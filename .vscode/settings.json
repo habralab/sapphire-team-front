@@ -8,5 +8,5 @@
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.formatOnSave": true,
-  "jest.pathToJest": "yarn jest"
+  "vitest.commandLine": "yarn test"
 }
