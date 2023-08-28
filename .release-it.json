@@ -7,32 +7,5 @@
   },
   "github": {
     "release": true
-  },
-  "plugins": {
-    "@release-it/conventional-changelog": {
-      "infile": "CHANGELOG.md",
-      "header": "#Список изменений",
-      "preset": {
-        "name": "conventionalcommits",
-        "types": [
-          {
-            "type": "feat",
-            "section": "Новые возможности"
-          },
-          {
-            "type": "fix",
-            "section": "Исправления багов"
-          },
-          {
-            "type": "chore",
-            "hidden": true
-          },
-          {
-            "type": "refactor",
-            "hidden": true
-          }
-        ]
-      }
-    }
   }
 }
