@@ -1,4 +1,5 @@
 import { Routing } from '@/pages';
+import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient({
@@ -11,9 +12,11 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Routing />
-    </QueryClientProvider>
+    <ChakraProvider>
+      <QueryClientProvider client={queryClient}>
+        <Routing />
+      </QueryClientProvider>
+    </ChakraProvider>
   );
 }
 
