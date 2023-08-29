@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "postinstall": "husky install",
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "tsc -p tsconfig.prod.json && vite build",
     "serve": "vite preview",
     "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
