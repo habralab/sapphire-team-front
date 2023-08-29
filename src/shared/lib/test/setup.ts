@@ -4,7 +4,7 @@ import { act, cleanup } from '@testing-library/react';
 
 import { afterEach, vi } from 'vitest';
 import { StateCreator } from 'zustand';
-import { server } from '../../api/mock';
+import { server } from '@/shared/api/mock';
 
 type ZustandModel = typeof import('zustand');
 

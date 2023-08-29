@@ -17,6 +17,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
@@ -40,7 +41,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "husky": "^8.0.3",
-    "identity-obj-proxy": "^3.0.0",
     "jest-environment-jsdom": "^29.6.4",
     "jsdom": "^22.1.0",
     "lint-staged": "^14.0.1",

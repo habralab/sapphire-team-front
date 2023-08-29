@@ -19,4 +19,12 @@ export default defineConfig({
     },
   },
   cacheDir: '.yarn/.vite',
+  resolve: {
+    alias: [
+      {
+        find: /^@\//,
+        replacement: '/src/',
+      },
+    ],
+  },
 });

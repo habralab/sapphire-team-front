@@ -1,5 +1,11 @@
+import { Routing } from '@/pages';
+
 function App() {
-  return <>app</>;
+  return (
+    <>
+      <Routing />
+    </>
+  );
 }
 
 export default App;
