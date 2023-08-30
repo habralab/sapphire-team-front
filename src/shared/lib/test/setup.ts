@@ -25,7 +25,7 @@ vi.mock('zustand', async (zustandOriginal: () => Promise<ZustandModel>) => {
   return { ...zustand, createStore };
 });
 
-beforeAll(() => server.listen());
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 
 beforeEach(() => {
   act(() => storeResetFns.forEach((resetFn) => resetFn()));
