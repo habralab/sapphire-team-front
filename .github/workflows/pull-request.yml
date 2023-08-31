@@ -7,20 +7,30 @@ on:
       - synchronize
 
 jobs:
-  setup:
+  checkout:
     runs-on: front
     steps:
+      - name: Set up unique workspace
+        id: setup_workspace
+        run: |
+          workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
+          echo "Using workspace path: $workspace_path"
+          echo "::set-output name=workspace::$workspace_path"
       - name: Custom Checkout
         run: |
-          if [ -d ${{ github.workspace }} ]; then
+          if [ -d ${{ steps.setup_workspace.outputs.workspace }} ]; then
             echo "Fetching repository changes"
-            cd ${{ github.workspace }}
+            cd ${{ steps.setup_workspace.outputs.workspace }}
             git fetch origin ${{ github.event.pull_request.head.ref }} --depth 1
             git reset --hard FETCH_HEAD
           else
             echo "Cloning repository"
-            git clone --branch ${{ github.event.pull_request.head.ref }} --depth 1 git@github.com:${{ github.repository }} ${{ github.workspace }}
+            git clone --branch ${{ github.event.pull_request.head.ref }} --depth 1 git@github.com:${{ github.repository }} ${{ steps.setup_workspace.outputs.workspace }}
           fi
+
+  setup:
+    runs-on: front
+    steps:
       - name: Install dependencies
         run: yarn
 
@@ -32,6 +42,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Run tests
         run: yarn test
+
   eslint:
     runs-on: front
     needs: setup
@@ -40,6 +51,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Run eslint
         run: yarn eslint
+
   tslint:
     runs-on: front
     needs: setup
@@ -48,6 +60,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Run tslint
         run: yarn tslint
+
   prettier:
     runs-on: front
     needs: setup
@@ -56,9 +69,21 @@ jobs:
         uses: actions/checkout@v3
       - name: Run prettier
         run: yarn prettier
+
   protect:
     runs-on: front
     needs: [tests, eslint, tslint, prettier]
     steps:
       - name: Protect branch
         run: echo "Branch is protected"
+
+  cleanup:
+    runs-on: front
+    needs: protect
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    steps:
+      - name: Clean up workspace
+        run: |
+          workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
+          echo "Cleaning up workspace: $workspace_path"
+          rm -rf $workspace_path
