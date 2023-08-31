@@ -33,7 +33,6 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
-          echo ${{ needs.checkout.outputs.workspace_path }}
           cd ${{ needs.checkout.outputs.workspace_path }}
           yarn
 
