@@ -15,7 +15,7 @@ jobs:
         run: |
           workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
           echo "Using workspace path: $workspace_path"
-          echo "workspace_path=$workspace_path" >> $GITHUB_ENV
+          echo "workspace_path=$workspace_path" >> "$GITHUB_OUTPUT"
 
           if [ -e "$workspace_path/.git" ]; then
             echo "Fetching repository changes"
