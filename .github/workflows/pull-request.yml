@@ -6,7 +6,8 @@ on:
       - opened
       - synchronize
 
-env: workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
+env:
+  workspace_path: '${{ github.workspace }}/${{ github.event.pull_request.number }}'
 
 jobs:
   checkout:
