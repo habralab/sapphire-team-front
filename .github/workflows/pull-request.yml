@@ -12,20 +12,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          path: .
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18'
       - name: Install dependencies
-        run: yarn --immutable
+        run: yarn --immutable && ls -la
   tests:
     runs-on: ubuntu-latest
     needs: setup
     steps:
       - name: Run tests
-        run: yarn test
+        run: ls -la && yarn test
   eslint:
     runs-on: ubuntu-latest
     needs: setup
