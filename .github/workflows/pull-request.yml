@@ -33,7 +33,7 @@ jobs:
     needs: checkout
     steps:
       - name: Install dependencies
-        run: cd ${{ steps.setup_workspace.outputs.workspace }} && yarn
+        run: yarn
 
   tests:
     runs-on: front
@@ -42,7 +42,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Run tests
-        run: cd ${{ steps.setup_workspace.outputs.workspace }} && yarn test
+        run: yarn test
 
   eslint:
     runs-on: front
@@ -51,7 +51,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Run eslint
-        run: cd ${{ steps.setup_workspace.outputs.workspace }} && yarn eslint
+        run: yarn eslint
 
   tslint:
     runs-on: front
@@ -60,7 +60,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Run tslint
-        run: cd ${{ steps.setup_workspace.outputs.workspace }} && yarn tslint
+        run: yarn tslint
 
   prettier:
     runs-on: front
@@ -69,7 +69,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Run prettier
-        run: cd ${{ steps.setup_workspace.outputs.workspace }} && yarn prettier
+        run: yarn prettier
 
   protect:
     runs-on: front
