@@ -12,8 +12,15 @@ jobs:
     steps:
       - name: Custom Checkout
         run: |
-          git clone --branch ${{ github.event.pull_request.head.ref }} --depth 1 git@github.com:${{ github.repository }} ${{ github.workspace }}
-          cd ${{ github.workspace }}
+          if [ -d ${{ github.workspace }} ]; then
+            echo "Fetching repository changes"
+            cd ${{ github.workspace }}
+            git fetch origin ${{ github.event.pull_request.head.ref }} --depth 1
+            git reset --hard FETCH_HEAD
+          else
+            echo "Cloning repository"
+            git clone --branch ${{ github.event.pull_request.head.ref }} --depth 1 git@github.com:${{ github.repository }} ${{ github.workspace }}
+          fi
       - name: Install dependencies
         run: yarn
 
