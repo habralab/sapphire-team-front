@@ -35,7 +35,8 @@ jobs:
         env:
           workspace_path: ${{ steps.setup_workspace.outputs.workspace_path}}
         run: |
-          cd $workspace_path
+          echo ${{ workspace_path }}
+          cd ${{ workspace_path }}
           yarn
 
   tests:
