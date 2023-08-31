@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '18'
       - name: Install dependencies
-        run: yarn --immutable
+        run: yarn
   tests:
     runs-on: ubuntu-latest
     needs: setup
