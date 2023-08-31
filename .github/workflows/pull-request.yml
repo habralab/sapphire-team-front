@@ -8,7 +8,7 @@ on:
 
 jobs:
   setup:
-    runs-on: debian-10
+    runs-on: debian-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: yarn
   tests:
-    runs-on: debian-10
+    runs-on: debian-latest
     needs: setup
     steps:
       - name: Checkout code
@@ -27,7 +27,7 @@ jobs:
       - name: Run tests
         run: yarn test
   eslint:
-    runs-on: debian-10
+    runs-on: debian-latest
     needs: setup
     steps:
       - name: Checkout code
@@ -35,7 +35,7 @@ jobs:
       - name: Run eslint
         run: yarn eslint
   tslint:
-    runs-on: debian-10
+    runs-on: debian-latest
     needs: setup
     steps:
       - name: Checkout code
@@ -43,7 +43,7 @@ jobs:
       - name: Run tslint
         run: yarn tslint
   prettier:
-    runs-on: debian-10
+    runs-on: debian-latest
     needs: setup
     steps:
       - name: Checkout code
@@ -51,7 +51,7 @@ jobs:
       - name: Run prettier
         run: yarn prettier
   protect:
-    runs-on: debian-10
+    runs-on: debian-latest
     needs: [tests, eslint, tslint, prettier]
     steps:
       - name: Protect branch
