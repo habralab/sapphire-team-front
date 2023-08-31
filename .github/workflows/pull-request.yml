@@ -6,6 +6,8 @@ on:
       - opened
       - synchronize
 
+env: workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
+
 jobs:
   checkout:
     runs-on: front
@@ -13,10 +15,6 @@ jobs:
       - name: Set up unique workspace and checkout
         id: setup_workspace
         run: |
-          workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
-          echo "Using workspace path: $workspace_path"
-          echo "workspace_path=$workspace_path" >> $GITHUB_OUTPUT
-
           if [ -e "$workspace_path/.git" ]; then
             echo "Fetching repository changes"
             cd $workspace_path
@@ -26,8 +24,6 @@ jobs:
             echo "Cloning repository"
             git clone --branch ${{ github.event.pull_request.head.ref }} --depth 1 git@github.com:${{ github.repository }} $workspace_path
           fi
-    outputs:
-      workspace_path: ${{ steps.setup_workspace.outputs.workspace_path }}
 
   setup:
     runs-on: front
@@ -35,7 +31,7 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
-          cd ${{ needs.checkout.outputs.workspace_path}}
+          cd $workspace_path
           yarn
 
   tests:
@@ -43,28 +39,28 @@ jobs:
     needs: setup
     steps:
       - name: Run tests
-        run: cd ${{ needs.checkout.outputs.workspace_path}} && yarn test
+        run: cd $workspace_path && yarn test
 
   eslint:
     runs-on: front
     needs: setup
     steps:
       - name: Run eslint
-        run: cd ${{ needs.checkout.outputs.workspace_path}} && yarn eslint
+        run: cd $workspace_path && yarn eslint
 
   tslint:
     runs-on: front
     needs: setup
     steps:
       - name: Run tslint
-        run: cd ${{ needs.checkout.outputs.workspace_path}} && yarn tslint
+        run: cd $workspace_path && yarn tslint
 
   prettier:
     runs-on: front
     needs: setup
     steps:
       - name: Run prettier
-        run: cd ${{ needs.checkout.outputs.workspace_path}} && yarn prettier
+        run: cd $workspace_path && yarn prettier
 
   protect:
     runs-on: front
@@ -79,4 +75,4 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     steps:
       - name: Clean up workspace
-        run: rm -rf ${{ needs.checkout.outputs.workspace_path}}
+        run: rm -rf $workspace_path
