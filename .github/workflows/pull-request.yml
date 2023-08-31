@@ -17,7 +17,7 @@ jobs:
           echo "Using workspace path: $workspace_path"
       - name: Custom Checkout
         run: |
-          if [ -d $workspace_path ]; then
+          if [ -e "$workspace_path/.git" ]; then
             echo "Fetching repository changes"
             cd $workspace_path
             git fetch origin ${{ github.event.pull_request.head.ref }} --depth 1
