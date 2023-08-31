@@ -15,12 +15,12 @@ jobs:
         run: |
           workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
           echo "Using workspace path: $workspace_path"
-          echo "::set-output name=workspace::$workspace_path"
+          echo "$workspace_path" >> $GITHUB_OUTPUT
       - name: Custom Checkout
         run: |
-          if [ -d ${{ steps.setup_workspace.outputs.workspace }} ]; then
+          if [ -d $GITHUB_OUTPUT ]; then
             echo "Fetching repository changes"
-            cd ${{ steps.setup_workspace.outputs.workspace }}
+            cd $GITHUB_OUTPUT
             git fetch origin ${{ github.event.pull_request.head.ref }} --depth 1
             git reset --hard FETCH_HEAD
           else
@@ -33,7 +33,7 @@ jobs:
     needs: checkout
     steps:
       - name: Install dependencies
-        working-directory: ${{ needs.setup.outputs.workspace }}
+        working-directory: $GITHUB_OUTPUT
         run: yarn
 
   tests:
@@ -41,7 +41,7 @@ jobs:
     needs: setup
     steps:
       - name: Run tests
-        working-directory: ${{ needs.setup.outputs.workspace }}
+        working-directory: $GITHUB_OUTPUT
         run: yarn test
 
   eslint:
@@ -49,7 +49,7 @@ jobs:
     needs: setup
     steps:
       - name: Run eslint
-        working-directory: ${{ needs.setup.outputs.workspace }}
+        working-directory: $GITHUB_OUTPUT
         run: yarn eslint
 
   tslint:
@@ -57,7 +57,7 @@ jobs:
     needs: setup
     steps:
       - name: Run tslint
-        working-directory: ${{ needs.setup.outputs.workspace }}
+        working-directory: $GITHUB_OUTPUT
         run: yarn tslint
 
   prettier:
@@ -65,7 +65,7 @@ jobs:
     needs: setup
     steps:
       - name: Run prettier
-        working-directory: ${{ needs.setup.outputs.workspace }}
+        working-directory: $GITHUB_OUTPUT
         run: yarn prettier
 
   protect:
@@ -81,7 +81,4 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     steps:
       - name: Clean up workspace
-        run: |
-          workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
-          echo "Cleaning up workspace: $workspace_path"
-          rm -rf $workspace_path
+        run: rm -rf $GITHUB_OUTPUT
