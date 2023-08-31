@@ -33,6 +33,7 @@ jobs:
     needs: checkout
     steps:
       - name: Install dependencies
+        working-directory: ${{ needs.setup.outputs.workspace }}
         run: yarn
 
   tests:
@@ -40,6 +41,7 @@ jobs:
     needs: setup
     steps:
       - name: Run tests
+        working-directory: ${{ needs.setup.outputs.workspace }}
         run: yarn test
 
   eslint:
@@ -47,6 +49,7 @@ jobs:
     needs: setup
     steps:
       - name: Run eslint
+        working-directory: ${{ needs.setup.outputs.workspace }}
         run: yarn eslint
 
   tslint:
@@ -54,6 +57,7 @@ jobs:
     needs: setup
     steps:
       - name: Run tslint
+        working-directory: ${{ needs.setup.outputs.workspace }}
         run: yarn tslint
 
   prettier:
@@ -61,6 +65,7 @@ jobs:
     needs: setup
     steps:
       - name: Run prettier
+        working-directory: ${{ needs.setup.outputs.workspace }}
         run: yarn prettier
 
   protect:
