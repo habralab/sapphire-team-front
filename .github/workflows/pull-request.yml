@@ -12,8 +12,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true
       - name: Install dependencies
         run: yarn
+
   tests:
     runs-on: front
     needs: setup
