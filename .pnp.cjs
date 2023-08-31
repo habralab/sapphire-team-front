@@ -43,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:5.62.0"],\
             ["@typescript-eslint/parser", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:5.62.0"],\
             ["@vitejs/plugin-react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.0.4"],\
+            ["@yarnpkg/plugin-compat", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.0.0-rc.50"],\
             ["axios", "npm:1.5.0"],\
             ["commitlint", "npm:17.7.1"],\
             ["eslint", "npm:8.48.0"],\
@@ -4801,6 +4802,55 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@xmldom-xmldom-npm-0.8.10-c1bd991e61-4c136aec31.zip/node_modules/@xmldom/xmldom/",\
           "packageDependencies": [\
             ["@xmldom/xmldom", "npm:0.8.10"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@yarnpkg/extensions", [\
+        ["npm:2.0.0-rc.32", {\
+          "packageLocation": "./.yarn/cache/@yarnpkg-extensions-npm-2.0.0-rc.32-07b07b6e7d-d2204af8b5.zip/node_modules/@yarnpkg/extensions/",\
+          "packageDependencies": [\
+            ["@yarnpkg/extensions", "npm:2.0.0-rc.32"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:69e3cfdfcb9800a77e58e23abca308d2ed7f6bbaa1b30c2a65d0e814e3c92a14672c5a1ba962cc3af16c429db9fe0392a89c6cb681e743bcb35f11bfa63d975f#npm:2.0.0-rc.32", {\
+          "packageLocation": "./.yarn/__virtual__/@yarnpkg-extensions-virtual-5667712d5e/0/cache/@yarnpkg-extensions-npm-2.0.0-rc.32-07b07b6e7d-d2204af8b5.zip/node_modules/@yarnpkg/extensions/",\
+          "packageDependencies": [\
+            ["@yarnpkg/extensions", "virtual:69e3cfdfcb9800a77e58e23abca308d2ed7f6bbaa1b30c2a65d0e814e3c92a14672c5a1ba962cc3af16c429db9fe0392a89c6cb681e743bcb35f11bfa63d975f#npm:2.0.0-rc.32"],\
+            ["@types/yarnpkg__core", null],\
+            ["@yarnpkg/core", null]\
+          ],\
+          "packagePeers": [\
+            "@types/yarnpkg__core",\
+            "@yarnpkg/core"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@yarnpkg/plugin-compat", [\
+        ["npm:4.0.0-rc.50", {\
+          "packageLocation": "./.yarn/cache/@yarnpkg-plugin-compat-npm-4.0.0-rc.50-ac8c9e989c-ab11334a3b.zip/node_modules/@yarnpkg/plugin-compat/",\
+          "packageDependencies": [\
+            ["@yarnpkg/plugin-compat", "npm:4.0.0-rc.50"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.0.0-rc.50", {\
+          "packageLocation": "./.yarn/__virtual__/@yarnpkg-plugin-compat-virtual-69e3cfdfcb/0/cache/@yarnpkg-plugin-compat-npm-4.0.0-rc.50-ac8c9e989c-ab11334a3b.zip/node_modules/@yarnpkg/plugin-compat/",\
+          "packageDependencies": [\
+            ["@yarnpkg/plugin-compat", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.0.0-rc.50"],\
+            ["@types/yarnpkg__core", null],\
+            ["@types/yarnpkg__plugin-patch", null],\
+            ["@yarnpkg/core", null],\
+            ["@yarnpkg/extensions", "virtual:69e3cfdfcb9800a77e58e23abca308d2ed7f6bbaa1b30c2a65d0e814e3c92a14672c5a1ba962cc3af16c429db9fe0392a89c6cb681e743bcb35f11bfa63d975f#npm:2.0.0-rc.32"],\
+            ["@yarnpkg/plugin-patch", null]\
+          ],\
+          "packagePeers": [\
+            "@types/yarnpkg__core",\
+            "@types/yarnpkg__plugin-patch",\
+            "@yarnpkg/core",\
+            "@yarnpkg/plugin-patch"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12077,6 +12127,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/eslint-plugin", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:5.62.0"],\
             ["@typescript-eslint/parser", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:5.62.0"],\
             ["@vitejs/plugin-react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.0.4"],\
+            ["@yarnpkg/plugin-compat", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.0.0-rc.50"],\
             ["axios", "npm:1.5.0"],\
             ["commitlint", "npm:17.7.1"],\
             ["eslint", "npm:8.48.0"],\

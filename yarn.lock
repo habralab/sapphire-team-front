@@ -3098,6 +3098,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@yarnpkg/extensions@npm:^2.0.0-rc.32":
+  version: 2.0.0-rc.32
+  resolution: "@yarnpkg/extensions@npm:2.0.0-rc.32"
+  peerDependencies:
+    "@yarnpkg/core": ^4.0.0-rc.50
+  checksum: d2204af8b5fa838f7767868b4634c7323698a18f4a68cd706cbeaa59355d8cfa6f8645bcd84dffb8a11ae7a11a3a5ab469214d35850cbaad24bd86a703e637db
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/plugin-compat@npm:^4.0.0-rc.50":
+  version: 4.0.0-rc.50
+  resolution: "@yarnpkg/plugin-compat@npm:4.0.0-rc.50"
+  dependencies:
+    "@yarnpkg/extensions": ^2.0.0-rc.32
+  peerDependencies:
+    "@yarnpkg/core": ^4.0.0-rc.50
+    "@yarnpkg/plugin-patch": ^4.0.0-rc.50
+  checksum: ab11334a3b6e424d3b54013810ddc4f6e46d610a676765080af6675de004a75c37807b44d00268ff6e38c60023fbf018416463319be41fdc21f004dc1fae4700
+  languageName: node
+  linkType: hard
+
 "@zag-js/dom-query@npm:0.10.5":
   version: 0.10.5
   resolution: "@zag-js/dom-query@npm:0.10.5"
@@ -9493,6 +9514,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
     "@vitejs/plugin-react": ^4.0.4
+    "@yarnpkg/plugin-compat": ^4.0.0-rc.50
     axios: ^1.5.0
     commitlint: ^17.7.1
     eslint: ^8.8.0
