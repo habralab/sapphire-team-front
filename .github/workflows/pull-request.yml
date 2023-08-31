@@ -39,8 +39,6 @@ jobs:
     runs-on: front
     needs: setup
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Run tests
         run: yarn test
 
@@ -48,8 +46,6 @@ jobs:
     runs-on: front
     needs: setup
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Run eslint
         run: yarn eslint
 
@@ -57,8 +53,6 @@ jobs:
     runs-on: front
     needs: setup
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Run tslint
         run: yarn tslint
 
@@ -66,8 +60,6 @@ jobs:
     runs-on: front
     needs: setup
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
       - name: Run prettier
         run: yarn prettier
 
