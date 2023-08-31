@@ -15,12 +15,11 @@ jobs:
         run: |
           workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
           echo "Using workspace path: $workspace_path"
-          echo "$workspace_path" >> $GITHUB_OUTPUT
       - name: Custom Checkout
         run: |
-          if [ -d $GITHUB_OUTPUT ]; then
+          if [ -d $workspace_path ]; then
             echo "Fetching repository changes"
-            cd $GITHUB_OUTPUT
+            cd $workspace_path
             git fetch origin ${{ github.event.pull_request.head.ref }} --depth 1
             git reset --hard FETCH_HEAD
           else
@@ -33,7 +32,7 @@ jobs:
     needs: checkout
     steps:
       - name: Install dependencies
-        working-directory: $GITHUB_OUTPUT
+        working-directory: $workspace_path
         run: yarn
 
   tests:
@@ -41,7 +40,7 @@ jobs:
     needs: setup
     steps:
       - name: Run tests
-        working-directory: $GITHUB_OUTPUT
+        working-directory: $workspace_path
         run: yarn test
 
   eslint:
@@ -49,7 +48,7 @@ jobs:
     needs: setup
     steps:
       - name: Run eslint
-        working-directory: $GITHUB_OUTPUT
+        working-directory: $workspace_path
         run: yarn eslint
 
   tslint:
@@ -57,7 +56,7 @@ jobs:
     needs: setup
     steps:
       - name: Run tslint
-        working-directory: $GITHUB_OUTPUT
+        working-directory: $workspace_path
         run: yarn tslint
 
   prettier:
@@ -65,7 +64,7 @@ jobs:
     needs: setup
     steps:
       - name: Run prettier
-        working-directory: $GITHUB_OUTPUT
+        working-directory: $workspace_path
         run: yarn prettier
 
   protect:
@@ -81,4 +80,4 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     steps:
       - name: Clean up workspace
-        run: rm -rf $GITHUB_OUTPUT
+        run: rm -rf $workspace_path
