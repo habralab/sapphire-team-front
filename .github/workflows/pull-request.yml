@@ -16,6 +16,7 @@ jobs:
           workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
           echo "Using workspace path: $workspace_path"
           echo "workspace_path=$workspace_path" >> $GITHUB_ENV
+          echo "MY_VARIABLE=hello" >> $GITHUB_ENV
 
           if [ -e "$workspace_path/.git" ]; then
             echo "Fetching repository changes"
@@ -26,6 +27,8 @@ jobs:
             echo "Cloning repository"
             git clone --branch ${{ github.event.pull_request.head.ref }} --depth 1 git@github.com:${{ github.repository }} $workspace_path
           fi
+      - name: Print workspace_path
+        run: echo ${{ env.workspace_path }}
 
   setup:
     runs-on: front
@@ -42,7 +45,7 @@ jobs:
     needs: setup
     steps:
       - name: Run tests
-        run: cd ${{ env.workspace_path }} && yarn test
+        run: cd $workspace_path && yarn test
 
   eslint:
     runs-on: front
