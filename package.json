@@ -44,6 +44,7 @@
     "@vitejs/plugin-react": "^4.0.4",
     "@yarnpkg/plugin-compat": "^4.0.0-rc.50",
     "commitlint": "^17.7.1",
+    "esbuild": "^0.19.2",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.4",
