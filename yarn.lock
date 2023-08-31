@@ -4933,7 +4933,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:0.18.20, esbuild@npm:^0.18.10":
+"esbuild@npm:^0.18.10":
   version: 0.18.20
   resolution: "esbuild@npm:0.18.20"
   dependencies:
@@ -9517,7 +9517,6 @@ __metadata:
     "@yarnpkg/plugin-compat": ^4.0.0-rc.50
     axios: ^1.5.0
     commitlint: ^17.7.1
-    esbuild: 0.18.20
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-import: ^2.25.4
