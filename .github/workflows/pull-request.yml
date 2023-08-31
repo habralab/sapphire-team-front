@@ -45,3 +45,6 @@ jobs:
   protect:
     runs-on: ubuntu-latest
     needs: [tests, eslint, tslint, prettier]
+    steps:
+      - name: Protect branch
+        run: echo "Branch is protected"
