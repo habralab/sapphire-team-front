@@ -34,7 +34,7 @@ jobs:
       - name: Install dependencies
         env:
           WORKSPACE_PATH: ${{ needs.setup.outputs.workspace }}
-        run: pwd && cd $WORKSPACE_PATH && yarn
+        run: echo $WORKSPACE_PATH && cd $WORKSPACE_PATH && yarn
 
   tests:
     runs-on: front
@@ -43,7 +43,7 @@ jobs:
       - name: Run tests
         env:
           WORKSPACE_PATH: ${{ needs.setup.outputs.workspace }}
-        run: cd $WORKSPACE_PATH && yarn test
+        run: echo $WORKSPACE_PATH && cd $WORKSPACE_PATH && yarn test
 
   eslint:
     runs-on: front
