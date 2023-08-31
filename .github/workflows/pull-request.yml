@@ -30,6 +30,7 @@ jobs:
 
   setup:
     runs-on: front
+    needs: checkout
     steps:
       - name: Install dependencies
         run: yarn
