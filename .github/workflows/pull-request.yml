@@ -16,8 +16,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '18'
+      - name: Install Yarn 2
+        run: npm install -g yarn@2
       - name: Install dependencies
-        run: yarn install
+        run: yarn --immutable
   tests:
     runs-on: ubuntu-latest
     needs: setup
