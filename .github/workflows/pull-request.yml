@@ -8,16 +8,16 @@ on:
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: front
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Set up Node.js
         uses: actions/setup-node@v3
       - name: Install dependencies
-        run: yarn
+        run: yarn --immutable
   tests:
-    runs-on: ubuntu-latest
+    runs-on: front
     needs: setup
     steps:
       - name: Checkout code
@@ -25,7 +25,7 @@ jobs:
       - name: Run tests
         run: yarn test
   eslint:
-    runs-on: ubuntu-latest
+    runs-on: front
     needs: setup
     steps:
       - name: Checkout code
@@ -33,7 +33,7 @@ jobs:
       - name: Run eslint
         run: yarn eslint
   tslint:
-    runs-on: ubuntu-latest
+    runs-on: front
     needs: setup
     steps:
       - name: Checkout code
@@ -41,7 +41,7 @@ jobs:
       - name: Run tslint
         run: yarn tslint
   prettier:
-    runs-on: ubuntu-latest
+    runs-on: front
     needs: setup
     steps:
       - name: Checkout code
@@ -49,7 +49,7 @@ jobs:
       - name: Run prettier
         run: yarn prettier
   protect:
-    runs-on: ubuntu-latest
+    runs-on: front
     needs: [tests, eslint, tslint, prettier]
     steps:
       - name: Protect branch
