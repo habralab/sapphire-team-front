@@ -33,8 +33,8 @@ jobs:
     steps:
       - name: Install dependencies
         run: |
-          echo ${{ env.workspace_path }}
-          cd ${{ env.workspace_path }}
+          echo ${{ needs.checkout.outputs.workspace_path }}
+          cd ${{ needs.checkout.outputs.workspace_path }}
           yarn
 
   tests:
@@ -42,28 +42,28 @@ jobs:
     needs: setup
     steps:
       - name: Run tests
-        run: cd ${{ env.workspace_path }} && yarn test
+        run: cd ${{ needs.checkout.outputs.workspace_path }} && yarn test
 
   eslint:
     runs-on: front
     needs: setup
     steps:
       - name: Run eslint
-        run: cd ${{ env.workspace_path }} && yarn eslint
+        run: cd ${{ needs.checkout.outputs.workspace_path }} && yarn eslint
 
   tslint:
     runs-on: front
     needs: setup
     steps:
       - name: Run tslint
-        run: cd ${{ env.workspace_path }} && yarn tslint
+        run: cd ${{ needs.checkout.outputs.workspace_path }} && yarn tslint
 
   prettier:
     runs-on: front
     needs: setup
     steps:
       - name: Run prettier
-        run: cd ${{ env.workspace_path }} && yarn prettier
+        run: cd ${{ needs.checkout.outputs.workspace_path }} && yarn prettier
 
   protect:
     runs-on: front
@@ -78,4 +78,4 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     steps:
       - name: Clean up workspace
-        run: rm -rf ${{ env.workspace_path }}
+        run: rm -rf ${{ needs.checkout.outputs.workspace_path }}
