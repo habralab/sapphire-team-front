@@ -10,13 +10,13 @@ jobs:
   checkout:
     runs-on: front
     steps:
-      - name: Set up unique workspace
+      - name: Set up unique workspace and checkout
         id: setup_workspace
         run: |
           workspace_path="${{ github.workspace }}/${{ github.event.pull_request.number }}"
           echo "Using workspace path: $workspace_path"
-      - name: Custom Checkout
-        run: |
+          echo "WORKSPACE_PATH=$workspace_path" >> $GITHUB_ENV
+
           if [ -e "$workspace_path/.git" ]; then
             echo "Fetching repository changes"
             cd $workspace_path
@@ -24,7 +24,7 @@ jobs:
             git reset --hard FETCH_HEAD
           else
             echo "Cloning repository"
-            git clone --branch ${{ github.event.pull_request.head.ref }} --depth 1 git@github.com:${{ github.repository }} ${{ github.workspace }}/${{ github.event.pull_request.number }}
+            git clone --branch ${{ github.event.pull_request.head.ref }} --depth 1 git@github.com:${{ github.repository }} $workspace_path
           fi
 
   setup:
@@ -32,40 +32,45 @@ jobs:
     needs: checkout
     steps:
       - name: Install dependencies
-        working-directory: $workspace_path
-        run: yarn
+        env:
+          WORKSPACE_PATH: ${{ needs.setup.outputs.workspace }}
+        run: cd $WORKSPACE_PATH && yarn
 
   tests:
     runs-on: front
     needs: setup
     steps:
       - name: Run tests
-        working-directory: $workspace_path
-        run: yarn test
+        env:
+          WORKSPACE_PATH: ${{ needs.setup.outputs.workspace }}
+        run: cd $WORKSPACE_PATH && yarn test
 
   eslint:
     runs-on: front
     needs: setup
     steps:
       - name: Run eslint
-        working-directory: $workspace_path
-        run: yarn eslint
+        env:
+          WORKSPACE_PATH: ${{ needs.setup.outputs.workspace }}
+        run: cd $WORKSPACE_PATH && yarn eslint
 
   tslint:
     runs-on: front
     needs: setup
     steps:
       - name: Run tslint
-        working-directory: $workspace_path
-        run: yarn tslint
+        env:
+          WORKSPACE_PATH: ${{ needs.setup.outputs.workspace }}
+        run: cd $WORKSPACE_PATH && yarn tslint
 
   prettier:
     runs-on: front
     needs: setup
     steps:
       - name: Run prettier
-        working-directory: $workspace_path
-        run: yarn prettier
+        env:
+          WORKSPACE_PATH: ${{ needs.setup.outputs.workspace }}
+        run: cd $WORKSPACE_PATH && yarn prettier
 
   protect:
     runs-on: front
@@ -80,4 +85,6 @@ jobs:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     steps:
       - name: Clean up workspace
-        run: rm -rf $workspace_path
+        env:
+          WORKSPACE_PATH: ${{ needs.setup.outputs.workspace }}
+        run: rm -rf $WORKSPACE_PATH
