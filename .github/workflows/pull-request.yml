@@ -6,74 +6,50 @@ on:
       - opened
       - synchronize
 
-env:
-  workspace_path: '${{ github.workspace }}/${{ github.event.pull_request.number }}'
-
 jobs:
-  checkout:
-    runs-on: front
-    steps:
-      - name: Set up unique workspace and checkout
-        id: setup_workspace
-        run: |
-          if [ -e "$workspace_path/.git" ]; then
-            echo "Fetching repository changes"
-            cd $workspace_path
-            git fetch origin ${{ github.event.pull_request.head.ref }} --depth 1
-            git reset --hard FETCH_HEAD
-          else
-            echo "Cloning repository"
-            git clone --branch ${{ github.event.pull_request.head.ref }} --depth 1 git@github.com:${{ github.repository }} $workspace_path
-          fi
-
   setup:
-    runs-on: front
-    needs: checkout
+    runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
       - name: Install dependencies
-        run: |
-          cd $workspace_path
-          yarn
+        run: yarn --immutable
 
   tests:
-    runs-on: front
+    runs-on: ubuntu-latest
     needs: setup
     steps:
       - name: Run tests
-        run: cd $workspace_path && yarn test
+        run: yarn test
 
   eslint:
-    runs-on: front
+    runs-on: ubuntu-latest
     needs: setup
     steps:
       - name: Run eslint
-        run: cd $workspace_path && yarn eslint
+        run: yarn eslint
 
   tslint:
-    runs-on: front
+    runs-on: ubuntu-latest
     needs: setup
     steps:
       - name: Run tslint
-        run: cd $workspace_path && yarn tslint
+        run: yarn tslint
 
   prettier:
-    runs-on: front
+    runs-on: ubuntu-latest
     needs: setup
     steps:
       - name: Run prettier
-        run: cd $workspace_path && yarn prettier
+        run: yarn prettier
 
   protect:
-    runs-on: front
+    runs-on: ubuntu-latest
     needs: [tests, eslint, tslint, prettier]
     steps:
       - name: Protect branch
         run: echo "Branch is protected"
-
-  cleanup:
-    runs-on: front
-    needs: protect
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    steps:
-      - name: Clean up workspace
-        run: rm -rf $workspace_path
