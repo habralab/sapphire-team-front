@@ -1,6 +1,5 @@
-node_modules
-.DS_Store
+.github
+.husky
+.vscode
+.yarn
 dist
-dist-ssr
-*.local
-node_modules/*
