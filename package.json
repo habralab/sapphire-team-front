@@ -14,6 +14,7 @@
     "prettier:fix": "yarn prettier --write",
     "lint": "yarn prettier && yarn eslint && yarn tslint",
     "lint:fix": "yarn prettier:fix && yarn eslint:prettier",
+    "check": "concurrently \"yarn test\" \"yarn eslint\" \"yarn tslint\" \"yarn prettier\"",
     "test": "vitest",
     "release": "release-it"
   },
