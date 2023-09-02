@@ -1,5 +1,9 @@
 module.exports = {
   root: true,
+  env: {
+    browser: true,
+    node: true,
+  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
@@ -8,43 +12,34 @@ module.exports = {
       jsx: true,
     },
   },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-    'import/resolver': {
-      node: {
-        paths: ['src'],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-    },
-  },
-  env: {
-    browser: true,
-    amd: true,
-    node: true,
-  },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
   ],
   plugins: ['prettier'],
   rules: {
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     'react/react-in-jsx-scope': 'off',
     'jsx-a11y/accessible-emoji': 'off',
     'react/prop-types': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    'jsx-a11y/anchor-is-valid': [
-      'error',
-      {
-        components: ['Link'],
-        specialLink: ['hrefLeft', 'hrefRight'],
-        aspects: ['invalidHref', 'preferButton'],
-      },
-    ],
+    '@typescript-eslint/no-unused-vars': 'warn',
+    'import/no-unresolved': 'error',
+    'import/newline-after-import': 'error',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: true,
+      node: true,
+    },
   },
 };

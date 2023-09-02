@@ -7,13 +7,14 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   plugins: [
     react(),
-    eslint(),
+    !process.env.VITEST ? eslint() : undefined,
     !process.env.VITEST ? checker({ typescript: true }) : undefined,
   ],
   test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: 'src/shared/lib/test/setup.ts',
+    include: ['(src|tests)/**/*.test.ts(x)?'],
     cache: {
       dir: '.yarn/.vite/test',
     },

@@ -1,6 +1,2 @@
-node_modules
-.DS_Store
+.yarn
 dist
-dist-ssr
-*.local
-node_modules/*
