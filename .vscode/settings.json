@@ -1,6 +1,9 @@
 {
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "vitest.commandLine": "yarn test:watch",
   "search.exclude": {
     "**/.yarn": true,
