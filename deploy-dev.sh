@@ -2,7 +2,7 @@
 
 git pull
 
-yarn
+yarn --immutable
 
 yarn build
 
