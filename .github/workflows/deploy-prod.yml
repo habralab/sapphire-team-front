@@ -15,4 +15,4 @@ jobs:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          script: cd /var/www/front-prod && git fetch origin ${{github.ref_name}} && git checkout origin/${{github.ref_name}} && chmod +x ./deploy-prod.sh && ./deploy-prod.sh
+          script: cd /var/www/front-prod && git fetch origin && git checkout ${{github.ref_name}} && chmod +x ./deploy-prod.sh && ./deploy-prod.sh
