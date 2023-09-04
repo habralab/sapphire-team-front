@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy to dev
 
 on:
   push:
@@ -16,4 +16,4 @@ jobs:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          script: cd /var/www/front && chmod +x ./deploy.sh && ./deploy.sh
+          script: cd /var/www/front && chmod +x ./deploy-dev.sh && ./deploy-dev.sh
