@@ -19,4 +19,4 @@ jobs:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          script: cd /var/www/front-prod && git checkout ${{github.ref_name}} && chmod +x ./deploy-prod.sh && ./deploy-prod.sh
+          script: cd /var/www/front-prod && git checkout ${{ github.event.inputs.ref }} && chmod +x ./deploy-prod.sh && ./deploy-prod.sh
