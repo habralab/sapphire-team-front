@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check commit message
         run: |
-          if [[ "$(git log -1 --pretty=%B)" == "chore:"* ]]; then
+          if [[ "${{ github.event.head_commit.message }}" == "chore:"* ]]; then
             echo "Commit message contains 'chore', skipping workflow."
             exit 0
           fi
