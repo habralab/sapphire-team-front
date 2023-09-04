@@ -5,6 +5,9 @@ on:
     tags:
       - 'refs/tags/*'
   workflow_dispatch:
+    inputs:
+      ref:
+        required: true
 
 jobs:
   deploy-dev:
