@@ -10,6 +10,12 @@ jobs:
   deploy-dev:
     runs-on: ubuntu-latest
     steps:
+      - name: Check commit message
+        run: |
+          if [[ "$(git log -1 --pretty=%B)" == "chore:"* ]]; then
+            echo "Commit message contains 'chore', skipping workflow."
+            exit 0
+          fi
       - name: deploy
         uses: appleboy/ssh-action@master
         with:
