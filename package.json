@@ -7,7 +7,7 @@
     "dev": "vite --open",
     "build": "tsc -p tsconfig.prod.json && vite build",
     "serve": "vite preview",
-    "eslint": "eslint **/*.{ts,tsx} --quiet --ignore-path ./.gitignore",
+    "eslint": "eslint **/*.{ts,tsx}",
     "tslint": "tsc --noEmit",
     "prettier": "prettier --loglevel warn \"**/*.{ts,tsx}\" --check --cache-location=.yarn/.prettier",
     "lint": "concurrently \"yarn eslint\" \"yarn tslint\" \"yarn prettier\" --raw",

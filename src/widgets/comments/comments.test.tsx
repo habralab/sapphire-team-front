@@ -10,7 +10,7 @@ import userEvent from '@testing-library/user-event';
 import Comments, { CommentsForm } from './Comments';
 
 const formHandler = {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   onSubmit: (values: CommentsForm) => {},
 };
 

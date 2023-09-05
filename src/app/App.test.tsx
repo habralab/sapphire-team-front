@@ -4,10 +4,10 @@ import { render } from '@testing-library/react';
 import App from './App';
 
 test('demo', () => {
-  expect(true).toBe(true);
+  expect(true).toBeTruthy();
 });
 
-test('Renders the main page', () => {
+test('renders the main page', () => {
   render(<App />);
   expect(true).toBeTruthy();
 });
