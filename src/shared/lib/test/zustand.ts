@@ -13,7 +13,9 @@ vi.mock('zustand', async (zustandOriginal: () => Promise<ZustandModel>) => {
     <S>(createState: StateCreator<S>) => {
       const store = zustand.createStore(createState);
       const initialState = store.getState();
-      storeResetFns.add(() => store.setState(initialState, true));
+      storeResetFns.add(() => {
+        store.setState(initialState, true);
+      });
       return store;
     };
 
@@ -21,5 +23,9 @@ vi.mock('zustand', async (zustandOriginal: () => Promise<ZustandModel>) => {
 });
 
 beforeEach(() => {
-  act(() => storeResetFns.forEach((resetFn) => resetFn()));
+  act(() => {
+    storeResetFns.forEach((resetFn) => {
+      resetFn();
+    });
+  });
 });

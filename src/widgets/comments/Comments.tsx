@@ -6,9 +6,9 @@ export interface CommentsForm {
   comment: string;
 }
 
-type CommentsProps = {
+interface CommentsProps {
   onSubmit: (values: CommentsForm) => void;
-};
+}
 
 export default function Comments({ onSubmit }: CommentsProps) {
   const {

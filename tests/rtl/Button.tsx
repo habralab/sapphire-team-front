@@ -1,6 +1,6 @@
-type ButtonProps = {
+interface ButtonProps {
   onClick: () => void;
-};
+}
 
 function Button({ onClick }: ButtonProps) {
   return <button onClick={onClick}>Click me</button>;

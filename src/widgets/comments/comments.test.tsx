@@ -10,10 +10,11 @@ import userEvent from '@testing-library/user-event';
 import Comments, { CommentsForm } from './Comments';
 
 const formHandler = {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onSubmit: (values: CommentsForm) => {},
 };
 
-test('Не добавлять комментарий, если текст комментария пустой', async () => {
+test('не добавлять комментарий, если текст комментария пустой', async () => {
   const onSubmitSpy = vi.spyOn(formHandler, 'onSubmit');
 
   render(<Comments onSubmit={formHandler.onSubmit} />);
@@ -26,5 +27,5 @@ test('Не добавлять комментарий, если текст ком
   const sendButton = screen.getByRole('button', { name: /send/i });
   await userEvent.click(sendButton);
 
-  expect(onSubmitSpy).not.toBeCalled();
+  expect(onSubmitSpy).not.toHaveBeenCalled();
 });

@@ -8,13 +8,15 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
+    project: 'tsconfig.json',
     ecmaFeatures: {
       jsx: true,
     },
   },
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/strict-type-checked',
+    'plugin:@typescript-eslint/stylistic-type-checked',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:prettier/recommended',
@@ -98,6 +100,14 @@ module.exports = {
         ],
       },
     ],
+    '@typescript-eslint/no-misused-promises': [
+      2,
+      {
+        checksVoidReturn: {
+          attributes: false,
+        },
+      },
+    ],
   },
   settings: {
     react: {
@@ -122,10 +132,16 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['tests/**/*.ts?(x)', 'src/**/*.test.ts?(x)'],
-      extends: ['plugin:testing-library/react', 'plugin:jest-dom/recommended'],
+      files: ['tests/**/*.{ts,tsx}', 'src/**/*.test.{ts,tsx}'],
+      extends: [
+        'plugin:testing-library/react',
+        'plugin:jest-dom/recommended',
+        'plugin:vitest/all',
+      ],
       rules: {
         'boundaries/element-types': 'off',
+        'vitest/consistent-test-it': ['error', { fn: 'test' }],
+        'vitest/require-top-level-describe': 'off',
       },
     },
   ],
