@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Button from './Button';
 import { vi, expect } from 'vitest';
+
+import Button from './Button';
 
 test('Button component renders correctly', () => {
   const onClick = vi.fn();

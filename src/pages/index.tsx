@@ -1,4 +1,5 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
+
 import CommentsPage from './comments';
 
 const routes = [

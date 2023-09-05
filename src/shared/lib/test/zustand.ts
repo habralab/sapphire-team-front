@@ -1,5 +1,5 @@
-import { StateCreator } from 'zustand';
 import { act } from '@testing-library/react';
+import { StateCreator } from 'zustand';
 
 type ZustandModel = typeof import('zustand');
 

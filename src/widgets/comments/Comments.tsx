@@ -1,6 +1,6 @@
-import { useForm } from 'react-hook-form';
 import { ArrowRightIcon } from '@chakra-ui/icons';
 import { FormControl, Input, IconButton, Heading, FormLabel } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
 
 export interface CommentsForm {
   comment: string;
