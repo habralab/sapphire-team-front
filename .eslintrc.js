@@ -77,8 +77,32 @@ module.exports = {
             group: ['~/shared/*/*/**'],
           },
           {
-            message: 'Prefer absolute imports instead of relatives',
-            group: ['../**'],
+            message: 'Prefer absolute imports instead of relatives (for root modules)',
+            group: ['../**/app'],
+          },
+          {
+            message: 'Prefer absolute imports instead of relatives (for root modules)',
+            group: ['../**/processes'],
+          },
+          {
+            message: 'Prefer absolute imports instead of relatives (for root modules)',
+            group: ['../**/pages'],
+          },
+          {
+            message: 'Prefer absolute imports instead of relatives (for root modules)',
+            group: ['../**/widgets'],
+          },
+          {
+            message: 'Prefer absolute imports instead of relatives (for root modules)',
+            group: ['../**/features'],
+          },
+          {
+            message: 'Prefer absolute imports instead of relatives (for root modules)',
+            group: ['../**/entities'],
+          },
+          {
+            message: 'Prefer absolute imports instead of relatives (for root modules)',
+            group: ['../**/shared'],
           },
         ],
       },
