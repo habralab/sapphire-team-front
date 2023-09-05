@@ -8,10 +8,11 @@
     "build": "tsc -p tsconfig.prod.json && vite build",
     "serve": "vite preview",
     "eslint": "eslint **/*.{ts,tsx}",
+    "eslint-recursive": "yarn eslint --rule \"{import/no-cycle: error}\"",
     "tslint": "tsc --noEmit",
     "prettier": "prettier --loglevel warn \"**/*.{ts,tsx}\" --check --cache-location=.yarn/.prettier",
     "lint": "concurrently \"yarn eslint\" \"yarn tslint\" \"yarn prettier\" --raw",
-    "check": "concurrently \"yarn test\" \"yarn eslint\" \"yarn tslint\" \"yarn prettier\" --raw",
+    "check": "concurrently \"yarn test\" \"yarn eslint-recursive\" \"yarn tslint\" \"yarn prettier\" --raw",
     "test": "vitest run",
     "test:watch": "vitest",
     "release": "release-it"

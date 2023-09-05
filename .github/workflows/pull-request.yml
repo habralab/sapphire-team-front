@@ -19,4 +19,4 @@ jobs:
       - name: Install dependencies
         run: yarn --immutable
       - name: Run checks
-        run: yarn concurrently "yarn test" "yarn eslint" "yarn tslint" "yarn prettier" --raw
+        run: yarn concurrently "yarn test" "yarn eslint-recursive" "yarn tslint" "yarn prettier" --raw
