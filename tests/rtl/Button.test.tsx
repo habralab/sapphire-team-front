@@ -1,21 +1,19 @@
-import React from 'react';
-
-import { render, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Button from './Button';
 import { vi, expect } from 'vitest';
 
 test('Button component renders correctly', () => {
   const onClick = vi.fn();
-  const { getByText } = render(<Button onClick={onClick} />);
-  const buttonElement = getByText('Click me');
+  render(<Button onClick={onClick} />);
+  const buttonElement = screen.getByText('Click me');
   expect(buttonElement).toBeInTheDocument();
 });
 
-test('Button component calls onClick handler', () => {
+test('Button component calls onClick handler', async () => {
   const onClickMock = vi.fn();
-  const { getByText } = render(<Button onClick={onClickMock} />);
-  const buttonElement = getByText('Click me');
-
-  fireEvent.click(buttonElement);
+  render(<Button onClick={onClickMock} />);
+  const buttonElement = screen.getByText('Click me');
+  await userEvent.click(buttonElement);
   expect(onClickMock).toHaveBeenCalled();
 });

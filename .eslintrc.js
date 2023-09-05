@@ -20,6 +20,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
+    'plugin:react-hooks/recommended',
   ],
   plugins: ['prettier'],
   rules: {
@@ -42,4 +43,10 @@ module.exports = {
       node: true,
     },
   },
+  overrides: [
+    {
+      files: ['**/tests/**/*.ts?(x)', 'src/**/*.test.ts?(x)'],
+      extends: ['plugin:testing-library/react', 'plugin:jest-dom/recommended'],
+    },
+  ],
 };
