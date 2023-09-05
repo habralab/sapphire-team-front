@@ -1,4 +1,4 @@
-import Comments from '@/widgets/comments';
+import Comments from '~/widgets/comments';
 
 const CommentsPage = () => {
   return <Comments onSubmit={() => alert()} />;

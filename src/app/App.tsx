@@ -1,4 +1,4 @@
-import { Routing } from '@/pages';
+import { Routing } from '~/pages';
 import { ChakraProvider } from '@chakra-ui/react';
 
 function App() {
