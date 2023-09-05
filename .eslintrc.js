@@ -45,7 +45,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/tests/**/*.ts?(x)', 'src/**/*.test.ts?(x)'],
+      files: ['tests/**/*.ts?(x)', 'src/**/*.test.ts?(x)'],
       extends: ['plugin:testing-library/react', 'plugin:jest-dom/recommended'],
     },
   ],
