@@ -82,10 +82,6 @@ module.exports = {
           },
           {
             message: 'Prefer absolute imports instead of relatives (for root modules)',
-            group: ['../**/processes'],
-          },
-          {
-            message: 'Prefer absolute imports instead of relatives (for root modules)',
             group: ['../**/pages'],
           },
           {
