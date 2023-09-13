@@ -2,8 +2,8 @@
 
 ### Ссылки на проект:
 
-- [stage.sapphire.pet-project.habr.com](stage.sapphire.pet-project.habr.com)
-- [sapphire.pet-project.habr.com](sapphire.pet-project.habr.com)
+- [stage.sapphire.pet-project.habr.com](https://stage.sapphire.pet-project.habr.com)
+- [sapphire.pet-project.habr.com](https://sapphire.pet-project.habr.com)
 
 Установка зависимостей:
 
