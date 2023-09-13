@@ -16,4 +16,4 @@ jobs:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          script: cd /var/www/front-prod && git fetch origin && git reset --hard HEAD && git checkout -f ${{github.ref_name}} && sh ./deploy-prod.sh
+          script: cd /var/www/front-prod && git fetch origin && git reset --hard HEAD && git checkout -f ${{github.ref_name}} && yarn --immutable && yarn build

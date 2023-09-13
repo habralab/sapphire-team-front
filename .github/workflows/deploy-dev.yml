@@ -17,4 +17,4 @@ jobs:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          script: cd /var/www/front && sh ./deploy-dev.sh
+          script: cd /var/www/front && git reset --hard HEAD && git pull --force && yarn --immutable && yarn build
