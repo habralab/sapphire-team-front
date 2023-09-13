@@ -10,10 +10,9 @@ jobs:
   deploy-prod:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Environment Variables
+      - name: deploy
         env:
           VITE_CLOSED: ${{ vars.VITE_CLOSED }}
-      - name: deploy
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.IP }}
