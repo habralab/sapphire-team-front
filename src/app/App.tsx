@@ -1,9 +1,12 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import { Routing } from '~/pages';
+
+import { basicTheme } from '~/shared/config/theme';
+
+import { Routing } from './providers/router';
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={basicTheme}>
       <Routing />
     </ChakraProvider>
   );

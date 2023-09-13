@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "husky install",
     "dev": "vite --open",
-    "build": "tsc -p tsconfig.prod.json && vite build",
+    "build": "vite build",
     "serve": "vite preview",
     "eslint": "eslint **/*.{ts,tsx}",
     "eslint-recursive": "yarn eslint --rule \"{import/no-cycle: error}\"",
@@ -23,6 +23,7 @@
     "@chakra-ui/system": "^2.6.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fontsource/raleway": "^5.0.8",
     "axios": "^1.5.0",
     "framer-motion": "^10.16.2",
     "react": "^18.2.0",
@@ -69,6 +70,7 @@
     "vite": "^4.4.9",
     "vite-plugin-checker": "^0.6.2",
     "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-svgr": "^3.2.0",
     "vitest": "^0.34.3"
   },
   "packageManager": "yarn@3.6.3",
