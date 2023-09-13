@@ -1,5 +1,10 @@
 # Sapphire
 
+### Ссылки на проект:
+
+- [stage.sapphire.pet-project.habr.com](stage.sapphire.pet-project.habr.com)
+- [sapphire.pet-project.habr.com](sapphire.pet-project.habr.com)
+
 Установка зависимостей:
 
 ```
