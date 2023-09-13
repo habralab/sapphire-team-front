@@ -18,4 +18,4 @@ jobs:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          script: cd /var/www/front-prod && git fetch origin && git reset --hard HEAD && git checkout -f ${{github.ref_name}} && yarn --immutable && yarn build
+          script: cd /var/www/front-prod && git fetch origin && git reset --hard HEAD && git checkout -f ${{github.ref_name}} && yarn --immutable && VITE_CLOSED=$VITE_CLOSED yarn build
