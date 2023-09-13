@@ -2,7 +2,7 @@
 
 git reset --hard HEAD
 
-git pull
+git pull --force
 
 yarn --immutable
 
