@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: deploy
-        env:
-          VITE_CLOSED: ${{ vars.VITE_CLOSED }}
         uses: appleboy/ssh-action@master
         if: contains(github.event.head_commit.message, 'chore:') == false
         with:
@@ -20,4 +18,4 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
           envs: VITE_CLOSED
-          script: cd /var/www/front && git reset --hard HEAD && git pull --force && yarn --immutable && VITE_CLOSED=$VITE_CLOSED yarn build
+          script: cd /var/www/front && git reset --hard HEAD && git pull --force && yarn --immutable && yarn build
