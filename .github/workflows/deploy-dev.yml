@@ -10,6 +10,9 @@ jobs:
   deploy-dev:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Environment Variables
+        env:
+          VITE_CLOSED: ${{ vars.VITE_CLOSED }}
       - name: deploy
         uses: appleboy/ssh-action@master
         if: contains(github.event.head_commit.message, 'chore:') == false
