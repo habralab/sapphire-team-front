@@ -1,0 +1,1 @@
+export { ParticipantPage } from './Participant';
