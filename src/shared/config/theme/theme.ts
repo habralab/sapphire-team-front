@@ -12,18 +12,12 @@ const Button = defineStyleConfig({
   },
 });
 
-const Text = defineStyleConfig({
-  baseStyle: {
-    mb: 3,
-  },
-});
-
 export const basicTheme = extendTheme({
   config: {
     initialColorMode: 'dark',
     useSystemColorMode: false,
   },
-  components: { Button, Text },
+  components: { Button },
   styles: {
     global: {
       body: {

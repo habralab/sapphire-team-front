@@ -25,6 +25,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/raleway": "^5.0.8",
+    "@tanstack/react-query": "^4.35.3",
     "axios": "^1.5.0",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
@@ -36,6 +37,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@tanstack/eslint-plugin-query": "^4.34.1",
+    "@tanstack/react-query-devtools": "^4.35.3",
     "@testing-library/dom": "^9.3.1",
     "@testing-library/jest-dom": "^6.1.2",
     "@testing-library/react": "^14.0.0",
