@@ -13,8 +13,8 @@
     "prettier": "prettier --loglevel warn \"**/*.{ts,tsx}\" --check --cache-location=.yarn/.prettier",
     "lint": "concurrently \"yarn eslint\" \"yarn tslint\" \"yarn prettier\" --raw",
     "check": "concurrently \"yarn test\" \"yarn eslint-recursive\" \"yarn tslint\" \"yarn prettier\" --raw",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest --passWithNoTests",
     "release": "release-it",
     "analyze": "vite-bundle-visualizer -o ./stats.html"
   },
