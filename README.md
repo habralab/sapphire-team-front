@@ -5,8 +5,8 @@
 - [stage.sapphire.pet-project.habr.com](https://stage.sapphire.pet-project.habr.com)
 - [sapphire.pet-project.habr.com](https://sapphire.pet-project.habr.com)
 
-[Бекенд репозиторий](https://github.com/habralab/sapphire-team-back)
-[Figma](https://www.figma.com/file/0NelvdkD6gTqKrWfRYydI2/)
+[Бекенд репозиторий](https://github.com/habralab/sapphire-team-back)  
+[Figma](https://www.figma.com/file/0NelvdkD6gTqKrWfRYydI2/)  
 [Task manager](https://tree.taiga.io/project/olegyurchik-sapphire-habr/timeline)
 
 Установка зависимостей:
