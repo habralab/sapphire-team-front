@@ -5,6 +5,8 @@
 - [stage.sapphire.pet-project.habr.com](https://stage.sapphire.pet-project.habr.com)
 - [sapphire.pet-project.habr.com](https://sapphire.pet-project.habr.com)
 
+[Бекенд репозиторий](https://github.com/habralab/sapphire-team-back)
+
 Установка зависимостей:
 
 ```
