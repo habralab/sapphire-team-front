@@ -50,9 +50,6 @@ export const basicTheme = extendTheme({
     body: `'Inter', sans-serif`,
     heading: `'Raleway', sans-serif`,
   },
-  variants: {
-    h3: { fontFamily: `'Inter', sans-serif !important` },
-  },
   colors: {
     purple: {
       100: '#E9D8FD',
