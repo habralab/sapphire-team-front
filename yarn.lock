@@ -2215,6 +2215,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/inter@npm:^5.0.8":
+  version: 5.0.8
+  resolution: "@fontsource/inter@npm:5.0.8"
+  checksum: d67def08f86681ca21d7ee771fc94b05bd6073f4ccc130f619bb94252b37cda1a9796f0c9991bb7be723f292b6deb014049546be5961bcd5185b439b12ed7d63
+  languageName: node
+  linkType: hard
+
 "@fontsource/raleway@npm:^5.0.8":
   version: 5.0.8
   resolution: "@fontsource/raleway@npm:5.0.8"
@@ -9888,6 +9895,7 @@ __metadata:
     "@commitlint/config-conventional": ^17.7.0
     "@emotion/react": ^11.11.1
     "@emotion/styled": ^11.11.0
+    "@fontsource/inter": ^5.0.8
     "@fontsource/raleway": ^5.0.8
     "@testing-library/dom": ^9.3.1
     "@testing-library/jest-dom": ^6.1.2

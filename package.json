@@ -24,6 +24,7 @@
     "@chakra-ui/system": "^2.6.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fontsource/inter": "^5.0.8",
     "@fontsource/raleway": "^5.0.8",
     "axios": "^1.5.0",
     "framer-motion": "^10.16.4",

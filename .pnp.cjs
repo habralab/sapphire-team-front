@@ -35,6 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@commitlint/config-conventional", "npm:17.7.0"],\
             ["@emotion/react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:11.11.1"],\
             ["@emotion/styled", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:11.11.0"],\
+            ["@fontsource/inter", "npm:5.0.8"],\
             ["@fontsource/raleway", "npm:5.0.8"],\
             ["@testing-library/dom", "npm:9.3.1"],\
             ["@testing-library/jest-dom", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.1.2"],\
@@ -3628,6 +3629,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@eslint-js-npm-8.48.0-cee42a7097-b2755f9c0e.zip/node_modules/@eslint/js/",\
           "packageDependencies": [\
             ["@eslint/js", "npm:8.48.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@fontsource/inter", [\
+        ["npm:5.0.8", {\
+          "packageLocation": "./.yarn/cache/@fontsource-inter-npm-5.0.8-81dbd7a481-d67def08f8.zip/node_modules/@fontsource/inter/",\
+          "packageDependencies": [\
+            ["@fontsource/inter", "npm:5.0.8"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12775,6 +12785,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@commitlint/config-conventional", "npm:17.7.0"],\
             ["@emotion/react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:11.11.1"],\
             ["@emotion/styled", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:11.11.0"],\
+            ["@fontsource/inter", "npm:5.0.8"],\
             ["@fontsource/raleway", "npm:5.0.8"],\
             ["@testing-library/dom", "npm:9.3.1"],\
             ["@testing-library/jest-dom", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.1.2"],\
