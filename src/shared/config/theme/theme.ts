@@ -18,26 +18,12 @@ const Button = defineStyleConfig({
   },
 });
 
-const Text = defineStyleConfig({
-  baseStyle: {
-    mb: 3,
-  },
-});
-
-const Heading = defineStyleConfig({
-  variants: {
-    h3: {
-      fontFamily: `'Inter', sans-serif`,
-    },
-  },
-});
-
 export const basicTheme = extendTheme({
   config: {
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Text, Heading },
+  components: { Button },
   styles: {
     global: {
       body: {

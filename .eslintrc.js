@@ -24,12 +24,21 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:react-hooks/recommended',
     'plugin:boundaries/recommended',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
   ],
   rules: {
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
+    'react-hooks/exhaustive-deps': 'off',
     'react/react-in-jsx-scope': 'off',
     'jsx-a11y/accessible-emoji': 'off',
     'react/prop-types': 'off',
-    '@typescript-eslint/no-unused-vars': 'warn',
     'import/no-unresolved': 'error',
     'import/newline-after-import': 'error',
     'import/order': [
