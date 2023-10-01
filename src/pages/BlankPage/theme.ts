@@ -37,6 +37,6 @@ export const theme = extendTheme(basicTheme, {
     },
   },
   fonts: {
-    heading: `'Raleway', sans-serif`,
+    body: 'system-ui, sans-serif',
   },
 });
