@@ -48,7 +48,6 @@ export const basicTheme = extendTheme({
     purple: {
       100: '#E9D8FD',
       600: '#6D2DF0',
-      700: '#4A00B5',
       900: '#25005B',
     },
     gray: {
