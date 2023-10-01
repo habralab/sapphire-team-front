@@ -28,6 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@chakra-ui/anatomy", "npm:2.2.1"],\
             ["@chakra-ui/icons", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:2.1.0"],\
             ["@chakra-ui/react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:2.8.0"],\
             ["@chakra-ui/system", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:2.6.0"],\
@@ -672,6 +673,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@chakra-ui-anatomy-npm-2.2.0-06ae9243ab-30359e9e8a.zip/node_modules/@chakra-ui/anatomy/",\
           "packageDependencies": [\
             ["@chakra-ui/anatomy", "npm:2.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:2.2.1", {\
+          "packageLocation": "./.yarn/cache/@chakra-ui-anatomy-npm-2.2.1-3d760c7140-61f529cf47.zip/node_modules/@chakra-ui/anatomy/",\
+          "packageDependencies": [\
+            ["@chakra-ui/anatomy", "npm:2.2.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12915,6 +12923,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["sapphire", "workspace:."],\
+            ["@chakra-ui/anatomy", "npm:2.2.1"],\
             ["@chakra-ui/icons", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:2.1.0"],\
             ["@chakra-ui/react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:2.8.0"],\
             ["@chakra-ui/system", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:2.6.0"],\
