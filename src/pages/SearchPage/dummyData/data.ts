@@ -1,4 +1,4 @@
-import { IProjectCard } from '~/widgets/projectcard';
+import { IProjectCard } from '~/widgets/project-card';
 
 export const data: IProjectCard[] = [
   {
