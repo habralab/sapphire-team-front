@@ -1,6 +1,6 @@
 import { Text } from '@chakra-ui/react';
 
-import { ICard } from '~/entities/projectcard';
+import { ICard } from '~/entities/project-card';
 
 export const Card = (props: ICard) => {
   const { title, date, description } = props;

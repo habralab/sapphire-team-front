@@ -1,4 +1,4 @@
-import { ICard } from '~/entities/projectcard';
+import { ICard } from '~/entities/project-card';
 
 export interface IProjectCard extends ICard {
   id: number;

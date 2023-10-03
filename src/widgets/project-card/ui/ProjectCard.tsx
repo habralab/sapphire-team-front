@@ -6,9 +6,9 @@ import {
   Flex,
 } from '@chakra-ui/react';
 
-import { IProjectCard } from '~/widgets/projectcard';
+import { IProjectCard } from '~/widgets/project-card';
 
-import { Card, ProjectTag } from '~/entities/projectcard';
+import { Card, ProjectTag } from '~/entities/project-card';
 
 export const ProjectCard = (props: IProjectCard) => {
   const { status, title, date, description, type, tags } = props;
