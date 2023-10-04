@@ -9,5 +9,6 @@ export interface IInput {
 }
 
 export interface IActiveInput {
+  isActiveInput?: boolean;
   activeInput: (value: boolean) => void;
 }

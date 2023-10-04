@@ -14,6 +14,7 @@ export const Card = (props: ICard) => {
           md: '4xl',
         }}
         fontWeight={600}
+        lineHeight="120%"
       >
         {title}
       </Text>
@@ -25,6 +26,7 @@ export const Card = (props: ICard) => {
         }}
         fontWeight={500}
         color="gray.500"
+        lineHeight="120%"
       >
         {date}
       </Text>
@@ -42,7 +44,7 @@ export const Card = (props: ICard) => {
           overflow: 'hidden',
         }}
         lineHeight={{
-          base: '115%',
+          base: '120%',
           md: '125%',
         }}
       >

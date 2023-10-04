@@ -12,32 +12,32 @@ export const FilterProject = () => {
         alignItems="center"
         justifyContent="center"
         bg="white"
-        width="40px"
-        height="40px"
+        width="36px"
+        height="36px"
         borderRadius="50%"
         ml="5px"
       >
-        <Icon as={IoOptions} boxSize="25px"></Icon>
+        <Icon as={IoOptions} boxSize="25px" />
         {filters && (
           <Flex
             position="absolute"
-            top="-8px "
-            right="-8px"
-            width="23px"
-            height="23px"
+            top="-4px "
+            right="-3px"
+            width="16px"
+            height="16px"
             lineHeight="0"
             justifyContent="center"
             alignItems="center"
             bg="purple.600"
             color="white"
             fontSize={{
-              base: 'sm',
-              sm: 'sm',
-              md: 'sm',
+              base: 'xs',
+              sm: 'xs',
+              md: 'xs',
             }}
             fontWeight="500"
             borderRadius="50%"
-            border="3px solid"
+            border="2px solid"
             borderColor="gray.100"
           >
             {dummyFilter}

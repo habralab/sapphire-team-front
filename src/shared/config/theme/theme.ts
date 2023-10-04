@@ -43,7 +43,7 @@ const Card = defineMultiStyleConfig({
         borderRadius: '16px',
         cursor: 'pointer',
         _active: {
-          boxShadow: 'xl',
+          boxShadow: '0px 7px 29px 0px rgba(100, 100, 111, 0.20)',
         },
       },
     }),
