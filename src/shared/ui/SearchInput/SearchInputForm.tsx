@@ -21,8 +21,8 @@ export const SearchInputForm = ({ placeholder, onSubmit, activeInput }: ISearchI
       <Flex>
         <FormControl>
           <InputGroup>
-            <InputLeftElement pointerEvents="none">
-              <SearchIcon color="gray.400" />
+            <InputLeftElement w="36px" h="36px" pointerEvents="none">
+              <SearchIcon color="gray.400" w="16px" h="16px" />
             </InputLeftElement>
             <Input
               fontSize={{
@@ -36,6 +36,7 @@ export const SearchInputForm = ({ placeholder, onSubmit, activeInput }: ISearchI
               variant="unstyled"
               pl="40px"
               borderRadius="20px"
+              height="36px"
               color="gray.900"
               _placeholder={{ color: 'gray.400' }}
               background="white"
