@@ -1,11 +1,11 @@
 import { Container, Flex } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import { data } from '~/pages/SearchPage';
-
 import { ProjectCard } from '~/widgets/project-card';
 
 import { FilterProject, SearchProject } from '~/features/projects-list';
+
+import { data } from '../dummyData/data';
 
 export const SearchPage = () => {
   const [isActiveInput, setActiveInput] = useState(false);
