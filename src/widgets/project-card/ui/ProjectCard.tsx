@@ -1,8 +1,8 @@
 import { Box as StatusTag, CardBody, Card as ChakraCard, Flex } from '@chakra-ui/react';
 
-import { IProjectCard } from '~/widgets/project-card';
-
 import { Card, ProjectTag } from '~/entities/project-card';
+
+import { IProjectCard } from '../types/ProjectCardTypes';
 
 export const ProjectCard = (props: IProjectCard) => {
   const { status, title, date, description, type, tags } = props;
