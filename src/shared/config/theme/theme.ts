@@ -1,4 +1,4 @@
-import { extendTheme, defineStyleConfig } from '@chakra-ui/react';
+import { extendTheme, defineStyleConfig, defineStyle } from '@chakra-ui/react';
 import '@fontsource/raleway/600.css';
 import '@fontsource/raleway/700.css';
 import '@fontsource/inter/400.css';
@@ -26,17 +26,49 @@ const Heading = defineStyleConfig({
   },
 });
 
+const Text = defineStyleConfig({
+  variants: {
+    es: {
+      fontSize: '10px',
+    },
+  },
+});
+
+const dividerStyle = defineStyle({
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: 'gray.200',
+});
+
+const dividerStyleTabs = defineStyle({
+  borderWidth: '1px',
+  borderRadius: '4px',
+  borderStyle: 'solid',
+  borderColor: 'gray.400',
+});
+
+const Tab = defineStyleConfig({
+  baseStyle: {
+    bg: 'gray.100',
+  },
+});
+
+export const Divider = defineStyleConfig({
+  variants: { dividerStyle, dividerStyleTabs },
+});
+
 export const basicTheme = extendTheme({
   config: {
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Heading },
+  components: { Button, Heading, Divider, Tab, Text },
   styles: {
     global: {
       body: {
         fontSize: 'sm',
         color: 'gray.900',
+        bg: 'gray.100',
       },
     },
   },
