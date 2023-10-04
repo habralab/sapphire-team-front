@@ -1,6 +1,5 @@
 import { extendTheme, defineStyleConfig } from '@chakra-ui/react';
 
-import { basicTheme } from '~/shared/config/theme';
 import '@fontsource/raleway/700.css';
 
 const Button = defineStyleConfig({
@@ -26,7 +25,7 @@ const Button = defineStyleConfig({
   },
 });
 
-export const theme = extendTheme(basicTheme, {
+export const theme = extendTheme({
   components: { Button },
   styles: {
     global: {
@@ -34,6 +33,13 @@ export const theme = extendTheme(basicTheme, {
         bg: 'purple.700',
         color: 'white',
       },
+    },
+  },
+  colors: {
+    purple: {
+      700: '#4A00B5',
+      900: '#25005B',
+      100: '#E6DAF7',
     },
   },
   fonts: {
