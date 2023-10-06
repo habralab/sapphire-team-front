@@ -19,6 +19,9 @@ const Button = defineStyleConfig({
 });
 
 const Heading = defineStyleConfig({
+  baseStyle: {
+    fontWeight: 'semibold',
+  },
   variants: {
     h3: {
       fontFamily: `'Inter', sans-serif`,
@@ -47,13 +50,15 @@ const dividerStyleTabs = defineStyle({
   borderColor: 'gray.400',
 });
 
-const Tab = defineStyleConfig({
+const Link = defineStyleConfig({
   baseStyle: {
-    bg: 'gray.100',
+    color: 'purple.600',
+    fontWeight: 'medium',
+    fontSize: 'xs',
   },
 });
 
-export const Divider = defineStyleConfig({
+const Divider = defineStyleConfig({
   variants: { dividerStyle, dividerStyleTabs },
 });
 
@@ -62,11 +67,11 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Heading, Divider, Tab, Text },
+  components: { Button, Heading, Divider, Text, Link },
   styles: {
     global: {
       body: {
-        fontSize: 'sm',
+        fontSize: 'xs',
         color: 'gray.900',
         bg: 'gray.100',
       },

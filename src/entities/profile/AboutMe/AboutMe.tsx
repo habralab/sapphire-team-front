@@ -1,38 +1,32 @@
-import { Box, Text, Flex, Tag } from '@chakra-ui/react';
+import { Box, Text, Flex, Heading } from '@chakra-ui/react';
+
+import { TagComponent } from '~/shared/ui/Tag';
 
 export function AboutMe() {
   return (
     <Box>
-      <Text fontWeight="semibold">Обо мне</Text>
-      <Text py={2} fontSize="xs">
+      <Heading fontSize="sm" fontWeight="semibold">
+        Обо мне
+      </Heading>
+      <Text py={2} lineHeight="16px">
         Привет! Меня зовут Татьяна, и я начинающий UX/UI дизайнер, готовый погрузиться в
         мир творчества и пользовательских интерфейсов.
         <br />
         Моя страсть к дизайну началась давно, и я горжусь тем, что обладаю креативным
         мышлением и аналитическими способностями.
       </Text>
-      <Text fontWeight="semibold">Профессия</Text>
-      <Flex wrap="wrap" gap={2} py={2} fontWeight="semibold" color="gray.800">
-        <Tag py={1} px={4}>
-          Дизайнер
-        </Tag>
-        <Tag py={1} px={4}>
-          UX/UI дизайнер
-        </Tag>
-        <Tag py={1} px={4}>
-          Product дизайнер
-        </Tag>
+      <Heading fontSize="sm">Профессия</Heading>
+      <Flex wrap="wrap" gap={2} py={2} fontWeight="semibold">
+        <TagComponent title="Дизайнер" />
+        <TagComponent title="UX/UI дизайнер" />
+        <TagComponent title="Product дизайнер" />
       </Flex>
-      <Text fontWeight="semibold" py={2}>
+      <Heading fontSize="sm" py={2}>
         Навыки
-      </Text>
-      <Flex wrap="wrap" gap={2} fontWeight="semibold" color="gray.800">
-        <Tag py={1} px={4}>
-          UX
-        </Tag>
-        <Tag py={1} px={4}>
-          UI
-        </Tag>
+      </Heading>
+      <Flex wrap="wrap" gap={2} fontWeight="semibold">
+        <TagComponent title="UX" />
+        <TagComponent title="UI" />
       </Flex>
     </Box>
   );

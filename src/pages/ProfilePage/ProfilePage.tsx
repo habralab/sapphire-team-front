@@ -14,7 +14,7 @@ export function ProfilePage() {
         <Heading fontWeight="bold" fontSize="2xl">
           Профиль
         </Heading>
-        <Flex gap={4} position="relative">
+        <Flex gap={4}>
           <Notification />
           <Setting />
         </Flex>
