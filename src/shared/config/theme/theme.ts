@@ -30,20 +30,51 @@ const Button = defineStyleConfig({
 
 const Heading = defineStyleConfig({
   variants: {
+    h1: {
+      fontSize: '2xl',
+      fontWeight: '700',
+    },
+    h2: {
+      fontSize: '2xl',
+      fontWeight: '600',
+    },
     h3: {
       fontFamily: `'Inter', sans-serif`,
+    },
+    h4: {
+      fontFamily: `'Inter', sans-serif`,
+      fontSize: 'md',
+      fontWeight: '600',
+    },
+  },
+});
+
+const Container = defineStyleConfig({
+  variants: {
+    mobile: {
+      maxW: 'container.xs',
+      padding: '0.5rem 1.25rem',
+    },
+  },
+});
+
+const Text = defineStyleConfig({
+  variants: {
+    cardTextMobile: {
+      fontSize: 'xs',
+      fontWeight: '500',
     },
   },
 });
 
 const Card = defineMultiStyleConfig({
   variants: {
-    sapphire: definePartsStyle({
+    mobile: definePartsStyle({
       container: {
-        borderRadius: '16px',
+        borderRadius: '1rem',
         cursor: 'pointer',
         _active: {
-          boxShadow: '0px 7px 29px 0px rgba(100, 100, 111, 0.20)',
+          boxShadow: '0 0.4375rem 1.8125rem 0 rgba(100, 100, 111, 0.20)',
         },
       },
     }),
@@ -55,13 +86,14 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Heading, Card },
+  components: { Button, Heading, Card, Text, Container },
   styles: {
     global: {
       body: {
-        fontSize: 'sm',
+        fontSize: 'xs',
         background: 'gray.100',
         color: 'gray.900',
+        lineHeight: '120%',
       },
     },
   },

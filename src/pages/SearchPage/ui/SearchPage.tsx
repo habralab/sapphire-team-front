@@ -1,16 +1,14 @@
 import { Container, Flex } from '@chakra-ui/react';
-import { useState } from 'react';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { FilterProject, SearchProject } from '~/features/projects-list';
+import { FilterProject, SearchProject } from '~/features/projects';
 
-import { data } from '../dummyData/data';
+import { data } from '../data';
 
 export const SearchPage = () => {
-  const [isActiveInput, setActiveInput] = useState(false);
   return (
-    <Container maxW="container.sm" mt={5} px="20px">
+    <Container variant="mobile">
       <Flex
         alignContent={'center'}
         gap={4}
@@ -18,13 +16,8 @@ export const SearchPage = () => {
         justifyContent="space-between"
       >
         <Flex>
-          <SearchProject
-            activeInput={(value) => {
-              setActiveInput(value);
-            }}
-            isActiveInput={isActiveInput}
-          />
-          {!isActiveInput && <FilterProject />}
+          <SearchProject />
+          <FilterProject />
         </Flex>
         {data.map((project) => (
           <ProjectCard key={project.id} {...project} type="all" />

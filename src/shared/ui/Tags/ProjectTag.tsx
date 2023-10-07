@@ -1,6 +1,8 @@
 import { Tag } from '@chakra-ui/react';
 
-import { ITag } from '../types/TagTypes';
+interface ITag {
+  tag: string;
+}
 
 export const ProjectTag = (props: ITag) => {
   return (
