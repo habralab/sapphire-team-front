@@ -1,6 +1,8 @@
 import { Suspense } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
+import { Layout } from '~/pages/Layout';
+
 import { Loader } from '~/shared/ui/Loader';
 
 import { routes } from './config';
@@ -11,7 +13,11 @@ const Routing = () => {
       <Suspense fallback={<Loader />}>
         <Routes>
           {routes.map((props) => (
-            <Route {...props} key={props.path} />
+            <Route
+              key={props.path}
+              path={props.path}
+              element={<Layout {...props.view} />}
+            />
           ))}
         </Routes>
       </Suspense>

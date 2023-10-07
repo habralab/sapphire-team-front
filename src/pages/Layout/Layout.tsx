@@ -1,31 +1,33 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, useBreakpointValue } from '@chakra-ui/react';
 
-import { basicTheme } from '~/shared/config/theme';
-import { useScreenSize } from '~/shared/lib';
+import { desktopTheme, mobileTheme } from '~/shared/config/theme';
 
 interface LayoutProps {
-  Mobile?: JSX.Element;
-  Desktop?: JSX.Element;
+  mobile?: JSX.Element;
+  desktop?: JSX.Element;
+  all?: JSX.Element;
 }
 
-export const Layout = ({ Mobile, Desktop }: LayoutProps) => {
-  const breakpoint = 600;
-  const widthSize = useScreenSize();
+export const Layout = ({ mobile, desktop, all }: LayoutProps) => {
+  const breakpoint = useBreakpointValue(
+    { base: 'mobile', md: 'desktop' },
+    { ssr: false },
+  );
   return (
     <>
-      {widthSize > breakpoint ? (
-        /* Здесь применяем тему для десктопа + место для меню */
-        <ChakraProvider theme={basicTheme}>
-          {Desktop}
-          <div>Desktop Menu</div>
-        </ChakraProvider>
-      ) : (
-        /* Здесь применяем тему для мобилки + место для меню */
-        <ChakraProvider theme={basicTheme}>
-          {Mobile}
+      {(breakpoint === 'mobile' || !desktop) && mobile && (
+        <ChakraProvider theme={mobileTheme}>
+          {mobile}
           <div>Mobile Menu</div>
         </ChakraProvider>
       )}
+      {breakpoint === 'desktop' && desktop && (
+        <ChakraProvider theme={desktopTheme}>
+          {desktop}
+          <div>Desktop Menu</div>
+        </ChakraProvider>
+      )}
+      {!!all && all}
     </>
   );
 };
