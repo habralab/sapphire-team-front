@@ -1,2 +1,3 @@
-export * from './ui/ProjectCard';
-export * from './types/ProjectCardTypes';
+export * from './ui';
+export * from './types';
+export * from './model';

@@ -10,8 +10,8 @@ export const TextWithRows = (props: ITextWithRows) => {
     <Text
       sx={{
         display: '-webkit-box',
-        '-webkit-line-clamp': `${props.rows}`,
-        '-webkit-box-orient': 'vertical',
+        WebkitLineClamp: `${props.rows}`,
+        WebkitBoxOrient: 'vertical',
         overflow: 'hidden',
       }}
     >
