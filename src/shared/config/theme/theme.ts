@@ -104,7 +104,18 @@ export const basicTheme = extendTheme({
   fontSizes: {
     es: '0.625rem',
   },
+  sizes: {
+    container: {
+      xs: '22.5rem',
+    },
+  },
   colors: {
+    purpleBage: {
+      500: '#6D2DF0',
+    },
+    grayBage: {
+      500: '#9E9E9E',
+    },
     purple: {
       100: '#E9D8FD',
       600: '#6D2DF0',

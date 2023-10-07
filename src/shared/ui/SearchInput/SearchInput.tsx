@@ -10,32 +10,32 @@ import {
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-interface ISearchInput {
+interface SearchInputProps {
   placeholder?: string;
-  onSubmit: (value: IInput) => void;
+  onSubmit: (value: InputProps) => void;
 }
 
-export interface IInput {
+export interface InputProps {
   title: string;
 }
 
-export const SearchInput = ({ placeholder, onSubmit }: ISearchInput) => {
-  const { handleSubmit, register, reset, watch } = useForm<IInput>({
+export const SearchInput = ({ placeholder, onSubmit }: SearchInputProps) => {
+  const { handleSubmit, register, reset, watch } = useForm<InputProps>({
     defaultValues: {
       title: '',
     },
   });
 
-  const onSubmitHandler = (values: IInput) => {
+  const onSubmitHandler = (values: InputProps) => {
     onSubmit(values);
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmitHandler)}
-      // style={{
-      //   width: '100%',
-      // }}
+      style={{
+        width: '100%',
+      }}
     >
       <Flex>
         <FormControl>

@@ -2,9 +2,13 @@ import { Heading, Text } from '@chakra-ui/react';
 
 import { TextWithRows } from '~/shared/ui/TextWithRows';
 
-import { ICard } from '../model/CardModel';
+interface CardProps {
+  title: string;
+  date: string;
+  description: string;
+}
 
-export const Card = (props: ICard) => {
+export const Card = (props: CardProps) => {
   const { title, date, description } = props;
 
   return (

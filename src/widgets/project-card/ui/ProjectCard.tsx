@@ -1,12 +1,14 @@
 import { CardBody, Card as ChakraCard, Flex, Badge } from '@chakra-ui/react';
 
+import { Status } from '~/features/projects';
+
 import { Card } from '~/entities/project';
 
 import { ProjectTag } from '~/shared/ui/Tags';
 
-import { IProjectCardDto } from '../model';
+import { ProjectCardProps } from '../model';
 
-export const ProjectCard = (props: IProjectCardDto) => {
+export const ProjectCard = (props: ProjectCardProps) => {
   const { status, title, date, description, page, tags } = props;
   return (
     <ChakraCard variant="mobile" alignContent="center">
@@ -16,19 +18,7 @@ export const ProjectCard = (props: IProjectCardDto) => {
         flexDirection="column"
         gap="0.75rem"
       >
-        <Badge
-          background={status === 'Проект завершён' ? 'gray.500' : 'purple.600'}
-          fontSize="es"
-          textTransform="none"
-          fontWeight="600"
-          lineHeight="0.4375rem"
-          color="white"
-          width="fit-content"
-          p="0.375rem 0.625rem"
-          borderRadius="1.25rem"
-        >
-          {status}
-        </Badge>
+        <Status status={status} />
         <Card title={title} date={date} description={description} />
       </CardBody>
       {page === 'search' && (

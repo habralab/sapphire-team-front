@@ -1,12 +1,18 @@
-import { IProjectCard } from '../types/ProjectCardTypes';
+import { ProjectCardDto } from '../types/ProjectCardTypes';
 
-export interface IProjectCardDto extends IProjectCard {
+export interface ProjectCardProps {
+  id: number;
+  status: string;
+  title: string;
+  date: string;
+  description: string;
+  tags?: ('Разработка' | 'Тестирование' | 'Аналитика' | 'Дизайн' | 'Менеджмент')[];
   page?: 'search' | 'project';
 }
 
 export const dataAdapter = (
-  data: IProjectCard,
+  data: ProjectCardDto,
   page: 'search' | 'project',
-): IProjectCardDto => {
+): ProjectCardProps => {
   return { ...data, page };
 };
