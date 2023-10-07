@@ -1,6 +1,6 @@
-import { IProjectCard } from '~/widgets/project-card';
+import { ProjectCardDto } from '~/widgets/project-card';
 
-export const data: IProjectCard[] = [
+export const data: ProjectCardDto[] = [
   {
     id: 1,
     status: 'Проект идёт',

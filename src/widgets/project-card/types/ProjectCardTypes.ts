@@ -1,15 +1,8 @@
-export interface IProjectCard {
+export interface ProjectCardDto {
   id: number;
-  status: 'Скоро начнётся' | 'Проект идёт' | 'Проект завершён';
+  status: string;
   title: string;
   date: string;
   description: string;
   tags?: ('Разработка' | 'Тестирование' | 'Аналитика' | 'Дизайн' | 'Менеджмент')[];
 }
-
-// export interface IProjectCardDto {
-//   id: number;
-//   status: 'Скоро начнётся' | 'Проект идёт' | 'Проект завершён';
-//   type?: 'all' | 'my-project';
-//   tags?: ('Разработка' | 'Тестирование' | 'Аналитика' | 'Дизайн' | 'Менеджмент')[];
-// }
