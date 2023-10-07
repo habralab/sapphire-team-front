@@ -2,9 +2,17 @@ import { SearchIcon } from '@chakra-ui/icons';
 import { Flex, FormControl, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
-import { IInput, ISearchInput } from '~/shared/types/SearchInput';
+interface ISearchInput {
+  placeholder?: string;
+  value?: string;
+  onSubmit: (value: IInput) => void;
+}
 
-export const SearchInputForm = ({ placeholder, onSubmit, activeInput }: ISearchInput) => {
+export interface IInput {
+  title: string;
+}
+
+export const SearchInput = ({ placeholder, onSubmit }: ISearchInput) => {
   const { handleSubmit, register } = useForm<IInput>();
 
   const onSubmitHandler = (values: IInput) => {
@@ -21,35 +29,19 @@ export const SearchInputForm = ({ placeholder, onSubmit, activeInput }: ISearchI
       <Flex>
         <FormControl>
           <InputGroup>
-            <InputLeftElement w="36px" h="36px" pointerEvents="none">
-              <SearchIcon color="gray.400" w="16px" h="16px" />
+            <InputLeftElement w="2.25rem" h="2.25rem" pointerEvents="none">
+              <SearchIcon color="gray.400" w="1rem" h="1rem" />
             </InputLeftElement>
             <Input
-              fontSize={{
-                base: 'sm',
-                sm: '2xl',
-                md: '4xl',
-              }}
-              onFocus={() => {
-                activeInput(true);
-              }}
               variant="unstyled"
-              pl="40px"
-              borderRadius="20px"
-              height="36px"
+              p="0.625rem 0 0.625rem 2.5rem"
+              borderRadius="1.25rem"
+              height="2.25rem"
               color="gray.900"
               _placeholder={{ color: 'gray.400' }}
               background="white"
-              py={'10px'}
               placeholder={placeholder}
-              sx={{
-                caretColor: '#BDBDBD',
-              }}
-              {...register('title', {
-                onBlur: () => {
-                  activeInput(false);
-                },
-              })}
+              {...register('title')}
             />
             {/* <InputRightElement width="6rem">
               <Button

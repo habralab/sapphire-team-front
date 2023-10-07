@@ -83,7 +83,7 @@ export const basicTheme = extendTheme({
   styles: {
     global: {
       body: {
-        fontSize: 'sm',
+        fontSize: 'xs',
         background: 'gray.100',
         color: 'gray.900',
         bg: 'gray.100',
