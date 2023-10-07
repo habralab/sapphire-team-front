@@ -10,31 +10,26 @@ export const FilterProject = () => {
         alignItems="center"
         justifyContent="center"
         bg="white"
-        width="36px"
-        height="36px"
+        width="2.25rem"
+        height="2.25rem"
         borderRadius="50%"
-        ml="5px"
       >
-        <Icon as={IoOptions} boxSize="25px" />
+        <Icon as={IoOptions} boxSize="1.625rem" />
         <Flex
           position="absolute"
-          top="-4px "
-          right="-3px"
-          width="16px"
-          height="16px"
+          top="-0.25rem"
+          right="-0.25rem"
+          width="1rem"
+          height="1rem"
           lineHeight="0"
           justifyContent="center"
           alignItems="center"
           bg="purple.600"
           color="white"
-          fontSize={{
-            base: 'xs',
-            sm: 'xs',
-            md: 'xs',
-          }}
+          fontSize="xs"
           fontWeight="500"
           borderRadius="50%"
-          border="2px solid"
+          border="0.125rem solid"
           borderColor="gray.100"
         >
           {dummyFilter}

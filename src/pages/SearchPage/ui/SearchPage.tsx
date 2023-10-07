@@ -1,6 +1,6 @@
 import { Container, Flex } from '@chakra-ui/react';
 
-import { ProjectCard } from '~/widgets/project-card';
+import { ProjectCard, dataAdapter } from '~/widgets/project-card';
 
 import { FilterProject, SearchProject } from '~/features/projects';
 
@@ -10,18 +10,19 @@ export const SearchPage = () => {
   return (
     <Container variant="mobile">
       <Flex
-        alignContent={'center'}
-        gap={4}
+        alignContent="center"
+        gap="4"
         flexDirection="column"
         justifyContent="space-between"
       >
-        <Flex>
+        <Flex gap="1">
           <SearchProject />
           <FilterProject />
         </Flex>
-        {data.map((project) => (
-          <ProjectCard key={project.id} {...project} type="all" />
-        ))}
+        {data.map((project) => {
+          const adaptiveProjectData = dataAdapter(project, 'search');
+          return <ProjectCard key={adaptiveProjectData.id} {...adaptiveProjectData} />;
+        })}
       </Flex>
     </Container>
   );

@@ -4,10 +4,10 @@ import { Card } from '~/entities/project';
 
 import { ProjectTag } from '~/shared/ui/Tags';
 
-import { IProjectCard } from '../types/ProjectCardTypes';
+import { IProjectCardDto } from '../model';
 
-export const ProjectCard = (props: IProjectCard) => {
-  const { status, title, date, description, type, tags } = props;
+export const ProjectCard = (props: IProjectCardDto) => {
+  const { status, title, date, description, page, tags } = props;
   return (
     <ChakraCard variant="mobile" alignContent="center">
       <CardBody
@@ -31,7 +31,7 @@ export const ProjectCard = (props: IProjectCard) => {
         </Badge>
         <Card title={title} date={date} description={description} />
       </CardBody>
-      {type === 'all' && (
+      {page === 'search' && (
         <Flex
           overflowX="auto"
           p="0.75rem 1rem 1rem 1rem"
