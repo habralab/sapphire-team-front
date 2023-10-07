@@ -6,7 +6,7 @@ import { Counter } from '~/shared/ui/Counter';
 export function Notification() {
   return (
     <Flex position="relative">
-      <Icon as={IoNotifications} w="24px" h="24px" />
+      <Icon as={IoNotifications} w="24px" h="24px" cursor="pointer" />
       <Counter count={2} />
     </Flex>
   );

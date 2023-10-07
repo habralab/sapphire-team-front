@@ -1,4 +1,6 @@
-import { Avatar, Text, Flex, Box, Divider } from '@chakra-ui/react';
+import { Avatar, Text, Flex } from '@chakra-ui/react';
+
+import { UserInfo } from '~/shared/ui/UserInfo';
 
 export function ProfileCard() {
   return (
@@ -23,37 +25,12 @@ export function ProfileCard() {
         fontSize="md"
         position="absolute"
         top="-40px"
+        boxSizing="content-box"
       />
-      <Text align="center" fontWeight="bold" fontSize="2xl" mt={10} py={4}>
+      <Text align="center" fontWeight="bold" fontSize="2xl" mt={12} py={4}>
         Татьяна А
       </Text>
-      <Flex py={4} px={0.5} w="100%" textAlign="center">
-        <Box pr={2} flex="1">
-          <Text fontWeight="bold" fontSize="xl">
-            3
-          </Text>
-          <Text color="gray.600">Участник</Text>
-        </Box>
-        <Box>
-          <Divider orientation="vertical" variant="dividerStyle" />
-        </Box>
-        <Box px={2} flex="1">
-          <Text fontWeight="bold" fontSize="xl">
-            1
-          </Text>
-          <Text color="gray.600">Организатор</Text>
-        </Box>
-        <Box>
-          <Divider orientation="vertical" variant="dividerStyle" />
-        </Box>
-        <Divider orientation="vertical" variant="dividerStyle" />
-        <Box pl={2} flex="1">
-          <Text fontWeight="bold" fontSize="xl">
-            4.89
-          </Text>
-          <Text color="gray.600">Рейтинг</Text>
-        </Box>
-      </Flex>
+      <UserInfo participantCount={3} organizerCount={1} rating={4.89} />
     </Flex>
   );
 }

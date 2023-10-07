@@ -1,10 +1,10 @@
-import { Box, Text, Flex, Heading } from '@chakra-ui/react';
+import { Box, Text, Flex, Heading, VStack } from '@chakra-ui/react';
 
 import { TagComponent } from '~/shared/ui/Tag';
 
 export function AboutMe() {
   return (
-    <Box>
+    <Box position="absolute" left="0" right="0" bg="white" borderRadius="2xl" p={4}>
       <Heading fontSize="sm" fontWeight="semibold">
         Обо мне
       </Heading>

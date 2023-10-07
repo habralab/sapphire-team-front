@@ -1,11 +1,13 @@
 import { Container, Flex, Heading } from '@chakra-ui/react';
 
-import { ProfileTabs } from '~/widgets/ProfileTabs';
+import { ReviewsList } from '~/widgets/ReviewsList';
 
 import { Notification } from '~/features/notofication';
 import { Setting } from '~/features/setting';
 
-import { ProfileCard } from '~/entities/profile';
+import { AboutMe, ProfileCard, Projects } from '~/entities/profile';
+
+import { TabsComponent } from '~/shared/ui/TabsComponent';
 
 export function ProfilePage() {
   return (
@@ -20,7 +22,10 @@ export function ProfilePage() {
         </Flex>
       </Flex>
       <ProfileCard />
-      <ProfileTabs />
+      <TabsComponent
+        tabList={['Обо мне', 'Проекты', 'Отзывы']}
+        tabPanels={[<AboutMe key={1} />, <Projects key={2} />, <ReviewsList key={3} />]}
+      />
     </Container>
   );
 }

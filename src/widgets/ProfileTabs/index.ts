@@ -1,1 +1,0 @@
-export { ProfileTabs } from './ProfileTabs';
