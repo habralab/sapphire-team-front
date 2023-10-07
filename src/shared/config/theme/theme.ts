@@ -52,7 +52,8 @@ const Heading = defineStyleConfig({
 const Container = defineStyleConfig({
   variants: {
     mobile: {
-      maxW: 'container.xs',
+      // maxW: 'container.xs',
+      maxW: 'none',
       padding: '0.5rem 1.25rem',
     },
   },

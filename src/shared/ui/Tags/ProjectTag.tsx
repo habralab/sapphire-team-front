@@ -1,10 +1,10 @@
 import { Tag } from '@chakra-ui/react';
 
-interface ITag {
+interface TagProps {
   tag: string;
 }
 
-export const ProjectTag = (props: ITag) => {
+export const ProjectTag = (props: TagProps) => {
   return (
     <Tag
       minW="none"
