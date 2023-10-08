@@ -8,7 +8,7 @@ const appClosed = [
   {
     path: '*',
     view: {
-      all: <BlankPage />,
+      base: <BlankPage />,
     },
   },
 ];
@@ -17,27 +17,27 @@ const normalRoutes = [
   {
     path: '/test',
     view: {
-      mobile: <NotFound />,
+      base: <NotFound />,
       desktop: <BlankPage />,
     },
   },
   {
     path: '/test2',
     view: {
-      mobile: <NotFound />,
+      base: <NotFound />,
     },
   },
   {
     path: '404',
     view: {
-      all: <NotFound />,
+      base: <NotFound />,
     },
   },
   { path: '/profile', view: { base: <ProfilePage /> } },
   {
     path: '*',
     view: {
-      all: <Navigate to={'404'} replace />,
+      base: <Navigate to={'404'} replace />,
     },
   },
 ];
