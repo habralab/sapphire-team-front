@@ -9,7 +9,6 @@ export function ProfileCard() {
       alignItems="center"
       bg="white"
       w="100%"
-      mt={16}
       borderRadius="2xl"
       position="relative"
     >
@@ -27,7 +26,7 @@ export function ProfileCard() {
         top={-10}
         boxSizing="content-box"
       />
-      <Text align="center" fontWeight="bold" fontSize="2xl" mt={12} py={4}>
+      <Text align="center" fontWeight="bold" fontSize="2xl" pt={12} mb={4}>
         Татьяна А
       </Text>
       <UserInfoList participantCount={3} organizerCount={1} rating={4.89} />
