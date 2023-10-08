@@ -1,50 +1,16 @@
-import { Search2Icon } from '@chakra-ui/icons';
-import { Menu as ChakraMenu, Flex, HStack, Box, Icon } from '@chakra-ui/react';
-import { BsFillBriefcaseFill } from 'react-icons/bs';
-import { IoChatbubbles, IoPerson } from 'react-icons/io5';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Menu as ChakraMenu, Flex, HStack, Box, useToken } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 
-import { mainMenu } from '~/shared/api';
+import { PATH_PAGE } from '~/shared/lib/react-router';
 
-interface IMobileMenuIcons {
-  searchIcon: JSX.Element;
-  projectIcon: JSX.Element;
-  chatIcon: JSX.Element;
-  profileIcon: JSX.Element;
+import { mainMenu } from './mainMenu';
+
+interface MenuProps {
+  separator?: string;
 }
 
-export const Menu = () => {
-  const location = useLocation();
-
-  const mobileMenuIcons = {
-    searchIcon: <Search2Icon boxSize="2rem" />,
-    projectIcon: <Icon as={BsFillBriefcaseFill} boxSize="2rem" />,
-    chatIcon: (
-      <Flex position="relative" alignItems="center" justifyContent="center">
-        <Icon as={IoChatbubbles} boxSize="2rem" />
-        <Flex
-          position="absolute"
-          top="-0.25rem"
-          right="-0.25rem"
-          width="1rem"
-          height="1rem"
-          lineHeight="0"
-          justifyContent="center"
-          alignItems="center"
-          bg="purple.600"
-          color="white"
-          fontSize="xs"
-          fontWeight="500"
-          borderRadius="50%"
-          border="0.125rem solid"
-          borderColor="gray.100"
-        >
-          4
-        </Flex>
-      </Flex>
-    ),
-    profileIcon: <Icon as={IoPerson} boxSize="2rem" />,
-  };
+export const Menu = ({ separator }: MenuProps) => {
+  const [activeMenu, inactiveMenu] = useToken('colors', ['activeMenu', 'inactiveMenu']);
 
   return (
     <Flex
@@ -56,24 +22,38 @@ export const Menu = () => {
       justifyContent="center"
     >
       <ChakraMenu>
-        <HStack as={'nav'} spacing={5} p="0.5rem 1.25rem">
-          {mainMenu.map(({ path, name, icon }) => (
-            <NavLink key={path} to={path}>
-              <Flex
-                direction="column"
-                alignItems="center"
-                color={location.pathname === path ? 'activeMenu' : 'inactiveMenu'}
-                width="4.0625rem"
-              >
-                <Box height="2rem" mb="0.375rem">
-                  {mobileMenuIcons[icon as keyof IMobileMenuIcons]}
-                </Box>
-                <Box fontSize="sm" fontWeight="500">
-                  {name}
-                </Box>
-              </Flex>
-            </NavLink>
-          ))}
+        <HStack as={'nav'} spacing={separator ? 2 : 5} p="0.5rem 1.25rem">
+          {mainMenu.map(({ path, name, icon }, i, arr) => {
+            const isLastElement = i === arr.length - 1;
+            return (
+              <>
+                <NavLink
+                  key={path}
+                  to={path}
+                  style={({ isActive }) => ({
+                    color: isActive ? activeMenu : inactiveMenu,
+                  })}
+                >
+                  <Flex
+                    direction="column"
+                    position="relative"
+                    alignItems="center"
+                    width="4.0625rem"
+                  >
+                    <Box height="2rem" mb="0.375rem">
+                      {icon('2rem', path === PATH_PAGE.chats ? 5 : undefined)}
+                    </Box>
+                    <Box fontSize="sm" fontWeight="500">
+                      {name}
+                    </Box>
+                  </Flex>
+                </NavLink>
+                {separator && !isLastElement && (
+                  <Box color="inactiveMenu">{separator}</Box>
+                )}
+              </>
+            );
+          })}
         </HStack>
       </ChakraMenu>
     </Flex>
