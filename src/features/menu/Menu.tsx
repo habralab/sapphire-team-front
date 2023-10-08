@@ -62,7 +62,7 @@ export const Menu = () => {
               <Flex
                 direction="column"
                 alignItems="center"
-                color={location.pathname === path ? 'gray.900' : 'gray.400'}
+                color={location.pathname === path ? 'activeMenu' : 'inactiveMenu'}
                 width="4.0625rem"
               >
                 <Box height="2rem" mb="0.375rem">

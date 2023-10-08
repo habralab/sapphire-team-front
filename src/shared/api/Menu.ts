@@ -1,17 +1,19 @@
+import { PATH_PAGE } from '../lib/react-router';
+
 export const mainMenu = [
-  { path: '/search', name: 'Поиск', icon: 'searchIcon' },
+  { path: PATH_PAGE.search, name: 'Поиск', icon: 'searchIcon' },
   {
-    path: '/project',
+    path: PATH_PAGE.projects,
     name: 'Проекты',
     icon: 'projectIcon',
   },
   {
-    path: '/chat',
+    path: PATH_PAGE.chats,
     name: 'Чаты',
     icon: 'chatIcon',
   },
   {
-    path: '/profile',
+    path: PATH_PAGE.profile,
     name: 'Профиль',
     icon: 'profileIcon',
   },
