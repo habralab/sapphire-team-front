@@ -1,4 +1,4 @@
-import { Box, Text, Flex, Heading, VStack } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import { STag } from '~/shared/ui/STag';
 import { SText } from '~/shared/ui/SText';
@@ -8,7 +8,7 @@ const testText = `Привет! Меня зовут Татьяна, и я нач
 Моя страсть к дизайну началась давно, и я горжусь тем, что обладаю креативным
 мышлением и аналитическими способностями.`;
 
-const testTagProf = ['Дизайнер', 'UX/UI дизайнер', 'Product дизайнер'];
+const testTagProf = ['Дизайнер', 'UX/UI дизайнер'];
 const testTagSkill = ['UX', 'UI', 'Figma'];
 
 export function AboutMe() {
@@ -24,16 +24,16 @@ export function AboutMe() {
       gap={4}
     >
       <Flex direction="column" gap={2}>
-        <SText variant="h2" text="Обо мне" />
-        <SText text={testText} />
+        <SText variant="h2">Обо мне</SText>
+        <SText variant="info">{testText}</SText>
       </Flex>
       <Flex direction="column" gap={2}>
-        <SText variant="h2" text="Профессия" />
-        <STag tagArr={testTagProf} />
+        <SText variant="h2">Профессия</SText>
+        <STag mainTag={testTagProf} />
       </Flex>
       <Flex direction="column" gap={2}>
-        <SText variant="h2" text="Навыки" />
-        <STag tagArr={testTagSkill} />
+        <SText variant="h2">Навыки</SText>
+        <STag tags={testTagSkill} />
       </Flex>
     </Flex>
   );

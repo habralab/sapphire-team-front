@@ -1,4 +1,4 @@
-import { Flex, Text, Box, Divider } from '@chakra-ui/react';
+import { Flex, Box, Divider } from '@chakra-ui/react';
 
 import { UserInfo } from './UserInfo';
 

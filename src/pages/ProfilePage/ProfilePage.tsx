@@ -14,7 +14,7 @@ export function ProfilePage() {
   return (
     <Container maxW="md" p={5}>
       <Flex alignItems="center" justifyContent="space-between">
-        <SText variant="h1" text="Профиль" />
+        <SText variant="h1">Профиль</SText>
         <Flex gap={4}>
           <Notification />
           <Setting />

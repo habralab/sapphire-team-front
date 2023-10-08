@@ -7,7 +7,7 @@ export function Rating() {
   return (
     <Flex align="center" gap={1}>
       <Icon as={AiFillStar} color="yellow.400" w={4} h={4} />
-      <SText variant="medium" text="5" />
+      <SText variant="medium">5</SText>
     </Flex>
   );
 }

@@ -1,22 +1,26 @@
 import { Tag, Flex } from '@chakra-ui/react';
 
+import { SText } from '../SText';
+
 interface TagType {
-  mainTag?: string;
-  tagArr: string[];
+  mainTag?: string[];
+  tags?: string[];
 }
 
 export function STag(props: TagType) {
-  const { tagArr, mainTag } = props;
+  const { tags, mainTag } = props;
 
   return (
-    <Flex wrap="wrap" gap={2} fontWeight="semibold">
-      {mainTag && (
-        <Tag bg="gray.900" color="white" py={1} px={4}>
-          {mainTag}
+    <Flex direction={mainTag && 'column'} align={mainTag && 'start'} wrap="wrap" gap={2}>
+      {mainTag?.map((tag) => (
+        <Tag key={tag} bg="gray.900" color="white" py={1} px={4}>
+          <SText variant="black" as="h3">
+            {tag}
+          </SText>
         </Tag>
-      )}
-      {tagArr.map((tag, i) => (
-        <Tag key={tagArr[i]} bg={'gray.100'} py={1} px={4}>
+      ))}
+      {tags?.map((tag) => (
+        <Tag key={tag} bg={'gray.100'} py={1} px={4} fontWeight="medium">
           {tag}
         </Tag>
       ))}

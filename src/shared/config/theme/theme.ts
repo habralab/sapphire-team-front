@@ -18,25 +18,6 @@ const Button = defineStyleConfig({
   },
 });
 
-// const Heading = defineStyleConfig({
-//   baseStyle: {
-//     fontWeight: 'semibold',
-//   },
-//   variants: {
-//     h3: {
-//       fontFamily: `'Inter', sans-serif`,
-//     },
-//   },
-// });
-
-// const Text = defineStyleConfig({
-//   variants: {
-//     es: {
-//       fontSize: '10px',
-//     },
-//   },
-// });
-
 const dividerStyle = defineStyle({
   borderWidth: '1px',
   borderStyle: 'solid',
@@ -49,14 +30,6 @@ const dividerStyleTabs = defineStyle({
   borderStyle: 'solid',
   borderColor: 'gray.400',
 });
-
-// const Link = defineStyleConfig({
-//   baseStyle: {
-//     color: 'purple.600',
-//     fontWeight: 'medium',
-//     fontSize: 'xs',
-//   },
-// });
 
 const Divider = defineStyleConfig({
   variants: { dividerStyle, dividerStyleTabs },
@@ -71,7 +44,6 @@ export const basicTheme = extendTheme({
   styles: {
     global: {
       body: {
-        // fontSize: 'xs',
         color: 'gray.900',
         bg: 'gray.100',
       },
@@ -79,7 +51,6 @@ export const basicTheme = extendTheme({
   },
   fonts: {
     body: `'Inter', sans-serif`,
-    // heading: `'Raleway', sans-serif`,
   },
   colors: {
     purple: {

@@ -1,19 +1,31 @@
 import { Heading, Text } from '@chakra-ui/react';
 
+type Heading = 'h1' | 'h2' | 'h3';
+
 interface TextType {
-  text: string;
-  variant?: string;
+  children: string;
+  variant?:
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'date'
+    | 'medium'
+    | 'small'
+    | 'info'
+    | 'black'
+    | 'caption';
+  as?: Heading;
 }
 
 export function SText(props: TextType) {
-  const { text, variant } = props;
+  const { children, variant, as } = props;
 
   const styles = {
-    fontSize: 'xs',
-    fontWeight: 'regular',
+    fontSize: 'sm',
+    fontWeight: 'normal',
     fontFamily: `'Inter', sans-serif`,
     color: 'gray.900',
-    lineHeight: '120%',
   };
 
   switch (variant) {
@@ -23,20 +35,33 @@ export function SText(props: TextType) {
       styles.fontFamily = `'Raleway', sans-serif`;
       break;
     case 'h2':
-      styles.fontSize = 'sm';
-      styles.fontWeight = 'semibold';
-      break;
-    case 'name':
       styles.fontSize = 'md';
+      styles.fontWeight = 'medium';
+      break;
+    case 'h3':
+      styles.fontSize = 'sm';
+      styles.fontWeight = 'medium';
+      break;
+    case 'h4':
+      styles.fontSize = 'xs';
       styles.fontWeight = 'medium';
       break;
     case 'medium':
       styles.fontWeight = 'medium';
       break;
-    case 'light':
+    case 'black':
+      styles.fontSize = 'sm';
+      styles.color = 'white';
+      break;
+    case 'small':
+    case 'date':
+      styles.fontSize = 'xs';
       styles.color = 'gray.600';
       break;
-    case 'extra small':
+    case 'info':
+      styles.fontSize = 'xs';
+      break;
+    case 'caption':
       styles.fontSize = '10px';
       styles.color = 'gray.600';
       break;
@@ -46,15 +71,15 @@ export function SText(props: TextType) {
 
   return (
     <>
-      {variant === 'h1' || variant === 'h2' || variant === 'h3' ? (
+      {variant?.startsWith('h') ? (
         <Heading
           fontSize={styles.fontSize}
           fontFamily={styles.fontFamily}
           fontWeight={styles.fontWeight}
           color={styles.color}
-          as={variant}
+          as={as ?? (variant as Heading)}
         >
-          {text}
+          {children}
         </Heading>
       ) : (
         <Text
@@ -63,7 +88,7 @@ export function SText(props: TextType) {
           fontWeight={styles.fontWeight}
           color={styles.color}
         >
-          {text}
+          {children}
         </Text>
       )}
     </>
