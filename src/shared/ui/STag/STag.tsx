@@ -14,7 +14,7 @@ export function STag(props: TagType) {
     <Flex direction={mainTag && 'column'} align={mainTag && 'start'} wrap="wrap" gap={2}>
       {mainTag?.map((tag) => (
         <Tag key={tag} bg="gray.900" color="white" py={1} px={4}>
-          <SText variant="black" as="h3">
+          <SText variant="white" as="h3">
             {tag}
           </SText>
         </Tag>

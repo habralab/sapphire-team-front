@@ -4,17 +4,7 @@ type Heading = 'h1' | 'h2' | 'h3';
 
 interface TextType {
   children: string;
-  variant?:
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'h4'
-    | 'date'
-    | 'medium'
-    | 'small'
-    | 'info'
-    | 'black'
-    | 'caption';
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'date' | 'small' | 'info' | 'white' | 'caption';
   as?: Heading;
 }
 
@@ -39,16 +29,13 @@ export function SText(props: TextType) {
       styles.fontWeight = 'medium';
       break;
     case 'h3':
-      styles.fontSize = 'sm';
       styles.fontWeight = 'medium';
       break;
     case 'h4':
-    case 'medium':
       styles.fontSize = 'xs';
       styles.fontWeight = 'medium';
       break;
-    case 'black':
-      styles.fontSize = 'sm';
+    case 'white':
       styles.color = 'white';
       break;
     case 'small':
