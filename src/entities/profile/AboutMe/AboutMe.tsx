@@ -3,14 +3,6 @@ import { Flex } from '@chakra-ui/react';
 import { STag } from '~/shared/ui/STag';
 import { SText } from '~/shared/ui/SText';
 
-const testText = `Привет! Меня зовут Татьяна, и я начинающий UX/UI дизайнер, готовый погрузиться в
-мир творчества и пользовательских интерфейсов.
-Моя страсть к дизайну началась давно, и я горжусь тем, что обладаю креативным
-мышлением и аналитическими способностями.`;
-
-const testTagProf = ['Дизайнер', 'UX/UI дизайнер'];
-const testTagSkill = ['UX', 'UI', 'Figma'];
-
 export function AboutMe() {
   return (
     <Flex
@@ -25,15 +17,20 @@ export function AboutMe() {
     >
       <Flex direction="column" gap={2}>
         <SText variant="h2">Обо мне</SText>
-        <SText>{testText}</SText>
+        <SText>
+          Привет! Меня зовут Татьяна, и я начинающий UX/UI дизайнер, готовый погрузиться в
+          мир творчества и пользовательских интерфейсов. Моя страсть к дизайну началась
+          давно, и я горжусь тем, что обладаю креативным мышлением и аналитическими
+          способностями.
+        </SText>
       </Flex>
       <Flex direction="column" gap={2}>
         <SText variant="h2">Профессия</SText>
-        <STag mainTag={testTagProf} />
+        <STag mainTag={['Дизайнер', 'UX/UI дизайнер']} />
       </Flex>
       <Flex direction="column" gap={2}>
         <SText variant="h2">Навыки</SText>
-        <STag tags={testTagSkill} />
+        <STag tags={['UX', 'UI', 'Figma']} />
       </Flex>
     </Flex>
   );
