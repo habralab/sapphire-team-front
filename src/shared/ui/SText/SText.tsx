@@ -43,10 +43,8 @@ export function SText(props: TextType) {
       styles.fontWeight = 'medium';
       break;
     case 'h4':
-      styles.fontSize = 'xs';
-      styles.fontWeight = 'medium';
-      break;
     case 'medium':
+      styles.fontSize = 'xs';
       styles.fontWeight = 'medium';
       break;
     case 'black':

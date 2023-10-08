@@ -1,4 +1,12 @@
-import { Container, Flex, Tabs, TabList, TabPanels, TabPanel } from '@chakra-ui/react';
+import {
+  Container,
+  Flex,
+  Tabs,
+  TabList,
+  TabPanels,
+  TabPanel,
+  Tab,
+} from '@chakra-ui/react';
 
 import { ReviewsList } from '~/widgets/ReviewsList';
 
@@ -7,8 +15,6 @@ import { Setting } from '~/features/setting';
 
 import { AboutMe, ProfileCard, Projects } from '~/entities/profile';
 
-// import { STabs } from '~/shared/ui/STabs';
-import { STab } from '~/shared/ui/STab';
 import { SText } from '~/shared/ui/SText';
 
 export function ProfilePage() {
@@ -24,9 +30,9 @@ export function ProfilePage() {
       <ProfileCard />
       <Tabs my={4} variant="base">
         <TabList>
-          <STab>Обо мне</STab>
-          <STab>Проекты</STab>
-          <STab>Отзывы</STab>
+          <Tab>Обо мне</Tab>
+          <Tab>Проекты</Tab>
+          <Tab>Отзывы</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
