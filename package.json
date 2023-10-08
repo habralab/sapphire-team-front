@@ -19,6 +19,7 @@
     "analyze": "vite-bundle-visualizer -o ./stats.html"
   },
   "dependencies": {
+    "@chakra-ui/anatomy": "^2.2.1",
     "@chakra-ui/icons": "^2.1.0",
     "@chakra-ui/react": "^2.8.0",
     "@chakra-ui/system": "^2.6.0",

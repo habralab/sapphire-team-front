@@ -1,4 +1,11 @@
-import { extendTheme, defineStyleConfig, defineStyle } from '@chakra-ui/react';
+import { tabsAnatomy } from '@chakra-ui/anatomy';
+import {
+  extendTheme,
+  defineStyleConfig,
+  defineStyle,
+  createMultiStyleConfigHelpers,
+} from '@chakra-ui/react';
+
 import '@fontsource/raleway/600.css';
 import '@fontsource/raleway/700.css';
 import '@fontsource/inter/400.css';
@@ -10,6 +17,40 @@ import '@fontsource/inter/700.css';
  * Можно посмотреть исходники и понять, что можно переопределить
  * https://github.com/chakra-ui/chakra-ui/tree/main/packages/components/theme/src
  */
+
+// eslint-disable-next-line @typescript-eslint/unbound-method
+const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpers(
+  tabsAnatomy.keys,
+);
+
+const Tabs = defineMultiStyleConfig({
+  variants: {
+    base: definePartsStyle({
+      tablist: {
+        bg: 'white',
+        w: '100%',
+        borderRadius: 'full',
+        p: '1',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 'px',
+      },
+      tab: {
+        h: '7',
+        color: 'gray.600',
+        fontSize: 'sm',
+        fontWeight: 'normal',
+        borderRadius: 'full',
+        flex: '1',
+        _selected: { color: 'white', bg: 'gray.900' },
+      },
+      tabpanel: {
+        position: 'relative',
+      },
+    }),
+  },
+});
 
 const Button = defineStyleConfig({
   baseStyle: {
@@ -40,7 +81,7 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Divider, Text },
+  components: { Button, Divider, Tabs },
   styles: {
     global: {
       body: {
