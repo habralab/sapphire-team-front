@@ -1,22 +1,16 @@
-import { Heading, Text } from '@chakra-ui/react';
+import { Heading, Text, TextProps } from '@chakra-ui/react';
 
 type Heading = 'h1' | 'h2' | 'h3';
+type Variants = 'h1' | 'h2' | 'h3' | 'h4' | 'caption';
 
-interface TextType {
+type STextProps = {
   children: string;
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'date' | 'small' | 'info' | 'white' | 'caption';
+  variant?: Variants;
   as?: Heading;
-}
+} & TextProps;
 
-export function SText(props: TextType) {
-  const { children, variant, as } = props;
-
-  const styles = {
-    fontSize: 'sm',
-    fontWeight: 'normal',
-    fontFamily: `'Inter', sans-serif`,
-    color: 'gray.900',
-  };
+function getStyles(variant?: Variants) {
+  const styles: TextProps = {};
 
   switch (variant) {
     case 'h1':
@@ -29,50 +23,32 @@ export function SText(props: TextType) {
       styles.fontWeight = 'medium';
       break;
     case 'h3':
+      styles.fontSize = 'sm';
       styles.fontWeight = 'medium';
       break;
     case 'h4':
       styles.fontSize = 'xs';
       styles.fontWeight = 'medium';
       break;
-    case 'white':
-      styles.color = 'white';
-      break;
-    case 'small':
-    case 'date':
-      styles.fontSize = 'xs';
-      styles.color = 'gray.600';
-      break;
-    case 'info':
-      styles.fontSize = 'xs';
-      break;
     case 'caption':
-      styles.fontSize = '10px';
+      styles.fontSize = 'xs';
       styles.color = 'gray.600';
       break;
-    default:
-      styles;
   }
+  return styles;
+}
+
+export function SText(props: STextProps) {
+  const { children, variant, as, ...others } = props;
 
   return (
     <>
       {variant?.startsWith('h') ? (
-        <Heading
-          fontSize={styles.fontSize}
-          fontFamily={styles.fontFamily}
-          fontWeight={styles.fontWeight}
-          color={styles.color}
-          as={as ?? (variant as Heading)}
-        >
+        <Heading {...getStyles(variant)} as={as ?? (variant as Heading)} {...others}>
           {children}
         </Heading>
       ) : (
-        <Text
-          fontSize={styles.fontSize}
-          fontFamily={styles.fontFamily}
-          fontWeight={styles.fontWeight}
-          color={styles.color}
-        >
+        <Text {...getStyles(variant)} {...others}>
           {children}
         </Text>
       )}

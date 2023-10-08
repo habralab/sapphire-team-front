@@ -25,7 +25,7 @@ export function AboutMe() {
     >
       <Flex direction="column" gap={2}>
         <SText variant="h2">Обо мне</SText>
-        <SText variant="info">{testText}</SText>
+        <SText>{testText}</SText>
       </Flex>
       <Flex direction="column" gap={2}>
         <SText variant="h2">Профессия</SText>

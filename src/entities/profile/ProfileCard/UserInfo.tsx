@@ -15,7 +15,7 @@ export function UserInfo(props: UserInfoType) {
       <Text fontWeight="bold" fontSize="xl">
         {count}
       </Text>
-      <SText variant="small">{section}</SText>
+      <SText variant="caption">{section}</SText>
     </Box>
   );
 }

@@ -5,7 +5,7 @@ import { Link as ReactLink, LinkProps } from 'react-router-dom';
 export function SLink(props: LinkProps) {
   return (
     <Flex align="center" gap={1} color="purple.600">
-      <Link as={ReactLink} {...props} fontSize="xs" />
+      <Link as={ReactLink} {...props} />
       <Icon as={FiArrowUpRight} w={4} h={4} />
     </Flex>
   );

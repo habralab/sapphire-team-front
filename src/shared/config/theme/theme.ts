@@ -34,13 +34,11 @@ const Tabs = defineMultiStyleConfig({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: 'px',
       },
       tab: {
         h: '7',
         color: 'gray.600',
         fontSize: 'sm',
-        fontWeight: 'normal',
         borderRadius: 'full',
         flex: '1',
         _selected: { color: 'white', bg: 'gray.900' },
@@ -85,6 +83,7 @@ export const basicTheme = extendTheme({
   styles: {
     global: {
       body: {
+        fontSize: 'sm',
         color: 'gray.900',
         bg: 'gray.100',
       },
