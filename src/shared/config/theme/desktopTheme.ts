@@ -1,4 +1,6 @@
 import { extendTheme, defineStyleConfig } from '@chakra-ui/react';
+
+import { basicTheme } from './theme';
 import '@fontsource/raleway/600.css';
 import '@fontsource/raleway/700.css';
 import '@fontsource/inter/400.css';
@@ -26,7 +28,7 @@ const Heading = defineStyleConfig({
   },
 });
 
-export const desktopTheme = extendTheme({
+export const desktopTheme = extendTheme(basicTheme, {
   config: {
     initialColorMode: 'light',
     useSystemColorMode: false,
