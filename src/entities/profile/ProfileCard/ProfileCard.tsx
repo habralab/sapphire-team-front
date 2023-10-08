@@ -1,6 +1,6 @@
 import { Avatar, Text, Flex } from '@chakra-ui/react';
 
-import { UserInfo } from '~/shared/ui/UserInfo';
+import { UserInfoList } from './UserInfoList';
 
 export function ProfileCard() {
   return (
@@ -17,20 +17,20 @@ export function ProfileCard() {
         name="Татьяна А"
         bg="gray.900"
         color="white"
-        border="8px"
+        border={2}
         borderColor="white"
-        w="80px"
-        h="80px"
+        w={20}
+        h={20}
         fontWeight="semibold"
         fontSize="md"
         position="absolute"
-        top="-40px"
+        top={-10}
         boxSizing="content-box"
       />
       <Text align="center" fontWeight="bold" fontSize="2xl" mt={12} py={4}>
         Татьяна А
       </Text>
-      <UserInfo participantCount={3} organizerCount={1} rating={4.89} />
+      <UserInfoList participantCount={3} organizerCount={1} rating={4.89} />
     </Flex>
   );
 }

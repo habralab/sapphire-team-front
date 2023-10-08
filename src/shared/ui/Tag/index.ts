@@ -1,1 +1,0 @@
-export { TagComponent } from './Tag';

@@ -1,0 +1,1 @@
+export { STag } from './STag';

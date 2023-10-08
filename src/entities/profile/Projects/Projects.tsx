@@ -1,9 +1,11 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+
+import { SText } from '~/shared/ui/SText';
 
 export function Projects() {
   return (
     <Box>
-      <Text>Здесь компонент от Димы</Text>
+      <SText variant="medium" text="Здесь компонент от Димы" />
     </Box>
   );
 }

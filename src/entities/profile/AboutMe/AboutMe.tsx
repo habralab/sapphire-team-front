@@ -1,33 +1,40 @@
 import { Box, Text, Flex, Heading, VStack } from '@chakra-ui/react';
 
-import { TagComponent } from '~/shared/ui/Tag';
+import { STag } from '~/shared/ui/STag';
+import { SText } from '~/shared/ui/SText';
+
+const testText = `Привет! Меня зовут Татьяна, и я начинающий UX/UI дизайнер, готовый погрузиться в
+мир творчества и пользовательских интерфейсов.
+Моя страсть к дизайну началась давно, и я горжусь тем, что обладаю креативным
+мышлением и аналитическими способностями.`;
+
+const testTagProf = ['Дизайнер', 'UX/UI дизайнер', 'Product дизайнер'];
+const testTagSkill = ['UX', 'UI', 'Figma'];
 
 export function AboutMe() {
   return (
-    <Box position="absolute" left="0" right="0" bg="white" borderRadius="2xl" p={4}>
-      <Heading fontSize="sm" fontWeight="semibold">
-        Обо мне
-      </Heading>
-      <Text py={2} lineHeight="16px">
-        Привет! Меня зовут Татьяна, и я начинающий UX/UI дизайнер, готовый погрузиться в
-        мир творчества и пользовательских интерфейсов.
-        <br />
-        Моя страсть к дизайну началась давно, и я горжусь тем, что обладаю креативным
-        мышлением и аналитическими способностями.
-      </Text>
-      <Heading fontSize="sm">Профессия</Heading>
-      <Flex wrap="wrap" gap={2} py={2} fontWeight="semibold">
-        <TagComponent title="Дизайнер" />
-        <TagComponent title="UX/UI дизайнер" />
-        <TagComponent title="Product дизайнер" />
+    <Flex
+      direction="column"
+      position="absolute"
+      left="0"
+      right="0"
+      bg="white"
+      borderRadius="2xl"
+      p={4}
+      gap={4}
+    >
+      <Flex direction="column" gap={2}>
+        <SText variant="h2" text="Обо мне" />
+        <SText text={testText} />
       </Flex>
-      <Heading fontSize="sm" py={2}>
-        Навыки
-      </Heading>
-      <Flex wrap="wrap" gap={2} fontWeight="semibold">
-        <TagComponent title="UX" />
-        <TagComponent title="UI" />
+      <Flex direction="column" gap={2}>
+        <SText variant="h2" text="Профессия" />
+        <STag tagArr={testTagProf} />
       </Flex>
-    </Box>
+      <Flex direction="column" gap={2}>
+        <SText variant="h2" text="Навыки" />
+        <STag tagArr={testTagSkill} />
+      </Flex>
+    </Flex>
   );
 }

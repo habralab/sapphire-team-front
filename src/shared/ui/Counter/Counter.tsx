@@ -12,15 +12,15 @@ export function Counter(props: CounterType) {
       bg="purple.600"
       color="white"
       position="absolute"
-      w="16px"
-      h="16px"
+      w={4}
+      h={4}
       fontSize="xs"
       fontWeight="medium"
       border="1px"
       borderColor="inherit"
       borderRadius="full"
-      right="-4px"
-      top="-4px"
+      right={-1}
+      top={-1}
     >
       {count}
     </Center>

@@ -40,7 +40,7 @@ export function TabsComponent(props: ProfileTabsType) {
           )}
         </Box> */}
       </TabList>
-      <TabPanels mt={4}>
+      <TabPanels>
         <TabPanel position="relative">{tabPanels[0]}</TabPanel>
         <TabPanel position="relative">{tabPanels[1]}</TabPanel>
         <TabPanel position="relative">{tabPanels[2]}</TabPanel>

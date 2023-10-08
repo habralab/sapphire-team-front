@@ -18,29 +18,29 @@ const Button = defineStyleConfig({
   },
 });
 
-const Heading = defineStyleConfig({
-  baseStyle: {
-    fontWeight: 'semibold',
-  },
-  variants: {
-    h3: {
-      fontFamily: `'Inter', sans-serif`,
-    },
-  },
-});
+// const Heading = defineStyleConfig({
+//   baseStyle: {
+//     fontWeight: 'semibold',
+//   },
+//   variants: {
+//     h3: {
+//       fontFamily: `'Inter', sans-serif`,
+//     },
+//   },
+// });
 
-const Text = defineStyleConfig({
-  variants: {
-    es: {
-      fontSize: '10px',
-    },
-  },
-});
+// const Text = defineStyleConfig({
+//   variants: {
+//     es: {
+//       fontSize: '10px',
+//     },
+//   },
+// });
 
 const dividerStyle = defineStyle({
   borderWidth: '1px',
   borderStyle: 'solid',
-  borderColor: 'gray.200',
+  borderColor: 'gray.300',
 });
 
 const dividerStyleTabs = defineStyle({
@@ -50,13 +50,13 @@ const dividerStyleTabs = defineStyle({
   borderColor: 'gray.400',
 });
 
-const Link = defineStyleConfig({
-  baseStyle: {
-    color: 'purple.600',
-    fontWeight: 'medium',
-    fontSize: 'xs',
-  },
-});
+// const Link = defineStyleConfig({
+//   baseStyle: {
+//     color: 'purple.600',
+//     fontWeight: 'medium',
+//     fontSize: 'xs',
+//   },
+// });
 
 const Divider = defineStyleConfig({
   variants: { dividerStyle, dividerStyleTabs },
@@ -67,11 +67,11 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Heading, Divider, Text, Link },
+  components: { Button, Divider, Text },
   styles: {
     global: {
       body: {
-        fontSize: 'xs',
+        // fontSize: 'xs',
         color: 'gray.900',
         bg: 'gray.100',
       },
@@ -79,7 +79,7 @@ export const basicTheme = extendTheme({
   },
   fonts: {
     body: `'Inter', sans-serif`,
-    heading: `'Raleway', sans-serif`,
+    // heading: `'Raleway', sans-serif`,
   },
   colors: {
     purple: {

@@ -1,4 +1,4 @@
-import { Container, Flex, Heading } from '@chakra-ui/react';
+import { Container, Flex } from '@chakra-ui/react';
 
 import { ReviewsList } from '~/widgets/ReviewsList';
 
@@ -7,15 +7,14 @@ import { Setting } from '~/features/setting';
 
 import { AboutMe, ProfileCard, Projects } from '~/entities/profile';
 
+import { SText } from '~/shared/ui/SText';
 import { TabsComponent } from '~/shared/ui/TabsComponent';
 
 export function ProfilePage() {
   return (
-    <Container maxW="xl" p={5}>
+    <Container maxW="md" p={5}>
       <Flex alignItems="center" justifyContent="space-between">
-        <Heading fontWeight="bold" fontSize="2xl">
-          Профиль
-        </Heading>
+        <SText variant="h1" text="Профиль" />
         <Flex gap={4}>
           <Notification />
           <Setting />
