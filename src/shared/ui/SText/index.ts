@@ -1,0 +1,1 @@
+export { SText } from './SText';

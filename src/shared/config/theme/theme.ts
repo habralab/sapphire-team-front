@@ -1,4 +1,11 @@
-import { extendTheme, defineStyleConfig } from '@chakra-ui/react';
+import { tabsAnatomy } from '@chakra-ui/anatomy';
+import {
+  extendTheme,
+  defineStyleConfig,
+  defineStyle,
+  createMultiStyleConfigHelpers,
+} from '@chakra-ui/react';
+
 import '@fontsource/raleway/600.css';
 import '@fontsource/raleway/700.css';
 import '@fontsource/inter/400.css';
@@ -11,6 +18,38 @@ import '@fontsource/inter/700.css';
  * https://github.com/chakra-ui/chakra-ui/tree/main/packages/components/theme/src
  */
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
+const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpers(
+  tabsAnatomy.keys,
+);
+
+const Tabs = defineMultiStyleConfig({
+  variants: {
+    base: definePartsStyle({
+      tablist: {
+        bg: 'white',
+        w: '100%',
+        borderRadius: 'full',
+        p: '1',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      },
+      tab: {
+        h: '7',
+        color: 'gray.600',
+        fontSize: 'sm',
+        borderRadius: 'full',
+        flex: '1',
+        _selected: { color: 'white', bg: 'gray.900' },
+      },
+      tabpanel: {
+        position: 'relative',
+      },
+    }),
+  },
+});
+
 const Button = defineStyleConfig({
   baseStyle: {
     borderRadius: 'full',
@@ -18,12 +57,21 @@ const Button = defineStyleConfig({
   },
 });
 
-const Heading = defineStyleConfig({
-  variants: {
-    h3: {
-      fontFamily: `'Inter', sans-serif`,
-    },
-  },
+const dividerStyle = defineStyle({
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: 'gray.300',
+});
+
+const dividerStyleTabs = defineStyle({
+  borderWidth: '1px',
+  borderRadius: '4px',
+  borderStyle: 'solid',
+  borderColor: 'gray.400',
+});
+
+const Divider = defineStyleConfig({
+  variants: { dividerStyle, dividerStyleTabs },
 });
 
 export const basicTheme = extendTheme({
@@ -31,18 +79,18 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Heading },
+  components: { Button, Divider, Tabs },
   styles: {
     global: {
       body: {
         fontSize: 'sm',
         color: 'gray.900',
+        bg: 'gray.100',
       },
     },
   },
   fonts: {
     body: `'Inter', sans-serif`,
-    heading: `'Raleway', sans-serif`,
   },
   colors: {
     purple: {
