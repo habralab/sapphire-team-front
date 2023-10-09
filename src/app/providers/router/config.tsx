@@ -15,19 +15,6 @@ const appClosed = [
 
 const normalRoutes = [
   {
-    path: '/test',
-    view: {
-      base: <NotFound />,
-      desktop: <BlankPage />,
-    },
-  },
-  {
-    path: '/test2',
-    view: {
-      base: <NotFound />,
-    },
-  },
-  {
     path: '404',
     view: {
       base: <NotFound />,

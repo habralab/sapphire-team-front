@@ -112,7 +112,6 @@ export const basicTheme = extendTheme({
     },
   },
   breakpoints: {
-    base: '0rem',
     md: '37.5rem',
   },
 });
