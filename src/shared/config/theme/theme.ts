@@ -93,8 +93,6 @@ export const basicTheme = extendTheme({
     body: `'Inter', sans-serif`,
   },
   colors: {
-    activeMenu: '#111111',
-    inactiveMenu: '#BDBDBD',
     purple: {
       100: '#E9D8FD',
       600: '#6D2DF0',

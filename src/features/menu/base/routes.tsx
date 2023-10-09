@@ -5,13 +5,9 @@ import { IoChatbubbles, IoPerson } from 'react-icons/io5';
 
 import { PATH_PAGE } from '~/shared/lib/react-router';
 
-interface IMainMenu {
-  path: string;
-  name: string;
-  icon: (size: string, count?: number) => JSX.Element;
-}
+import { MenuRoute } from './MenuBase.types';
 
-export const mainMenu: IMainMenu[] = [
+export const routes: MenuRoute[] = [
   {
     path: PATH_PAGE.search,
     name: 'Поиск',

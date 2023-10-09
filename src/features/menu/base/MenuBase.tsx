@@ -1,17 +1,11 @@
-import { Menu as ChakraMenu, Flex, HStack, Box, useToken } from '@chakra-ui/react';
+import { Menu as ChakraMenu, Flex, HStack, Box, Link } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 import { PATH_PAGE } from '~/shared/lib/react-router';
 
-import { mainMenu } from './mainMenu';
+import { routes } from './routes';
 
-interface MenuProps {
-  separator?: string;
-}
-
-export const Menu = ({ separator }: MenuProps) => {
-  const [activeMenu, inactiveMenu] = useToken('colors', ['activeMenu', 'inactiveMenu']);
-
+export const MenuBase = () => {
   return (
     <Flex
       bg="white"
@@ -22,17 +16,16 @@ export const Menu = ({ separator }: MenuProps) => {
       justifyContent="center"
     >
       <ChakraMenu>
-        <HStack as={'nav'} spacing={separator ? 2 : 5} p="0.5rem 1.25rem">
-          {mainMenu.map(({ path, name, icon }, i, arr) => {
-            const isLastElement = i === arr.length - 1;
+        <HStack as={'nav'} spacing={5} p="0.5rem 1.25rem">
+          {routes.map(({ path, name, icon }) => {
             return (
               <>
-                <NavLink
+                <Link
                   key={path}
+                  as={NavLink}
                   to={path}
-                  style={({ isActive }) => ({
-                    color: isActive ? activeMenu : inactiveMenu,
-                  })}
+                  color="gray.400"
+                  _activeLink={{ color: 'gray.900' }}
                 >
                   <Flex
                     direction="column"
@@ -47,10 +40,7 @@ export const Menu = ({ separator }: MenuProps) => {
                       {name}
                     </Box>
                   </Flex>
-                </NavLink>
-                {separator && !isLastElement && (
-                  <Box color="inactiveMenu">{separator}</Box>
-                )}
+                </Link>
               </>
             );
           })}
