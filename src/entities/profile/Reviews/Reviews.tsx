@@ -11,7 +11,7 @@ export function Reviews(props: ReviewType) {
   const { rating } = props;
 
   return (
-    <VStack align="stretch" spacing={0} p={4} mb={4} borderRadius="2xl" bg="white">
+    <VStack align="stretch" spacing={0} p={5} mb={4} borderRadius="2xl" bg="white">
       <Flex align="center" justifyContent="space-between">
         <SText variant="caption">3 сентября 2022</SText>
         {rating}

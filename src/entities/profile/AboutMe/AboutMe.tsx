@@ -12,8 +12,8 @@ export function AboutMe() {
       right="0"
       bg="white"
       borderRadius="2xl"
-      p={4}
-      gap={4}
+      p={5}
+      gap={6}
     >
       <Flex direction="column" gap={2}>
         <SText variant="h2">Обо мне</SText>

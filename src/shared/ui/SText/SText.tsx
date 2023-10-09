@@ -1,7 +1,7 @@
 import { Heading, Text, TextProps } from '@chakra-ui/react';
 
 type Heading = 'h1' | 'h2' | 'h3';
-type Variants = 'h1' | 'h2' | 'h3' | 'h4' | 'caption';
+type Variants = 'h1' | 'h2' | 'h3' | 'caption';
 
 type STextProps = {
   children: string;
@@ -26,13 +26,9 @@ function getStyles(variant?: Variants) {
       styles.fontSize = 'sm';
       styles.fontWeight = 'medium';
       break;
-    case 'h4':
-      styles.fontSize = 'xs';
-      styles.fontWeight = 'medium';
-      break;
     case 'caption':
       styles.fontSize = 'xs';
-      styles.color = 'gray.600';
+      styles.color = 'gray.700';
       break;
   }
   return styles;
