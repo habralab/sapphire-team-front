@@ -111,4 +111,7 @@ export const basicTheme = extendTheme({
       900: '#111111',
     },
   },
+  breakpoints: {
+    md: '37.5rem',
+  },
 });

@@ -4,12 +4,29 @@ import { BlankPage } from '~/pages/BlankPage';
 import { NotFound } from '~/pages/NotFound';
 import { ProfilePage } from '~/pages/ProfilePage';
 
-const appClosed = [{ path: '*', element: <BlankPage /> }];
+const appClosed = [
+  {
+    path: '*',
+    view: {
+      base: <BlankPage />,
+    },
+  },
+];
 
 const normalRoutes = [
-  { path: '404', element: <NotFound /> },
-  { path: '*', element: <Navigate to={'404'} replace /> },
-  { path: '/profile', element: <ProfilePage /> },
+  {
+    path: '404',
+    view: {
+      base: <NotFound />,
+    },
+  },
+  { path: '/profile', view: { base: <ProfilePage /> } },
+  {
+    path: '*',
+    view: {
+      base: <Navigate to={'404'} replace />,
+    },
+  },
 ];
 
 export const routes = import.meta.env.VITE_CLOSED ? appClosed : normalRoutes;
