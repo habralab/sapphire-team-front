@@ -1,6 +1,9 @@
-import { ChakraProvider, useBreakpointValue } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
+
+import { MenuBase } from '~/features/menu';
 
 import { desktopTheme, mobileTheme } from '~/shared/config/theme';
+import { useIsMobile } from '~/shared/hooks';
 
 interface LayoutProps {
   base: JSX.Element;
@@ -8,14 +11,13 @@ interface LayoutProps {
 }
 
 export const Layout = ({ base, desktop }: LayoutProps) => {
-  const breakpoint = useBreakpointValue({ base: 'base', md: 'desktop' }, { ssr: false });
-
-  const isBase = breakpoint === 'base' || !desktop;
+  const isMobile = useIsMobile();
+  const isBase = isMobile || !desktop;
 
   return (
     <ChakraProvider theme={isBase ? mobileTheme : desktopTheme}>
       {isBase ? base : desktop}
-      {isBase ? <div>Mobile Menu</div> : <div>Desktop Menu</div>}
+      {isBase ? <MenuBase /> : <div>Desktop Menu</div>}
     </ChakraProvider>
   );
 };
