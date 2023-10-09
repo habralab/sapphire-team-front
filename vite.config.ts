@@ -4,13 +4,15 @@ import eslint from 'vite-plugin-eslint';
 import svgr from 'vite-plugin-svgr';
 import { defineConfig } from 'vitest/config';
 
+const isNotProduction = process.env.NODE_ENV !== 'production';
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     svgr({}),
-    !process.env.VITEST ? eslint() : undefined,
-    !process.env.VITEST ? checker({ typescript: true }) : undefined,
+    !process.env.VITEST && isNotProduction ? eslint() : undefined,
+    !process.env.VITEST && isNotProduction ? checker({ typescript: true }) : undefined,
   ],
   test: {
     globals: true,
