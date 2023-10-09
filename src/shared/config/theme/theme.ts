@@ -6,12 +6,12 @@ import {
   createMultiStyleConfigHelpers,
 } from '@chakra-ui/react';
 
-import '@fontsource/raleway/600.css';
-import '@fontsource/raleway/700.css';
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
-import '@fontsource/inter/700.css';
+import '@fontsource/raleway/cyrillic-600.css';
+import '@fontsource/raleway/cyrillic-700.css';
+import '@fontsource/inter/cyrillic-400.css';
+import '@fontsource/inter/cyrillic-500.css';
+import '@fontsource/inter/cyrillic-600.css';
+import '@fontsource/inter/cyrillic-700.css';
 
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
