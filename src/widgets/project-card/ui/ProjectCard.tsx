@@ -1,6 +1,6 @@
 import { CardBody, Card as ChakraCard, Flex, Badge } from '@chakra-ui/react';
 
-import { Status } from '~/features/projects';
+import { Status } from '~/features/project';
 
 import { Card } from '~/entities/project';
 

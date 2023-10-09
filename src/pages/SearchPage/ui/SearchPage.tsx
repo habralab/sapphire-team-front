@@ -2,7 +2,7 @@ import { Container, Flex } from '@chakra-ui/react';
 
 import { ProjectCard, dataAdapter } from '~/widgets/project-card';
 
-import { FilterProject, SearchProject } from '~/features/projects';
+import { FilterProject, SearchProject } from '~/features/project';
 
 import { data } from '../data';
 
