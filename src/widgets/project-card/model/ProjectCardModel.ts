@@ -6,7 +6,8 @@ export interface ProjectCardProps {
   title: string;
   date: string;
   description: string;
-  tags?: ('Разработка' | 'Тестирование' | 'Аналитика' | 'Дизайн' | 'Менеджмент')[];
+  mainTag: string[];
+  tags?: string[];
   page?: 'search' | 'project';
 }
 

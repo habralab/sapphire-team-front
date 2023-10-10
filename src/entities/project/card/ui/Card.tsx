@@ -1,6 +1,6 @@
 import { Heading, Text } from '@chakra-ui/react';
 
-import { TextWithRows } from '~/shared/ui/TextWithRows';
+import { SText } from '~/shared/ui/SText';
 
 interface CardProps {
   title: string;
@@ -13,11 +13,15 @@ export const Card = (props: CardProps) => {
 
   return (
     <>
-      <Heading variant="h4">{title}</Heading>
-      <Text variant="cardTextMobile" color="gray.500">
+      <SText variant="h2" mb="0.5rem">
+        {title}
+      </SText>
+      <SText variant="caption" mb="0.75rem">
         {date}
+      </SText>
+      <Text fontSize="sm" noOfLines={3} mb="0.75rem" lineHeight="120%">
+        {description}
       </Text>
-      <TextWithRows rows={3} text={description} />
     </>
   );
 };

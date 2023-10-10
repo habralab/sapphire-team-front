@@ -1,24 +1,27 @@
-import { Badge } from '@chakra-ui/react';
+import { Badge, TextProps } from '@chakra-ui/react';
 
-interface StatusProps {
-  status: string;
-}
+import { SText } from '~/shared/ui/SText';
 
-export const Status = ({ status }: StatusProps) => {
+type StatusProps = {
+  children: string;
+} & TextProps;
+
+export const Status = (props: StatusProps) => {
+  const { children, ...others } = props;
   return (
     <Badge
-      colorScheme={status === 'Проект завершён' ? 'grayBage' : 'purpleBage'}
+      colorScheme={children === 'Проект завершён' ? 'grayBage' : 'purpleBage'}
       variant="solid"
-      fontSize="es"
       textTransform="none"
-      fontWeight="600"
-      lineHeight="0.4375rem"
-      color="white"
+      lineHeight="120%"
       width="fit-content"
       p="0.375rem 0.625rem"
       borderRadius="1.25rem"
+      {...others}
     >
-      {status}
+      <SText variant="caption" color="white" fontWeight="medium">
+        {children}
+      </SText>
     </Badge>
   );
 };

@@ -19,7 +19,7 @@ function getStyles(variant?: Variants) {
       styles.fontFamily = `'Raleway', sans-serif`;
       break;
     case 'h2':
-      styles.fontSize = 'md';
+      styles.fontSize = 'lg';
       styles.fontWeight = 'medium';
       break;
     case 'h3':

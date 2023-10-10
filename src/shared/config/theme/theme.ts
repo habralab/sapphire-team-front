@@ -12,6 +12,7 @@ import '@fontsource/inter/cyrillic-400.css';
 import '@fontsource/inter/cyrillic-500.css';
 import '@fontsource/inter/cyrillic-600.css';
 import '@fontsource/inter/cyrillic-700.css';
+import { avatarTheme } from './avatarTheme';
 
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
@@ -79,12 +80,12 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Divider, Tabs },
+  components: { Button, Divider, Tabs, Avatar: avatarTheme },
   styles: {
     global: {
       body: {
         fontSize: 'xs',
-        background: 'gray.100',
+        lineHeight: '120%',
         color: 'gray.900',
         bg: 'gray.100',
       },

@@ -4,37 +4,25 @@ import { Status } from '~/features/project';
 
 import { Card } from '~/entities/project';
 
-import { ProjectTag } from '~/shared/ui/Tags';
+import { STag } from '~/shared/ui/STag';
 
 import { ProjectCardProps } from '../model';
 
 export const ProjectCard = (props: ProjectCardProps) => {
-  const { status, title, date, description, page, tags } = props;
+  const { status, title, date, description, page, mainTag, tags } = props;
   return (
-    <ChakraCard variant="mobile" alignContent="center">
-      <CardBody
-        display="flex"
-        padding="1rem 1rem 0 1rem"
-        flexDirection="column"
-        gap="0.75rem"
-      >
-        <Status status={status} />
+    <ChakraCard
+      borderRadius="2xl"
+      _active={{ boxShadow: '0 0.4375rem 1.8125rem 0 rgba(100, 100, 111, 0.20)' }}
+      boxShadow="none"
+      alignContent="center"
+      mb="1rem"
+    >
+      <CardBody display="flex" padding="1.25rem" flexDirection="column">
+        <Status mb="0.75rem">{status}</Status>
         <Card title={title} date={date} description={description} />
+        {page === 'search' && <STag mainTag={mainTag} tags={tags} />}
       </CardBody>
-      {page === 'search' && (
-        <Flex
-          overflowX="auto"
-          p="0.75rem 1rem 1rem 1rem"
-          gap="2"
-          css={{
-            '&::-webkit-scrollbar': {
-              display: 'none',
-            },
-          }}
-        >
-          {tags?.map((tag) => <ProjectTag key={tag} tag={tag} />)}
-        </Flex>
-      )}
     </ChakraCard>
   );
 };

@@ -25,6 +25,7 @@ export const MenuBase = () => {
                   as={NavLink}
                   to={path}
                   color="gray.400"
+                  _hover={{ textDecoration: 'none' }}
                   _activeLink={{ color: 'gray.900' }}
                 >
                   <Flex
