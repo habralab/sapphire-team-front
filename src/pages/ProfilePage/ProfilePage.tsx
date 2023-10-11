@@ -1,12 +1,4 @@
-import {
-  Container,
-  Flex,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Tab,
-} from '@chakra-ui/react';
+import { Flex, Tabs, TabList, TabPanels, TabPanel, Tab } from '@chakra-ui/react';
 
 import { ReviewsList } from '~/widgets/ReviewsList';
 
@@ -19,8 +11,8 @@ import { SText } from '~/shared/ui/SText';
 
 export function ProfilePage() {
   return (
-    <Container maxW="md" p={5}>
-      <Flex alignItems="center" justifyContent="space-between" mb={16}>
+    <>
+      <Flex justifyContent="space-between" mb={16}>
         <SText variant="h1">Профиль</SText>
         <Flex gap={4}>
           <Notification />
@@ -46,6 +38,6 @@ export function ProfilePage() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </Container>
+    </>
   );
 }

@@ -12,6 +12,7 @@ import '@fontsource/inter/cyrillic-400.css';
 import '@fontsource/inter/cyrillic-500.css';
 import '@fontsource/inter/cyrillic-600.css';
 import '@fontsource/inter/cyrillic-700.css';
+import { avatarTheme } from './avatarTheme';
 
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
@@ -57,6 +58,13 @@ const Button = defineStyleConfig({
   },
 });
 
+const Icon = defineStyleConfig({
+  baseStyle: {
+    w: '6',
+    h: '6',
+  },
+});
+
 const dividerStyle = defineStyle({
   borderWidth: '1px',
   borderStyle: 'solid',
@@ -79,11 +87,12 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Divider, Tabs },
+  components: { Button, Divider, Tabs, Avatar: avatarTheme, Icon },
   styles: {
     global: {
       body: {
         fontSize: 'sm',
+        lineHeight: '120%',
         color: 'gray.900',
         bg: 'gray.100',
       },

@@ -26,7 +26,7 @@ export function AboutMe() {
       </Flex>
       <Flex direction="column" gap={2}>
         <SText variant="h2">Профессия</SText>
-        <STag mainTag={['Дизайнер', 'UX/UI дизайнер']} />
+        <STag mainTags={['Дизайнер', 'UX/UI дизайнер']} />
       </Flex>
       <Flex direction="column" gap={2}>
         <SText variant="h2">Навыки</SText>
