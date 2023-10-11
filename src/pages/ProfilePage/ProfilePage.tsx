@@ -1,12 +1,4 @@
-import {
-  Container,
-  Flex,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Tab,
-} from '@chakra-ui/react';
+import { Flex, Tabs, TabList, TabPanels, TabPanel, Tab } from '@chakra-ui/react';
 
 import { ReviewsList } from '~/widgets/ReviewsList';
 

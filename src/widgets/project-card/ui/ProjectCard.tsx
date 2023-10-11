@@ -1,4 +1,4 @@
-import { CardBody, Card as ChakraCard, Flex, Badge } from '@chakra-ui/react';
+import { CardBody, Card as ChakraCard } from '@chakra-ui/react';
 
 import { Status } from '~/features/project';
 
@@ -13,7 +13,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
   return (
     <ChakraCard
       borderRadius="2xl"
-      _active={{ boxShadow: '0 0.4375rem 1.8125rem 0 rgba(100, 100, 111, 0.20)' }}
+      _active={{ boxShadow: '2xl' }}
       boxShadow="none"
       alignContent="center"
       mb="1rem"

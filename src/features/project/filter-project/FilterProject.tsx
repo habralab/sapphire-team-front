@@ -13,8 +13,8 @@ export const FilterProject = () => {
         justifyContent="center"
         bg="gray.900"
         color="white"
-        width="2.25rem"
-        height="2.25rem"
+        width={9}
+        height={9}
         borderRadius="50%"
       >
         <Icon as={IoOptions} boxSize="1.625rem" />

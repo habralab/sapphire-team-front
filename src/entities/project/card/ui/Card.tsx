@@ -1,5 +1,3 @@
-import { Heading, Text } from '@chakra-ui/react';
-
 import { SText } from '~/shared/ui/SText';
 
 interface CardProps {
@@ -13,15 +11,15 @@ export const Card = (props: CardProps) => {
 
   return (
     <>
-      <SText variant="h2" mb="0.5rem">
+      <SText variant="h2" mb={2}>
         {title}
       </SText>
-      <SText variant="caption" mb="0.75rem">
+      <SText variant="caption" mb={3}>
         {date}
       </SText>
-      <Text fontSize="sm" noOfLines={3} mb="0.75rem" lineHeight="120%">
+      <SText noOfLines={3} mb={3}>
         {description}
-      </Text>
+      </SText>
     </>
   );
 };

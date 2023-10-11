@@ -13,14 +13,14 @@ export const SearchPage = () => {
   return (
     <>
       <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
-        <Flex alignItems="center" justifyContent="space-between" mb="1.5rem">
+        <Flex alignItems="center" justifyContent="space-between" mb={6}>
           <Avatar firstName="Татьяна" lastName="Антонова" />
           <Flex gap={4}>
             <Notification />
             <Setting />
           </Flex>
         </Flex>
-        <Flex gap="1" mb="1rem">
+        <Flex gap="1" mb={4}>
           <SearchProject />
           <FilterProject />
         </Flex>

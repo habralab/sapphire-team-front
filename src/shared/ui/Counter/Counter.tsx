@@ -1,7 +1,7 @@
 import { Center } from '@chakra-ui/react';
 
 interface CounterType {
-  count: number | undefined;
+  count?: number;
 }
 
 export function Counter(props: CounterType) {
