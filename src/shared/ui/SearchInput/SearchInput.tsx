@@ -20,11 +20,12 @@ export interface InputProps {
 }
 
 export const SearchInput = ({ placeholder, onSubmit }: SearchInputProps) => {
-  const { handleSubmit, register, reset, watch } = useForm<InputProps>({
-    defaultValues: {
-      title: '',
-    },
-  });
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { dirtyFields },
+  } = useForm<InputProps>();
 
   const onSubmitHandler = (values: InputProps) => {
     onSubmit(values);
@@ -47,7 +48,7 @@ export const SearchInput = ({ placeholder, onSubmit }: SearchInputProps) => {
               variant="unstyled"
               py={2.5}
               px={10}
-              borderRadius="1.25rem"
+              borderRadius="full"
               height={9}
               color="gray.900"
               _placeholder={{ color: 'gray.400' }}
@@ -55,7 +56,7 @@ export const SearchInput = ({ placeholder, onSubmit }: SearchInputProps) => {
               placeholder={placeholder}
               {...register('title')}
             />
-            {watch('title').trim() && (
+            {dirtyFields.title && (
               <InputRightElement w={9} h={9}>
                 <IconButton
                   onClick={() => {

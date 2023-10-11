@@ -7,14 +7,15 @@ const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpe
 );
 
 const baseStyle = definePartsStyle({
-  // define the part you're going to style
   container: {
     bg: 'gray.900',
     color: 'white',
-    w: '2.5rem',
-    h: '2.5rem',
+    w: '10',
+    h: '10',
+  },
+  label: {
     fontSize: 'sm',
-    fontWeight: '500',
+    fontWeight: '600',
   },
 });
 

@@ -9,19 +9,19 @@ import { STag } from '~/shared/ui/STag';
 import { ProjectCardProps } from '../model';
 
 export const ProjectCard = (props: ProjectCardProps) => {
-  const { status, title, date, description, page, mainTag, tags } = props;
+  const { status, title, date, description, page, mainTags, tags } = props;
   return (
     <ChakraCard
       borderRadius="2xl"
       _active={{ boxShadow: '2xl' }}
       boxShadow="none"
       alignContent="center"
-      mb="1rem"
+      mb="4"
     >
-      <CardBody display="flex" padding="1.25rem" flexDirection="column">
-        <Status mb="0.75rem">{status}</Status>
+      <CardBody padding="5">
+        <Status mb="3">{status}</Status>
         <Card title={title} date={date} description={description} />
-        {page === 'search' && <STag mainTag={mainTag} tags={tags} />}
+        {page === 'search' && <STag mainTags={mainTags} tags={tags} />}
       </CardBody>
     </ChakraCard>
   );

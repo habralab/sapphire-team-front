@@ -12,7 +12,7 @@ import { SText } from '~/shared/ui/SText';
 export function ProfilePage() {
   return (
     <>
-      <Flex alignItems="center" justifyContent="space-between" mb={16}>
+      <Flex justifyContent="space-between" mb={16}>
         <SText variant="h1">Профиль</SText>
         <Flex gap={4}>
           <Notification />

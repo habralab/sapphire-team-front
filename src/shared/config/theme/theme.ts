@@ -58,6 +58,13 @@ const Button = defineStyleConfig({
   },
 });
 
+const Icon = defineStyleConfig({
+  baseStyle: {
+    w: '6',
+    h: '6',
+  },
+});
+
 const dividerStyle = defineStyle({
   borderWidth: '1px',
   borderStyle: 'solid',
@@ -80,7 +87,7 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Divider, Tabs, Avatar: avatarTheme },
+  components: { Button, Divider, Tabs, Avatar: avatarTheme, Icon },
   styles: {
     global: {
       body: {
@@ -94,18 +101,7 @@ export const basicTheme = extendTheme({
   fonts: {
     body: `'Inter', sans-serif`,
   },
-  sizes: {
-    container: {
-      xs: '22.5rem',
-    },
-  },
   colors: {
-    purpleBage: {
-      500: '#6D2DF0',
-    },
-    grayBage: {
-      500: '#9E9E9E',
-    },
     purple: {
       100: '#E9D8FD',
       600: '#6D2DF0',

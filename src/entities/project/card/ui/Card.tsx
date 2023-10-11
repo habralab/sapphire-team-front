@@ -11,13 +11,9 @@ export const Card = (props: CardProps) => {
 
   return (
     <>
-      <SText variant="h2" mb={2}>
-        {title}
-      </SText>
-      <SText variant="caption" mb={3}>
-        {date}
-      </SText>
-      <SText noOfLines={3} mb={3}>
+      <SText variant="h2">{title}</SText>
+      <SText variant="caption">{date}</SText>
+      <SText variant="main" noOfLines={3}>
         {description}
       </SText>
     </>

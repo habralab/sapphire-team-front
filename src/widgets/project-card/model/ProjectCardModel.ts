@@ -6,7 +6,7 @@ export interface ProjectCardProps {
   title: string;
   date: string;
   description: string;
-  mainTag: string[];
+  mainTags: string[];
   tags?: string[];
   page?: 'search' | 'project';
 }

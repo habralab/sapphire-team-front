@@ -4,6 +4,6 @@ export interface ProjectCardDto {
   title: string;
   date: string;
   description: string;
-  mainTag: string[];
+  mainTags: string[];
   tags: string[];
 }

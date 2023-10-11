@@ -10,9 +10,9 @@ interface AvatarProps {
 
 export const Avatar = ({ firstName, lastName, avatarImg }: AvatarProps) => {
   return (
-    <Flex alignItems="center" gap="0.5rem">
-      <ChakraAvatar size="sAvatar" name={`${firstName} ${lastName}`} src={avatarImg} />
-      <SText variant="h3">{`Привет, ${firstName}!`}</SText>
+    <Flex alignItems="center" gap={2}>
+      <ChakraAvatar name={`${firstName} ${lastName}`} src={avatarImg} />
+      <SText fontWeight="semibold">{`Привет, ${firstName}!`}</SText>
     </Flex>
   );
 };

@@ -1,7 +1,8 @@
-import { Menu as ChakraMenu, Flex, HStack, Box, Link } from '@chakra-ui/react';
+import { Menu as ChakraMenu, Flex, HStack, Link } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 import { PATH_PAGE } from '~/shared/lib/react-router';
+import { SText } from '~/shared/ui/SText';
 
 import { routes } from './routes';
 
@@ -16,33 +17,28 @@ export const MenuBase = () => {
       justifyContent="center"
     >
       <ChakraMenu>
-        <HStack as={'nav'} spacing={5} p="0.5rem 1.25rem">
+        <HStack as={'nav'} spacing={5} py="2" px="5">
           {routes.map(({ path, name, icon }) => {
             return (
-              <>
-                <Link
-                  key={path}
-                  as={NavLink}
-                  to={path}
-                  color="gray.400"
-                  _hover={{ textDecoration: 'none' }}
-                  _activeLink={{ color: 'gray.900' }}
+              <Link
+                key={path}
+                as={NavLink}
+                to={path}
+                color="gray.400"
+                _hover={{ textDecoration: 'none' }}
+                _activeLink={{ color: 'gray.900' }}
+              >
+                <Flex
+                  direction="column"
+                  position="relative"
+                  alignItems="center"
+                  width="16"
+                  gap={2}
                 >
-                  <Flex
-                    direction="column"
-                    position="relative"
-                    alignItems="center"
-                    width="4.0625rem"
-                  >
-                    <Box height="2rem" mb="0.375rem">
-                      {icon('2rem', path === PATH_PAGE.chats ? 5 : undefined)}
-                    </Box>
-                    <Box fontSize="sm" fontWeight="500">
-                      {name}
-                    </Box>
-                  </Flex>
-                </Link>
-              </>
+                  {icon('6', path === PATH_PAGE.chats ? 5 : undefined)}
+                  <SText fontWeight="500">{name}</SText>
+                </Flex>
+              </Link>
             );
           })}
         </HStack>
