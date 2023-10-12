@@ -4,7 +4,7 @@ import { ProjectCard } from '~/widgets/project-card';
 
 import { SearchProject, FilterProject } from '~/features/project';
 
-import { data } from '../data';
+import { data } from '../../data';
 
 export const SearchPageDesktop = () => {
   return (

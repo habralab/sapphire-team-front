@@ -7,7 +7,7 @@ import { Notification, Settings } from '~/features/user';
 
 import { Avatar } from '~/entities/user';
 
-import { data } from '../data';
+import { data } from '../../data';
 
 export const SearchPage = () => {
   return (

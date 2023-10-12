@@ -17,10 +17,10 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
     <ChakraProvider theme={isMobile ? mobileTheme : desktopTheme}>
       {isMobile ? (
         <Flex alignItems="baseline">
-          <MenuBase />
           <Container maxW="md" pt={2} pb={16}>
             {base}
           </Container>
+          <MenuBase />
         </Flex>
       ) : (
         <Flex alignItems="baseline">
