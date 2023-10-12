@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { BlankPage } from '~/pages/blank';
 import { NotFoundPage } from '~/pages/not-found';
 import { ProfilePage } from '~/pages/profile';
-import { SearchPage } from '~/pages/search';
+import { SearchPage, SearchPageDesktop } from '~/pages/search';
 
 import { PATHS } from '~/shared/lib/router';
 
@@ -24,7 +24,7 @@ const normalRoutes = [
     },
   },
   { path: PATHS.profile, view: { base: <ProfilePage /> } },
-  { path: PATHS.search, view: { base: <SearchPage /> } },
+  { path: PATHS.search, view: { base: <SearchPage />, desktop: <SearchPageDesktop /> } },
   {
     path: '*',
     view: {
