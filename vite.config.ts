@@ -17,7 +17,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: 'src/shared/config/test/setup.ts',
+    setupFiles: 'tests/config/setup.ts',
     include: ['(src|tests)/**/*.test.ts(x)?'],
     cache: {
       dir: '.yarn/.vite/test',

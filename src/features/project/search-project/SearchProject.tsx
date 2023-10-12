@@ -1,4 +1,4 @@
-import { InputProps, SearchInput } from '~/shared/ui/SearchInput';
+import { InputProps, SearchInput } from '~/shared/ui';
 
 export const SearchProject = () => {
   const handleSumbit = (value: InputProps) => {

@@ -1,8 +1,8 @@
 import { ChakraProvider, Container } from '@chakra-ui/react';
 
-import { MenuBase } from '~/features/menu';
+import { MenuBase } from '~/widgets/menu';
 
-import { desktopTheme, mobileTheme } from '~/shared/config/theme';
+import { desktopTheme, mobileTheme } from '~/shared/config';
 import { useIsMobile } from '~/shared/hooks';
 
 interface LayoutProps {

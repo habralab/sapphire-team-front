@@ -4,9 +4,18 @@ import { Status } from '~/features/project';
 
 import { Card } from '~/entities/project';
 
-import { STag } from '~/shared/ui/STag';
+import { STag } from '~/shared/ui';
 
-import { ProjectCardProps } from '../model';
+interface ProjectCardProps {
+  id: number;
+  status: string;
+  title: string;
+  date: string;
+  description: string;
+  mainTags: string[];
+  tags?: string[];
+  page?: 'search' | 'project';
+}
 
 export const ProjectCard = (props: ProjectCardProps) => {
   const { status, title, date, description, page, mainTags, tags } = props;

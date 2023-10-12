@@ -1,0 +1,21 @@
+import { Box, Text } from '@chakra-ui/react';
+
+import { SText } from '~/shared/ui';
+
+interface SGroupProps {
+  count: number;
+  section: string;
+}
+
+export function SGroup(props: SGroupProps) {
+  const { count, section } = props;
+
+  return (
+    <Box px={2} flex="1">
+      <Text fontWeight="bold" fontSize="xl">
+        {count}
+      </Text>
+      <SText variant="caption">{section}</SText>
+    </Box>
+  );
+}

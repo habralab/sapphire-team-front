@@ -83,7 +83,7 @@ module.exports = {
           },
           {
             message: 'Private imports are prohibited, use public imports instead',
-            group: ['~/shared/*/*/**'],
+            group: ['~/shared/*/**'],
           },
           {
             message: 'Prefer absolute imports instead of relatives (for root modules)',
@@ -161,7 +161,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['tests/**/*.{ts,tsx}', 'src/**/*.test.{ts,tsx}'],
+      files: ['tests/**/*.test.{ts,tsx}', 'src/**/*.test.{ts,tsx}'],
       extends: [
         'plugin:testing-library/react',
         'plugin:jest-dom/recommended',

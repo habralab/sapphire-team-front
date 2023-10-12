@@ -1,11 +1,11 @@
 import { Navigate } from 'react-router-dom';
 
-import { BlankPage } from '~/pages/BlankPage';
-import { NotFound } from '~/pages/NotFound';
-import { ProfilePage } from '~/pages/ProfilePage';
-import { SearchPage } from '~/pages/SearchPage';
+import { BlankPage } from '~/pages/blank';
+import { NotFoundPage } from '~/pages/not-found';
+import { ProfilePage } from '~/pages/profile';
+import { SearchPage } from '~/pages/search';
 
-import { PATH_PAGE } from '~/shared/lib/react-router';
+import { PATHS } from '~/shared/lib';
 
 const appClosed = [
   {
@@ -18,13 +18,13 @@ const appClosed = [
 
 const normalRoutes = [
   {
-    path: PATH_PAGE.notFound,
+    path: PATHS.notFound,
     view: {
-      base: <NotFound />,
+      base: <NotFoundPage />,
     },
   },
-  { path: PATH_PAGE.profile, view: { base: <ProfilePage /> } },
-  { path: PATH_PAGE.search, view: { base: <SearchPage /> } },
+  { path: PATHS.profile, view: { base: <ProfilePage /> } },
+  { path: PATHS.search, view: { base: <SearchPage /> } },
   {
     path: '*',
     view: {
