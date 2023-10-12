@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
-import { Layout } from '~/pages/Layout';
+import { Layout } from '~/pages/layout';
 
 import { Loader } from '~/shared/ui/Loader';
 

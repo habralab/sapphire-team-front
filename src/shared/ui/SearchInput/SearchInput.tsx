@@ -41,34 +41,27 @@ export const SearchInput = ({ placeholder, onSubmit }: SearchInputProps) => {
       <Flex>
         <FormControl>
           <InputGroup>
-            <InputLeftElement w={9} h={9} pointerEvents="none">
+            <InputLeftElement pointerEvents="none">
               <SearchIcon color="gray.400" w={4} h={4} />
             </InputLeftElement>
             <Input
-              variant="unstyled"
-              py={2.5}
-              px={10}
+              variant="outline"
               borderRadius="full"
-              height={9}
-              color="gray.900"
               _placeholder={{ color: 'gray.400' }}
               background="white"
               placeholder={placeholder}
               {...register('title')}
             />
             {dirtyFields.title && (
-              <InputRightElement w={9} h={9}>
+              <InputRightElement>
                 <IconButton
                   onClick={() => {
                     reset();
                   }}
-                  variant="unstyled"
-                  h={9}
                   color="gray.400"
+                  variant="ghost"
                   aria-label="Close"
-                  fontSize="sm"
-                  lineHeight="0"
-                  icon={<CloseIcon />}
+                  icon={<CloseIcon w={4} h={4} />}
                 />
               </InputRightElement>
             )}

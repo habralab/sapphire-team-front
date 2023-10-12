@@ -35,6 +35,7 @@ const Tabs = defineMultiStyleConfig({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        mb: 4,
       },
       tab: {
         h: '7',
@@ -45,9 +46,19 @@ const Tabs = defineMultiStyleConfig({
         _selected: { color: 'white', bg: 'gray.900' },
       },
       tabpanel: {
-        position: 'relative',
+        p: 0,
       },
     }),
+  },
+});
+
+const flatButton = defineStyle({
+  color: 'gray.900',
+  _hover: {
+    color: 'gray.800',
+  },
+  _active: {
+    color: 'gray.700',
   },
 });
 
@@ -55,6 +66,12 @@ const Button = defineStyleConfig({
   baseStyle: {
     borderRadius: 'full',
     fontWeight: 'bold',
+  },
+  variants: {
+    flat: flatButton,
+  },
+  defaultProps: {
+    colorScheme: 'dark',
   },
 });
 
@@ -100,6 +117,15 @@ export const basicTheme = extendTheme({
   },
   fonts: {
     body: `'Inter', sans-serif`,
+  },
+  semanticTokens: {
+    colors: {
+      dark: {
+        500: 'gray.900',
+        600: 'gray.800',
+        700: 'gray.700',
+      },
+    },
   },
   colors: {
     purple: {

@@ -161,7 +161,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['tests/**/*.{ts,tsx}', 'src/**/*.test.{ts,tsx}'],
+      files: ['tests/**/*.test.{ts,tsx}', 'src/**/*.test.{ts,tsx}'],
       extends: [
         'plugin:testing-library/react',
         'plugin:jest-dom/recommended',
