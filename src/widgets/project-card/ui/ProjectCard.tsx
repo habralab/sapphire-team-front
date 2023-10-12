@@ -1,15 +1,8 @@
-import {
-  Avatar,
-  AvatarGroup,
-  CardBody,
-  Card as ChakraCard,
-  Flex,
-} from '@chakra-ui/react';
+import { CardBody, Card as ChakraCard, Flex } from '@chakra-ui/react';
 
 import { Status } from '~/features/project';
 
 import { AvatarsGroup, Card } from '~/entities/project';
-// import { Avatar } from '~/entities/user';
 
 import { STag } from '~/shared/ui/STag';
 
