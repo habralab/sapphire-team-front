@@ -4,8 +4,7 @@ import { data } from '~/pages/data';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { AddProject, FilterProject, SearchProject } from '~/features/project';
-import { Notification, Settings } from '~/features/user';
+import { AddProject } from '~/features/project';
 
 import { SText } from '~/shared/ui/SText';
 
