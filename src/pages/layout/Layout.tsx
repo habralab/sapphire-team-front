@@ -1,6 +1,6 @@
-import { ChakraProvider, Container } from '@chakra-ui/react';
+import { ChakraProvider, Container, Flex } from '@chakra-ui/react';
 
-import { MenuBase } from '~/widgets/menu';
+import { MenuBase, MenuDesktop } from '~/widgets/menu';
 
 import { desktopTheme, mobileTheme } from '~/shared/config';
 import { useIsMobile } from '~/shared/hooks';
@@ -12,18 +12,24 @@ interface LayoutProps {
 
 export const Layout = ({ base, desktop }: LayoutProps) => {
   const isMobile = useIsMobile();
-  const isBase = isMobile || !desktop;
 
   return (
-    <ChakraProvider theme={isBase ? mobileTheme : desktopTheme}>
-      {isBase ? (
-        <Container maxW="md" px={5} pt={2} pb={16}>
-          {base}
-        </Container>
+    <ChakraProvider theme={isMobile ? mobileTheme : desktopTheme}>
+      {isMobile ? (
+        <Flex alignItems="baseline">
+          <MenuBase />
+          <Container maxW="md" pt={2} pb={16}>
+            {base}
+          </Container>
+        </Flex>
       ) : (
-        desktop
+        <Flex alignItems="baseline">
+          <MenuDesktop />
+          <Container maxW="4xl" pt={4} ml={0}>
+            {desktop ?? base}
+          </Container>
+        </Flex>
       )}
-      {isBase ? <MenuBase /> : <div>Desktop Menu</div>}
     </ChakraProvider>
   );
 };

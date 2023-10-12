@@ -12,26 +12,26 @@ export const routes: MenuRoute[] = [
   {
     path: PATHS.search,
     name: 'Поиск',
-    icon: (size) => <Search2Icon boxSize={size} />,
+    icon: ({ size }) => <Search2Icon boxSize={size} />,
   },
   {
     path: PATHS.projects,
     name: 'Проекты',
-    icon: (size) => <Icon as={BsFillBriefcaseFill} boxSize={size} />,
+    icon: ({ size }) => <Icon as={BsFillBriefcaseFill} boxSize={size} />,
   },
   {
     path: PATHS.chats,
     name: 'Чаты',
-    icon: (size, count) => (
+    icon: ({ size, value }) => (
       <Flex position="relative" alignItems="center" justifyContent="center">
         <Icon as={IoChatbubbles} boxSize={size} />
-        <Counter count={count} />
+        <Counter count={value} />
       </Flex>
     ),
   },
   {
     path: PATHS.profile,
     name: 'Профиль',
-    icon: (size) => <Icon as={IoPerson} boxSize={size} />,
+    icon: ({ size }) => <Icon as={IoPerson} boxSize={size} />,
   },
 ];
