@@ -5,7 +5,7 @@ import { ReactComponent as NameLogo } from './nameDesktop.svg';
 
 export const LogoDesktop = () => {
   return (
-    <Flex alignItems="center" gap={2} mb={2}>
+    <Flex alignItems="center" gap={2} mb={2} px={2}>
       <Icon as={IconLogo} w={7} h={7} />
       <Icon as={NameLogo} w={20} />
     </Flex>
