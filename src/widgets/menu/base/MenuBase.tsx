@@ -24,7 +24,7 @@ export const MenuBase = () => {
                 key={path}
                 as={NavLink}
                 to={path}
-                color="gray.400"
+                color="gray.500"
                 _hover={{ textDecoration: 'none' }}
                 _activeLink={{ color: 'gray.900' }}
               >

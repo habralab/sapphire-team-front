@@ -1,6 +1,6 @@
 import { ChakraProvider, Container } from '@chakra-ui/react';
 
-import { MenuBase } from '~/widgets/menu';
+import { MenuBase, MenuDesktop } from '~/widgets/menu';
 
 import { desktopTheme, mobileTheme } from '~/shared/config';
 import { useIsMobile } from '~/shared/hooks';
@@ -21,9 +21,11 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
           {base}
         </Container>
       ) : (
-        desktop
+        <Container pl={64} pt={8} pr={6} pb={80}>
+          {desktop}
+        </Container>
       )}
-      {isBase ? <MenuBase /> : <div>Desktop Menu</div>}
+      {isBase ? <MenuBase /> : <MenuDesktop />}
     </ChakraProvider>
   );
 };
