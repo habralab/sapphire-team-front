@@ -1,6 +1,6 @@
 import { Box, Text } from '@chakra-ui/react';
 
-import { SText } from '~/shared/ui';
+import { SText } from '~/shared/ui/SText';
 
 interface SGroupProps {
   count: number;

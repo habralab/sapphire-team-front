@@ -1,6 +1,7 @@
 import { Flex, VStack } from '@chakra-ui/react';
 
-import { SLink, SText } from '~/shared/ui';
+import { SLink } from '~/shared/ui/SLink';
+import { SText } from '~/shared/ui/SText';
 
 interface ReviewType {
   rating: JSX.Element;

@@ -1,4 +1,4 @@
-import { SText } from '~/shared/ui';
+import { SText } from '~/shared/ui/SText';
 
 interface CardProps {
   title: string;

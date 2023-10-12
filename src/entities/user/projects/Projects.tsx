@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 
-import { SText } from '~/shared/ui';
+import { SText } from '~/shared/ui/SText';
 
 export function Projects() {
   return (

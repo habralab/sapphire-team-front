@@ -1,6 +1,6 @@
 import { Search2Icon } from '@chakra-ui/icons';
 
-import { PATHS } from '~/shared/lib';
+import { PATHS } from '~/shared/lib/router';
 
 import { MenuRoute, routes as baseRoutes } from '../base';
 

@@ -1,6 +1,6 @@
 import { Flex, Avatar as ChakraAvatar } from '@chakra-ui/react';
 
-import { SText } from '~/shared/ui';
+import { SText } from '~/shared/ui/SText';
 
 interface AvatarProps {
   firstName: string;

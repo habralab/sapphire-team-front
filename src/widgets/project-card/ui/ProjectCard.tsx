@@ -4,7 +4,7 @@ import { Status } from '~/features/project';
 
 import { Card } from '~/entities/project';
 
-import { STag } from '~/shared/ui';
+import { STag } from '~/shared/ui/STag';
 
 interface ProjectCardProps {
   id: number;

@@ -10,7 +10,7 @@ import {
   ChakraProvider,
 } from '@chakra-ui/react';
 
-import { Logo } from '~/shared/ui';
+import { Logo } from '~/shared/ui/Logo';
 
 import Bottom from './bottom.svg';
 import Decorate from './decorate.svg';

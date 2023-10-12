@@ -83,7 +83,7 @@ module.exports = {
           },
           {
             message: 'Private imports are prohibited, use public imports instead',
-            group: ['~/shared/*/**'],
+            group: ['~/shared/*/*/**'],
           },
           {
             message: 'Prefer absolute imports instead of relatives (for root modules)',

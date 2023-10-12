@@ -1,8 +1,8 @@
 import { Menu as ChakraMenu, Flex, HStack, Link } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
-import { PATHS } from '~/shared/lib';
-import { SText } from '~/shared/ui';
+import { PATHS } from '~/shared/lib/router';
+import { SText } from '~/shared/ui/SText';
 
 import { routes } from './routes';
 

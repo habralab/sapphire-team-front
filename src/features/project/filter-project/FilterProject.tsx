@@ -1,7 +1,7 @@
 import { Icon, IconButton } from '@chakra-ui/react';
 import { IoOptions } from 'react-icons/io5';
 
-import { Counter } from '~/shared/ui';
+import { Counter } from '~/shared/ui/Counter';
 
 export const FilterProject = () => {
   const dummyFilter = 5;

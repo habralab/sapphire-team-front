@@ -3,8 +3,8 @@ import { Flex } from '@chakra-ui/react';
 import { BsFillBriefcaseFill } from 'react-icons/bs';
 import { IoChatbubbles, IoPerson } from 'react-icons/io5';
 
-import { PATHS } from '~/shared/lib';
-import { Counter } from '~/shared/ui';
+import { PATHS } from '~/shared/lib/router';
+import { Counter } from '~/shared/ui/Counter';
 
 import { MenuRoute } from './MenuBase.types';
 

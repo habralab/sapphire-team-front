@@ -1,7 +1,7 @@
 import { IconButton, Icon, Box } from '@chakra-ui/react';
 import { IoNotifications } from 'react-icons/io5';
 
-import { Counter } from '~/shared/ui';
+import { Counter } from '~/shared/ui/Counter';
 
 export function Notification() {
   return (

@@ -1,6 +1,6 @@
 import { Badge, BadgeProps } from '@chakra-ui/react';
 
-import { SText } from '~/shared/ui';
+import { SText } from '~/shared/ui/SText';
 
 type StatusProps = {
   children: string;

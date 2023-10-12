@@ -3,7 +3,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 import { Layout } from '~/pages/layout';
 
-import { Loader } from '~/shared/ui';
+import { Loader } from '~/shared/ui/Loader';
 
 import { routes } from './config';
 

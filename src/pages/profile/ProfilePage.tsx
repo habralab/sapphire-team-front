@@ -6,7 +6,7 @@ import { Notification, Settings } from '~/features/user';
 
 import { AboutMe, ProfileCard, Projects } from '~/entities/user';
 
-import { SText } from '~/shared/ui';
+import { SText } from '~/shared/ui/SText';
 
 export function ProfilePage() {
   return (

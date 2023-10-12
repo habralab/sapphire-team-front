@@ -1,6 +1,7 @@
 import { Flex } from '@chakra-ui/react';
 
-import { STag, SText } from '~/shared/ui';
+import { STag } from '~/shared/ui/STag';
+import { SText } from '~/shared/ui/SText';
 
 export function AboutMe() {
   return (

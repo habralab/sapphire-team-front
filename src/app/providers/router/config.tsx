@@ -5,7 +5,7 @@ import { NotFoundPage } from '~/pages/not-found';
 import { ProfilePage } from '~/pages/profile';
 import { SearchPage } from '~/pages/search';
 
-import { PATHS } from '~/shared/lib';
+import { PATHS } from '~/shared/lib/router';
 
 const appClosed = [
   {
