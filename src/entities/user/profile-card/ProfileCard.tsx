@@ -27,17 +27,17 @@ export function ProfileCard() {
         top={-10}
         boxSizing="content-box"
       />
-      <Text align="center" fontWeight="bold" fontSize="2xl" pt={12} mb={4}>
+      <Text align="center" fontWeight="bold" fontSize="2xl" pt={16} mb={4}>
         Татьяна А
       </Text>
       <Flex py={4} px={0.5} w="100%" textAlign="center">
         <SGroup count={3} section="Участник" />
         <Box>
-          <Divider orientation="vertical" variant="dividerStyle" />
+          <Divider orientation="vertical" variant="dividerLight" />
         </Box>
         <SGroup count={1} section="Организатор" />
         <Box>
-          <Divider orientation="vertical" variant="dividerStyle" />
+          <Divider orientation="vertical" variant="dividerLight" />
         </Box>
         <SGroup count={4.89} section="Рейтинг" />
       </Flex>

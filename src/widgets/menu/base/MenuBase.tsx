@@ -15,6 +15,8 @@ export const MenuBase = () => {
       right="0"
       justifyContent="center"
       zIndex={1}
+      borderTop="1px"
+      borderColor="gray.300"
     >
       <Container maxW="md">
         <Flex as={'nav'} py="3" px="2" justifyContent="space-between">

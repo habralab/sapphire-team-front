@@ -12,6 +12,7 @@ import '@fontsource/inter/cyrillic-400.css';
 import '@fontsource/inter/cyrillic-500.css';
 import '@fontsource/inter/cyrillic-600.css';
 import '@fontsource/inter/cyrillic-700.css';
+
 import { avatarTheme } from './avatarTheme';
 
 /**
@@ -92,13 +93,13 @@ const Icon = defineStyleConfig({
   },
 });
 
-const dividerStyle = defineStyle({
+const dividerLight = defineStyle({
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: 'gray.300',
 });
 
-const dividerStyleTabs = defineStyle({
+const dividerDark = defineStyle({
   borderWidth: '1px',
   borderRadius: '4px',
   borderStyle: 'solid',
@@ -106,7 +107,7 @@ const dividerStyleTabs = defineStyle({
 });
 
 const Divider = defineStyleConfig({
-  variants: { dividerStyle, dividerStyleTabs },
+  variants: { dividerLight, dividerDark },
 });
 
 const Heading = defineStyleConfig({
@@ -145,7 +146,7 @@ export const basicTheme = extendTheme({
         fontSize: 'sm',
         lineHeight: '120%',
         color: 'gray.900',
-        bg: 'gray.100',
+        // bg: 'gray.100',
       },
     },
   },
