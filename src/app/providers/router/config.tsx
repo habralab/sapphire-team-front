@@ -23,8 +23,8 @@ const normalRoutes = [
       base: <NotFoundPage />,
     },
   },
-  { path: PATHS.profile, view: { base: <ProfilePage />, desktop: <ProfilePage /> } },
-  { path: PATHS.search, view: { base: <SearchPage />, desktop: <SearchPage /> } },
+  { path: PATHS.profile, view: { base: <ProfilePage /> } },
+  { path: PATHS.search, view: { base: <SearchPage /> } },
   {
     path: '*',
     view: {

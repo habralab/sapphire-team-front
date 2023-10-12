@@ -12,10 +12,10 @@ export const routes: MenuRoute[] = [
   {
     path: PATHS.notifications,
     name: 'Уведомления',
-    icon: (size, count) => (
+    icon: ({ size, value }) => (
       <Flex position="relative" alignItems="center" justifyContent="center">
         <Icon as={IoNotifications} boxSize={size} />
-        <Counter count={count} />
+        <Counter count={value} />
       </Flex>
     ),
     divided: true,
@@ -23,6 +23,6 @@ export const routes: MenuRoute[] = [
   {
     path: PATHS.settings,
     name: 'Настройки',
-    icon: (size) => <Icon as={IoSettings} boxSize={size} />,
+    icon: ({ size }) => <Icon as={IoSettings} boxSize={size} />,
   },
 ];

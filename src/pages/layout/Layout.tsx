@@ -19,13 +19,14 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
       {isBase ? (
         <Container maxW="md" px={5} pt={2} pb={16}>
           {base}
+          <MenuBase />
         </Container>
       ) : (
-        <Container pl={64} pt={8} pr={6} pb={80}>
+        <Container display="flex" maxW="80rem" pl={8} pt={8} pr={6} pb={20}>
+          <MenuDesktop />
           {desktop}
         </Container>
       )}
-      {isBase ? <MenuBase /> : <MenuDesktop />}
     </ChakraProvider>
   );
 };

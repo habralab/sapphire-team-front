@@ -52,6 +52,16 @@ const Tabs = defineMultiStyleConfig({
   },
 });
 
+const Link = defineStyleConfig({
+  variants: {
+    nav: {
+      color: 'gray.500',
+      _hover: { textDecoration: 'none' },
+      _activeLink: { color: 'gray.900' },
+    },
+  },
+});
+
 const flatButton = defineStyle({
   color: 'gray.900',
   _hover: {
@@ -104,7 +114,7 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Divider, Tabs, Avatar: avatarTheme, Icon },
+  components: { Button, Divider, Tabs, Avatar: avatarTheme, Icon, Link },
   styles: {
     global: {
       body: {
