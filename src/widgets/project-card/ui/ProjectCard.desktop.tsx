@@ -13,7 +13,7 @@ export const ProjectCardDesktop = (props: ProjectCardProps) => {
   return (
     <ChakraCard
       borderRadius="2xl"
-      _active={{ boxShadow: '2xl' }}
+      _hover={{ boxShadow: '2xl', cursor: 'pointer' }}
       boxShadow="none"
       alignContent="center"
     >
