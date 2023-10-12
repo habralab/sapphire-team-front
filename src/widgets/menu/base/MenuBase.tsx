@@ -1,7 +1,6 @@
-import { Menu as ChakraMenu, Flex, HStack, Link } from '@chakra-ui/react';
+import { Container, Flex, Link } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
-import { PATHS } from '~/shared/lib/router';
 import { SText } from '~/shared/ui/SText';
 
 import { routes } from './routes';
@@ -16,18 +15,11 @@ export const MenuBase = () => {
       right="0"
       justifyContent="center"
     >
-      <ChakraMenu>
-        <HStack as={'nav'} spacing={5} py="2" px="5">
+      <Container maxW="md">
+        <Flex as={'nav'} py="3" px="2" justifyContent="space-between">
           {routes.map(({ path, name, icon }) => {
             return (
-              <Link
-                key={path}
-                as={NavLink}
-                to={path}
-                color="gray.400"
-                _hover={{ textDecoration: 'none' }}
-                _activeLink={{ color: 'gray.900' }}
-              >
+              <Link key={path} as={NavLink} to={path} variant="nav">
                 <Flex
                   direction="column"
                   position="relative"
@@ -35,14 +27,14 @@ export const MenuBase = () => {
                   width="16"
                   gap={2}
                 >
-                  {icon('6', path === PATHS.chats ? 5 : undefined)}
+                  {icon({ size: '6', value: 5 })}
                   <SText fontWeight="500">{name}</SText>
                 </Flex>
               </Link>
             );
           })}
-        </HStack>
-      </ChakraMenu>
+        </Flex>
+      </Container>
     </Flex>
   );
 };
