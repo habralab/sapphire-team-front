@@ -1,6 +1,4 @@
-import { Flex, Avatar as ChakraAvatar } from '@chakra-ui/react';
-
-import { SText } from '~/shared/ui/SText';
+import { Flex, Avatar as ChakraAvatar, Text } from '@chakra-ui/react';
 
 interface AvatarProps {
   firstName: string;
@@ -12,7 +10,7 @@ export const Avatar = ({ firstName, lastName, avatarImg }: AvatarProps) => {
   return (
     <Flex alignItems="center" gap={2}>
       <ChakraAvatar name={`${firstName} ${lastName}`} src={avatarImg} />
-      <SText fontWeight="semibold">{`Привет, ${firstName}!`}</SText>
+      <Text fontWeight="semibold">{`Привет, ${firstName}!`}</Text>
     </Flex>
   );
 };

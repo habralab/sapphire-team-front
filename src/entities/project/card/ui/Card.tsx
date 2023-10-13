@@ -1,4 +1,4 @@
-import { SText } from '~/shared/ui/SText';
+import { Heading, Text } from '@chakra-ui/react';
 
 export interface CardProps {
   title: string;
@@ -11,11 +11,13 @@ export const Card = (props: CardProps) => {
 
   return (
     <>
-      <SText variant="h2">{title}</SText>
-      <SText variant="caption">{date}</SText>
-      <SText variant="main" noOfLines={3}>
+      <Heading variant="h2">{title}</Heading>
+      <Text variant="caption" mb={3}>
+        {date}
+      </Text>
+      <Text noOfLines={3} mb={3}>
         {description}
-      </SText>
+      </Text>
     </>
   );
 };

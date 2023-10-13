@@ -1,9 +1,8 @@
-import { Divider, Flex, Link, Stack } from '@chakra-ui/react';
+import { Divider, Flex, Link, Stack, Text } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 import { Counter } from '~/shared/ui/Counter';
 import { LogoDesktop } from '~/shared/ui/Logo';
-import { SText } from '~/shared/ui/SText';
 
 import { routes } from './routes';
 
@@ -25,7 +24,7 @@ export const MenuDesktop = () => {
                 w="44"
               >
                 {icon}
-                <SText
+                <Text
                   whiteSpace="nowrap"
                   overflow="hidden"
                   textOverflow="ellipsis"
@@ -34,7 +33,7 @@ export const MenuDesktop = () => {
                   lineHeight="normal"
                 >
                   {name}
-                </SText>
+                </Text>
 
                 {name === 'Чаты' && <Counter count={2} />}
               </Flex>

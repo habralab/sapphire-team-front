@@ -1,28 +1,27 @@
-import { Flex } from '@chakra-ui/react';
+import { Box, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { STag } from '~/shared/ui/STag';
-import { SText } from '~/shared/ui/SText';
 
 export function AboutMe() {
   return (
-    <Flex direction="column" bg="white" borderRadius="2xl" p={5} gap={6}>
-      <Flex direction="column">
-        <SText variant="h2">Обо мне</SText>
-        <SText>
+    <Stack bg="white" borderRadius="2xl" p={5} gap={6}>
+      <Box>
+        <Heading variant="h2">Обо мне</Heading>
+        <Text>
           Привет! Меня зовут Татьяна, и я начинающий UX/UI дизайнер, готовый погрузиться в
           мир творчества и пользовательских интерфейсов. Моя страсть к дизайну началась
           давно, и я горжусь тем, что обладаю креативным мышлением и аналитическими
           способностями.
-        </SText>
-      </Flex>
-      <Flex direction="column">
-        <SText variant="h2">Профессия</SText>
+        </Text>
+      </Box>
+      <Box>
+        <Heading variant="h2">Профессия</Heading>
         <STag mainTags={['Дизайнер', 'UX/UI дизайнер']} />
-      </Flex>
-      <Flex direction="column">
-        <SText variant="h2">Навыки</SText>
+      </Box>
+      <Box>
+        <Heading variant="h2">Навыки</Heading>
         <STag tags={['UX', 'UI', 'Figma']} />
-      </Flex>
-    </Flex>
+      </Box>
+    </Stack>
   );
 }

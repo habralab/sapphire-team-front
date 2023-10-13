@@ -109,12 +109,36 @@ const Divider = defineStyleConfig({
   variants: { dividerStyle, dividerStyleTabs },
 });
 
+const Heading = defineStyleConfig({
+  variants: {
+    h1: {
+      fontFamily: `'Raleway', sans-serif`,
+      fontSize: '2xl',
+      fontWeight: 'bold',
+    },
+    h2: {
+      fontSize: 'lg',
+      fontWeight: 'medium',
+      marginBottom: '3',
+    },
+  },
+});
+
+const Text = defineStyleConfig({
+  variants: {
+    caption: {
+      fontSize: 'xs',
+      color: 'gray.700',
+    },
+  },
+});
+
 export const basicTheme = extendTheme({
   config: {
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Divider, Tabs, Avatar: avatarTheme, Icon, Link },
+  components: { Button, Divider, Tabs, Avatar: avatarTheme, Icon, Link, Heading, Text },
   styles: {
     global: {
       body: {
