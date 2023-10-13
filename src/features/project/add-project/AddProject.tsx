@@ -9,7 +9,6 @@ export const AddProject = () => {
 
   return (
     <IconButton
-      variant={'solid'}
       aria-label="add-project"
       gap={2}
       minW={['8', '8', '10']}
