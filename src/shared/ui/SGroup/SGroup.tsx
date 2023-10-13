@@ -15,7 +15,9 @@ export function SGroup(props: SGroupProps) {
       <Text fontWeight="bold" fontSize="xl" mb={2}>
         {count}
       </Text>
-      <SText variant="caption">{section}</SText>
+      <SText variant="caption" mb={0}>
+        {section}
+      </SText>
     </Box>
   );
 }
