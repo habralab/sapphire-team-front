@@ -17,8 +17,8 @@ export const data: ChatDto[] = [
   },
   {
     id: 2,
-    title: 'Сервис онлайн-образования',
-    name: 'Иван Иванов',
+    title: 'Сайт студии видеозаписи',
+    name: 'Борис Бритва',
     role: 'Участник',
     messages: [
       {
@@ -41,8 +41,8 @@ export const data: ChatDto[] = [
   },
   {
     id: 3,
-    title: 'Сервис онлайн-образования',
-    name: 'Татьяна Андреева',
+    title: 'Сайт для барбершопа',
+    name: 'Иван Мятный',
     role: 'Участник',
     messages: [
       {
@@ -54,9 +54,9 @@ export const data: ChatDto[] = [
     ],
   },
   {
-    id: 3,
-    title: 'Сервис онлайн-образования',
-    name: 'Татьяна Андреева',
+    id: 4,
+    title: 'Маркетплейс',
+    name: 'Юрий Антонов',
     role: 'Участник',
     messages: [
       {

@@ -8,11 +8,11 @@ import { SText } from '~/shared/ui/SText';
 
 export function ChatCard(props: ChatDto) {
   const { title, name, messages, role } = props;
+  const lastMessage = messages[messages.length - 1];
 
-  const noReadMessage = messages.filter((mes) => mes.status === 'noRead').length;
-  const doneMessage = messages.filter((mes) => mes.status === 'done').length;
-  const noDoneMessage = messages.filter((mes) => mes.status === 'noDone').length;
-  const errorMessage = messages.filter((mes) => mes.status === 'error').length;
+  const filterMessage = (status: string) => {
+    return messages.filter((mes) => mes.status === status).length;
+  };
 
   return (
     <Flex
@@ -46,21 +46,27 @@ export function ChatCard(props: ChatDto) {
           {name}
         </SText>
         <SText color="gray.600" mb={0} noOfLines={1}>
-          {messages[messages.length - 1].message}
+          {lastMessage.message}
         </SText>
       </Flex>
       <Flex direction="column" justifyContent="space-between" alignItems="flex-end">
         <SText variant="caption" mb={0}>
-          {messages[messages.length - 1].date}
+          {lastMessage.date}
         </SText>
-        {noReadMessage > 0 && (
+        {filterMessage('noRead') > 0 && (
           <Circle fontSize="xs" bg="gray.500" px={1} minW={4} minH={4} color="white">
-            {noReadMessage}
+            {filterMessage('noRead')}
           </Circle>
         )}
-        {doneMessage > 0 && <Icon as={BsCheck2All} color="purple.600" w={4} h={4} />}
-        {noDoneMessage > 0 && <Icon as={BsCheck2All} color="gray.600" w={4} h={4} />}
-        {errorMessage > 0 && <Icon as={WarningIcon} color="red.500" w={4} h={4} />}
+        {filterMessage('done') > 0 && (
+          <Icon as={BsCheck2All} color="purple.600" w={4} h={4} />
+        )}
+        {filterMessage('noDone') > 0 && (
+          <Icon as={BsCheck2All} color="gray.600" w={4} h={4} />
+        )}
+        {filterMessage('error') > 0 && (
+          <Icon as={WarningIcon} color="red.500" w={4} h={4} />
+        )}
       </Flex>
     </Flex>
   );
