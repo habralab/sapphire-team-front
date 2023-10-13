@@ -1,11 +1,8 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, SimpleGrid } from '@chakra-ui/react';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { FilterProject, SearchProject } from '~/features/project';
-import { Notification, Settings } from '~/features/user';
-
-import { Avatar } from '~/entities/user';
+import { SearchProject, FilterProject } from '~/features/project';
 
 import { data } from '../data';
 
@@ -13,13 +10,15 @@ export const SearchPageDesktop = () => {
   return (
     <>
       <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
-        <Flex gap="1" mb={4}>
+        <Flex gap="4" mb={4}>
           <SearchProject />
           <FilterProject />
         </Flex>
-        {data.map((project) => {
-          return <ProjectCard key={project.id} {...project} page="search" />;
-        })}
+        <SimpleGrid columns={2} gap={6}>
+          {data.map((project) => {
+            return <ProjectCard key={project.id} {...project} page="search" />;
+          })}
+        </SimpleGrid>
       </Flex>
     </>
   );

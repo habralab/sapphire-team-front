@@ -22,13 +22,14 @@ export const ProjectCard = (props: ProjectCardProps) => {
   return (
     <ChakraCard
       borderRadius="2xl"
+      _hover={{ boxShadow: '2xl', cursor: 'pointer' }}
       _active={{ boxShadow: '2xl' }}
       boxShadow="none"
       alignContent="center"
-      mb="4"
+      mb={[4, 0]}
     >
-      <CardBody padding="5">
-        <Status mb="3">{status}</Status>
+      <CardBody padding={['5', '6']}>
+        <Status mb={['3', '4']}>{status}</Status>
         <Card title={title} date={date} description={description} />
         {page === 'search' && <STag mainTags={mainTags} tags={tags} />}
       </CardBody>

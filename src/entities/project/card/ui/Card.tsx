@@ -1,6 +1,6 @@
 import { SText } from '~/shared/ui/SText';
 
-interface CardProps {
+export interface CardProps {
   title: string;
   date: string;
   description: string;

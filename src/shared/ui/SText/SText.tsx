@@ -19,9 +19,9 @@ function getStyles(variant?: Variants) {
       styles.fontFamily = `'Raleway', sans-serif`;
       break;
     case 'h2':
-      styles.fontSize = 'lg';
+      styles.fontSize = ['lg', 'xl'];
       styles.fontWeight = 'medium';
-      styles.marginBottom = '3';
+      styles.marginBottom = ['3', '4'];
       break;
     case 'h3':
       styles.fontSize = 'sm';
@@ -29,12 +29,12 @@ function getStyles(variant?: Variants) {
       styles.marginBottom = '2';
       break;
     case 'caption':
-      styles.fontSize = 'xs';
+      styles.fontSize = ['xs', 'sm'];
       styles.color = 'gray.700';
-      styles.marginBottom = '3';
+      styles.marginBottom = ['3', '4'];
       break;
     case 'main':
-      styles.marginBottom = '3';
+      styles.marginBottom = ['3', '4'];
       break;
   }
   return styles;
