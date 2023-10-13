@@ -1,32 +1,20 @@
-import { CardBody, Card as ChakraCard, Flex } from '@chakra-ui/react';
+import { CardBody, Card as ChakraCard } from '@chakra-ui/react';
 
 import { Status } from '~/features/project';
 
-import { AvatarsGroup, Card } from '~/entities/project';
-
-import { STag } from '~/shared/ui/STag';
+import { Card } from '~/entities/project';
 
 interface ProjectCardProps {
-  id: number;
   status: string;
   title: string;
   date: string;
   description: string;
-  mainTags: string[];
-  tags?: string[];
-  page?: 'search' | 'project';
+  children: React.ReactNode;
 }
 
 export const ProjectCard = (props: ProjectCardProps) => {
-  const { status, title, date, description, page, mainTags, tags } = props;
-  const dummyAvatars = [
-    { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
-    { firstName: 'Игорь', lastName: 'Крутой', img: 'https://bit.ly/sage-adebayo' },
-    { firstName: 'Джек', lastName: 'Воробей', img: 'https://bit.ly/kent-c-dodds' },
-    { firstName: 'Кларк', lastName: 'Кент', img: 'https://bit.ly/prosper-baba' },
-    { firstName: 'Джеймс', lastName: 'Бонд', img: 'https://bit.ly/code-beast' },
-    { firstName: 'Бернд', lastName: 'Шнайдер', img: 'https://bit.ly/dan-abramov' },
-  ];
+  const { status, title, date, description, children } = props;
+
   return (
     <ChakraCard
       borderRadius="2xl"
@@ -34,18 +22,12 @@ export const ProjectCard = (props: ProjectCardProps) => {
       _active={{ boxShadow: '2xl' }}
       boxShadow="none"
       alignContent="center"
-      mb={[4, 0]}
+      mb={4}
     >
       <CardBody padding={['5', '6']}>
         <Status mb={['3', '4']}>{status}</Status>
         <Card title={title} date={date} description={description} />
-        {page === 'search' && <STag mainTags={mainTags} tags={tags} />}
-        {page === 'project' && (
-          <Flex justifyContent="space-between" alignItems="center">
-            <STag mainTags={['Организатор']} />
-            <AvatarsGroup avatars={dummyAvatars} />
-          </Flex>
-        )}
+        {children}
       </CardBody>
     </ChakraCard>
   );

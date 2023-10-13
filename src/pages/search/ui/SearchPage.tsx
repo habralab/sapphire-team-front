@@ -7,6 +7,8 @@ import { Notification, Settings } from '~/features/user';
 
 import { Avatar } from '~/entities/user';
 
+import { STag } from '~/shared/ui/STag';
+
 import { data } from '../../data';
 
 export const SearchPage = () => {
@@ -25,7 +27,11 @@ export const SearchPage = () => {
           <FilterProject />
         </Flex>
         {data.map((project) => {
-          return <ProjectCard key={project.id} {...project} page="search" />;
+          return (
+            <ProjectCard key={project.id} {...project}>
+              <STag mainTags={project.mainTags} tags={project.tags} />
+            </ProjectCard>
+          );
         })}
       </Flex>
     </>

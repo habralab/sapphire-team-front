@@ -4,6 +4,8 @@ import { ProjectCard } from '~/widgets/project-card';
 
 import { SearchProject, FilterProject } from '~/features/project';
 
+import { STag } from '~/shared/ui/STag';
+
 import { data } from '../../data';
 
 export const SearchPageDesktop = () => {
@@ -16,7 +18,11 @@ export const SearchPageDesktop = () => {
         </Flex>
         <SimpleGrid columns={2} gap={6}>
           {data.map((project) => {
-            return <ProjectCard key={project.id} {...project} page="search" />;
+            return (
+              <ProjectCard key={project.id} {...project}>
+                <STag mainTags={project.mainTags} tags={project.tags} />
+              </ProjectCard>
+            );
           })}
         </SimpleGrid>
       </Flex>
