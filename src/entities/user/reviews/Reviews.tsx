@@ -1,7 +1,6 @@
-import { Flex, VStack } from '@chakra-ui/react';
+import { Box, HStack, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { SLink } from '~/shared/ui/SLink';
-import { SText } from '~/shared/ui/SText';
 
 interface ReviewType {
   rating: JSX.Element;
@@ -11,20 +10,24 @@ export function Reviews(props: ReviewType) {
   const { rating } = props;
 
   return (
-    <VStack align="stretch" spacing={0} p={5} mb={4} borderRadius="2xl" bg="white">
-      <Flex align="center" justifyContent="space-between">
-        <SText variant="caption">3 сентября 2022</SText>
+    <Stack p={5} borderRadius="2xl" bg="white" gap={3}>
+      <HStack justifyContent="space-between">
+        <Text variant="caption">3 сентября 2022</Text>
         {rating}
-      </Flex>
-      <Flex direction="column" py={3} gap={1}>
-        <SText variant="h2">Михаил Шафутинский</SText>
-        <SText variant="caption">Участник проекта</SText>
+      </HStack>
+      <Box>
+        <Heading variant="h2" mb={1}>
+          Михаил Шафутинский
+        </Heading>
+        <Text variant="caption" mb={1}>
+          Участник проекта
+        </Text>
         <SLink to="#">Сервис онлайн-образования</SLink>
-      </Flex>
-      <SText>
+      </Box>
+      <Text>
         Все прошло отлично. Спасибо Денису за оперативность. Организация на высшем уровне.
         Показал, рассказал все по уму.
-      </SText>
-    </VStack>
+      </Text>
+    </Stack>
   );
 }

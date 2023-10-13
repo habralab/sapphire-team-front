@@ -1,8 +1,7 @@
-import { Icon, IconButton } from '@chakra-ui/react';
+import { HStack, Icon, IconButton, Text } from '@chakra-ui/react';
 import { BsPlus } from 'react-icons/bs';
 
 import { useIsMobile } from '~/shared/hooks';
-import { SText } from '~/shared/ui/SText';
 
 export const AddProject = () => {
   const isMobile = useIsMobile();
@@ -16,12 +15,10 @@ export const AddProject = () => {
       flexShrink="0"
       padding={['0', '0', '4']}
       icon={
-        <>
-          <SText fontSize="sm" fontWeight="normal" hidden={isMobile}>
-            Создать проект
-          </SText>
+        <HStack fontWeight="semibold">
+          <Text hidden={isMobile}>Создать проект</Text>
           <Icon as={BsPlus} />
-        </>
+        </HStack>
       }
     />
   );

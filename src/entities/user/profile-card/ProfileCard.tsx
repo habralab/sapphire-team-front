@@ -11,6 +11,7 @@ export function ProfileCard() {
       w="100%"
       borderRadius="2xl"
       position="relative"
+      mb={4}
     >
       <Avatar
         name="Татьяна А"

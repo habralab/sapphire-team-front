@@ -1,4 +1,4 @@
-import { Flex, SimpleGrid } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Heading } from '@chakra-ui/react';
 
 import { data } from '~/pages/data';
 
@@ -9,7 +9,6 @@ import { AddProject } from '~/features/project';
 import { AvatarsGroup } from '~/entities/project';
 
 import { STag } from '~/shared/ui/STag';
-import { SText } from '~/shared/ui/SText';
 
 export const ProjectPage = () => {
   const dummyAvatars = [
@@ -24,7 +23,9 @@ export const ProjectPage = () => {
     <>
       <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
         <Flex justifyContent="space-between" alignItems="center" mb={6}>
-          <SText variant="h1">Проекты</SText>
+          <Heading variant="h1" as="h1">
+            Проекты
+          </Heading>
           <Flex gap={4} alignItems="baseline">
             <AddProject />
           </Flex>

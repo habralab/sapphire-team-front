@@ -1,6 +1,4 @@
-import { Badge, BadgeProps } from '@chakra-ui/react';
-
-import { SText } from '~/shared/ui/SText';
+import { Badge, BadgeProps, Text } from '@chakra-ui/react';
 
 type StatusProps = {
   children: string;
@@ -18,9 +16,9 @@ export const Status = (props: StatusProps) => {
       borderRadius="full"
       {...others}
     >
-      <SText color="white" fontWeight="medium">
+      <Text color="white" fontWeight="medium">
         {children}
-      </SText>
+      </Text>
     </Badge>
   );
 };

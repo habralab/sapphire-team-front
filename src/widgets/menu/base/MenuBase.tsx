@@ -1,8 +1,7 @@
-import { Container, Flex, Link } from '@chakra-ui/react';
+import { Container, Flex, Link, Text } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 import { Counter } from '~/shared/ui/Counter';
-import { SText } from '~/shared/ui/SText';
 
 import { routes } from './routes';
 
@@ -30,7 +29,7 @@ export const MenuBase = () => {
                   gap={2}
                 >
                   {icon}
-                  <SText fontWeight="500">{name}</SText>
+                  <Text fontWeight="500">{name}</Text>
                   {name === 'Чаты' && <Counter count={2} float />}
                 </Flex>
               </Link>

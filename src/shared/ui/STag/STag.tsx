@@ -1,6 +1,4 @@
-import { Tag, Flex } from '@chakra-ui/react';
-
-import { SText } from '../SText';
+import { Tag, Flex, Text } from '@chakra-ui/react';
 
 interface TagType {
   mainTags?: string[];
@@ -19,9 +17,9 @@ export function STag(props: TagType) {
     >
       {mainTags?.map((tag) => (
         <Tag key={tag} bg="gray.900" py={1} px={2} borderRadius="lg">
-          <SText color="white" as="h3">
+          <Text color="white" as="h3">
             {tag}
-          </SText>
+          </Text>
         </Tag>
       ))}
       {tags?.map((tag) => (
