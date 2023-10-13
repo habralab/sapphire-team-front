@@ -4,21 +4,17 @@ import { Status } from '~/features/project';
 
 import { Card } from '~/entities/project';
 
-import { STag } from '~/shared/ui/STag';
-
 interface ProjectCardProps {
-  id: number;
   status: string;
   title: string;
   date: string;
   description: string;
-  mainTags: string[];
-  tags?: string[];
-  page?: 'search' | 'project';
+  children: React.ReactNode;
 }
 
 export const ProjectCard = (props: ProjectCardProps) => {
-  const { status, title, date, description, page, mainTags, tags } = props;
+  const { status, title, date, description, children } = props;
+
   return (
     <ChakraCard
       borderRadius="2xl"
@@ -26,12 +22,12 @@ export const ProjectCard = (props: ProjectCardProps) => {
       _active={{ boxShadow: '2xl' }}
       boxShadow="none"
       alignContent="center"
-      mb={[4, 0]}
+      mb={4}
     >
       <CardBody padding={['5', '6']}>
         <Status mb={['3', '4']}>{status}</Status>
         <Card title={title} date={date} description={description} />
-        {page === 'search' && <STag mainTags={mainTags} tags={tags} />}
+        {children}
       </CardBody>
     </ChakraCard>
   );

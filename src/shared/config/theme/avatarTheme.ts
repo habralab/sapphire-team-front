@@ -17,6 +17,9 @@ const baseStyle = definePartsStyle({
     fontSize: 'sm',
     fontWeight: '600',
   },
+  excessLabel: {
+    bg: 'gray.100',
+  },
 });
 
 export const avatarTheme = defineMultiStyleConfig({ baseStyle });
