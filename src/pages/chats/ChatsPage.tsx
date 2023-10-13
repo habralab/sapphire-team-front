@@ -15,7 +15,7 @@ import { ChatCard } from '~/entities/chat';
 
 import { SText } from '~/shared/ui/SText';
 
-import { data } from './data';
+import { data } from '../chat';
 
 export function ChatsPage() {
   const [value, setValue] = useState('');
@@ -51,7 +51,9 @@ export function ChatsPage() {
                 <Link to={`/chat/${chat.id}`}>
                   <ChatCard {...chat} />
                 </Link>
-                <Divider variant="dividerDark" />
+                <Box>
+                  <Divider variant="dividerDark" />
+                </Box>
               </Box>
             );
           })}

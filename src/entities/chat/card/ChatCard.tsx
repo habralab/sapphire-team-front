@@ -1,9 +1,10 @@
 import { WarningIcon } from '@chakra-ui/icons';
-import { Icon, Flex, Avatar, Circle } from '@chakra-ui/react';
+import { Icon, Flex, Circle } from '@chakra-ui/react';
 import { BsFillBriefcaseFill, BsCheck2All } from 'react-icons/bs';
 import { IoPerson } from 'react-icons/io5';
 
 import { ChatDto } from '~/shared/lib/types';
+import { SAvatar } from '~/shared/ui/SAvatar';
 import { SText } from '~/shared/ui/SText';
 
 export function ChatCard(props: ChatDto) {
@@ -22,15 +23,7 @@ export function ChatCard(props: ChatDto) {
       borderColor="gray.700"
       _hover={{ bg: 'gray.100', mx: '-4', px: '4' }}
     >
-      <Avatar
-        name={name}
-        bg="gray.900"
-        color="white"
-        fontWeight="semibold"
-        fontSize="sm"
-        h={10}
-        w={10}
-      />
+      <SAvatar name={name} />
       <Flex direction="column" gap={1.5}>
         <Flex gap={1} alignItems="center">
           <Icon
