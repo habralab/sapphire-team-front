@@ -14,7 +14,7 @@ function getStyles(variant?: Variants) {
 
   switch (variant) {
     case 'h1':
-      styles.fontSize = '2xl';
+      styles.fontSize = ['2xl', '4xl'];
       styles.fontWeight = 'bold';
       styles.fontFamily = `'Raleway', sans-serif`;
       break;

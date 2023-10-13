@@ -11,7 +11,7 @@ import { AvatarsGroup } from '~/entities/project';
 import { STag } from '~/shared/ui/STag';
 import { SText } from '~/shared/ui/SText';
 
-export const ProjectPage = () => {
+export const ProjectPageDesktop = () => {
   const dummyAvatars = [
     { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
     { firstName: 'Игорь', lastName: 'Крутой', img: 'https://bit.ly/sage-adebayo' },
@@ -29,7 +29,12 @@ export const ProjectPage = () => {
             <AddProject />
           </Flex>
         </Flex>
-        <SimpleGrid gap={6}>
+        <SimpleGrid
+          columns={{
+            lg: 2,
+          }}
+          gap={6}
+        >
           {data.map((project) => {
             return (
               <ProjectCard key={project.id} {...project}>

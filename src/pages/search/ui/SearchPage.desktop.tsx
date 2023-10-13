@@ -16,7 +16,7 @@ export const SearchPageDesktop = () => {
           <SearchProject />
           <FilterProject />
         </Flex>
-        <SimpleGrid columns={2} gap={6}>
+        <SimpleGrid gap={6}>
           {data.map((project) => {
             return (
               <ProjectCard key={project.id} {...project}>
