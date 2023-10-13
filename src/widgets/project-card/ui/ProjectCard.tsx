@@ -6,7 +6,7 @@ import { Card } from '~/entities/project';
 
 import { STag } from '~/shared/ui/STag';
 
-export interface ProjectCardProps {
+interface ProjectCardProps {
   id: number;
   status: string;
   title: string;
