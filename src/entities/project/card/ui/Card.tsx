@@ -1,6 +1,10 @@
 import { SText } from '~/shared/ui/SText';
 
-import { CardProps } from '../types/CardTypes';
+export interface CardProps {
+  title: string;
+  date: string;
+  description: string;
+}
 
 export const Card = (props: CardProps) => {
   const { title, date, description } = props;

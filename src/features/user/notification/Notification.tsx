@@ -12,7 +12,7 @@ export function Notification() {
         icon={
           <Box position="relative">
             <Icon as={IoNotifications} />
-            <Counter count={2} />
+            <Counter count={2} float />
           </Box>
         }
       />

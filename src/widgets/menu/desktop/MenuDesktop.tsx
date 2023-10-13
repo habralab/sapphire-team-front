@@ -1,6 +1,7 @@
 import { Divider, Flex, Link, Stack } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
+import { Counter } from '~/shared/ui/Counter';
 import { LogoDesktop } from '~/shared/ui/Logo';
 import { SText } from '~/shared/ui/SText';
 
@@ -16,11 +17,26 @@ export const MenuDesktop = () => {
           return (
             <Link key={path} as={NavLink} to={path} variant="nav" px={2}>
               {divided && <Divider variant="dividerStyle" mt={-1} mb={5} />}
-              <Flex alignItems="center" gap={2.5}>
-                {icon({ size: '6', value: 5 })}
-                <SText fontWeight="500" lineHeight="normal">
+              <Flex
+                alignItems="center"
+                gap={2.5}
+                position="relative"
+                justifyContent="center"
+                w="44"
+              >
+                {icon}
+                <SText
+                  whiteSpace="nowrap"
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                  flexGrow="1"
+                  fontWeight="500"
+                  lineHeight="normal"
+                >
                   {name}
                 </SText>
+
+                {name === 'Чаты' && <Counter count={2} />}
               </Flex>
             </Link>
           );

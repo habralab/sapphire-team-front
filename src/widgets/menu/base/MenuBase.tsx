@@ -1,6 +1,7 @@
 import { Container, Flex, Link } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
+import { Counter } from '~/shared/ui/Counter';
 import { SText } from '~/shared/ui/SText';
 
 import { routes } from './routes';
@@ -14,6 +15,7 @@ export const MenuBase = () => {
       left="0"
       right="0"
       justifyContent="center"
+      zIndex={1}
     >
       <Container maxW="md">
         <Flex as={'nav'} py="3" px="2" justifyContent="space-between">
@@ -27,8 +29,9 @@ export const MenuBase = () => {
                   width="16"
                   gap={2}
                 >
-                  {icon({ size: '6', value: 5 })}
+                  {icon}
                   <SText fontWeight="500">{name}</SText>
+                  {name === 'Чаты' && <Counter count={2} float />}
                 </Flex>
               </Link>
             );
