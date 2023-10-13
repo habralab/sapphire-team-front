@@ -6,7 +6,7 @@ import { SText } from '~/shared/ui/SText';
 export function AboutMe() {
   return (
     <Flex direction="column" bg="white" borderRadius="2xl" p={5} gap={6}>
-      <Flex direction="column" gap={2}>
+      <Flex direction="column">
         <SText variant="h2">Обо мне</SText>
         <SText>
           Привет! Меня зовут Татьяна, и я начинающий UX/UI дизайнер, готовый погрузиться в
@@ -15,11 +15,11 @@ export function AboutMe() {
           способностями.
         </SText>
       </Flex>
-      <Flex direction="column" gap={2}>
+      <Flex direction="column">
         <SText variant="h2">Профессия</SText>
         <STag mainTags={['Дизайнер', 'UX/UI дизайнер']} />
       </Flex>
-      <Flex direction="column" gap={2}>
+      <Flex direction="column">
         <SText variant="h2">Навыки</SText>
         <STag tags={['UX', 'UI', 'Figma']} />
       </Flex>
