@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, SimpleGrid } from '@chakra-ui/react';
 
 import { data } from '~/pages/data';
 
@@ -29,16 +29,18 @@ export const ProjectPage = () => {
             <AddProject />
           </Flex>
         </Flex>
-        {data.map((project) => {
-          return (
-            <ProjectCard key={project.id} {...project}>
-              <Flex justifyContent="space-between" alignItems="center">
-                <STag mainTags={['Организатор']} />
-                <AvatarsGroup avatars={dummyAvatars} />
-              </Flex>
-            </ProjectCard>
-          );
-        })}
+        <SimpleGrid gap={6}>
+          {data.map((project) => {
+            return (
+              <ProjectCard key={project.id} {...project}>
+                <Flex justifyContent="space-between" alignItems="center">
+                  <STag mainTags={['Организатор']} />
+                  <AvatarsGroup avatars={dummyAvatars} />
+                </Flex>
+              </ProjectCard>
+            );
+          })}
+        </SimpleGrid>
       </Flex>
     </>
   );

@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, SimpleGrid } from '@chakra-ui/react';
 
 import { ProjectCard } from '~/widgets/project-card';
 
@@ -26,13 +26,16 @@ export const SearchPage = () => {
           <SearchProject />
           <FilterProject />
         </Flex>
-        {data.map((project) => {
-          return (
-            <ProjectCard key={project.id} {...project}>
-              <STag mainTags={project.mainTags} tags={project.tags} />
-            </ProjectCard>
-          );
-        })}
+
+        <SimpleGrid gap={4}>
+          {data.map((project) => {
+            return (
+              <ProjectCard key={project.id} {...project}>
+                <STag mainTags={project.mainTags} tags={project.tags} />
+              </ProjectCard>
+            );
+          })}
+        </SimpleGrid>
       </Flex>
     </>
   );
