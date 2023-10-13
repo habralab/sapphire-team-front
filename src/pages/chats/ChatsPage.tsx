@@ -24,7 +24,7 @@ export function ChatsPage() {
   // const [filterData, setFilterData] = useState(data);
 
   return (
-    <Container maxW="md" p={5}>
+    <Container p={5}>
       <Flex direction="column" gap={4}>
         <SText variant="h1">Чаты</SText>
         <FormControl>
