@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Link, Stack, Text } from '@chakra-ui/react';
+import { Divider, Flex, Link, Stack, Text } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 import { Counter } from '~/shared/ui/Counter';
