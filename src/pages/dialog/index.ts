@@ -1,0 +1,1 @@
+export { DialogPage } from './DialogPage';

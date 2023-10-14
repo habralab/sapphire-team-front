@@ -12,6 +12,7 @@ import '@fontsource/inter/cyrillic-400.css';
 import '@fontsource/inter/cyrillic-500.css';
 import '@fontsource/inter/cyrillic-600.css';
 import '@fontsource/inter/cyrillic-700.css';
+
 import { avatarTheme } from './avatarTheme';
 
 /**
@@ -92,13 +93,13 @@ const Icon = defineStyleConfig({
   },
 });
 
-const dividerStyle = defineStyle({
+const light = defineStyle({
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: 'gray.300',
 });
 
-const dividerStyleTabs = defineStyle({
+const dark = defineStyle({
   borderWidth: '1px',
   borderRadius: '4px',
   borderStyle: 'solid',
@@ -106,7 +107,7 @@ const dividerStyleTabs = defineStyle({
 });
 
 const Divider = defineStyleConfig({
-  variants: { dividerStyle, dividerStyleTabs },
+  variants: { light, dark },
 });
 
 const Heading = defineStyleConfig({
@@ -120,6 +121,10 @@ const Heading = defineStyleConfig({
       fontSize: 'lg',
       fontWeight: 'medium',
       marginBottom: '3',
+    },
+    h3: {
+      fontSize: 'sm',
+      fontWeight: 'medium',
     },
   },
 });
@@ -138,14 +143,22 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Divider, Tabs, Avatar: avatarTheme, Icon, Link, Heading, Text },
+  components: {
+    Button,
+    Divider,
+    Tabs,
+    Avatar: avatarTheme,
+    Icon,
+    Link,
+    Heading,
+    Text,
+  },
   styles: {
     global: {
       body: {
         fontSize: 'sm',
         lineHeight: '120%',
         color: 'gray.900',
-        bg: 'gray.100',
       },
     },
   },
