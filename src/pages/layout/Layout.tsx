@@ -16,16 +16,11 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
   const isMobile = useIsMobile();
   const location = useLocation();
 
+  const mobile = location.pathname.includes(PATHS.chats) ? whiteMobileTheme : mobileTheme;
+  const desk = desktopTheme;
+
   return (
-    <ChakraProvider
-      theme={
-        isMobile
-          ? location.pathname.includes(PATHS.chats)
-            ? whiteMobileTheme
-            : mobileTheme
-          : desktopTheme
-      }
-    >
+    <ChakraProvider theme={isMobile ? mobile : desk}>
       {isMobile ? (
         <Flex alignItems="start" mt="4" mb={6}>
           <Container maxW="md" pb={'72.8px'}>
