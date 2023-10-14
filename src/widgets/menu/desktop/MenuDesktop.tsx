@@ -34,9 +34,7 @@ export const MenuDesktop = () => {
                 >
                   {name}
                 </Text>
-                <Box position="absolute" left={4} bottom={4}>
-                  {name === 'Чаты' && <Counter count={2} />}
-                </Box>
+                {name === 'Чаты' && <Counter count={2} />}
               </Flex>
             </Link>
           );

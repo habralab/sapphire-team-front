@@ -1,6 +1,6 @@
-import { ChatDto } from '~/shared/lib/types';
+import { ChatCardProps } from './model';
 
-export const data: ChatDto[] = [
+export const data: ChatCardProps[] = [
   {
     id: 1,
     title: 'Сервис онлайн-образования',
@@ -10,7 +10,7 @@ export const data: ChatDto[] = [
       {
         message:
           'Привет! Приглашаю тебя присоединиться к нашей команде Dream Team и создать проект',
-        status: 'noDone',
+        status: 'sent',
         date: '11:08',
       },
     ],
@@ -23,18 +23,18 @@ export const data: ChatDto[] = [
     messages: [
       {
         message: 'Здравствуйте',
-        status: 'done',
+        status: 'unread',
         date: '12:18',
       },
       {
         message: 'Мы рады пригласить вас в нашу дружную команду.',
-        status: 'done',
+        status: 'unread',
         date: '12:18',
       },
       {
         message:
           'Мы ищем людей, которые готовы работать в команде, проявлять инициативу и развиваться вместе с нами. Если вы уверены в своих силах и готовы принять вызов, то мы будем рады видеть вас в нашей команде. Присылайте ваше резюме на адрес электронной почты и мы обязательно рассмотрим вашу кандидатуру.',
-        status: 'done',
+        status: 'unread',
         date: '12:18',
       },
     ],
@@ -62,7 +62,7 @@ export const data: ChatDto[] = [
       {
         message:
           'Привет! Приглашаю тебя присоединиться к нашей команде Dream Team и создать проект',
-        status: 'noRead',
+        status: 'read',
         date: '18:15',
       },
     ],

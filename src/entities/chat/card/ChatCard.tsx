@@ -1,18 +1,17 @@
-import { WarningIcon } from '@chakra-ui/icons';
-import { Icon, Flex, Circle, Text, Heading, VStack } from '@chakra-ui/react';
-import { BsFillBriefcaseFill, BsCheck2All } from 'react-icons/bs';
+import { Icon, Flex, Text, Heading, VStack, Stack, HStack } from '@chakra-ui/react';
+import { BsFillBriefcaseFill } from 'react-icons/bs';
 import { IoPerson } from 'react-icons/io5';
 
-import { ChatDto } from '~/shared/lib/types';
 import { SAvatar } from '~/shared/ui/SAvatar';
 
-export function ChatCard(props: ChatDto) {
+import { ChatCardProps } from '../model';
+
+import { Status } from './status';
+
+export function ChatCard(props: ChatCardProps) {
   const { title, name, messages, role } = props;
   const lastMessage = messages[messages.length - 1];
-
-  const filterMessage = (status: string) => {
-    return messages.filter((mes) => mes.status === status).length;
-  };
+  const count = messages.filter((message) => message.status === 'unread').length;
 
   return (
     <Flex
@@ -23,36 +22,27 @@ export function ChatCard(props: ChatDto) {
       _hover={{ bg: 'gray.100', mx: '-4', px: '4' }}
     >
       <SAvatar name={name} />
-      <VStack alignItems="start" gap={1.5}>
-        <Flex gap={1} alignItems="center">
+
+      <Stack spacing={1}>
+        <HStack>
           <Icon
             as={role === 'Организатор' ? BsFillBriefcaseFill : IoPerson}
             w={3}
             h={3}
           />
           <Heading variant="h3">{title}</Heading>
-        </Flex>
-        <Heading variant="h3">{name}</Heading>
+        </HStack>
+        <Heading variant="h3" as="h3">
+          {name}
+        </Heading>
         <Text color="gray.600" noOfLines={1}>
           {lastMessage.message}
         </Text>
-      </VStack>
-      <VStack justifyContent="space-between" alignItems="flex-end">
+      </Stack>
+
+      <VStack justifyContent="space-between" alignItems="flex-end" ml="auto">
         <Text variant="caption">{lastMessage.date}</Text>
-        {filterMessage('noRead') > 0 && (
-          <Circle fontSize="xs" bg="gray.500" px={1} minW={4} minH={4} color="white">
-            {filterMessage('noRead')}
-          </Circle>
-        )}
-        {filterMessage('done') > 0 && (
-          <Icon as={BsCheck2All} color="purple.600" w={4} h={4} />
-        )}
-        {filterMessage('noDone') > 0 && (
-          <Icon as={BsCheck2All} color="gray.600" w={4} h={4} />
-        )}
-        {filterMessage('error') > 0 && (
-          <Icon as={WarningIcon} color="red.500" w={4} h={4} />
-        )}
+        <Status status={lastMessage.status} count={count} />
       </VStack>
     </Flex>
   );

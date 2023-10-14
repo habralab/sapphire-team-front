@@ -143,7 +143,16 @@ export const basicTheme = extendTheme({
     initialColorMode: 'light',
     useSystemColorMode: false,
   },
-  components: { Button, Divider, Tabs, Avatar: avatarTheme, Icon, Link, Heading, Text },
+  components: {
+    Button,
+    Divider,
+    Tabs,
+    Avatar: avatarTheme,
+    Icon,
+    Link,
+    Heading,
+    Text,
+  },
   styles: {
     global: {
       body: {

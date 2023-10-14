@@ -1,10 +1,10 @@
 export interface MessageType {
   message: string;
-  status: string;
+  status: 'sent' | 'read' | 'unread' | 'error';
   date: string;
 }
 
-export interface ChatDto {
+export interface ChatCardProps {
   id: number;
   title: string;
   name: string;

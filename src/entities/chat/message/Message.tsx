@@ -16,7 +16,7 @@ export function Message(props: MessageProps) {
       <Text
         bg={variant === 'incoming' ? 'gray.100' : 'purple.600'}
         color={variant === 'incoming' ? 'gray.900' : 'white'}
-        p={4}
+        p={3}
         borderRadius="2xl"
       >
         {children}

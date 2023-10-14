@@ -16,17 +16,20 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
   const isMobile = useIsMobile();
   const location = useLocation();
 
-  const mobile = location.pathname.includes(PATHS.chats) ? whiteMobileTheme : mobileTheme;
+  const isChatPages = location.pathname.includes(PATHS.chats);
+  const isDialogPage = new RegExp(`${PATHS.chats}/\\d+`).test(location.pathname);
+
+  const mobile = isChatPages ? whiteMobileTheme : mobileTheme;
   const desk = desktopTheme;
 
   return (
     <ChakraProvider theme={isMobile ? mobile : desk}>
       {isMobile ? (
         <Flex alignItems="start" mt="4" mb={6}>
-          <Container maxW="md" pb={'72.8px'}>
+          <Container maxW="md" pb={isChatPages ? '73px' : '72.8px'}>
             {base}
           </Container>
-          {!location.pathname.includes('/chats/') && <MenuBase />}
+          {!isDialogPage && <MenuBase />}
         </Flex>
       ) : (
         <Flex alignItems="start" mt="4" mb={6}>

@@ -1,4 +1,4 @@
-import { Flex, Icon, VStack, Heading } from '@chakra-ui/react';
+import { Flex, Icon, Heading, IconButton, Stack, HStack } from '@chakra-ui/react';
 import { BsFillBriefcaseFill } from 'react-icons/bs';
 import { FiChevronLeft } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -9,17 +9,25 @@ import { SAvatar } from '~/shared/ui/SAvatar';
 export function ChatInfo() {
   return (
     <Flex align="center" gap={2} pb={4}>
-      <Link to={PATHS.chats}>
-        <Icon as={FiChevronLeft} />
-      </Link>
+      <IconButton
+        aria-label="back"
+        as={Link}
+        to={PATHS.chats}
+        icon={<Icon as={FiChevronLeft} />}
+        variant="flat"
+      />
+
       <SAvatar name="Татьяна Андреева" />
-      <VStack spacing={0} align="start">
-        <Flex align="center" gap={1}>
+
+      <Stack spacing={1}>
+        <HStack>
           <Icon as={BsFillBriefcaseFill} w={3} h={3} />
           <Heading variant="h3">Сервис онлайн-образования</Heading>
-        </Flex>
-        <Heading variant="h3">Татьяна Андреева</Heading>
-      </VStack>
+        </HStack>
+        <Heading variant="h3" as="h3">
+          Татьяна Андреева
+        </Heading>
+      </Stack>
     </Flex>
   );
 }

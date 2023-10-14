@@ -1,6 +1,6 @@
-import { Box, VStack, Heading } from '@chakra-ui/react';
+import { Link, VStack, Heading, Stack } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Link, generatePath } from 'react-router-dom';
+import { Link as ReactLink, generatePath } from 'react-router-dom';
 
 import { search, SearchInput } from '~/features/chat';
 
@@ -17,22 +17,23 @@ export function ChatsPage() {
         Чаты
       </Heading>
       <SearchInput value={value} setValue={setValue} />
-      <VStack spacing={0}>
+      <Stack spacing={0}>
         {search(value).map((chat) => {
           return (
-            <Box
+            <Link
+              to={generatePath(PATHS.dialog, { id: chat.id })}
+              as={ReactLink}
               key={chat.id}
               borderBottom="1px"
               borderColor="gray.200"
+              _hover={{ textDecoration: 'none', bg: 'gray.100' }}
               _last={{ border: 'none' }}
             >
-              <Link to={generatePath(PATHS.dialog, { id: chat.id })}>
-                <ChatCard {...chat} />
-              </Link>
-            </Box>
+              <ChatCard {...chat} />
+            </Link>
           );
         })}
-      </VStack>
+      </Stack>
     </VStack>
   );
 }
