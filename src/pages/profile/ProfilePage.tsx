@@ -8,6 +8,8 @@ import {
   Stack,
   Heading,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
 import { ReviewsList } from '~/widgets/rewiews-list';
@@ -21,7 +23,17 @@ import { STag } from '~/shared/ui/STag';
 
 import { data } from '../data';
 
+const tabs = ['about', 'projects', 'reviews'];
+
 export function ProfilePage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (!searchParams.get('tab')) {
+      setSearchParams({ tab: tabs[0] });
+    }
+  }, [searchParams]);
+
   const dummyAvatars = [
     { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
     { firstName: 'Игорь', lastName: 'Крутой', img: 'https://bit.ly/sage-adebayo' },
@@ -30,6 +42,7 @@ export function ProfilePage() {
     { firstName: 'Джеймс', lastName: 'Бонд', img: 'https://bit.ly/code-beast' },
     { firstName: 'Бернд', lastName: 'Шнайдер', img: 'https://bit.ly/dan-abramov' },
   ];
+
   return (
     <>
       <Flex justifyContent="space-between" alignItems="center" mb={16}>
@@ -42,7 +55,13 @@ export function ProfilePage() {
         </Flex>
       </Flex>
       <ProfileCard />
-      <Tabs variant="base">
+      <Tabs
+        variant="base"
+        index={tabs.findIndex((name) => name === searchParams.get('tab'))}
+        onChange={(index) => {
+          setSearchParams({ tab: tabs[index] });
+        }}
+      >
         <TabList>
           <Tab>Обо мне</Tab>
           <Tab>Проекты</Tab>
