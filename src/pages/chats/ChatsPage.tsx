@@ -13,7 +13,9 @@ export function ChatsPage() {
 
   return (
     <VStack gap={4} align="start">
-      <Heading variant="h1">Чаты</Heading>
+      <Heading variant="h1" as="h1">
+        Чаты
+      </Heading>
       <SearchInput value={value} setValue={setValue} />
       <VStack spacing={0}>
         {search(value).map((chat) => {
