@@ -93,13 +93,13 @@ const Icon = defineStyleConfig({
   },
 });
 
-const dividerLight = defineStyle({
+const light = defineStyle({
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: 'gray.300',
 });
 
-const dividerDark = defineStyle({
+const dark = defineStyle({
   borderWidth: '1px',
   borderRadius: '4px',
   borderStyle: 'solid',
@@ -107,7 +107,7 @@ const dividerDark = defineStyle({
 });
 
 const Divider = defineStyleConfig({
-  variants: { dividerLight, dividerDark },
+  variants: { light, dark },
 });
 
 const Heading = defineStyleConfig({

@@ -10,7 +10,7 @@ export function DialogPage() {
   return (
     <Box>
       <ChatInfo />
-      <Divider variant="dividerLight" position="absolute" left={0} right={0} />
+      <Divider variant="light" position="absolute" left={0} right={0} />
       <Messages />
       <CreateMessage />
     </Box>

@@ -33,11 +33,11 @@ export function ProfileCard() {
       <Flex py={4} px={0.5} w="100%" textAlign="center">
         <SGroup count={3} section="Участник" />
         <Box>
-          <Divider orientation="vertical" variant="dividerLight" />
+          <Divider orientation="vertical" variant="light" />
         </Box>
         <SGroup count={1} section="Организатор" />
         <Box>
-          <Divider orientation="vertical" variant="dividerLight" />
+          <Divider orientation="vertical" variant="light" />
         </Box>
         <SGroup count={4.89} section="Рейтинг" />
       </Flex>
