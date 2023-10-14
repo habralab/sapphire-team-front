@@ -6,7 +6,7 @@ import { STag } from '~/shared/ui/STag';
 
 export function Messages() {
   return (
-    <VStack mt={4} mb={6}>
+    <VStack mt={4}>
       <Box>
         <STag tags={['Сегодня']} />
       </Box>

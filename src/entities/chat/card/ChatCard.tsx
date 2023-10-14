@@ -1,11 +1,10 @@
 import { WarningIcon } from '@chakra-ui/icons';
-import { Icon, Flex, Circle } from '@chakra-ui/react';
+import { Icon, Flex, Circle, Text, Heading } from '@chakra-ui/react';
 import { BsFillBriefcaseFill, BsCheck2All } from 'react-icons/bs';
 import { IoPerson } from 'react-icons/io5';
 
 import { ChatDto } from '~/shared/lib/types';
 import { SAvatar } from '~/shared/ui/SAvatar';
-import { SText } from '~/shared/ui/SText';
 
 export function ChatCard(props: ChatDto) {
   const { title, name, messages, role } = props;
@@ -31,21 +30,21 @@ export function ChatCard(props: ChatDto) {
             w={3}
             h={3}
           />
-          <SText variant="h3" mb={0}>
+          <Heading variant="h3" mb={0}>
             {title}
-          </SText>
+          </Heading>
         </Flex>
-        <SText variant="h3" mb={0}>
+        <Heading variant="h3" mb={0}>
           {name}
-        </SText>
-        <SText color="gray.600" mb={0} noOfLines={1}>
+        </Heading>
+        <Text color="gray.600" mb={0} noOfLines={1}>
           {lastMessage.message}
-        </SText>
+        </Text>
       </Flex>
       <Flex direction="column" justifyContent="space-between" alignItems="flex-end">
-        <SText variant="caption" mb={0}>
+        <Text variant="caption" mb={0}>
           {lastMessage.date}
-        </SText>
+        </Text>
         {filterMessage('noRead') > 0 && (
           <Circle fontSize="xs" bg="gray.500" px={1} minW={4} minH={4} color="white">
             {filterMessage('noRead')}

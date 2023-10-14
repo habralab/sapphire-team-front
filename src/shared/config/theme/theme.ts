@@ -122,6 +122,11 @@ const Heading = defineStyleConfig({
       fontWeight: 'medium',
       marginBottom: '3',
     },
+    h3: {
+      fontSize: 'sm',
+      fontWeight: 'medium',
+      marginBottom: '3',
+    },
   },
 });
 
@@ -146,7 +151,6 @@ export const basicTheme = extendTheme({
         fontSize: 'sm',
         lineHeight: '120%',
         color: 'gray.900',
-        // bg: 'gray.100',
       },
     },
   },

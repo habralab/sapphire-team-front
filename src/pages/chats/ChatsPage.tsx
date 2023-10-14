@@ -1,4 +1,4 @@
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, VStack, Heading } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 
@@ -7,14 +7,13 @@ import { search, SearchInput } from '~/features/chat';
 import { ChatCard } from '~/entities/chat';
 
 import { PATHS } from '~/shared/lib/router';
-import { SText } from '~/shared/ui/SText';
 
 export function ChatsPage() {
   const [value, setValue] = useState('');
 
   return (
     <VStack gap={4} align="start">
-      <SText variant="h1">Чаты</SText>
+      <Heading variant="h1">Чаты</Heading>
       <SearchInput value={value} setValue={setValue} />
       <VStack spacing={0}>
         {search(value).map((chat) => {
