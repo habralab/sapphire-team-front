@@ -1,13 +1,16 @@
-import { Text, Link } from '@chakra-ui/react';
-import { Link as ReactRouterLink } from 'react-router-dom';
+import { Heading, Text } from '@chakra-ui/react';
+
+import { SLink } from '~/shared/ui/SLink';
 
 export const NotFoundPage = () => {
   return (
-    <Text>
-      Страница не найдена,{' '}
-      <Link as={ReactRouterLink} to="/">
-        перейти на главную
-      </Link>
-    </Text>
+    <>
+      <Heading variant="h1" as="h1" mb={4}>
+        404
+      </Heading>
+      <Text>
+        Страница не найдена, <SLink to="/">перейти на главную</SLink>
+      </Text>
+    </>
   );
 };
