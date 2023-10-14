@@ -19,9 +19,8 @@ import { Notification, Settings } from '~/features/user';
 import { AvatarsGroup } from '~/entities/project';
 import { AboutMe, ProfileCard } from '~/entities/user';
 
+import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
-
-import { data } from '../data';
 
 const tabs = ['about', 'projects', 'reviews'];
 

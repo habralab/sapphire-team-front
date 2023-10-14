@@ -125,7 +125,6 @@ const Heading = defineStyleConfig({
     h3: {
       fontSize: 'sm',
       fontWeight: 'medium',
-      marginBottom: '3',
     },
   },
 });

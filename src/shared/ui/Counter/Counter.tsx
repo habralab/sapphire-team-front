@@ -28,7 +28,7 @@ export function Counter(props: CounterType) {
       position={float ? 'absolute' : 'static'}
       textAlign="center"
     >
-      {count}
+      {count && count > 99 ? '99+' : count}
     </Box>
   );
 }

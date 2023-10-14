@@ -20,7 +20,7 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
     <ChakraProvider
       theme={
         isMobile
-          ? location.pathname === PATHS.chats || location.pathname.includes('/chat/')
+          ? location.pathname.includes(PATHS.chats)
             ? whiteMobileTheme
             : mobileTheme
           : desktopTheme
@@ -31,7 +31,7 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
           <Container maxW="md" pb={'72.8px'}>
             {base}
           </Container>
-          {!location.pathname.includes('/chat/') && <MenuBase />}
+          {!location.pathname.includes('/chats/') && <MenuBase />}
         </Flex>
       ) : (
         <Flex alignItems="start" mt="4" mb={6}>

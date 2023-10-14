@@ -3,7 +3,7 @@ export const PATHS = {
   search: '/search',
   projects: '/projects',
   chats: '/chats',
-  dialog: '/chat/:id',
+  dialog: '/chats/:id',
   profile: '/profile',
   notifications: '/notifications',
   settings: '/settings',

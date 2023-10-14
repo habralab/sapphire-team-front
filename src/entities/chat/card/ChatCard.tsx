@@ -1,5 +1,5 @@
 import { WarningIcon } from '@chakra-ui/icons';
-import { Icon, Flex, Circle, Text, Heading } from '@chakra-ui/react';
+import { Icon, Flex, Circle, Text, Heading, VStack } from '@chakra-ui/react';
 import { BsFillBriefcaseFill, BsCheck2All } from 'react-icons/bs';
 import { IoPerson } from 'react-icons/io5';
 
@@ -23,28 +23,22 @@ export function ChatCard(props: ChatDto) {
       _hover={{ bg: 'gray.100', mx: '-4', px: '4' }}
     >
       <SAvatar name={name} />
-      <Flex direction="column" gap={1.5}>
+      <VStack alignItems="start" gap={1.5}>
         <Flex gap={1} alignItems="center">
           <Icon
             as={role === 'Организатор' ? BsFillBriefcaseFill : IoPerson}
             w={3}
             h={3}
           />
-          <Heading variant="h3" mb={0}>
-            {title}
-          </Heading>
+          <Heading variant="h3">{title}</Heading>
         </Flex>
-        <Heading variant="h3" mb={0}>
-          {name}
-        </Heading>
-        <Text color="gray.600" mb={0} noOfLines={1}>
+        <Heading variant="h3">{name}</Heading>
+        <Text color="gray.600" noOfLines={1}>
           {lastMessage.message}
         </Text>
-      </Flex>
-      <Flex direction="column" justifyContent="space-between" alignItems="flex-end">
-        <Text variant="caption" mb={0}>
-          {lastMessage.date}
-        </Text>
+      </VStack>
+      <VStack justifyContent="space-between" alignItems="flex-end">
+        <Text variant="caption">{lastMessage.date}</Text>
         {filterMessage('noRead') > 0 && (
           <Circle fontSize="xs" bg="gray.500" px={1} minW={4} minH={4} color="white">
             {filterMessage('noRead')}
@@ -59,7 +53,7 @@ export function ChatCard(props: ChatDto) {
         {filterMessage('error') > 0 && (
           <Icon as={WarningIcon} color="red.500" w={4} h={4} />
         )}
-      </Flex>
+      </VStack>
     </Flex>
   );
 }

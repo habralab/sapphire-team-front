@@ -1,13 +1,12 @@
 import { Flex, SimpleGrid, Heading } from '@chakra-ui/react';
 
-import { data } from '~/pages/data';
-
 import { ProjectCard } from '~/widgets/project-card';
 
 import { AddProject } from '~/features/project';
 
 import { AvatarsGroup } from '~/entities/project';
 
+import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
 
 export const ProjectPage = () => {

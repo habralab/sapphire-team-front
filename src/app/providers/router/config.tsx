@@ -38,7 +38,7 @@ const normalRoutes = [
   {
     path: '*',
     view: {
-      base: <Navigate to={'404'} replace />,
+      base: <Navigate to={PATHS.search} replace />,
     },
   },
 ];

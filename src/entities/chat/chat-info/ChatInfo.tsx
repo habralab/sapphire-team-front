@@ -16,13 +16,9 @@ export function ChatInfo() {
       <VStack spacing={0} align="start">
         <Flex align="center" gap={1}>
           <Icon as={BsFillBriefcaseFill} w={3} h={3} />
-          <Heading variant="h3" mb={0}>
-            Сервис онлайн-образования
-          </Heading>
+          <Heading variant="h3">Сервис онлайн-образования</Heading>
         </Flex>
-        <Heading variant="h3" mb={0}>
-          Татьяна Андреева
-        </Heading>
+        <Heading variant="h3">Татьяна Андреева</Heading>
       </VStack>
     </Flex>
   );

@@ -24,4 +24,11 @@ const Text = defineStyleConfig({
 
 export const desktopTheme = extendTheme(basicTheme, {
   components: { Heading, Text },
+  styles: {
+    global: {
+      body: {
+        bg: 'gray.100',
+      },
+    },
+  },
 });

@@ -4,9 +4,8 @@ import { ProjectCard } from '~/widgets/project-card';
 
 import { SearchProject, FilterProject } from '~/features/project';
 
+import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
-
-import { data } from '../../data';
 
 export const SearchPageDesktop = () => {
   return (
