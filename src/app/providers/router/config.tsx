@@ -34,11 +34,16 @@ const normalRoutes = [
   { path: PATHS.search, view: { base: <SearchPage />, desktop: <SearchPageDesktop /> } },
   { path: PATHS.chats, view: { base: <ChatsPage /> } },
   { path: PATHS.dialog, view: { base: <DialogPage /> } },
-
+  {
+    path: PATHS.root,
+    view: {
+      base: <Navigate to={PATHS.search} replace />,
+    },
+  },
   {
     path: '*',
     view: {
-      base: <Navigate to={PATHS.search} replace />,
+      base: <Navigate to={'404'} replace />,
     },
   },
 ];

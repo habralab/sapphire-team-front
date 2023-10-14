@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Link, Text } from '@chakra-ui/react';
+import { Container, Flex, Link, Text } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 import { Counter } from '~/shared/ui/Counter';
@@ -24,10 +24,7 @@ export const MenuBase = () => {
             return (
               <Link key={path} as={NavLink} to={path} variant="nav">
                 <Flex direction="column" position="relative" alignItems="center" gap={2}>
-                  <Box w={6} h={6}>
-                    {icon}
-                  </Box>
-
+                  {icon}
                   <Text fontWeight="500">{name}</Text>
                   {name === 'Чаты' && <Counter count={2} float />}
                 </Flex>

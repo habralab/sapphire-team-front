@@ -1,4 +1,4 @@
-import { Divider, Flex, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Divider, Flex, Link, Stack, Text } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 import { Counter } from '~/shared/ui/Counter';
@@ -34,8 +34,9 @@ export const MenuDesktop = () => {
                 >
                   {name}
                 </Text>
-
-                {name === 'Чаты' && <Counter count={2} />}
+                <Box position="absolute" left={4} bottom={4}>
+                  {name === 'Чаты' && <Counter count={2} />}
+                </Box>
               </Flex>
             </Link>
           );
