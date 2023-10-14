@@ -9,13 +9,12 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 
-import { ChatCard } from '~/entities/chat';
+import { ChatCard, data } from '~/entities/chat';
 
+import { PATHS } from '~/shared/lib/router';
 import { SText } from '~/shared/ui/SText';
-
-import { data } from '../chat';
 
 export function ChatsPage() {
   const [value, setValue] = useState('');
@@ -48,7 +47,7 @@ export function ChatsPage() {
           .map((chat) => {
             return (
               <Box key={chat.id}>
-                <Link to={`/chat/${chat.id}`}>
+                <Link to={generatePath(PATHS.dialog, { id: chat.id })}>
                   <ChatCard {...chat} />
                 </Link>
                 <Box>
