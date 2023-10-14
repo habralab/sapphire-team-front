@@ -46,13 +46,15 @@ export function ChatsPage() {
           })
           .map((chat) => {
             return (
-              <Box key={chat.id}>
+              <Box
+                key={chat.id}
+                borderBottom="1px"
+                borderColor="gray.200"
+                _last={{ border: 'none' }}
+              >
                 <Link to={generatePath(PATHS.dialog, { id: chat.id })}>
                   <ChatCard {...chat} />
                 </Link>
-                <Box>
-                  <Divider variant="dividerDark" />
-                </Box>
               </Box>
             );
           })}
