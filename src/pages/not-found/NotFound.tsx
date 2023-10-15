@@ -9,11 +9,15 @@ import NotFound from './notFound.svg';
 export const NotFoundPage = () => {
   const navigate = useNavigate();
   return (
-    <Flex height="100vh" direction="column" justifyContent="center" alignItems="center">
+    <Flex flexDirection="column" justifyContent="center" alignItems="center">
       <Heading
         variant="h1"
         as="h1"
         fontSize={['8xl', '8xl', '9xl']}
+        mt={{
+          base: '40px',
+          md: '46px',
+        }}
         position="relative"
         _after={{
           base: {

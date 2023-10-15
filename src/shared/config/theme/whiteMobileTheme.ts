@@ -1,8 +1,8 @@
 import { extendTheme } from '@chakra-ui/react';
 
-import { basicTheme } from './theme';
+import { mobileTheme } from './mobileTheme';
 
-export const whiteMobileTheme = extendTheme(basicTheme, {
+export const whiteMobileTheme = extendTheme(mobileTheme, {
   styles: {
     global: {
       body: {

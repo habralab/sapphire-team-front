@@ -7,6 +7,7 @@ import {
   Tab,
   Stack,
   Heading,
+  Box,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -43,7 +44,7 @@ export function ProfilePage() {
   ];
 
   return (
-    <>
+    <Box>
       <Flex justifyContent="space-between" alignItems="center" mb={16}>
         <Heading variant="h1" as="h1">
           Профиль
@@ -89,6 +90,6 @@ export function ProfilePage() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </>
+    </Box>
   );
 }
