@@ -7,6 +7,7 @@ export const mobileTheme = extendTheme(basicTheme, {
     global: {
       body: {
         bg: 'gray.100',
+        overflow: 'hidden',
       },
     },
   },
