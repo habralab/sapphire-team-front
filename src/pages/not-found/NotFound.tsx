@@ -43,7 +43,7 @@ export const NotFoundPage = () => {
           navigate(PATHS.root);
         }}
         padding={7}
-        maxW={'sm'}
+        maxW={'md'}
         icon={
           <Flex fontSize={['sm', 'sm', 'md']} fontWeight="600" gap={2}>
             <Text lineHeight="160%">Вернуться на главную страницу</Text>
