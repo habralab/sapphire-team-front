@@ -14,21 +14,23 @@ export const NotFoundPage = () => {
         variant="h1"
         as="h1"
         fontSize={['8xl', '8xl', '9xl']}
-        mb={4}
-        textAlign="center"
         position="relative"
         _after={{
           base: {
             content: `url(${NotFound})`,
             position: 'absolute',
+            width: '85px',
             top: '-14',
-            left: '-6',
+            left: '-8',
           },
           md: {
+            width: '120px !important',
             top: '-20 !important',
-            left: '-10 !important',
+            left: '-14 !important',
           },
         }}
+        textAlign="center"
+        mb={4}
       >
         404
       </Heading>
@@ -43,7 +45,7 @@ export const NotFoundPage = () => {
         padding={7}
         maxW={'sm'}
         icon={
-          <Flex fontSize={['sm', 'sm', 'md']} fontWeight="normal" gap={2}>
+          <Flex fontSize={['sm', 'sm', 'md']} fontWeight="600" gap={2}>
             <Text lineHeight="160%">Вернуться на главную страницу</Text>
             <Icon as={BsArrowRightShort} />
           </Flex>
