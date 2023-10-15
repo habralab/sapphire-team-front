@@ -25,7 +25,7 @@ export function Counter(props: CounterType) {
       borderColor={bg ?? 'purple.600'}
       borderRadius="full"
       boxSizing="content-box"
-      right={-1}
+      right={count && count > 99 ? -3 : -1}
       top={-1}
       position={float ? 'absolute' : 'static'}
       textAlign="center"

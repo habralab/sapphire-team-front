@@ -9,6 +9,7 @@ export function Notification() {
       <IconButton
         variant="flat"
         aria-label="notification"
+        fontSize="sm"
         icon={
           <Box position="relative">
             <Icon as={IoNotifications} />
