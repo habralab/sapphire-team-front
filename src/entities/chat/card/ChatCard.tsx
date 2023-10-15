@@ -19,7 +19,7 @@ export function ChatCard(props: ChatCardProps) {
       py={4}
       borderBottom={1}
       borderColor="gray.700"
-      _hover={{ bg: 'gray.100', mx: '-4', px: '4' }}
+      _hover={{ bg: 'gray.100', mx: '-5', px: '4' }}
     >
       <SAvatar name={name} />
 

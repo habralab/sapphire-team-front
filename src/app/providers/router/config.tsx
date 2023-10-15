@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
 import { BlankPage } from '~/pages/blank';
-import { ChatsPage } from '~/pages/chats';
+import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
 import { NotFoundPage } from '~/pages/not-found';
 import { ProfilePage } from '~/pages/profile';
@@ -32,7 +32,7 @@ const normalRoutes = [
     view: { base: <ProjectPage />, desktop: <ProjectPageDesktop /> },
   },
   { path: PATHS.search, view: { base: <SearchPage />, desktop: <SearchPageDesktop /> } },
-  { path: PATHS.chats, view: { base: <ChatsPage /> } },
+  { path: PATHS.chats, view: { base: <ChatsPage />, desktop: <ChatsPageDesktop /> } },
   { path: PATHS.dialog, view: { base: <DialogPage /> } },
   {
     path: PATHS.root,

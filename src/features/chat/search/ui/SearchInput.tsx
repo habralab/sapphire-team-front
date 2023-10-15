@@ -10,7 +10,7 @@ export function SearchInput(props: SearchProps) {
   const { value, setValue } = props;
 
   return (
-    <InputGroup h={9}>
+    <InputGroup>
       <InputLeftElement>
         <Icon as={Search2Icon} color="gray.400" w={4} h={4} />
       </InputLeftElement>
@@ -18,6 +18,7 @@ export function SearchInput(props: SearchProps) {
         placeholder="Поиск в чатах"
         borderRadius="full"
         bg="gray.100"
+        h="36px"
         onChange={(event) => {
           setValue(event.target.value);
         }}

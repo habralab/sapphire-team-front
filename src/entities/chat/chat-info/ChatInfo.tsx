@@ -6,7 +6,13 @@ import { Link } from 'react-router-dom';
 import { PATHS } from '~/shared/lib/router';
 import { SAvatar } from '~/shared/ui/SAvatar';
 
-export function ChatInfo() {
+type viewType = 'base' | 'desktop';
+
+interface ChatInfoProps {
+  view?: viewType;
+}
+
+export function ChatInfo({ view }: ChatInfoProps) {
   return (
     <Flex align="center" gap={2} py={4}>
       <IconButton
