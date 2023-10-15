@@ -1,33 +1,35 @@
-import { Box, HStack, Heading, Stack, Text } from '@chakra-ui/react';
+import { Box, HStack, Heading, Stack, StackProps, Text } from '@chakra-ui/react';
 
 import { SLink } from '~/shared/ui/SLink';
 
-interface ReviewType {
+type ReviewType = {
+  date: string;
+  name: string;
+  userStatus: string;
+  project: string;
+  review: string;
   rating: JSX.Element;
-}
+} & StackProps;
 
 export function Reviews(props: ReviewType) {
-  const { rating } = props;
+  const { rating, date, name, project, review, userStatus, ...others } = props;
 
   return (
-    <Stack p={5} borderRadius="2xl" bg="white" gap={3}>
+    <Stack p={5} borderRadius="2xl" bg="white" gap={3} {...others}>
       <HStack justifyContent="space-between">
-        <Text variant="caption">3 сентября 2022</Text>
+        <Text variant="caption">{date}</Text>
         {rating}
       </HStack>
       <Box>
         <Heading variant="h2" mb={1}>
-          Михаил Шафутинский
+          {name}
         </Heading>
         <Text variant="caption" mb={1}>
-          Участник проекта
+          {userStatus}
         </Text>
-        <SLink to="#">Сервис онлайн-образования</SLink>
+        <SLink to="#">{project}</SLink>
       </Box>
-      <Text>
-        Все прошло отлично. Спасибо Денису за оперативность. Организация на высшем уровне.
-        Показал, рассказал все по уму.
-      </Text>
+      <Text>{review}</Text>
     </Stack>
   );
 }

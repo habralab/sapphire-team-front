@@ -1,19 +1,19 @@
-import { CardBody, Card as ChakraCard } from '@chakra-ui/react';
+import { CardBody, CardProps, Card as ChakraCard } from '@chakra-ui/react';
 
 import { Status } from '~/features/project';
 
 import { Card } from '~/entities/project';
 
-interface ProjectCardProps {
+type ProjectCardProps = {
   status: string;
   title: string;
   date: string;
   description: string;
   children: React.ReactNode;
-}
+} & CardProps;
 
 export const ProjectCard = (props: ProjectCardProps) => {
-  const { status, title, date, description, children } = props;
+  const { status, title, date, description, children, ...others } = props;
 
   return (
     <ChakraCard
@@ -22,6 +22,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
       _active={{ boxShadow: '2xl' }}
       boxShadow="none"
       alignContent="center"
+      {...others}
     >
       <CardBody padding={['5', '6']}>
         <Status mb={['3', '4']}>{status}</Status>

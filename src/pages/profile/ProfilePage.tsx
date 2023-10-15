@@ -12,13 +12,14 @@ import {
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { ProfileCard } from '~/widgets/profile-card';
 import { ProjectCard } from '~/widgets/project-card';
 import { ReviewsList } from '~/widgets/rewiews-list';
 
 import { Notification, Settings } from '~/features/user';
 
 import { AvatarsGroup } from '~/entities/project';
-import { AboutMe, ProfileCard } from '~/entities/user';
+import { AboutMe } from '~/entities/user';
 
 import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
