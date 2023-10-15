@@ -84,7 +84,6 @@ export function ProfileCardDesktop() {
           color="purple.600"
           thickness="1rem"
           capIsRound
-          borderRadius="5px"
           mb={4}
         >
           <CircularProgressLabel fontSize="2xl" color="purple.600" fontWeight="600">
