@@ -14,12 +14,11 @@ import { useSearchParams } from 'react-router-dom';
 
 import { ProfileCard } from '~/widgets/profile-card';
 import { ProjectCard } from '~/widgets/project-card';
-import { ReviewsList } from '~/widgets/rewiews-list';
 
-import { Notification, Settings } from '~/features/user';
+import { Notification, Rating, Settings } from '~/features/user';
 
 import { AvatarsGroup } from '~/entities/project';
-import { AboutMe } from '~/entities/user';
+import { AboutMe, Reviews } from '~/entities/user';
 
 import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
@@ -42,6 +41,33 @@ export function ProfilePage() {
     { firstName: 'Кларк', lastName: 'Кент', img: 'https://bit.ly/prosper-baba' },
     { firstName: 'Джеймс', lastName: 'Бонд', img: 'https://bit.ly/code-beast' },
     { firstName: 'Бернд', lastName: 'Шнайдер', img: 'https://bit.ly/dan-abramov' },
+  ];
+
+  const dummyReviews = [
+    {
+      date: '3 сентября 2022',
+      name: 'Михаил Шафутинский',
+      userStatus: 'Участник проекта',
+      project: 'Сервис онлайн-образования',
+      review:
+        'Все прошло отлично. Спасибо Денису за оперативность. Организация на высшем уровне. Показал, рассказал все по уму.',
+    },
+    {
+      date: '3 сентября 2022',
+      name: 'Михаил Шафутинский',
+      userStatus: 'Участник проекта',
+      project: 'Сервис онлайн-образования',
+      review:
+        'Все прошло отлично. Спасибо Денису за оперативность. Организация на высшем уровне. Показал, рассказал все по уму.',
+    },
+    {
+      date: '3 сентября 2022',
+      name: 'Михаил Шафутинский',
+      userStatus: 'Участник проекта',
+      project: 'Сервис онлайн-образования',
+      review:
+        'Все прошло отлично. Спасибо Денису за оперативность. Организация на высшем уровне. Показал, рассказал все по уму.',
+    },
   ];
 
   return (
@@ -87,7 +113,17 @@ export function ProfilePage() {
             </Stack>
           </TabPanel>
           <TabPanel>
-            <ReviewsList />
+            {dummyReviews.length > 0 ? (
+              <Stack gap={4}>
+                {dummyReviews.map((review, i) => (
+                  <Reviews key={`review-${i}`} rating={<Rating />} {...review} />
+                ))}
+              </Stack>
+            ) : (
+              <Text color="gray.400" textAlign="center" pt={20} pb={40}>
+                У вас пока нет отзывов
+              </Text>
+            )}
           </TabPanel>
         </TabPanels>
       </Tabs>
