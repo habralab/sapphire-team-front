@@ -1,5 +1,5 @@
 import { ChakraProvider, Container, Box, Flex, Stack } from '@chakra-ui/react';
-import { useEffect, useRef } from 'react';
+import { useRef, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { MenuBase, MenuDesktop } from '~/widgets/menu';
@@ -29,7 +29,7 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
   const mobile = isChatPages ? whiteMobileTheme : mobileTheme;
   const desk = desktopTheme;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isChatPages) {
       document
         .querySelector('meta[name=theme-color]')
