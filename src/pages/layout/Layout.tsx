@@ -1,5 +1,5 @@
 import { ChakraProvider, Container, Box, Flex, Stack } from '@chakra-ui/react';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { MenuBase, MenuDesktop } from '~/widgets/menu';
@@ -28,20 +28,6 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
 
   const mobile = isChatPages ? whiteMobileTheme : mobileTheme;
   const desk = desktopTheme;
-
-  useEffect(() => {
-    requestAnimationFrame(function () {
-      if (isChatPages) {
-        document
-          .querySelector('meta[name=theme-color]')
-          ?.setAttribute('content', '#FFFFFF');
-      } else {
-        document
-          .querySelector('meta[name=theme-color]')
-          ?.setAttribute('content', '#F5F5F5');
-      }
-    });
-  }, [isChatPages]);
 
   return (
     <LayoutContext.Provider value={{ header: headerRef, footer: footerRef }}>
