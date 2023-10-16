@@ -8,6 +8,7 @@ import {
   Stack,
   Heading,
   Box,
+  Text,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
