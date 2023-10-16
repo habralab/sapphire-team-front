@@ -19,8 +19,14 @@ export function DialogPage() {
           <Divider variant="light" position="absolute" left={0} right={0} />
         </Portal>
       )}
+
       <Messages />
-      <CreateMessage />
+
+      {layout?.footer && (
+        <Portal containerRef={layout.footer}>
+          <CreateMessage />
+        </Portal>
+      )}
     </Box>
   );
 }
