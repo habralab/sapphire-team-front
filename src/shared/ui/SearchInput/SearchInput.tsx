@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 
 interface SearchInputProps {
   placeholder?: string;
+  inputColor?: string;
   onSubmit: (value: InputProps) => void;
 }
 
@@ -19,7 +20,7 @@ export interface InputProps {
   title: string;
 }
 
-export const SearchInput = ({ placeholder, onSubmit }: SearchInputProps) => {
+export const SearchInput = ({ placeholder, onSubmit, inputColor }: SearchInputProps) => {
   const {
     handleSubmit,
     register,
@@ -48,7 +49,7 @@ export const SearchInput = ({ placeholder, onSubmit }: SearchInputProps) => {
               variant="outline"
               borderRadius="full"
               _placeholder={{ color: 'gray.400' }}
-              background="white"
+              background={inputColor ?? 'white'}
               placeholder={placeholder}
               {...register('title')}
             />

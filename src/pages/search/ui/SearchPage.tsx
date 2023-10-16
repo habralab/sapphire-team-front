@@ -1,5 +1,6 @@
 import { Flex, SimpleGrid, Container } from '@chakra-ui/react';
 
+import { FilterBase } from '~/widgets/filter';
 import { ProjectCard } from '~/widgets/project-card';
 
 import { FilterProject, SearchProject } from '~/features/project';
