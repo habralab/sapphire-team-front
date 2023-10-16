@@ -9,6 +9,8 @@ import { FooterContext } from '~/shared/contexts';
 import { useIsMobile } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
+import styles from './Layout.module.css';
+
 interface LayoutProps {
   base: JSX.Element;
   desktop?: JSX.Element;
@@ -30,7 +32,7 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
     <FooterContext.Provider value={footerRef}>
       <ChakraProvider theme={isMobile ? mobile : desk}>
         {isMobile ? (
-          <Stack height="100vh" gap={0}>
+          <Stack className={styles.layout} gap={0}>
             <Box overflow="auto" flex="1">
               <Container maxW="md" pt={4} pb={4} minH="full" display="flex">
                 {base}
