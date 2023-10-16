@@ -156,6 +156,7 @@ export const basicTheme = extendTheme({
   styles: {
     global: {
       body: {
+        transition: 'background 1s ease-in-out',
         fontSize: 'sm',
         lineHeight: '120%',
         color: 'gray.900',
