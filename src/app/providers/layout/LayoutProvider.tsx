@@ -9,7 +9,7 @@ export const LayoutProvider = ({ children }: { children?: ReactNode }) => {
     if (!isMobile) return;
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }, []);
+  }, [isMobile]);
 
   return children;
 };
