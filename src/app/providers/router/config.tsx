@@ -4,6 +4,7 @@ import { BlankPage } from '~/pages/blank';
 import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
 import { NotFoundPage } from '~/pages/not-found';
+import { NotificationPage } from '~/pages/notification';
 import { ProfilePage } from '~/pages/profile';
 import { ProjectPage, ProjectPageDesktop } from '~/pages/projects';
 import { SearchPage, SearchPageDesktop } from '~/pages/search';
@@ -34,6 +35,8 @@ const normalRoutes = [
   { path: PATHS.search, view: { base: <SearchPage />, desktop: <SearchPageDesktop /> } },
   { path: PATHS.chats, view: { base: <ChatsPage />, desktop: <ChatsPageDesktop /> } },
   { path: PATHS.dialog, view: { base: <DialogPage /> } },
+  { path: PATHS.notifications, view: { base: <NotificationPage /> } },
+
   {
     path: PATHS.root,
     view: {

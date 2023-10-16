@@ -23,10 +23,12 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   const isNotFoundPage = location.pathname === PATHS.notFound;
+  const isNotificationPage = location.pathname.includes(PATHS.notifications);
   const isChatPages = location.pathname.includes(PATHS.chats);
+  const isWhiteBackgroundPage = isChatPages || isNotificationPage;
   const isDialogPage = new RegExp(`${PATHS.chats}/\\d+`).test(location.pathname);
 
-  const mobile = isChatPages ? whiteMobileTheme : mobileTheme;
+  const mobile = isWhiteBackgroundPage ? whiteMobileTheme : mobileTheme;
   const desk = desktopTheme;
 
   return (
