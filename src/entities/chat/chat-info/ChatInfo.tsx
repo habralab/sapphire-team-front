@@ -8,7 +8,7 @@ import { SAvatar } from '~/shared/ui/SAvatar';
 
 export function ChatInfo() {
   return (
-    <Flex align="center" gap={2} pb={4}>
+    <Flex align="center" gap={2} py={4}>
       <IconButton
         aria-label="back"
         as={Link}

@@ -1,2 +1,2 @@
 export * from './useIsMobile';
-export * from './useRefFooter';
+export * from './useLayoutRefs';

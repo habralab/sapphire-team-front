@@ -1,1 +1,1 @@
-export * from './FooterContext';
+export * from './LayoutContext';
