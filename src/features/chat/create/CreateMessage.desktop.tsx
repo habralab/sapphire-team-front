@@ -2,41 +2,49 @@ import { Icon, Flex, IconButton, Box } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { IoSend } from 'react-icons/io5';
 
-interface CreateMessageProps {
-  fixed?: boolean;
+interface CreateMessageDesktopProps {
   onSubmit?: (message: string) => void;
 }
 
-export function CreateMessage({ fixed, onSubmit }: CreateMessageProps) {
+export function CreateMessageDesktop({ onSubmit }: CreateMessageDesktopProps) {
   const [value, setValue] = useState('');
   const messageRef = useRef<HTMLDivElement>(null);
 
   return (
     <Flex
       bg="white"
-      position={fixed ? 'fixed' : 'sticky'}
-      borderBottomRadius={fixed ? '' : 'lg'}
-      bottom="0"
-      left="0"
-      right="0"
-      justifyContent="center"
+      borderBottomRadius="lg"
+      px="6"
+      py="4"
+      gap="4"
       borderTop="1px"
+      w="full"
       borderColor="gray.300"
-      px={[5, 6]}
-      py={4}
       alignItems="center"
-      gap={4}
     >
       <Box
         ref={messageRef}
         contentEditable
+        overflowWrap="anywhere"
+        overflowY="auto"
         placeholder="Введите сообщение..."
         width="full"
         border="1px"
-        borderRadius="lg"
+        maxH="200px"
+        borderRadius="xl"
         borderColor="gray.300"
         onInput={(e) => {
-          setValue(e.currentTarget.innerText);
+          const element = e.currentTarget;
+          const text = element.innerText;
+          e.currentTarget.innerHTML = text;
+          setValue(text);
+
+          const range = document.createRange();
+          const selection = window.getSelection();
+          range.selectNodeContents(element);
+          range.collapse(false);
+          selection?.removeAllRanges();
+          selection?.addRange(range);
         }}
         _focusVisible={{ outline: 'none' }}
         _empty={{

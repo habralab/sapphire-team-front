@@ -51,7 +51,7 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
           <Flex alignItems="start" height="100vh">
             {!isNotFoundPage && <MenuDesktop />}
             <Container
-              maxW="4xl"
+              maxW="6xl"
               pt="4"
               pb={6}
               ml={isNotFoundPage ? 'auto' : 0}

@@ -1,1 +1,1 @@
-export { DialogPage } from './DialogPage';
+export * from './DialogPage';

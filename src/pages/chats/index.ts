@@ -1,1 +1,2 @@
-export { ChatsPage } from './ChatsPage';
+export * from './ChatsPage';
+export * from './ChatsPage.desktop';

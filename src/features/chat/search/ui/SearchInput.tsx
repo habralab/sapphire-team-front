@@ -10,7 +10,7 @@ export function SearchInput(props: SearchProps) {
   const { value, setValue } = props;
 
   return (
-    <InputGroup h={9}>
+    <InputGroup pb={4}>
       <InputLeftElement>
         <Icon as={Search2Icon} color="gray.400" w={4} h={4} />
       </InputLeftElement>
