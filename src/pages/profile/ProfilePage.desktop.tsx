@@ -1,4 +1,6 @@
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { ProfileCardDesktop } from '~/widgets/profile-card';
 import { ProjectCard } from '~/widgets/project-card';
@@ -12,6 +14,12 @@ import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
 
 export function ProfilePageDesktop() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setSearchParams({});
+  }, [searchParams]);
+
   const dummyAvatars = [
     { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
     { firstName: 'Игорь', lastName: 'Крутой', img: 'https://bit.ly/sage-adebayo' },
