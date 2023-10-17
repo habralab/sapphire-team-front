@@ -195,6 +195,6 @@ export const basicTheme = extendTheme({
     },
   },
   breakpoints: {
-    md: '40.6rem',
+    md: '56.25rem',
   },
 });

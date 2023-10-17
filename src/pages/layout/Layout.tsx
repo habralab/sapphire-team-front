@@ -59,6 +59,7 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
               ml={isNotFoundPage ? 'auto' : 0}
               minH="full"
               display="flex"
+              flexDirection="column"
             >
               {desktop ?? base}
             </Container>

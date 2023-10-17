@@ -1,5 +1,5 @@
 export interface ProjectCardDto {
-  id: number;
+  id: string;
   status: string;
   title: string;
   date: string;
@@ -10,7 +10,7 @@ export interface ProjectCardDto {
 
 export const data: ProjectCardDto[] = [
   {
-    id: 1,
+    id: '1',
     status: 'Проект идёт',
     title: 'Сервис онлайн-образования',
     date: 'с 25 сентября 2023',
@@ -20,7 +20,7 @@ export const data: ProjectCardDto[] = [
     tags: ['TypeScript', 'Vue', 'Webpack'],
   },
   {
-    id: 2,
+    id: '2',
     status: 'Скоро начнётся',
     title: 'Сервис онлайн-образования',
     date: 'с 25 сентября 2023',
@@ -30,7 +30,7 @@ export const data: ProjectCardDto[] = [
     tags: ['TypeScript', 'Vue', 'Webpack'],
   },
   {
-    id: 3,
+    id: '3',
     status: 'Проект завершён',
     title: 'Сервис онлайн-образования',
     date: 'с 25 сентября 2023',
@@ -40,7 +40,7 @@ export const data: ProjectCardDto[] = [
     tags: ['TypeScript', 'Vue', 'Webpack'],
   },
   {
-    id: 4,
+    id: '4',
     status: 'Проект идёт',
     title: 'Сервис онлайн-образования',
     date: 'с 25 сентября 2023',
@@ -50,7 +50,7 @@ export const data: ProjectCardDto[] = [
     tags: ['TypeScript', 'Vue', 'Webpack'],
   },
   {
-    id: 5,
+    id: '5',
     status: 'Скоро начнётся',
     title: 'Сервис онлайн-образования',
     date: 'с 25 сентября 2023',
