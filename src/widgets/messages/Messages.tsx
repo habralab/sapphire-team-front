@@ -24,18 +24,7 @@ export function Messages() {
   }, []);
 
   return (
-    <VStack
-      pt={4}
-      bg="white"
-      ref={messagesRef}
-      css={{
-        '&::-webkit-scrollbar': {
-          width: '0',
-        },
-      }}
-      width={['auto', 'auto', '4xl']}
-      px={[0, 0, 6]}
-    >
+    <VStack pt={4} bg="white" ref={messagesRef} px={[0, 0, 6]} overflowY="auto">
       <Box>
         <STag tags={['Не прочитано']} />
       </Box>

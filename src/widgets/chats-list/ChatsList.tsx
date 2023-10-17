@@ -1,4 +1,4 @@
-import { Link, Stack } from '@chakra-ui/react';
+import { Box, Link, Stack } from '@chakra-ui/react';
 import { Link as ReactLink, generatePath } from 'react-router-dom';
 
 import { search } from '~/features/chat';
@@ -16,13 +16,11 @@ export function ChatsList(props: SearchProps) {
   const { value, view } = props;
 
   return (
-    <Stack spacing={0}>
+    <Stack spacing={0} overflowY="auto">
       {search(value).map((chat) => {
         {
           return view === 'desktop' ? (
-            <Link
-              to={generatePath(PATHS.dialog, { id: chat.id })}
-              as={ReactLink}
+            <Box
               key={chat.id}
               borderBottom="1px"
               borderColor="gray.200"
@@ -31,7 +29,7 @@ export function ChatsList(props: SearchProps) {
               px={5}
             >
               <ChatCard {...chat} />
-            </Link>
+            </Box>
           ) : (
             <Link
               to={generatePath(PATHS.dialog, { id: chat.id })}

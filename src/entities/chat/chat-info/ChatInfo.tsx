@@ -6,17 +6,23 @@ import { Link } from 'react-router-dom';
 import { PATHS } from '~/shared/lib/router';
 import { SAvatar } from '~/shared/ui/SAvatar';
 
-export function ChatInfo() {
+interface ChatInfoProps {
+  isDesktop?: boolean;
+}
+
+export function ChatInfo({ isDesktop }: ChatInfoProps) {
   return (
-    <Flex align="center" gap={2} pb={4}>
-      <IconButton
-        aria-label="back"
-        as={Link}
-        to={PATHS.chats}
-        icon={<Icon as={FiChevronLeft} />}
-        variant="flat"
-        marginLeft="-2"
-      />
+    <Flex align="center" gap={2} pb={4} pl={isDesktop ? '6' : '0'}>
+      {!isDesktop && (
+        <IconButton
+          aria-label="back"
+          as={Link}
+          to={PATHS.chats}
+          icon={<Icon as={FiChevronLeft} />}
+          variant="flat"
+          marginLeft="-2"
+        />
+      )}
 
       <SAvatar name="Татьяна Андреева" />
 
