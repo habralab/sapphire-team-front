@@ -34,7 +34,7 @@ export function ChatsPageDesktop() {
           <ChatsList value={value} view="desktop" />
         </Stack>
         <Stack position="relative" spacing={0} minWidth="400px">
-          <Box pt={4}>
+          <Box>
             <ChatInfo isDesktop />
             <Divider variant="light" position="absolute" left={0} right={0} />
           </Box>

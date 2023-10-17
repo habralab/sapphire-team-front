@@ -12,7 +12,7 @@ interface ChatInfoProps {
 
 export function ChatInfo({ isDesktop }: ChatInfoProps) {
   return (
-    <Flex align="center" gap={2} pb={4} pl={isDesktop ? '6' : '0'}>
+    <Flex align="center" gap={2} pb={4} pt={4} pl={isDesktop ? '6' : '0'}>
       {!isDesktop && (
         <IconButton
           aria-label="back"
