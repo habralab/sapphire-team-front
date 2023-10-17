@@ -22,4 +22,18 @@ const baseStyle = definePartsStyle({
   },
 });
 
-export const avatarTheme = defineMultiStyleConfig({ baseStyle });
+const profileAvatar = definePartsStyle({
+  label: {
+    fontSize: ['md', 'md', '4xl'],
+    fontWeight: 'semibold',
+  },
+  container: {
+    w: ['20', '20', '11.25rem'],
+    h: ['20', '20', '11.25rem'],
+  },
+});
+
+export const avatarTheme = defineMultiStyleConfig({
+  baseStyle,
+  variants: { profileAvatar },
+});

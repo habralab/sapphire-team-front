@@ -1,38 +1,23 @@
-import {
-  Flex,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Tab,
-  Stack,
-  Heading,
-  Box,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { ProfileCard } from '~/widgets/profile-card';
+import { ProfileCardDesktop } from '~/widgets/profile-card';
 import { ProjectCard } from '~/widgets/project-card';
 
-import { Notification, Rating, Settings } from '~/features/user';
+import { Rating } from '~/features/user';
 
 import { AvatarsGroup } from '~/entities/project';
-import { AboutMe, Reviews } from '~/entities/user';
+import { Reviews } from '~/entities/user';
 
 import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
 
-const tabs = ['about', 'projects', 'reviews'];
-
-export function ProfilePage() {
+export function ProfilePageDesktop() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    if (!searchParams.get('tab')) {
-      setSearchParams({ tab: tabs[0] });
-    }
+    setSearchParams({});
   }, [searchParams]);
 
   const dummyAvatars = [
@@ -73,61 +58,56 @@ export function ProfilePage() {
 
   return (
     <Box>
-      <Flex justifyContent="space-between" alignItems="center" mb={16}>
+      <Flex justifyContent="space-between" alignItems="center" mb={6}>
         <Heading variant="h1" as="h1">
           Профиль
         </Heading>
-        <Flex gap={4} alignItems="baseline">
-          <Notification />
-          <Settings />
-        </Flex>
       </Flex>
-      <ProfileCard />
-      <Tabs
-        variant="base"
-        index={tabs.findIndex((name) => name === searchParams.get('tab'))}
-        onChange={(index) => {
-          setSearchParams({ tab: tabs[index] });
-        }}
-      >
-        <TabList>
-          <Tab>Обо мне</Tab>
-          <Tab>Проекты</Tab>
-          <Tab>Отзывы</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <AboutMe />
-          </TabPanel>
-          <TabPanel>
-            <Stack gap={4}>
-              {data.map((project) => {
-                return (
-                  <ProjectCard key={project.id} {...project}>
-                    <Flex justifyContent="space-between" alignItems="center">
-                      <STag mainTags={['Организатор']} />
-                      <AvatarsGroup avatars={dummyAvatars} />
-                    </Flex>
-                  </ProjectCard>
-                );
-              })}
-            </Stack>
-          </TabPanel>
-          <TabPanel>
-            {dummyReviews.length > 0 ? (
-              <Stack gap={4}>
-                {dummyReviews.map((review, i) => (
-                  <Reviews key={`review-${i}`} rating={<Rating />} {...review} />
-                ))}
-              </Stack>
-            ) : (
-              <Text color="gray.400" textAlign="center" pt={20} pb={40}>
-                У вас пока нет отзывов
-              </Text>
-            )}
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+      <ProfileCardDesktop />
+      <Flex direction="column">
+        <Heading variant="h2">Проекты</Heading>
+        {data.length > 0 ? (
+          <Flex gap={4} flexWrap="wrap" pb={1} mb={10}>
+            {data.map((project) => {
+              return (
+                <ProjectCard
+                  key={project.id}
+                  flex="0 0 45%"
+                  _hover={{ boxShadow: 'xs', cursor: 'pointer' }}
+                  {...project}
+                >
+                  <Flex justifyContent="space-between" alignItems="center">
+                    <STag mainTags={['Организатор']} />
+                    <AvatarsGroup avatars={dummyAvatars} />
+                  </Flex>
+                </ProjectCard>
+              );
+            })}
+          </Flex>
+        ) : (
+          <Text color="gray.400" textAlign="center" pt={20} pb={40}>
+            У вас пока нет проектов
+          </Text>
+        )}
+        <Heading variant="h2">Отзывы</Heading>
+        {dummyReviews.length > 0 ? (
+          <Flex flexWrap="wrap" gap={4} pb={1}>
+            {dummyReviews.map((review, i) => (
+              <Reviews
+                key={`review-${i}`}
+                rating={<Rating />}
+                flex="0 0 45%"
+                _hover={{ boxShadow: 'xs', cursor: 'pointer' }}
+                {...review}
+              />
+            ))}
+          </Flex>
+        ) : (
+          <Text color="gray.400" textAlign="center" pt={20} pb={40}>
+            У вас пока нет отзывов
+          </Text>
+        )}
+      </Flex>
     </Box>
   );
 }

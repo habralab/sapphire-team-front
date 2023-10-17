@@ -4,7 +4,7 @@ import { BlankPage } from '~/pages/blank';
 import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
 import { NotFoundPage } from '~/pages/not-found';
-import { ProfilePage } from '~/pages/profile';
+import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
 import { ProjectPage, ProjectPageDesktop } from '~/pages/projects';
 import { SearchPage, SearchPageDesktop } from '~/pages/search';
 
@@ -26,7 +26,10 @@ const normalRoutes = [
       base: <NotFoundPage />,
     },
   },
-  { path: PATHS.profile, view: { base: <ProfilePage /> } },
+  {
+    path: PATHS.profile,
+    view: { base: <ProfilePage />, desktop: <ProfilePageDesktop /> },
+  },
   {
     path: PATHS.projects,
     view: { base: <ProjectPage />, desktop: <ProjectPageDesktop /> },
