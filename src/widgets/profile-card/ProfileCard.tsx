@@ -1,8 +1,6 @@
-import { Avatar, Text, Flex, Divider, Box } from '@chakra-ui/react';
+import { Avatar, Text, Flex } from '@chakra-ui/react';
 
 import { Info } from '~/entities/user';
-
-import { SGroup } from '~/shared/ui/SGroup';
 
 export function ProfileCard() {
   return (

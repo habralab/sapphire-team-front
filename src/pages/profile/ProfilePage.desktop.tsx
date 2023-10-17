@@ -1,4 +1,4 @@
-import { Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 import { ProfileCardDesktop } from '~/widgets/profile-card';
 import { ProjectCard } from '~/widgets/project-card';
@@ -49,7 +49,7 @@ export function ProfilePageDesktop() {
   ];
 
   return (
-    <>
+    <Box>
       <Flex justifyContent="space-between" alignItems="center" mb={6}>
         <Heading variant="h1" as="h1">
           Профиль
@@ -59,7 +59,7 @@ export function ProfilePageDesktop() {
       <Flex direction="column">
         <Heading variant="h2">Проекты</Heading>
         {data.length > 0 ? (
-          <Flex gap={4} overflow="auto" pb={1} mb={10}>
+          <Flex gap={4} flexWrap="wrap" pb={1} mb={10}>
             {data.map((project) => {
               return (
                 <ProjectCard
@@ -83,7 +83,7 @@ export function ProfilePageDesktop() {
         )}
         <Heading variant="h2">Отзывы</Heading>
         {dummyReviews.length > 0 ? (
-          <Flex gap={4} overflow="auto" pb={1}>
+          <Flex flexWrap="wrap" gap={4} pb={1}>
             {dummyReviews.map((review, i) => (
               <Reviews
                 key={`review-${i}`}
@@ -100,6 +100,6 @@ export function ProfilePageDesktop() {
           </Text>
         )}
       </Flex>
-    </>
+    </Box>
   );
 }

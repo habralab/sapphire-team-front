@@ -9,7 +9,7 @@ export function SGroup(props: SGroupProps) {
   const { count, section } = props;
 
   return (
-    <Box px={0} flex="1">
+    <Box px={2} flex="1">
       <Text fontWeight="bold" fontSize="xl" mb={2}>
         {count}
       </Text>

@@ -36,7 +36,7 @@ export function ProfileCardDesktop() {
         w="100%"
         borderRadius="2xl"
         mb={10}
-        p={10}
+        p={[2, 2, 6, 10]}
         gap={6}
       >
         <Stack gap="2.5">
@@ -73,6 +73,7 @@ export function ProfileCardDesktop() {
         alignItems="center"
         height="fit-content"
         borderRadius="2xl"
+        textAlign="center"
         gap={0}
       >
         <Heading as="h3" variant="h3" mb={4}>
