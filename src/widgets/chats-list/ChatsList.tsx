@@ -26,7 +26,7 @@ export function ChatsList(props: SearchProps) {
               key={chat.id}
               borderBottom="1px"
               borderColor="gray.200"
-              _hover={{ textDecoration: 'none', bg: 'gray.100' }}
+              _hover={{ textDecoration: 'none', bg: 'gray.200' }}
               _last={{ border: 'none' }}
               px={5}
             >

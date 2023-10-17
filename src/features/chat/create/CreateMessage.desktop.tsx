@@ -32,17 +32,31 @@ export function CreateMessageDesktop({ onSubmit }: CreateMessageDesktopProps) {
         borderTop="1px"
         w="full"
         borderColor="gray.300"
+        alignItems="center"
       >
         <Box
           ref={messageRef}
           contentEditable
+          overflowWrap="anywhere"
+          overflowY="auto"
           placeholder="Введите сообщение..."
           width="full"
           border="1px"
-          borderRadius="lg"
+          maxH="200px"
+          borderRadius="xl"
           borderColor="gray.300"
           onInput={(e) => {
-            setValue(e.currentTarget.innerText);
+            const element = e.currentTarget;
+            const text = element.innerText;
+            e.currentTarget.innerHTML = text;
+            setValue(text);
+
+            const range = document.createRange();
+            const selection = window.getSelection();
+            range.selectNodeContents(element);
+            range.collapse(false);
+            selection?.removeAllRanges();
+            selection?.addRange(range);
           }}
           _focusVisible={{ outline: 'none' }}
           _empty={{
