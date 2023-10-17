@@ -1,4 +1,4 @@
-import { Heading, Stack, Box, Divider, HStack, Flex } from '@chakra-ui/react';
+import { Heading, Stack, Box, Divider, Flex } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import { ChatsList } from '~/widgets/chats-list';
@@ -12,7 +12,7 @@ export function ChatsPageDesktop() {
   const [value, setValue] = useState('');
 
   return (
-    <>
+    <Box>
       <Heading variant="h1" as="h1" mb={6}>
         Чаты
       </Heading>
@@ -42,6 +42,6 @@ export function ChatsPageDesktop() {
           <CreateMessageDesktop />
         </Stack>
       </Flex>
-    </>
+    </Box>
   );
 }
