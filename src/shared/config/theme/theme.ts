@@ -14,7 +14,6 @@ import '@fontsource/inter/cyrillic-600.css';
 import '@fontsource/inter/cyrillic-700.css';
 
 import { avatarTheme } from './avatarTheme';
-
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
  * https://github.com/chakra-ui/chakra-ui/tree/main/packages/components/theme/src
@@ -81,6 +80,7 @@ const Button = defineStyleConfig({
   variants: {
     flat: flatButton,
   },
+
   defaultProps: {
     colorScheme: 'dark',
   },
