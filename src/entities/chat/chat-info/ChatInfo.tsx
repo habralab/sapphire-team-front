@@ -6,21 +6,16 @@ import { Link } from 'react-router-dom';
 import { PATHS } from '~/shared/lib/router';
 import { SAvatar } from '~/shared/ui/SAvatar';
 
-type viewType = 'base' | 'desktop';
-
-interface ChatInfoProps {
-  view?: viewType;
-}
-
-export function ChatInfo({ view }: ChatInfoProps) {
+export function ChatInfo() {
   return (
-    <Flex align="center" gap={2} py={4}>
+    <Flex align="center" gap={2} pb={4}>
       <IconButton
         aria-label="back"
         as={Link}
         to={PATHS.chats}
         icon={<Icon as={FiChevronLeft} />}
         variant="flat"
+        marginLeft="-2"
       />
 
       <SAvatar name="Татьяна Андреева" />

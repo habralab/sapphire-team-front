@@ -14,13 +14,7 @@ export function ChatCard(props: ChatCardProps) {
   const count = messages.filter((message) => message.status === 'unread').length;
 
   return (
-    <Flex
-      gap={2}
-      py={4}
-      borderBottom={1}
-      borderColor="gray.700"
-      _hover={{ bg: 'gray.100', mx: '-5', px: '4' }}
-    >
+    <Flex gap={2} py={4} borderBottom={1} borderColor="gray.700">
       <SAvatar name={name} />
 
       <Stack spacing={1}>

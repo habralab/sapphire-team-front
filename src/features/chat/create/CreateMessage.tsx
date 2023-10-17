@@ -1,17 +1,24 @@
-import { Input, Icon, Flex, IconButton } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Icon, Flex, IconButton, Box } from '@chakra-ui/react';
+import { useRef, useState } from 'react';
 import { IoSend } from 'react-icons/io5';
 
 interface CreateMessageProps {
-  position?: string;
+  fixed?: boolean;
+  onSubmit?: (message: string) => void;
 }
 
-export function CreateMessage({ position }: CreateMessageProps) {
+export function CreateMessage({ fixed, onSubmit }: CreateMessageProps) {
   const [value, setValue] = useState('');
+  const messageRef = useRef<HTMLDivElement>(null);
 
   return (
     <Flex
       bg="white"
+      position={fixed ? 'fixed' : 'sticky'}
+      borderBottomRadius={fixed ? '' : 'lg'}
+      bottom="0"
+      left="0"
+      right="0"
       justifyContent="center"
       borderTop="1px"
       borderColor="gray.300"
@@ -20,22 +27,34 @@ export function CreateMessage({ position }: CreateMessageProps) {
       alignItems="center"
       gap={4}
     >
-      <Input
-        placeholder="Сообщение"
-        borderRadius="2xl"
-        bg="gray.100"
-        h="36px"
-        value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
+      <Box
+        ref={messageRef}
+        contentEditable
+        placeholder="Введите сообщение..."
+        width="full"
+        border="1px"
+        borderRadius="lg"
+        borderColor="gray.300"
+        onInput={(e) => {
+          setValue(e.currentTarget.innerText);
         }}
+        _focusVisible={{ outline: 'none' }}
+        _empty={{
+          _before: {
+            color: 'gray.500',
+            content: '"Введите сообщение..."',
+          },
+        }}
+        p="2"
       />
       <IconButton
         aria-label="create-message"
         variant="flat"
-        w="fit-content"
         onClick={() => {
-          setValue('');
+          if (onSubmit) onSubmit(value);
+          if (messageRef.current) {
+            messageRef.current.innerHTML = '';
+          }
         }}
         icon={<Icon as={IoSend} w={4} h={4} />}
       />

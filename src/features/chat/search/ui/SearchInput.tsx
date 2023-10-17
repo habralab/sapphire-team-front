@@ -18,7 +18,6 @@ export function SearchInput(props: SearchProps) {
         placeholder="Поиск в чатах"
         borderRadius="full"
         bg="gray.100"
-        h="36px"
         onChange={(event) => {
           setValue(event.target.value);
         }}
