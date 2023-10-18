@@ -25,18 +25,21 @@ export const SkillsSelector = () => {
   const saveSkills = useSkillsFilterStore((state) => state.saveSkills);
   const dummySelectors = useSkillsFilterStore((state) => state.skills);
 
-  const [allSelectors, setDummySelectors] = useState<Selector[]>([]);
+  const [skillSelector, setSkillSelectors] = useState<Selector[]>([]);
 
   useEffect(() => {
-    console.log(dummySelectors);
-    setDummySelectors([...dummySelectors]);
+    setSkillSelectors([...dummySelectors]);
   }, [dummySelectors, isSkillsSelectorOpen]);
 
-  const handleSetCheckbox = (skill: string) => {
-    const newSkills = [...allSelectors];
+  const handleSetSkill = (skill: string) => {
+    const newSkills = [...skillSelector];
     const index = newSkills.findIndex((selector) => selector.name === skill);
     newSkills[index].state = !newSkills[index].state;
-    setDummySelectors([...allSelectors]);
+    setSkillSelectors([...newSkills]);
+    console.log(`newSkills`);
+    console.log(newSkills);
+    console.log('dummySelectors');
+    console.log(dummySelectors);
   };
 
   const handleSumbit = (value: InputProps) => {
@@ -76,11 +79,11 @@ export const SkillsSelector = () => {
         inputColor="gray.100"
       />
       <Stack overflow="auto" gap={6} mt={4} mb={4}>
-        {allSelectors.map((selector) => (
+        {skillSelector.map((selector) => (
           <Checkbox
             key={selector.name}
             onChange={(e) => {
-              handleSetCheckbox(e.target.value);
+              handleSetSkill(e.target.value);
             }}
             colorScheme="purple"
             isChecked={selector.state}
@@ -92,7 +95,7 @@ export const SkillsSelector = () => {
       </Stack>
       <Button
         onClick={() => {
-          saveSkills(allSelectors);
+          saveSkills(skillSelector);
           setVisibleSkillsSelector(false);
         }}
         fontSize="sm"
