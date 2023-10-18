@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import {
   Button,
   CloseButton,
@@ -7,12 +7,12 @@ import {
   Flex,
   HStack,
   Heading,
+  IconButton,
   Input,
   InputGroup,
   InputRightElement,
   Stack,
   Tag,
-  TagCloseButton,
   TagLabel,
 } from '@chakra-ui/react';
 
@@ -37,9 +37,21 @@ export const FilterBase = () => {
   const isSkillsSelectorOpen = useSkillsFilterStore(
     (state) => state.isSkillsSelectorOpen,
   );
+
+  const saveSkills = useSkillsFilterStore((state) => state.saveSkills);
+
+  const specs = useSpecsFilterStore((state) => state.specs);
+  const skills = useSkillsFilterStore((state) => state.skills);
+
+  // const handleDeleteSkill = (skill: string) => {
+  //   const newSkills = [...skills];
+  //   const index = newSkills.findIndex((selector) => selector.name === skill);
+  //   newSkills[index].state = false;
+  //   saveSkills(newSkills);
+  // };
   return (
     <Stack h="100%" background="gray.100" px={5} py={2}>
-      <Flex alignItems="center" mb={8}>
+      <Flex alignItems="center" mb={4}>
         <CloseButton
           onClick={() => {
             setFilterStatus(false);
@@ -58,12 +70,12 @@ export const FilterBase = () => {
           Сбросить
         </Button>
       </Flex>
-      <Stack>
+      <Stack overflow="auto" mb={4}>
         <Stack gap={0} mb={8}>
           <Heading variant="h2" mb={3}>
             Специализация
           </Heading>
-          <InputGroup>
+          <InputGroup mb={3}>
             <Input
               bg="white"
               borderRadius="full"
@@ -90,25 +102,41 @@ export const FilterBase = () => {
               <SpecializationSelector />
             </DrawerContent>
           </Drawer>
-          <HStack spacing={4}>
-            <Tag
-              size="sm"
-              bg="gray.300"
-              py={1}
-              px={2}
-              borderRadius="lg"
-              fontWeight="medium"
-            >
-              <TagLabel>Green</TagLabel>
-              <TagCloseButton />
-            </Tag>
-          </HStack>
+          <Flex flexWrap="wrap" gap={2}>
+            {specs
+              .flatMap((title) => title.child.filter((child) => child.state))
+              .map((selector) => (
+                <Tag
+                  key={selector.name}
+                  size="sm"
+                  bg="gray.300"
+                  py={1}
+                  px={2}
+                  borderRadius="lg"
+                  fontWeight="medium"
+                >
+                  <TagLabel>{selector.name}</TagLabel>
+                  <IconButton
+                    onClick={() => {
+                      setFilterStatus(true);
+                    }}
+                    aria-label="Close"
+                    variant="ghost"
+                    flexShrink="0"
+                    minW="none"
+                    height="none"
+                    fontWeight="normal"
+                    icon={<SmallCloseIcon boxSize={4} />}
+                  />
+                </Tag>
+              ))}
+          </Flex>
         </Stack>
         <Stack gap={0} mb={8}>
           <Heading variant="h2" mb={3}>
             Профессиональные навыки
           </Heading>
-          <InputGroup>
+          <InputGroup mb={3}>
             <Input
               bg="white"
               borderRadius="full"
@@ -135,6 +163,35 @@ export const FilterBase = () => {
               <SkillsSelector />
             </DrawerContent>
           </Drawer>
+          <Flex flexWrap="wrap" gap={2}>
+            {skills
+              .filter((child) => child.state)
+              .map((selector) => (
+                <Tag
+                  key={selector.name}
+                  size="sm"
+                  bg="gray.300"
+                  py={1}
+                  px={2}
+                  borderRadius="lg"
+                  fontWeight="medium"
+                >
+                  <TagLabel>{selector.name}</TagLabel>
+                  <IconButton
+                    onClick={() => {
+                      // handleDeleteSkill(selector.name);
+                    }}
+                    aria-label="Close"
+                    variant="ghost"
+                    flexShrink="0"
+                    minW="none"
+                    height="none"
+                    fontWeight="normal"
+                    icon={<SmallCloseIcon boxSize={4} />}
+                  />
+                </Tag>
+              ))}
+          </Flex>
         </Stack>
         <Stack>
           <Heading variant="h2">Дата начала проекта</Heading>

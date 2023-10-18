@@ -34,6 +34,7 @@ export const SpecializationSelector = () => {
   const [allSelectors, setDummySelectors] = useState<SpecsSelector[]>([]);
 
   useEffect(() => {
+    console.log('it work');
     setDummySelectors(_.cloneDeep(dummySelectors));
   }, [dummySelectors, isSpecsSelectorOpen]);
 

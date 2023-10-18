@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Checkbox,
   Flex,
@@ -29,15 +28,14 @@ export const SkillsSelector = () => {
   const [allSelectors, setDummySelectors] = useState<Selector[]>([]);
 
   useEffect(() => {
+    console.log(dummySelectors);
     setDummySelectors([...dummySelectors]);
   }, [dummySelectors, isSkillsSelectorOpen]);
 
   const handleSetCheckbox = (skill: string) => {
-    const ind = allSelectors.findIndex((selector) => selector.name === skill);
-    allSelectors[ind] = {
-      ...allSelectors[ind],
-      state: !allSelectors[ind].state,
-    };
+    const newSkills = [...allSelectors];
+    const index = newSkills.findIndex((selector) => selector.name === skill);
+    newSkills[index].state = !newSkills[index].state;
     setDummySelectors([...allSelectors]);
   };
 

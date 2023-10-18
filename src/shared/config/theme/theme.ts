@@ -13,9 +13,10 @@ import '@fontsource/inter/cyrillic-500.css';
 import '@fontsource/inter/cyrillic-600.css';
 import '@fontsource/inter/cyrillic-700.css';
 
-import { accordionTheme } from './accordionTheme';
-import { avatarTheme } from './avatarTheme';
-import { checkboxTheme } from './checkboxTheme';
+import { accordionTheme } from './customAnatomy/accordionTheme';
+import { avatarTheme } from './customAnatomy/avatarTheme';
+import { checkboxTheme } from './customAnatomy/checkboxTheme';
+import { tagTheme } from './customAnatomy/tagTheme';
 
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
@@ -157,6 +158,7 @@ export const basicTheme = extendTheme({
     Text,
     Accordion: accordionTheme,
     Checkbox: checkboxTheme,
+    Tag: tagTheme,
   },
   styles: {
     global: {
