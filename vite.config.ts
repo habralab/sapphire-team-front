@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import { splitVendorChunkPlugin } from 'vite';
 import { checker } from 'vite-plugin-checker';
 import eslint from 'vite-plugin-eslint';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -14,6 +15,7 @@ export default defineConfig({
     svgr({}),
     !process.env.VITEST && isNotProduction ? eslint() : undefined,
     !process.env.VITEST && isNotProduction ? checker({ typescript: true }) : undefined,
+    splitVendorChunkPlugin(),
     VitePWA({
       registerType: 'autoUpdate',
       workbox: {
@@ -69,5 +71,22 @@ export default defineConfig({
         replacement: '/src/',
       },
     ],
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('framer-motion')) {
+            return 'framer-motion';
+          }
+          if (id.includes('chakra') || id.includes('emotion')) {
+            return 'chakra';
+          }
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        },
+      },
+    },
   },
 });
