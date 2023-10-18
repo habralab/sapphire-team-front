@@ -88,6 +88,7 @@
   },
   "resolutions": {
     "typescript": "5.1.6",
-    "vite-plugin-checker/meow": "8.1.2"
+    "vite-plugin-checker/meow": "8.1.2",
+    "@babel/core": "7.23.2"
   }
 }
