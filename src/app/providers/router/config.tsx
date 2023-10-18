@@ -4,9 +4,9 @@ import { BlankPage } from '~/pages/blank';
 import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
 import { NotFoundPage } from '~/pages/not-found';
-import { NotificationPage } from '~/pages/notification';
+import { NotificationsPage } from '~/pages/notifications';
 import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
-import { ProjectPage, ProjectPageDesktop } from '~/pages/projects';
+import { ProjectsPage, ProjectsPageDesktop } from '~/pages/projects';
 import { SearchPage, SearchPageDesktop } from '~/pages/search';
 
 import { PATHS } from '~/shared/lib/router';
@@ -33,12 +33,12 @@ const normalRoutes = [
   },
   {
     path: PATHS.projects,
-    view: { base: <ProjectPage />, desktop: <ProjectPageDesktop /> },
+    view: { base: <ProjectsPage />, desktop: <ProjectsPageDesktop /> },
   },
   { path: PATHS.search, view: { base: <SearchPage />, desktop: <SearchPageDesktop /> } },
   { path: PATHS.chats, view: { base: <ChatsPage />, desktop: <ChatsPageDesktop /> } },
   { path: PATHS.dialog, view: { base: <DialogPage /> } },
-  { path: PATHS.notifications, view: { base: <NotificationPage /> } },
+  { path: PATHS.notifications, view: { base: <NotificationsPage /> } },
 
   {
     path: PATHS.root,

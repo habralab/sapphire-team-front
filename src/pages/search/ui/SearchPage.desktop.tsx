@@ -23,7 +23,13 @@ export const SearchPageDesktop = () => {
         >
           {data.map((project) => {
             return (
-              <ProjectCard key={project.id} {...project}>
+              <ProjectCard
+                key={project.id}
+                status={project.status}
+                title={project.title}
+                date={project.date}
+                description={project.description}
+              >
                 <STag mainTags={project.mainTags} tags={project.tags} />
               </ProjectCard>
             );

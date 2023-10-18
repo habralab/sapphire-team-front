@@ -74,7 +74,10 @@ export function ProfilePageDesktop() {
                   key={project.id}
                   flex="0 0 45%"
                   _hover={{ boxShadow: 'xs', cursor: 'pointer' }}
-                  {...project}
+                  status={project.status}
+                  title={project.title}
+                  date={project.date}
+                  description={project.description}
                 >
                   <Flex justifyContent="space-between" alignItems="center">
                     <STag mainTags={['Организатор']} />

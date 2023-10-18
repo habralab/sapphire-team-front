@@ -15,7 +15,7 @@ import { NotificationList } from '~/widgets/notification-list';
 
 import { useLayoutRefs } from '~/shared/hooks';
 
-export function NotificationPage() {
+export function NotificationsPage() {
   const navigate = useNavigate();
   const layout = useLayoutRefs();
   const goBack = () => {
