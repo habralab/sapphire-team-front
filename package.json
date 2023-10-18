@@ -89,6 +89,9 @@
   "resolutions": {
     "typescript": "5.1.6",
     "vite-plugin-checker/meow": "8.1.2",
-    "@babel/core": "7.23.2"
+    "@babel/core": "7.23.2",
+    "get-func-name": "2.0.1",
+    "postcss": "8.4.31",
+    "graphql": "16.8.1"
   }
 }

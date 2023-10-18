@@ -8605,7 +8605,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["assertion-error", "npm:1.1.0"],\
             ["check-error", "npm:1.0.2"],\
             ["deep-eql", "npm:4.1.3"],\
-            ["get-func-name", "npm:2.0.0"],\
+            ["get-func-name", "npm:2.0.1"],\
             ["loupe", "npm:2.3.6"],\
             ["pathval", "npm:1.1.1"],\
             ["type-detect", "npm:4.0.8"]\
@@ -11123,10 +11123,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["get-func-name", [\
-        ["npm:2.0.0", {\
-          "packageLocation": "./.yarn/cache/get-func-name-npm-2.0.0-afbf363765-8d82e69f3e.zip/node_modules/get-func-name/",\
+        ["npm:2.0.1", {\
+          "packageLocation": "./.yarn/cache/get-func-name-npm-2.0.1-130866c897-765efe7a6d.zip/node_modules/get-func-name/",\
           "packageDependencies": [\
-            ["get-func-name", "npm:2.0.0"]\
+            ["get-func-name", "npm:2.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -11431,10 +11431,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["graphql", [\
-        ["npm:16.8.0", {\
-          "packageLocation": "./.yarn/cache/graphql-npm-16.8.0-3c6baad491-d853d4085b.zip/node_modules/graphql/",\
+        ["npm:16.8.1", {\
+          "packageLocation": "./.yarn/cache/graphql-npm-16.8.1-c2cd08b4c0-8d304b7b6f.zip/node_modules/graphql/",\
           "packageDependencies": [\
-            ["graphql", "npm:16.8.0"]\
+            ["graphql", "npm:16.8.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -13185,7 +13185,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/loupe-npm-2.3.6-b8b37d55e7-cc83f1b124.zip/node_modules/loupe/",\
           "packageDependencies": [\
             ["loupe", "npm:2.3.6"],\
-            ["get-func-name", "npm:2.0.0"]\
+            ["get-func-name", "npm:2.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -13619,7 +13619,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chalk", "npm:4.1.2"],\
             ["chokidar", "npm:3.5.3"],\
             ["cookie", "npm:0.4.2"],\
-            ["graphql", "npm:16.8.0"],\
+            ["graphql", "npm:16.8.1"],\
             ["headers-polyfill", "npm:3.2.1"],\
             ["inquirer", "npm:8.2.6"],\
             ["is-node-process", "npm:1.2.0"],\
@@ -14401,10 +14401,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["postcss", [\
-        ["npm:8.4.29", {\
-          "packageLocation": "./.yarn/cache/postcss-npm-8.4.29-2319a64d31-dd6daa25e7.zip/node_modules/postcss/",\
+        ["npm:8.4.31", {\
+          "packageLocation": "./.yarn/cache/postcss-npm-8.4.31-385051a82b-1d8611341b.zip/node_modules/postcss/",\
           "packageDependencies": [\
-            ["postcss", "npm:8.4.29"],\
+            ["postcss", "npm:8.4.31"],\
             ["nanoid", "npm:3.3.6"],\
             ["picocolors", "npm:1.0.0"],\
             ["source-map-js", "npm:1.0.2"]\
@@ -17228,7 +17228,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fsevents", "patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"],\
             ["less", null],\
             ["lightningcss", null],\
-            ["postcss", "npm:8.4.29"],\
+            ["postcss", "npm:8.4.31"],\
             ["rollup", "npm:3.28.1"],\
             ["sass", null],\
             ["stylus", null],\
@@ -17267,7 +17267,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fsevents", "patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=df0bf1"],\
             ["less", null],\
             ["lightningcss", null],\
-            ["postcss", "npm:8.4.29"],\
+            ["postcss", "npm:8.4.31"],\
             ["rollup", "npm:3.28.1"],\
             ["sass", null],\
             ["stylus", null],\
