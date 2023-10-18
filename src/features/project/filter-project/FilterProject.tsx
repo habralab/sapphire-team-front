@@ -12,7 +12,9 @@ export const FilterProject = () => {
   return (
     <>
       <IconButton
-        onClick={setFilterStatus}
+        onClick={() => {
+          setFilterStatus(true);
+        }}
         aria-label="filter"
         flexShrink="0"
         gap={2}

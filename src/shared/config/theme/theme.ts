@@ -13,7 +13,10 @@ import '@fontsource/inter/cyrillic-500.css';
 import '@fontsource/inter/cyrillic-600.css';
 import '@fontsource/inter/cyrillic-700.css';
 
+import { accordionTheme } from './accordionTheme';
 import { avatarTheme } from './avatarTheme';
+import { checkboxTheme } from './checkboxTheme';
+
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
  * https://github.com/chakra-ui/chakra-ui/tree/main/packages/components/theme/src
@@ -152,6 +155,8 @@ export const basicTheme = extendTheme({
     Link,
     Heading,
     Text,
+    Accordion: accordionTheme,
+    Checkbox: checkboxTheme,
   },
   styles: {
     global: {

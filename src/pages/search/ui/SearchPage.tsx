@@ -9,9 +9,12 @@ import { Notification, Settings } from '~/features/user';
 import { Avatar } from '~/entities/user';
 
 import { data } from '~/shared/lib/data';
+import { useFilterStore } from '~/shared/store';
 import { STag } from '~/shared/ui/STag';
 
 export const SearchPage = () => {
+  const isFilterOpen = useFilterStore((state) => state.isFilterOpen);
+  const setFilterStatus = useFilterStore((state) => state.setFilterStatus);
   return (
     <Container maxW="md" mb={4}>
       <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
