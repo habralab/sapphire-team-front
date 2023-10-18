@@ -23,10 +23,10 @@ export function NotificationPage() {
   };
 
   return (
-    <Stack spacing={0}>
+    <Stack spacing={0} pos="relative" w="full">
       {layout?.header && (
         <Portal containerRef={layout.header}>
-          <Container pos="relative">
+          <Container maxW="md">
             <Flex alignItems="center" my={4} gap={4}>
               <IconButton
                 aria-label="back"

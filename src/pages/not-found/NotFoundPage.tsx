@@ -1,4 +1,4 @@
-import { Flex, Heading, Icon, IconButton, Text } from '@chakra-ui/react';
+import { Button, Flex, Heading, Icon } from '@chakra-ui/react';
 import { BsArrowRightShort } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,11 +9,11 @@ import NotFound from './notFound.svg';
 export const NotFoundPage = () => {
   const navigate = useNavigate();
   return (
-    <Flex flexDirection="column" justifyContent="center" alignItems="center">
+    <Flex flexDirection="column" justifyContent="center" alignItems="center" m="auto">
       <Heading
         variant="h1"
         as="h1"
-        fontSize={['8xl', '8xl', '9xl']}
+        fontSize={['6xl', '8xl', '9xl']}
         mt={{
           base: '40px',
           md: '46px',
@@ -38,23 +38,22 @@ export const NotFoundPage = () => {
       >
         404
       </Heading>
-      <Heading as="h2" fontSize={['2xl', '2xl', '4xl']} textAlign="center" pb={10}>
+      <Heading as="h2" fontSize={['xl', '2xl', '4xl']} textAlign="center" pb={10}>
         Упс!.. Похоже, такой страницы не существует
       </Heading>
-      <IconButton
+      <Button
         aria-label="main-page"
         onClick={() => {
           navigate(PATHS.root);
         }}
-        padding={7}
-        maxW={'md'}
-        icon={
-          <Flex fontSize={['sm', 'sm', 'md']} fontWeight="600" gap={2}>
-            <Text lineHeight="160%">Вернуться на главную страницу</Text>
-            <Icon as={BsArrowRightShort} />
-          </Flex>
-        }
-      />
+        maxW="100%"
+        padding={[5, 5, 7]}
+        fontSize={['sm', 'sm', 'md']}
+        fontWeight="600"
+        rightIcon={<Icon as={BsArrowRightShort} />}
+      >
+        Вернуться на главную страницу
+      </Button>
     </Flex>
   );
 };
