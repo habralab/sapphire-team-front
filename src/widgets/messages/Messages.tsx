@@ -13,7 +13,6 @@ export function Messages() {
       () =>
         messagesRef.current?.scrollTo({
           top: messagesRef.current.scrollHeight,
-          behavior: 'smooth',
         }),
       0,
     );
