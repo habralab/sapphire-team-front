@@ -5,7 +5,6 @@ import {
   Drawer,
   DrawerContent,
   Flex,
-  HStack,
   Heading,
   IconButton,
   Input,
@@ -38,17 +37,32 @@ export const FilterBase = () => {
     (state) => state.isSkillsSelectorOpen,
   );
 
+  const saveSpecs = useSpecsFilterStore((state) => state.saveSpecs);
   const saveSkills = useSkillsFilterStore((state) => state.saveSkills);
 
   const specs = useSpecsFilterStore((state) => state.specs);
   const skills = useSkillsFilterStore((state) => state.skills);
 
-  // const handleDeleteSkill = (skill: string) => {
-  //   const newSkills = [...skills];
-  //   const index = newSkills.findIndex((selector) => selector.name === skill);
-  //   newSkills[index].state = false;
-  //   saveSkills(newSkills);
-  // };
+  const resetSpecs = useSpecsFilterStore((state) => state.resetSpecs);
+  const resetSkills = useSkillsFilterStore((state) => state.resetSkills);
+
+  const handleDeleteSkill = (skill: string) => {
+    const newSkills = [...skills];
+    const index = newSkills.findIndex((selector) => selector.name === skill);
+    newSkills[index].state = false;
+    saveSkills(newSkills);
+  };
+
+  const handleDeleteSpec = (title: string, spec: string) => {
+    const indexTitle = specs.findIndex((selector) => selector.title === title);
+    const index = specs[indexTitle].child.findIndex((selector) => selector.name === spec);
+    const newSpecs = [...specs];
+    newSpecs[indexTitle].child[index] = {
+      ...newSpecs[indexTitle].child[index],
+      state: !newSpecs[indexTitle].child[index].state,
+    };
+    saveSpecs(newSpecs);
+  };
   return (
     <Stack h="100%" background="gray.100" px={5} py={2}>
       <Flex alignItems="center" mb={4}>
@@ -61,6 +75,10 @@ export const FilterBase = () => {
           Фильтры
         </Heading>
         <Button
+          onClick={() => {
+            resetSpecs();
+            resetSkills();
+          }}
           variant="unstyled"
           fontSize="xs"
           fontWeight="500"
@@ -104,7 +122,16 @@ export const FilterBase = () => {
           </Drawer>
           <Flex flexWrap="wrap" gap={2}>
             {specs
-              .flatMap((title) => title.child.filter((child) => child.state))
+              .flatMap(({ child, title }) => {
+                const selector = child.flatMap(({ state, name }) => {
+                  if (state) {
+                    return [{ name, state, title }];
+                  } else {
+                    return [];
+                  }
+                });
+                return selector;
+              })
               .map((selector) => (
                 <Tag
                   key={selector.name}
@@ -118,7 +145,7 @@ export const FilterBase = () => {
                   <TagLabel>{selector.name}</TagLabel>
                   <IconButton
                     onClick={() => {
-                      setFilterStatus(true);
+                      handleDeleteSpec(selector.title, selector.name);
                     }}
                     aria-label="Close"
                     variant="ghost"
@@ -179,7 +206,7 @@ export const FilterBase = () => {
                   <TagLabel>{selector.name}</TagLabel>
                   <IconButton
                     onClick={() => {
-                      // handleDeleteSkill(selector.name);
+                      handleDeleteSkill(selector.name);
                     }}
                     aria-label="Close"
                     variant="ghost"
@@ -196,6 +223,7 @@ export const FilterBase = () => {
         <Stack>
           <Heading variant="h2">Дата начала проекта</Heading>
           <Input
+            variant="filled"
             bg="white"
             borderRadius="full"
             fontSize="sm"
@@ -209,7 +237,15 @@ export const FilterBase = () => {
           />
         </Stack>
       </Stack>
-      <Button fontSize="sm" fontWeight="600" mt="auto" mb={4}>
+      <Button
+        onClick={() => {
+          setFilterStatus(false);
+        }}
+        fontSize="sm"
+        fontWeight="600"
+        mt="auto"
+        mb={4}
+      >
         Показать 43 проекта
       </Button>
     </Stack>

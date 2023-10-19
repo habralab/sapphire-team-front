@@ -34,12 +34,8 @@ export const SkillsSelector = () => {
   const handleSetSkill = (skill: string) => {
     const newSkills = [...skillSelector];
     const index = newSkills.findIndex((selector) => selector.name === skill);
-    newSkills[index].state = !newSkills[index].state;
-    setSkillSelectors([...newSkills]);
-    console.log(`newSkills`);
-    console.log(newSkills);
-    console.log('dummySelectors');
-    console.log(dummySelectors);
+    newSkills[index] = { ...newSkills[index], state: !newSkills[index].state };
+    setSkillSelectors(newSkills);
   };
 
   const handleSumbit = (value: InputProps) => {
@@ -63,6 +59,7 @@ export const SkillsSelector = () => {
         <Button
           onClick={() => {
             resetSkills();
+            setSkillSelectors([...dummySelectors]);
           }}
           variant="unstyled"
           fontSize="xs"

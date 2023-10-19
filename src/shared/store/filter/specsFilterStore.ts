@@ -6,6 +6,7 @@ interface SpecsFilterState {
   specs: SpecsSelector[];
   setVisibleSpecsSelector: (status: boolean) => void;
   saveSpecs: (newSpecs: SpecsSelector[]) => void;
+  setCount: () => number;
   resetSpecs: () => void;
 }
 
@@ -208,7 +209,7 @@ const initialStateSpecs: InitialStateSpecs = {
   ],
 };
 
-export const useSpecsFilterStore = create<SpecsFilterState>((set) => ({
+export const useSpecsFilterStore = create<SpecsFilterState>((set, get) => ({
   ...initialStateSpecs,
   isSpecsSelectorOpen: false,
   setVisibleSpecsSelector: (status) => {
@@ -217,6 +218,8 @@ export const useSpecsFilterStore = create<SpecsFilterState>((set) => ({
   saveSpecs: (newSpecs) => {
     set(() => ({ specs: newSpecs }));
   },
+  setCount: () =>
+    get().specs.flatMap((title) => title.child.filter(({ state }) => state)).length,
   resetSpecs: () => {
     set(initialStateSpecs);
   },

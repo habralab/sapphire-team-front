@@ -5,6 +5,7 @@ interface SkillsFilterStore {
   skills: Selector[];
   setVisibleSkillsSelector: (status: boolean) => void;
   saveSkills: (newSkills: Selector[]) => void;
+  setCount: () => number;
   resetSkills: () => void;
 }
 
@@ -41,7 +42,7 @@ const initialStateSkills: InitialStateSkills = {
   ],
 };
 
-export const useSkillsFilterStore = create<SkillsFilterStore>((set) => ({
+export const useSkillsFilterStore = create<SkillsFilterStore>((set, get) => ({
   ...initialStateSkills,
   isSkillsSelectorOpen: false,
   setVisibleSkillsSelector: (status) => {
@@ -50,6 +51,7 @@ export const useSkillsFilterStore = create<SkillsFilterStore>((set) => ({
   saveSkills: (newSkills) => {
     set(() => ({ skills: newSkills }));
   },
+  setCount: () => get().skills.filter(({ state }) => state).length,
   resetSkills: () => {
     set(initialStateSkills);
   },

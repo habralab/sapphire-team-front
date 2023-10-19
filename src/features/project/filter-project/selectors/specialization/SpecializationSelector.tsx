@@ -31,23 +31,23 @@ export const SpecializationSelector = () => {
   const saveSpecs = useSpecsFilterStore((state) => state.saveSpecs);
   const dummySelectors = useSpecsFilterStore((state) => state.specs);
 
-  const [allSelectors, setDummySelectors] = useState<SpecsSelector[]>([]);
+  const [specSelector, setSpecSelectors] = useState<SpecsSelector[]>([]);
 
   useEffect(() => {
-    console.log('it work');
-    setDummySelectors(_.cloneDeep(dummySelectors));
-  }, [dummySelectors, isSpecsSelectorOpen]);
+    setSpecSelectors(_.cloneDeep(dummySelectors));
+  }, [dummySelectors, isSpecsSelectorOpen, resetSpecs]);
 
   const handleSetCheckbox = (title: string, spec: string) => {
-    const indTitle = allSelectors.findIndex((selector) => selector.title === title);
-    const indSpec = allSelectors[indTitle].child.findIndex(
+    const indexTitle = specSelector.findIndex((selector) => selector.title === title);
+    const index = specSelector[indexTitle].child.findIndex(
       (selector) => selector.name === spec,
     );
-    allSelectors[indTitle].child[indSpec] = {
-      ...allSelectors[indTitle].child[indSpec],
-      state: !allSelectors[indTitle].child[indSpec].state,
+    const newSpecs = [...specSelector];
+    newSpecs[indexTitle].child[index] = {
+      ...newSpecs[indexTitle].child[index],
+      state: !newSpecs[indexTitle].child[index].state,
     };
-    setDummySelectors([...allSelectors]);
+    setSpecSelectors(newSpecs);
   };
 
   const handleSumbit = (value: InputProps) => {
@@ -69,7 +69,10 @@ export const SpecializationSelector = () => {
           Специализация
         </Heading>
         <Button
-          onClick={resetSpecs}
+          onClick={() => {
+            resetSpecs();
+            setSpecSelectors(_.cloneDeep(dummySelectors));
+          }}
           variant="unstyled"
           fontSize="xs"
           fontWeight="500"
@@ -85,7 +88,7 @@ export const SpecializationSelector = () => {
         inputColor="gray.100"
       />
       <Accordion allowToggle overflow="auto" mt={4} mb={4}>
-        {allSelectors.map((spec, i) => (
+        {specSelector.map((spec, i) => (
           <AccordionItem key={i}>
             <h2>
               <AccordionButton>
@@ -119,7 +122,7 @@ export const SpecializationSelector = () => {
       </Accordion>
       <Button
         onClick={() => {
-          saveSpecs(allSelectors);
+          saveSpecs(specSelector);
           setVisibleSpecsSelector(false);
         }}
         fontSize="sm"
