@@ -1,4 +1,4 @@
-import { ChevronDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 import {
   Button,
   CloseButton,
@@ -6,16 +6,15 @@ import {
   DrawerContent,
   Flex,
   Heading,
-  IconButton,
   Input,
   InputGroup,
   InputRightElement,
   Stack,
-  Tag,
-  TagLabel,
 } from '@chakra-ui/react';
 
 import { SkillsSelector, SpecializationSelector } from '~/features/project';
+
+import { SkillsBages, SpecializationBages } from '~/entities/filter';
 
 import {
   useFilterStore,
@@ -120,44 +119,7 @@ export const FilterBase = () => {
               <SpecializationSelector />
             </DrawerContent>
           </Drawer>
-          <Flex flexWrap="wrap" gap={2}>
-            {specs
-              .flatMap(({ child, title }) => {
-                const selector = child.flatMap(({ state, name }) => {
-                  if (state) {
-                    return [{ name, state, title }];
-                  } else {
-                    return [];
-                  }
-                });
-                return selector;
-              })
-              .map((selector) => (
-                <Tag
-                  key={selector.name}
-                  size="sm"
-                  bg="gray.300"
-                  py={1}
-                  px={2}
-                  borderRadius="lg"
-                  fontWeight="medium"
-                >
-                  <TagLabel>{selector.name}</TagLabel>
-                  <IconButton
-                    onClick={() => {
-                      handleDeleteSpec(selector.title, selector.name);
-                    }}
-                    aria-label="Close"
-                    variant="ghost"
-                    flexShrink="0"
-                    minW="none"
-                    height="none"
-                    fontWeight="normal"
-                    icon={<SmallCloseIcon boxSize={4} />}
-                  />
-                </Tag>
-              ))}
-          </Flex>
+          <SpecializationBages delete={handleDeleteSpec} />
         </Stack>
         <Stack gap={0} mb={8}>
           <Heading variant="h2" mb={3}>
@@ -190,35 +152,7 @@ export const FilterBase = () => {
               <SkillsSelector />
             </DrawerContent>
           </Drawer>
-          <Flex flexWrap="wrap" gap={2}>
-            {skills
-              .filter((child) => child.state)
-              .map((selector) => (
-                <Tag
-                  key={selector.name}
-                  size="sm"
-                  bg="gray.300"
-                  py={1}
-                  px={2}
-                  borderRadius="lg"
-                  fontWeight="medium"
-                >
-                  <TagLabel>{selector.name}</TagLabel>
-                  <IconButton
-                    onClick={() => {
-                      handleDeleteSkill(selector.name);
-                    }}
-                    aria-label="Close"
-                    variant="ghost"
-                    flexShrink="0"
-                    minW="none"
-                    height="none"
-                    fontWeight="normal"
-                    icon={<SmallCloseIcon boxSize={4} />}
-                  />
-                </Tag>
-              ))}
-          </Flex>
+          <SkillsBages delete={handleDeleteSkill} />
         </Stack>
         <Stack>
           <Heading variant="h2">Дата начала проекта</Heading>
