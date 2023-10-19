@@ -11,7 +11,7 @@ export function ChatsPage() {
   return (
     <>
       <Container maxW="md">
-        <Flex justifyContent="space-between" alignItems="center" flexGrow="1" my={4}>
+        <Flex justifyContent="space-between" alignItems="center" my={4} h={42}>
           <Heading variant="h1" as="h1">
             Чаты
           </Heading>

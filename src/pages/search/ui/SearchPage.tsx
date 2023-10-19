@@ -14,7 +14,7 @@ export const SearchPage = () => {
   return (
     <Container maxW="md" mb={4}>
       <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
-        <Flex justifyContent="space-between" alignItems="center" my={4}>
+        <Flex justifyContent="space-between" alignItems="center" my={4} h={42}>
           <Avatar firstName="Татьяна" lastName="Антонова" />
           <Flex gap={4} alignItems="baseline">
             <Notification />

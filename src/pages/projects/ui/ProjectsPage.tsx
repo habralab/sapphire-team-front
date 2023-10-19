@@ -20,7 +20,7 @@ export const ProjectsPage = () => {
   ];
   return (
     <Container maxW="md" mb={4}>
-      <Flex justifyContent="space-between" alignItems="center" my={4}>
+      <Flex justifyContent="space-between" alignItems="center" my={4} h={42}>
         <Heading variant="h1" as="h1">
           Проекты
         </Heading>

@@ -73,9 +73,9 @@ export function ProfilePage() {
 
   return (
     <Container maxW="md" mb={4}>
-      <Flex justifyContent="space-between" alignItems="center" mt={4} mb={16}>
+      <Flex justifyContent="space-between" alignItems="center" mt={4} mb={16} h={42}>
         <Heading variant="h1" as="h1">
-          Поиск
+          Профиль
         </Heading>
         <Flex gap={4} alignItems="baseline">
           <Notification />
