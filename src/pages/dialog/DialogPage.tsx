@@ -1,4 +1,4 @@
-import { Divider, Box, Portal } from '@chakra-ui/react';
+import { Divider, Box, Container } from '@chakra-ui/react';
 
 import { Messages } from '~/widgets/messages';
 
@@ -6,27 +6,32 @@ import { CreateMessage } from '~/features/chat';
 
 import { ChatInfo } from '~/entities/chat';
 
-import { useLayoutRefs } from '~/shared/hooks';
-
 export function DialogPage() {
-  const layout = useLayoutRefs();
-
   return (
-    <Box>
-      {layout?.header && (
-        <Portal containerRef={layout.header}>
+    <>
+      <Box pos="sticky" top={0} bg="white">
+        <Container maxW="md">
           <ChatInfo />
           <Divider variant="light" position="absolute" left={0} right={0} />
-        </Portal>
-      )}
+        </Container>
+      </Box>
 
-      <Messages />
+      <Container maxW="md">
+        <Messages />
+      </Container>
 
-      {layout?.footer && (
-        <Portal containerRef={layout.footer}>
+      <Box
+        pos="sticky"
+        bottom={0}
+        bg="white"
+        justifyContent="center"
+        borderTop="1px"
+        borderColor="gray.300"
+      >
+        <Container maxW="md">
           <CreateMessage />
-        </Portal>
-      )}
-    </Box>
+        </Container>
+      </Box>
+    </>
   );
 }

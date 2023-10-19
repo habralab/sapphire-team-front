@@ -1,4 +1,4 @@
-import { Flex, SimpleGrid, Heading } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Heading, Container } from '@chakra-ui/react';
 
 import { ProjectCard } from '~/widgets/project-card';
 
@@ -19,35 +19,34 @@ export const ProjectsPage = () => {
     { firstName: 'Бернд', lastName: 'Шнайдер', img: 'https://bit.ly/dan-abramov' },
   ];
   return (
-    <>
-      <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
-        <Flex justifyContent="space-between" alignItems="center" mb={6}>
-          <Heading variant="h1" as="h1">
-            Проекты
-          </Heading>
-          <Flex gap={4} alignItems="baseline">
-            <AddProject />
-          </Flex>
+    <Container maxW="md" mb={4}>
+      <Flex justifyContent="space-between" alignItems="center" my={4}>
+        <Heading variant="h1" as="h1">
+          Проекты
+        </Heading>
+        <Flex gap={4} alignItems="baseline">
+          <AddProject />
         </Flex>
-        <SimpleGrid gap={6}>
-          {data.map((project) => {
-            return (
-              <ProjectCard
-                key={project.id}
-                status={project.status}
-                title={project.title}
-                date={project.date}
-                description={project.description}
-              >
-                <Flex justifyContent="space-between" alignItems="center">
-                  <STag mainTags={['Организатор']} />
-                  <AvatarsGroup avatars={dummyAvatars} />
-                </Flex>
-              </ProjectCard>
-            );
-          })}
-        </SimpleGrid>
       </Flex>
-    </>
+
+      <SimpleGrid gap={4}>
+        {data.map((project) => {
+          return (
+            <ProjectCard
+              key={project.id}
+              status={project.status}
+              title={project.title}
+              date={project.date}
+              description={project.description}
+            >
+              <Flex justifyContent="space-between" alignItems="center">
+                <STag mainTags={['Организатор']} />
+                <AvatarsGroup avatars={dummyAvatars} />
+              </Flex>
+            </ProjectCard>
+          );
+        })}
+      </SimpleGrid>
+    </Container>
   );
 };

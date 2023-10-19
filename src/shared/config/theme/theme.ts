@@ -155,11 +155,15 @@ export const basicTheme = extendTheme({
   },
   styles: {
     global: {
+      html: {
+        overflowY: 'scroll',
+      },
       body: {
         transition: 'background 1s ease-in-out',
         fontSize: 'sm',
         lineHeight: '120%',
         color: 'gray.900',
+        bg: 'gray',
       },
     },
   },
@@ -173,6 +177,7 @@ export const basicTheme = extendTheme({
         600: 'gray.800',
         700: 'gray.700',
       },
+      gray: 'gray.100',
     },
   },
   colors: {

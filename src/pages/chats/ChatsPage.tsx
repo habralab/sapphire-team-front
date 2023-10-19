@@ -1,4 +1,4 @@
-import { VStack, Heading } from '@chakra-ui/react';
+import { Heading, Flex, Container } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import { ChatsList } from '~/widgets/chats-list';
@@ -9,12 +9,16 @@ export function ChatsPage() {
   const [value, setValue] = useState('');
 
   return (
-    <VStack gap={4} align="start">
-      <Heading variant="h1" as="h1">
-        Чаты
-      </Heading>
-      <SearchInput value={value} setValue={setValue} />
+    <>
+      <Container maxW="md">
+        <Flex justifyContent="space-between" alignItems="center" flexGrow="1" my={4}>
+          <Heading variant="h1" as="h1">
+            Чаты
+          </Heading>
+        </Flex>
+        <SearchInput value={value} setValue={setValue} />
+      </Container>
       <ChatsList value={value} />
-    </VStack>
+    </>
   );
 }

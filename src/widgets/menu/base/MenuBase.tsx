@@ -7,7 +7,7 @@ import { routes } from './routes';
 
 export const MenuBase = () => {
   return (
-    <Flex bg="white" justifyContent="center" borderTop="1px" borderColor="gray.300">
+    <Flex bg="white" borderTop="1px" borderColor="gray.300" pos="sticky" bottom={0}>
       <Container maxW="md">
         <Flex as={'nav'} py="3" px="2" justifyContent="space-between">
           {routes.map(({ path, name, icon }) => {

@@ -38,7 +38,7 @@ export function ChatsPageDesktop() {
             <ChatInfo isDesktop />
             <Divider variant="light" position="absolute" left={0} right={0} />
           </Box>
-          <Messages />
+          <Messages isDesktop />
           <CreateMessageDesktop />
         </Stack>
       </Flex>

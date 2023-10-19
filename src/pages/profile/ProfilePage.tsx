@@ -7,7 +7,7 @@ import {
   Tab,
   Stack,
   Heading,
-  Box,
+  Container,
   Text,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
@@ -72,10 +72,10 @@ export function ProfilePage() {
   ];
 
   return (
-    <Box>
-      <Flex justifyContent="space-between" alignItems="center" mb={16}>
+    <Container maxW="md" mb={4}>
+      <Flex justifyContent="space-between" alignItems="center" mt={4} mb={16}>
         <Heading variant="h1" as="h1">
-          Профиль
+          Поиск
         </Heading>
         <Flex gap={4} alignItems="baseline">
           <Notification />
@@ -134,6 +134,6 @@ export function ProfilePage() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </Box>
+    </Container>
   );
 }

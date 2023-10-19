@@ -3,30 +3,15 @@ import { useRef, useState } from 'react';
 import { IoSend } from 'react-icons/io5';
 
 interface CreateMessageProps {
-  fixed?: boolean;
   onSubmit?: (message: string) => void;
 }
 
-export function CreateMessage({ fixed, onSubmit }: CreateMessageProps) {
+export function CreateMessage({ onSubmit }: CreateMessageProps) {
   const [value, setValue] = useState('');
   const messageRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Flex
-      bg="white"
-      position={fixed ? 'fixed' : 'sticky'}
-      borderBottomRadius={fixed ? '' : 'lg'}
-      bottom="0"
-      left="0"
-      right="0"
-      justifyContent="center"
-      borderTop="1px"
-      borderColor="gray.300"
-      px={[5, 6]}
-      py={4}
-      alignItems="center"
-      gap={4}
-    >
+    <Flex px={[0, 0, 6]} py={4} alignItems="center" gap={4} w="full">
       <Box
         ref={messageRef}
         contentEditable
@@ -50,6 +35,7 @@ export function CreateMessage({ fixed, onSubmit }: CreateMessageProps) {
       <IconButton
         aria-label="create-message"
         variant="flat"
+        minW="auto"
         onClick={() => {
           if (onSubmit) onSubmit(value);
           if (messageRef.current) {

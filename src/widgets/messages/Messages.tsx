@@ -5,7 +5,11 @@ import { Message } from '~/entities/chat';
 
 import { STag } from '~/shared/ui/STag';
 
-export function Messages() {
+interface MessagesProps {
+  isDesktop?: boolean;
+}
+
+export function Messages({ isDesktop }: MessagesProps) {
   const messagesRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -23,7 +27,13 @@ export function Messages() {
   }, []);
 
   return (
-    <VStack pt={4} bg="white" ref={messagesRef} px={[0, 0, 6]} overflowY="auto">
+    <VStack
+      pt={4}
+      bg="white"
+      ref={messagesRef}
+      px={[0, 0, 6]}
+      overflowY={isDesktop ? 'auto' : 'initial'}
+    >
       <Box>
         <STag tags={['Не прочитано']} />
       </Box>

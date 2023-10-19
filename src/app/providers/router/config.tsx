@@ -37,7 +37,7 @@ const normalRoutes = [
   },
   { path: PATHS.search, view: { base: <SearchPage />, desktop: <SearchPageDesktop /> } },
   { path: PATHS.chats, view: { base: <ChatsPage />, desktop: <ChatsPageDesktop /> } },
-  { path: PATHS.dialog, view: { base: <DialogPage /> } },
+  { path: PATHS.dialog, view: { base: <DialogPage />, desktop: <ChatsPageDesktop /> } },
   { path: PATHS.notifications, view: { base: <NotificationsPage /> } },
 
   {

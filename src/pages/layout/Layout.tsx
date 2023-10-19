@@ -1,5 +1,5 @@
-import { ChakraProvider, Container, Box, Flex, Stack } from '@chakra-ui/react';
-import { useRef } from 'react';
+import { ChakraProvider, Container, Box, Flex, Stack, Divider } from '@chakra-ui/react';
+import { useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { MenuBase, MenuDesktop } from '~/widgets/menu';
@@ -35,19 +35,9 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
     <LayoutContext.Provider value={{ header: headerRef, footer: footerRef }}>
       <ChakraProvider theme={isMobile ? mobile : desk}>
         {isMobile ? (
-          <Stack className={styles.layout} gap={0}>
-            <Stack gap={0}>
-              <Box ref={headerRef} />
-            </Stack>
-            <Box overflow="auto" flex="1">
-              <Container maxW="md" pt={4} pb={4} minH="full" display="flex">
-                {base}
-              </Container>
-            </Box>
-            <Stack gap={0}>
-              <Box ref={footerRef} />
-              {!isDialogPage && <MenuBase />}
-            </Stack>
+          <Stack gap={0} className={styles.layout}>
+            <Box flex="1">{base}</Box>
+            {!isDialogPage && <MenuBase />}
           </Stack>
         ) : (
           <Flex alignItems="start" height="100vh">

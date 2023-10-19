@@ -1,4 +1,4 @@
-import { Flex, SimpleGrid } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Heading } from '@chakra-ui/react';
 
 import { ProjectCard } from '~/widgets/project-card';
 
@@ -11,6 +11,11 @@ export const SearchPageDesktop = () => {
   return (
     <>
       <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
+        <Flex justifyContent="space-between" alignItems="center" mb={4}>
+          <Heading variant="h1" as="h1">
+            Поиск
+          </Heading>
+        </Flex>
         <Flex gap="4" mb={4}>
           <SearchProject />
           <FilterProject />
