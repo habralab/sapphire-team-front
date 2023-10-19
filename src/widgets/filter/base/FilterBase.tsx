@@ -3,6 +3,7 @@ import {
   Button,
   CloseButton,
   Drawer,
+  DrawerCloseButton,
   DrawerContent,
   Flex,
   Heading,
@@ -65,12 +66,8 @@ export const FilterBase = () => {
   return (
     <Stack h="100%" background="gray.100" px={5} py={2}>
       <Flex alignItems="center" mb={4}>
-        <CloseButton
-          onClick={() => {
-            setFilterStatus(false);
-          }}
-        />
-        <Heading variant="h2" mb={0}>
+        <DrawerCloseButton top={3} left="3" />
+        <Heading variant="h2" mb={0} pl={6}>
           Фильтры
         </Heading>
         <Button
