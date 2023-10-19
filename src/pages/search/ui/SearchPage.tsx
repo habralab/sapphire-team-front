@@ -1,4 +1,4 @@
-import { Flex, SimpleGrid, Container } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Container, Drawer, DrawerContent } from '@chakra-ui/react';
 
 import { FilterBase } from '~/widgets/filter';
 import { ProjectCard } from '~/widgets/project-card';
@@ -45,6 +45,18 @@ export const SearchPage = () => {
           })}
         </SimpleGrid>
       </Flex>
+      <Drawer
+        isOpen={isFilterOpen}
+        onClose={() => {
+          setFilterStatus(false);
+        }}
+        size="full"
+        placement="bottom"
+      >
+        <DrawerContent>
+          <FilterBase />
+        </DrawerContent>
+      </Drawer>
     </Container>
   );
 };
