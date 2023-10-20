@@ -20,6 +20,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       workbox: {
         globPatterns: ['**/*.{js,css,html,woff,woff2,svg}'],
+        navigateFallbackDenylist: [/^\/backend/],
       },
       includeAssets: ['favicon.svg'],
       manifest: {
