@@ -12,12 +12,14 @@ interface StatusProps {
 }
 
 export const Status = ({ status, count }: StatusProps) => {
-  if (count) return <Counter bg="gray.500" count={count} />;
+  if (count) {
+    return <Counter bg="gray.500" count={count} noBorder />;
+  }
   return (
     <>
-      {status === 'read' && <Icon as={BsCheck2All} color="purple.600" w={4} h={4} />}
-      {status === 'sent' && <Icon as={BsCheck2All} color="gray.600" w={4} h={4} />}
-      {status === 'error' && <Icon as={WarningIcon} color="red.500" w={4} h={4} />}
+      {status === 'read' && <Icon as={BsCheck2All} color="purple.600" />}
+      {status === 'sent' && <Icon as={BsCheck2All} color="gray.600" />}
+      {status === 'error' && <Icon as={WarningIcon} color="red.500" />}
     </>
   );
 };

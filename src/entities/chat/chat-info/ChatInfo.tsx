@@ -18,7 +18,7 @@ export function ChatInfo({ isDesktop }: ChatInfoProps) {
           aria-label="back"
           as={Link}
           to={PATHS.chats}
-          icon={<Icon as={FiChevronLeft} />}
+          icon={<Icon as={FiChevronLeft} fontSize="2xl" />}
           variant="flat"
           marginLeft="-2"
         />
@@ -28,7 +28,7 @@ export function ChatInfo({ isDesktop }: ChatInfoProps) {
 
       <Stack spacing={1}>
         <HStack>
-          <Icon as={BsFillBriefcaseFill} w={3} h={3} />
+          <Icon as={BsFillBriefcaseFill} />
           <Heading variant="h3">Сервис онлайн-образования</Heading>
         </HStack>
         <Heading variant="h3" as="h3">

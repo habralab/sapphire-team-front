@@ -43,7 +43,7 @@ export const SearchInput = ({ placeholder, onSubmit, inputColor }: SearchInputPr
         <FormControl>
           <InputGroup>
             <InputLeftElement pointerEvents="none">
-              <SearchIcon color="gray.400" w={4} h={4} />
+              <SearchIcon color="gray.400" fontSize="md" />
             </InputLeftElement>
             <Input
               variant="outline"
@@ -62,7 +62,7 @@ export const SearchInput = ({ placeholder, onSubmit, inputColor }: SearchInputPr
                   color="gray.400"
                   variant="ghost"
                   aria-label="Close"
-                  icon={<CloseIcon w={4} h={4} />}
+                  icon={<CloseIcon fontSize="sm" />}
                 />
               </InputRightElement>
             )}

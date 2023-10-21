@@ -17,7 +17,7 @@ export const AddProject = () => {
       icon={
         <HStack fontWeight="semibold">
           <Text hidden={isMobile}>Создать проект</Text>
-          <Icon as={BsPlus} />
+          <Icon as={BsPlus} fontSize="2xl" />
         </HStack>
       }
     />

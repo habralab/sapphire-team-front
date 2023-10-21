@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { ChatsList } from '~/widgets/chats-list';
 import { Messages } from '~/widgets/messages';
 
-import { CreateMessageDesktop, SearchInput } from '~/features/chat';
+import { CreateMessageDesktop } from '~/features/chat';
 
 import { ChatInfo } from '~/entities/chat';
+
+import { SearchInput } from '~/shared/ui/SearchInput';
 
 export function ChatsPageDesktop() {
   const [value, setValue] = useState('');
@@ -27,9 +29,15 @@ export function ChatsPageDesktop() {
           width="400px"
           flexShrink="0"
         >
-          <Box pt={4} px={5}>
-            <SearchInput value={value} setValue={setValue} />
-            <Divider variant="light" position="absolute" left={0} right={0} />
+          <Box py={4} px={5} position="relative">
+            <SearchInput placeholder="Найти в чатах" onSubmit={console.log} />
+            <Divider
+              variant="light"
+              position="absolute"
+              left={0}
+              bottom={'-1px'}
+              right={0}
+            />
           </Box>
           <ChatsList value={value} view="desktop" />
         </Stack>

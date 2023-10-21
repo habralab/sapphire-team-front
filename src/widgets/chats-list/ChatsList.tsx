@@ -16,7 +16,7 @@ export function ChatsList(props: SearchProps) {
   const { value, view } = props;
 
   return (
-    <Stack spacing={0}>
+    <Stack spacing={0} overflowY="auto">
       {search(value).map((chat) => {
         {
           return view === 'desktop' ? (
@@ -36,12 +36,15 @@ export function ChatsList(props: SearchProps) {
               as={ReactLink}
               key={chat.id}
               borderBottom="1px"
-              borderColor="gray.200"
+              borderColor="gray.300"
               _hover={{
                 textDecoration: 'none',
-                bg: 'gray.100',
+                bg: 'gray.300',
               }}
-              _last={{ border: 'none' }}
+              _first={{
+                borderTop: '1px',
+                borderColor: 'gray.300',
+              }}
             >
               <Container maxW="md">
                 <ChatCard {...chat} />

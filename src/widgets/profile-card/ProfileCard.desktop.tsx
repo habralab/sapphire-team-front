@@ -91,7 +91,7 @@ export function ProfileCardDesktop() {
             {dummyFillProfile}%
           </CircularProgressLabel>
         </CircularProgress>
-        <Text textAlign="center" fontSize="xs">
+        <Text textAlign="center" variant="caption">
           Данные профиля влияют на выдачу актуальных проектов
         </Text>
       </Flex>

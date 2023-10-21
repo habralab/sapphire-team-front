@@ -1,10 +1,10 @@
-import { ChakraProvider, Container, Box, Flex, Stack, Divider } from '@chakra-ui/react';
-import { useMemo, useRef } from 'react';
+import { ChakraProvider, Container, Flex, Stack } from '@chakra-ui/react';
+import { useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { MenuBase, MenuDesktop } from '~/widgets/menu';
 
-import { desktopTheme, mobileTheme, whiteMobileTheme } from '~/shared/config';
+import { desktopTheme, mobileTheme } from '~/shared/config';
 import { LayoutContext } from '~/shared/contexts';
 import { useIsMobile } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
@@ -23,24 +23,18 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   const isNotFoundPage = location.pathname === PATHS.notFound;
-  const isNotificationPage = location.pathname.includes(PATHS.notifications);
-  const isChatPages = location.pathname.includes(PATHS.chats);
-  const isWhiteBackgroundPage = isChatPages || isNotificationPage;
   const isDialogPage = new RegExp(`${PATHS.chats}/\\d+`).test(location.pathname);
-
-  const mobile = isWhiteBackgroundPage ? whiteMobileTheme : mobileTheme;
-  const desk = desktopTheme;
 
   return (
     <LayoutContext.Provider value={{ header: headerRef, footer: footerRef }}>
-      <ChakraProvider theme={isMobile ? mobile : desk}>
+      <ChakraProvider theme={isMobile ? mobileTheme : desktopTheme}>
         {isMobile ? (
           <Stack gap={0} className={styles.layout}>
-            <Box flex="1">{base}</Box>
+            <Flex flex="1">{base}</Flex>
             {!isDialogPage && <MenuBase />}
           </Stack>
         ) : (
-          <Flex alignItems="start" height="100vh">
+          <Flex alignItems="start">
             {!isNotFoundPage && <MenuDesktop />}
             <Container
               maxW="6xl"

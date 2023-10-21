@@ -10,21 +10,21 @@ export const routes: MenuRoute[] = [
   {
     path: PATHS.search,
     name: 'Поиск',
-    icon: <Search2Icon />,
+    icon: <Search2Icon fontSize="2xl" />,
   },
   {
     path: PATHS.projects,
     name: 'Проекты',
-    icon: <Icon as={BsFillBriefcaseFill} />,
+    icon: <Icon as={BsFillBriefcaseFill} fontSize="2xl" />,
   },
   {
     path: PATHS.chats,
     name: 'Чаты',
-    icon: <Icon as={IoChatbubbles} />,
+    icon: <Icon as={IoChatbubbles} fontSize="2xl" />,
   },
   {
     path: PATHS.profile,
     name: 'Профиль',
-    icon: <Icon as={IoPerson} />,
+    icon: <Icon as={IoPerson} fontSize="2xl" />,
   },
 ];

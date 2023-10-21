@@ -16,8 +16,7 @@ import '@fontsource/inter/cyrillic-700.css';
 import { accordionTheme } from './customAnatomy/accordionTheme';
 import { avatarTheme } from './customAnatomy/avatarTheme';
 import { checkboxTheme } from './customAnatomy/checkboxTheme';
-import { tagTheme } from './customAnatomy/tagTheme';
-
+import { inputTheme } from './customAnatomy/inputTheme';
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
  * https://github.com/chakra-ui/chakra-ui/tree/main/packages/components/theme/src
@@ -66,15 +65,15 @@ const Link = defineStyleConfig({
   },
 });
 
-const flatButton = defineStyle({
-  color: 'gray.900',
+const flatButton = defineStyle(({ colorScheme }) => ({
+  color: colorScheme === 'purple' ? 'purple.600' : 'gray.900',
   _hover: {
-    color: 'gray.800',
+    color: colorScheme === 'purple' ? 'purple.500' : 'gray.800',
   },
   _active: {
-    color: 'gray.700',
+    color: colorScheme === 'purple' ? 'purple.400' : 'gray.700',
   },
-});
+}));
 
 const Button = defineStyleConfig({
   baseStyle: {
@@ -152,25 +151,23 @@ export const basicTheme = extendTheme({
     Divider,
     Tabs,
     Avatar: avatarTheme,
-    Icon,
+    //Icon,
     Link,
     Heading,
     Text,
     Accordion: accordionTheme,
     Checkbox: checkboxTheme,
-    Tag: tagTheme,
+    Input: inputTheme,
   },
   styles: {
     global: {
-      html: {
-        overflowY: 'scroll',
-      },
       body: {
         transition: 'background 1s ease-in-out',
         fontSize: 'sm',
         lineHeight: '120%',
         color: 'gray.900',
-        bg: 'gray',
+        bg: 'bg',
+        overflowY: 'scroll',
       },
     },
   },
@@ -179,6 +176,7 @@ export const basicTheme = extendTheme({
   },
   semanticTokens: {
     colors: {
+      bg: 'gray',
       dark: {
         500: 'gray.900',
         600: 'gray.800',
@@ -192,6 +190,9 @@ export const basicTheme = extendTheme({
       100: '#E9D8FD',
       600: '#6D2DF0',
       900: '#25005B',
+    },
+    pin: {
+      100: '#E0E0E0',
     },
     gray: {
       50: '#FAFAFA',

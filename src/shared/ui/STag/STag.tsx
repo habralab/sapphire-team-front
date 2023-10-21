@@ -25,7 +25,7 @@ export function STag(props: TagType) {
       {tags?.map((tag) => (
         <Tag
           key={tag}
-          bg={'gray.100'}
+          bg={'gray.300'}
           py={1}
           px={2}
           borderRadius="lg"

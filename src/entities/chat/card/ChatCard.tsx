@@ -19,11 +19,7 @@ export function ChatCard(props: ChatCardProps) {
 
       <Stack spacing={1}>
         <HStack>
-          <Icon
-            as={role === 'Организатор' ? BsFillBriefcaseFill : IoPerson}
-            w={3}
-            h={3}
-          />
+          <Icon as={role === 'Организатор' ? BsFillBriefcaseFill : IoPerson} />
           <Heading variant="h3">{title}</Heading>
         </HStack>
         <Heading variant="h3" as="h3">

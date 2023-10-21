@@ -8,7 +8,7 @@ import { routes } from './routes';
 
 export const MenuDesktop = () => {
   return (
-    <Stack position="sticky" top={2} pt={2} gap={0} ml="auto" pl={2}>
+    <Stack position="sticky" top={2} pt={4} gap={0} ml="auto" pl={4}>
       <LogoDesktop />
       <Divider variant="light" mb={5} />
       <Stack as={'nav'} spacing={6}>

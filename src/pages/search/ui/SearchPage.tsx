@@ -1,20 +1,16 @@
-import { Flex, SimpleGrid, Container, Drawer, DrawerContent } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Container } from '@chakra-ui/react';
 
-import { FilterBase } from '~/widgets/filter';
 import { ProjectCard } from '~/widgets/project-card';
 
-import { FilterProject, SearchProject } from '~/features/project';
+import { SearchProject, Filter } from '~/features/project';
 import { Notification, Settings } from '~/features/user';
 
 import { Avatar } from '~/entities/user';
 
 import { data } from '~/shared/lib/data';
-import { useFilterStore } from '~/shared/store';
 import { STag } from '~/shared/ui/STag';
 
 export const SearchPage = () => {
-  const isFilterOpen = useFilterStore((state) => state.isFilterOpen);
-  const setFilterStatus = useFilterStore((state) => state.setFilterStatus);
   return (
     <Container maxW="md" mb={4}>
       <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
@@ -27,7 +23,7 @@ export const SearchPage = () => {
         </Flex>
         <Flex gap="1" mb={4}>
           <SearchProject />
-          <FilterProject />
+          <Filter />
         </Flex>
         <SimpleGrid gap={4}>
           {data.map((project) => {
@@ -45,18 +41,6 @@ export const SearchPage = () => {
           })}
         </SimpleGrid>
       </Flex>
-      <Drawer
-        isOpen={isFilterOpen}
-        onClose={() => {
-          setFilterStatus(false);
-        }}
-        size="full"
-        placement="bottom"
-      >
-        <DrawerContent>
-          <FilterBase />
-        </DrawerContent>
-      </Drawer>
     </Container>
   );
 };

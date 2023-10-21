@@ -5,10 +5,12 @@ interface CounterType {
   float?: boolean;
   bg?: ColorProps['color'];
   color?: ColorProps['color'];
+  borderBg?: ColorProps['color'];
+  noBorder?: boolean;
 }
 
 export function Counter(props: CounterType) {
-  const { count, float, bg, color } = props;
+  const { count, float, bg, color, borderBg, noBorder } = props;
 
   return (
     <Box
@@ -21,8 +23,9 @@ export function Counter(props: CounterType) {
       whiteSpace="nowrap"
       fontWeight="medium"
       lineHeight="1"
-      border="1px"
-      borderColor={bg ?? 'purple.600'}
+      border={noBorder ? '' : '2px'}
+      fontSize="sm"
+      borderColor={borderBg ?? bg ?? 'purple.600'}
       borderRadius="full"
       boxSizing="content-box"
       right={count && count > 99 ? -3 : -1}
