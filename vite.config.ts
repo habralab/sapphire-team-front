@@ -77,9 +77,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes('framer-motion')) {
-            return 'framer-motion';
-          }
           if (id.includes('ant') || id.includes('rc-')) {
             return 'ant';
           }
