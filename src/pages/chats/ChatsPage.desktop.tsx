@@ -30,7 +30,7 @@ export function ChatsPageDesktop() {
           flexShrink="0"
         >
           <Box py={4} px={5} position="relative">
-            <SearchInput placeholder="Найти в чатах" onSubmit={console.log} />
+            <SearchInput placeholder="Найти в чатах" onChange={console.log} />
             <Divider
               variant="light"
               position="absolute"

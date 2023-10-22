@@ -1,8 +1,8 @@
-import { InputProps, SearchInput } from '~/shared/ui/SearchInput';
+import { SearchInput } from '~/shared/ui/SearchInput';
 
 export const SearchProject = () => {
-  const handleSumbit = (value: InputProps) => {
+  const handleSumbit = (value: string) => {
     console.log(value);
   };
-  return <SearchInput onSubmit={handleSumbit} placeholder="Найти проект" />;
+  return <SearchInput onChange={handleSumbit} placeholder="Найти проект" />;
 };

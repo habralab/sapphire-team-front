@@ -22,14 +22,17 @@ import {
   TagCloseButton,
   HStack,
 } from '@chakra-ui/react';
+import { BsPlus } from 'react-icons/bs';
 import { IoOptions } from 'react-icons/io5';
 
 import { useIsMobile } from '~/shared/hooks';
 import { Counter } from '~/shared/ui/Counter';
+import { TreeSelect } from '~/shared/ui/TreeSelect';
 
 export const Filter = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isMobile = useIsMobile();
+
   return (
     <>
       <IconButton
@@ -69,80 +72,13 @@ export const Filter = () => {
                 <Heading variant="h2" mb={3}>
                   Специализация
                 </Heading>
-                <InputGroup>
-                  <Input
-                    bg="white"
-                    borderRadius="full"
-                    readOnly
-                    placeholder="Например, Фронтенд разработчик"
-                  />
-                  <InputRightElement pointerEvents="none">
-                    <ChevronDownIcon mr={4} fontSize="2xl" />
-                  </InputRightElement>
-                </InputGroup>
-
-                <HStack wrap={'wrap'} mt={2}>
-                  <Tag
-                    size="sm"
-                    borderRadius="lg"
-                    colorScheme="pin"
-                    px={3}
-                    py={1}
-                    fontWeight="medium"
-                  >
-                    <TagLabel>UX-дизайнер</TagLabel>
-                    <TagCloseButton />
-                  </Tag>
-                  <Tag
-                    size="sm"
-                    borderRadius="lg"
-                    colorScheme="pin"
-                    px={3}
-                    py={1}
-                    fontWeight="medium"
-                  >
-                    <TagLabel>UX-дизайнер</TagLabel>
-                    <TagCloseButton />
-                  </Tag>
-                  <Tag
-                    size="sm"
-                    borderRadius="lg"
-                    colorScheme="pin"
-                    px={3}
-                    py={1}
-                    fontWeight="medium"
-                  >
-                    <TagLabel>UX-дизайнер</TagLabel>
-                    <TagCloseButton />
-                  </Tag>
-                  <Tag
-                    size="sm"
-                    borderRadius="lg"
-                    colorScheme="pin"
-                    px={3}
-                    py={1}
-                    fontWeight="medium"
-                  >
-                    <TagLabel>UX-дизайнер</TagLabel>
-                    <TagCloseButton />
-                  </Tag>
-                </HStack>
+                <TreeSelect />
               </Box>
               <Box>
                 <Heading variant="h2" mb={3}>
                   Профессиональные навыки
                 </Heading>
-                <InputGroup>
-                  <Input
-                    bg="white"
-                    borderRadius="full"
-                    readOnly
-                    placeholder="Например, Python"
-                  />
-                  <InputRightElement pointerEvents="none">
-                    <ChevronDownIcon mr={4} fontSize="2xl" />
-                  </InputRightElement>
-                </InputGroup>
+                <TreeSelect />
               </Box>
               <Box>
                 <Heading variant="h2">Дата начала проекта</Heading>

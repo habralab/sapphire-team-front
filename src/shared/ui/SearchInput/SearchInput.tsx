@@ -1,74 +1,58 @@
 import { CloseIcon, SearchIcon } from '@chakra-ui/icons';
 import {
-  Flex,
-  FormControl,
   IconButton,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
 } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
+import React from 'react';
 
 interface SearchInputProps {
   placeholder?: string;
   inputColor?: string;
-  onSubmit: (value: InputProps) => void;
+  value?: string;
+  onChange: (value: string) => void;
 }
 
-export interface InputProps {
-  title: string;
-}
-
-export const SearchInput = ({ placeholder, onSubmit, inputColor }: SearchInputProps) => {
-  const {
-    handleSubmit,
-    register,
-    reset,
-    formState: { dirtyFields },
-  } = useForm<InputProps>();
-
-  const onSubmitHandler = (values: InputProps) => {
-    onSubmit(values);
-  };
-
-  return (
-    <form
-      onSubmit={handleSubmit(onSubmitHandler)}
-      style={{
-        width: '100%',
-      }}
-    >
-      <Flex>
-        <FormControl>
-          <InputGroup>
-            <InputLeftElement pointerEvents="none">
-              <SearchIcon color="gray.400" fontSize="md" />
-            </InputLeftElement>
-            <Input
-              variant="outline"
-              borderRadius="full"
-              _placeholder={{ color: 'gray.400' }}
-              background={inputColor ?? 'white'}
-              placeholder={placeholder}
-              {...register('title')}
+export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
+  ({ placeholder, onChange, value, inputColor }: SearchInputProps, ref) => {
+    return (
+      <InputGroup>
+        <InputLeftElement pointerEvents="none">
+          <SearchIcon color="gray.400" fontSize="md" />
+        </InputLeftElement>
+        <Input
+          ref={ref}
+          variant="outline"
+          borderRadius="full"
+          _placeholder={{ color: 'gray.400' }}
+          background={inputColor ?? 'white'}
+          placeholder={placeholder}
+          value={value}
+          onBlur={(e) => {
+            e.stopPropagation();
+          }}
+          onChange={(e) => {
+            onChange(e.target.value);
+          }}
+        />
+        {value && (
+          <InputRightElement>
+            <IconButton
+              onClick={() => {
+                onChange('');
+              }}
+              color="gray.400"
+              variant="ghost"
+              aria-label="Close"
+              icon={<CloseIcon fontSize="sm" />}
             />
-            {dirtyFields.title && (
-              <InputRightElement>
-                <IconButton
-                  onClick={() => {
-                    reset();
-                  }}
-                  color="gray.400"
-                  variant="ghost"
-                  aria-label="Close"
-                  icon={<CloseIcon fontSize="sm" />}
-                />
-              </InputRightElement>
-            )}
-          </InputGroup>
-        </FormControl>
-      </Flex>
-    </form>
-  );
-};
+          </InputRightElement>
+        )}
+      </InputGroup>
+    );
+  },
+);
+
+SearchInput.displayName = 'SearchInput';

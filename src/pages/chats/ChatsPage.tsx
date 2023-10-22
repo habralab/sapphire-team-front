@@ -16,7 +16,7 @@ export function ChatsPage() {
             Чаты
           </Heading>
         </Flex>
-        <SearchInput placeholder="Найти в чатах" onSubmit={console.log} />
+        <SearchInput placeholder="Найти в чатах" onChange={console.log} />
       </Container>
       <ChatsList value={value} />
     </Box>

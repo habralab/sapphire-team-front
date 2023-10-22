@@ -89,13 +89,6 @@ const Button = defineStyleConfig({
   },
 });
 
-const Icon = defineStyleConfig({
-  baseStyle: {
-    w: '6',
-    h: '6',
-  },
-});
-
 const light = defineStyle({
   borderWidth: '1px',
   borderStyle: 'solid',
@@ -151,7 +144,6 @@ export const basicTheme = extendTheme({
     Divider,
     Tabs,
     Avatar: avatarTheme,
-    //Icon,
     Link,
     Heading,
     Text,

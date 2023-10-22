@@ -1,4 +1,4 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, createLocalStorageManager, ColorMode } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -9,9 +9,14 @@ import { Routing } from './providers/router';
 
 const queryClient = new QueryClient();
 
+const colorModeManager = {
+  ...createLocalStorageManager('chakra-ui-color-mode'),
+  get: () => 'light' as ColorMode,
+};
+
 function App() {
   return (
-    <ChakraProvider theme={basicTheme}>
+    <ChakraProvider theme={basicTheme} colorModeManager={colorModeManager}>
       <LayoutProvider>
         <QueryClientProvider client={queryClient}>
           <Routing />

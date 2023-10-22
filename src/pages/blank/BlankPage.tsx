@@ -8,6 +8,8 @@ import {
   Icon,
   Text,
   ChakraProvider,
+  createLocalStorageManager,
+  ColorMode,
 } from '@chakra-ui/react';
 
 import { Logo } from '~/shared/ui/Logo';
@@ -17,9 +19,14 @@ import Decorate from './decorate.svg';
 import { ReactComponent as TelegramIcon } from './telegram.svg';
 import { theme } from './theme';
 
+const colorModeManager = {
+  ...createLocalStorageManager('chakra-ui-color-mode'),
+  get: () => 'dark' as ColorMode,
+};
+
 export function BlankPage() {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme} colorModeManager={colorModeManager}>
       <Container maxW="container.sm">
         <Flex
           height={'100vh'}
