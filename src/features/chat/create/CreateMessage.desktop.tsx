@@ -27,7 +27,6 @@ export function CreateMessageDesktop({ onSubmit }: CreateMessageDesktopProps) {
         contentEditable
         overflowWrap="anywhere"
         overflowY="auto"
-        placeholder="Введите сообщение..."
         width="full"
         border="1px"
         maxH="200px"
@@ -52,7 +51,7 @@ export function CreateMessageDesktop({ onSubmit }: CreateMessageDesktopProps) {
         _focusVisible={{ outline: 'none' }}
         _empty={{
           _before: {
-            color: 'gray.500',
+            color: 'gray.400',
             content: '"Введите сообщение..."',
           },
         }}

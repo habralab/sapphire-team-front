@@ -161,6 +161,9 @@ export const basicTheme = extendTheme({
         bg: 'bg',
         overflowY: 'scroll',
       },
+      '.ant-picker-clear': {
+        opacity: 1,
+      },
     },
   },
   fonts: {

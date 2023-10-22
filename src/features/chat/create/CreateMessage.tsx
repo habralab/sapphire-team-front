@@ -15,7 +15,6 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
       <Box
         ref={messageRef}
         contentEditable
-        placeholder="Введите сообщение..."
         width="full"
         border="1px"
         borderRadius="lg"
@@ -29,7 +28,7 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
         }}
         _empty={{
           _before: {
-            color: 'gray.500',
+            color: 'gray.400',
             content: '"Введите сообщение..."',
           },
         }}

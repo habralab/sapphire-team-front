@@ -48,62 +48,43 @@ export const TreeSelect = () => {
   };
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          fontSizeLG: 14,
-          fontFamily: `'Inter', sans-serif`,
-          zIndexPopupBase: 2000,
-        },
-        components: {
-          Select: {
-            borderRadiusLG: 16,
-            colorPrimaryHover: 'var(--chakra-colors-blue-500)',
-            controlOutline: 'var(--chakra-colors-blue-500)',
-            controlOutlineWidth: 1,
-            borderRadius: 12,
-          },
-        },
-      }}
-    >
-      <AntdTreeSelect
-        style={{ width: '100%' }}
-        value={value}
-        dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-        placeholder="Ваши специализации"
-        showSearch={false}
-        multiple
-        treeCheckable
-        treeExpandAction="click"
-        searchValue={input}
-        treeDefaultExpandAll
-        onChange={onChange}
-        treeData={treeData}
-        maxTagCount={'responsive'}
-        size="large"
-        dropdownRender={(menu) => (
-          <>
-            <HStack mb={2}>
-              <SearchInput
-                ref={int}
-                placeholder="Найти специальность"
-                onChange={(value) => {
-                  setInput(value);
-                }}
-                value={input}
-              />
-              <IconButton
-                aria-label="clear"
-                onClick={() => {
-                  setValue(undefined);
-                }}
-                icon={<CloseIcon fontSize="sm" />}
-              />
-            </HStack>
-            <Box onClick={() => int.current?.blur()}>{menu}</Box>
-          </>
-        )}
-      />
-    </ConfigProvider>
+    <AntdTreeSelect
+      style={{ width: '100%' }}
+      value={value}
+      dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+      placeholder="Ваши специализации"
+      showSearch={false}
+      multiple
+      treeCheckable
+      treeExpandAction="click"
+      searchValue={input}
+      treeDefaultExpandAll
+      onChange={onChange}
+      treeData={treeData}
+      maxTagCount={'responsive'}
+      size="large"
+      dropdownRender={(menu) => (
+        <>
+          <HStack mb={2}>
+            <SearchInput
+              ref={int}
+              placeholder="Найти специальность"
+              onChange={(value) => {
+                setInput(value);
+              }}
+              value={input}
+            />
+            <IconButton
+              aria-label="clear"
+              onClick={() => {
+                setValue(undefined);
+              }}
+              icon={<CloseIcon fontSize="sm" />}
+            />
+          </HStack>
+          <Box onClick={() => int.current?.blur()}>{menu}</Box>
+        </>
+      )}
+    />
   );
 };

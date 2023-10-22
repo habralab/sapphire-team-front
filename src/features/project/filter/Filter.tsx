@@ -15,6 +15,7 @@ import {
   Stack,
   Input,
 } from '@chakra-ui/react';
+import { DatePicker } from 'antd';
 import { IoOptions } from 'react-icons/io5';
 
 import { useIsMobile } from '~/shared/hooks';
@@ -74,16 +75,13 @@ export const Filter = () => {
               </Box>
               <Box>
                 <Heading variant="h2">Дата начала проекта</Heading>
-                <Input
-                  variant="filled"
-                  bg="white"
-                  borderRadius="full"
-                  fontSize="sm"
-                  color="gray.500"
-                  placeholder="Выберите дату"
-                  type="date"
-                />
-                {/* вынести в colorSchema или в variant */}
+                <DatePicker
+                  inputReadOnly={isMobile}
+                  size="large"
+                  style={{ width: '100%' }}
+                  placeholder="дд.мм.гггг"
+                  format="DD.MM.YYYY"
+                ></DatePicker>
               </Box>
             </Stack>
           </Container>
