@@ -12,7 +12,9 @@ const Routing = () => {
           <Route
             key={props.path}
             path={props.path}
-            element={<Layout {...props.view} />}
+            element={
+              import.meta.env.VITE_CLOSED ? props.view.base : <Layout {...props.view} />
+            }
           />
         ))}
       </Routes>
