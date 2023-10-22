@@ -20,6 +20,7 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
         border="1px"
         borderRadius="lg"
         borderColor="gray.300"
+        bg="white"
         onInput={(e) => {
           setValue(e.currentTarget.innerText);
         }}
@@ -42,7 +43,7 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
             messageRef.current.innerHTML = '';
           }
         }}
-        icon={<Icon as={IoSend} w={4} h={4} />}
+        icon={<Icon as={IoSend} />}
       />
     </Flex>
   );

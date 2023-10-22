@@ -2,7 +2,7 @@ import { Flex, SimpleGrid, Heading } from '@chakra-ui/react';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { SearchProject, FilterProject } from '~/features/project';
+import { Filter, SearchProject } from '~/features/project';
 
 import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
@@ -18,7 +18,7 @@ export const SearchPageDesktop = () => {
         </Flex>
         <Flex gap="4" mb={4}>
           <SearchProject />
-          <FilterProject />
+          <Filter />
         </Flex>
         <SimpleGrid
           columns={{

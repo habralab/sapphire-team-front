@@ -80,6 +80,9 @@ export default defineConfig({
           if (id.includes('framer-motion')) {
             return 'framer-motion';
           }
+          if (id.includes('ant') || id.includes('rc-')) {
+            return 'ant';
+          }
           if (id.includes('chakra') || id.includes('emotion')) {
             return 'chakra';
           }

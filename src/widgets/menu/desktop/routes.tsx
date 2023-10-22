@@ -10,12 +10,12 @@ export const routes: MenuRoute[] = [
   {
     path: PATHS.notifications,
     name: 'Уведомления',
-    icon: <Icon as={IoNotifications} />,
+    icon: <Icon as={IoNotifications} fontSize="2xl" />,
     divided: true,
   },
   {
     path: PATHS.settings,
     name: 'Настройки',
-    icon: <Icon as={IoSettings} />,
+    icon: <Icon as={IoSettings} fontSize="2xl" />,
   },
 ];

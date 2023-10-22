@@ -4,7 +4,7 @@ import { AiFillStar } from 'react-icons/ai';
 export function Rating() {
   return (
     <Flex align="center" gap={1}>
-      <Icon as={AiFillStar} color="yellow.400" w={4} h={4} />
+      <Icon as={AiFillStar} color="yellow.400" />
       <Text fontWeight="medium" fontSize="xs">
         5
       </Text>

@@ -6,7 +6,7 @@ export function Settings() {
     <IconButton
       variant="flat"
       aria-label="notification"
-      icon={<Icon as={IoSettings} />}
+      icon={<Icon as={IoSettings} fontSize="2xl" />}
     />
   );
 }

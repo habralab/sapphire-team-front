@@ -8,8 +8,8 @@ import { ChatInfo } from '~/entities/chat';
 
 export function DialogPage() {
   return (
-    <>
-      <Box pos="sticky" top={0} bg="white">
+    <Box w="full">
+      <Box pos="sticky" top={0} bg="bg">
         <Container maxW="md">
           <ChatInfo />
           <Divider variant="light" position="absolute" left={0} right={0} />
@@ -23,7 +23,7 @@ export function DialogPage() {
       <Box
         pos="sticky"
         bottom={0}
-        bg="white"
+        bg="bg"
         justifyContent="center"
         borderTop="1px"
         borderColor="gray.300"
@@ -32,6 +32,6 @@ export function DialogPage() {
           <CreateMessage />
         </Container>
       </Box>
-    </>
+    </Box>
   );
 }

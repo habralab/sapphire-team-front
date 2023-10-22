@@ -29,7 +29,6 @@ export function Messages({ isDesktop }: MessagesProps) {
   return (
     <VStack
       pt={4}
-      bg="white"
       ref={messagesRef}
       px={[0, 0, 6]}
       overflowY={isDesktop ? 'auto' : 'initial'}

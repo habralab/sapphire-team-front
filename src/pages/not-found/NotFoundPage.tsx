@@ -9,7 +9,7 @@ import NotFound from './notFound.svg';
 export const NotFoundPage = () => {
   const navigate = useNavigate();
   return (
-    <Flex flexDirection="column" justifyContent="center" alignItems="center" m="auto">
+    <Flex flexDirection="column" justifyContent="center" alignItems="center" flex="1">
       <Heading
         variant="h1"
         as="h1"
@@ -50,7 +50,7 @@ export const NotFoundPage = () => {
         padding={[5, 5, 7]}
         fontSize={['sm', 'sm', 'md']}
         fontWeight="600"
-        rightIcon={<Icon as={BsArrowRightShort} />}
+        rightIcon={<Icon as={BsArrowRightShort} fontSize="2xl" />}
       >
         Вернуться на главную страницу
       </Button>

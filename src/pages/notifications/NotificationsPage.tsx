@@ -12,10 +12,10 @@ export function NotificationsPage() {
 
   return (
     <Container maxW="md" mb={4}>
-      <Flex alignItems="center" my={4} gap={4}>
+      <Flex alignItems="center" my={4} gap={4} h={42}>
         <IconButton
           aria-label="back"
-          icon={<Icon as={FiChevronLeft} />}
+          icon={<Icon as={FiChevronLeft} fontSize="2xl" />}
           variant="flat"
           onClick={goBack}
           minW={6}

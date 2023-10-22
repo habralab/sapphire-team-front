@@ -2,7 +2,7 @@ import { Flex, SimpleGrid, Container } from '@chakra-ui/react';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { FilterProject, SearchProject } from '~/features/project';
+import { SearchProject, Filter } from '~/features/project';
 import { Notification, Settings } from '~/features/user';
 
 import { Avatar } from '~/entities/user';
@@ -23,7 +23,7 @@ export const SearchPage = () => {
         </Flex>
         <Flex gap="1" mb={4}>
           <SearchProject />
-          <FilterProject />
+          <Filter />
         </Flex>
         <SimpleGrid gap={4}>
           {data.map((project) => {
