@@ -1,4 +1,3 @@
-import { ChevronDownIcon } from '@chakra-ui/icons';
 import {
   Button,
   IconButton,
@@ -15,14 +14,7 @@ import {
   Container,
   Stack,
   Input,
-  InputRightElement,
-  InputGroup,
-  Tag,
-  TagLabel,
-  TagCloseButton,
-  HStack,
 } from '@chakra-ui/react';
-import { BsPlus } from 'react-icons/bs';
 import { IoOptions } from 'react-icons/io5';
 
 import { useIsMobile } from '~/shared/hooks';
