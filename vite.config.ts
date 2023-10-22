@@ -73,21 +73,4 @@ export default defineConfig({
       },
     ],
   },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('ant') || id.includes('rc-')) {
-            return 'ant';
-          }
-          if (id.includes('chakra') || id.includes('emotion')) {
-            return 'chakra';
-          }
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
-        },
-      },
-    },
-  },
 });
