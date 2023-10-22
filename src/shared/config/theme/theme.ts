@@ -162,7 +162,7 @@ export const basicTheme = extendTheme({
         overflowY: 'scroll',
       },
       '.ant-picker-clear': {
-        opacity: 1,
+        opacity: '1 !important',
       },
     },
   },
