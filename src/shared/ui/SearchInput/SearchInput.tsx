@@ -6,7 +6,7 @@ import {
   InputLeftElement,
   InputRightElement,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 interface SearchInputProps {
   placeholder?: string;
@@ -15,7 +15,7 @@ interface SearchInputProps {
   onChange: (value: string) => void;
 }
 
-export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
+export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   ({ placeholder, onChange, value, inputColor }: SearchInputProps, ref) => {
     return (
       <InputGroup>
