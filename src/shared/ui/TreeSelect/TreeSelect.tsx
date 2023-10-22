@@ -58,8 +58,8 @@ export const TreeSelect = () => {
         components: {
           Select: {
             borderRadiusLG: 16,
-            colorPrimaryHover: '#3182ce',
-            controlOutline: '#3182ce',
+            colorPrimaryHover: 'var(--chakra-colors-blue-500)',
+            controlOutline: 'var(--chakra-colors-blue-500)',
             controlOutlineWidth: 1,
             borderRadius: 12,
           },

@@ -25,6 +25,9 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         <Input
           ref={ref}
           variant="outline"
+          _hover={{
+            borderColor: 'blue.500',
+          }}
           borderRadius="full"
           _placeholder={{ color: 'gray.400' }}
           background={inputColor ?? 'white'}

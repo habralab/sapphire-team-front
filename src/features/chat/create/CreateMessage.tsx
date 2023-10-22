@@ -21,10 +21,12 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
         borderRadius="lg"
         borderColor="gray.300"
         bg="white"
+        _hover={{
+          borderColor: 'blue.500',
+        }}
         onInput={(e) => {
           setValue(e.currentTarget.innerText);
         }}
-        _focusVisible={{ outline: 'none' }}
         _empty={{
           _before: {
             color: 'gray.500',

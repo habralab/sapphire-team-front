@@ -33,6 +33,9 @@ export function CreateMessageDesktop({ onSubmit }: CreateMessageDesktopProps) {
         maxH="200px"
         borderRadius="xl"
         borderColor="gray.300"
+        _hover={{
+          borderColor: 'blue.500',
+        }}
         onInput={(e) => {
           const element = e.currentTarget;
           const text = element.innerText;
