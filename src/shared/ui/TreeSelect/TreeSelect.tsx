@@ -62,6 +62,9 @@ export const TreeSelect = () => {
             userSelect="none"
             {...effect}
             px={3}
+            onClick={() => {
+              searchRef.current?.focus();
+            }}
             _empty={{
               _before: {
                 color: 'gray.400',
