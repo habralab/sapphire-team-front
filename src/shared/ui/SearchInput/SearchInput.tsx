@@ -10,13 +10,12 @@ import React, { forwardRef } from 'react';
 
 interface SearchInputProps {
   placeholder?: string;
-  inputColor?: string;
   value?: string;
   onChange: (value: string) => void;
 }
 
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ placeholder, onChange, value, inputColor }: SearchInputProps, ref) => {
+  ({ placeholder, onChange, value }: SearchInputProps, ref) => {
     return (
       <InputGroup>
         <InputLeftElement pointerEvents="none">
@@ -30,7 +29,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
           }}
           borderRadius="full"
           _placeholder={{ color: 'gray.400' }}
-          background={inputColor ?? 'white'}
+          background={'white'}
           placeholder={placeholder}
           value={value}
           onBlur={(e) => {

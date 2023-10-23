@@ -48,7 +48,6 @@ export function CreateMessageDesktop({ onSubmit }: CreateMessageDesktopProps) {
           selection?.removeAllRanges();
           selection?.addRange(range);
         }}
-        _focusVisible={{ outline: 'none' }}
         _empty={{
           _before: {
             color: 'gray.400',

@@ -14,4 +14,6 @@ const sizes = {
   md: definePartsStyle({ field: md }),
 };
 
-export const inputTheme = defineMultiStyleConfig({ sizes });
+export const inputTheme = defineMultiStyleConfig({
+  sizes,
+});

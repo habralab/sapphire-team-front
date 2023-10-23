@@ -15,7 +15,6 @@ import {
   Stack,
   Input,
 } from '@chakra-ui/react';
-import { DatePicker } from 'antd';
 import { IoOptions } from 'react-icons/io5';
 
 import { useIsMobile } from '~/shared/hooks';
@@ -47,7 +46,7 @@ export const Filter = () => {
       <Modal onClose={onClose} size="full" isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent bg="bg" display="flex" alignItems="center">
-          <Container maxW="md" flex="1">
+          <Container maxW="md">
             <Flex alignItems="center" justifyContent="space-between" my={4}>
               <Flex alignItems="baseline">
                 <CloseButton onClick={onClose} mr={2} />
@@ -75,13 +74,15 @@ export const Filter = () => {
               </Box>
               <Box>
                 <Heading variant="h2">Дата начала проекта</Heading>
-                <DatePicker
-                  inputReadOnly={isMobile}
-                  size="large"
-                  style={{ width: '100%' }}
-                  placeholder="дд.мм.гггг"
-                  format="DD.MM.YYYY"
-                ></DatePicker>
+                <Input
+                  variant="filled"
+                  bg="white"
+                  borderRadius="full"
+                  fontSize="sm"
+                  color="gray.500"
+                  placeholder="Выберите дату"
+                  type="date"
+                />
               </Box>
             </Stack>
           </Container>

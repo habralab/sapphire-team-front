@@ -8,18 +8,14 @@ const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpe
 
 const baseStyle = definePartsStyle({
   container: {
-    borderTopWidth: '0px',
-    _last: {
-      borderBottomWidth: '0px',
-    },
-  },
-  button: {
-    borderRadius: '2xl',
-    _expanded: { bg: 'gray.100', borderBottomRadius: 'none' },
+    border: 'none',
   },
   panel: {
-    bg: 'gray.100',
-    borderBottomRadius: '2xl',
+    p: 0,
+    pb: 2,
+  },
+  button: {
+    _hover: { bg: 'gray.200', borderColor: 'blue.500' },
   },
 });
 
