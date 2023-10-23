@@ -3,4 +3,4 @@
 
 export FORCE_COLOR=1
 
-yarn lint-staged
+yarn concurrently "yarn lint" "lint-staged" --raw

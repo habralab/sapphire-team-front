@@ -10,3 +10,4 @@ dist
 !.yarn/versions
 stats.html
 .cache
+.eslintcache

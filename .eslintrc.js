@@ -40,6 +40,7 @@ module.exports = {
     'jsx-a11y/accessible-emoji': 'off',
     'react/prop-types': 'off',
     'import/no-unresolved': 'error',
+    'import/no-cycle': 'error',
     'import/newline-after-import': 'error',
     'import/order': [
       'error',
