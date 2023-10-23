@@ -10,7 +10,7 @@ import {
   Container,
   Text,
 } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { ProfileCard } from '~/widgets/profile-card';
@@ -29,7 +29,7 @@ const tabs = ['about', 'projects', 'reviews'];
 export function ProfilePage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!searchParams.get('tab')) {
       setSearchParams({ tab: tabs[0] });
     }
