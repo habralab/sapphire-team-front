@@ -13,6 +13,7 @@ jobs:
       - name: deploy
         env:
           VITE_CLOSED: ${{ vars.VITE_CLOSED }}
+          VITE_APP_BASE_URL: ${{ vars.PROD_URL }}
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.IP }}

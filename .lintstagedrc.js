@@ -1,5 +1,5 @@
 module.exports = {
-  '*.{ts,tsx}': (filenames) => {
+  'src/**/*.{ts,tsx}': (filenames) => {
     return [`vitest related --run ${filenames.join(' ')}`];
   },
 };

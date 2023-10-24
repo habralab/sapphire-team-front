@@ -42,7 +42,7 @@ export default defineConfig({
         orientation: 'any',
         display: 'standalone',
         lang: 'ru-RU',
-        start_url: '/',
+        start_url: import.meta.env.VITE_APP_BASE_URL || '/',
         name: 'Найди IT-проект | Sapphire',
         short_name: 'Найди IT-проект',
         description: 'Помогает специалистам объединиться в команды для работы в проектах',
