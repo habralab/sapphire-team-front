@@ -11,13 +11,13 @@ export function Notification() {
       <IconButton
         variant="flat"
         aria-label="notification"
+        as={Link}
+        to={PATHS.notifications}
         icon={
-          <Link to={PATHS.notifications}>
-            <Box position="relative">
-              <Icon as={IoNotifications} fontSize="2xl" />
-              <Counter count={2} float borderBg="bg" />
-            </Box>
-          </Link>
+          <Box position="relative">
+            <Icon as={IoNotifications} fontSize="2xl" />
+            <Counter count={2} float borderBg="bg" />
+          </Box>
         }
       />
     </>

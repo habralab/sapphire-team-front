@@ -43,7 +43,7 @@ export const Filter = () => {
         }
       ></IconButton>
 
-      <Modal onClose={onClose} size="full" isOpen={isOpen}>
+      <Modal onClose={onClose} size="full" isOpen={isOpen} blockScrollOnMount={false}>
         <ModalOverlay />
         <ModalContent bg="bg" display="flex" alignItems="center">
           <Container maxW="md">

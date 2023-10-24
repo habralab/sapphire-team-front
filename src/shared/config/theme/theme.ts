@@ -58,9 +58,9 @@ const Tabs = defineMultiStyleConfig({
 const Link = defineStyleConfig({
   variants: {
     nav: {
-      color: 'gray.500',
+      color: 'gray.800',
       _hover: { textDecoration: 'none' },
-      _activeLink: { color: 'gray.900' },
+      _activeLink: { color: 'purple.600' },
     },
   },
 });

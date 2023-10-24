@@ -8,7 +8,7 @@ export const Status = (props: StatusProps) => {
   const { children, ...others } = props;
   return (
     <Badge
-      bg={children === 'Проект завершён' ? 'gray.500' : 'purple.600'}
+      bg={children === 'Проект завершён' ? 'gray.600' : 'purple.600'}
       variant="solid"
       textTransform="none"
       px={2.5}
