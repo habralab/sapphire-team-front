@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { splitVendorChunkPlugin } from 'vite';
+import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import { VitePWA } from 'vite-plugin-pwa';
 import svgr from 'vite-plugin-svgr';
 import { defineConfig } from 'vitest/config';
@@ -7,6 +8,9 @@ import { defineConfig } from 'vitest/config';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    ViteEjsPlugin((viteConfig) => ({
+      env: viteConfig.env,
+    })),
     react(),
     svgr({}),
     splitVendorChunkPlugin(),
