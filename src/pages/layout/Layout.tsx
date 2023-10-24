@@ -34,7 +34,7 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
             {!isDialogPage && <MenuBase />}
           </Stack>
         ) : (
-          <Flex alignItems="start">
+          <Flex alignItems="start" h="full">
             {!isNotFoundPage && <MenuDesktop />}
             <Container
               maxW="6xl"
