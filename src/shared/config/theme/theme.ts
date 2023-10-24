@@ -10,6 +10,14 @@ import { accordionTheme } from './customAnatomy/accordionTheme';
 import { avatarTheme } from './customAnatomy/avatarTheme';
 import { checkboxTheme } from './customAnatomy/checkboxTheme';
 import { inputTheme } from './customAnatomy/inputTheme';
+
+import '@fontsource/raleway/cyrillic-600.css';
+import '@fontsource/raleway/cyrillic-700.css';
+import '@fontsource/inter/cyrillic-400.css';
+import '@fontsource/inter/cyrillic-500.css';
+import '@fontsource/inter/cyrillic-600.css';
+import '@fontsource/inter/cyrillic-700.css';
+
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
  * https://github.com/chakra-ui/chakra-ui/tree/main/packages/components/theme/src

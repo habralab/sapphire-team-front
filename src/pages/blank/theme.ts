@@ -1,4 +1,5 @@
 import { extendTheme, defineStyleConfig } from '@chakra-ui/react';
+import '@fontsource/raleway/700.css';
 
 const Button = defineStyleConfig({
   baseStyle: {
