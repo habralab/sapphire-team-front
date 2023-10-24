@@ -19,4 +19,5 @@ jobs:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
+          envs: VITE_APP_BASE_URL
           script: cd /var/www/front && git reset --hard HEAD && git pull --force && yarn --immutable && yarn build

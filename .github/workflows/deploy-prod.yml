@@ -19,5 +19,5 @@ jobs:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          envs: VITE_CLOSED
+          envs: VITE_CLOSED, VITE_APP_BASE_URL
           script: cd /var/www/front-prod && git fetch origin && git reset --hard HEAD && git checkout -f ${{github.ref_name}} && yarn --immutable && VITE_CLOSED=$VITE_CLOSED yarn build
