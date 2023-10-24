@@ -16,26 +16,26 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,woff,woff2,svg}'],
         navigateFallbackDenylist: [/^\/backend/],
       },
-      includeAssets: ['favicon.svg'],
+      includeAssets: ['/assets/favicon.svg'],
       manifest: {
         theme_color: '#f5f5f5',
         background_color: '#f5f5f5',
         icons: [
           {
-            src: './favicon-base.svg',
+            src: '/assets/favicon-base.svg',
             sizes: '64x64 32x32 24x24 16x16 192x192',
             type: 'image/svg+xml',
           },
           {
             purpose: 'maskable',
             sizes: '512x512',
-            src: './icon512_maskable.png',
+            src: '/assets/icon512_maskable.png',
             type: 'image/png',
           },
           {
             purpose: 'any',
             sizes: '512x512',
-            src: './icon512_rounded.png',
+            src: '/assets/icon512_rounded.png',
             type: 'image/png',
           },
         ],
