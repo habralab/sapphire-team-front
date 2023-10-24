@@ -41,10 +41,11 @@ interface FilterSpecializationProps {
   changeVisible: (status: boolean) => void;
   state: SpecsSelector[];
   resetSpec: () => void;
+  saveSpec: (spec: SpecsSelector[]) => void;
 }
 
 export const FilterSpecialization = (props: FilterSpecializationProps) => {
-  const { isVisible, changeVisible, state, resetSpec } = props;
+  const { isVisible, changeVisible, state, resetSpec, saveSpec } = props;
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +54,7 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
   const getCopyState = (currentState: SpecsSelector[]) => _.cloneDeep(currentState);
 
   useEffect(() => {
-    setSpecSelectors([...getCopyState(state)]);
+    setSpecSelectors(getCopyState(state));
   }, [state, isVisible]);
 
   const handleSetCheckbox = (title: string, spec: string) => {
@@ -61,13 +62,15 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
     const index = specSelector[indexTitle].child.findIndex(
       (selector) => selector.name === spec,
     );
-    const newSpecs = [...getCopyState(specSelector)];
+    const newSpecs = getCopyState(specSelector);
     newSpecs[indexTitle].child[index] = {
       ...newSpecs[indexTitle].child[index],
       state: !newSpecs[indexTitle].child[index].state,
     };
     setSpecSelectors(newSpecs);
   };
+
+  console.log(specSelector);
 
   return (
     <Modal
@@ -160,7 +163,15 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
           </Accordion>
         </Container>
         <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0">
-          <Button fontSize="sm" fontWeight="600" w="full">
+          <Button
+            onClick={() => {
+              saveSpec(specSelector);
+              changeVisible(false);
+            }}
+            fontSize="sm"
+            fontWeight="600"
+            w="full"
+          >
             Применить
           </Button>
         </Container>

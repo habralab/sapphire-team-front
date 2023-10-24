@@ -278,6 +278,7 @@ export const Filter = () => {
                   resetSpec={() => {
                     setSpecState(_.cloneDeep(initialStateSpecs));
                   }}
+                  saveSpec={setSpecState}
                 />
               </Box>
               <Box>
