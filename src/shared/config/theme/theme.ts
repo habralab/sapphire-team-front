@@ -6,13 +6,6 @@ import {
   createMultiStyleConfigHelpers,
 } from '@chakra-ui/react';
 
-import '@fontsource/raleway/cyrillic-600.css';
-import '@fontsource/raleway/cyrillic-700.css';
-import '@fontsource/inter/cyrillic-400.css';
-import '@fontsource/inter/cyrillic-500.css';
-import '@fontsource/inter/cyrillic-600.css';
-import '@fontsource/inter/cyrillic-700.css';
-
 import { accordionTheme } from './customAnatomy/accordionTheme';
 import { avatarTheme } from './customAnatomy/avatarTheme';
 import { checkboxTheme } from './customAnatomy/checkboxTheme';
@@ -154,15 +147,11 @@ export const basicTheme = extendTheme({
   styles: {
     global: {
       body: {
-        transition: 'background 1s ease-in-out',
         fontSize: 'sm',
         lineHeight: '120%',
         color: 'gray.900',
         bg: 'bg',
         overflowY: 'scroll',
-      },
-      '.ant-picker-clear': {
-        opacity: '1 !important',
       },
     },
   },
