@@ -7,7 +7,7 @@ import {
   Box,
   Button,
   Checkbox,
-  CloseButton,
+  CheckboxGroup,
   Container,
   Divider,
   Flex,
@@ -20,7 +20,8 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import React, { useRef, useState } from 'react';
+import _ from 'lodash';
+import { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
 import { SearchInput } from '~/shared/ui/SearchInput';
@@ -39,12 +40,34 @@ interface FilterSpecializationProps {
   isVisible: boolean;
   changeVisible: (status: boolean) => void;
   state: SpecsSelector[];
+  resetSpec: () => void;
 }
 
 export const FilterSpecialization = (props: FilterSpecializationProps) => {
-  const { isVisible, changeVisible, state } = props;
+  const { isVisible, changeVisible, state, resetSpec } = props;
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
+
+  const [specSelector, setSpecSelectors] = useState<SpecsSelector[]>([]);
+
+  const getCopyState = (currentState: SpecsSelector[]) => _.cloneDeep(currentState);
+
+  useEffect(() => {
+    setSpecSelectors([...getCopyState(state)]);
+  }, [state, isVisible]);
+
+  const handleSetCheckbox = (title: string, spec: string) => {
+    const indexTitle = specSelector.findIndex((selector) => selector.title === title);
+    const index = specSelector[indexTitle].child.findIndex(
+      (selector) => selector.name === spec,
+    );
+    const newSpecs = [...getCopyState(specSelector)];
+    newSpecs[indexTitle].child[index] = {
+      ...newSpecs[indexTitle].child[index],
+      state: !newSpecs[indexTitle].child[index].state,
+    };
+    setSpecSelectors(newSpecs);
+  };
 
   return (
     <Modal
@@ -74,7 +97,13 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
                   Специализация
                 </Heading>
               </Flex>
-              <Button variant="flat" fontSize="sm" fontWeight="500" colorScheme="purple">
+              <Button
+                onClick={resetSpec}
+                variant="flat"
+                fontSize="sm"
+                fontWeight="500"
+                colorScheme="purple"
+              >
                 Сбросить
               </Button>
             </Flex>
@@ -88,7 +117,7 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
             />
           </Container>
           <Accordion allowToggle mb={4}>
-            {state.map((spec, i) => (
+            {specSelector.map((spec, i) => (
               <AccordionItem key={i}>
                 <h2>
                   <AccordionButton>
@@ -106,28 +135,26 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
                 </h2>
                 <AccordionPanel pb={3}>
                   <Stack gap={0}>
-                    {spec.child.map((selector) => (
-                      <Checkbox
-                        key={selector.name}
-                        // onChange={(e) => {
-                        //   handleSetCheckbox(spec.title, e.target.value);
-                        // }}
-                        p={4}
-                        _hover={{
-                          bg: 'gray.200',
-                        }}
-                        w="full"
-                        py={2}
-                        isChecked={selector.state}
-                        value={selector.name}
-                        variant="black"
-                      >
-                        <Text fontSize="sm">{selector.name}</Text>
-                      </Checkbox>
-                    ))}
+                    <CheckboxGroup variant="black" colorScheme="purple">
+                      {spec.child.map((selector) => (
+                        <Checkbox
+                          key={selector.name}
+                          onChange={(e) => {
+                            handleSetCheckbox(spec.title, e.target.value);
+                          }}
+                          p={4}
+                          w="full"
+                          py={2}
+                          isChecked={selector.state}
+                          value={selector.name}
+                        >
+                          <Text fontSize="sm">{selector.name}</Text>
+                        </Checkbox>
+                      ))}
+                    </CheckboxGroup>
                   </Stack>
                 </AccordionPanel>
-                <Divider width="90%" ml="auto" mr="auto" borderColor="gray.300" />
+                <Divider width="90%" ml="auto" mr="auto" borderColor="gray.200" />
               </AccordionItem>
             ))}
           </Accordion>

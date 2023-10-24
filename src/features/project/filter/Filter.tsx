@@ -16,6 +16,7 @@ import {
   Stack,
   Input,
 } from '@chakra-ui/react';
+import _ from 'lodash';
 import { useState } from 'react';
 import { BsPlus } from 'react-icons/bs';
 import { IoOptions } from 'react-icons/io5';
@@ -214,6 +215,8 @@ export const Filter = () => {
   const [specFilter, setSpecFilter] = useState(false);
   const isMobile = useIsMobile();
 
+  const [specState, setSpecState] = useState(_.cloneDeep(initialStateSpecs));
+
   return (
     <>
       <IconButton
@@ -271,7 +274,10 @@ export const Filter = () => {
                 <FilterSpecialization
                   isVisible={specFilter}
                   changeVisible={setSpecFilter}
-                  state={initialStateSpecs}
+                  state={specState}
+                  resetSpec={() => {
+                    setSpecState(_.cloneDeep(initialStateSpecs));
+                  }}
                 />
               </Box>
               <Box>

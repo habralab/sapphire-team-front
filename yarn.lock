@@ -4205,6 +4205,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash@npm:^4.14.200":
+  version: 4.14.200
+  resolution: "@types/lodash@npm:4.14.200"
+  checksum: 6471f8bb5da692a6ecf03a8da4935bfbc341e67ee9bcb4f5730bfacff0c367232548f0a01e8ac5ea18c6fe78fb085d502494e33ccb47a7ee87cbdee03b47d00d
+  languageName: node
+  linkType: hard
+
 "@types/minimist@npm:^1.2.0":
   version: 1.2.2
   resolution: "@types/minimist@npm:1.2.2"
@@ -11496,6 +11503,7 @@ __metadata:
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.4.3
     "@types/jest": ^29.5.4
+    "@types/lodash": ^4.14.200
     "@types/node": ^20.5.7
     "@types/react": ^18.2.21
     "@types/react-dom": ^18.2.7
@@ -11521,6 +11529,7 @@ __metadata:
     husky: ^8.0.3
     jsdom: ^22.1.0
     lint-staged: ^14.0.1
+    lodash: ^4.17.21
     msw: ^1.2.5
     prettier: ^3.0.3
     react: ^18.2.0
