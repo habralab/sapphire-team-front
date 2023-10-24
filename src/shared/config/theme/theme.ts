@@ -146,12 +146,16 @@ export const basicTheme = extendTheme({
   },
   styles: {
     global: {
+      'html, #root': {
+        height: '100%',
+      },
       body: {
         fontSize: 'sm',
         lineHeight: '120%',
         color: 'gray.900',
         bg: 'bg',
         overflowY: 'scroll',
+        height: '100%',
       },
     },
   },
