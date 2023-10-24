@@ -29,14 +29,14 @@ export const Filter = () => {
     <>
       <IconButton
         onClick={onOpen}
-        aria-label="filter"
+        aria-label={'Фильтры'}
         flexShrink="0"
         gap={2}
         padding={['0', '0', '4']}
         fontWeight="normal"
         icon={
           <>
-            <Text hidden={isMobile}>Все фильтры</Text>
+            <Text hidden={isMobile}>Фильтры</Text>
             <Icon as={IoOptions} fontSize="2xl" />
             <Counter count={4} float borderBg="bg" />
           </>
