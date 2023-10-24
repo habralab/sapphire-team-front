@@ -79,7 +79,7 @@ export const TreeSelect = () => {
                 py={1}
                 px={2}
                 borderRadius="lg"
-                fontWeight="medium"
+                fontWeight="normal"
               >
                 Дизайнер1
               </Tag>
@@ -89,7 +89,7 @@ export const TreeSelect = () => {
                 py={1}
                 px={2}
                 borderRadius="lg"
-                fontWeight="medium"
+                fontWeight="normal"
               >
                 Дизайнер2
               </Tag>
@@ -99,7 +99,7 @@ export const TreeSelect = () => {
                 py={1}
                 px={2}
                 borderRadius="lg"
-                fontWeight="medium"
+                fontWeight="normal"
               >
                 Дизайнер3
               </Tag>
@@ -109,7 +109,7 @@ export const TreeSelect = () => {
                 py={1}
                 px={2}
                 borderRadius="lg"
-                fontWeight="medium"
+                fontWeight="normal"
               >
                 Дизайнер4
               </Tag>
@@ -119,7 +119,7 @@ export const TreeSelect = () => {
                 py={1}
                 px={2}
                 borderRadius="lg"
-                fontWeight="medium"
+                fontWeight="normal"
               >
                 Дизайнер5
               </Tag>
@@ -129,7 +129,7 @@ export const TreeSelect = () => {
                 py={1}
                 px={2}
                 borderRadius="lg"
-                fontWeight="medium"
+                fontWeight="normal"
               >
                 Дизайнер
               </Tag>

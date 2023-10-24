@@ -21,7 +21,7 @@ export function Counter(props: CounterType) {
       minW="1em"
       maxW="12"
       whiteSpace="nowrap"
-      fontWeight="medium"
+      fontWeight="normal"
       lineHeight="1"
       border={noBorder ? '' : '2px'}
       fontSize="sm"

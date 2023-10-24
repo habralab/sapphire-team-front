@@ -23,14 +23,7 @@ export function STag(props: TagType) {
         </Tag>
       ))}
       {tags?.map((tag) => (
-        <Tag
-          key={tag}
-          bg={'gray.300'}
-          py={1}
-          px={2}
-          borderRadius="lg"
-          fontWeight="medium"
-        >
+        <Tag key={tag} bg={'gray.300'} py={1} px={2} borderRadius="lg">
           {tag}
         </Tag>
       ))}
