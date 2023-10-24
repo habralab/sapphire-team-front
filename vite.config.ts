@@ -12,6 +12,7 @@ export default defineConfig({
     splitVendorChunkPlugin(),
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: null,
       workbox: {
         globPatterns: ['**/*.{js,css,html,woff,woff2,svg}'],
         navigateFallbackDenylist: [/^\/backend/],
