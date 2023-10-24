@@ -12,7 +12,7 @@
     />
     <meta name="author" content="Sapphire" />
     <meta name="robots" content="index, follow" />
-    <script async id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script>
+    <% if (env.PROD) { %><script async id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script><% } %>
     <title>Найди IT-проект | Sapphire</title>
     <style>
       @font-face {

@@ -80,6 +80,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
             ["vite", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.4.9"],\
             ["vite-bundle-visualizer", "npm:0.10.0"],\
+            ["vite-plugin-ejs", "npm:1.6.4"],\
             ["vite-plugin-pwa", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:0.16.5"],\
             ["vite-plugin-svgr", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:3.2.0"],\
             ["vitest", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:0.34.3"],\
@@ -15518,6 +15519,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
             ["vite", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.4.9"],\
             ["vite-bundle-visualizer", "npm:0.10.0"],\
+            ["vite-plugin-ejs", "npm:1.6.4"],\
             ["vite-plugin-pwa", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:0.16.5"],\
             ["vite-plugin-svgr", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:3.2.0"],\
             ["vitest", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:0.34.3"],\
@@ -17252,6 +17254,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["pathe", "npm:1.1.1"],\
             ["picocolors", "npm:1.0.0"],\
             ["vite", "virtual:9875fabeb24e58a1dd4a3296a703686b9087c7754eac1b5fbe1993bbdcd503570b0b0e7ee72c885e8b8e4ab44295f44f17be527f3807e62f7533dae3e3028528#npm:4.4.9"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["vite-plugin-ejs", [\
+        ["npm:1.6.4", {\
+          "packageLocation": "./.yarn/cache/vite-plugin-ejs-npm-1.6.4-2a2209bbc5-e256d408a2.zip/node_modules/vite-plugin-ejs/",\
+          "packageDependencies": [\
+            ["vite-plugin-ejs", "npm:1.6.4"],\
+            ["ejs", "npm:3.1.9"]\
           ],\
           "linkType": "HARD"\
         }]\

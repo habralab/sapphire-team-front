@@ -6415,7 +6415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ejs@npm:^3.1.6":
+"ejs@npm:^3.1.6, ejs@npm:^3.1.8":
   version: 3.1.9
   resolution: "ejs@npm:3.1.9"
   dependencies:
@@ -11532,6 +11532,7 @@ __metadata:
     typescript: ^5.1.6
     vite: ^4.4.9
     vite-bundle-visualizer: ^0.10.0
+    vite-plugin-ejs: ^1.6.4
     vite-plugin-pwa: ^0.16.5
     vite-plugin-svgr: ^3.2.0
     vitest: ^0.34.3
@@ -12957,6 +12958,15 @@ __metadata:
   bin:
     vite-node: vite-node.mjs
   checksum: 366c4f3fb7c038e2180abc6b18cfbac3b8684cd878eaf7ebf1ffb07d95d2ea325713fc575a7949a13bb00cfe264acbc28c02e2836b8647e1f443fe631c17805a
+  languageName: node
+  linkType: hard
+
+"vite-plugin-ejs@npm:^1.6.4":
+  version: 1.6.4
+  resolution: "vite-plugin-ejs@npm:1.6.4"
+  dependencies:
+    ejs: ^3.1.8
+  checksum: e256d408a2e9d5bfe703bbe679c9eb962ca7c819e0ac1fa8bd79bccf7b7eec322eeb812acdd9dcff1121a7d58948245bbef5ac65134b86e2400b92c2d536fe4f
   languageName: node
   linkType: hard
 
