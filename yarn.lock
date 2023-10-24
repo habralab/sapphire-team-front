@@ -3247,20 +3247,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/inter@npm:^5.0.15":
-  version: 5.0.15
-  resolution: "@fontsource/inter@npm:5.0.15"
-  checksum: 9d65a95f1e90fbba06fd48a5729ea5148cf01a18d5d40e03bbafc75090ee04f1b852fbfc3e0c44366ab2ad932e69c73d5dd829b8b58bdd90dae8616e61436ce9
-  languageName: node
-  linkType: hard
-
-"@fontsource/raleway@npm:^5.0.15":
-  version: 5.0.15
-  resolution: "@fontsource/raleway@npm:5.0.15"
-  checksum: edb1acb22dcc6df48ed62682f64f35f5c138a94f88e4bf8daad3fc2f28f694f65fa05bb55240f685899f40b04b26e6f04e396b31cde48d060274ff553d06c76d
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.11.10":
   version: 0.11.11
   resolution: "@humanwhocodes/config-array@npm:0.11.11"
@@ -11502,8 +11488,6 @@ __metadata:
     "@commitlint/config-conventional": ^17.7.0
     "@emotion/react": ^11.11.1
     "@emotion/styled": ^11.11.0
-    "@fontsource/inter": ^5.0.15
-    "@fontsource/raleway": ^5.0.15
     "@tanstack/eslint-plugin-query": ^4.34.1
     "@tanstack/react-query": ^4.35.3
     "@tanstack/react-query-devtools": ^4.35.3
