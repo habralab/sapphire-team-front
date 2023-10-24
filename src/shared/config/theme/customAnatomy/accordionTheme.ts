@@ -13,9 +13,12 @@ const baseStyle = definePartsStyle({
   panel: {
     p: 0,
     pb: 2,
+    bg: 'gray.300',
+    borderBottomRadius: '2xl',
   },
   button: {
-    _hover: { bg: 'gray.200', borderColor: 'blue.500' },
+    borderRadius: '2xl',
+    _expanded: { bg: 'gray.300', borderBottomRadius: 'none' },
   },
 });
 
