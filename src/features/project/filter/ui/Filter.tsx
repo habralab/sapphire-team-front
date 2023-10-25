@@ -1,4 +1,3 @@
-import { PlusSquareIcon } from '@chakra-ui/icons';
 import {
   Button,
   IconButton,
@@ -23,20 +22,198 @@ import { IoOptions } from 'react-icons/io5';
 
 import { useIsMobile } from '~/shared/hooks';
 import { Counter } from '~/shared/ui/Counter';
-import { TreeSelect } from '~/shared/ui/TreeSelect';
 
-import { useSpecsFilterStore } from '../state/SpecState';
-
+import { FilterSkill } from './FilterSkill';
 import { FilterSpecialization } from './FilterSpecialization';
+
+const specState = [
+  {
+    title: 'Разработка',
+    child: [
+      { name: 'Figma', state: false },
+      { name: 'UX', state: false },
+      { name: 'UI', state: false },
+      { name: 'Adobe Photoshop', state: false },
+      { name: 'Дизайн интерфейсов', state: false },
+      { name: 'Adobe Illustrator', state: false },
+    ],
+  },
+  {
+    title: 'Тестирование',
+    child: [
+      { name: 'Tilda', state: false },
+      { name: 'Adobe after effect', state: false },
+      { name: 'Новое 1', state: false },
+      { name: 'Новое 2', state: false },
+      { name: 'Новое 3', state: false },
+      { name: 'Новое 4', state: false },
+      { name: 'Новое 5', state: false },
+    ],
+  },
+  {
+    title: 'Аналитика',
+    child: [
+      { name: 'Figma', state: false },
+      { name: 'UX', state: false },
+      { name: 'UI', state: false },
+      { name: 'Adobe Photoshop', state: false },
+      { name: 'Дизайн интерфейсов', state: false },
+      { name: 'Adobe Illustrator', state: false },
+    ],
+  },
+  {
+    title: 'Дизайн',
+    child: [
+      { name: 'Tilda', state: false },
+      { name: 'Adobe after effect', state: false },
+      { name: 'Новое 1', state: false },
+      { name: 'Новое 2', state: false },
+      { name: 'Новое 3', state: false },
+      { name: 'Новое 4', state: false },
+      { name: 'Новое 5', state: false },
+    ],
+  },
+  {
+    title: 'Менеджмент',
+    child: [
+      { name: 'Figma', state: false },
+      { name: 'UX', state: false },
+      { name: 'UI', state: false },
+      { name: 'Adobe Photoshop', state: false },
+      { name: 'Дизайн интерфейсов', state: false },
+      { name: 'Adobe Illustrator', state: false },
+    ],
+  },
+  {
+    title: 'Информационнная безопасность',
+    child: [
+      { name: 'Figma', state: false },
+      { name: 'UX', state: false },
+      { name: 'UI', state: false },
+      { name: 'Adobe Photoshop', state: false },
+      { name: 'Дизайн интерфейсов', state: false },
+      { name: 'Adobe Illustrator', state: false },
+    ],
+  },
+  {
+    title: 'Искусственный интеллект',
+    child: [
+      { name: 'Figma', state: false },
+      { name: 'UX', state: false },
+      { name: 'UI', state: false },
+      { name: 'Adobe Photoshop', state: false },
+      { name: 'Дизайн интерфейсов', state: false },
+      { name: 'Adobe Illustrator', state: false },
+    ],
+  },
+  {
+    title: 'Поддержка',
+    child: [
+      { name: 'Figma', state: false },
+      { name: 'UX', state: false },
+      { name: 'UI', state: false },
+      { name: 'Adobe Photoshop', state: false },
+      { name: 'Дизайн интерфейсов', state: false },
+      { name: 'Adobe Illustrator', state: false },
+    ],
+  },
+  {
+    title: 'Маркетинг',
+    child: [
+      { name: 'Figma', state: false },
+      { name: 'UX', state: false },
+      { name: 'UI', state: false },
+      { name: 'Adobe Photoshop', state: false },
+      { name: 'Дизайн интерфейсов', state: false },
+      { name: 'Adobe Illustrator', state: false },
+    ],
+  },
+  {
+    title: 'Администрирование',
+    child: [
+      { name: 'Web-дизайн', state: false },
+      { name: 'Прототипирование', state: false },
+      { name: 'Графический дизайн', state: false },
+      { name: 'HTML', state: false },
+      { name: 'CSS', state: false },
+      { name: 'Sketch', state: false },
+    ],
+  },
+  {
+    title: 'Контент',
+    child: [
+      { name: 'Tilda', state: false },
+      { name: 'Adobe after effect', state: false },
+      { name: 'Новое 1', state: false },
+      { name: 'Новое 2', state: false },
+      { name: 'Новое 3', state: false },
+      { name: 'Новое 4', state: false },
+      { name: 'Новое 5', state: false },
+    ],
+  },
+  {
+    title: 'HR',
+    child: [
+      { name: 'Figma', state: false },
+      { name: 'UX', state: false },
+      { name: 'UI', state: false },
+      { name: 'Adobe Photoshop', state: false },
+      { name: 'Дизайн интерфейсов', state: false },
+      { name: 'Adobe Illustrator', state: false },
+    ],
+  },
+  {
+    title: 'Офис',
+    child: [
+      { name: 'Web-дизайн', state: false },
+      { name: 'Прототипирование', state: false },
+      { name: 'Графический дизайн', state: false },
+      { name: 'HTML', state: false },
+      { name: 'CSS', state: false },
+      { name: 'Sketch', state: false },
+    ],
+  },
+  {
+    title: 'Зерокодинг',
+    child: [
+      { name: 'Figma', state: false },
+      { name: 'UX', state: false },
+      { name: 'UI', state: false },
+      { name: 'Adobe Photoshop', state: false },
+      { name: 'Дизайн интерфейсов', state: false },
+      { name: 'Adobe Illustrator', state: false },
+    ],
+  },
+  {
+    title: 'Тестовая категория',
+    child: [
+      { name: 'Tilda', state: false },
+      { name: 'Adobe after effect', state: false },
+      { name: 'Новое 1', state: false },
+      { name: 'Новое 2', state: false },
+      { name: 'Новое 3', state: false },
+      { name: 'Новое 4', state: false },
+      { name: 'Новое 5', state: false },
+    ],
+  },
+  {
+    title: 'Тестовая категория 2',
+    child: [
+      { name: 'Web-дизайн', state: false },
+      { name: 'Прототипирование', state: false },
+      { name: 'Графический дизайн', state: false },
+      { name: 'HTML', state: false },
+      { name: 'CSS', state: false },
+      { name: 'Sketch', state: false },
+    ],
+  },
+];
 
 export const Filter = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [specFilter, setSpecFilter] = useState(false);
   const isMobile = useIsMobile();
-
-  const specState = useSpecsFilterStore((state) => state.specs);
-  const saveSpecs = useSpecsFilterStore((state) => state.saveSpecs);
-  const resetSpecs = useSpecsFilterStore((state) => state.resetSpecs);
+  const [specData, setSpecData] = useState(_.cloneDeep(specState));
 
   return (
     <>
@@ -95,16 +272,26 @@ export const Filter = () => {
                 <FilterSpecialization
                   isVisible={specFilter}
                   changeVisible={setSpecFilter}
-                  state={specState}
-                  resetSpec={resetSpecs}
-                  saveSpec={saveSpecs}
+                  state={specData}
+                  resetSpec={() => {
+                    setSpecData(_.cloneDeep(specState));
+                  }}
+                  saveSpec={setSpecData}
                 />
               </Box>
               <Box>
                 <Heading variant="h2" mb={3}>
                   Профессиональные навыки
                 </Heading>
-                <TreeSelect />
+                <FilterSkill
+                  isVisible={specFilter}
+                  changeVisible={setSpecFilter}
+                  state={specData}
+                  resetSpec={() => {
+                    setSpecData(_.cloneDeep(specState));
+                  }}
+                  saveSpec={setSpecData}
+                />
               </Box>
               <Box>
                 <Heading variant="h2">Дата начала проекта</Heading>

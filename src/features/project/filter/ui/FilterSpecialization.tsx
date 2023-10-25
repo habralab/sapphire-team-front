@@ -26,8 +26,6 @@ import { FiChevronLeft } from 'react-icons/fi';
 
 import { SearchInput } from '~/shared/ui/SearchInput';
 
-import { useSpecsFilterStore } from '../state/SpecState';
-
 interface Selector {
   name: string;
   state: boolean;
@@ -41,9 +39,9 @@ interface SpecsSelector {
 interface FilterSpecializationProps {
   isVisible: boolean;
   changeVisible: (status: boolean) => void;
-  state?: SpecsSelector[];
-  resetSpec?: () => void;
-  saveSpec?: (spec: SpecsSelector[]) => void;
+  state: SpecsSelector[];
+  resetSpec: () => void;
+  saveSpec: (spec: SpecsSelector[]) => void;
 }
 
 export const FilterSpecialization = (props: FilterSpecializationProps) => {
@@ -51,15 +49,11 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const specState = useSpecsFilterStore((state) => state.specs);
-  const saveSpecs = useSpecsFilterStore((state) => state.saveSpecs);
-  const resetSpecs = useSpecsFilterStore((state) => state.resetSpecs);
-
   const [specSelector, setSpecSelectors] = useState<SpecsSelector[]>([]);
 
   useEffect(() => {
-    setSpecSelectors(_.cloneDeep(specState));
-  }, [specState, isVisible, resetSpecs]);
+    setSpecSelectors(_.cloneDeep(state));
+  }, [state, isVisible, resetSpec]);
 
   const handleSetCheckbox = (title: string, spec: string) => {
     const indexTitle = specSelector.findIndex((selector) => selector.title === title);
@@ -103,7 +97,7 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
                 </Heading>
               </Flex>
               <Button
-                onClick={resetSpecs}
+                onClick={resetSpec}
                 variant="flat"
                 fontSize="sm"
                 fontWeight="500"
@@ -167,7 +161,7 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
         <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0">
           <Button
             onClick={() => {
-              saveSpecs(specSelector);
+              saveSpec(specSelector);
               changeVisible(false);
             }}
             fontSize="sm"

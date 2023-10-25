@@ -44,33 +44,20 @@ interface FilterSpecializationProps {
   saveSpec: (spec: SpecsSelector[]) => void;
 }
 
-export const FilterSpecialization = (props: FilterSpecializationProps) => {
+export const FilterSkill = (props: FilterSpecializationProps) => {
   const { isVisible, changeVisible, state, resetSpec, saveSpec } = props;
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
 
   const [specSelector, setSpecSelectors] = useState<SpecsSelector[]>([]);
 
-  const getCopyState = (currentState: SpecsSelector[]) => _.cloneDeep(currentState);
-
   useEffect(() => {
-    setSpecSelectors(getCopyState(state));
-  }, [state, isVisible]);
+    console.log('test');
+  }, [state, isVisible, resetSpec]);
 
   const handleSetCheckbox = (title: string, spec: string) => {
-    const indexTitle = specSelector.findIndex((selector) => selector.title === title);
-    const index = specSelector[indexTitle].child.findIndex(
-      (selector) => selector.name === spec,
-    );
-    const newSpecs = getCopyState(specSelector);
-    newSpecs[indexTitle].child[index] = {
-      ...newSpecs[indexTitle].child[index],
-      state: !newSpecs[indexTitle].child[index].state,
-    };
-    setSpecSelectors(newSpecs);
+    console.log('test');
   };
-
-  console.log(specSelector);
 
   return (
     <Modal

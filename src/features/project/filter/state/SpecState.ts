@@ -210,6 +210,7 @@ export const useSpecsFilterStore = create<SpecsFilterState>((set, get) => ({
   ...initialStateSpecs,
   saveSpecs: (newSpecs) => {
     set(() => ({ specs: newSpecs }));
+    console.log(get().specs);
   },
   resetSpecs: () => {
     set(initialStateSpecs);
