@@ -1,15 +1,8 @@
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
   Button,
   Checkbox,
   CheckboxGroup,
   Container,
-  Divider,
   Flex,
   Heading,
   Icon,
@@ -26,37 +19,35 @@ import { FiChevronLeft } from 'react-icons/fi';
 
 import { SearchInput } from '~/shared/ui/SearchInput';
 
-interface Selector {
+export interface Selector {
   name: string;
   state: boolean;
 }
 
-interface SpecsSelector {
-  title: string;
-  child: Selector[];
-}
-
-interface FilterSpecializationProps {
+interface FilterSkillProps {
   isVisible: boolean;
   changeVisible: (status: boolean) => void;
-  state: SpecsSelector[];
+  state: Selector[];
   resetSpec: () => void;
-  saveSpec: (spec: SpecsSelector[]) => void;
+  saveSpec: (spec: Selector[]) => void;
 }
 
-export const FilterSkill = (props: FilterSpecializationProps) => {
+export const FilterSkill = (props: FilterSkillProps) => {
   const { isVisible, changeVisible, state, resetSpec, saveSpec } = props;
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const [specSelector, setSpecSelectors] = useState<SpecsSelector[]>([]);
+  const [skillSelector, setSkillSelectors] = useState<Selector[]>([]);
 
   useEffect(() => {
-    console.log('test');
+    setSkillSelectors([...state]);
   }, [state, isVisible, resetSpec]);
 
-  const handleSetCheckbox = (title: string, spec: string) => {
-    console.log('test');
+  const handleSetCheckbox = (skill: string) => {
+    const newSkills = [...skillSelector];
+    const index = newSkills.findIndex((selector) => selector.name === skill);
+    newSkills[index] = { ...newSkills[index], state: !newSkills[index].state };
+    setSkillSelectors(newSkills);
   };
 
   return (
@@ -106,53 +97,27 @@ export const FilterSkill = (props: FilterSpecializationProps) => {
               value={search}
             />
           </Container>
-          <Accordion allowToggle mb={4}>
-            {specSelector.map((spec, i) => (
-              <AccordionItem key={i}>
-                <h2>
-                  <AccordionButton>
-                    <Box
-                      as="span"
-                      flex="1"
-                      textAlign="left"
-                      fontSize="sm"
-                      fontWeight="500"
-                    >
-                      {spec.title}
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={3}>
-                  <Stack gap={0}>
-                    <CheckboxGroup variant="black" colorScheme="purple">
-                      {spec.child.map((selector) => (
-                        <Checkbox
-                          key={selector.name}
-                          onChange={(e) => {
-                            handleSetCheckbox(spec.title, e.target.value);
-                          }}
-                          p={4}
-                          w="full"
-                          py={2}
-                          isChecked={selector.state}
-                          value={selector.name}
-                        >
-                          <Text fontSize="sm">{selector.name}</Text>
-                        </Checkbox>
-                      ))}
-                    </CheckboxGroup>
-                  </Stack>
-                </AccordionPanel>
-                <Divider width="90%" ml="auto" mr="auto" borderColor="gray.200" />
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <Stack>
+            <CheckboxGroup variant="black" colorScheme="purple" value={['Новое 5']}>
+              {skillSelector.map((selector) => (
+                <Checkbox
+                  colorScheme="purple"
+                  key={selector.name}
+                  onChange={(e) => {
+                    handleSetCheckbox(e.target.value);
+                  }}
+                  value={selector.name}
+                >
+                  <Text fontSize="sm">{selector.name}</Text>
+                </Checkbox>
+              ))}
+            </CheckboxGroup>
+          </Stack>
         </Container>
         <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0">
           <Button
             onClick={() => {
-              saveSpec(specSelector);
+              saveSpec(skillSelector);
               changeVisible(false);
             }}
             fontSize="sm"

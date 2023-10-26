@@ -24,14 +24,17 @@ import _ from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
+import { Counter } from '~/shared/ui/Counter';
 import { SearchInput } from '~/shared/ui/SearchInput';
 
 interface Selector {
   name: string;
-  state: boolean;
+  id: number;
+  titleId: number;
 }
 
 interface SpecsSelector {
+  id: number;
   title: string;
   child: Selector[];
 }
@@ -41,31 +44,53 @@ interface FilterSpecializationProps {
   changeVisible: (status: boolean) => void;
   state: SpecsSelector[];
   resetSpec: () => void;
-  saveSpec: (spec: SpecsSelector[]) => void;
+  userFilter: number[];
+  saveSpec: (spec: number[]) => void;
 }
 
 export const FilterSpecialization = (props: FilterSpecializationProps) => {
-  const { isVisible, changeVisible, state, resetSpec, saveSpec } = props;
+  const { isVisible, changeVisible, state, resetSpec, saveSpec, userFilter } = props;
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const [specSelector, setSpecSelectors] = useState<SpecsSelector[]>([]);
+  const [filteredState, setFilteredState] = useState<SpecsSelector[]>([]);
+  const [selectCheckboxes, setSelectCheckboxes] = useState<number[]>([]);
+
+  const activeNestedCheckboxes = (state: Selector[]) =>
+    state.filter((selector) => selectCheckboxes.includes(selector.id));
 
   useEffect(() => {
-    setSpecSelectors(_.cloneDeep(state));
-  }, [state, isVisible, resetSpec]);
+    setSelectCheckboxes([...userFilter]);
+  }, [userFilter, isVisible]);
 
-  const handleSetCheckbox = (title: string, spec: string) => {
-    const indexTitle = specSelector.findIndex((selector) => selector.title === title);
-    const index = specSelector[indexTitle].child.findIndex(
-      (selector) => selector.name === spec,
+  useEffect(() => {
+    const copyState = _.cloneDeep(state);
+    const activeSections = copyState.filter(
+      ({ child }) => activeNestedCheckboxes(child).length > 0,
     );
-    const newSpecs = [...specSelector];
-    newSpecs[indexTitle].child[index] = {
-      ...newSpecs[indexTitle].child[index],
-      state: !newSpecs[indexTitle].child[index].state,
-    };
-    setSpecSelectors(newSpecs);
+    const inactiveSections = copyState.filter(
+      ({ child }) => activeNestedCheckboxes(child).length === 0,
+    );
+    activeSections.forEach((section) => {
+      const activeCheckbox = section.child.filter(({ id }) =>
+        selectCheckboxes.includes(id),
+      );
+      const inactiveCheckbox = section.child.filter(
+        ({ id }) => !selectCheckboxes.includes(id),
+      );
+      section.child = [...activeCheckbox, ...inactiveCheckbox];
+    });
+
+    setFilteredState([...activeSections, ...inactiveSections]);
+  }, [isVisible]);
+
+  const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const id = Number(e.target.value);
+    if (selectCheckboxes.includes(id)) {
+      setSelectCheckboxes(selectCheckboxes.filter((item) => item !== id));
+      return;
+    }
+    setSelectCheckboxes([...selectCheckboxes, id]);
   };
 
   return (
@@ -116,52 +141,50 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
             />
           </Container>
           <Accordion allowToggle mb={4}>
-            {specSelector.map((spec, i) => (
-              <AccordionItem key={i}>
-                <h2>
-                  <AccordionButton>
-                    <Box
-                      as="span"
-                      flex="1"
-                      textAlign="left"
-                      fontSize="sm"
-                      fontWeight="500"
-                    >
-                      {spec.title}
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={3}>
-                  <Stack gap={0}>
-                    <CheckboxGroup variant="black" colorScheme="purple">
+            <CheckboxGroup variant="black" colorScheme="purple" value={selectCheckboxes}>
+              {filteredState.map((spec) => (
+                <AccordionItem key={spec.id}>
+                  <h2>
+                    <AccordionButton>
+                      <Box
+                        as="span"
+                        flex="1"
+                        textAlign="left"
+                        fontSize="sm"
+                        fontWeight="500"
+                      >
+                        {spec.title}
+                      </Box>
+                      <Counter count={activeNestedCheckboxes(spec.child).length} />
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={3}>
+                    <Stack gap={0}>
                       {spec.child.map((selector) => (
                         <Checkbox
-                          key={selector.name}
-                          onChange={(e) => {
-                            handleSetCheckbox(spec.title, e.target.value);
-                          }}
+                          key={selector.id}
+                          onChange={handleCheckbox}
                           p={4}
                           w="full"
                           py={2}
-                          isChecked={selector.state}
-                          value={selector.name}
+                          value={selector.id}
                         >
                           <Text fontSize="sm">{selector.name}</Text>
                         </Checkbox>
                       ))}
-                    </CheckboxGroup>
-                  </Stack>
-                </AccordionPanel>
-                <Divider width="90%" ml="auto" mr="auto" borderColor="gray.200" />
-              </AccordionItem>
-            ))}
+                    </Stack>
+                  </AccordionPanel>
+                  <Divider width="90%" ml="auto" mr="auto" borderColor="gray.200" />
+                </AccordionItem>
+              ))}
+            </CheckboxGroup>
           </Accordion>
         </Container>
         <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0">
           <Button
             onClick={() => {
-              saveSpec(specSelector);
+              saveSpec(selectCheckboxes);
               changeVisible(false);
             }}
             fontSize="sm"
