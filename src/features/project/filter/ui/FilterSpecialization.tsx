@@ -30,7 +30,6 @@ import { SearchInput } from '~/shared/ui/SearchInput';
 interface Selector {
   name: string;
   id: number;
-  titleId: number;
 }
 
 interface SpecsSelector {
@@ -102,7 +101,7 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
       isOpen={isVisible}
     >
       <ModalOverlay />
-      <ModalContent bg="bg" display="flex" alignItems="center">
+      <ModalContent bg="bg" display="flex" alignItems="center" borderTopRadius="2xl">
         <Container maxW="md" flex="1">
           <Container bg="bg" position="sticky" top="0" zIndex={3} p={0} pt={3} pb={2}>
             <Flex alignItems="center" justifyContent="space-between" mb={3}>
@@ -140,10 +139,10 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
               value={search}
             />
           </Container>
-          <Accordion allowToggle mb={4}>
+          <Accordion allowMultiple mb={3} bg="white" borderRadius="2xl">
             <CheckboxGroup variant="black" colorScheme="purple" value={selectCheckboxes}>
               {filteredState.map((spec) => (
-                <AccordionItem key={spec.id}>
+                <AccordionItem key={spec.id} mb={2}>
                   <h2>
                     <AccordionButton>
                       <Box
@@ -175,7 +174,6 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
                       ))}
                     </Stack>
                   </AccordionPanel>
-                  <Divider width="90%" ml="auto" mr="auto" borderColor="gray.200" />
                 </AccordionItem>
               ))}
             </CheckboxGroup>

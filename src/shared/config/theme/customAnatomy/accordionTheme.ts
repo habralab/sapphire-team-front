@@ -13,12 +13,12 @@ const baseStyle = definePartsStyle({
   panel: {
     p: 0,
     pb: 2,
-    bg: 'gray.200',
+    bg: 'gray.100',
     borderBottomRadius: '2xl',
   },
   button: {
     borderRadius: '2xl',
-    _expanded: { bg: 'gray.200', borderBottomRadius: 'none' },
+    _expanded: { bg: 'gray.100', borderBottomRadius: 'none' },
   },
 });
 
