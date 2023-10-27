@@ -9,7 +9,6 @@ import {
   Checkbox,
   CheckboxGroup,
   Container,
-  Divider,
   Flex,
   Heading,
   Icon,

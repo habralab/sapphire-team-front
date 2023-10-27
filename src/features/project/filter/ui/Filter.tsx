@@ -18,7 +18,6 @@ import {
   Tag,
   TagLabel,
 } from '@chakra-ui/react';
-import _ from 'lodash';
 import { useState } from 'react';
 import { BsPlus } from 'react-icons/bs';
 import { IoOptions } from 'react-icons/io5';
