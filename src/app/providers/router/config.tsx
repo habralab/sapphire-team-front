@@ -9,6 +9,11 @@ import { NotificationsPage } from '~/pages/notifications';
 import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
 import { ProjectsPage, ProjectsPageDesktop } from '~/pages/projects';
 import { SearchPage, SearchPageDesktop } from '~/pages/search';
+import {
+  NotificationsSettingsPage,
+  ProfileSettingsPage,
+  SettingsPage,
+} from '~/pages/setting';
 
 import { PATHS } from '~/shared/lib/router';
 
@@ -40,7 +45,9 @@ const normalRoutes = [
   { path: PATHS.chats, view: { base: <ChatsPage />, desktop: <ChatsPageDesktop /> } },
   { path: PATHS.dialog, view: { base: <DialogPage />, desktop: <ChatsPageDesktop /> } },
   { path: PATHS.notifications, view: { base: <NotificationsPage /> } },
-
+  { path: PATHS.settings, view: { base: <SettingsPage /> } },
+  { path: PATHS.profileSettings, view: { base: <ProfileSettingsPage /> } },
+  { path: PATHS.notificationsSettings, view: { base: <NotificationsSettingsPage /> } },
   {
     path: PATHS.root,
     view: {
