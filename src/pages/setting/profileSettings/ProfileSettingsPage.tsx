@@ -1,23 +1,13 @@
-import {
-  Flex,
-  IconButton,
-  Icon,
-  Heading,
-  Avatar,
-  Input,
-  Textarea,
-  Text,
-} from '@chakra-ui/react';
+import { Flex, Heading, Avatar, Input, Textarea, Text } from '@chakra-ui/react';
 import { useState } from 'react';
-import { BsPlus } from 'react-icons/bs';
 
-import { GoBack } from '~/features/settings';
+import { AddAvatar, GoBack, UpdateUser } from '~/features/settings';
 
 export function ProfileSettingsPage() {
   const [value, setValue] = useState('');
 
   return (
-    <Flex direction="column" gap={6} mb={4} px={5} w="full">
+    <Flex direction="column" gap={6} mb={4} px={5} w="full" maxW="md">
       <Flex alignItems="center" mt={4} gap={2}>
         <GoBack />
         <Heading variant="h2" as="h1" mb={0}>
@@ -29,18 +19,7 @@ export function ProfileSettingsPage() {
         <Heading variant="h2">Фото</Heading>
         <Flex position="relative" w="fit-content">
           <Avatar variant="profileAvatar" name="T A" />
-          <IconButton
-            position="absolute"
-            bottom="-1"
-            right="-1"
-            aria-label="update-avatar"
-            h={6}
-            minW={6}
-            border="2px"
-            boxSizing="content-box"
-            borderColor="gray.100"
-            icon={<Icon as={BsPlus} fontSize="2xl" />}
-          />
+          <AddAvatar />
         </Flex>
       </Flex>
 
@@ -74,6 +53,7 @@ export function ProfileSettingsPage() {
           </Text>
         </Flex>
       </Flex>
+      <UpdateUser />
     </Flex>
   );
 }
