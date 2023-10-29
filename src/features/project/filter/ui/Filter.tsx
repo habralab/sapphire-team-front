@@ -1,4 +1,4 @@
-import { SmallCloseIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import {
   Button,
   IconButton,
@@ -17,15 +17,18 @@ import {
   Input,
   Tag,
   TagLabel,
+  InputGroup,
+  InputRightElement,
+  FormControl,
+  FormLabel,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { BsPlus } from 'react-icons/bs';
+import { Select } from 'chakra-react-select';
 import { IoOptions } from 'react-icons/io5';
 
 import { useIsMobile } from '~/shared/hooks';
 import { Counter } from '~/shared/ui/Counter';
 
-import { FilterSkill } from './FilterSkill';
 import { FilterSpecialization } from './FilterSpecialization';
 
 const specState = [
@@ -227,32 +230,36 @@ const specState = [
   },
 ];
 
-const skillState = [
-  { name: 'Figma', id: 1 },
-  { name: 'UX', id: 2 },
-  { name: 'UI', id: 3 },
-  { name: 'Adobe Photoshop', id: 4 },
-  { name: 'Дизайн интерфейсов', id: 5 },
-  { name: 'Adobe Illustrator', id: 6 },
-  { name: 'Web-дизайн', id: 7 },
-  { name: 'Прототипирование', id: 8 },
-  { name: 'Графический дизайн', id: 9 },
-  { name: 'HTML', id: 10 },
-  { name: 'CSS', id: 11 },
-  { name: 'Sketch', id: 12 },
-  { name: 'Tilda', id: 13 },
-  { name: 'Adobe after effect', id: 14 },
-  { name: 'Новое 1', id: 15 },
-  { name: 'Новое 2', id: 16 },
-  { name: 'Новое 3', id: 17 },
-  { name: 'Новое 4', id: 18 },
-  { name: 'Новое 5', id: 19 },
+interface Selector {
+  label: string;
+  value: number;
+}
+
+const skillState: Selector[] = [
+  { label: 'Figma', value: 1 },
+  { label: 'UX', value: 2 },
+  { label: 'UI', value: 3 },
+  { label: 'Adobe Photoshop', value: 4 },
+  { label: 'Дизайн интерфейсов', value: 5 },
+  { label: 'Adobe Illustrator', value: 6 },
+  { label: 'Web-дизайн', value: 7 },
+  { label: 'Прототипирование', value: 8 },
+  { label: 'Графический дизайн', value: 9 },
+  { label: 'HTML', value: 10 },
+  { label: 'CSS', value: 11 },
+  { label: 'Sketch', value: 12 },
+  { label: 'Tilda', value: 13 },
+  { label: 'Adobe after effect', value: 14 },
+  { label: 'Новое 1', value: 15 },
+  { label: 'Новое 2', value: 16 },
+  { label: 'Новое 3', value: 17 },
+  { label: 'Новое 4', value: 18 },
+  { label: 'Новое 5', value: 19 },
 ];
 
 export const Filter = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [specFilter, setSpecFilter] = useState(false);
-  const [skillFilter, setSkillFilter] = useState(false);
   const isMobile = useIsMobile();
   const [userSpecs, setUserSpecs] = useState<number[]>([]);
   const [userSkills, setUserSkills] = useState<number[]>([]);
@@ -312,26 +319,26 @@ export const Filter = () => {
 
             <Stack spacing={6}>
               <Box>
-                <Flex gap={1}>
+                <Stack gap={1} mb={4}>
                   <Heading variant="h2" mb={3}>
                     Специализация
                   </Heading>
-                  <IconButton
-                    onClick={() => {
-                      setSpecFilter(true);
-                    }}
-                    aria-label="add-spec"
-                    flexShrink="0"
-                    height="6"
-                    minW="6"
-                    gap={2}
-                    icon={
-                      <>
-                        <Icon as={BsPlus} fontSize="xl" />
-                      </>
-                    }
-                  />
-                </Flex>
+                  <InputGroup>
+                    <Input
+                      bg="white"
+                      borderRadius="full"
+                      fontSize="sm"
+                      readOnly
+                      placeholder="Например, Фронтенд разработчик"
+                      onClick={() => {
+                        setSpecFilter(true);
+                      }}
+                    />
+                    <InputRightElement>
+                      <ChevronDownIcon boxSize={6} mr={4} />
+                    </InputRightElement>
+                  </InputGroup>
+                </Stack>
                 <Flex flexWrap="wrap" gap={2}>
                   {specState.map((spec) =>
                     spec.child.map(
@@ -376,32 +383,45 @@ export const Filter = () => {
                 />
               </Box>
               <Box>
-                <Flex gap={1}>
+                <Stack gap={1} mb={4}>
                   <Heading variant="h2" mb={3}>
                     Профессиональные навыки
                   </Heading>
-                  <IconButton
-                    onClick={() => {
-                      setSkillFilter(true);
-                    }}
-                    aria-label="add-skill"
-                    flexShrink="0"
-                    height="6"
-                    minW="6"
-                    gap={2}
-                    icon={
-                      <>
-                        <Icon as={BsPlus} fontSize="xl" />
-                      </>
-                    }
-                  />
-                </Flex>
+                  <FormControl>
+                    <Select
+                      useBasicStyles
+                      noOptionsMessage={({ inputValue }) =>
+                        !inputValue ? 'Навыков больше нет' : 'Навык не найден'
+                      }
+                      chakraStyles={{
+                        control: (provided) => ({
+                          ...provided,
+                          background: 'white',
+                          borderRadius: 'full',
+                        }),
+                        downChevron: (provided) => ({
+                          ...provided,
+                          display: 'none',
+                        }),
+                      }}
+                      name="skills"
+                      onChange={(e) => {
+                        setUserSkills([...userSkills, e.value]);
+                      }}
+                      options={skillState.filter(
+                        ({ value }) => !userSkills.includes(value),
+                      )}
+                      placeholder="Например, Python"
+                      closeMenuOnSelect={true}
+                    />
+                  </FormControl>
+                </Stack>
                 <Flex flexWrap="wrap" gap={2}>
                   {skillState.map(
-                    ({ id, name }) =>
-                      userSkills.includes(id) && (
+                    ({ label, value }) =>
+                      userSkills.includes(value) && (
                         <Tag
-                          key={id}
+                          key={value}
                           size="sm"
                           bg="gray.300"
                           py={1}
@@ -409,10 +429,10 @@ export const Filter = () => {
                           borderRadius="lg"
                           fontWeight="medium"
                         >
-                          <TagLabel>{name}</TagLabel>
+                          <TagLabel>{label}</TagLabel>
                           <IconButton
                             onClick={() => {
-                              deleteSkillFilter(id);
+                              deleteSkillFilter(value);
                             }}
                             aria-label="Close"
                             variant="ghost"
@@ -426,16 +446,6 @@ export const Filter = () => {
                       ),
                   )}
                 </Flex>
-                <FilterSkill
-                  state={skillState}
-                  isVisible={skillFilter}
-                  changeVisible={setSkillFilter}
-                  userFilter={userSkills}
-                  resetSkill={() => {
-                    setUserSkills([]);
-                  }}
-                  saveSkill={setUserSkills}
-                />
               </Box>
               <Box>
                 <Heading variant="h2">Дата начала проекта</Heading>

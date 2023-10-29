@@ -100,7 +100,7 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
       isOpen={isVisible}
     >
       <ModalOverlay />
-      <ModalContent bg="bg" display="flex" alignItems="center" borderTopRadius="2xl">
+      <ModalContent bg="bg" display="flex" alignItems="center">
         <Container maxW="md" flex="1">
           <Container bg="bg" position="sticky" top="0" zIndex={3} p={0} pt={3} pb={2}>
             <Flex alignItems="center" justifyContent="space-between" mb={3}>
@@ -138,22 +138,18 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
               value={search}
             />
           </Container>
-          <Accordion allowMultiple mb={3} bg="white" borderRadius="2xl">
+          <Accordion allowMultiple mb={3} bg="white" borderRadius="2xl" overflow="hidden">
             <CheckboxGroup variant="black" colorScheme="purple" value={selectCheckboxes}>
               {filteredState.map((spec) => (
-                <AccordionItem key={spec.id} mb={2}>
+                <AccordionItem key={spec.id}>
                   <h2>
-                    <AccordionButton>
-                      <Box
-                        as="span"
-                        flex="1"
-                        textAlign="left"
-                        fontSize="sm"
-                        fontWeight="500"
-                      >
+                    <AccordionButton py={3} justifyContent="space-between">
+                      <Box as="span" textAlign="left" fontSize="sm" fontWeight="500">
                         {spec.title}
                       </Box>
-                      <Counter count={activeNestedCheckboxes(spec.child).length} />
+                      <Box mr="auto" pl={1}>
+                        <Counter count={activeNestedCheckboxes(spec.child).length} />
+                      </Box>
                       <AccordionIcon />
                     </AccordionButton>
                   </h2>
