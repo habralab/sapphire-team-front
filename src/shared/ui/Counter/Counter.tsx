@@ -20,6 +20,7 @@ export function Counter(props: CounterType) {
       textOverflow="ellipsis"
       minW="1em"
       maxW="12"
+      height="1em"
       whiteSpace="nowrap"
       fontWeight="normal"
       lineHeight="1"

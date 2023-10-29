@@ -7,6 +7,9 @@ const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpe
 );
 
 const baseStyle = definePartsStyle({
+  root: {
+    overflow: 'hidden',
+  },
   container: {
     border: 'none',
   },
@@ -15,7 +18,11 @@ const baseStyle = definePartsStyle({
     pb: 2,
   },
   button: {
-    _hover: { bg: 'gray.200', borderColor: 'blue.500' },
+    py: 3,
+    _hover: {
+      bg: 'initial',
+    },
+    _expanded: { bg: 'gray.200' },
   },
 });
 
