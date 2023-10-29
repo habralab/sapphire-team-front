@@ -422,7 +422,7 @@ export const Filter = () => {
                   <Heading variant="h2" mb={3}>
                     Профессиональные навыки
                   </Heading>
-                </Flex>
+                </Stack>
                 <Box mb={3}>
                   <AsyncSelect<SelectOptions, false, GroupBase<SelectOptions>>
                     placeholder="Например, Python"
