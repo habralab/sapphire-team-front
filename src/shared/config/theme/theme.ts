@@ -60,6 +60,7 @@ const Link = defineStyleConfig({
 
 const flatButton = defineStyle(({ colorScheme }) => ({
   color: colorScheme === 'purple' ? 'purple.600' : 'gray.900',
+  p: 0,
   _hover: {
     color: colorScheme === 'purple' ? 'purple.500' : 'gray.800',
   },

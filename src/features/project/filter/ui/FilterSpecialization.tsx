@@ -16,10 +16,8 @@ import {
   Modal,
   ModalContent,
   ModalOverlay,
-  Stack,
   Text,
 } from '@chakra-ui/react';
-import _ from 'lodash';
 import { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
@@ -62,11 +60,10 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
   }, [userFilter, isVisible]);
 
   useEffect(() => {
-    const copyState = _.cloneDeep(state);
-    const activeSections = copyState.filter(
+    const activeSections = state.filter(
       ({ child }) => activeNestedCheckboxes(child).length > 0,
     );
-    const inactiveSections = copyState.filter(
+    const inactiveSections = state.filter(
       ({ child }) => activeNestedCheckboxes(child).length === 0,
     );
     activeSections.forEach((section) => {
@@ -100,10 +97,10 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
       isOpen={isVisible}
     >
       <ModalOverlay />
-      <ModalContent bg="bg" display="flex" alignItems="center">
-        <Container maxW="md" flex="1">
-          <Container bg="bg" position="sticky" top="0" zIndex={3} p={0} pt={3} pb={2}>
-            <Flex alignItems="center" justifyContent="space-between" mb={3}>
+      <ModalContent bg="bg">
+        <Container maxW="md">
+          <Box bg="bg" position="sticky" top="0" zIndex={1} pt={3} pb={4}>
+            <Flex justifyContent="space-between" mb={3}>
               <Flex alignItems="center">
                 <IconButton
                   onClick={() => {
@@ -113,7 +110,7 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
                   aria-label="Close"
                   minW="fit-content"
                   mr={2}
-                  icon={<Icon as={FiChevronLeft} w={5} h={5} />}
+                  icon={<Icon as={FiChevronLeft} fontSize="2xl" />}
                 />
                 <Heading variant="h2" mb={0}>
                   Специализация
@@ -137,37 +134,38 @@ export const FilterSpecialization = (props: FilterSpecializationProps) => {
               }}
               value={search}
             />
-          </Container>
-          <Accordion allowMultiple mb={3} bg="white" borderRadius="2xl" overflow="hidden">
+          </Box>
+          <Accordion allowMultiple bg="white" borderRadius="2xl">
             <CheckboxGroup variant="black" colorScheme="purple" value={selectCheckboxes}>
               {filteredState.map((spec) => (
                 <AccordionItem key={spec.id}>
-                  <h2>
-                    <AccordionButton py={3} justifyContent="space-between">
-                      <Box as="span" textAlign="left" fontSize="sm" fontWeight="500">
+                  <AccordionButton justifyContent="space-between">
+                    <Flex gap={2} fontSize="sm" textAlign="left">
+                      <Heading fontSize="md" fontWeight="medium">
                         {spec.title}
-                      </Box>
-                      <Box mr="auto" pl={1}>
+                      </Heading>
+                      {activeNestedCheckboxes(spec.child).length > 0 && (
                         <Counter count={activeNestedCheckboxes(spec.child).length} />
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
+                      )}
+                    </Flex>
+                    <AccordionIcon />
+                  </AccordionButton>
+
                   <AccordionPanel pb={3}>
-                    <Stack gap={0}>
-                      {spec.child.map((selector) => (
-                        <Checkbox
-                          key={selector.id}
-                          onChange={handleCheckbox}
-                          p={4}
-                          w="full"
-                          py={2}
-                          value={selector.id}
-                        >
-                          <Text fontSize="sm">{selector.name}</Text>
-                        </Checkbox>
-                      ))}
-                    </Stack>
+                    {spec.child.map((selector) => (
+                      <Checkbox
+                        key={selector.id}
+                        onChange={handleCheckbox}
+                        p={4}
+                        w="full"
+                        py={2}
+                        value={selector.id}
+                      >
+                        <Text fontWeight="medium" fontSize="sm">
+                          {selector.name}
+                        </Text>
+                      </Checkbox>
+                    ))}
                   </AccordionPanel>
                 </AccordionItem>
               ))}

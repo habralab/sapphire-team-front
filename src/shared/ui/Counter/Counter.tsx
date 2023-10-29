@@ -14,13 +14,13 @@ export function Counter(props: CounterType) {
 
   return (
     <Box
-      display={count ? 'block' : 'none'}
       bg={bg ?? 'purple.600'}
       color={color ?? 'white'}
       overflow="hidden"
       textOverflow="ellipsis"
       minW="1em"
       maxW="12"
+      height="1em"
       whiteSpace="nowrap"
       fontWeight="normal"
       lineHeight="1"
