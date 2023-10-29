@@ -4,47 +4,47 @@
  */
 
 export interface paths {
-  '/api/v1beta/rest/health': {
+  '/health': {
     /** Health */
-    get: operations['health_api_v1beta_rest_health_get'];
+    get: operations['health_health_get'];
   };
-  '/api/v1beta/rest/projects/': {
+  '/api/rest/projects/': {
     /** Get Projects */
-    get: operations['get_projects_api_v1beta_rest_projects__get'];
+    get: operations['get_projects_api_rest_projects__get'];
     /** Create Project */
-    post: operations['create_project_api_v1beta_rest_projects__post'];
+    post: operations['create_project_api_rest_projects__post'];
   };
-  '/api/v1beta/rest/projects/{project_id}': {
+  '/api/rest/projects/{project_id}': {
     /** Get Project */
-    get: operations['get_project_api_v1beta_rest_projects__project_id__get'];
+    get: operations['get_project_api_rest_projects__project_id__get'];
   };
-  '/api/v1beta/rest/projects/{project_id}/history': {
+  '/api/rest/projects/{project_id}/history': {
     /** History */
-    get: operations['history_api_v1beta_rest_projects__project_id__history_get'];
+    get: operations['history_api_rest_projects__project_id__history_get'];
   };
-  '/api/v1beta/rest/projects/{project_id}/avatar': {
+  '/api/rest/projects/{project_id}/avatar': {
     /** Upload Project Avatar */
-    post: operations['upload_project_avatar_api_v1beta_rest_projects__project_id__avatar_post'];
+    post: operations['upload_project_avatar_api_rest_projects__project_id__avatar_post'];
     /** Delete Project Avatar */
-    delete: operations['delete_project_avatar_api_v1beta_rest_projects__project_id__avatar_delete'];
+    delete: operations['delete_project_avatar_api_rest_projects__project_id__avatar_delete'];
   };
-  '/api/v1beta/rest/projects/{project_id}/positions/': {
+  '/api/rest/projects/{project_id}/positions/': {
     /** Get Project Positions */
-    get: operations['get_project_positions_api_v1beta_rest_projects__project_id__positions__get'];
+    get: operations['get_project_positions_api_rest_projects__project_id__positions__get'];
     /** Create Project Position */
-    post: operations['create_project_position_api_v1beta_rest_projects__project_id__positions__post'];
+    post: operations['create_project_position_api_rest_projects__project_id__positions__post'];
   };
-  '/api/v1beta/rest/projects/{project_id}/positions/{position_id}': {
+  '/api/rest/projects/{project_id}/positions/{position_id}': {
     /** Remove Project Position */
-    delete: operations['remove_project_position_api_v1beta_rest_projects__project_id__positions__position_id__delete'];
+    delete: operations['remove_project_position_api_rest_projects__project_id__positions__position_id__delete'];
   };
-  '/api/v1beta/rest/projects/{project_id}/positions/{position_id}/participants/': {
+  '/api/rest/projects/{project_id}/positions/{position_id}/participants/': {
     /** Create Participant */
-    post: operations['create_participant_api_v1beta_rest_projects__project_id__positions__position_id__participants__post'];
+    post: operations['create_participant_api_rest_projects__project_id__positions__position_id__participants__post'];
   };
-  '/api/v1beta/rest/projects/{project_id}/positions/{position_id}/participants/{participant_id}': {
+  '/api/rest/projects/{project_id}/positions/{position_id}/participants/{participant_id}': {
     /** Update Participant */
-    post: operations['update_participant_api_v1beta_rest_projects__project_id__positions__position_id__participants__participant_id__post'];
+    post: operations['update_participant_api_rest_projects__project_id__positions__position_id__participants__participant_id__post'];
   };
 }
 
@@ -52,18 +52,13 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
-    /** Body_upload_project_avatar_api_v1beta_rest_projects__project_id__avatar_post */
-    Body_upload_project_avatar_api_v1beta_rest_projects__project_id__avatar_post: {
+    /** Body_upload_project_avatar_api_rest_projects__project_id__avatar_post */
+    Body_upload_project_avatar_api_rest_projects__project_id__avatar_post: {
       /**
        * Avatar
        * Format: binary
        */
       avatar: string;
-    };
-    /** CreateProjectPositionRequest */
-    CreateProjectPositionRequest: {
-      /** Name */
-      name: string;
     };
     /** CreateProjectRequest */
     CreateProjectRequest: {
@@ -182,8 +177,6 @@ export interface components {
        * Format: uuid
        */
       project_id: string;
-      /** Name */
-      name: string;
       /** Is Deleted */
       is_deleted: boolean;
       /** Closed At */
@@ -274,7 +267,7 @@ export type external = Record<string, never>;
 
 export interface operations {
   /** Health */
-  health_api_v1beta_rest_health_get: {
+  health_health_get: {
     responses: {
       /** @description Successful Response */
       200: {
@@ -285,7 +278,7 @@ export interface operations {
     };
   };
   /** Get Projects */
-  get_projects_api_v1beta_rest_projects__get: {
+  get_projects_api_rest_projects__get: {
     parameters: {
       query?: {
         /** @description Page number */
@@ -310,7 +303,7 @@ export interface operations {
     };
   };
   /** Create Project */
-  create_project_api_v1beta_rest_projects__post: {
+  create_project_api_rest_projects__post: {
     parameters: {
       header?: {
         Authorization?: string | null;
@@ -341,7 +334,7 @@ export interface operations {
     };
   };
   /** Get Project */
-  get_project_api_v1beta_rest_projects__project_id__get: {
+  get_project_api_rest_projects__project_id__get: {
     parameters: {
       path: {
         project_id: string;
@@ -363,7 +356,7 @@ export interface operations {
     };
   };
   /** History */
-  history_api_v1beta_rest_projects__project_id__history_get: {
+  history_api_rest_projects__project_id__history_get: {
     parameters: {
       query?: {
         /** @description Page number */
@@ -391,7 +384,7 @@ export interface operations {
     };
   };
   /** Upload Project Avatar */
-  upload_project_avatar_api_v1beta_rest_projects__project_id__avatar_post: {
+  upload_project_avatar_api_rest_projects__project_id__avatar_post: {
     parameters: {
       header?: {
         Authorization?: string | null;
@@ -406,7 +399,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'multipart/form-data': components['schemas']['Body_upload_project_avatar_api_v1beta_rest_projects__project_id__avatar_post'];
+        'multipart/form-data': components['schemas']['Body_upload_project_avatar_api_rest_projects__project_id__avatar_post'];
       };
     };
     responses: {
@@ -425,7 +418,7 @@ export interface operations {
     };
   };
   /** Delete Project Avatar */
-  delete_project_avatar_api_v1beta_rest_projects__project_id__avatar_delete: {
+  delete_project_avatar_api_rest_projects__project_id__avatar_delete: {
     parameters: {
       header?: {
         Authorization?: string | null;
@@ -454,7 +447,7 @@ export interface operations {
     };
   };
   /** Get Project Positions */
-  get_project_positions_api_v1beta_rest_projects__project_id__positions__get: {
+  get_project_positions_api_rest_projects__project_id__positions__get: {
     parameters: {
       query?: {
         /** @description Page number */
@@ -482,7 +475,7 @@ export interface operations {
     };
   };
   /** Create Project Position */
-  create_project_position_api_v1beta_rest_projects__project_id__positions__post: {
+  create_project_position_api_rest_projects__project_id__positions__post: {
     parameters: {
       header?: {
         Authorization?: string | null;
@@ -493,11 +486,6 @@ export interface operations {
       cookie?: {
         access_token?: string | null;
         refresh_token?: string | null;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateProjectPositionRequest'];
       };
     };
     responses: {
@@ -516,7 +504,7 @@ export interface operations {
     };
   };
   /** Remove Project Position */
-  remove_project_position_api_v1beta_rest_projects__project_id__positions__position_id__delete: {
+  remove_project_position_api_rest_projects__project_id__positions__position_id__delete: {
     parameters: {
       header?: {
         Authorization?: string | null;
@@ -546,7 +534,7 @@ export interface operations {
     };
   };
   /** Create Participant */
-  create_participant_api_v1beta_rest_projects__project_id__positions__position_id__participants__post: {
+  create_participant_api_rest_projects__project_id__positions__position_id__participants__post: {
     parameters: {
       header?: {
         Authorization?: string | null;
@@ -576,7 +564,7 @@ export interface operations {
     };
   };
   /** Update Participant */
-  update_participant_api_v1beta_rest_projects__project_id__positions__position_id__participants__participant_id__post: {
+  update_participant_api_rest_projects__project_id__positions__position_id__participants__participant_id__post: {
     parameters: {
       header?: {
         Authorization?: string | null;

@@ -3,11 +3,15 @@ const util = require('util');
 const fs = require('fs');
 const promisifiedExec = util.promisify(exec);
 
+require('dotenv').config();
+
+const BASE_URL = process.env.VITE_API_BASE_URL;
+
 async function generateClient(url) {
   const regex = /\/([^/]+)\/openapi.json/;
   const match = url.match(regex);
 
-  const command = `yarn openapi-typescript ${url} --output src/shared/api/types/${match[1]}.ts && eslint src/shared/api/types/${match[1]}.ts --fix`;
+  const command = `yarn openapi-typescript ${BASE_URL}${url}/openapi.json --output src/shared/api/types/${match[1]}.ts && eslint src/shared/api/types/${match[1]}.ts --fix`;
 
   try {
     const { stdout, stderr } = await promisifiedExec(command);

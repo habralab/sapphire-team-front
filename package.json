@@ -19,11 +19,11 @@
   },
   "config": {
     "openapiUrls": [
-      "https://stage.sapphire.pet-project.habr.com/backend/users/openapi.json",
-      "https://stage.sapphire.pet-project.habr.com/backend/storage/openapi.json",
-      "https://stage.sapphire.pet-project.habr.com/backend/projects/openapi.json",
-      "https://stage.sapphire.pet-project.habr.com/backend/notifications/openapi.json",
-      "https://stage.sapphire.pet-project.habr.com/backend/messenger/openapi.json"
+      "/users",
+      "/storage",
+      "/projects",
+      "/notifications",
+      "/messenger"
     ]
   },
   "dependencies": {
@@ -68,9 +68,11 @@
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-react": "^4.0.4",
     "commitlint": "^17.7.1",
     "concurrently": "^8.2.1",
+    "dotenv": "^16.3.1",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.0",

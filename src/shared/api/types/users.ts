@@ -4,39 +4,39 @@
  */
 
 export interface paths {
-  '/api/v1beta/rest/health': {
+  '/health': {
     /** Health */
-    get: operations['health_api_v1beta_rest_health_get'];
+    get: operations['health_health_get'];
   };
-  '/api/v1beta/rest/auth/logout': {
+  '/api/rest/auth/logout': {
     /** Logout */
-    delete: operations['logout_api_v1beta_rest_auth_logout_delete'];
+    delete: operations['logout_api_rest_auth_logout_delete'];
   };
-  '/api/v1beta/rest/auth/oauth2/habr/authorize': {
+  '/api/rest/auth/oauth2/habr/authorize': {
     /** Authorize */
-    get: operations['authorize_api_v1beta_rest_auth_oauth2_habr_authorize_get'];
+    get: operations['authorize_api_rest_auth_oauth2_habr_authorize_get'];
   };
-  '/api/v1beta/rest/auth/oauth2/habr/callback': {
+  '/api/rest/auth/oauth2/habr/callback': {
     /** Callback */
-    get: operations['callback_api_v1beta_rest_auth_oauth2_habr_callback_get'];
+    get: operations['callback_api_rest_auth_oauth2_habr_callback_get'];
   };
-  '/api/v1beta/rest/users/{user_id}': {
+  '/api/rest/users/{user_id}': {
     /** Get User */
-    get: operations['get_user_api_v1beta_rest_users__user_id__get'];
+    get: operations['get_user_api_rest_users__user_id__get'];
     /** Update User */
-    post: operations['update_user_api_v1beta_rest_users__user_id__post'];
+    post: operations['update_user_api_rest_users__user_id__post'];
   };
-  '/api/v1beta/rest/users/{user_id}/avatar': {
+  '/api/rest/users/{user_id}/avatar': {
     /** Get User Avatar */
-    get: operations['get_user_avatar_api_v1beta_rest_users__user_id__avatar_get'];
+    get: operations['get_user_avatar_api_rest_users__user_id__avatar_get'];
     /** Upload User Avatar */
-    post: operations['upload_user_avatar_api_v1beta_rest_users__user_id__avatar_post'];
+    post: operations['upload_user_avatar_api_rest_users__user_id__avatar_post'];
     /** Delete User Avatar */
-    delete: operations['delete_user_avatar_api_v1beta_rest_users__user_id__avatar_delete'];
+    delete: operations['delete_user_avatar_api_rest_users__user_id__avatar_delete'];
   };
-  '/api/v1beta/rest/users/{user_id}/skills': {
+  '/api/rest/users/{user_id}/skills': {
     /** Update User Skills */
-    post: operations['update_user_skills_api_v1beta_rest_users__user_id__skills_post'];
+    post: operations['update_user_skills_api_rest_users__user_id__skills_post'];
   };
 }
 
@@ -44,8 +44,8 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
-    /** Body_upload_user_avatar_api_v1beta_rest_users__user_id__avatar_post */
-    Body_upload_user_avatar_api_v1beta_rest_users__user_id__avatar_post: {
+    /** Body_upload_user_avatar_api_rest_users__user_id__avatar_post */
+    Body_upload_user_avatar_api_rest_users__user_id__avatar_post: {
       /**
        * Avatar
        * Format: binary
@@ -137,7 +137,7 @@ export type external = Record<string, never>;
 
 export interface operations {
   /** Health */
-  health_api_v1beta_rest_health_get: {
+  health_health_get: {
     responses: {
       /** @description Successful Response */
       200: {
@@ -148,7 +148,7 @@ export interface operations {
     };
   };
   /** Logout */
-  logout_api_v1beta_rest_auth_logout_delete: {
+  logout_api_rest_auth_logout_delete: {
     responses: {
       /** @description Successful Response */
       200: {
@@ -159,7 +159,7 @@ export interface operations {
     };
   };
   /** Authorize */
-  authorize_api_v1beta_rest_auth_oauth2_habr_authorize_get: {
+  authorize_api_rest_auth_oauth2_habr_authorize_get: {
     responses: {
       /** @description Successful Response */
       307: {
@@ -168,7 +168,7 @@ export interface operations {
     };
   };
   /** Callback */
-  callback_api_v1beta_rest_auth_oauth2_habr_callback_get: {
+  callback_api_rest_auth_oauth2_habr_callback_get: {
     parameters: {
       query: {
         state: string;
@@ -191,7 +191,7 @@ export interface operations {
     };
   };
   /** Get User */
-  get_user_api_v1beta_rest_users__user_id__get: {
+  get_user_api_rest_users__user_id__get: {
     parameters: {
       header?: {
         Authorization?: string | null;
@@ -220,7 +220,7 @@ export interface operations {
     };
   };
   /** Update User */
-  update_user_api_v1beta_rest_users__user_id__post: {
+  update_user_api_rest_users__user_id__post: {
     parameters: {
       header?: {
         Authorization?: string | null;
@@ -254,7 +254,7 @@ export interface operations {
     };
   };
   /** Get User Avatar */
-  get_user_avatar_api_v1beta_rest_users__user_id__avatar_get: {
+  get_user_avatar_api_rest_users__user_id__avatar_get: {
     parameters: {
       path: {
         user_id: string;
@@ -276,7 +276,7 @@ export interface operations {
     };
   };
   /** Upload User Avatar */
-  upload_user_avatar_api_v1beta_rest_users__user_id__avatar_post: {
+  upload_user_avatar_api_rest_users__user_id__avatar_post: {
     parameters: {
       header?: {
         Authorization?: string | null;
@@ -291,7 +291,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'multipart/form-data': components['schemas']['Body_upload_user_avatar_api_v1beta_rest_users__user_id__avatar_post'];
+        'multipart/form-data': components['schemas']['Body_upload_user_avatar_api_rest_users__user_id__avatar_post'];
       };
     };
     responses: {
@@ -310,7 +310,7 @@ export interface operations {
     };
   };
   /** Delete User Avatar */
-  delete_user_avatar_api_v1beta_rest_users__user_id__avatar_delete: {
+  delete_user_avatar_api_rest_users__user_id__avatar_delete: {
     parameters: {
       header?: {
         Authorization?: string | null;
@@ -339,7 +339,7 @@ export interface operations {
     };
   };
   /** Update User Skills */
-  update_user_skills_api_v1beta_rest_users__user_id__skills_post: {
+  update_user_skills_api_rest_users__user_id__skills_post: {
     parameters: {
       header?: {
         Authorization?: string | null;

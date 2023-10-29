@@ -4,21 +4,21 @@
  */
 
 export interface paths {
-  '/api/v1beta/rest/health': {
+  '/health': {
     /** Health */
-    get: operations['health_api_v1beta_rest_health_get'];
+    get: operations['health_health_get'];
   };
-  '/api/v1beta/rest/skills/': {
+  '/api/rest/skills/': {
     /** Get Skills */
-    get: operations['get_skills_api_v1beta_rest_skills__get'];
+    get: operations['get_skills_api_rest_skills__get'];
   };
-  '/api/v1beta/rest/specializations/': {
+  '/api/rest/specializations/': {
     /** Get Specializations */
-    get: operations['get_specializations_api_v1beta_rest_specializations__get'];
+    get: operations['get_specializations_api_rest_specializations__get'];
   };
-  '/api/v1beta/rest/spec-groups/': {
+  '/api/rest/spec-groups/': {
     /** Get Specialization Groups */
-    get: operations['get_specialization_groups_api_v1beta_rest_spec_groups__get'];
+    get: operations['get_specialization_groups_api_rest_spec_groups__get'];
   };
 }
 
@@ -74,7 +74,7 @@ export type external = Record<string, never>;
 
 export interface operations {
   /** Health */
-  health_api_v1beta_rest_health_get: {
+  health_health_get: {
     responses: {
       /** @description Successful Response */
       200: {
@@ -85,7 +85,7 @@ export interface operations {
     };
   };
   /** Get Skills */
-  get_skills_api_v1beta_rest_skills__get: {
+  get_skills_api_rest_skills__get: {
     parameters: {
       query?: {
         /** @description Page number */
@@ -110,7 +110,7 @@ export interface operations {
     };
   };
   /** Get Specializations */
-  get_specializations_api_v1beta_rest_specializations__get: {
+  get_specializations_api_rest_specializations__get: {
     parameters: {
       query?: {
         /** @description Page number */
@@ -135,7 +135,7 @@ export interface operations {
     };
   };
   /** Get Specialization Groups */
-  get_specialization_groups_api_v1beta_rest_spec_groups__get: {
+  get_specialization_groups_api_rest_spec_groups__get: {
     parameters: {
       query?: {
         /** @description Page number */

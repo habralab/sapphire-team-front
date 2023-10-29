@@ -4,9 +4,9 @@
  */
 
 export interface paths {
-  '/api/v1beta/rest/health': {
+  '/health': {
     /** Health */
-    get: operations['health_api_v1beta_rest_health_get'];
+    get: operations['health_health_get'];
   };
 }
 
@@ -35,7 +35,7 @@ export type external = Record<string, never>;
 
 export interface operations {
   /** Health */
-  health_api_v1beta_rest_health_get: {
+  health_health_get: {
     responses: {
       /** @description Successful Response */
       200: {

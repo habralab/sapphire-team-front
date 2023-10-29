@@ -56,11 +56,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.7"],\
             ["@typescript-eslint/eslint-plugin", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.5.0"],\
             ["@typescript-eslint/parser", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.5.0"],\
+            ["@vitejs/plugin-basic-ssl", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:1.0.1"],\
             ["@vitejs/plugin-react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.0.4"],\
             ["axios", "npm:1.5.0"],\
             ["chakra-react-select", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.7.6"],\
             ["commitlint", "npm:17.7.1"],\
             ["concurrently", "npm:8.2.1"],\
+            ["dotenv", "npm:16.3.1"],\
             ["eslint", "npm:8.48.0"],\
             ["eslint-config-prettier", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:9.0.0"],\
             ["eslint-import-resolver-typescript", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:3.6.0"],\
@@ -7788,6 +7790,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@vitejs/plugin-basic-ssl", [\
+        ["npm:1.0.1", {\
+          "packageLocation": "./.yarn/cache/@vitejs-plugin-basic-ssl-npm-1.0.1-54d353eb6f-9060dd9b02.zip/node_modules/@vitejs/plugin-basic-ssl/",\
+          "packageDependencies": [\
+            ["@vitejs/plugin-basic-ssl", "npm:1.0.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:1.0.1", {\
+          "packageLocation": "./.yarn/__virtual__/@vitejs-plugin-basic-ssl-virtual-715a0af69a/0/cache/@vitejs-plugin-basic-ssl-npm-1.0.1-54d353eb6f-9060dd9b02.zip/node_modules/@vitejs/plugin-basic-ssl/",\
+          "packageDependencies": [\
+            ["@vitejs/plugin-basic-ssl", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:1.0.1"],\
+            ["@types/vite", null],\
+            ["vite", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.4.9"]\
+          ],\
+          "packagePeers": [\
+            "@types/vite",\
+            "vite"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@vitejs/plugin-react", [\
         ["npm:4.0.4", {\
           "packageLocation": "./.yarn/cache/@vitejs-plugin-react-npm-4.0.4-a752ee42a8-ec25400dc7.zip/node_modules/@vitejs/plugin-react/",\
@@ -9999,6 +10023,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["dot-prop", "npm:6.0.1"],\
             ["is-obj", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dotenv", [\
+        ["npm:16.3.1", {\
+          "packageLocation": "./.yarn/cache/dotenv-npm-16.3.1-e6d380a398-15d75e7279.zip/node_modules/dotenv/",\
+          "packageDependencies": [\
+            ["dotenv", "npm:16.3.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -15981,11 +16014,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.7"],\
             ["@typescript-eslint/eslint-plugin", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.5.0"],\
             ["@typescript-eslint/parser", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.5.0"],\
+            ["@vitejs/plugin-basic-ssl", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:1.0.1"],\
             ["@vitejs/plugin-react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.0.4"],\
             ["axios", "npm:1.5.0"],\
             ["chakra-react-select", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.7.6"],\
             ["commitlint", "npm:17.7.1"],\
             ["concurrently", "npm:8.2.1"],\
+            ["dotenv", "npm:16.3.1"],\
             ["eslint", "npm:8.48.0"],\
             ["eslint-config-prettier", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:9.0.0"],\
             ["eslint-import-resolver-typescript", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:3.6.0"],\
