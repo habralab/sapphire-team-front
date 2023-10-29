@@ -17,8 +17,8 @@ export function UpdateUser() {
 
   return (
     <Flex direction="column" gap={6}>
-      <Flex direction="column" gap={1}>
-        <Heading variant="h2">Фото</Heading>
+      <Flex direction="column" gap={4}>
+        <Heading variant="h3">Фото</Heading>
         <IconButton
           aria-label="add-avatar"
           variant="flat"
@@ -41,8 +41,8 @@ export function UpdateUser() {
           }
         />
       </Flex>
-      <Flex direction="column" gap={1}>
-        <Heading variant="h2">Имя</Heading>
+      <Flex direction="column" gap={4}>
+        <Heading variant="h3">Имя</Heading>
         <Input
           placeholder="Как вас зовут?"
           py={4}
@@ -51,8 +51,8 @@ export function UpdateUser() {
           borderRadius="full"
         />
       </Flex>
-      <Flex direction="column" gap={1}>
-        <Heading variant="h2">О себе</Heading>
+      <Flex direction="column" gap={4}>
+        <Heading variant="h3">О себе</Heading>
         <Flex direction="column" p={5} gap={2} bg="white" borderRadius="2xl">
           <Box
             ref={infoRef}

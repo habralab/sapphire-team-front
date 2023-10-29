@@ -5,7 +5,7 @@ import { SettingItem } from '~/shared/ui/SettingsItem';
 export function SettingsList() {
   return (
     <Flex direction="column">
-      <Heading variant="h2" mt={2} mb={4}>
+      <Heading variant="h3" mt={2} mb={4}>
         Колокольчик
       </Heading>
       <VStack
@@ -28,7 +28,7 @@ export function SettingsList() {
         <Divider variant="light" />
         <SettingItem>Правки в публикации</SettingItem>
       </VStack>
-      <Heading variant="h2" mt={6} mb={4}>
+      <Heading variant="h3" mt={6} mb={4}>
         Push-уведомления
       </Heading>
       <VStack
