@@ -16,7 +16,7 @@ export function DialogPage() {
         </Container>
       </Box>
 
-      <Container maxW="md">
+      <Container maxW="md" bg="white">
         <Messages />
       </Container>
 

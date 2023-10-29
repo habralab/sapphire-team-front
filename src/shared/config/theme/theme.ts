@@ -114,8 +114,8 @@ const Heading = defineStyleConfig({
       marginBottom: '3',
     },
     h3: {
-      fontSize: 'sm',
-      fontWeight: 'semibold',
+      fontSize: 'md',
+      fontWeight: 'medium',
     },
   },
 });

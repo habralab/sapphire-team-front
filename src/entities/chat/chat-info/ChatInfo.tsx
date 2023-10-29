@@ -29,9 +29,11 @@ export function ChatInfo({ isDesktop }: ChatInfoProps) {
       <Stack spacing={1}>
         <HStack>
           <Icon as={BsFillBriefcaseFill} />
-          <Heading variant="h3">Сервис онлайн-образования</Heading>
+          <Heading fontSize="sm" fontWeight="medium">
+            Сервис онлайн-образования
+          </Heading>
         </HStack>
-        <Heading variant="h3" as="h3">
+        <Heading fontSize="sm" fontWeight="medium" as="h3">
           Татьяна Андреева
         </Heading>
       </Stack>

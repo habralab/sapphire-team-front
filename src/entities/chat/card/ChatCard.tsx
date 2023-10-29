@@ -17,12 +17,14 @@ export function ChatCard(props: ChatCardProps) {
     <Flex gap={2} py={4}>
       <SAvatar name={name} />
 
-      <Stack spacing={1}>
+      <Stack spacing={2}>
         <HStack>
           <Icon as={role === 'Организатор' ? BsFillBriefcaseFill : IoPerson} />
-          <Heading variant="h3">{title}</Heading>
+          <Heading fontSize="sm" fontWeight="medium">
+            {title}
+          </Heading>
         </HStack>
-        <Heading variant="h3" as="h3">
+        <Heading fontSize="sm" fontWeight="medium" as="h3">
           {name}
         </Heading>
         <Text color="gray.600" noOfLines={1}>
