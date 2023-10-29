@@ -15,6 +15,7 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
       <Box
         ref={messageRef}
         contentEditable
+        maxW="90%"
         width="full"
         border="1px"
         borderRadius="lg"
