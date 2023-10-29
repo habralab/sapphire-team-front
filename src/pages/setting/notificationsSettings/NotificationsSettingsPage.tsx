@@ -1,8 +1,8 @@
 import { Container, Flex, Heading } from '@chakra-ui/react';
 
-import { SettingsList } from '~/widgets/settings-list';
+import { SettingsList } from '~/features/user';
 
-import { GoBack } from '~/features/settings';
+import { GoBack } from '~/shared/ui/GoBack';
 
 export function NotificationsSettingsPage() {
   return (

@@ -1,6 +1,6 @@
 import { Flex, Heading, VStack, Divider } from '@chakra-ui/react';
 
-import { SettingItem } from '~/entities/settings';
+import { SettingItem } from '~/shared/ui/SettingsItem';
 
 export function SettingsList() {
   return (

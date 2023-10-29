@@ -2,11 +2,11 @@ import { Flex, Heading, Container, VStack, Divider } from '@chakra-ui/react';
 import { FiChevronRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-import { GoBack, Logout } from '~/features/settings';
-
-import { SettingItem } from '~/entities/settings';
+import { Logout } from '~/features/user';
 
 import { PATHS } from '~/shared/lib/router';
+import { GoBack } from '~/shared/ui/GoBack';
+import { SettingItem } from '~/shared/ui/SettingsItem';
 
 export function SettingsPage() {
   return (

@@ -1,6 +1,6 @@
 import { Stack } from '@chakra-ui/react';
 
-import { NotificationItem } from '~/entities/notification';
+import { NotificationItem } from '~/entities/user';
 
 export function NotificationList() {
   const notifications = [

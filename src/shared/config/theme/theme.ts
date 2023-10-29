@@ -138,13 +138,13 @@ const noline = defineStyle({
   },
 });
 
-const sm = defineStyle({
-  minH: '50px',
-});
+// const sm = defineStyle({
+//   minH: '50px',
+// });
 
 const textareaTheme = defineStyleConfig({
   variants: { noline },
-  sizes: { sm },
+  // sizes: { sm },
 });
 
 export const basicTheme = extendTheme({
