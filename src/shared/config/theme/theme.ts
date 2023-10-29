@@ -10,7 +10,6 @@ import { accordionTheme } from './customAnatomy/accordionTheme';
 import { avatarTheme } from './customAnatomy/avatarTheme';
 import { checkboxTheme } from './customAnatomy/checkboxTheme';
 import { inputTheme } from './customAnatomy/inputTheme';
-import { selectTheme } from './customAnatomy/selectTheme ';
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
  * https://github.com/chakra-ui/chakra-ui/tree/main/packages/components/theme/src
@@ -144,7 +143,6 @@ export const basicTheme = extendTheme({
     Accordion: accordionTheme,
     Checkbox: checkboxTheme,
     Input: inputTheme,
-    Select: selectTheme,
   },
   styles: {
     global: {
