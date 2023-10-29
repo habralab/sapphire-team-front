@@ -20,10 +20,9 @@ import {
   InputGroup,
   InputRightElement,
   FormControl,
-  FormLabel,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 import { Select } from 'chakra-react-select';
+import { useState } from 'react';
 import { IoOptions } from 'react-icons/io5';
 
 import { useIsMobile } from '~/shared/hooks';
@@ -406,6 +405,7 @@ export const Filter = () => {
                       }}
                       name="skills"
                       onChange={(e) => {
+                        if (!e) return;
                         setUserSkills([...userSkills, e.value]);
                       }}
                       options={skillState.filter(
