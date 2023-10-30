@@ -1,14 +1,14 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, isAxiosError } from 'axios';
 
-export class BasicAgent {
-  agent: AxiosInstance;
+export class BaseApiClient {
+  client: AxiosInstance;
 
   constructor(baseURL: string) {
-    this.agent = axios.create({
-      baseURL,
+    this.client = axios.create({
+      baseURL: `${import.meta.env.VITE_API_BASE_URL}${baseURL}`,
     });
 
-    this.agent.interceptors.response.use(
+    this.client.interceptors.response.use(
       this.handleSuccessResponse,
       this.handleErrorResponse,
     );

@@ -1,4 +1,4 @@
-import { server } from '~/shared/api';
+import { server } from '../mock';
 
 beforeAll(() => {
   server.listen({ onUnhandledRequest: 'error' });

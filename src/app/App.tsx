@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { basicTheme } from '~/shared/config';
 
+import { ApiProvider } from './providers/api';
 import { LayoutProvider } from './providers/layout';
 import { Routing } from './providers/router';
 
@@ -17,12 +18,14 @@ const colorModeManager = {
 function App() {
   return (
     <ChakraProvider theme={basicTheme} colorModeManager={colorModeManager}>
-      <LayoutProvider>
-        <QueryClientProvider client={queryClient}>
-          <Routing />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </LayoutProvider>
+      <ApiProvider>
+        <LayoutProvider>
+          <QueryClientProvider client={queryClient}>
+            <Routing />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </LayoutProvider>
+      </ApiProvider>
     </ChakraProvider>
   );
 }
