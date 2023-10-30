@@ -14,7 +14,17 @@
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest --passWithNoTests",
     "release": "release-it",
-    "analyze": "vite-bundle-visualizer -o ./stats.html"
+    "analyze": "vite-bundle-visualizer -o ./stats.html",
+    "swagger": "node openapiGenerator.js"
+  },
+  "config": {
+    "openapiUrls": [
+      "/users",
+      "/storage",
+      "/projects",
+      "/notifications",
+      "/messenger"
+    ]
   },
   "dependencies": {
     "@chakra-ui/anatomy": "^2.2.1",
@@ -33,6 +43,7 @@
     "@types/lodash": "^4.14.200",
     "axios": "^1.5.0",
     "chakra-react-select": "^4.7.6",
+    "form-data": "^4.0.0",
     "framer-motion": "^10.16.4",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
@@ -57,9 +68,11 @@
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-react": "^4.0.4",
     "commitlint": "^17.7.1",
     "concurrently": "^8.2.1",
+    "dotenv": "^16.3.1",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.0",
@@ -76,6 +89,7 @@
     "jsdom": "^22.1.0",
     "lint-staged": "^14.0.1",
     "msw": "^1.2.5",
+    "openapi-typescript": "^6.7.0",
     "prettier": "^3.0.3",
     "release-it": "^16.1.5",
     "typescript": "^5.1.6",

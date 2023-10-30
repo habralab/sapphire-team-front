@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { BlankPage } from '~/pages/blank';
 import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
+import { MainPage } from '~/pages/main';
 import { NotFoundPage } from '~/pages/not-found';
 import { NotificationsPage } from '~/pages/notifications';
 import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
@@ -43,7 +44,7 @@ const normalRoutes = [
   {
     path: PATHS.root,
     view: {
-      base: <Navigate to={PATHS.search} replace />,
+      base: <MainPage />,
     },
   },
   {

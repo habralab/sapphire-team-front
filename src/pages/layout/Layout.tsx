@@ -1,4 +1,4 @@
-import { ChakraProvider, Container, Flex, Stack } from '@chakra-ui/react';
+import { Box, ChakraProvider, Container, Flex, Stack } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -31,7 +31,10 @@ export const Layout = ({ base, desktop }: LayoutProps) => {
         {isMobile ? (
           <Stack gap={0} className={styles.layout}>
             <Flex flex="1">{base}</Flex>
-            {!isDialogPage && <MenuBase />}
+            <Box position="sticky" bottom="0" bg="bg">
+              <Box ref={footerRef}></Box>
+              {!isDialogPage && <MenuBase />}
+            </Box>
           </Stack>
         ) : (
           <Flex alignItems="start" h="full">

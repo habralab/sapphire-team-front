@@ -1,3 +1,4 @@
+import basicSsl from '@vitejs/plugin-basic-ssl';
 import react from '@vitejs/plugin-react';
 import { splitVendorChunkPlugin } from 'vite';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
@@ -8,6 +9,7 @@ import { defineConfig } from 'vitest/config';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    basicSsl(),
     ViteEjsPlugin((viteConfig) => ({
       env: viteConfig.env,
     })),
@@ -62,6 +64,9 @@ export default defineConfig({
     cache: {
       dir: '.yarn/.vite/test',
     },
+  },
+  server: {
+    https: true,
   },
   cacheDir: '.yarn/.vite',
   resolve: {
