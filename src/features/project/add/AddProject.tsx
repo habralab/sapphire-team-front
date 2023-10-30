@@ -1,14 +1,20 @@
 import { HStack, Icon, IconButton, Text } from '@chakra-ui/react';
 import { BsPlus } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 import { useIsMobile } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 
 export const AddProject = () => {
+  const navigate = useNavigate();
   const isMobile = useIsMobile();
 
   return (
     <IconButton
       aria-label="add-project"
+      onClick={() => {
+        navigate(PATHS.addProject);
+      }}
       gap={2}
       minW={['8', '8', '10']}
       h={['8', '8', '10']}
