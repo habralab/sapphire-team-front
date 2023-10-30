@@ -1,19 +1,10 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  Input,
-  Text,
-  Icon,
-  Box,
-  IconButton,
-} from '@chakra-ui/react';
-import { useState, useRef } from 'react';
+import { Button, Flex, Heading, Input, Text, Icon, IconButton } from '@chakra-ui/react';
 import { BsPlus } from 'react-icons/bs';
 
+import { STextarea } from '~/shared/ui/STextarea';
+
 export function UpdateUser() {
-  const [value, setValue] = useState('');
-  const infoRef = useRef<HTMLDivElement>(null);
+  const maxLength = 50;
 
   return (
     <Flex direction="column" gap={6}>
@@ -53,34 +44,11 @@ export function UpdateUser() {
       </Flex>
       <Flex direction="column" gap={4}>
         <Heading variant="h3">О себе</Heading>
-        <Flex direction="column" p={5} gap={2} bg="white" borderRadius="2xl">
-          <Box
-            ref={infoRef}
-            contentEditable
-            width="full"
-            bg="white"
-            minH="50px"
-            onInput={(e) => {
-              setValue(e.currentTarget.innerText);
-            }}
-            _focus={{ outline: 'none' }}
-            _empty={{
-              _before: {
-                color: 'gray.500',
-                content:
-                  '"Напишите о себе поподробнее. Хороший рассказ убедит обратиться именно к вам"',
-              },
-            }}
-          />
-          <Text textAlign="end" color="gray.500">
-            {value.length}/300
-          </Text>
-        </Flex>
+        <STextarea maxLength={maxLength} />
       </Flex>
       <Button fontWeight="semibold" w="full">
         Сохранить
       </Button>
-      ;
     </Flex>
   );
 }
