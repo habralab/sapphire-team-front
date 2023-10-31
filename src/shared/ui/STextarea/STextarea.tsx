@@ -3,10 +3,12 @@ import React, { useRef, useState, useCallback, useLayoutEffect } from 'react';
 
 interface STextareaProps {
   maxLength: number;
+  information: string;
+  setInformation: (information: string) => void;
 }
 
-export function STextarea({ maxLength }: STextareaProps) {
-  const [value, setValue] = useState('');
+export function STextarea({ maxLength, information, setInformation }: STextareaProps) {
+  // const [value, setValue] = useState('');
   const [cursorPosition, setCursorPosition] = useState<number | null>(null);
   const contentEditableRef = useRef<HTMLDivElement>(null);
 
@@ -40,10 +42,10 @@ export function STextarea({ maxLength }: STextareaProps) {
             offset && offset > maxLength ? maxLength : offset ? offset : newValue.length,
           );
 
-          setValue(newValue);
+          setInformation(newValue);
         }
       } else {
-        setValue(content);
+        setInformation(content);
       }
     }
   }, []);
@@ -115,10 +117,10 @@ export function STextarea({ maxLength }: STextareaProps) {
         color="gray.500"
         onClick={() => {
           contentEditableRef.current?.focus();
-          setCursorPosition(value.length);
+          setCursorPosition(information.length);
         }}
       >
-        {value.length}/{maxLength}
+        {information.length}/{maxLength}
       </Text>
     </Box>
   );

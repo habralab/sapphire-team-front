@@ -129,24 +129,6 @@ const Text = defineStyleConfig({
   },
 });
 
-const noline = defineStyle({
-  background: 'white',
-  fontSize: 'sm',
-  padding: '0',
-  _focus: {
-    borderColor: 'white',
-  },
-});
-
-// const sm = defineStyle({
-//   minH: '50px',
-// });
-
-const textareaTheme = defineStyleConfig({
-  variants: { noline },
-  // sizes: { sm },
-});
-
 export const basicTheme = extendTheme({
   config: {
     initialColorMode: 'light',
@@ -160,7 +142,6 @@ export const basicTheme = extendTheme({
     Link,
     Heading,
     Text,
-    Textarea: textareaTheme,
     Accordion: accordionTheme,
     Checkbox: checkboxTheme,
     Input: inputTheme,

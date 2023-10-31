@@ -17,6 +17,12 @@ import { STextarea } from '~/shared/ui/STextarea';
 
 export function UpdateUser() {
   const [avatar, setAvatar] = useState<File | null>(null);
+  const [name, setName] = useState('');
+  const [information, setInformation] = useState('');
+
+  // const [specialization, setSpecialization] = useState();
+  // const [skills, setSkills] = useState();
+
   const maxLength = 300;
 
   const addAvatar = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +31,14 @@ export function UpdateUser() {
     if (selectedFile) {
       setAvatar(selectedFile);
     }
+  };
+
+  const onSubmit = () => {
+    console.log({
+      avatar: avatar?.name,
+      name: name,
+      info: information,
+    });
   };
 
   return (
@@ -87,13 +101,21 @@ export function UpdateUser() {
           px={5}
           bg="white"
           borderRadius="full"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
         />
       </Flex>
       <Flex direction="column" gap={4}>
         <Heading variant="h3">О себе</Heading>
-        <STextarea maxLength={maxLength} />
+        <STextarea
+          maxLength={maxLength}
+          information={information}
+          setInformation={setInformation}
+        />
       </Flex>
-      <Button fontWeight="semibold" w="full">
+      <Button fontWeight="semibold" w="full" onClick={onSubmit}>
         Сохранить
       </Button>
     </Flex>
