@@ -7,5 +7,7 @@ export const PATHS = {
   profile: '/profile',
   notifications: '/notifications',
   settings: '/settings',
+  profileSettings: '/settings/profile',
+  notificationsSettings: '/settings/notifications',
   notFound: '/404',
 };

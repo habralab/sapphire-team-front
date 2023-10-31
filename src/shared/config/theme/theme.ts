@@ -10,6 +10,7 @@ import { accordionTheme } from './customAnatomy/accordionTheme';
 import { avatarTheme } from './customAnatomy/avatarTheme';
 import { checkboxTheme } from './customAnatomy/checkboxTheme';
 import { inputTheme } from './customAnatomy/inputTheme';
+import { switchTheme } from './customAnatomy/switchTheme';
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
  * https://github.com/chakra-ui/chakra-ui/tree/main/packages/components/theme/src
@@ -113,8 +114,8 @@ const Heading = defineStyleConfig({
       marginBottom: '3',
     },
     h3: {
-      fontSize: 'sm',
-      fontWeight: 'semibold',
+      fontSize: 'md',
+      fontWeight: 'medium',
     },
   },
 });
@@ -144,6 +145,7 @@ export const basicTheme = extendTheme({
     Accordion: accordionTheme,
     Checkbox: checkboxTheme,
     Input: inputTheme,
+    Switch: switchTheme,
   },
   styles: {
     global: {

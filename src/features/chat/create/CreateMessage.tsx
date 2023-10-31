@@ -2,6 +2,8 @@ import { Icon, Flex, IconButton, Box } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { IoSend } from 'react-icons/io5';
 
+import { STextarea } from '~/shared/ui/STextarea';
+
 interface CreateMessageProps {
   onSubmit?: (message: string) => void;
 }
@@ -12,27 +14,11 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
 
   return (
     <Flex px={[0, 0, 6]} py={4} alignItems="center" gap={4} w="full">
-      <Box
-        ref={messageRef}
-        contentEditable
-        width="full"
-        border="1px"
-        borderRadius="lg"
-        borderColor="gray.300"
-        bg="white"
-        _hover={{
-          borderColor: 'blue.500',
-        }}
-        onInput={(e) => {
-          setValue(e.currentTarget.innerText);
-        }}
-        _empty={{
-          _before: {
-            color: 'gray.400',
-            content: '"Введите сообщение..."',
-          },
-        }}
-        p="2"
+      <STextarea
+        maxLength={50}
+        information={value}
+        setInformation={setValue}
+        placeholder="Введите сообщение..."
       />
       <IconButton
         aria-label="create-message"

@@ -14,7 +14,7 @@ export function Message(props: MessageProps) {
   return (
     <VStack maxW="70%" alignItems={variant === 'incoming' ? 'start' : 'end'}>
       <Text
-        bg={variant === 'incoming' ? 'gray.300' : 'purple.600'}
+        bg={variant === 'incoming' ? 'gray.100' : 'purple.600'}
         color={variant === 'incoming' ? 'gray.900' : 'white'}
         p={3}
         borderRadius="2xl"
