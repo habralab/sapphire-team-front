@@ -113,7 +113,10 @@ export function STextarea({ maxLength }: STextareaProps) {
         right={2}
         bottom={2}
         color="gray.500"
-        onClick={() => contentEditableRef.current?.focus()}
+        onClick={() => {
+          contentEditableRef.current?.focus();
+          setCursorPosition(value.length);
+        }}
       >
         {value.length}/{maxLength}
       </Text>
