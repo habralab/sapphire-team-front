@@ -1,5 +1,5 @@
 import { Box, Text } from '@chakra-ui/react';
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useLayoutEffect } from 'react';
 
 interface STextareaProps {
   maxLength: number;
@@ -10,7 +10,7 @@ export function STextarea({ maxLength }: STextareaProps) {
   const [cursorPosition, setCursorPosition] = useState<number | null>(null);
   const contentEditableRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (contentEditableRef.current && cursorPosition !== null) {
       const selection = window.getSelection();
       if (selection && contentEditableRef.current.firstChild) {
