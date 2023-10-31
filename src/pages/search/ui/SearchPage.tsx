@@ -49,7 +49,7 @@ export const SearchPage = () => {
       {layout?.footer && (
         <Portal containerRef={layout.footer}>
           <Container py={4} maxW="md">
-            <Button w="full" onClick={() => userApi.auth()}>
+            <Button w="full" as="a" href={userApi.authURL}>
               Авторизоваться
             </Button>
           </Container>

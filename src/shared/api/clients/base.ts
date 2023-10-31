@@ -2,11 +2,15 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse, isAxiosError } from 'a
 
 export class BaseApiClient {
   client: AxiosInstance;
+  baseURL: string;
 
-  constructor(baseURL: string) {
+  constructor(domainURL: string) {
+    const baseURL = `${import.meta.env.VITE_API_BASE_URL}${domainURL}`;
     this.client = axios.create({
-      baseURL: `${import.meta.env.VITE_API_BASE_URL}${baseURL}`,
+      baseURL,
     });
+
+    this.baseURL = baseURL;
 
     this.client.interceptors.response.use(
       this.handleSuccessResponse,
