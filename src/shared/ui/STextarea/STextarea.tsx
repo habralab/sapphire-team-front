@@ -96,7 +96,7 @@ export function STextarea({ maxLength }: STextareaProps) {
         contentEditable
         width="full"
         bg="white"
-        minH="50px"
+        minH="82px"
         onPaste={handlePaste}
         onInput={handleInput}
         _empty={{
