@@ -15,7 +15,7 @@ export function NotificationList() {
   ];
 
   return (
-    <Stack spacing={0}>
+    <Stack spacing={0} bg="white" px={5} py={2} borderRadius="2xl">
       {notifications.map((notification, i) => (
         <NotificationItem
           key={i}
