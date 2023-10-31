@@ -35,7 +35,7 @@ interface SpecsSelector {
   child: Selector[];
 }
 
-interface FilterSpecializationProps {
+interface FilterSpecializationModalProps {
   isVisible: boolean;
   changeVisible: (status: boolean) => void;
   state: SpecsSelector[];
@@ -44,7 +44,7 @@ interface FilterSpecializationProps {
   saveSpec: (spec: number[]) => void;
 }
 
-export const FilterSpecialization = (props: FilterSpecializationProps) => {
+export const FilterSpecializationModal = (props: FilterSpecializationModalProps) => {
   const { isVisible, changeVisible, state, resetSpec, saveSpec, userFilter } = props;
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
