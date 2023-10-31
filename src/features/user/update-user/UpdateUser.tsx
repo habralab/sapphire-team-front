@@ -113,6 +113,7 @@ export function UpdateUser() {
           maxLength={maxLength}
           information={information}
           setInformation={setInformation}
+          placeholder="Напишите о себе поподробнее. Хороший рассказ убедит обратиться именно к вам"
         />
       </Flex>
       <Button fontWeight="semibold" w="full" onClick={onSubmit}>

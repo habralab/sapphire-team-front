@@ -5,12 +5,19 @@ interface STextareaProps {
   maxLength: number;
   information: string;
   setInformation: (information: string) => void;
+  placeholder: string;
 }
 
-export function STextarea({ maxLength, information, setInformation }: STextareaProps) {
+export function STextarea({
+  maxLength,
+  information,
+  setInformation,
+  placeholder,
+}: STextareaProps) {
   // const [value, setValue] = useState('');
   const [cursorPosition, setCursorPosition] = useState<number | null>(null);
   const contentEditableRef = useRef<HTMLDivElement>(null);
+  const [minH, setMinH] = useState(0);
 
   useLayoutEffect(() => {
     if (contentEditableRef.current && cursorPosition !== null) {
@@ -88,8 +95,17 @@ export function STextarea({ maxLength, information, setInformation }: STextareaP
     }
   };
 
+  useLayoutEffect(() => {
+    if (contentEditableRef.current) {
+      contentEditableRef.current.textContent = placeholder;
+      const height = contentEditableRef.current.getBoundingClientRect().height;
+      setMinH(height);
+      contentEditableRef.current.textContent = '';
+    }
+  }, []);
+
   return (
-    <Box pos="relative">
+    <Box pos="relative" w="full">
       <Box
         p={5}
         pb={7}
@@ -98,15 +114,15 @@ export function STextarea({ maxLength, information, setInformation }: STextareaP
         contentEditable
         width="full"
         bg="white"
-        minH="82px"
+        minH={minH}
         onPaste={handlePaste}
+        pos="relative"
         onInput={handleInput}
         _empty={{
           _before: {
             cursor: 'text',
             color: 'gray.500',
-            content:
-              '"Напишите о себе поподробнее. Хороший рассказ убедит обратиться именно к вам"',
+            content: `"${placeholder}"`,
           },
         }}
       />

@@ -16,7 +16,7 @@ export function ChatsList(props: SearchProps) {
   const { value, view } = props;
 
   return (
-    <Stack spacing={0} overflowY="auto" bg="white" py={2} borderRadius="2xl">
+    <Stack spacing={0} overflowY="auto" bg="white">
       {search(value).map((chat) => {
         {
           return view === 'desktop' ? (
