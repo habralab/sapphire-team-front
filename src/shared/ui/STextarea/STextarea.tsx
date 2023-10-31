@@ -55,15 +55,16 @@ export function STextarea({ maxLength }: STextareaProps) {
     if (contentEditableRef.current) {
       const clipboardData = e.clipboardData;
       const pastedText = clipboardData.getData('text/plain');
-      const cleanText = pastedText.replace(/<[^>]*>/g, '');
-
-      document.execCommand('insertText', false, cleanText);
+      document.execCommand('insertText', false, pastedText);
     }
   };
 
   return (
-    <Flex direction="column" p={5} gap={2} bg="white" borderRadius="2xl">
+    <Box pos="relative">
       <Box
+        p={5}
+        pb={7}
+        borderRadius="2xl"
         ref={contentEditableRef}
         contentEditable
         width="full"
@@ -71,18 +72,24 @@ export function STextarea({ maxLength }: STextareaProps) {
         minH="50px"
         onPaste={handlePaste}
         onInput={handleInput}
-        _focus={{ outline: 'none' }}
         _empty={{
           _before: {
+            cursor: 'text',
             color: 'gray.500',
             content:
               '"Напишите о себе поподробнее. Хороший рассказ убедит обратиться именно к вам"',
           },
         }}
       />
-      <Text textAlign="end" color="gray.500">
+      <Text
+        pos="absolute"
+        right={2}
+        bottom={2}
+        color="gray.500"
+        onClick={() => contentEditableRef.current?.focus()}
+      >
         {value.length}/{maxLength}
       </Text>
-    </Flex>
+    </Box>
   );
 }
