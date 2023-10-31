@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 interface STextareaProps {
@@ -26,20 +26,19 @@ export function STextarea({ maxLength }: STextareaProps) {
 
   const handleInput = useCallback(() => {
     if (contentEditableRef.current) {
+      const selection = window.getSelection();
+      const range = selection?.getRangeAt(0);
+      const offset = range?.startOffset;
+      console.log(offset);
       const content = contentEditableRef.current.textContent ?? '';
-      console.log(content);
       if (content.length > maxLength) {
-        const selection = window.getSelection();
-
         if (selection) {
           const newValue = content.slice(0, maxLength);
 
-          const range = selection.getRangeAt(0);
-
-          setCursorPosition(
-            range.startOffset > maxLength ? maxLength : range.startOffset,
-          );
           contentEditableRef.current.textContent = newValue;
+          setCursorPosition(
+            offset && offset > maxLength ? maxLength : offset ? offset : newValue.length,
+          );
 
           setValue(newValue);
         }
@@ -55,7 +54,35 @@ export function STextarea({ maxLength }: STextareaProps) {
     if (contentEditableRef.current) {
       const clipboardData = e.clipboardData;
       const pastedText = clipboardData.getData('text/plain');
-      document.execCommand('insertText', false, pastedText);
+      const selection = window.getSelection();
+
+      if (!selection) return;
+
+      const range = selection.getRangeAt(0);
+      range.deleteContents();
+
+      contentEditableRef.current.focus();
+
+      if (range.startContainer.nodeType === Node.TEXT_NODE) {
+        const startOffset = range.startOffset + pastedText.length;
+        range.startContainer.textContent =
+          range.startContainer.textContent?.slice(0, range.startOffset) +
+          pastedText +
+          range.startContainer.textContent?.slice(range.startOffset);
+        range.setStart(range.startContainer, startOffset);
+        range.collapse(true);
+      } else {
+        const textNode = document.createTextNode(pastedText);
+        contentEditableRef.current.appendChild(textNode);
+        range.selectNodeContents(textNode);
+        range.collapse(false);
+      }
+
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      const inputEvent = new Event('input', { bubbles: true });
+      contentEditableRef.current.dispatchEvent(inputEvent);
     }
   };
 
