@@ -29,7 +29,7 @@ export function STextarea({ maxLength }: STextareaProps) {
       const selection = window.getSelection();
       const range = selection?.getRangeAt(0);
       const offset = range?.startOffset;
-      console.log(offset);
+
       const content = contentEditableRef.current.textContent ?? '';
       if (content.length > maxLength) {
         if (selection) {
