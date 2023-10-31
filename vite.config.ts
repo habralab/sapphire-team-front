@@ -1,10 +1,13 @@
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import react from '@vitejs/plugin-react';
+import { config } from 'dotenv';
 import { splitVendorChunkPlugin } from 'vite';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import { VitePWA } from 'vite-plugin-pwa';
 import svgr from 'vite-plugin-svgr';
 import { defineConfig } from 'vitest/config';
+
+config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -67,6 +70,13 @@ export default defineConfig({
   },
   server: {
     https: true,
+    proxy: {
+      '/backend': {
+        target: process.env.VITE_API_BASE_URL,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/backend/, ''),
+      },
+    },
   },
   cacheDir: '.yarn/.vite',
   resolve: {

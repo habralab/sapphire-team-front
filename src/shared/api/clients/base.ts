@@ -5,12 +5,11 @@ export class BaseApiClient {
   baseURL: string;
 
   constructor(domainURL: string) {
-    const baseURL = `${import.meta.env.VITE_API_BASE_URL}${domainURL}`;
-    this.client = axios.create({
-      baseURL,
-    });
+    this.baseURL = `${import.meta.env.VITE_API_BASE_URL}${domainURL}`;
 
-    this.baseURL = baseURL;
+    this.client = axios.create({
+      baseURL: import.meta.env.DEV ? `/backend${domainURL}` : this.baseURL,
+    });
 
     this.client.interceptors.response.use(
       this.handleSuccessResponse,

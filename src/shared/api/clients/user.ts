@@ -20,4 +20,7 @@ export class UserApiClient extends BaseApiClient {
       withCredentials: true,
     });
   }
+  async getMe() {
+    return this.client.get('/api/rest/users/me');
+  }
 }
