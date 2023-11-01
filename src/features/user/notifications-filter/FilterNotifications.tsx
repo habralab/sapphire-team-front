@@ -7,8 +7,7 @@ import { PATHS } from '~/shared/lib/router';
 import { SAvatar } from '~/shared/ui/SAvatar';
 
 interface FilterNotificationsProps {
-  filter: NotificationsDto[];
-  setFilter: (filter: NotificationsDto[]) => void;
+  setFilter?: (filter: NotificationsDto[]) => void;
 }
 
 export function FilterNotifications(props: FilterNotificationsProps) {
@@ -16,14 +15,16 @@ export function FilterNotifications(props: FilterNotificationsProps) {
   const [active, setActive] = useState('all');
 
   const filterNotifications = (category: string) => {
-    if (category === 'all') {
-      setFilter(notifications);
-    } else {
-      setFilter(
-        notifications.filter((notification) => notification.category === category),
-      );
+    if (setFilter) {
+      if (category === 'all') {
+        setFilter(notifications);
+      } else {
+        setFilter(
+          notifications.filter((notification) => notification.category === category),
+        );
+      }
+      setActive(category);
     }
-    setActive(category);
   };
 
   return (

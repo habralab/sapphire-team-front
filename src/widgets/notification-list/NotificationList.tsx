@@ -1,7 +1,7 @@
 import { Stack, Link } from '@chakra-ui/react';
 import { Link as ReactLink, generatePath } from 'react-router-dom';
 
-import { NotificationItem } from '~/entities/notification';
+import { NotificationItem } from '~/entities/user';
 
 import { NotificationsDto } from '~/shared/lib/notifications';
 import { PATHS } from '~/shared/lib/router';

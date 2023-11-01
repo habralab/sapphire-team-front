@@ -16,10 +16,7 @@ export function NotificationsPageDesktop() {
       <Heading as="h1">Уведомления</Heading>
       <Flex gap={6} my={6} alignItems="stretch" w="full">
         <NotificationList notifications={filterNotifications} />
-        <FilterNotifications
-          filter={filterNotifications}
-          setFilter={setFilterNotifications}
-        />
+        <FilterNotifications setFilter={setFilterNotifications} />
       </Flex>
     </Container>
   );
