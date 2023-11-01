@@ -104,7 +104,7 @@ export const SearchSelect = () => {
             borderRadius: 'full',
             bg: 'white',
           }),
-          menu: (provided) => ({
+          input: (provided) => ({
             ...provided,
             touchAction: 'manipulation',
           }),
