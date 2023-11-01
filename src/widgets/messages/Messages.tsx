@@ -36,7 +36,7 @@ export function Messages({ isDesktop }: MessagesProps) {
       <Box>
         <STag tags={['Не прочитано']} />
       </Box>
-      <VStack gap={6}>
+      <VStack gap={6} mb={[4]}>
         <VStack alignItems="end">
           <Message variant="outgoing">Здравствуйте</Message>
           <Message variant="outgoing">
@@ -49,7 +49,7 @@ export function Messages({ isDesktop }: MessagesProps) {
             адрес электронной почты и мы обязательно рассмотрим вашу кандидатуру.
           </Message>
         </VStack>
-        <VStack alignItems="start" mb={[0, 4]}>
+        <VStack alignItems="start">
           <Message variant="incoming">
             Мы ищем людей, которые готовы работать в команде, проявлять инициативу и
             развиваться вместе с нами. Если вы уверены в своих силах и готовы принять
