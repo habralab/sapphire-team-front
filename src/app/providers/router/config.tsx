@@ -6,6 +6,7 @@ import { MainPage } from '~/pages/main';
 import { NotFoundPage } from '~/pages/not-found';
 import {
   NotificationPage,
+  NotificationPageDesktop,
   NotificationsPage,
   NotificationsPageDesktop,
 } from '~/pages/notifications';
@@ -51,7 +52,10 @@ export const normalRoutes = [
     path: PATHS.notifications,
     view: { base: <NotificationsPage />, desktop: <NotificationsPageDesktop /> },
   },
-  { path: PATHS.notification, view: { base: <NotificationPage /> } },
+  {
+    path: PATHS.notification,
+    view: { base: <NotificationPage />, desktop: <NotificationPageDesktop /> },
+  },
   { path: PATHS.settings, view: { base: <SettingsPage /> } },
   { path: PATHS.profileSettings, view: { base: <ProfileSettingsPage /> } },
   { path: PATHS.notificationsSettings, view: { base: <NotificationsSettingsPage /> } },
