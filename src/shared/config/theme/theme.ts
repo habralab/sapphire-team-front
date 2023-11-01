@@ -9,7 +9,6 @@ import {
 import { accordionTheme } from './customAnatomy/accordionTheme';
 import { avatarTheme } from './customAnatomy/avatarTheme';
 import { checkboxTheme } from './customAnatomy/checkboxTheme';
-import { inputTheme } from './customAnatomy/inputTheme';
 import { switchTheme } from './customAnatomy/switchTheme';
 /**
  * Можно посмотреть исходники и понять, что можно переопределить
@@ -144,7 +143,6 @@ export const basicTheme = extendTheme({
     Text,
     Accordion: accordionTheme,
     Checkbox: checkboxTheme,
-    Input: inputTheme,
     Switch: switchTheme,
   },
   styles: {
