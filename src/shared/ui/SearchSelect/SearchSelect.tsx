@@ -104,10 +104,6 @@ export const SearchSelect = () => {
             borderRadius: 'full',
             bg: 'white',
           }),
-          input: (provided) => ({
-            ...provided,
-            touchAction: 'manipulation',
-          }),
         }}
       />
       <Flex flexWrap="wrap" gap={2} mt={3}>
