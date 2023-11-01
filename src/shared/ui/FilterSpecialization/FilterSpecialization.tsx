@@ -233,8 +233,8 @@ export const FilterSpecialization = () => {
             setSpecFilter(true);
           }}
         />
-        <InputRightElement>
-          <ChevronDownIcon boxSize={6} mr={4} />
+        <InputRightElement pointerEvents="none">
+          <ChevronDownIcon fontSize="xl" />
         </InputRightElement>
       </InputGroup>
       <Flex flexWrap="wrap" gap={2}>
