@@ -102,6 +102,12 @@ const Button = defineStyleConfig({
   },
   variants: {
     flat: flatButton,
+    filter: {
+      fontWeight: 'normal',
+      height: 'fit-content',
+      fontSize: 'sm',
+      padding: 0,
+    },
     light: lightButton,
   },
 

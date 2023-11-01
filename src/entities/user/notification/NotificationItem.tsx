@@ -16,6 +16,7 @@ export function NotificationItem(props: NotificationItemProps) {
       borderBottom="1px"
       borderColor="gray.200"
       py={3}
+      px={[5, 6]}
       _last={{ border: 'none' }}
     >
       <Flex alignItems="center" justifyContent="space-between" gap={2}>

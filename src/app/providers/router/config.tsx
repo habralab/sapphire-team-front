@@ -4,7 +4,11 @@ import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
 import { MainPage } from '~/pages/main';
 import { NotFoundPage } from '~/pages/not-found';
-import { NotificationsPage } from '~/pages/notifications';
+import {
+  NotificationPage,
+  NotificationsPage,
+  NotificationsPageDesktop,
+} from '~/pages/notifications';
 import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
 import { ProjectsPage, ProjectsPageDesktop } from '~/pages/projects';
 import { SearchPage, SearchPageDesktop } from '~/pages/search';
@@ -43,7 +47,11 @@ export const normalRoutes = [
   { path: PATHS.search, view: { base: <SearchPage />, desktop: <SearchPageDesktop /> } },
   { path: PATHS.chats, view: { base: <ChatsPage />, desktop: <ChatsPageDesktop /> } },
   { path: PATHS.dialog, view: { base: <DialogPage />, desktop: <ChatsPageDesktop /> } },
-  { path: PATHS.notifications, view: { base: <NotificationsPage /> } },
+  {
+    path: PATHS.notifications,
+    view: { base: <NotificationsPage />, desktop: <NotificationsPageDesktop /> },
+  },
+  { path: PATHS.notification, view: { base: <NotificationPage /> } },
   { path: PATHS.settings, view: { base: <SettingsPage /> } },
   { path: PATHS.profileSettings, view: { base: <ProfileSettingsPage /> } },
   { path: PATHS.notificationsSettings, view: { base: <NotificationsSettingsPage /> } },
