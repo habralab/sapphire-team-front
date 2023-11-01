@@ -1,9 +1,8 @@
 import { Flex, Icon, Heading, IconButton, Stack, HStack } from '@chakra-ui/react';
 import { BsFillBriefcaseFill } from 'react-icons/bs';
 import { FiChevronLeft } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { PATHS } from '~/shared/lib/router';
 import { SAvatar } from '~/shared/ui/SAvatar';
 
 interface ChatInfoProps {
@@ -11,13 +10,16 @@ interface ChatInfoProps {
 }
 
 export function ChatInfo({ isDesktop }: ChatInfoProps) {
+  const navigate = useNavigate();
+
   return (
     <Flex align="center" gap={2} pb={4} pt={4} pl={isDesktop ? '6' : '0'}>
       {!isDesktop && (
         <IconButton
           aria-label="back"
-          as={Link}
-          to={PATHS.chats}
+          onClick={() => {
+            navigate(-1);
+          }}
           icon={<Icon as={FiChevronLeft} fontSize="2xl" />}
           variant="flat"
           marginLeft="-2"

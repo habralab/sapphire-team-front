@@ -1,24 +1,26 @@
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { Layout } from '~/pages/layout';
+import { BlankPage } from '~/pages/blank';
 
-import { routes } from './config';
+import { Layout } from '../layout/Layout';
+
+const closedRouter = createBrowserRouter([
+  {
+    path: '*',
+    element: <BlankPage />,
+  },
+]);
+
+const normalRouter = createBrowserRouter([
+  {
+    path: '*',
+    element: <Layout />,
+  },
+]);
 
 const Routing = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        {routes.map((props) => (
-          <Route
-            key={props.path}
-            path={props.path}
-            element={
-              import.meta.env.VITE_CLOSED ? props.view.base : <Layout {...props.view} />
-            }
-          />
-        ))}
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router={import.meta.env.VITE_CLOSED ? closedRouter : normalRouter} />
   );
 };
 

@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom';
 
-import { BlankPage } from '~/pages/blank';
 import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
 import { MainPage } from '~/pages/main';
@@ -17,16 +16,7 @@ import {
 
 import { PATHS } from '~/shared/lib/router';
 
-const appClosed = [
-  {
-    path: '*',
-    view: {
-      base: <BlankPage />,
-    },
-  },
-];
-
-const normalRoutes = [
+export const normalRoutes = [
   {
     path: PATHS.notFound,
     view: {
@@ -61,5 +51,3 @@ const normalRoutes = [
     },
   },
 ];
-
-export const routes = import.meta.env.VITE_CLOSED ? appClosed : normalRoutes;
