@@ -2,6 +2,8 @@ import { Icon, Flex, IconButton, Box } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { IoSend } from 'react-icons/io5';
 
+import { STextarea } from '~/shared/ui/STextarea';
+
 interface CreateMessageDesktopProps {
   onSubmit?: (message: string) => void;
 }
@@ -22,39 +24,11 @@ export function CreateMessageDesktop({ onSubmit }: CreateMessageDesktopProps) {
       borderColor="gray.300"
       alignItems="center"
     >
-      <Box
-        ref={messageRef}
-        contentEditable
-        overflowWrap="anywhere"
-        overflowY="auto"
-        width="full"
-        border="1px"
-        maxH="200px"
-        borderRadius="xl"
-        borderColor="gray.300"
-        _hover={{
-          borderColor: 'blue.500',
-        }}
-        onInput={(e) => {
-          const element = e.currentTarget;
-          const text = element.innerText;
-          e.currentTarget.innerHTML = text;
-          setValue(text);
-
-          const range = document.createRange();
-          const selection = window.getSelection();
-          range.selectNodeContents(element);
-          range.collapse(false);
-          selection?.removeAllRanges();
-          selection?.addRange(range);
-        }}
-        _empty={{
-          _before: {
-            color: 'gray.400',
-            content: '"Введите сообщение..."',
-          },
-        }}
-        p="2"
+      <STextarea
+        maxLength={50}
+        information={value}
+        setInformation={setValue}
+        placeholder="Введите сообщение..."
       />
       <IconButton
         aria-label="create-message"

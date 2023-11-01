@@ -114,6 +114,8 @@ export function STextarea({
         contentEditable
         width="full"
         bg="white"
+        border="1px"
+        borderColor="inherit"
         minH={minH}
         onPaste={handlePaste}
         pos="relative"
