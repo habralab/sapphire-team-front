@@ -12,19 +12,12 @@ interface MessagesProps {
 export function Messages({ isDesktop }: MessagesProps) {
   const messagesRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    setTimeout(
-      () =>
-        messagesRef.current?.scrollTo({
-          top: messagesRef.current.scrollHeight,
-        }),
-      0,
-    );
-  };
-
   useLayoutEffect(() => {
-    scrollToBottom();
-  }, []);
+    if (isDesktop)
+      messagesRef.current?.scrollTo({
+        top: messagesRef.current.scrollHeight,
+      });
+  }, [isDesktop]);
 
   return (
     <VStack
