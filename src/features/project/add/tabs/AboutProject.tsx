@@ -1,7 +1,7 @@
 import { FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/form-control';
 import { Text } from '@chakra-ui/layout';
 import { Icon, IconButton, Input, Flex, Textarea, Box, Switch } from '@chakra-ui/react';
-import { FieldErrors } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { BsPlus } from 'react-icons/bs';
 import ResizeTextarea from 'react-textarea-autosize';
 
@@ -15,8 +15,8 @@ export interface Inputs {
 
 interface AboutProjectProps {
   dirtyField?: boolean;
-  register: (name: 'attachFile' | 'title' | 'description' | 'date' | 'pause') => object;
-  watch: (names?: string) => string[];
+  register: UseFormRegister<Inputs>;
+  watch: UseFormWatch<Inputs>;
   errors: FieldErrors<Inputs>;
 }
 
@@ -79,7 +79,6 @@ export const AboutProject = (props: AboutProjectProps) => {
           placeholder="Название проекта"
           {...register('title')}
         />
-        {errors.title && <FormErrorMessage>Название обязательно.</FormErrorMessage>}
       </FormControl>
       <FormControl mb={6}>
         <FormLabel mb={4}>Описание</FormLabel>

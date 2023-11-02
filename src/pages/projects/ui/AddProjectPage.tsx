@@ -77,21 +77,23 @@ export const AddProjectPage = () => {
           <Tab>О проекте</Tab>
           <Tab>Команда</Tab>
         </TabList>
-        <TabPanels>
-          <TabPanel>
-            <AboutProject
-              dirtyField={dirtyFields.attachFile}
-              register={register}
-              errors={errors}
-              watch={watch}
-            />
-          </TabPanel>
-          <TabPanel>
-            <Team newSpecialist={newSpecialist} setNewSpecialist={setNewSpecialist} />
-          </TabPanel>
-        </TabPanels>
+        <form noValidate>
+          <TabPanels>
+            <TabPanel>
+              <AboutProject
+                dirtyField={dirtyFields.attachFile}
+                register={register}
+                errors={errors}
+                watch={watch}
+              />
+            </TabPanel>
+            <TabPanel>
+              <Team newSpecialist={newSpecialist} setNewSpecialist={setNewSpecialist} />
+            </TabPanel>
+          </TabPanels>
+        </form>
       </Tabs>
-      <Flex bg="bg" position="sticky" bottom="4.6rem" p={0} py={3} mt="auto" zIndex={4}>
+      <Flex bg="bg" position="sticky" bottom="4.6rem" p={0} py={3} mt="auto">
         {tabIndex === 0 && (
           <Button
             type="button"

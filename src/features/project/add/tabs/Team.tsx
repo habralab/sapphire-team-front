@@ -305,16 +305,18 @@ export const Team = (props: TeamProps) => {
 
   const getMainTag = (id: number) => {
     let tag = '';
+    let title = '';
     specState.forEach((spec) => {
       spec.child.forEach((ch) => {
         if (ch.id === id) {
           tag = ch.name;
+          title = spec.title;
           return;
         }
       });
     });
 
-    return tag;
+    return [tag, title];
   };
 
   const handleNewSpecialist = () => {
@@ -324,11 +326,12 @@ export const Team = (props: TeamProps) => {
     ]);
     setUserSpecs([]);
     setUserSkills([]);
+    setUnSelectedSkills(skillState);
   };
 
   return (
     <>
-      <Box>
+      <Box mb={5}>
         <Stack gap={1} mb={4}>
           <Heading variant="h2" mb={3}>
             Специализация
@@ -477,26 +480,29 @@ export const Team = (props: TeamProps) => {
         Добавить спциалиста
       </Button>
       <Stack gap={6}>
-        {newSpecialist.map((specialist) => (
-          <Card key={specialist.id} p={5} borderRadius="2xl" boxShadow="none">
-            <Flex alignItems="baseline" justifyContent="space-between">
-              <Heading variant="h2" mb={4}>
-                {getMainTag(specialist.spec[0])}
-              </Heading>
-              <CloseButton
-                onClick={() => {
-                  setNewSpecialist(
-                    newSpecialist.filter(({ id }) => id !== specialist.id),
-                  );
-                }}
+        {newSpecialist.map((specialist) => {
+          const [mainTag, mainTitle] = getMainTag(specialist.spec[0]);
+          return (
+            <Card key={specialist.id} p={5} borderRadius="2xl" boxShadow="none">
+              <Flex alignItems="baseline" justifyContent="space-between">
+                <Heading variant="h2" mb={4}>
+                  {mainTitle}
+                </Heading>
+                <CloseButton
+                  onClick={() => {
+                    setNewSpecialist(
+                      newSpecialist.filter(({ id }) => id !== specialist.id),
+                    );
+                  }}
+                />
+              </Flex>
+              <STag
+                mainTags={[mainTag]}
+                tags={specialist.skills.map(({ label }) => label)}
               />
-            </Flex>
-            <STag
-              mainTags={[getMainTag(specialist.spec[0])]}
-              tags={specialist.skills.map(({ label }) => label)}
-            />
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </Stack>
     </>
   );
