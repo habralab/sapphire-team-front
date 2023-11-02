@@ -1,27 +1,41 @@
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Text } from '@chakra-ui/layout';
-import { Icon, IconButton, Input, Flex, Textarea, Box, Switch } from '@chakra-ui/react';
-import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
+import { Icon, IconButton, Input, Flex, Box, Switch } from '@chakra-ui/react';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { BsPlus } from 'react-icons/bs';
-import ResizeTextarea from 'react-textarea-autosize';
+
+import { STextarea } from '~/shared/ui/STextarea';
 
 export interface Inputs {
   attachFile: string;
   title: string;
-  description: string;
   date: string;
   pause: boolean;
 }
 
-interface AboutProjectProps {
-  dirtyField?: boolean;
+interface UseHookForm {
+  dirtyFields: Partial<
+    Readonly<{
+      attachFile?: boolean | undefined;
+      title?: boolean | undefined;
+      description?: boolean | undefined;
+      date?: boolean | undefined;
+      pause?: boolean | undefined;
+    }>
+  >;
   register: UseFormRegister<Inputs>;
-  watch: UseFormWatch<Inputs>;
   errors?: FieldErrors<Inputs>;
 }
 
+interface AboutProjectProps {
+  form: UseHookForm;
+  description: string;
+  setDescription: (description: string) => void;
+}
+
 export const AboutProject = (props: AboutProjectProps) => {
-  const { dirtyField, register, watch } = props;
+  const { description, setDescription } = props;
+  const { dirtyFields, register } = props.form;
   return (
     <>
       <FormControl mb={6}>
@@ -35,7 +49,7 @@ export const AboutProject = (props: AboutProjectProps) => {
           justifyContent="space-between"
         >
           <Text>Добавить обложку</Text>
-          {dirtyField && (
+          {dirtyFields.attachFile && (
             <Text ml="auto" color="purple" fontSize="xs">
               Добавлено
             </Text>
@@ -83,27 +97,12 @@ export const AboutProject = (props: AboutProjectProps) => {
       <FormControl mb={6}>
         <FormLabel mb={4}>Описание</FormLabel>
         <Box position="relative">
-          <Textarea
-            as={ResizeTextarea}
+          <STextarea
             placeholder="Напишите о проекте подробнее. Хороший рассказ привлечет больше заявок."
-            p={5}
-            bg="white"
-            borderRadius="2xl"
-            size="sm"
-            minH={28}
-            resize="vertical"
-            {...register('description')}
+            maxLength={300}
+            information={description}
+            setInformation={setDescription}
           />
-          <Flex
-            position="absolute"
-            fontSize="xs"
-            bottom={2}
-            right={2}
-            color={watch('description').length > 300 ? 'red' : 'gray.400'}
-            zIndex={3}
-          >
-            <Text>{watch('description').length}/300</Text>
-          </Flex>
         </Box>
       </FormControl>
       <FormControl mb={6}>
@@ -118,10 +117,10 @@ export const AboutProject = (props: AboutProjectProps) => {
         />
       </FormControl>
       <FormControl display="flex" alignItems="center" justifyContent="space-between">
-        <FormLabel htmlFor="email-alerts" mb="0">
+        <FormLabel htmlFor="project-on-pause" mb="0">
           Проект на паузе
         </FormLabel>
-        <Switch id="email-alerts" my={1} {...register('pause')} />
+        <Switch id="project-on-pause" my={1} {...register('pause')} />
       </FormControl>
     </>
   );

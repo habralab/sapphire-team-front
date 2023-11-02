@@ -18,20 +18,18 @@ import { GoBack } from '~/shared/ui/GoBack';
 
 export const AddProjectPage = () => {
   const [newSpecialist, setNewSpecialist] = useState<NewSpecialist[]>([]);
+  const [description, setDescription] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, dirtyFields },
-  } = useForm<Inputs>({
-    mode: 'onChange',
-    defaultValues: {
-      description: '',
-    },
-  });
+  } = useForm<Inputs>();
+
+  const form = { register, errors, dirtyFields };
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const newProject = { ...data, newSpec: newSpecialist };
+    const newProject = { ...data, newSpec: newSpecialist, description };
     console.log(newProject);
   };
   const handleTabsChange = (index: number) => {
@@ -68,10 +66,9 @@ export const AddProjectPage = () => {
           <TabPanels>
             <TabPanel>
               <AboutProject
-                dirtyField={dirtyFields.attachFile}
-                register={register}
-                errors={errors}
-                watch={watch}
+                form={form}
+                description={description}
+                setDescription={setDescription}
               />
             </TabPanel>
             <TabPanel>

@@ -89,7 +89,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hook-form", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:7.45.4"],\
             ["react-icons", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.11.0"],\
             ["react-router-dom", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.15.0"],\
-            ["react-textarea-autosize", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:8.5.3"],\
             ["release-it", "npm:16.1.5"],\
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
             ["vite", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.4.9"],\
@@ -15385,31 +15384,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["react-textarea-autosize", [\
-        ["npm:8.5.3", {\
-          "packageLocation": "./.yarn/cache/react-textarea-autosize-npm-8.5.3-27299c7990-b317c3763f.zip/node_modules/react-textarea-autosize/",\
-          "packageDependencies": [\
-            ["react-textarea-autosize", "npm:8.5.3"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:8.5.3", {\
-          "packageLocation": "./.yarn/__virtual__/react-textarea-autosize-virtual-b85a81825a/0/cache/react-textarea-autosize-npm-8.5.3-27299c7990-b317c3763f.zip/node_modules/react-textarea-autosize/",\
-          "packageDependencies": [\
-            ["react-textarea-autosize", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:8.5.3"],\
-            ["@babel/runtime", "npm:7.23.2"],\
-            ["@types/react", "npm:18.2.21"],\
-            ["react", "npm:18.2.0"],\
-            ["use-composed-ref", "virtual:b85a81825aecce8af1d5c626779ba9b5cba45c44611c562f40fc4a4f65b77a4ac359b33ba1a63a533bfb0ca1b60a28d7ecd935e1e0d2e7a9bfdaa0c7be63c61c#npm:1.3.0"],\
-            ["use-latest", "virtual:b85a81825aecce8af1d5c626779ba9b5cba45c44611c562f40fc4a4f65b77a4ac359b33ba1a63a533bfb0ca1b60a28d7ecd935e1e0d2e7a9bfdaa0c7be63c61c#npm:1.2.1"]\
-          ],\
-          "packagePeers": [\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["react-transition-group", [\
         ["npm:4.4.5", {\
           "packageLocation": "./.yarn/cache/react-transition-group-npm-4.4.5-98ea4ef96e-7560284010.zip/node_modules/react-transition-group/",\
@@ -16083,7 +16057,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hook-form", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:7.45.4"],\
             ["react-icons", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.11.0"],\
             ["react-router-dom", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.15.0"],\
-            ["react-textarea-autosize", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:8.5.3"],\
             ["release-it", "npm:16.1.5"],\
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
             ["vite", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.4.9"],\
@@ -17642,28 +17615,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["use-composed-ref", [\
-        ["npm:1.3.0", {\
-          "packageLocation": "./.yarn/cache/use-composed-ref-npm-1.3.0-20ed37af5c-f771cbadfd.zip/node_modules/use-composed-ref/",\
-          "packageDependencies": [\
-            ["use-composed-ref", "npm:1.3.0"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:b85a81825aecce8af1d5c626779ba9b5cba45c44611c562f40fc4a4f65b77a4ac359b33ba1a63a533bfb0ca1b60a28d7ecd935e1e0d2e7a9bfdaa0c7be63c61c#npm:1.3.0", {\
-          "packageLocation": "./.yarn/__virtual__/use-composed-ref-virtual-bf233e424b/0/cache/use-composed-ref-npm-1.3.0-20ed37af5c-f771cbadfd.zip/node_modules/use-composed-ref/",\
-          "packageDependencies": [\
-            ["use-composed-ref", "virtual:b85a81825aecce8af1d5c626779ba9b5cba45c44611c562f40fc4a4f65b77a4ac359b33ba1a63a533bfb0ca1b60a28d7ecd935e1e0d2e7a9bfdaa0c7be63c61c#npm:1.3.0"],\
-            ["@types/react", "npm:18.2.21"],\
-            ["react", "npm:18.2.0"]\
-          ],\
-          "packagePeers": [\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["use-isomorphic-layout-effect", [\
         ["npm:1.1.2", {\
           "packageLocation": "./.yarn/cache/use-isomorphic-layout-effect-npm-1.1.2-65facd0a4b-a6532f7fc9.zip/node_modules/use-isomorphic-layout-effect/",\
@@ -17678,29 +17629,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["use-isomorphic-layout-effect", "virtual:24a19011cdb9af0957a0384aa08034830cbb3d48b6836f6fbc2f90086be6854c1520ba394849961d28f83165d8129dbcc90ae68f0ba88e12f2e3d91d79e00720#npm:1.1.2"],\
             ["@types/react", "npm:18.2.21"],\
             ["react", "npm:18.2.0"]\
-          ],\
-          "packagePeers": [\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["use-latest", [\
-        ["npm:1.2.1", {\
-          "packageLocation": "./.yarn/cache/use-latest-npm-1.2.1-a2c18ad4ba-ed3f2ddddf.zip/node_modules/use-latest/",\
-          "packageDependencies": [\
-            ["use-latest", "npm:1.2.1"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:b85a81825aecce8af1d5c626779ba9b5cba45c44611c562f40fc4a4f65b77a4ac359b33ba1a63a533bfb0ca1b60a28d7ecd935e1e0d2e7a9bfdaa0c7be63c61c#npm:1.2.1", {\
-          "packageLocation": "./.yarn/__virtual__/use-latest-virtual-310bf9b3f1/0/cache/use-latest-npm-1.2.1-a2c18ad4ba-ed3f2ddddf.zip/node_modules/use-latest/",\
-          "packageDependencies": [\
-            ["use-latest", "virtual:b85a81825aecce8af1d5c626779ba9b5cba45c44611c562f40fc4a4f65b77a4ac359b33ba1a63a533bfb0ca1b60a28d7ecd935e1e0d2e7a9bfdaa0c7be63c61c#npm:1.2.1"],\
-            ["@types/react", "npm:18.2.21"],\
-            ["react", "npm:18.2.0"],\
-            ["use-isomorphic-layout-effect", "virtual:24a19011cdb9af0957a0384aa08034830cbb3d48b6836f6fbc2f90086be6854c1520ba394849961d28f83165d8129dbcc90ae68f0ba88e12f2e3d91d79e00720#npm:1.1.2"]\
           ],\
           "packagePeers": [\
             "@types/react",\

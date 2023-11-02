@@ -212,11 +212,13 @@ const specState = [
 ];
 
 interface FilterSpecializationProps {
+  singleChecked?: boolean;
   userSpecs: number[];
   setUserSpecs: (userSpecs: number[]) => void;
 }
 
 export const FilterSpecialization = ({
+  singleChecked,
   userSpecs,
   setUserSpecs,
 }: FilterSpecializationProps) => {
@@ -286,6 +288,7 @@ export const FilterSpecialization = ({
           setUserSpecs([]);
         }}
         saveSpec={setUserSpecs}
+        singleChecked={singleChecked}
       />
     </>
   );

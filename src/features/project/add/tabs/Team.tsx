@@ -1,26 +1,10 @@
-import { ChevronDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import { Box, Flex, Heading, Stack } from '@chakra-ui/layout';
-import {
-  Button,
-  Card,
-  CloseButton,
-  IconButton,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Tag,
-  TagLabel,
-} from '@chakra-ui/react';
-import {
-  AsyncSelect,
-  GroupBase,
-  LoadingIndicatorProps,
-  OptionBase,
-  chakraComponents,
-} from 'chakra-react-select';
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Button, Card, CloseButton } from '@chakra-ui/react';
+import { OptionBase } from 'chakra-react-select';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-import { FilterSpecializationModal } from '~/shared/ui/FilterSpecialization';
+import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
+import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STag } from '~/shared/ui/STag';
 
 const specState = [
@@ -222,28 +206,6 @@ const specState = [
   },
 ];
 
-const skillState = [
-  { label: 'Figma', value: '1' },
-  { label: 'UX', value: '2' },
-  { label: 'UI', value: '3' },
-  { label: 'Adobe Photoshop', value: '4' },
-  { label: 'Дизайн интерфейсов', value: '5' },
-  { label: 'Adobe Illustrator', value: '6' },
-  { label: 'Web-дизайн', value: '7' },
-  { label: 'Прототипирование', value: '8' },
-  { label: 'Графический дизайн', value: '9' },
-  { label: 'HTML', value: '10' },
-  { label: 'CSS', value: '11' },
-  { label: 'Sketch', value: '12' },
-  { label: 'Tilda', value: '13' },
-  { label: 'Adobe after effect', value: '14' },
-  { label: 'Новое 1', value: '15' },
-  { label: 'Новое 2', value: '16' },
-  { label: 'Новое 3', value: '17' },
-  { label: 'Новое 4', value: '18' },
-  { label: 'Новое 5', value: '19' },
-];
-
 interface SelectOptions extends OptionBase {
   label: string;
   value: string;
@@ -260,51 +222,16 @@ interface TeamProps {
   setNewSpecialist: Dispatch<SetStateAction<NewSpecialist[]>>;
 }
 
-const asyncComponents = {
-  LoadingIndicator: (
-    props: LoadingIndicatorProps<SelectOptions, false, GroupBase<SelectOptions>>,
-  ) => {
-    return (
-      <chakraComponents.LoadingIndicator
-        color="blue.500"
-        emptyColor="blue.100"
-        speed="750ms"
-        spinnerSize="md"
-        thickness="3px"
-        {...props}
-      />
-    );
-  },
-};
-
 export const Team = (props: TeamProps) => {
   const { newSpecialist, setNewSpecialist } = props;
-  const [specFilter, setSpecFilter] = useState(false);
-
   const [userSpecs, setUserSpecs] = useState<number[]>([]);
-
   const [userSkills, setUserSkills] = useState<{ value: string; label: string }[]>([]);
 
-  const deleteSpecFilter = (id: number) => {
-    const newUserSpecs = userSpecs.filter((specId) => specId !== id);
-    setUserSpecs(newUserSpecs);
-  };
-
-  const [unSelectedSkills, setUnSelectedSkills] =
-    useState<{ value: string; label: string }[]>(skillState);
-
-  const deleteSkillFilter = (id: string) => {
-    const unSelectedSkill = userSkills.find((skill) => skill.value === id);
-    if (unSelectedSkill) {
-      const newUserSkill = userSkills.filter((skill) => skill.value !== id);
-      setUserSkills(newUserSkill);
-      setUnSelectedSkills((unSelectedSkills) => [...unSelectedSkills, unSelectedSkill]);
-    }
-  };
+  const [refresh, setRefresh] = useState(false);
 
   const getMainTag = (id: number) => {
-    let tag = '';
     let title = '';
+    let tag = '';
     specState.forEach((spec) => {
       spec.child.forEach((ch) => {
         if (ch.id === id) {
@@ -325,7 +252,7 @@ export const Team = (props: TeamProps) => {
     ]);
     setUserSpecs([]);
     setUserSkills([]);
-    setUnSelectedSkills(skillState);
+    setRefresh((prev) => !prev);
   };
 
   return (
@@ -335,66 +262,12 @@ export const Team = (props: TeamProps) => {
           <Heading variant="h2" mb={3}>
             Специализация
           </Heading>
-          <InputGroup>
-            <Input
-              bg="white"
-              borderRadius="full"
-              fontSize="sm"
-              readOnly
-              placeholder="Например, Фронтенд разработчик"
-              onClick={() => {
-                setSpecFilter(true);
-              }}
-            />
-            <InputRightElement>
-              <ChevronDownIcon boxSize={6} mr={4} />
-            </InputRightElement>
-          </InputGroup>
+          <FilterSpecialization
+            singleChecked={true}
+            sendUserSpec={setUserSpecs}
+            refresh={refresh}
+          />
         </Stack>
-        <Flex flexWrap="wrap" gap={2}>
-          {specState.map((spec) =>
-            spec.child.map(
-              ({ id, name }) =>
-                userSpecs.includes(id) && (
-                  <Tag
-                    key={id}
-                    size="sm"
-                    bg="gray.300"
-                    py={1}
-                    px={2}
-                    borderRadius="lg"
-                    fontWeight="medium"
-                  >
-                    <TagLabel>{name}</TagLabel>
-                    <IconButton
-                      onClick={() => {
-                        deleteSpecFilter(id);
-                      }}
-                      aria-label="Close"
-                      variant="ghost"
-                      flexShrink="0"
-                      minW="none"
-                      height="none"
-                      fontWeight="normal"
-                      icon={<SmallCloseIcon boxSize={4} />}
-                    />
-                  </Tag>
-                ),
-            ),
-          )}
-        </Flex>
-
-        <FilterSpecializationModal
-          isVisible={specFilter}
-          changeVisible={setSpecFilter}
-          state={specState}
-          userFilter={userSpecs}
-          resetSpec={() => {
-            setUserSpecs([]);
-          }}
-          saveSpec={setUserSpecs}
-          singleChecked={true}
-        />
       </Box>
       <Box mb={5}>
         <Stack gap={1}>
@@ -403,69 +276,8 @@ export const Team = (props: TeamProps) => {
           </Heading>
         </Stack>
         <Box mb={3}>
-          <AsyncSelect<SelectOptions, false, GroupBase<SelectOptions>>
-            placeholder="Например, Python"
-            size="md"
-            useBasicStyles
-            noOptionsMessage={() => 'Ничего не найдено'}
-            loadingMessage={() => 'Загрузка...'}
-            components={asyncComponents}
-            value={null}
-            defaultOptions={unSelectedSkills}
-            options={unSelectedSkills}
-            loadOptions={(inputValue, callback) => {
-              setTimeout(() => {
-                callback(
-                  unSelectedSkills.filter((e) =>
-                    e.label.match(new RegExp(inputValue, 'i')),
-                  ),
-                );
-              }, 500);
-            }}
-            onChange={(e) => {
-              if (e) {
-                setUserSkills([...userSkills, e]);
-                setUnSelectedSkills((unSelectedSkills) =>
-                  unSelectedSkills.filter((skill) => skill.value !== e.value),
-                );
-              }
-            }}
-            chakraStyles={{
-              control: (provided) => ({
-                ...provided,
-                borderRadius: 'full',
-                bg: 'white',
-              }),
-            }}
-          />
+          <SearchSelect sendUserSkills={setUserSkills} refresh={refresh} />
         </Box>
-        <Flex flexWrap="wrap" gap={2}>
-          {userSkills.map(({ label, value }) => (
-            <Tag
-              key={value}
-              size="sm"
-              bg="gray.300"
-              py={1}
-              px={2}
-              borderRadius="lg"
-              fontWeight="medium"
-            >
-              <TagLabel>{label}</TagLabel>
-              <IconButton
-                onClick={() => {
-                  deleteSkillFilter(value);
-                }}
-                aria-label="Close"
-                variant="ghost"
-                flexShrink="0"
-                minW="none"
-                height="none"
-                fontWeight="normal"
-                icon={<SmallCloseIcon boxSize={4} />}
-              />
-            </Tag>
-          ))}
-        </Flex>
       </Box>
       <Button
         mb={5}
@@ -476,7 +288,7 @@ export const Team = (props: TeamProps) => {
         fontWeight="600"
         w="full"
       >
-        Добавить спциалиста
+        Добавить специалиста
       </Button>
       <Stack gap={6}>
         {newSpecialist.map((specialist) => {
