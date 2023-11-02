@@ -1,5 +1,5 @@
 import { Divider, Box, Container } from '@chakra-ui/react';
-import { useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
 import { Messages } from '~/widgets/messages';
 
@@ -8,9 +8,17 @@ import { CreateMessage } from '~/features/chat';
 import { ChatInfo } from '~/entities/chat';
 
 export function DialogPage() {
-  useLayoutEffect(() => {
+  useEffect(() => {
+    const scrollHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight,
+      document.body.clientHeight,
+      document.documentElement.clientHeight,
+    );
     window.scrollTo({
-      top: window.outerHeight,
+      top: scrollHeight,
     });
   }, []);
 
