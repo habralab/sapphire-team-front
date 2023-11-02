@@ -1,11 +1,8 @@
-import { ChevronLeftIcon } from '@chakra-ui/icons';
 import {
   Flex,
   Button,
   Heading,
   Container,
-  IconButton,
-  Icon,
   Tabs,
   TabList,
   Tab,
@@ -14,13 +11,13 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 
 import { AboutProject, Inputs, NewSpecialist, Team } from '~/features/project';
 
+import { GoBack } from '~/shared/ui/GoBack';
+
 export const AddProjectPage = () => {
   const [newSpecialist, setNewSpecialist] = useState<NewSpecialist[]>([]);
-  const navigate = useNavigate();
   const [tabIndex, setTabIndex] = useState(0);
   const {
     register,
@@ -34,8 +31,8 @@ export const AddProjectPage = () => {
     },
   });
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log('object');
-    console.log(data);
+    const newProject = { ...data, newSpec: newSpecialist };
+    console.log(newProject);
   };
   const handleTabsChange = (index: number) => {
     setTabIndex(index);
@@ -53,17 +50,7 @@ export const AddProjectPage = () => {
         py={4}
       >
         <Flex alignItems="center">
-          <IconButton
-            variant="ghost"
-            aria-label="projects"
-            onClick={() => {
-              navigate(-1);
-            }}
-            gap={2}
-            flexShrink="0"
-            padding={['0', '0', '4']}
-            icon={<Icon as={ChevronLeftIcon} fontSize="2xl" />}
-          />
+          <GoBack />
           <Heading variant="h2" mb={0}>
             Создать проект
           </Heading>
@@ -77,7 +64,7 @@ export const AddProjectPage = () => {
           <Tab>О проекте</Tab>
           <Tab>Команда</Tab>
         </TabList>
-        <form noValidate>
+        <form id="addNewProjectForm" onSubmit={handleSubmit(onSubmit)}>
           <TabPanels>
             <TabPanel>
               <AboutProject
@@ -110,7 +97,7 @@ export const AddProjectPage = () => {
         {tabIndex === 1 && (
           <Button
             type="submit"
-            onClick={handleSubmit(onSubmit)}
+            form="addNewProjectForm"
             fontSize="sm"
             fontWeight="600"
             w="full"

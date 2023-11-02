@@ -20,9 +20,8 @@ import {
 } from 'chakra-react-select';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 
+import { FilterSpecializationModal } from '~/shared/ui/FilterSpecialization';
 import { STag } from '~/shared/ui/STag';
-
-import { FilterSpecialization } from '../../filter/ui/FilterSpecialization';
 
 const specState = [
   {
@@ -385,7 +384,7 @@ export const Team = (props: TeamProps) => {
           )}
         </Flex>
 
-        <FilterSpecialization
+        <FilterSpecializationModal
           isVisible={specFilter}
           changeVisible={setSpecFilter}
           state={specState}

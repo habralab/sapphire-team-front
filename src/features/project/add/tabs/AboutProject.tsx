@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/form-control';
+import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Text } from '@chakra-ui/layout';
 import { Icon, IconButton, Input, Flex, Textarea, Box, Switch } from '@chakra-ui/react';
 import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
@@ -17,11 +17,11 @@ interface AboutProjectProps {
   dirtyField?: boolean;
   register: UseFormRegister<Inputs>;
   watch: UseFormWatch<Inputs>;
-  errors: FieldErrors<Inputs>;
+  errors?: FieldErrors<Inputs>;
 }
 
 export const AboutProject = (props: AboutProjectProps) => {
-  const { dirtyField, register, watch, errors } = props;
+  const { dirtyField, register, watch } = props;
   return (
     <>
       <FormControl mb={6}>
