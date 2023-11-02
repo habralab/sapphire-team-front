@@ -14,7 +14,6 @@ export function STextarea({
   setInformation,
   placeholder,
 }: STextareaProps) {
-  // const [value, setValue] = useState('');
   const [cursorPosition, setCursorPosition] = useState<number | null>(null);
   const contentEditableRef = useRef<HTMLDivElement>(null);
   const [minH, setMinH] = useState(0);
@@ -120,6 +119,10 @@ export function STextarea({
         onPaste={handlePaste}
         pos="relative"
         onInput={handleInput}
+        outline="2px solid transparent"
+        _focus={{
+          outlineColor: 'blue.500',
+        }}
         _empty={{
           _before: {
             cursor: 'text',
