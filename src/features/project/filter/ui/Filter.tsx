@@ -29,6 +29,7 @@ export const Filter = () => {
   return (
     <>
       <IconButton
+        size="md"
         onClick={onOpen}
         aria-label="Все фильтры"
         flexShrink="0"

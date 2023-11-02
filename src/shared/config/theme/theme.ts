@@ -69,17 +69,45 @@ const flatButton = defineStyle(({ colorScheme }) => ({
   },
 }));
 
+const lightButton = defineStyle(({ colorScheme }) => ({
+  bg: colorScheme === 'gray' ? 'gray.300' : 'gray.900',
+  p: 0,
+  _hover: {
+    bg: colorScheme === 'gray' && 'gray.400',
+  },
+  _active: {
+    bg: colorScheme === 'gray' && 'gray.400',
+    color: colorScheme === 'gray' ? 'white' : 'gray.800',
+  },
+  size: 'md',
+}));
+
+const sizes = {
+  sm: defineStyle({
+    h: '6',
+  }),
+  md: defineStyle({
+    h: '10',
+  }),
+  xl: defineStyle({
+    h: '12',
+  }),
+};
+
 const Button = defineStyleConfig({
+  sizes,
   baseStyle: {
     borderRadius: 'full',
-    fontWeight: 'bold',
+    fontWeight: 'semibold',
   },
   variants: {
     flat: flatButton,
+    light: lightButton,
   },
 
   defaultProps: {
     colorScheme: 'dark',
+    size: 'xl',
   },
 });
 
