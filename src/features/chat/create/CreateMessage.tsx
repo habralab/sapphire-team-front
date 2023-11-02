@@ -1,4 +1,4 @@
-import { Icon, Flex, IconButton, Box } from '@chakra-ui/react';
+import { Icon, Flex, IconButton } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { IoSend } from 'react-icons/io5';
 
@@ -16,8 +16,8 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
     <Flex px={[0, 0, 6]} py={4} alignItems="center" gap={4} w="full">
       <STextarea
         maxLength={50}
-        information={value}
-        setInformation={setValue}
+        value={value}
+        setValue={setValue}
         placeholder="Введите сообщение..."
       />
       <IconButton

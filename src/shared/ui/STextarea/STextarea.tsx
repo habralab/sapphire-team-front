@@ -3,15 +3,15 @@ import React, { useRef, useState, useCallback, useLayoutEffect } from 'react';
 
 interface STextareaProps {
   maxLength: number;
-  information: string;
-  setInformation: (information: string) => void;
+  value: string;
+  setValue: (value: string) => void;
   placeholder: string;
 }
 
 export function STextarea({
   maxLength,
-  information,
-  setInformation,
+  value = '',
+  setValue,
   placeholder,
 }: STextareaProps) {
   const [cursorPosition, setCursorPosition] = useState<number | null>(null);
@@ -48,10 +48,10 @@ export function STextarea({
             offset && offset > maxLength ? maxLength : offset ? offset : newValue.length,
           );
 
-          setInformation(newValue);
+          setValue(newValue);
         }
       } else {
-        setInformation(content);
+        setValue(content);
       }
     }
   }, []);
@@ -138,10 +138,10 @@ export function STextarea({
         color="gray.500"
         onClick={() => {
           contentEditableRef.current?.focus();
-          setCursorPosition(information.length);
+          setCursorPosition(value.length);
         }}
       >
-        {information.length}/{maxLength}
+        {value.length}/{maxLength}
       </Text>
     </Box>
   );
