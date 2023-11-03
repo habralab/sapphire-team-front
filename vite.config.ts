@@ -29,11 +29,13 @@ export default defineConfig({
       includeAssets: [
         '/favicon.ico',
         '/favicon.svg',
-        '/pwa-64x64.png',
+        '/pwa-16x16.png',
+        '/pwa-32x32.png',
+        '/pwa-48x48.png',
         '/pwa-192x192.png',
         '/pwa-512x512.png',
         '/maskable-icon-512x512.png',
-        '/apple-touch-icon-180x180.png',
+        '/apple-touch-icon.png',
       ],
       manifest: {
         theme_color: '#f5f5f5',
