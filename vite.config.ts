@@ -34,6 +34,7 @@ export default defineConfig({
         '/mstile-150x150.png',
         '/safari-pinned-tab.svg',
         '/apple-touch-icon.png',
+        '/apple-touch-icon-precomposed.png',
       ],
       manifest: {
         theme_color: '#f5f5f5',
