@@ -103,10 +103,13 @@ const Button = defineStyleConfig({
   variants: {
     flat: flatButton,
     filter: {
+      height: 'auto',
       fontWeight: 'normal',
-      height: 'fit-content',
       fontSize: 'sm',
       padding: 0,
+      _hover: {
+        color: 'gray.900',
+      },
     },
     light: lightButton,
   },

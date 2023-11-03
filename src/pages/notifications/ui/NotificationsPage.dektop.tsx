@@ -1,4 +1,4 @@
-import { Container, Heading, Flex } from '@chakra-ui/react';
+import { Heading, Flex, Box } from '@chakra-ui/react';
 import { useState } from 'react';
 
 import { NotificationList } from '~/widgets/notification-list';
@@ -12,12 +12,12 @@ export function NotificationsPageDesktop() {
     useState<NotificationsDto[]>(notifications);
 
   return (
-    <Container>
+    <Box>
       <Heading as="h1">Уведомления</Heading>
-      <Flex gap={6} my={6} alignItems="stretch" w="full">
+      <Flex gap={6} my={6} alignItems="start" w="full">
         <NotificationList notifications={filterNotifications} />
         <FilterNotifications setFilter={setFilterNotifications} />
       </Flex>
-    </Container>
+    </Box>
   );
 }

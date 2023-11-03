@@ -28,16 +28,8 @@ export function FilterNotifications(props: FilterNotificationsProps) {
   };
 
   return (
-    <VStack
-      alignItems="start"
-      bg="white"
-      p={4}
-      h="fit-content"
-      borderRadius="2xl"
-      spacing={0}
-      gap={4}
-    >
-      <Flex gap={2} mb={4}>
+    <VStack alignItems="start" bg="white" p={4} borderRadius="2xl" spacing={0} gap={4}>
+      <Flex gap={2}>
         <SAvatar name="Татьяна Андреева" />
         <Flex direction="column" gap={1}>
           <Heading variant="h3">Татьяна Андреева</Heading>

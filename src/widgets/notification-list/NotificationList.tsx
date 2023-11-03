@@ -12,14 +12,7 @@ interface NotificationListProps {
 
 export function NotificationList({ notifications }: NotificationListProps) {
   return (
-    <Stack
-      spacing={0}
-      bg="white"
-      borderRadius="2xl"
-      overflow="hidden"
-      flexGrow={1}
-      h="fit-content"
-    >
+    <Stack spacing={0} bg="white" borderRadius="2xl" overflow="hidden" flexGrow={1}>
       {notifications.map((notification, i) => (
         <Link
           to={generatePath(PATHS.notification, { id: notification.id })}
