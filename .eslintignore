@@ -4,3 +4,4 @@
 .yarn
 dist
 openapiGenerator.js
+pwa-assets.config.js
