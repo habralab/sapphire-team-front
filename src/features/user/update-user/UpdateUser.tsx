@@ -2,7 +2,6 @@ import { SmallCloseIcon } from '@chakra-ui/icons';
 import {
   Button,
   Flex,
-  Heading,
   Input,
   Text,
   Icon,
@@ -10,16 +9,24 @@ import {
   Tag,
   TagLabel,
   FormControl,
+  FormLabel,
 } from '@chakra-ui/react';
 import { Controller, useForm, Form } from 'react-hook-form';
 import { BsPlus } from 'react-icons/bs';
 
+import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
+import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STextarea } from '~/shared/ui/STextarea';
 
 interface UserType {
   avatar: File | null;
   name: string;
   information: string;
+  specialization: number[];
+  skills: {
+    value: string;
+    label: string;
+  }[];
 }
 
 export function UpdateUser() {
@@ -29,7 +36,15 @@ export function UpdateUser() {
     register,
     watch,
     formState: { errors, isSubmitting },
-  } = useForm<UserType>();
+  } = useForm<UserType>({
+    defaultValues: {
+      avatar: null,
+      name: '',
+      information: '',
+      specialization: [],
+      skills: [],
+    },
+  });
 
   const maxLength = 300;
 
@@ -50,7 +65,7 @@ export function UpdateUser() {
       <Flex direction="column" gap={6}>
         <FormControl isInvalid={!!errors.avatar}>
           <Flex direction="column" gap={4}>
-            <Heading variant="h3">Фото</Heading>
+            <FormLabel mb={0}>Фото</FormLabel>
             <Flex
               fontWeight="normal"
               fontSize="sm"
@@ -102,7 +117,7 @@ export function UpdateUser() {
         </FormControl>
         <FormControl isInvalid={!!errors.name}>
           <Flex direction="column" gap={4}>
-            <Heading variant="h3">Имя</Heading>
+            <FormLabel mb={0}>Имя</FormLabel>
             <Input
               placeholder="Как вас зовут?"
               py={4}
@@ -115,7 +130,7 @@ export function UpdateUser() {
         </FormControl>
         <FormControl isInvalid={!!errors.information}>
           <Flex direction="column" gap={4}>
-            <Heading variant="h3">О себе</Heading>
+            <FormLabel mb={0}>О себе</FormLabel>
             <Controller
               control={control}
               name="information"
@@ -131,6 +146,26 @@ export function UpdateUser() {
               }}
             />
           </Flex>
+        </FormControl>
+        <FormControl>
+          <FormLabel mb={4}>Специализация</FormLabel>
+          <Controller
+            control={control}
+            name="specialization"
+            render={({ field: { onChange, value } }) => {
+              return <FilterSpecialization userSpecs={value} setUserSpecs={onChange} />;
+            }}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel mb={4}>Профессиональные навыки</FormLabel>
+          <Controller
+            control={control}
+            name="skills"
+            render={({ field: { value, onChange } }) => {
+              return <SearchSelect selectedItems={value} setSelectedItems={onChange} />;
+            }}
+          />
         </FormControl>
         <Button fontWeight="semibold" w="full" isLoading={isSubmitting} type="submit">
           Сохранить

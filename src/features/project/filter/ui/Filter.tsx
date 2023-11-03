@@ -15,6 +15,7 @@ import {
   Stack,
   Input,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 import { IoOptions } from 'react-icons/io5';
 
 import { useIsMobile } from '~/shared/hooks';
@@ -24,6 +25,11 @@ import { SearchSelect } from '~/shared/ui/SearchSelect';
 
 export const Filter = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [userSpecs, setUserSpecs] = useState<number[]>([]);
+  const [selectedItems, setSelectedItems] = useState<{ value: string; label: string }[]>(
+    [],
+  );
+
   const isMobile = useIsMobile();
 
   return (
@@ -66,14 +72,17 @@ export const Filter = () => {
                 <Heading variant="h2" mb={3}>
                   Специализация
                 </Heading>
-                <FilterSpecialization />
+                <FilterSpecialization userSpecs={userSpecs} setUserSpecs={setUserSpecs} />
               </Box>
               <Box>
                 <Stack gap={1} mb={4}>
                   <Heading variant="h2" mb={3}>
                     Профессиональные навыки
                   </Heading>
-                  <SearchSelect />
+                  <SearchSelect
+                    selectedItems={selectedItems}
+                    setSelectedItems={setSelectedItems}
+                  />
                 </Stack>
               </Box>
               <Box>
