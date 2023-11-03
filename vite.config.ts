@@ -34,7 +34,8 @@ export default defineConfig({
         '/pwa-48x48.png',
         '/pwa-192x192.png',
         '/pwa-512x512.png',
-        '/maskable-icon-512x512.png',
+        '/mstile-150x150.png',
+        '/safari-pinned-tab.svg',
         '/apple-touch-icon.png',
       ],
       manifest: {
@@ -52,14 +53,7 @@ export default defineConfig({
             type: 'image/png',
           },
           {
-            purpose: 'any',
             src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            purpose: 'maskable',
-            src: '/maskable-icon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
           },
