@@ -11,3 +11,4 @@ dist
 stats.html
 .cache
 .eslintcache
+.DS_Store
