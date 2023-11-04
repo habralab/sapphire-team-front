@@ -100,8 +100,8 @@ export const AboutProject = (props: AboutProjectProps) => {
           <STextarea
             placeholder="Напишите о проекте подробнее. Хороший рассказ привлечет больше заявок."
             maxLength={300}
-            information={description}
-            setInformation={setDescription}
+            value={description}
+            setValue={setDescription}
           />
         </Box>
       </FormControl>

@@ -227,8 +227,6 @@ export const Team = (props: TeamProps) => {
   const [userSpecs, setUserSpecs] = useState<number[]>([]);
   const [userSkills, setUserSkills] = useState<{ value: string; label: string }[]>([]);
 
-  const [refresh, setRefresh] = useState(false);
-
   const getMainTag = (id: number) => {
     let title = '';
     let tag = '';
@@ -252,7 +250,6 @@ export const Team = (props: TeamProps) => {
     ]);
     setUserSpecs([]);
     setUserSkills([]);
-    setRefresh((prev) => !prev);
   };
 
   return (
@@ -263,9 +260,9 @@ export const Team = (props: TeamProps) => {
             Специализация
           </Heading>
           <FilterSpecialization
+            userSpecs={userSpecs}
             singleChecked={true}
-            sendUserSpec={setUserSpecs}
-            refresh={refresh}
+            setUserSpecs={setUserSpecs}
           />
         </Stack>
       </Box>
@@ -276,7 +273,7 @@ export const Team = (props: TeamProps) => {
           </Heading>
         </Stack>
         <Box mb={3}>
-          <SearchSelect sendUserSkills={setUserSkills} refresh={refresh} />
+          <SearchSelect selectedItems={userSkills} setSelectedItems={setUserSkills} />
         </Box>
       </Box>
       <Button
