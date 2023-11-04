@@ -22,10 +22,12 @@ export const SearchPage = () => {
         <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
           <Flex justifyContent="space-between" alignItems="center" my={4} h={42}>
             <Avatar />
-            <Flex gap={4} alignItems="baseline">
-              <Notification />
-              <Settings />
-            </Flex>
+            {isAuth && (
+              <Flex gap={4} alignItems="baseline">
+                <Notification />
+                <Settings />
+              </Flex>
+            )}
           </Flex>
           <Flex gap="1" mb={4}>
             <SearchProject />
