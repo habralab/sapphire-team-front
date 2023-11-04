@@ -20,10 +20,10 @@ export const SearchPage = () => {
     <>
       <Container maxW="md" mb={4}>
         <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
-          <Flex justifyContent="space-between" alignItems="center" my={4} h={42}>
+          <Flex alignItems="center" my={4} h={42}>
             <Avatar />
             {isAuth && (
-              <Flex gap={4} alignItems="baseline">
+              <Flex ml="auto" gap={4} alignItems="baseline">
                 <Notification />
                 <Settings />
               </Flex>
