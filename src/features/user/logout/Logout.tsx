@@ -18,7 +18,7 @@ export function Logout() {
           onClick={() => userApi.logout()}
         >
           Выйти
-          <Icon ml={2} w={6} h={6} as={IoLogOutOutline} />
+          <Icon ml={2} fontSize="2xl" as={IoLogOutOutline} />
         </Button>
       </Container>
     </Portal>
