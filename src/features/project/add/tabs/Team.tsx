@@ -1,16 +1,11 @@
-import { ChevronDownIcon, SmallCloseIcon } from '@chakra-ui/icons';
-import {
-  Flex,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Tag,
-  TagLabel,
-  IconButton,
-} from '@chakra-ui/react';
-import { useState } from 'react';
+import { Box, Flex, Heading, Stack } from '@chakra-ui/layout';
+import { Button, Card, CloseButton } from '@chakra-ui/react';
+import { OptionBase } from 'chakra-react-select';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-import { FilterSpecializationModal } from './FilterSpecializationModal';
+import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
+import { SearchSelect } from '~/shared/ui/SearchSelect';
+import { STag } from '~/shared/ui/STag';
 
 const specState = [
   {
@@ -211,85 +206,112 @@ const specState = [
   },
 ];
 
-interface FilterSpecializationProps {
-  singleChecked?: boolean;
-  userSpecs: number[];
-  setUserSpecs: (userSpecs: number[]) => void;
+interface SelectOptions extends OptionBase {
+  label: string;
+  value: string;
 }
 
-export const FilterSpecialization = ({
-  singleChecked,
-  userSpecs,
-  setUserSpecs,
-}: FilterSpecializationProps) => {
-  const [specFilter, setSpecFilter] = useState(false);
+export interface NewSpecialist {
+  spec: number[];
+  skills: SelectOptions[];
+  id: number;
+}
 
-  const deleteSpecFilter = (id: number) => {
-    const newUserSpecs = userSpecs.filter((specId) => specId !== id);
-    setUserSpecs(newUserSpecs);
+interface TeamProps {
+  newSpecialist: NewSpecialist[];
+  setNewSpecialist: Dispatch<SetStateAction<NewSpecialist[]>>;
+}
+
+export const Team = (props: TeamProps) => {
+  const { newSpecialist, setNewSpecialist } = props;
+  const [userSpecs, setUserSpecs] = useState<number[]>([]);
+  const [userSkills, setUserSkills] = useState<{ value: string; label: string }[]>([]);
+
+  const getMainTag = (id: number) => {
+    let title = '';
+    let tag = '';
+    specState.forEach((spec) => {
+      spec.child.forEach((ch) => {
+        if (ch.id === id) {
+          tag = ch.name;
+          title = spec.title;
+          return;
+        }
+      });
+    });
+
+    return [tag, title];
+  };
+
+  const handleNewSpecialist = () => {
+    setNewSpecialist([
+      ...newSpecialist,
+      { spec: [...userSpecs], skills: [...userSkills], id: Date.now() },
+    ]);
+    setUserSpecs([]);
+    setUserSkills([]);
   };
 
   return (
     <>
-      <InputGroup mb={4}>
-        <Input
-          bg="white"
-          borderRadius="full"
-          fontSize="sm"
-          readOnly
-          placeholder="Например, Фронтенд разработчик"
-          onClick={() => {
-            setSpecFilter(true);
-          }}
-        />
-        <InputRightElement pointerEvents="none">
-          <ChevronDownIcon fontSize="xl" />
-        </InputRightElement>
-      </InputGroup>
-      <Flex flexWrap="wrap" gap={2}>
-        {specState.map((spec) =>
-          spec.child.map(
-            ({ id, name }) =>
-              userSpecs.includes(id) && (
-                <Tag
-                  key={id}
-                  size="sm"
-                  bg="gray.300"
-                  py={1}
-                  px={2}
-                  borderRadius="lg"
-                  fontWeight="medium"
-                >
-                  <TagLabel>{name}</TagLabel>
-                  <IconButton
-                    onClick={() => {
-                      deleteSpecFilter(id);
-                    }}
-                    aria-label="Close"
-                    variant="ghost"
-                    flexShrink="0"
-                    minW="none"
-                    height="none"
-                    fontWeight="normal"
-                    icon={<SmallCloseIcon boxSize={4} />}
-                  />
-                </Tag>
-              ),
-          ),
-        )}
-      </Flex>
-
-      <FilterSpecializationModal
-        isVisible={specFilter}
-        changeVisible={setSpecFilter}
-        state={specState}
-        userFilter={userSpecs}
-        resetSpec={() => {
-          setUserSpecs([]);
-        }}
-        saveSpec={setUserSpecs}
-        singleChecked={singleChecked}
-      />
+      <Box mb={5}>
+        <Stack gap={1} mb={4}>
+          <Heading variant="h2" mb={3}>
+            Специализация
+          </Heading>
+          <FilterSpecialization
+            userSpecs={userSpecs}
+            singleChecked={true}
+            setUserSpecs={setUserSpecs}
+          />
+        </Stack>
+      </Box>
+      <Box mb={5}>
+        <Stack gap={1}>
+          <Heading variant="h2" mb={3}>
+            Профессиональные навыки
+          </Heading>
+        </Stack>
+        <Box mb={3}>
+          <SearchSelect selectedItems={userSkills} setSelectedItems={setUserSkills} />
+        </Box>
+      </Box>
+      <Button
+        mb={5}
+        isDisabled={userSpecs.length === 0 || userSkills.length === 0}
+        type="button"
+        onClick={handleNewSpecialist}
+        fontSize="sm"
+        fontWeight="600"
+        w="full"
+      >
+        Добавить специалиста
+      </Button>
+      <Stack gap={6}>
+        {newSpecialist.map((specialist) => {
+          const [mainTag, mainTitle] = getMainTag(specialist.spec[0]);
+          return (
+            <Card key={specialist.id} p={5} borderRadius="2xl" boxShadow="none">
+              <Flex alignItems="baseline" justifyContent="space-between">
+                <Heading variant="h2" mb={4}>
+                  {mainTitle}
+                </Heading>
+                <CloseButton
+                  onClick={() => {
+                    setNewSpecialist(
+                      newSpecialist.filter(({ id }) => id !== specialist.id),
+                    );
+                  }}
+                />
+              </Flex>
+              <STag
+                mainTags={[mainTag]}
+                tags={specialist.skills.map(({ label }) => label)}
+              />
+            </Card>
+          );
+        })}
+      </Stack>
     </>
   );
 };

@@ -42,10 +42,19 @@ interface FilterSpecializationModalProps {
   resetSpec: () => void;
   userFilter: number[];
   saveSpec: (spec: number[]) => void;
+  singleChecked?: boolean;
 }
 
 export const FilterSpecializationModal = (props: FilterSpecializationModalProps) => {
-  const { isVisible, changeVisible, state, resetSpec, saveSpec, userFilter } = props;
+  const {
+    isVisible,
+    changeVisible,
+    state,
+    resetSpec,
+    saveSpec,
+    userFilter,
+    singleChecked,
+  } = props;
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -85,7 +94,11 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
       setSelectCheckboxes(selectCheckboxes.filter((item) => item !== id));
       return;
     }
-    setSelectCheckboxes([...selectCheckboxes, id]);
+    if (singleChecked) {
+      setSelectCheckboxes([id]);
+    } else {
+      setSelectCheckboxes([...selectCheckboxes, id]);
+    }
   };
 
   return (

@@ -2,6 +2,7 @@ export const PATHS = {
   root: '/',
   search: '/search',
   projects: '/projects',
+  addProject: '/add-project',
   chats: '/chats',
   dialog: '/chats/:id',
   profile: '/profile',
