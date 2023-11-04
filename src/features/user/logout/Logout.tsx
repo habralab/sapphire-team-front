@@ -11,9 +11,14 @@ export function Logout() {
   return layout?.footer && isAuth ? (
     <Portal containerRef={layout.footer}>
       <Container py={4} maxW="md">
-        <Button w="full" onClick={() => userApi.logout()}>
+        <Button
+          w="full"
+          variant="light"
+          colorScheme="gray"
+          onClick={() => userApi.logout()}
+        >
           Выйти
-          <Icon ml={2} w={6} h={6} as={IoLogOutOutline} />
+          <Icon ml={2} fontSize="2xl" as={IoLogOutOutline} />
         </Button>
       </Container>
     </Portal>

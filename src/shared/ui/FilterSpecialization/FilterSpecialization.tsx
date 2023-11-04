@@ -211,9 +211,16 @@ const specState = [
   },
 ];
 
-export const FilterSpecialization = () => {
+interface FilterSpecializationProps {
+  userSpecs: number[];
+  setUserSpecs: (userSpecs: number[]) => void;
+}
+
+export const FilterSpecialization = ({
+  userSpecs,
+  setUserSpecs,
+}: FilterSpecializationProps) => {
   const [specFilter, setSpecFilter] = useState(false);
-  const [userSpecs, setUserSpecs] = useState<number[]>([]);
 
   const deleteSpecFilter = (id: number) => {
     const newUserSpecs = userSpecs.filter((specId) => specId !== id);

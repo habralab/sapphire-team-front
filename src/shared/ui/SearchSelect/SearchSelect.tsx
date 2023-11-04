@@ -53,12 +53,14 @@ const items = [
   { label: 'Новое 5', value: '19' },
 ];
 
-export const SearchSelect = () => {
+interface SearchSelectProps {
+  selectedItems: SelectOptions[];
+  setSelectedItems: (selectedItems: SelectOptions[]) => void;
+}
+
+export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectProps) => {
   const [unSelectedItems, setUnSelectedItems] =
     useState<{ value: string; label: string }[]>(items);
-  const [selectedItems, setSelectedItems] = useState<{ value: string; label: string }[]>(
-    [],
-  );
 
   const unSelectValue = (id: string) => {
     const unSelectedItem = selectedItems.find((item) => item.value === id);
@@ -90,7 +92,7 @@ export const SearchSelect = () => {
         }}
         onChange={(item) => {
           if (item) {
-            setSelectedItems((items) => [...items, item]);
+            setSelectedItems([...selectedItems, item]);
             setUnSelectedItems((unSelectedItems) =>
               unSelectedItems.filter(
                 (unSelectedItem) => unSelectedItem.value !== item.value,

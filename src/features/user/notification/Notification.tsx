@@ -9,6 +9,7 @@ export function Notification() {
   return (
     <>
       <IconButton
+        size="sm"
         variant="flat"
         aria-label="notification"
         as={Link}

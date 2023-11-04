@@ -1,4 +1,4 @@
-import { Icon, Flex, IconButton, Box } from '@chakra-ui/react';
+import { Icon, Flex, IconButton } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { IoSend } from 'react-icons/io5';
 
@@ -26,8 +26,8 @@ export function CreateMessageDesktop({ onSubmit }: CreateMessageDesktopProps) {
     >
       <STextarea
         maxLength={50}
-        information={value}
-        setInformation={setValue}
+        value={value}
+        setValue={setValue}
         placeholder="Введите сообщение..."
       />
       <IconButton

@@ -7,6 +7,7 @@ import { PATHS } from '~/shared/lib/router';
 export function Settings() {
   return (
     <IconButton
+      size="sm"
       variant="flat"
       aria-label="settings"
       to={PATHS.settings}
