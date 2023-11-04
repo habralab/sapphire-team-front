@@ -1,6 +1,6 @@
 import { Box, ChakraProvider, Container, Flex, Stack } from '@chakra-ui/react';
 import { useRef } from 'react';
-import { Route, Routes, ScrollRestoration, useLocation } from 'react-router-dom';
+import { ScrollRestoration, useLocation } from 'react-router-dom';
 
 import { MenuBase, MenuDesktop } from '~/widgets/menu';
 
@@ -9,9 +9,9 @@ import { LayoutContext } from '~/shared/contexts';
 import { useIsMobile } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
-import { normalRoutes } from '../router/config';
-
+import { AuthProvider } from './AuthProvider';
 import styles from './Layout.module.css';
+import { Routes } from './Routes';
 
 export const Layout = () => {
   const isMobile = useIsMobile();
@@ -29,11 +29,9 @@ export const Layout = () => {
           {isMobile ? (
             <Stack gap={0} className={styles.layout}>
               <Flex flex="1">
-                <Routes>
-                  {normalRoutes.map((props) => (
-                    <Route key={props.path} path={props.path} element={props.view.base} />
-                  ))}
-                </Routes>
+                <AuthProvider>
+                  <Routes />
+                </AuthProvider>
               </Flex>
               <Box position="sticky" bottom="0" bg="bg">
                 <Box ref={footerRef}></Box>
@@ -52,15 +50,9 @@ export const Layout = () => {
                 display="flex"
                 flexDirection="column"
               >
-                <Routes>
-                  {normalRoutes.map((props) => (
-                    <Route
-                      key={props.path}
-                      path={props.path}
-                      element={props.view.desktop ?? props.view.base}
-                    />
-                  ))}
-                </Routes>
+                <AuthProvider>
+                  <Routes />
+                </AuthProvider>
               </Container>
             </Flex>
           )}

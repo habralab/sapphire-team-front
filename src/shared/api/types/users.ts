@@ -8,6 +8,10 @@ export interface paths {
     /** Health */
     get: operations['health_health_get'];
   };
+  '/api/rest/auth/check': {
+    /** Check */
+    get: operations['check_api_rest_auth_check_get'];
+  };
   '/api/rest/auth/logout': {
     /** Logout */
     delete: operations['logout_api_rest_auth_logout_delete'];
@@ -19,6 +23,10 @@ export interface paths {
   '/api/rest/auth/oauth2/habr/callback': {
     /** Callback */
     get: operations['callback_api_rest_auth_oauth2_habr_callback_get'];
+  };
+  '/api/rest/users/me': {
+    /** Get Me */
+    get: operations['get_me_api_rest_users_me_get'];
   };
   '/api/rest/users/{user_id}': {
     /** Get User */
@@ -147,6 +155,32 @@ export interface operations {
       };
     };
   };
+  /** Check */
+  check_api_rest_auth_check_get: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': boolean;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
   /** Logout */
   logout_api_rest_auth_logout_delete: {
     responses: {
@@ -160,10 +194,21 @@ export interface operations {
   };
   /** Authorize */
   authorize_api_rest_auth_oauth2_habr_authorize_get: {
+    parameters: {
+      query?: {
+        redirect_url?: string | null;
+      };
+    };
     responses: {
       /** @description Successful Response */
       307: {
         content: never;
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
       };
     };
   };
@@ -180,6 +225,32 @@ export interface operations {
       200: {
         content: {
           'application/json': components['schemas']['JWTTokensResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get Me */
+  get_me_api_rest_users_me_get: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['UserResponse'];
         };
       };
       /** @description Validation Error */

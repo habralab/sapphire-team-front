@@ -5,6 +5,7 @@ export const PATHS = {
   chats: '/chats',
   dialog: '/chats/:id',
   profile: '/profile',
+  profileMe: '/profile/me',
   notifications: '/notifications',
   settings: '/settings',
   profileSettings: '/settings/profile',

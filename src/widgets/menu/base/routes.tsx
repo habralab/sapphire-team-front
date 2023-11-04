@@ -23,7 +23,7 @@ export const routes: MenuRoute[] = [
     icon: <Icon as={IoChatbubbles} fontSize="2xl" />,
   },
   {
-    path: PATHS.profile,
+    path: PATHS.profileMe,
     name: 'Профиль',
     icon: <Icon as={IoPerson} fontSize="2xl" />,
   },

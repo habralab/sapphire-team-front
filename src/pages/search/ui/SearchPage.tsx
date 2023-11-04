@@ -7,19 +7,21 @@ import { Notification, Settings } from '~/features/user';
 
 import { Avatar } from '~/entities/user';
 
-import { useApi, useLayoutRefs } from '~/shared/hooks';
+import { useApi, useIsAuth, useLayoutRefs } from '~/shared/hooks';
 import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
 
 export const SearchPage = () => {
   const { userApi } = useApi();
   const layout = useLayoutRefs();
+  const isAuth = useIsAuth();
+
   return (
     <>
       <Container maxW="md" mb={4}>
         <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
           <Flex justifyContent="space-between" alignItems="center" my={4} h={42}>
-            <Avatar firstName="Татьяна" lastName="Антонова" />
+            <Avatar />
             <Flex gap={4} alignItems="baseline">
               <Notification />
               <Settings />
@@ -46,7 +48,7 @@ export const SearchPage = () => {
           </SimpleGrid>
         </Flex>
       </Container>
-      {layout?.footer && (
+      {layout?.footer && !isAuth && (
         <Portal containerRef={layout.footer}>
           <Container py={4} maxW="md">
             <Button w="full" as="a" href={userApi.authURL}>
