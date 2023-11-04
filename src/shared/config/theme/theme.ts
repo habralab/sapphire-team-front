@@ -102,6 +102,15 @@ const Button = defineStyleConfig({
   },
   variants: {
     flat: flatButton,
+    filter: {
+      height: 'auto',
+      fontWeight: 'normal',
+      fontSize: 'sm',
+      padding: 0,
+      _hover: {
+        color: 'gray.900',
+      },
+    },
     light: lightButton,
   },
 

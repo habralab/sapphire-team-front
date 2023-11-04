@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { NotificationList } from '~/widgets/notification-list';
 
+import { notifications } from '~/shared/lib/notifications';
+
 export function NotificationsPage() {
   const navigate = useNavigate();
   const goBack = () => {
@@ -25,7 +27,7 @@ export function NotificationsPage() {
           Уведомления
         </Heading>
       </Flex>
-      <NotificationList />
+      <NotificationList notifications={notifications} />
     </Container>
   );
 }
