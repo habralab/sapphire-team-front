@@ -1,2 +1,2 @@
-export { ProfilePage } from './ProfilePage';
-export { ProfilePageDesktop } from './ProfilePage.desktop';
+export * from './ProfilePage';
+export * from './ProfilePage.desktop';

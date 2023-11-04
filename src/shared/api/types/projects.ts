@@ -17,6 +17,8 @@ export interface paths {
   '/api/rest/projects/{project_id}': {
     /** Get Project */
     get: operations['get_project_api_rest_projects__project_id__get'];
+    /** Partial Update Project */
+    patch: operations['partial_update_project_api_rest_projects__project_id__patch'];
   };
   '/api/rest/projects/{project_id}/history': {
     /** History */
@@ -59,6 +61,14 @@ export interface components {
        * Format: binary
        */
       avatar: string;
+    };
+    /** CreateProjectPositionRequest */
+    CreateProjectPositionRequest: {
+      /**
+       * Specialization Id
+       * Format: uuid
+       */
+      specialization_id: string;
     };
     /** CreateProjectRequest */
     CreateProjectRequest: {
@@ -136,6 +146,11 @@ export interface components {
       /** Total Items */
       total_items?: number | null;
     };
+    /** ProjectPartialUpdateRequest */
+    ProjectPartialUpdateRequest: {
+      /** Status */
+      status?: unknown;
+    };
     /** ProjectParticipantResponse */
     ProjectParticipantResponse: {
       /**
@@ -177,8 +192,6 @@ export interface components {
        * Format: uuid
        */
       project_id: string;
-      /** Is Deleted */
-      is_deleted: boolean;
       /** Closed At */
       closed_at: string | null;
       /**
@@ -285,6 +298,13 @@ export interface operations {
         page?: number;
         /** @description Number of items per page */
         per_page?: number;
+        query_text?: unknown;
+        owner_id?: unknown;
+        deadline?: unknown;
+        status?: unknown;
+        position_is_closed?: unknown;
+        position_skill_ids?: unknown;
+        position_specialization_ids?: unknown;
       };
     };
     responses: {
@@ -338,6 +358,40 @@ export interface operations {
     parameters: {
       path: {
         project_id: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ProjectResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Partial Update Project */
+  partial_update_project_api_rest_projects__project_id__patch: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      path: {
+        project_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ProjectPartialUpdateRequest'];
       };
     };
     responses: {
@@ -486,6 +540,11 @@ export interface operations {
       cookie?: {
         access_token?: string | null;
         refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateProjectPositionRequest'];
       };
     };
     responses: {

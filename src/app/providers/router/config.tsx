@@ -28,6 +28,15 @@ export const normalRoutes = [
     view: { base: <ProfilePage />, desktop: <ProfilePageDesktop /> },
   },
   {
+    path: PATHS.profileMe,
+    view: {
+      base: <ProfilePage />,
+      desktop: <ProfilePageDesktop />,
+      notAuthBase: <NotFoundPage />,
+      notAuthDesktop: <NotFoundPage />,
+    },
+  },
+  {
     path: PATHS.projects,
     view: { base: <ProjectsPage />, desktop: <ProjectsPageDesktop /> },
   },
