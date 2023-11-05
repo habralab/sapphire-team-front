@@ -10,7 +10,7 @@
     "eslint": "eslint --cache --ext .ts,.tsx . --rule \"{import/no-cycle: off}\"",
     "tslint": "tsc --noEmit --incremental --outDir .cache/ts",
     "prettier": "prettier --log-level warn \"**/*.{ts,tsx}\" --check",
-    "lint": "concurrently 'eslint **/*.{ts,tsx}' 'yarn tslint' --raw",
+    "lint": "concurrently 'eslint --ext .ts,.tsx .' 'yarn tslint' --raw",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest --passWithNoTests",
     "release": "release-it",
