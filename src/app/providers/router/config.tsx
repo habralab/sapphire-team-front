@@ -10,7 +10,7 @@ import {
   NotificationsPage,
   NotificationsPageDesktop,
 } from '~/pages/notifications';
-import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
+import { NotAuthProfilePage, ProfilePage, ProfilePageDesktop } from '~/pages/profile';
 import {
   AddProjectPage,
   ProjectPage,
@@ -42,7 +42,7 @@ export const normalRoutes = [
     view: {
       base: <ProfilePage />,
       desktop: <ProfilePageDesktop />,
-      notAuthBase: <NotFoundPage />,
+      notAuthBase: <NotAuthProfilePage />,
       notAuthDesktop: <NotFoundPage />,
     },
   },

@@ -7,7 +7,7 @@ import {
   OptionBase,
   chakraComponents,
 } from 'chakra-react-select';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface SelectOptions extends OptionBase {
   label: string;

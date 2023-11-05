@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "eslint": "eslint --cache **/*.{ts,tsx} --rule \"{import/no-cycle: off}\"",
+    "eslint": "eslint --cache --ext .ts,.tsx . --rule \"{import/no-cycle: off}\"",
     "tslint": "tsc --noEmit --incremental --outDir .cache/ts",
     "prettier": "prettier --log-level warn \"**/*.{ts,tsx}\" --check",
     "lint": "concurrently 'eslint **/*.{ts,tsx}' 'yarn tslint' --raw",
