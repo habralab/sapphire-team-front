@@ -8,6 +8,8 @@ import {
   TagLabel,
   IconButton,
 } from '@chakra-ui/react';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useState } from 'react';
 
 import { FilterSpecializationModal } from './FilterSpecializationModal';
@@ -223,6 +225,16 @@ export const FilterSpecialization = ({
   setUserSpecs,
 }: FilterSpecializationProps) => {
   const [specFilter, setSpecFilter] = useState(false);
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['todos'],
+    queryFn: () =>
+      axios.get(
+        `https://stage.sapphire.pet-project.habr.com/backend/storage/api/rest/specializations/`,
+      ),
+  });
+
+  console.log(data);
 
   const deleteSpecFilter = (id: number) => {
     const newUserSpecs = userSpecs.filter((specId) => specId !== id);
