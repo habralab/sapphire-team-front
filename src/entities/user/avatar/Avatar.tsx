@@ -52,7 +52,9 @@ export const Avatar = () => {
           </Center>
           <Stack spacing={0}>
             <Text variant="caption">{`Привет, Гость!`}</Text>
-            <SLink to={userApi.authURL}>Зарегистрироваться</SLink>
+            <SLink external to={userApi.authURL}>
+              Зарегистрироваться
+            </SLink>
           </Stack>
         </>
       ) : (
