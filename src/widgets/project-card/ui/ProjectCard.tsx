@@ -31,7 +31,11 @@ export const ProjectCard = (props: ProjectCardProps) => {
     >
       <CardBody padding={['5', '6']}>
         <Status mb={['3', '4']}>{status}</Status>
-        <Card {...formatData} />
+        <Card
+          date={formatData.title}
+          description={formatData.description}
+          title={formatData.title}
+        />
         {children}
       </CardBody>
     </ChakraCard>
