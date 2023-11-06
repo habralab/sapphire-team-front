@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
+import { ChatsPage, ChatsPageDesktop, NotAuthChatsPage } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
 import { MainPage } from '~/pages/main';
 import { NotFoundPage } from '~/pages/not-found';
@@ -13,6 +13,7 @@ import {
 import { NotAuthProfilePage, ProfilePage, ProfilePageDesktop } from '~/pages/profile';
 import {
   AddProjectPage,
+  NotAuthProjectsPage,
   ProjectPage,
   ProjectsPage,
   ProjectsPageDesktop,
@@ -48,7 +49,11 @@ export const normalRoutes = [
   },
   {
     path: PATHS.projects,
-    view: { base: <ProjectsPage />, desktop: <ProjectsPageDesktop /> },
+    view: {
+      base: <ProjectsPage />,
+      desktop: <ProjectsPageDesktop />,
+      notAuthBase: <NotAuthProjectsPage />,
+    },
   },
   {
     path: PATHS.project,
@@ -59,7 +64,14 @@ export const normalRoutes = [
     view: { base: <AddProjectPage /> },
   },
   { path: PATHS.search, view: { base: <SearchPage />, desktop: <SearchPageDesktop /> } },
-  { path: PATHS.chats, view: { base: <ChatsPage />, desktop: <ChatsPageDesktop /> } },
+  {
+    path: PATHS.chats,
+    view: {
+      base: <ChatsPage />,
+      desktop: <ChatsPageDesktop />,
+      notAuthBase: <NotAuthChatsPage />,
+    },
+  },
   { path: PATHS.dialog, view: { base: <DialogPage />, desktop: <ChatsPageDesktop /> } },
   {
     path: PATHS.notifications,

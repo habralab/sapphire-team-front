@@ -1,11 +1,11 @@
-import { Avatar, Text, Flex } from '@chakra-ui/react';
+import { Avatar, Text, Flex, Image, Center } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import { Info } from '~/entities/user';
 
 import { useIsAuth, useApi } from '~/shared/hooks';
 
-import notAuth from './notAuth.svg';
+import NotAuth from './notAuth.svg';
 
 const defaultName = 'Гость';
 
@@ -16,7 +16,7 @@ export function ProfileCard() {
     firstName: defaultName,
     lastName: '',
   });
-  const [avatar, setAvatar] = useState<string | undefined>(notAuth);
+  const [avatar, setAvatar] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (isAuth)
@@ -31,7 +31,7 @@ export function ProfileCard() {
         })
         .catch(() => {
           setName({ firstName: defaultName, lastName: '' });
-          setAvatar(notAuth);
+          setAvatar(NotAuth);
         });
   }, [isAuth]);
 
@@ -45,15 +45,37 @@ export function ProfileCard() {
       position="relative"
       mb={4}
     >
-      <Avatar
-        name={`${name.firstName} ${name.lastName}`}
-        variant="profileAvatar"
-        border="0.5rem solid white"
-        position="absolute"
-        top={-10}
-        boxSizing="content-box"
-        src={avatar}
-      />
+      {avatar ? (
+        <Avatar
+          name={`${name.firstName} ${name.lastName}`}
+          variant="profileAvatar"
+          border="0.5rem solid white"
+          position="absolute"
+          top={-10}
+          boxSizing="content-box"
+          src={avatar}
+        />
+      ) : (
+        <Center
+          border="0.5rem solid white"
+          position="absolute"
+          top={-10}
+          borderRadius="full"
+          w={20}
+          h={20}
+          boxSizing="content-box"
+          bg="white"
+        >
+          <Image
+            src={NotAuth}
+            objectFit="contain"
+            objectPosition="center"
+            h={16}
+            w={16}
+          />
+        </Center>
+      )}
+
       <Text align="center" fontWeight="bold" fontSize="2xl" pt={16} mb={4}>
         {`${name.firstName} ${name.lastName}`}
       </Text>
