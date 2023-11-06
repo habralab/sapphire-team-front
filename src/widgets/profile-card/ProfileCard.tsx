@@ -80,7 +80,7 @@ export function ProfileCard() {
         </Center>
       )}
       {loading && isAuth ? (
-        <SkeletonText noOfLines={1} skeletonHeight="6" w="60%" pt={16} mb={4} />
+        <SkeletonText noOfLines={1} skeletonHeight="5" w="60%" pt={16} mb={3} />
       ) : (
         <Text align="center" fontWeight="bold" fontSize="2xl" pt={16} mb={4}>
           {`${name.firstName} ${name.lastName}`}
