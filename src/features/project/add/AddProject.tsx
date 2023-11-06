@@ -2,15 +2,17 @@ import { HStack, Icon, IconButton, Text } from '@chakra-ui/react';
 import { BsPlus } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
-import { useIsMobile } from '~/shared/hooks';
+import { useIsMobile, useIsAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
 export const AddProject = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const isAuth = useIsAuth();
 
   return (
     <IconButton
+      isDisabled={!isAuth}
       aria-label="add-project"
       onClick={() => {
         navigate(PATHS.addProject);

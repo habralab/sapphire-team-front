@@ -54,7 +54,7 @@ export const SearchPage = () => {
         <Portal containerRef={layout.footer}>
           <Container py={2} maxW="md">
             <Button w="full" as="a" href={userApi.authURL}>
-              Авторизоваться
+              Зарегистрироваться
             </Button>
           </Container>
         </Portal>

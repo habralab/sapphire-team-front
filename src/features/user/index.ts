@@ -5,3 +5,4 @@ export * from './update-user';
 export * from './logout';
 export * from './notification-settings';
 export * from './notifications-filter';
+export * from './login';

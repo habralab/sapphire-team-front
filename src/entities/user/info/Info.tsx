@@ -1,19 +1,22 @@
 import { Box, Divider, Flex, FlexProps } from '@chakra-ui/react';
 
+import { useIsAuth } from '~/shared/hooks';
 import { SGroup } from '~/shared/ui/SGroup';
 
 export const Info = (props: FlexProps) => {
+  const isAuth = useIsAuth();
+
   return (
     <Flex py={4} px={0.5} width="100%" textAlign="center" {...props}>
-      <SGroup count={3} section="Участник" />
+      <SGroup count={isAuth ? 3 : 0} section="Участник" />
       <Box>
         <Divider orientation="vertical" variant="light" />
       </Box>
-      <SGroup count={1} section="Организатор" />
+      <SGroup count={isAuth ? 1 : 0} section="Организатор" />
       <Box>
         <Divider orientation="vertical" variant="light" />
       </Box>
-      <SGroup count={4.89} section="Рейтинг" />
+      <SGroup count={isAuth ? 4.89 : 0} section="Рейтинг" />
     </Flex>
   );
 };
