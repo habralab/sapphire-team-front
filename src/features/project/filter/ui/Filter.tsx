@@ -62,7 +62,16 @@ export const Filter = () => {
                   Фильтры
                 </Heading>
               </Flex>
-              <Button variant="flat" fontSize="sm" fontWeight="500" colorScheme="purple">
+              <Button
+                variant="flat"
+                fontSize="sm"
+                fontWeight="500"
+                colorScheme="purple"
+                onClick={() => {
+                  setUserSpecs([]);
+                  setSelectedItems([]);
+                }}
+              >
                 Сбросить
               </Button>
             </Flex>
