@@ -1,15 +1,11 @@
-import { Flex, Heading, Container, Image, Button, Text, Portal } from '@chakra-ui/react';
+import { Flex, Heading, Container, Image, Text } from '@chakra-ui/react';
 
 import { AddProject } from '~/features/project';
-
-import { useApi, useLayoutRefs } from '~/shared/hooks';
+import { Login } from '~/features/user';
 
 import NotAuth from './NotAuth.svg';
 
 export const NotAuthProjectsPage = () => {
-  const { userApi } = useApi();
-  const layout = useLayoutRefs();
-
   return (
     <Container maxW="md" mb={4}>
       <Flex justifyContent="space-between" alignItems="center" my={4} h={42}>
@@ -37,15 +33,7 @@ export const NotAuthProjectsPage = () => {
           Здесь будут отображаться все ваши проекты в качестве участника и организатора
         </Text>
       </Flex>
-      {layout?.footer && (
-        <Portal containerRef={layout.footer}>
-          <Container py={2} maxW="md">
-            <Button w="full" as="a" href={userApi.authURL}>
-              Зарегистрироваться
-            </Button>
-          </Container>
-        </Portal>
-      )}
+      <Login />
     </Container>
   );
 };

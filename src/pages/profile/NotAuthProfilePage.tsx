@@ -1,28 +1,14 @@
-import {
-  Flex,
-  Heading,
-  Container,
-  Text,
-  Portal,
-  Button,
-  Tabs,
-  TabList,
-  Tab,
-} from '@chakra-ui/react';
+import { Flex, Heading, Container, Text, Tabs, TabList, Tab } from '@chakra-ui/react';
 import { useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { ProfileCard } from '~/widgets/profile-card';
 
-import { useApi, useIsAuth, useLayoutRefs } from '~/shared/hooks';
+import { Login, Notification, Settings } from '~/features/user';
 
 const tabs = ['about', 'projects', 'reviews'];
 
 export function NotAuthProfilePage() {
-  const { userApi } = useApi();
-  const layout = useLayoutRefs();
-  const isAuth = useIsAuth();
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   useLayoutEffect(() => {
@@ -33,10 +19,14 @@ export function NotAuthProfilePage() {
 
   return (
     <Container maxW="md" mb={4}>
-      <Flex mt={4} mb={16} h={42}>
+      <Flex justifyContent="space-between" alignItems="center" mt={4} mb={16} h={42}>
         <Heading variant="h1" as="h1">
           Профиль
         </Heading>
+        <Flex gap={4} alignItems="baseline">
+          <Notification />
+          <Settings />
+        </Flex>
       </Flex>
       <ProfileCard />
       <Tabs
@@ -52,18 +42,10 @@ export function NotAuthProfilePage() {
           <Tab>Отзывы</Tab>
         </TabList>
       </Tabs>
-      <Text variant="caption" textAlign="center">
-        Для просмотра личного профиля необходимо зарегистрироваться
+      <Text textAlign="center" color="gray.700">
+        Для создания личного профиля необходимо зарегистрироваться
       </Text>
-      {layout?.footer && !isAuth && (
-        <Portal containerRef={layout.footer}>
-          <Container py={2} maxW="md">
-            <Button w="full" as="a" href={userApi.authURL}>
-              Зарегистрироваться
-            </Button>
-          </Container>
-        </Portal>
-      )}
+      <Login />
     </Container>
   );
 }

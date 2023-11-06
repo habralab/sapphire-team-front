@@ -1,23 +1,12 @@
-import {
-  Heading,
-  Flex,
-  Container,
-  Box,
-  Image,
-  Text,
-  Portal,
-  Button,
-} from '@chakra-ui/react';
+import { Heading, Flex, Container, Box, Image, Text } from '@chakra-ui/react';
 
-import { useApi, useLayoutRefs } from '~/shared/hooks';
+import { Login } from '~/features/user';
+
 import { SearchInput } from '~/shared/ui/SearchInput';
 
 import NotAuth from './NotAuth.svg';
 
 export function NotAuthChatsPage() {
-  const { userApi } = useApi();
-  const layout = useLayoutRefs();
-
   return (
     <Box w="full">
       <Box bg="bg">
@@ -45,15 +34,7 @@ export function NotAuthChatsPage() {
               Здесь будут отображаться диалоги c Вашими тиммейтами
             </Text>
           </Flex>
-          {layout?.footer && (
-            <Portal containerRef={layout.footer}>
-              <Container py={2} maxW="md">
-                <Button w="full" as="a" href={userApi.authURL}>
-                  Зарегистрироваться
-                </Button>
-              </Container>
-            </Portal>
-          )}
+          <Login />
         </Container>
       </Box>
     </Box>
