@@ -98,7 +98,6 @@ export const SearchPage = () => {
                         to={generatePath(PATHS.project, { id: project.id })}
                       >
                         <ProjectCard
-                          key={project.id}
                           status={project.status}
                           title={project.name}
                           date={project.deadline}
