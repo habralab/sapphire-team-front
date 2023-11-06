@@ -8,6 +8,8 @@ type AfterPostNewProjectResponse =
   paths['/api/rest/projects/']['post']['responses']['200']['content']['application/json'];
 export type getAllProjectsResponse =
   paths['/api/rest/projects/']['get']['responses']['200']['content']['application/json'];
+type getCurrentProjectResponse =
+  paths['/api/rest/projects/{project_id}']['get']['responses']['200']['content']['application/json'];
 
 export class ProjectsApiClient extends BaseApiClient {
   async addNewProject(newProject: PostNewProjectParams) {
@@ -16,6 +18,16 @@ export class ProjectsApiClient extends BaseApiClient {
       newProject,
     );
     return data;
+  }
+
+  async getCurrentProject(project_id: string) {
+    const { data } = await this.client.get<getCurrentProjectResponse>(
+      `/api/rest/projects/${project_id}`,
+    );
+    const { deadline, ...rest } = data;
+    let formatDate;
+    if (deadline) formatDate = new Date(deadline).toLocaleDateString('ru');
+    return { ...rest, deadline: formatDate ?? '' };
   }
 
   async getAllProjects(page: number) {

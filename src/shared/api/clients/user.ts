@@ -24,6 +24,9 @@ type UpdateUserAvatarID =
 type UpdateUserAvatar =
   paths['/api/rest/users/{user_id}/avatar']['post']['requestBody']['content']['multipart/form-data'];
 
+type getUserResponse =
+  paths['/api/rest/users/{user_id}']['get']['responses']['200']['content']['application/json'];
+
 export class UserApiClient extends BaseApiClient {
   get authURL() {
     return `${this.baseURL}/api/rest/auth/oauth2/habr/authorize?redirect_url=${window.location.origin}`;
@@ -46,6 +49,11 @@ export class UserApiClient extends BaseApiClient {
   async logout() {
     await this.client.delete('/api/rest/auth/logout', { withCredentials: true });
     window.location.href = PATHS.root;
+  }
+
+  async getUser(user_id: string | null) {
+    const { data } = await this.client.get<getUserResponse>(`/api/rest/users/${user_id}`);
+    return data;
   }
 
   async getMe() {

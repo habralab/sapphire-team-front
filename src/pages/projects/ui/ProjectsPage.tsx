@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Flex, SimpleGrid, Heading, Container, Box } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Heading, Container, Box, Skeleton } from '@chakra-ui/react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
 import { Link, generatePath } from 'react-router-dom';
@@ -14,7 +14,6 @@ import { AvatarsGroup } from '~/entities/project';
 
 import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
-import { Loader } from '~/shared/ui/Loader';
 import { STag } from '~/shared/ui/STag';
 
 export const ProjectsPage = () => {
@@ -69,7 +68,11 @@ export const ProjectsPage = () => {
       </Flex>
 
       {isLoading || !data ? (
-        <Loader />
+        <>
+          <Skeleton height="200px" borderRadius="2xl" mb={3} />
+          <Skeleton height="200px" borderRadius="2xl" mb={3} />
+          <Skeleton height="200px" borderRadius="2xl" mb={3} />
+        </>
       ) : (
         <SimpleGrid gap={4}>
           {data.pages.map((group, i) => (
