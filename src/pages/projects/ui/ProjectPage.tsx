@@ -60,7 +60,11 @@ export const ProjectPage = () => {
         boxShadow="none"
         alignContent="center"
       >
-        <Image src="https://img.freepik.com/premium-photo/programmer-working-computer-office_229060-14.jpg" />
+        <Image
+          src="https://img.freepik.com/premium-photo/programmer-working-computer-office_229060-14.jpg"
+          height={32}
+          objectFit="cover"
+        />
         <CardBody padding={['5', '6']}>
           <Stack gap={0} mb={3} alignItems="start">
             <Status mb={['3', '4']}>{dummyData[0].status}</Status>
