@@ -29,7 +29,7 @@ export const SearchPage = () => {
   const layout = useLayoutRefs();
   const isAuth = useIsAuth();
 
-  const { data, isLoading, fetchNextPage } = useInfiniteQuery({
+  const { data, isLoading, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['getAllProjects'],
     queryFn: ({ pageParam = 1 }) => projectsApi.getAllProjects(pageParam),
     getNextPageParam: (lastPage) => lastPage.page + 1,
@@ -104,6 +104,13 @@ export const SearchPage = () => {
                   })}
                 </React.Fragment>
               ))}
+              {isFetchingNextPage && (
+                <>
+                  <Skeleton height="200px" borderRadius="2xl" mb={3} />
+                  <Skeleton height="200px" borderRadius="2xl" mb={3} />
+                  <Skeleton height="200px" borderRadius="2xl" mb={3} />
+                </>
+              )}
               <Box ref={targetRef}></Box>
             </SimpleGrid>
           )}
