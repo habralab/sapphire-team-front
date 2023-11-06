@@ -23,6 +23,13 @@ export class ProjectsApiClient extends BaseApiClient {
       `/api/rest/projects/`,
       { params: { page } },
     );
-    return data;
+    const { data: onlyData, ...others } = data;
+    const newData = onlyData.map((project) => {
+      const { deadline, ...rest } = project;
+      let formatDate;
+      if (deadline) formatDate = new Date(deadline).toLocaleDateString('ru');
+      return { ...rest, deadline: formatDate ?? '' };
+    });
+    return { ...others, data: newData };
   }
 }

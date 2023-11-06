@@ -2,8 +2,8 @@ import { Heading, Text } from '@chakra-ui/react';
 
 export interface CardProps {
   title: string;
-  date: string;
-  description: string;
+  date: string | null;
+  description: string | null;
   fullDescription?: boolean;
 }
 
