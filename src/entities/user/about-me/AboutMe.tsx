@@ -8,19 +8,30 @@ export function AboutMe() {
       <Box>
         <Heading variant="h2">Обо мне</Heading>
         <Text>
-          Привет! Меня зовут Татьяна, и я начинающий UX/UI дизайнер, готовый погрузиться в
-          мир творчества и пользовательских интерфейсов. Моя страсть к дизайну началась
-          давно, и я горжусь тем, что обладаю креативным мышлением и аналитическими
-          способностями.
+          Привет! Меня зовут Дима, и я джуниор Frontend-разработчик, готовый изучать новые
+          технологии из мира Web-разработки и применять их на практике в новых проектах.
         </Text>
       </Box>
       <Box>
         <Heading variant="h2">Профессия</Heading>
-        <STag mainTags={['Дизайнер', 'UX/UI дизайнер']} />
+        <STag mainTags={['Разработчик', 'Frontend разработчик']} />
       </Box>
       <Box>
         <Heading variant="h2">Навыки</Heading>
-        <STag tags={['UX', 'UI', 'Figma']} />
+        <STag
+          tags={[
+            'TypeScript',
+            'JavaScript',
+            'React',
+            'Vue',
+            'Angular',
+            'Redux',
+            'Node JS',
+            'SCSS',
+            'Bootstrap',
+            'Tailwind',
+          ]}
+        />
       </Box>
     </Stack>
   );
