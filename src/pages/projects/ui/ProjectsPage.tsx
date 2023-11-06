@@ -1,4 +1,9 @@
-import { Flex, SimpleGrid, Heading, Container } from '@chakra-ui/react';
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { Flex, SimpleGrid, Heading, Container, Box } from '@chakra-ui/react';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import React, { useEffect, useRef } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
