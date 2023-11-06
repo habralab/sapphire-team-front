@@ -5,7 +5,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { basicTheme } from '~/shared/config';
 
 import { ApiProvider } from './providers/api';
-import { LayoutProvider } from './providers/layout';
 import { Routing } from './providers/router';
 
 const queryClient = new QueryClient();
@@ -19,12 +18,10 @@ function App() {
   return (
     <ChakraProvider theme={basicTheme} colorModeManager={colorModeManager}>
       <ApiProvider>
-        <LayoutProvider>
-          <QueryClientProvider client={queryClient}>
-            <Routing />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </LayoutProvider>
+        <QueryClientProvider client={queryClient}>
+          <Routing />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
       </ApiProvider>
     </ChakraProvider>
   );

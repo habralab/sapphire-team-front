@@ -10,7 +10,6 @@ import { useIsMobile } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
 import { AuthProvider } from './AuthProvider';
-import styles from './Layout.module.css';
 import { Routes } from './Routes';
 
 export const Layout = () => {
@@ -27,7 +26,7 @@ export const Layout = () => {
       <LayoutContext.Provider value={{ header: headerRef, footer: footerRef }}>
         <ChakraProvider theme={isMobile ? mobileTheme : desktopTheme}>
           {isMobile ? (
-            <Stack gap={0} className={styles.layout}>
+            <Stack gap={0} minH="full">
               <Flex flex="1">
                 <AuthProvider>
                   <Routes />

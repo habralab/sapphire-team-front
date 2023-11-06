@@ -1,4 +1,0 @@
-.layout {
-  min-height: calc(100vh - 56px);
-  min-height: calc(var(--vh, 1vh) * 100);
-}
