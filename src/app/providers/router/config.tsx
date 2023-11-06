@@ -11,7 +11,12 @@ import {
   NotificationsPageDesktop,
 } from '~/pages/notifications';
 import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
-import { AddProjectPage, ProjectsPage, ProjectsPageDesktop } from '~/pages/projects';
+import {
+  AddProjectPage,
+  ProjectPage,
+  ProjectsPage,
+  ProjectsPageDesktop,
+} from '~/pages/projects';
 import { SearchPage, SearchPageDesktop } from '~/pages/search';
 import {
   NotificationsSettingsPage,
@@ -44,6 +49,10 @@ export const normalRoutes = [
   {
     path: PATHS.projects,
     view: { base: <ProjectsPage />, desktop: <ProjectsPageDesktop /> },
+  },
+  {
+    path: PATHS.project,
+    view: { base: <ProjectPage /> },
   },
   {
     path: PATHS.addProject,
