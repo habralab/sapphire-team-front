@@ -79,14 +79,13 @@ export function ProfileCard() {
           />
         </Center>
       )}
-      {!loading ? (
+      {loading && isAuth ? (
+        <SkeletonText noOfLines={1} skeletonHeight="6" w="60%" pt={16} mb={4} />
+      ) : (
         <Text align="center" fontWeight="bold" fontSize="2xl" pt={16} mb={4}>
           {`${name.firstName} ${name.lastName}`}
         </Text>
-      ) : (
-        <SkeletonText noOfLines={1} skeletonHeight="6" w="60%" pt={16} mb={4} />
       )}
-
       <Info />
     </Flex>
   );
