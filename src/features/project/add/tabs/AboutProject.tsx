@@ -1,6 +1,6 @@
-import { FormControl, FormLabel } from '@chakra-ui/form-control';
+import { FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/form-control';
 import { Text } from '@chakra-ui/layout';
-import { Icon, IconButton, Input, Flex, Box, Switch } from '@chakra-ui/react';
+import { Icon, IconButton, Flex, Box, Switch, Input } from '@chakra-ui/react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { BsPlus } from 'react-icons/bs';
 
@@ -35,7 +35,9 @@ interface AboutProjectProps {
 
 export const AboutProject = (props: AboutProjectProps) => {
   const { description, setDescription } = props;
-  const { dirtyFields, register } = props.form;
+  const { dirtyFields, register, errors } = props.form;
+
+  console.log(!!errors?.title);
   return (
     <>
       <FormControl mb={6}>
@@ -83,7 +85,7 @@ export const AboutProject = (props: AboutProjectProps) => {
           />
         </Flex>
       </FormControl>
-      <FormControl mb={6}>
+      <FormControl mb={6} isRequired>
         <FormLabel mb={4}>Название</FormLabel>
         <Input
           type="text"
@@ -94,7 +96,7 @@ export const AboutProject = (props: AboutProjectProps) => {
           {...register('title')}
         />
       </FormControl>
-      <FormControl mb={6}>
+      <FormControl mb={6} isRequired>
         <FormLabel mb={4}>Описание</FormLabel>
         <Box position="relative">
           <STextarea
@@ -105,7 +107,7 @@ export const AboutProject = (props: AboutProjectProps) => {
           />
         </Box>
       </FormControl>
-      <FormControl mb={6}>
+      <FormControl mb={6} isRequired>
         <FormLabel mb={4}>Начало проекта</FormLabel>
         <Input
           variant="filled"
