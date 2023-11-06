@@ -5,6 +5,8 @@ import { Status } from '~/features/project';
 
 import { Card } from '~/entities/project';
 
+import { adapterCard } from '../api/adapterCard';
+
 type ProjectCardProps = {
   status: string;
   title: string;
@@ -15,6 +17,8 @@ type ProjectCardProps = {
 
 export const ProjectCard = (props: ProjectCardProps) => {
   const { status, title, date, description, children, ...others } = props;
+
+  const formatData = adapterCard(title, date, description);
 
   return (
     <ChakraCard
@@ -27,7 +31,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
     >
       <CardBody padding={['5', '6']}>
         <Status mb={['3', '4']}>{status}</Status>
-        <Card title={title} date={date} description={description} />
+        <Card {...formatData} />
         {children}
       </CardBody>
     </ChakraCard>
