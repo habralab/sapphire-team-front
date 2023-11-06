@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
+import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
 
@@ -21,6 +22,7 @@ import { Notification, Settings } from '~/features/user';
 import { Avatar } from '~/entities/user';
 
 import { useApi, useIsAuth, useLayoutRefs } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
 export const SearchPage = () => {
@@ -91,15 +93,19 @@ export const SearchPage = () => {
                 <React.Fragment key={i}>
                   {group.data.map((project) => {
                     return (
-                      <ProjectCard
+                      <Link
                         key={project.id}
-                        status={project.status}
-                        title={project.name}
-                        date={project.deadline}
-                        description={project.description}
+                        to={generatePath(PATHS.project, { id: project.id })}
                       >
-                        <STag mainTags={dummyDate.mainTags} tags={dummyDate.tags} />
-                      </ProjectCard>
+                        <ProjectCard
+                          status={project.status}
+                          title={project.name}
+                          date={project.deadline}
+                          description={project.description}
+                        >
+                          <STag mainTags={dummyDate.mainTags} tags={dummyDate.tags} />
+                        </ProjectCard>
+                      </Link>
                     );
                   })}
                 </React.Fragment>

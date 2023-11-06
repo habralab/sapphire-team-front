@@ -24,10 +24,15 @@ export class ProjectsApiClient extends BaseApiClient {
     const { data } = await this.client.get<getCurrentProjectResponse>(
       `/api/rest/projects/${project_id}`,
     );
-    const { deadline, ...rest } = data;
+    const statusAdapter = {
+      preparation: 'Подготовка',
+      in_work: 'В работе',
+      finished: 'Проект завершён',
+    };
+    const { deadline, status, ...rest } = data;
     let formatDate;
     if (deadline) formatDate = new Date(deadline).toLocaleDateString('ru');
-    return { ...rest, deadline: formatDate ?? '' };
+    return { ...rest, deadline: formatDate ?? '', status: statusAdapter[status] };
   }
 
   async getAllProjects(page: number) {
@@ -37,10 +42,15 @@ export class ProjectsApiClient extends BaseApiClient {
     );
     const { data: onlyData, ...others } = data;
     const newData = onlyData.map((project) => {
-      const { deadline, ...rest } = project;
+      const statusAdapter = {
+        preparation: 'Подготовка',
+        in_work: 'В работе',
+        finished: 'Проект завершён',
+      };
+      const { deadline, status, ...rest } = project;
       let formatDate;
       if (deadline) formatDate = new Date(deadline).toLocaleDateString('ru');
-      return { ...rest, deadline: formatDate ?? '' };
+      return { ...rest, deadline: formatDate ?? '', status: statusAdapter[status] };
     });
     return { ...others, data: newData };
   }
