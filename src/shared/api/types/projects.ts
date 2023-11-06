@@ -80,7 +80,7 @@ export interface components {
        * Owner Id
        * Format: uuid
        */
-      owner_id: string;
+      owner_id?: string;
       /** Deadline */
       deadline: string | null;
     };

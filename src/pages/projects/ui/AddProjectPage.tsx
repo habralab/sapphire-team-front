@@ -51,7 +51,6 @@ export const AddProjectPage = () => {
     const newProject = {
       name: data.title,
       description,
-      owner_id: '9800017e-c1b6-47b4-8ca7-a2ef1141046c',
       deadline: new Date(data.date).toISOString().slice(0, -1),
     };
 
