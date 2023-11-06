@@ -1,4 +1,5 @@
 import { Flex, SimpleGrid, Heading, Container } from '@chakra-ui/react';
+import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
 
@@ -7,6 +8,7 @@ import { AddProject } from '~/features/project';
 import { AvatarsGroup } from '~/entities/project';
 
 import { data } from '~/shared/lib/data';
+import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
 export const ProjectsPage = () => {
@@ -32,18 +34,19 @@ export const ProjectsPage = () => {
       <SimpleGrid gap={4}>
         {data.map((project) => {
           return (
-            <ProjectCard
-              key={project.id}
-              status={project.status}
-              title={project.title}
-              date={project.date}
-              description={project.description}
-            >
-              <Flex justifyContent="space-between" alignItems="center">
-                <STag mainTags={['Организатор']} />
-                <AvatarsGroup avatars={dummyAvatars} />
-              </Flex>
-            </ProjectCard>
+            <Link key={project.id} to={generatePath(PATHS.project, { id: project.id })}>
+              <ProjectCard
+                status={project.status}
+                title={project.title}
+                date={project.date}
+                description={project.description}
+              >
+                <Flex justifyContent="space-between" alignItems="center">
+                  <STag mainTags={['Организатор']} />
+                  <AvatarsGroup avatars={dummyAvatars} />
+                </Flex>
+              </ProjectCard>
+            </Link>
           );
         })}
       </SimpleGrid>
