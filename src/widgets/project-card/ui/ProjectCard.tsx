@@ -1,4 +1,5 @@
 import { CardBody, CardProps, Card as ChakraCard } from '@chakra-ui/react';
+import React from 'react';
 
 import { Status } from '~/features/project';
 
@@ -8,7 +9,7 @@ type ProjectCardProps = {
   status: string;
   title: string;
   date: string;
-  description: string;
+  description: string | null;
   children: React.ReactNode;
 } & CardProps;
 
@@ -26,7 +27,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
     >
       <CardBody padding={['5', '6']}>
         <Status mb={['3', '4']}>{status}</Status>
-        <Card title={title} date={date} description={description} />
+        <Card date={date} description={description} title={title} />
         {children}
       </CardBody>
     </ChakraCard>

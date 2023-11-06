@@ -15,7 +15,7 @@ export const MenuBase = () => {
               <Link key={path} as={NavLink} to={path} variant="nav">
                 <Flex direction="column" position="relative" alignItems="center" gap={2}>
                   {icon}
-                  <Text>{name}</Text>
+                  <Text fontSize="xs">{name}</Text>
                   {name === 'Чаты' && <Counter count={2} float borderBg="white" />}
                 </Flex>
               </Link>

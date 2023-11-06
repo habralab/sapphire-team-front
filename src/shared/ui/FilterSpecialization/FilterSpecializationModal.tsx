@@ -21,27 +21,18 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
+import { GetSpecGroupsDataResponse, GetSpecsDataResponse } from '~/shared/api';
 import { Counter } from '~/shared/ui/Counter';
 import { SearchInput } from '~/shared/ui/SearchInput';
-
-interface Selector {
-  name: string;
-  id: number;
-}
-
-interface SpecsSelector {
-  id: number;
-  title: string;
-  child: Selector[];
-}
 
 interface FilterSpecializationModalProps {
   isVisible: boolean;
   changeVisible: (status: boolean) => void;
-  state: SpecsSelector[];
+  state?: GetSpecsDataResponse;
+  stateGroup?: GetSpecGroupsDataResponse;
   resetSpec: () => void;
-  userFilter: number[];
-  saveSpec: (spec: number[]) => void;
+  userFilter: string[];
+  saveSpec: (spec: string[]) => void;
   singleChecked?: boolean;
 }
 
@@ -50,6 +41,7 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
     isVisible,
     changeVisible,
     state,
+    stateGroup,
     resetSpec,
     saveSpec,
     userFilter,
@@ -58,38 +50,42 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const [filteredState, setFilteredState] = useState<SpecsSelector[]>([]);
-  const [selectCheckboxes, setSelectCheckboxes] = useState<number[]>([]);
+  const [filteredGroupsState, setFilteredGroupsState] =
+    useState<GetSpecGroupsDataResponse>([]);
+  const [filteredState, setFilteredState] = useState<GetSpecsDataResponse>([]);
+  const [selectCheckboxes, setSelectCheckboxes] = useState<string[]>([]);
 
-  const activeNestedCheckboxes = (state: Selector[]) =>
-    state.filter((selector) => selectCheckboxes.includes(selector.id));
+  const activeNestedCheckboxes = (group_id: string) =>
+    filteredState.filter(
+      (selector) =>
+        selector.group_id === group_id && selectCheckboxes.includes(selector.id),
+    ).length;
 
   useEffect(() => {
     setSelectCheckboxes([...userFilter]);
   }, [userFilter, isVisible]);
 
   useEffect(() => {
-    const activeSections = state.filter(
-      ({ child }) => activeNestedCheckboxes(child).length > 0,
-    );
-    const inactiveSections = state.filter(
-      ({ child }) => activeNestedCheckboxes(child).length === 0,
-    );
-    activeSections.forEach((section) => {
-      const activeCheckbox = section.child.filter(({ id }) =>
-        selectCheckboxes.includes(id),
-      );
-      const inactiveCheckbox = section.child.filter(
-        ({ id }) => !selectCheckboxes.includes(id),
-      );
-      section.child = [...activeCheckbox, ...inactiveCheckbox];
-    });
+    if (state && stateGroup) {
+      const activeCheckbox = state.filter(({ id }) => selectCheckboxes.includes(id));
+      const inactiveCheckbox = state.filter(({ id }) => !selectCheckboxes.includes(id));
 
-    setFilteredState([...activeSections, ...inactiveSections]);
+      const activeSectionTitles = activeCheckbox.map(({ group_id }) => group_id);
+
+      const activeSections = stateGroup.filter(({ id }) =>
+        activeSectionTitles.includes(id),
+      );
+      const inactiveSections = stateGroup.filter(
+        ({ id }) => !activeSectionTitles.includes(id),
+      );
+
+      setFilteredGroupsState([...activeSections, ...inactiveSections]);
+      setFilteredState([...activeCheckbox, ...inactiveCheckbox]);
+    }
   }, [isVisible]);
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const id = Number(e.target.value);
+    const id = e.target.value;
     if (selectCheckboxes.includes(id)) {
       setSelectCheckboxes(selectCheckboxes.filter((item) => item !== id));
       return;
@@ -150,34 +146,38 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
           </Box>
           <Accordion allowMultiple bg="white" borderRadius="2xl">
             <CheckboxGroup variant="black" colorScheme="purple" value={selectCheckboxes}>
-              {filteredState.map((spec) => (
+              {filteredGroupsState.map((spec) => (
                 <AccordionItem key={spec.id}>
                   <AccordionButton justifyContent="space-between">
                     <Flex gap={2} fontSize="sm" textAlign="left">
                       <Heading fontSize="md" fontWeight="medium">
-                        {spec.title}
+                        {spec.name}
                       </Heading>
-                      {activeNestedCheckboxes(spec.child).length > 0 && (
-                        <Counter count={activeNestedCheckboxes(spec.child).length} />
+                      {activeNestedCheckboxes(spec.id) > 0 && (
+                        <Counter count={activeNestedCheckboxes(spec.id)} />
                       )}
                     </Flex>
                     <AccordionIcon />
                   </AccordionButton>
 
                   <AccordionPanel pb={3}>
-                    {spec.child.map((selector) => (
-                      <Checkbox
-                        key={selector.id}
-                        onChange={handleCheckbox}
-                        p={4}
-                        w="full"
-                        py={2}
-                        value={selector.id}
-                      >
-                        <Text fontWeight="medium" fontSize="sm">
-                          {selector.name}
-                        </Text>
-                      </Checkbox>
+                    {filteredState.map((selector) => (
+                      <>
+                        {selector.group_id === spec.id && (
+                          <Checkbox
+                            key={selector.id}
+                            onChange={handleCheckbox}
+                            p={4}
+                            w="full"
+                            py={2}
+                            value={selector.id}
+                          >
+                            <Text fontWeight="medium" fontSize="sm">
+                              {selector.name}
+                            </Text>
+                          </Checkbox>
+                        )}
+                      </>
                     ))}
                   </AccordionPanel>
                 </AccordionItem>

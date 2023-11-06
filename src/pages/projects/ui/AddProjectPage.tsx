@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   Flex,
   Button,
@@ -9,14 +10,21 @@ import {
   TabPanels,
   TabPanel,
 } from '@chakra-ui/react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { AboutProject, Inputs, NewSpecialist, Team } from '~/features/project';
 
+import { PostNewProjectParams } from '~/shared/api';
+import { useApi } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
 export const AddProjectPage = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { projectsApi } = useApi();
   const [newSpecialist, setNewSpecialist] = useState<NewSpecialist[]>([]);
   const [description, setDescription] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
@@ -28,10 +36,27 @@ export const AddProjectPage = () => {
 
   const form = { register, errors, dirtyFields };
 
+  const { mutate } = useMutation({
+    mutationFn: (data: PostNewProjectParams) => projectsApi.addNewProject(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['getAllProjects']);
+      navigate(-1);
+    },
+    onError: () => {
+      alert('there was an error');
+    },
+  });
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const newProject = { ...data, newSpec: newSpecialist, description };
-    console.log(newProject);
+    const newProject = {
+      name: data.title,
+      description,
+      deadline: new Date(data.date).toISOString().slice(0, -1),
+    };
+
+    mutate(newProject);
   };
+
   const handleTabsChange = (index: number) => {
     setTabIndex(index);
   };

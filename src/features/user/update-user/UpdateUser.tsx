@@ -22,7 +22,7 @@ interface UserType {
   avatar: File | null;
   name: string;
   information: string;
-  specialization: number[];
+  specialization: string[];
   skills: {
     value: string;
     label: string;
