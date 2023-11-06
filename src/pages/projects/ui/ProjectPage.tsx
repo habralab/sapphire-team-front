@@ -72,6 +72,7 @@ export const ProjectPage = () => {
               title={dummyData[0].title}
               date={dummyData[0].date}
               description={dummyData[0].description}
+              fullDescription={true}
             />
           </Stack>
           <Stack gap={0} mb={6}>

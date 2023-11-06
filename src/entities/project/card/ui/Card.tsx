@@ -4,10 +4,11 @@ export interface CardProps {
   title: string;
   date: string;
   description: string;
+  fullDescription?: boolean;
 }
 
 export const Card = (props: CardProps) => {
-  const { title, date, description } = props;
+  const { title, date, description, fullDescription } = props;
 
   return (
     <>
@@ -15,9 +16,13 @@ export const Card = (props: CardProps) => {
       <Text variant="caption" mb={3}>
         {date}
       </Text>
-      <Text noOfLines={3} mb={3}>
-        {description}
-      </Text>
+      {fullDescription ? (
+        <Text mb={3}>{description}</Text>
+      ) : (
+        <Text noOfLines={3} mb={3}>
+          {description}
+        </Text>
+      )}
     </>
   );
 };
