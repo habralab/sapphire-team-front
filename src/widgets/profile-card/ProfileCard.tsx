@@ -1,11 +1,11 @@
-import { Avatar, Text, Flex, Image, Center } from '@chakra-ui/react';
+import { Avatar, Text, Flex, Image, Center, SkeletonText } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import { Info } from '~/entities/user';
 
 import { useIsAuth, useApi } from '~/shared/hooks';
 
-import NotAuth from './notAuth.svg';
+import NotAuth from './notAuth.png';
 
 const defaultName = 'Гость';
 
@@ -17,6 +17,7 @@ export function ProfileCard() {
     lastName: '',
   });
   const [avatar, setAvatar] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (isAuth)
@@ -32,6 +33,9 @@ export function ProfileCard() {
         .catch(() => {
           setName({ firstName: defaultName, lastName: '' });
           setAvatar(NotAuth);
+        })
+        .finally(() => {
+          setLoading(false);
         });
   }, [isAuth]);
 
@@ -75,10 +79,14 @@ export function ProfileCard() {
           />
         </Center>
       )}
+      {!loading ? (
+        <Text align="center" fontWeight="bold" fontSize="2xl" pt={16} mb={4}>
+          {`${name.firstName} ${name.lastName}`}
+        </Text>
+      ) : (
+        <SkeletonText noOfLines={1} skeletonHeight="6" w="60%" pt={16} mb={4} />
+      )}
 
-      <Text align="center" fontWeight="bold" fontSize="2xl" pt={16} mb={4}>
-        {`${name.firstName} ${name.lastName}`}
-      </Text>
       <Info />
     </Flex>
   );
