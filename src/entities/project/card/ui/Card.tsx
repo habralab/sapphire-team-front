@@ -14,7 +14,7 @@ export const Card = (props: CardProps) => {
     <>
       <Heading variant="h2">{title}</Heading>
       <Text variant="caption" mb={3}>
-        {date}
+        {formatDate}
       </Text>
       {fullDescription ? (
         <Text mb={3}>{description}</Text>

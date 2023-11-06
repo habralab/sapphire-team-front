@@ -25,7 +25,7 @@ import { SearchSelect } from '~/shared/ui/SearchSelect';
 
 export const Filter = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [userSpecs, setUserSpecs] = useState<number[]>([]);
+  const [userSpecs, setUserSpecs] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<{ value: string; label: string }[]>(
     [],
   );

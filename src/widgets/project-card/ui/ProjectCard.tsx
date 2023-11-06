@@ -1,4 +1,5 @@
 import { CardBody, CardProps, Card as ChakraCard } from '@chakra-ui/react';
+import React from 'react';
 
 import { Status } from '~/features/project';
 
@@ -7,8 +8,8 @@ import { Card } from '~/entities/project';
 type ProjectCardProps = {
   status: string;
   title: string;
-  date: string;
-  description: string;
+  date: string | null;
+  description: string | null;
   children: React.ReactNode;
 } & CardProps;
 

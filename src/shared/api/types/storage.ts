@@ -51,6 +51,54 @@ export interface components {
       /** Total Items */
       total_items?: number | null;
     };
+    /** SpecializationsListResponse */
+    SpecializationsListResponse: {
+      /** Data */
+      data: components['schemas']['SpecializationsResponse'][];
+      /** Page */
+      page: number;
+      /** Per Page */
+      per_page: number;
+      /** Total Pages */
+      total_pages?: number | null;
+      /** Total Items */
+      total_items?: number | null;
+    };
+    /** SpecializationsResponse */
+    SpecializationsResponse: {
+      /** id */
+      id: string;
+      /** is_other */
+      is_other: false;
+      /** name */
+      name: string;
+      /** group_id */
+      group_id: string;
+      /** created_at */
+      created_at: string;
+    };
+    /** SpecializationsGroupListResponse */
+    SpecializationsGroupListResponse: {
+      /** Data */
+      data: components['schemas']['SpecializationsGroupResponse'][];
+      /** Page */
+      page: number;
+      /** Per Page */
+      per_page: number;
+      /** Total Pages */
+      total_pages?: number | null;
+      /** Total Items */
+      total_items?: number | null;
+    };
+    /** SpecializationsGroupResponse */
+    SpecializationsGroupResponse: {
+      /** id */
+      id: string;
+      /** name */
+      name: string;
+      /** created_at */
+      created_at: string;
+    };
     /** ValidationError */
     ValidationError: {
       /** Location */
@@ -123,7 +171,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['PaginatedResponse'];
+          'application/json': components['schemas']['SpecializationsListResponse'];
         };
       };
       /** @description Validation Error */
@@ -148,7 +196,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['PaginatedResponse'];
+          'application/json': components['schemas']['SpecializationsGroupListResponse'];
         };
       };
       /** @description Validation Error */
