@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Navigate, useSearchParams } from 'react-router-dom';
 
@@ -5,6 +6,7 @@ import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
 export const MainPage = () => {
+  const toast = useToast();
   const [searchParams] = useSearchParams();
   const [loaded, setLoaded] = useState(false);
   const { userApi } = useApi();
@@ -22,8 +24,15 @@ export const MainPage = () => {
       .then(() => {
         setLoaded(true);
       })
-      .catch(() => {
-        setLoaded(false);
+      .catch((e: Error) => {
+        setLoaded(true);
+        toast({
+          title: 'Ошибка авторизации',
+          description: e.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
       });
   }, []);
 
