@@ -1,7 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Flex, SimpleGrid, Heading, Container, Box, Skeleton } from '@chakra-ui/react';
+import {
+  Flex,
+  SimpleGrid,
+  Heading,
+  Container,
+  Box,
+  Skeleton,
+  Image,
+  Text,
+} from '@chakra-ui/react';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
 import { Link, generatePath } from 'react-router-dom';
@@ -15,6 +24,8 @@ import { AvatarsGroup } from '~/entities/project';
 import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
+
+import NotAuth from './NotAuth.svg';
 
 export const ProjectsPage = () => {
   const targetRef = useRef(null);
@@ -80,32 +91,58 @@ export const ProjectsPage = () => {
         </>
       ) : (
         <SimpleGrid gap={4}>
-          {data.pages.map((group, i) => (
-            <React.Fragment key={i}>
-              {group.data
-                .filter(({ owner_id }) => owner_id === myData?.id)
-                .map((project) => {
-                  return (
-                    <Link
-                      key={project.id}
-                      to={generatePath(PATHS.project, { id: project.id })}
-                    >
-                      <ProjectCard
-                        status={project.status}
-                        title={project.name}
-                        date={project.deadline}
-                        description={project.description}
-                      >
-                        <Flex justifyContent="space-between" alignItems="center">
-                          <STag mainTags={['Организатор']} />
-                          <AvatarsGroup avatars={dummyAvatars} />
-                        </Flex>
-                      </ProjectCard>
-                    </Link>
-                  );
-                })}
-            </React.Fragment>
-          ))}
+          {data.pages.map((group, i) => {
+            const filteredProject = group.data.filter(
+              ({ owner_id }) => owner_id === myData?.id,
+            );
+            return (
+              <>
+                {filteredProject.length === 0 ? (
+                  <Flex
+                    bg="white"
+                    my={6}
+                    borderRadius="2xl"
+                    p={5}
+                    direction="column"
+                    alignItems="center"
+                    gap={5}
+                  >
+                    <Image src={NotAuth} />
+                    <Text fontSize="md" fontWeight="medium" mt={1}>
+                      Нет проектов
+                    </Text>
+                    <Text color="gray.700" textAlign="center">
+                      Здесь будут отображаться все ваши проекты в качестве участника и
+                      организатора
+                    </Text>
+                  </Flex>
+                ) : (
+                  <React.Fragment key={i}>
+                    {filteredProject.map((project) => {
+                      return (
+                        <Link
+                          key={project.id}
+                          to={generatePath(PATHS.project, { id: project.id })}
+                        >
+                          <ProjectCard
+                            status={project.status}
+                            title={project.name}
+                            date={project.deadline}
+                            description={project.description}
+                          >
+                            <Flex justifyContent="space-between" alignItems="center">
+                              <STag mainTags={['Организатор']} />
+                              <AvatarsGroup avatars={dummyAvatars} />
+                            </Flex>
+                          </ProjectCard>
+                        </Link>
+                      );
+                    })}
+                  </React.Fragment>
+                )}
+              </>
+            );
+          })}
           {isFetchingNextPage && (
             <>
               <Skeleton height="200px" borderRadius="2xl" mb={3} />
