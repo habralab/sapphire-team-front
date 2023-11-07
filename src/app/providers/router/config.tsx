@@ -60,6 +60,10 @@ export const normalRoutes = [
     view: { base: <ProjectPage /> },
   },
   {
+    path: PATHS.searchProject,
+    view: { base: <ProjectPage /> },
+  },
+  {
     path: PATHS.addProject,
     view: { base: <AddProjectPage /> },
   },

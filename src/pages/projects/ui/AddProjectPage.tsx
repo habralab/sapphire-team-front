@@ -9,6 +9,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  useToast,
 } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -22,6 +23,7 @@ import { useApi } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
 export const AddProjectPage = () => {
+  const toast = useToast();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { projectsApi } = useApi();
@@ -42,8 +44,14 @@ export const AddProjectPage = () => {
       queryClient.invalidateQueries(['getAllProjects']);
       navigate(-1);
     },
-    onError: () => {
-      alert('there was an error');
+    onError: (e: Error) => {
+      toast({
+        title: 'Ошибка создания проекта',
+        description: e.message,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
     },
   });
 

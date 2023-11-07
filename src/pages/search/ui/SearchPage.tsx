@@ -95,7 +95,7 @@ export const SearchPage = () => {
                     return (
                       <Link
                         key={project.id}
-                        to={generatePath(PATHS.project, { id: project.id })}
+                        to={generatePath(PATHS.searchProject, { id: project.id })}
                       >
                         <ProjectCard
                           status={project.status}
