@@ -32,6 +32,7 @@ export const ProjectsPage = () => {
   const targetRef = useRef(null);
   const { projectsApi, userApi } = useApi();
   const [userID, setUserId] = useState<string | undefined>();
+  const [isEmptyData, setEmptyData] = useState<boolean>(false);
   const navigate = useNavigate();
   const dummyAvatars = [
     { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
@@ -42,14 +43,16 @@ export const ProjectsPage = () => {
     { firstName: 'Бернд', lastName: 'Шнайдер', img: 'https://bit.ly/dan-abramov' },
   ];
 
-  const { data, isLoading, fetchNextPage, isFetchingNextPage, isSuccess } =
-    useInfiniteQuery({
-      queryKey: ['getAllProjects', userID],
-      queryFn: ({ pageParam = 1 }) => projectsApi.getAllProjects(pageParam, userID),
-      // getNextPageParam: (lastPage) => lastPage.page + 1,
-      enabled: !!userID,
-      staleTime: 5000,
-    });
+  const { data, isLoading, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
+    queryKey: ['getAllProjects', userID],
+    queryFn: ({ pageParam = 1 }) => projectsApi.getAllProjects(pageParam, userID),
+    // getNextPageParam: (lastPage) => lastPage.page + 1,
+    onSuccess: (response) => {
+      setEmptyData(!response.pages[0].data.length);
+    },
+    enabled: !!userID,
+    staleTime: 5000,
+  });
 
   const { isLoading: meIsLoading } = useQuery({
     queryKey: ['myID'],
@@ -99,7 +102,7 @@ export const ProjectsPage = () => {
         </>
       ) : (
         <SimpleGrid gap={4}>
-          {isSuccess ? (
+          {isEmptyData ? (
             <Flex
               bg="white"
               my={6}
