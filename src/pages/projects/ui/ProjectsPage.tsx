@@ -10,10 +10,11 @@ import {
   Skeleton,
   Image,
   Text,
+  Button,
 } from '@chakra-ui/react';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
-import { Link, generatePath } from 'react-router-dom';
+import { Link, generatePath, useNavigate } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
 
@@ -30,6 +31,7 @@ import NotAuth from './NotAuth.svg';
 export const ProjectsPage = () => {
   const targetRef = useRef(null);
   const { projectsApi, userApi } = useApi();
+  const navigate = useNavigate();
   const dummyAvatars = [
     { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
     { firstName: 'Игорь', lastName: 'Крутой', img: 'https://bit.ly/sage-adebayo' },
@@ -115,6 +117,17 @@ export const ProjectsPage = () => {
                       Здесь будут отображаться все ваши проекты в качестве участника и
                       организатора
                     </Text>
+                    <Button
+                      type="button"
+                      onClick={() => {
+                        navigate(PATHS.addProject);
+                      }}
+                      fontSize="sm"
+                      fontWeight="600"
+                      w="full"
+                    >
+                      Создать свой проект
+                    </Button>
                   </Flex>
                 ) : (
                   <React.Fragment key={i}>
