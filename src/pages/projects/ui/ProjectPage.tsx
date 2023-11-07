@@ -22,7 +22,7 @@ import { Rating } from '~/features/user';
 
 import { Card } from '~/entities/project';
 
-import { useApi } from '~/shared/hooks';
+import { useApi, useIsAuth } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 import { STag } from '~/shared/ui/STag';
 
@@ -42,6 +42,7 @@ const dummyData = [
 export const ProjectPage = () => {
   const { id: projectId } = useParams();
   const { projectsApi, userApi } = useApi();
+  const isAuth = useIsAuth();
 
   const [ownerID, setOwnerID] = useState<string>('');
 
@@ -60,9 +61,9 @@ export const ProjectPage = () => {
   });
 
   const { data: myData, isLoading: meIsLoading } = useQuery({
-    queryKey: ['myID', ownerID],
+    queryKey: ['myID', ownerID, isAuth],
     queryFn: () => userApi.getMe(),
-    enabled: !!ownerID,
+    enabled: !!ownerID && !!isAuth,
   });
 
   return (
