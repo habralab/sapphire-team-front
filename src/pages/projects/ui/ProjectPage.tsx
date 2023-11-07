@@ -51,14 +51,12 @@ export const ProjectPage = () => {
     onSuccess: (data) => {
       setOwnerID(data.owner_id);
     },
-    staleTime: 50000,
   });
 
   const { data: userData, isLoading: userIsLoading } = useQuery({
     queryKey: ['ownerID', ownerID],
     queryFn: () => userApi.getUser(ownerID),
     enabled: !!ownerID,
-    staleTime: 50000,
   });
 
   const { data: myData, isLoading: meIsLoading } = useQuery({
