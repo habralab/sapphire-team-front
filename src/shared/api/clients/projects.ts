@@ -31,8 +31,17 @@ export class ProjectsApiClient extends BaseApiClient {
     };
     const { deadline, status, ...rest } = data;
     let formatDate;
-    if (deadline) formatDate = new Date(deadline).toLocaleDateString('ru');
-    return { ...rest, deadline: formatDate ?? '', status: statusAdapter[status] };
+    if (deadline)
+      formatDate = new Date(deadline).toLocaleDateString('ru', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+    return {
+      ...rest,
+      deadline: `с ${formatDate}`.slice(0, -3),
+      status: statusAdapter[status],
+    };
   }
 
   async getAllProjects(page: number) {
@@ -49,8 +58,17 @@ export class ProjectsApiClient extends BaseApiClient {
       };
       const { deadline, status, ...rest } = project;
       let formatDate;
-      if (deadline) formatDate = new Date(deadline).toLocaleDateString('ru');
-      return { ...rest, deadline: formatDate ?? '', status: statusAdapter[status] };
+      if (deadline)
+        formatDate = new Date(deadline).toLocaleDateString('ru', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+      return {
+        ...rest,
+        deadline: `с ${formatDate}`.slice(0, -3),
+        status: statusAdapter[status],
+      };
     });
     return { ...others, data: newData };
   }

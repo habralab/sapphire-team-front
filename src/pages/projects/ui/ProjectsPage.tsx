@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { Flex, SimpleGrid, Heading, Container, Box, Skeleton } from '@chakra-ui/react';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ import { STag } from '~/shared/ui/STag';
 
 export const ProjectsPage = () => {
   const targetRef = useRef(null);
-  const { projectsApi } = useApi();
+  const { projectsApi, userApi } = useApi();
   const dummyAvatars = [
     { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
     { firstName: 'Игорь', lastName: 'Крутой', img: 'https://bit.ly/sage-adebayo' },
@@ -31,8 +31,13 @@ export const ProjectsPage = () => {
   const { data, isLoading, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['getAllProjects'],
     queryFn: ({ pageParam = 1 }) => projectsApi.getAllProjects(pageParam),
-    getNextPageParam: (lastPage) => lastPage.page + 1,
+    // getNextPageParam: (lastPage) => lastPage.page + 1,
     staleTime: 5000,
+  });
+
+  const { data: myData, isLoading: meIsLoading } = useQuery({
+    queryKey: ['myID'],
+    queryFn: () => userApi.getMe(),
   });
 
   useEffect(() => {
@@ -67,7 +72,7 @@ export const ProjectsPage = () => {
         </Flex>
       </Flex>
 
-      {isLoading || !data ? (
+      {isLoading || meIsLoading || !data ? (
         <>
           <Skeleton height="200px" borderRadius="2xl" mb={3} />
           <Skeleton height="200px" borderRadius="2xl" mb={3} />
@@ -77,26 +82,28 @@ export const ProjectsPage = () => {
         <SimpleGrid gap={4}>
           {data.pages.map((group, i) => (
             <React.Fragment key={i}>
-              {group.data.map((project) => {
-                return (
-                  <Link
-                    key={project.id}
-                    to={generatePath(PATHS.project, { id: project.id })}
-                  >
-                    <ProjectCard
-                      status={project.status}
-                      title={project.name}
-                      date={project.deadline}
-                      description={project.description}
+              {group.data
+                .filter(({ owner_id }) => owner_id === myData?.id)
+                .map((project) => {
+                  return (
+                    <Link
+                      key={project.id}
+                      to={generatePath(PATHS.project, { id: project.id })}
                     >
-                      <Flex justifyContent="space-between" alignItems="center">
-                        <STag mainTags={['Организатор']} />
-                        <AvatarsGroup avatars={dummyAvatars} />
-                      </Flex>
-                    </ProjectCard>
-                  </Link>
-                );
-              })}
+                      <ProjectCard
+                        status={project.status}
+                        title={project.name}
+                        date={project.deadline}
+                        description={project.description}
+                      >
+                        <Flex justifyContent="space-between" alignItems="center">
+                          <STag mainTags={['Организатор']} />
+                          <AvatarsGroup avatars={dummyAvatars} />
+                        </Flex>
+                      </ProjectCard>
+                    </Link>
+                  );
+                })}
             </React.Fragment>
           ))}
           {isFetchingNextPage && (

@@ -61,6 +61,12 @@ export const ProjectPage = () => {
     staleTime: 50000,
   });
 
+  const { data: myData, isLoading: meIsLoading } = useQuery({
+    queryKey: ['myID', ownerID],
+    queryFn: () => userApi.getMe(),
+    enabled: !!ownerID,
+  });
+
   return (
     <Container maxW="md" display="flex" flexDirection="column">
       <Flex
@@ -139,17 +145,19 @@ export const ProjectPage = () => {
             </CardBody>
           </ChakraCard>
           <Flex bg="bg" position="sticky" bottom="4.6rem" p={0} py={3} mt="auto">
-            <Button
-              type="button"
-              onClick={() => {
-                // handleTabsChange(1);
-              }}
-              fontSize="sm"
-              fontWeight="600"
-              w="full"
-            >
-              Откликнуться
-            </Button>
+            {!meIsLoading && myData?.id !== data?.owner_id && (
+              <Button
+                type="button"
+                onClick={() => {
+                  // handleTabsChange(1);
+                }}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Откликнуться
+              </Button>
+            )}
           </Flex>
         </>
       )}
