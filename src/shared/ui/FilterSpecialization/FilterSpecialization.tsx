@@ -31,13 +31,13 @@ export const FilterSpecialization = ({
   const { storageApi } = useApi();
   const toast = useToast();
 
-  const { data: specGroup } = useQuery({
+  const { data: specGroup, isLoading: specGroupLoading } = useQuery({
     queryKey: ['specGroups'],
     queryFn: () => storageApi.getSpecGroups(),
     staleTime: 5000,
   });
 
-  const { data: specs } = useQuery({
+  const { data: specs, isLoading: specsLoading } = useQuery({
     queryKey: ['specs'],
     queryFn: () => storageApi.getSpecs(),
     onError: (e: Error) => {
@@ -106,6 +106,8 @@ export const FilterSpecialization = ({
       </Flex>
 
       <FilterSpecializationModal
+        specsLoading={specsLoading}
+        specGroupLoading={specGroupLoading}
         isVisible={specFilter}
         changeVisible={setSpecFilter}
         stateGroup={specGroup?.data}

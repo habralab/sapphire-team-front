@@ -85,9 +85,7 @@ export const ProjectPage = () => {
         </Flex>
       </Flex>
       {isLoading ? (
-        <>
-          <Skeleton height="550px" borderRadius="2xl" />
-        </>
+        <Skeleton height="550px" borderRadius="2xl" />
       ) : (
         <>
           <ChakraCard

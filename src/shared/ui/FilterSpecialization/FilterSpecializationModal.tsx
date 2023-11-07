@@ -16,9 +16,10 @@ import {
   Modal,
   ModalContent,
   ModalOverlay,
+  Skeleton,
   Text,
 } from '@chakra-ui/react';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
 import { GetSpecGroupsDataResponse, GetSpecsDataResponse } from '~/shared/api';
@@ -27,6 +28,8 @@ import { SearchInput } from '~/shared/ui/SearchInput';
 
 interface FilterSpecializationModalProps {
   isVisible: boolean;
+  specGroupLoading: boolean;
+  specsLoading: boolean;
   changeVisible: (status: boolean) => void;
   state?: GetSpecsDataResponse;
   stateGroup?: GetSpecGroupsDataResponse;
@@ -46,6 +49,8 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
     saveSpec,
     userFilter,
     singleChecked,
+    specsLoading,
+    specGroupLoading,
   } = props;
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
@@ -144,46 +149,52 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
               value={search}
             />
           </Box>
-          <Accordion allowMultiple bg="white" borderRadius="2xl">
-            <CheckboxGroup variant="black" colorScheme="purple" value={selectCheckboxes}>
-              {filteredGroupsState.map((spec) => (
-                <AccordionItem key={spec.id}>
-                  <AccordionButton justifyContent="space-between">
-                    <Flex gap={2} fontSize="sm" textAlign="left">
-                      <Heading fontSize="md" fontWeight="medium">
-                        {spec.name}
-                      </Heading>
-                      {activeNestedCheckboxes(spec.id) > 0 && (
-                        <Counter count={activeNestedCheckboxes(spec.id)} />
-                      )}
-                    </Flex>
-                    <AccordionIcon />
-                  </AccordionButton>
-
-                  <AccordionPanel pb={3}>
-                    {filteredState.map((selector) => (
-                      <>
-                        {selector.group_id === spec.id && (
-                          <Checkbox
-                            key={selector.id}
-                            onChange={handleCheckbox}
-                            p={4}
-                            w="full"
-                            py={2}
-                            value={selector.id}
-                          >
-                            <Text fontWeight="medium" fontSize="sm">
-                              {selector.name}
-                            </Text>
-                          </Checkbox>
+          {specGroupLoading || specsLoading ? (
+            <Skeleton height="550px" borderRadius="2xl" />
+          ) : (
+            <Accordion allowMultiple bg="white" borderRadius="2xl">
+              <CheckboxGroup
+                variant="black"
+                colorScheme="purple"
+                value={selectCheckboxes}
+              >
+                {filteredGroupsState.map((spec) => (
+                  <AccordionItem key={spec.id}>
+                    <AccordionButton justifyContent="space-between">
+                      <Flex gap={2} fontSize="sm" textAlign="left">
+                        <Heading fontSize="md" fontWeight="medium">
+                          {spec.name}
+                        </Heading>
+                        {activeNestedCheckboxes(spec.id) > 0 && (
+                          <Counter count={activeNestedCheckboxes(spec.id)} />
                         )}
-                      </>
-                    ))}
-                  </AccordionPanel>
-                </AccordionItem>
-              ))}
-            </CheckboxGroup>
-          </Accordion>
+                      </Flex>
+                      <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel pb={3}>
+                      {filteredState.map((selector) => (
+                        <React.Fragment key={selector.id}>
+                          {selector.group_id === spec.id && (
+                            <Checkbox
+                              onChange={handleCheckbox}
+                              p={4}
+                              w="full"
+                              py={2}
+                              value={selector.id}
+                            >
+                              <Text fontWeight="medium" fontSize="sm">
+                                {selector.name}
+                              </Text>
+                            </Checkbox>
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </AccordionPanel>
+                  </AccordionItem>
+                ))}
+              </CheckboxGroup>
+            </Accordion>
+          )}
         </Container>
         <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0">
           <Button
