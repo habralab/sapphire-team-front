@@ -7,6 +7,7 @@ import {
   Tag,
   TagLabel,
   IconButton,
+  useToast,
 } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -28,6 +29,7 @@ export const FilterSpecialization = ({
 }: FilterSpecializationProps) => {
   const [specFilter, setSpecFilter] = useState(false);
   const { storageApi } = useApi();
+  const toast = useToast();
 
   const { data: specGroup } = useQuery({
     queryKey: ['specGroups'],
@@ -38,7 +40,16 @@ export const FilterSpecialization = ({
   const { data: specs } = useQuery({
     queryKey: ['specs'],
     queryFn: () => storageApi.getSpecs(),
-    staleTime: 5000,
+    onError: (e: Error) => {
+      toast({
+        title: 'Ошибка получения специализаций',
+        description: e.message,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+    staleTime: 50000,
   });
 
   const deleteSpecFilter = (id: string) => {
