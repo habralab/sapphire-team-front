@@ -13,7 +13,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, generatePath, useNavigate } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
@@ -31,6 +31,8 @@ import NotAuth from './NotAuth.svg';
 export const ProjectsPage = () => {
   const targetRef = useRef(null);
   const { projectsApi, userApi } = useApi();
+  const [userID, setUserId] = useState<string | undefined>();
+  const [isEmptyData, setEmptyData] = useState<boolean>(false);
   const navigate = useNavigate();
   const dummyAvatars = [
     { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
@@ -42,15 +44,22 @@ export const ProjectsPage = () => {
   ];
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['getAllProjects'],
-    queryFn: ({ pageParam = 1 }) => projectsApi.getAllProjects(pageParam),
+    queryKey: ['getAllProjects', userID],
+    queryFn: ({ pageParam = 1 }) => projectsApi.getAllProjects(pageParam, userID),
     // getNextPageParam: (lastPage) => lastPage.page + 1,
+    onSuccess: (response) => {
+      setEmptyData(!response.pages[0].data.length);
+    },
+    enabled: !!userID,
     staleTime: 5000,
   });
 
-  const { data: myData, isLoading: meIsLoading } = useQuery({
+  const { isLoading: meIsLoading } = useQuery({
     queryKey: ['myID'],
     queryFn: () => userApi.getMe(),
+    onSuccess(data) {
+      setUserId(data.id);
+    },
   });
 
   useEffect(() => {
@@ -93,69 +102,65 @@ export const ProjectsPage = () => {
         </>
       ) : (
         <SimpleGrid gap={4}>
-          {data.pages.map((group, i) => {
-            const filteredProject = group.data.filter(
-              ({ owner_id }) => owner_id === myData?.id,
-            );
-            return (
-              <>
-                {filteredProject.length === 0 ? (
-                  <Flex
-                    bg="white"
-                    my={6}
-                    borderRadius="2xl"
-                    p={5}
-                    direction="column"
-                    alignItems="center"
-                    gap={5}
-                  >
-                    <Image src={NotAuth} />
-                    <Text fontSize="md" fontWeight="medium" mt={1}>
-                      Нет проектов
-                    </Text>
-                    <Text color="gray.700" textAlign="center">
-                      Здесь будут отображаться все ваши проекты в качестве участника и
-                      организатора
-                    </Text>
-                    <Button
-                      type="button"
-                      onClick={() => {
-                        navigate(PATHS.addProject);
-                      }}
-                      fontSize="sm"
-                      fontWeight="600"
-                      w="full"
-                    >
-                      Создать свой проект
-                    </Button>
-                  </Flex>
-                ) : (
-                  <React.Fragment key={i}>
-                    {filteredProject.map((project) => {
-                      return (
-                        <Link
-                          key={project.id}
-                          to={generatePath(PATHS.project, { id: project.id })}
+          {isEmptyData ? (
+            <Flex
+              bg="white"
+              my={6}
+              borderRadius="2xl"
+              p={5}
+              direction="column"
+              alignItems="center"
+              gap={5}
+            >
+              <Image src={NotAuth} />
+              <Text fontSize="md" fontWeight="medium" mt={1}>
+                Нет проектов
+              </Text>
+              <Text color="gray.700" textAlign="center">
+                Здесь будут отображаться все ваши проекты в качестве участника и
+                организатора
+              </Text>
+              <Button
+                type="button"
+                onClick={() => {
+                  navigate(PATHS.addProject);
+                }}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Создать свой проект
+              </Button>
+            </Flex>
+          ) : (
+            <>
+              {data.pages.map((group, i) => (
+                <React.Fragment key={i}>
+                  {group.data.map((project) => {
+                    return (
+                      <Link
+                        key={project.id}
+                        to={generatePath(PATHS.project, { id: project.id })}
+                      >
+                        <ProjectCard
+                          status={project.status}
+                          title={project.name}
+                          date={project.deadline}
+                          description={project.description}
                         >
-                          <ProjectCard
-                            status={project.status}
-                            title={project.name}
-                            date={project.deadline}
-                            description={project.description}
-                          >
-                            <Flex justifyContent="space-between" alignItems="center">
-                              <STag mainTags={['Организатор']} />
-                              <AvatarsGroup avatars={dummyAvatars} />
-                            </Flex>
-                          </ProjectCard>
-                        </Link>
-                      );
-                    })}
-                  </React.Fragment>
-                )}
-              </>
-            );
-          })}
+                          <Flex justifyContent="space-between" alignItems="center">
+                            <STag mainTags={['Организатор']} />
+                            <AvatarsGroup avatars={dummyAvatars} />
+                          </Flex>
+                        </ProjectCard>
+                      </Link>
+                    );
+                  })}
+                </React.Fragment>
+              ))}
+            </>
+          )}
+
           {isFetchingNextPage && (
             <>
               <Skeleton height="200px" borderRadius="2xl" mb={3} />

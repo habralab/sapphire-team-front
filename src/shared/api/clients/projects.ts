@@ -44,10 +44,10 @@ export class ProjectsApiClient extends BaseApiClient {
     };
   }
 
-  async getAllProjects(page: number) {
+  async getAllProjects(page: number, owner_id?: string) {
     const { data } = await this.client.get<getAllProjectsResponse>(
       `/api/rest/projects/`,
-      { params: { page } },
+      { params: { page, owner_id } },
     );
     const { data: onlyData, ...others } = data;
     const newData = onlyData.map((project) => {
