@@ -26,6 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       .then((res) => {
         if (!res) {
           setAuth(null);
+          localStorage.removeItem('user_id');
         }
       })
       .catch(() => {
