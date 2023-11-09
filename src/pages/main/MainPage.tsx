@@ -25,9 +25,11 @@ export const MainPage = () => {
       .then((data) => {
         setLoaded(true);
         setAuth(data.user_id);
+        localStorage.setItem('user_id', data.user_id);
       })
       .catch((e: Error) => {
         setAuth(null);
+        localStorage.removeItem('user_id');
         setLoaded(true);
         toast({
           title: 'Ошибка авторизации',
