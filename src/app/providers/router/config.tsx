@@ -29,14 +29,23 @@ import { PATHS } from '~/shared/lib/router';
 
 export const normalRoutes = [
   {
+    path: PATHS.root,
+    view: {
+      base: <MainPage />,
+    },
+    isPublic: true,
+  },
+  {
     path: PATHS.notFound,
     view: {
       base: <NotFoundPage />,
     },
+    isPublic: true,
   },
   {
     path: PATHS.profile,
     view: { base: <ProfilePage />, desktop: <ProfilePageDesktop /> },
+    isPublic: true,
   },
   {
     path: PATHS.profileMe,
@@ -46,6 +55,17 @@ export const normalRoutes = [
       notAuthBase: <NotAuthProfilePage />,
       notAuthDesktop: <NotFoundPage />,
     },
+    isPublic: true,
+  },
+  {
+    path: PATHS.searchProject,
+    view: { base: <ProjectPage /> },
+    isPublic: true,
+  },
+  {
+    path: PATHS.search,
+    view: { base: <SearchPage />, desktop: <SearchPageDesktop /> },
+    isPublic: true,
   },
   {
     path: PATHS.projects,
@@ -54,20 +74,8 @@ export const normalRoutes = [
       desktop: <ProjectsPageDesktop />,
       notAuthBase: <NotAuthProjectsPage />,
     },
+    isPublic: true,
   },
-  {
-    path: PATHS.project,
-    view: { base: <ProjectPage /> },
-  },
-  {
-    path: PATHS.searchProject,
-    view: { base: <ProjectPage /> },
-  },
-  {
-    path: PATHS.addProject,
-    view: { base: <AddProjectPage /> },
-  },
-  { path: PATHS.search, view: { base: <SearchPage />, desktop: <SearchPageDesktop /> } },
   {
     path: PATHS.chats,
     view: {
@@ -75,6 +83,15 @@ export const normalRoutes = [
       desktop: <ChatsPageDesktop />,
       notAuthBase: <NotAuthChatsPage />,
     },
+    isPublic: true,
+  },
+  {
+    path: PATHS.project,
+    view: { base: <ProjectPage /> },
+  },
+  {
+    path: PATHS.addProject,
+    view: { base: <AddProjectPage /> },
   },
   { path: PATHS.dialog, view: { base: <DialogPage />, desktop: <ChatsPageDesktop /> } },
   {
@@ -89,15 +106,10 @@ export const normalRoutes = [
   { path: PATHS.profileSettings, view: { base: <ProfileSettingsPage /> } },
   { path: PATHS.notificationsSettings, view: { base: <NotificationsSettingsPage /> } },
   {
-    path: PATHS.root,
-    view: {
-      base: <MainPage />,
-    },
-  },
-  {
     path: '*',
     view: {
-      base: <Navigate to={'404'} replace />,
+      base: <Navigate to={PATHS.notFound} replace />,
     },
+    isPublic: true,
   },
 ];

@@ -2,11 +2,12 @@ import { useToast } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Navigate, useSearchParams } from 'react-router-dom';
 
-import { useApi } from '~/shared/hooks';
+import { useApi, useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
 export const MainPage = () => {
   const toast = useToast();
+  const { setAuth } = useAuth();
   const [searchParams] = useSearchParams();
   const [loaded, setLoaded] = useState(false);
   const { userApi } = useApi();
@@ -21,10 +22,12 @@ export const MainPage = () => {
 
     userApi
       .afterAuth({ code, state })
-      .then(() => {
+      .then((data) => {
         setLoaded(true);
+        setAuth(data.user_id);
       })
       .catch((e: Error) => {
+        setAuth(null);
         setLoaded(true);
         toast({
           title: 'Ошибка авторизации',

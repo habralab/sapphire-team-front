@@ -10,8 +10,6 @@ type AfterAuthResponse =
   paths['/api/rest/auth/oauth2/habr/callback']['get']['responses']['200']['content']['application/json'];
 type IsAuthResponse =
   paths['/api/rest/auth/check']['get']['responses']['200']['content']['application/json'];
-type GetMeResponse =
-  paths['/api/rest/users/me']['get']['responses']['200']['content']['application/json'];
 type UpdateUserRequest =
   paths['/api/rest/users/{user_id}']['post']['requestBody']['content']['application/json'];
 type UpdateUserParams = paths['/api/rest/users/{user_id}']['post']['parameters']['path'];
@@ -32,13 +30,17 @@ export class UserApiClient extends BaseApiClient {
     return `${this.baseURL}/api/rest/auth/oauth2/habr/authorize?redirect_url=${window.location.origin}`;
   }
   async afterAuth({ code, state }: AfterAuthRequestParams) {
-    await this.client.get<AfterAuthResponse>(`/api/rest/auth/oauth2/habr/callback`, {
-      params: {
-        code,
-        state,
+    const { data } = await this.client.get<AfterAuthResponse>(
+      `/api/rest/auth/oauth2/habr/callback`,
+      {
+        params: {
+          code,
+          state,
+        },
+        withCredentials: true,
       },
-      withCredentials: true,
-    });
+    );
+    return data;
   }
 
   async isAuth() {
@@ -53,11 +55,6 @@ export class UserApiClient extends BaseApiClient {
 
   async getUser(user_id: string | null) {
     const { data } = await this.client.get<getUserResponse>(`/api/rest/users/${user_id}`);
-    return data;
-  }
-
-  async getMe() {
-    const { data } = await this.client.get<GetMeResponse>('/api/rest/users/me');
     return data;
   }
 

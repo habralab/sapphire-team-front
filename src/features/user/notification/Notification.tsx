@@ -2,12 +2,12 @@ import { IconButton, Icon, Box } from '@chakra-ui/react';
 import { IoNotifications } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
-import { useIsAuth } from '~/shared/hooks';
+import { useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { Counter } from '~/shared/ui/Counter';
 
 export function Notification() {
-  const isAuth = useIsAuth();
+  const { isAuth } = useAuth();
   const navigate = useNavigate();
 
   return (

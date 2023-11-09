@@ -1,28 +1,43 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { AuthContext } from '~/shared/contexts';
+import { AuthContext, initAuth } from '~/shared/contexts';
 import { useApi } from '~/shared/hooks';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { userApi } = useApi();
-  const [isAuth, setIsAuth] = useState<boolean | null>(null);
   const location = useLocation();
+  const [loaded, setLoaded] = useState(false);
+
+  const setAuth = (userId: string | null) => {
+    setState({ ...state, userId, isAuth: !!userId });
+  };
+
+  const initState = {
+    ...initAuth,
+    setAuth,
+  };
+
+  const [state, setState] = useState(initState);
 
   useEffect(() => {
     userApi
       .isAuth()
       .then((res) => {
-        setIsAuth(res);
+        if (!res) {
+          setAuth(null);
+        }
       })
       .catch(() => {
-        setIsAuth(false);
+        setAuth(null);
+        localStorage.removeItem('user_id');
+      })
+      .finally(() => {
+        setLoaded(true);
       });
   }, [location.pathname, location.search]);
 
   return (
-    <AuthContext.Provider value={isAuth}>
-      {isAuth === null ? null : children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={state}>{!loaded ? null : children}</AuthContext.Provider>
   );
 }

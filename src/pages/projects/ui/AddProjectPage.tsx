@@ -18,8 +18,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { AboutProject, Inputs, NewSpecialist, Team } from '~/features/project';
 
-import { PostNewProjectParams } from '~/shared/api';
-import { useApi } from '~/shared/hooks';
+import { NewProjectParams } from '~/shared/api';
+import { useApi, useAuth } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
 export const AddProjectPage = () => {
@@ -35,11 +35,12 @@ export const AddProjectPage = () => {
     handleSubmit,
     formState: { errors, dirtyFields },
   } = useForm<Inputs>();
+  const { userId, isAuth } = useAuth();
 
   const form = { register, errors, dirtyFields };
 
   const { mutate } = useMutation({
-    mutationFn: (data: PostNewProjectParams) => projectsApi.addNewProject(data),
+    mutationFn: (data: NewProjectParams) => projectsApi.addNewProject(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['getAllProjects']);
       navigate(-1);
@@ -56,13 +57,16 @@ export const AddProjectPage = () => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const newProject = {
-      name: data.title,
-      description,
-      deadline: new Date(data.date).toISOString().slice(0, -1),
-    };
+    if (userId) {
+      const newProject: NewProjectParams = {
+        name: data.title,
+        description,
+        deadline: new Date(data.date).toISOString().slice(0, -1),
+        owner_id: userId,
+      };
 
-    mutate(newProject);
+      mutate(newProject);
+    }
   };
 
   const handleTabsChange = (index: number) => {

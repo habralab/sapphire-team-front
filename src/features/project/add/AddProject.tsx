@@ -2,13 +2,13 @@ import { HStack, Icon, IconButton, Text } from '@chakra-ui/react';
 import { BsPlus } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
-import { useIsMobile, useIsAuth } from '~/shared/hooks';
+import { useIsMobile, useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
 export const AddProject = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const isAuth = useIsAuth();
+  const { isAuth } = useAuth();
 
   return (
     <IconButton

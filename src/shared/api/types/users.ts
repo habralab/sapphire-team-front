@@ -24,10 +24,6 @@ export interface paths {
     /** Callback */
     get: operations['callback_api_rest_auth_oauth2_habr_callback_get'];
   };
-  '/api/rest/users/me': {
-    /** Get Me */
-    get: operations['get_me_api_rest_users_me_get'];
-  };
   '/api/rest/users/{user_id}': {
     /** Get User */
     get: operations['get_user_api_rest_users__user_id__get'];
@@ -43,6 +39,8 @@ export interface paths {
     delete: operations['delete_user_avatar_api_rest_users__user_id__avatar_delete'];
   };
   '/api/rest/users/{user_id}/skills': {
+    /** Get User Skills */
+    get: operations['get_user_skills_api_rest_users__user_id__skills_get'];
     /** Update User Skills */
     post: operations['update_user_skills_api_rest_users__user_id__skills_post'];
   };
@@ -52,6 +50,18 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
+    /** AuthorizeResponse */
+    AuthorizeResponse: {
+      /**
+       * User Id
+       * Format: uuid
+       */
+      user_id: string;
+      /** Access Token */
+      access_token: string;
+      /** Refresh Token */
+      refresh_token: string;
+    };
     /** Body_upload_user_avatar_api_rest_users__user_id__avatar_post */
     Body_upload_user_avatar_api_rest_users__user_id__avatar_post: {
       /**
@@ -71,13 +81,6 @@ export interface components {
       version: string;
       /** Name */
       name: string;
-    };
-    /** JWTTokensResponse */
-    JWTTokensResponse: {
-      /** Access Token */
-      access_token: string;
-      /** Refresh Token */
-      refresh_token: string;
     };
     /** UserResponse */
     UserResponse: {
@@ -224,33 +227,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['JWTTokensResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /** Get Me */
-  get_me_api_rest_users_me_get: {
-    parameters: {
-      header?: {
-        Authorization?: string | null;
-      };
-      cookie?: {
-        access_token?: string | null;
-        refresh_token?: string | null;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['UserResponse'];
+          'application/json': components['schemas']['AuthorizeResponse'];
         };
       };
       /** @description Validation Error */
@@ -409,6 +386,28 @@ export interface operations {
       };
     };
   };
+  /** Get User Skills */
+  get_user_skills_api_rest_users__user_id__skills_get: {
+    parameters: {
+      path: {
+        user_id: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': string[];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
   /** Update User Skills */
   update_user_skills_api_rest_users__user_id__skills_post: {
     parameters: {
@@ -432,7 +431,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': unknown;
+          'application/json': string[];
         };
       };
       /** @description Validation Error */

@@ -2,17 +2,17 @@ import { paths } from '../types/projects';
 
 import { BaseApiClient } from './base';
 
-export type PostNewProjectParams =
+export type NewProjectParams =
   paths['/api/rest/projects/']['post']['requestBody']['content']['application/json'];
 type AfterPostNewProjectResponse =
   paths['/api/rest/projects/']['post']['responses']['200']['content']['application/json'];
-export type getAllProjectsResponse =
+export type GetAllProjectsResponse =
   paths['/api/rest/projects/']['get']['responses']['200']['content']['application/json'];
-type getCurrentProjectResponse =
+type GetCurrentProjectResponse =
   paths['/api/rest/projects/{project_id}']['get']['responses']['200']['content']['application/json'];
 
 export class ProjectsApiClient extends BaseApiClient {
-  async addNewProject(newProject: PostNewProjectParams) {
+  async addNewProject(newProject: NewProjectParams) {
     const { data } = await this.client.post<AfterPostNewProjectResponse>(
       `/api/rest/projects/`,
       newProject,
@@ -21,7 +21,7 @@ export class ProjectsApiClient extends BaseApiClient {
   }
 
   async getCurrentProject(project_id: string) {
-    const { data } = await this.client.get<getCurrentProjectResponse>(
+    const { data } = await this.client.get<GetCurrentProjectResponse>(
       `/api/rest/projects/${project_id}`,
     );
     const statusAdapter = {
@@ -44,8 +44,8 @@ export class ProjectsApiClient extends BaseApiClient {
     };
   }
 
-  async getAllProjects(page: number, owner_id?: string) {
-    const { data } = await this.client.get<getAllProjectsResponse>(
+  async getAllProjects(page: number, owner_id?: string | null) {
+    const { data } = await this.client.get<GetAllProjectsResponse>(
       `/api/rest/projects/`,
       { params: { page, owner_id } },
     );

@@ -3,15 +3,15 @@ import { useEffect, useState } from 'react';
 
 import { Info } from '~/entities/user';
 
-import { useIsAuth, useApi } from '~/shared/hooks';
+import { useApi, useAuth } from '~/shared/hooks';
 
 import NotAuth from './notAuth.png';
 
 const defaultName = 'Гость';
 
 export function ProfileCard() {
-  const isAuth = useIsAuth();
   const { userApi } = useApi();
+  const { userId, isAuth } = useAuth();
   const [name, setName] = useState<{ firstName: string; lastName: string }>({
     firstName: defaultName,
     lastName: '',
@@ -20,9 +20,9 @@ export function ProfileCard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (isAuth)
+    if (userId)
       userApi
-        .getMe()
+        .getUser(userId)
         .then((res) => {
           setName({
             firstName: res.first_name ?? defaultName,
@@ -37,7 +37,7 @@ export function ProfileCard() {
         .finally(() => {
           setLoading(false);
         });
-  }, [isAuth]);
+  }, [userId]);
 
   return (
     <Flex

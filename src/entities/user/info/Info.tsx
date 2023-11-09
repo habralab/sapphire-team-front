@@ -1,10 +1,10 @@
 import { Box, Divider, Flex, FlexProps } from '@chakra-ui/react';
 
-import { useIsAuth } from '~/shared/hooks';
+import { useAuth } from '~/shared/hooks';
 import { SGroup } from '~/shared/ui/SGroup';
 
 export const Info = (props: FlexProps) => {
-  const isAuth = useIsAuth();
+  const { isAuth } = useAuth();
 
   return (
     <Flex py={4} px={0.5} width="100%" textAlign="center" {...props}>

@@ -22,7 +22,7 @@ import { Rating } from '~/features/user';
 
 import { Card } from '~/entities/project';
 
-import { useApi, useIsAuth } from '~/shared/hooks';
+import { useApi, useAuth } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 import { STag } from '~/shared/ui/STag';
 
@@ -42,9 +42,9 @@ const dummyData = [
 export const ProjectPage = () => {
   const { id: projectId } = useParams();
   const { projectsApi, userApi } = useApi();
-  const isAuth = useIsAuth();
+  const { userId } = useAuth();
 
-  const [ownerID, setOwnerID] = useState<string>('');
+  const [ownerID, setOwnerID] = useState('');
 
   const { data, isLoading } = useQuery({
     queryKey: ['getCurrentProject', projectId],
@@ -58,12 +58,6 @@ export const ProjectPage = () => {
     queryKey: ['ownerID', ownerID],
     queryFn: () => userApi.getUser(ownerID),
     enabled: !!ownerID,
-  });
-
-  const { data: myData, isLoading: meIsLoading } = useQuery({
-    queryKey: ['myID', ownerID, isAuth],
-    queryFn: () => userApi.getMe(),
-    enabled: !!ownerID && !!isAuth,
   });
 
   return (
@@ -142,7 +136,7 @@ export const ProjectPage = () => {
             </CardBody>
           </ChakraCard>
           <Flex bg="bg" position="sticky" bottom="4.6rem" p={0} py={3} mt="auto">
-            {!meIsLoading && myData?.id !== data?.owner_id && (
+            {userId !== ownerID && (
               <Button
                 type="button"
                 onClick={() => {

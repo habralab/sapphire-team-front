@@ -47,7 +47,7 @@ export const Team = (props: TeamProps) => {
     if (specs && specGroup) {
       const mainTag = specs.data.filter(({ id }) => specId === id);
       const titleMainTag = specGroup.data.filter(({ id }) => mainTag[0].group_id === id);
-      return { mainTag: mainTag[0].name, titleMainTag: titleMainTag[0].name };
+      return { mainTag: mainTag[0].name ?? '', titleMainTag: titleMainTag[0].name ?? '' };
     }
   };
 

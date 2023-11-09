@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   Flex,
   SimpleGrid,
@@ -12,7 +9,7 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { QueryFunctionContext, QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, generatePath, useNavigate } from 'react-router-dom';
 
@@ -22,16 +19,16 @@ import { AddProject } from '~/features/project';
 
 import { AvatarsGroup } from '~/entities/project';
 
-import { useApi } from '~/shared/hooks';
+import { useApi, useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
 import NotAuth from './NotAuth.svg';
 
 export const ProjectsPage = () => {
-  const targetRef = useRef(null);
-  const { projectsApi, userApi } = useApi();
-  const [userID, setUserId] = useState<string | undefined>();
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { projectsApi } = useApi();
+  const { userId } = useAuth();
   const [isEmptyData, setEmptyData] = useState<boolean>(false);
   const navigate = useNavigate();
   const dummyAvatars = [
@@ -44,22 +41,15 @@ export const ProjectsPage = () => {
   ];
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['getAllProjects', userID],
-    queryFn: ({ pageParam = 1 }) => projectsApi.getAllProjects(pageParam, userID),
+    queryKey: ['getAllProjects', userId],
+    queryFn: ({ pageParam = 1 }: QueryFunctionContext<QueryKey, number>) =>
+      projectsApi.getAllProjects(pageParam, userId),
     // getNextPageParam: (lastPage) => lastPage.page + 1,
     onSuccess: (response) => {
       setEmptyData(!response.pages[0].data.length);
     },
-    enabled: !!userID,
+    enabled: !!userId,
     staleTime: 5000,
-  });
-
-  const { isLoading: meIsLoading } = useQuery({
-    queryKey: ['myID'],
-    queryFn: () => userApi.getMe(),
-    onSuccess(data) {
-      setUserId(data.id);
-    },
   });
 
   useEffect(() => {
@@ -72,6 +62,7 @@ export const ProjectsPage = () => {
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         fetchNextPage();
       }
     }, options);
@@ -94,7 +85,7 @@ export const ProjectsPage = () => {
         </Flex>
       </Flex>
 
-      {isLoading || meIsLoading || !data ? (
+      {isLoading ? (
         <>
           <Skeleton height="200px" borderRadius="2xl" mb={3} />
           <Skeleton height="200px" borderRadius="2xl" mb={3} />
@@ -134,7 +125,7 @@ export const ProjectsPage = () => {
             </Flex>
           ) : (
             <>
-              {data.pages.map((group, i) => (
+              {data?.pages.map((group, i) => (
                 <React.Fragment key={i}>
                   {group.data.map((project) => {
                     return (

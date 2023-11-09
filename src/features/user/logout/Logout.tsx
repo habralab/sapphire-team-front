@@ -1,11 +1,11 @@
 import { Button, Container, Icon, Portal } from '@chakra-ui/react';
 import { IoLogOutOutline } from 'react-icons/io5';
 
-import { useLayoutRefs, useIsAuth, useApi } from '~/shared/hooks';
+import { useLayoutRefs, useAuth, useApi } from '~/shared/hooks';
 
 export function Logout() {
   const layout = useLayoutRefs();
-  const isAuth = useIsAuth();
+  const { isAuth } = useAuth();
   const { userApi } = useApi();
 
   return layout?.footer && isAuth ? (

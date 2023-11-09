@@ -51,10 +51,10 @@ export interface components {
       /** Total Items */
       total_items?: number | null;
     };
-    /** SpecializationsListResponse */
-    SpecializationsListResponse: {
+    /** SpecializationGroupListResponse */
+    SpecializationGroupListResponse: {
       /** Data */
-      data: components['schemas']['SpecializationsResponse'][];
+      data: components['schemas']['SpecializationGroupResponse'][];
       /** Page */
       page: number;
       /** Per Page */
@@ -64,23 +64,25 @@ export interface components {
       /** Total Items */
       total_items?: number | null;
     };
-    /** SpecializationsResponse */
-    SpecializationsResponse: {
-      /** id */
+    /** SpecializationGroupResponse */
+    SpecializationGroupResponse: {
+      /**
+       * Id
+       * Format: uuid
+       */
       id: string;
-      /** is_other */
-      is_other: false;
-      /** name */
-      name: string;
-      /** group_id */
-      group_id: string;
-      /** created_at */
+      /** Name */
+      name: string | null;
+      /**
+       * Created At
+       * Format: date-time
+       */
       created_at: string;
     };
-    /** SpecializationsGroupListResponse */
-    SpecializationsGroupListResponse: {
+    /** SpecializationListResponse */
+    SpecializationListResponse: {
       /** Data */
-      data: components['schemas']['SpecializationsGroupResponse'][];
+      data: components['schemas']['SpecializationResponse'][];
       /** Page */
       page: number;
       /** Per Page */
@@ -90,13 +92,21 @@ export interface components {
       /** Total Items */
       total_items?: number | null;
     };
-    /** SpecializationsGroupResponse */
-    SpecializationsGroupResponse: {
-      /** id */
+    /** SpecializationResponse */
+    SpecializationResponse: {
+      /**
+       * Id
+       * Format: uuid
+       */
       id: string;
-      /** name */
-      name: string;
-      /** created_at */
+      /** Name */
+      name: string | null;
+      /** Group Id */
+      group_id: string | null;
+      /**
+       * Created At
+       * Format: date-time
+       */
       created_at: string;
     };
     /** ValidationError */
@@ -140,6 +150,8 @@ export interface operations {
         page?: number;
         /** @description Number of items per page */
         per_page?: number;
+        query_text?: unknown;
+        id?: unknown;
       };
     };
     responses: {
@@ -165,13 +177,15 @@ export interface operations {
         page?: number;
         /** @description Number of items per page */
         per_page?: number;
+        query_text?: unknown;
+        group_id?: unknown;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['SpecializationsListResponse'];
+          'application/json': components['schemas']['SpecializationListResponse'];
         };
       };
       /** @description Validation Error */
@@ -190,13 +204,14 @@ export interface operations {
         page?: number;
         /** @description Number of items per page */
         per_page?: number;
+        query_text?: unknown;
       };
     };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['SpecializationsGroupListResponse'];
+          'application/json': components['schemas']['SpecializationGroupListResponse'];
         };
       };
       /** @description Validation Error */

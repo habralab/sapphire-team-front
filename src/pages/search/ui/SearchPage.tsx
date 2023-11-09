@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   Flex,
   SimpleGrid,
@@ -10,7 +7,7 @@ import {
   Box,
   Skeleton,
 } from '@chakra-ui/react';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { QueryFunctionContext, QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 
@@ -21,19 +18,20 @@ import { Notification, Settings } from '~/features/user';
 
 import { Avatar } from '~/entities/user';
 
-import { useApi, useIsAuth, useLayoutRefs } from '~/shared/hooks';
+import { useApi, useAuth, useLayoutRefs } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
 export const SearchPage = () => {
   const { userApi, projectsApi } = useApi();
-  const targetRef = useRef(null);
+  const targetRef = useRef<HTMLDivElement>(null);
   const layout = useLayoutRefs();
-  const isAuth = useIsAuth();
+  const { isAuth } = useAuth();
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['getAllProjects'],
-    queryFn: ({ pageParam = 1 }) => projectsApi.getAllProjects(pageParam),
+    queryFn: ({ pageParam = 1 }: QueryFunctionContext<QueryKey, number>) =>
+      projectsApi.getAllProjects(pageParam),
     getNextPageParam: (lastPage) => lastPage.page + 1,
     staleTime: 5000,
   });
@@ -53,6 +51,7 @@ export const SearchPage = () => {
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         fetchNextPage();
       }
     }, options);
@@ -89,7 +88,7 @@ export const SearchPage = () => {
             </>
           ) : (
             <SimpleGrid gap={4}>
-              {data?.pages.map((group, i) => (
+              {data.pages.map((group, i) => (
                 <React.Fragment key={i}>
                   {group.data.map((project) => {
                     return (
