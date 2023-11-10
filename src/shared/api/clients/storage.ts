@@ -10,6 +10,8 @@ export type GetSpecsDataResponse =
   paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json']['data'];
 type GetSpecsResponse =
   paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json'];
+type GetSkillsResponse =
+  paths['/api/rest/skills/']['get']['responses']['200']['content']['application/json'];
 
 export class StorageApiClient extends BaseApiClient {
   async getSpecGroups() {
@@ -29,5 +31,12 @@ export class StorageApiClient extends BaseApiClient {
       },
     );
     return data;
+  }
+  async getSkills() {
+    const { data } = await this.client.get<GetSkillsResponse>(`/api/rest/skills/`);
+    const formatData = data.data.map(({ id, name }) => {
+      return { value: id, label: name };
+    });
+    return formatData;
   }
 }

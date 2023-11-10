@@ -63,7 +63,7 @@ export const FilterSpecialization = ({
         <Input
           bg="white"
           borderRadius="full"
-          fontSize="sm"
+          fontSize="md"
           readOnly
           placeholder="Например, Фронтенд разработчик"
           onClick={() => {

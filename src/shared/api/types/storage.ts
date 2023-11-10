@@ -72,7 +72,7 @@ export interface components {
        */
       id: string;
       /** Name */
-      name: string | null;
+      name: string;
       /**
        * Created At
        * Format: date-time
@@ -158,7 +158,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['PaginatedResponse'];
+          'application/json': components['schemas']['SpecializationGroupListResponse'];
         };
       };
       /** @description Validation Error */
