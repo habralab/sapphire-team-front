@@ -10,48 +10,91 @@ import {
   TagLabel,
   FormControl,
   FormLabel,
+  Heading,
 } from '@chakra-ui/react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import { Controller, useForm, Form } from 'react-hook-form';
 import { BsPlus } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
+import {
+  GetSpecGroupsDataResponse,
+  UpdateUserParams,
+  UpdateUserRequest,
+} from '~/shared/api';
+import { useApi, useAuth } from '~/shared/hooks';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
+import { STag } from '~/shared/ui/STag';
 import { STextarea } from '~/shared/ui/STextarea';
 
 interface UserType {
-  avatar: File | null;
-  name: string;
-  information: string;
-  specialization: string[];
-  skills: {
-    value: string;
-    label: string;
-  }[];
+  first_name: string;
+  last_name: string;
+  about: string;
+  main_specialization_id: string;
+  secondary_specialization_id: string;
 }
 
+const maxLength = 300;
+
 export function UpdateUser() {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { userApi, storageApi } = useApi();
+  const { userId, isAuth } = useAuth();
+  const [userSpecs, setUserSpecs] = useState<string[]>([]);
+
+  // const [updatedUser, setUpdatedUser] = useState<UserType>({
+  //   first_name: null,
+  //   last_name: null,
+  //   about: null,
+  //   main_specialization_id: null,
+  //   secondary_specialization_id: null,
+  // });
+
   const {
     control,
     resetField,
     register,
     watch,
     formState: { errors, isSubmitting },
-  } = useForm<UserType>({
-    defaultValues: {
-      avatar: null,
-      name: '',
-      information: '',
-      specialization: [],
-      skills: [],
-    },
+  } = useForm<UserType>();
+
+  // const watchShowAvatar = watch('avatar');
+
+  const { mutate } = useMutation({
+    mutationFn: ({ user_id, ...data }: UpdateUserParams & UpdateUserRequest) =>
+      userApi.updateUser({ user_id, ...data }),
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries(['getAllProjects']);
+    //   navigate(-1);
+    // },
+    // onError: (e: Error) => {
+    //   toast({
+    //     title: 'Ошибка создания проекта',
+    //     description: e.message,
+    //     status: 'error',
+    //     duration: 9000,
+    //     isClosable: true,
+    //   });
+    // },
   });
 
-  const maxLength = 300;
-
-  const watchShowAvatar = watch('avatar');
-
   const onSubmit = (data: UserType) => {
-    console.log(data);
+    const updatedUser = {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      about: data.about,
+      main_specialization_id: [...userSpecs][0],
+      secondary_specialization_id: [...userSpecs][1] ?? null,
+    };
+    console.log(updatedUser);
+
+    if (userId) {
+      mutate({ user_id: userId, ...updatedUser });
+    }
   };
 
   return (
@@ -63,7 +106,7 @@ export function UpdateUser() {
       }}
     >
       <Flex direction="column" gap={6}>
-        <FormControl isInvalid={!!errors.avatar}>
+        {/* <FormControl isInvalid={!!errors.avatar}>
           <Flex direction="column" gap={4}>
             <FormLabel mb={0}>Фото</FormLabel>
             <Flex
@@ -75,12 +118,12 @@ export function UpdateUser() {
               borderRadius="full"
               alignItems="center"
               justifyContent="space-between"
+              position="relative"
             >
               <Input
                 w="fit-content"
                 type="file"
                 accept="image/*"
-                capture="user"
                 position="absolute"
                 opacity={0}
                 {...register('avatar')}
@@ -112,10 +155,10 @@ export function UpdateUser() {
                   icon={<SmallCloseIcon boxSize={4} />}
                 />
               </Tag>
-            )}
-          </Flex>
-        </FormControl>
-        <FormControl isInvalid={!!errors.name}>
+            )} */}
+        {/* </Flex>
+        </FormControl> */}
+        <FormControl>
           <Flex direction="column" gap={4}>
             <FormLabel mb={0}>Имя</FormLabel>
             <Input
@@ -124,16 +167,29 @@ export function UpdateUser() {
               px={5}
               bg="white"
               borderRadius="full"
-              {...register('name')}
+              {...register('first_name')}
             />
           </Flex>
         </FormControl>
-        <FormControl isInvalid={!!errors.information}>
+        <FormControl>
+          <Flex direction="column" gap={4}>
+            <FormLabel mb={0}>Фамилия</FormLabel>
+            <Input
+              placeholder="Как вас зовут?"
+              py={4}
+              px={5}
+              bg="white"
+              borderRadius="full"
+              {...register('last_name')}
+            />
+          </Flex>
+        </FormControl>
+        <FormControl>
           <Flex direction="column" gap={4}>
             <FormLabel mb={0}>О себе</FormLabel>
             <Controller
               control={control}
-              name="information"
+              name="about"
               render={({ field: { onChange, value } }) => {
                 return (
                   <STextarea
@@ -149,15 +205,14 @@ export function UpdateUser() {
         </FormControl>
         <FormControl>
           <FormLabel mb={4}>Специализация</FormLabel>
-          <Controller
-            control={control}
-            name="specialization"
-            render={({ field: { onChange, value } }) => {
-              return <FilterSpecialization userSpecs={value} setUserSpecs={onChange} />;
-            }}
+          <FilterSpecialization
+            userSpecs={userSpecs}
+            setUserSpecs={setUserSpecs}
+            singleChecked={true}
           />
         </FormControl>
-        <FormControl>
+
+        {/* <FormControl>
           <FormLabel mb={4}>Профессиональные навыки</FormLabel>
           <Controller
             control={control}
@@ -166,7 +221,7 @@ export function UpdateUser() {
               return <SearchSelect selectedItems={value} setSelectedItems={onChange} />;
             }}
           />
-        </FormControl>
+        </FormControl> */}
         <Button fontWeight="semibold" w="full" isLoading={isSubmitting} type="submit">
           Сохранить
         </Button>

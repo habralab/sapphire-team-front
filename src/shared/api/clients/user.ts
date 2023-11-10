@@ -10,6 +10,7 @@ import {
   UpdateUserParams,
   UpdateUserRequest,
   getUserResponse,
+  UpdateUserResponse,
 } from '../types/user.types';
 
 import { BaseApiClient } from './base';
@@ -47,8 +48,12 @@ export class UserApiClient extends BaseApiClient {
     return data;
   }
 
-  async updateUser({ user_id, ...data }: UpdateUserParams & UpdateUserRequest) {
-    await this.client.post(`/api/rest/users/${user_id}`, data);
+  async updateUser({ user_id, ...user }: UpdateUserParams & UpdateUserRequest) {
+    const { data } = await this.client.post<UpdateUserResponse>(
+      `/api/rest/users/${user_id}`,
+      user,
+    );
+    return data;
   }
 
   async getUserAvatar({ user_id }: GetUserAvatarID) {

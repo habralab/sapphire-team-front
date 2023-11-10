@@ -18,3 +18,5 @@ export type UpdateUserAvatar =
   paths['/api/rest/users/{user_id}/avatar']['post']['requestBody']['content']['multipart/form-data'];
 export type getUserResponse =
   paths['/api/rest/users/{user_id}']['get']['responses']['200']['content']['application/json'];
+export type UpdateUserResponse =
+  paths['/api/rest/users/{user_id}']['post']['responses']['200']['content']['application/json'];
