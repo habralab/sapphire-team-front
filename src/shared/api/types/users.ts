@@ -52,11 +52,7 @@ export interface components {
   schemas: {
     /** AuthorizeResponse */
     AuthorizeResponse: {
-      /**
-       * User Id
-       * Format: uuid
-       */
-      user_id: string;
+      user: components['schemas']['UserResponse'];
       /** Access Token */
       access_token: string;
       /** Refresh Token */
@@ -82,6 +78,16 @@ export interface components {
       /** Name */
       name: string;
     };
+    /** JWTData */
+    JWTData: {
+      /**
+       * User Id
+       * Format: uuid
+       */
+      user_id: string;
+      /** Is Activated */
+      is_activated: boolean;
+    };
     /** UserResponse */
     UserResponse: {
       /**
@@ -95,6 +101,8 @@ export interface components {
       first_name: string | null;
       /** Last Name */
       last_name: string | null;
+      /** Is Activated */
+      is_activated: boolean;
       /** About */
       about: string | null;
       /** Main Specialization Id */
@@ -173,7 +181,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': boolean;
+          'application/json': components['schemas']['JWTData'] | null;
         };
       };
       /** @description Validation Error */
@@ -186,11 +194,26 @@ export interface operations {
   };
   /** Logout */
   logout_api_rest_auth_logout_delete: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
     responses: {
       /** @description Successful Response */
       200: {
         content: {
           'application/json': unknown;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };
@@ -200,6 +223,13 @@ export interface operations {
     parameters: {
       query?: {
         redirect_url?: string | null;
+      };
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
       };
     };
     responses: {
@@ -221,6 +251,13 @@ export interface operations {
       query: {
         state: string;
         code: string;
+      };
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
       };
     };
     responses: {
@@ -304,8 +341,15 @@ export interface operations {
   /** Get User Avatar */
   get_user_avatar_api_rest_users__user_id__avatar_get: {
     parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
       path: {
         user_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
       };
     };
     responses: {
@@ -389,8 +433,15 @@ export interface operations {
   /** Get User Skills */
   get_user_skills_api_rest_users__user_id__skills_get: {
     parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
       path: {
         user_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
       };
     };
     responses: {

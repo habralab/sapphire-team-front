@@ -16,7 +16,7 @@ import { ProjectCard } from '~/widgets/project-card';
 import { SearchProject, Filter } from '~/features/project';
 import { Notification, Settings } from '~/features/user';
 
-import { Avatar } from '~/entities/user';
+import { Avatar, DummyAvatar } from '~/entities/user';
 
 import { useApi, useAuth, useLayoutRefs } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
@@ -26,7 +26,7 @@ export const SearchPage = () => {
   const { userApi, projectsApi } = useApi();
   const targetRef = useRef<HTMLDivElement>(null);
   const layout = useLayoutRefs();
-  const { isAuth } = useAuth();
+  const { isAuth, userId } = useAuth();
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['getAllProjects'],
@@ -68,7 +68,8 @@ export const SearchPage = () => {
       <Container maxW="md" mb={4}>
         <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
           <Flex alignItems="center" my={4} h={42}>
-            <Avatar />
+            {userId ? <Avatar userId={userId} /> : <DummyAvatar />}
+
             {isAuth && (
               <Flex ml="auto" gap={4} alignItems="baseline">
                 <Notification />

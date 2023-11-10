@@ -234,6 +234,11 @@ export interface components {
        * Format: date-time
        */
       updated_at: string;
+      /**
+       * Specialization Id
+       * Format: uuid
+       */
+      specialization_id: string;
     };
     /** ProjectPositionsResponse */
     ProjectPositionsResponse: {
