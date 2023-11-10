@@ -2,13 +2,12 @@ import { createContext } from 'react';
 
 export const initAuth: {
   isAuth: boolean;
-  userId: string | null;
-  setAuth: (userId: string | null) => void;
+  userId?: string;
+  isActivated?: boolean;
 } = {
-  userId: localStorage.getItem('user_id'),
-  isAuth: !!localStorage.getItem('user_id'),
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setAuth: () => {},
+  userId: undefined,
+  isAuth: false,
+  isActivated: undefined,
 };
 
 export const AuthContext = createContext(initAuth);

@@ -23,7 +23,6 @@ export class BaseApiClient {
 
   private handleErrorResponse = (error: AxiosError | Error) => {
     if (isAxiosError(error) && error.response?.status === 401) {
-      localStorage.removeItem('user_id');
       window.location.href = window.location.origin;
     }
     return Promise.reject(error);

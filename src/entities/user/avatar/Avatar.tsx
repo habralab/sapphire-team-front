@@ -1,7 +1,6 @@
 import {
   Flex,
   Text,
-  Stack,
   SkeletonCircle,
   SkeletonText,
   Image,
@@ -9,41 +8,30 @@ import {
 } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 
-import { useApi, useAuth } from '~/shared/hooks';
-import { SLink } from '~/shared/ui/SLink';
+import { useApi } from '~/shared/hooks';
 
 import NotAuth from './notAuth.svg';
 
 const defaultName = 'Хабраюзер';
 
-export const Avatar = () => {
+interface AvatarProps {
+  userId: string;
+}
+
+export const Avatar = ({ userId }: AvatarProps) => {
   const { userApi } = useApi();
-  const { isAuth, userId } = useAuth();
 
   const { data, isLoading, isFetched } = useQuery({
     queryKey: ['ownerID', userId],
     queryFn: () => userApi.getUser(userId),
-    enabled: isAuth,
   });
 
   return (
     <Flex alignItems="center" gap={2} w="full">
-      {isLoading && isFetched ? (
+      {isLoading ? (
         <>
           <SkeletonCircle startColor="gray.600" endColor="gray.900" size="10" />
-          <SkeletonText noOfLines={2} skeletonHeight="4" w="60%" />
-        </>
-      ) : !isAuth && !data ? (
-        <>
-          <Center w={10} h={10} bg="white" borderRadius="full">
-            <Image src={NotAuth} w={9} h={9} />
-          </Center>
-          <Stack spacing={0}>
-            <Text variant="caption">{`Привет, Гость!`}</Text>
-            <SLink external to={userApi.authURL}>
-              Зарегистрироваться
-            </SLink>
-          </Stack>
+          <SkeletonText noOfLines={1} skeletonHeight="4" w="60%" />
         </>
       ) : (
         <>

@@ -8,7 +8,7 @@ type AfterAuthRequestParams =
   paths['/api/rest/auth/oauth2/habr/callback']['get']['parameters']['query'];
 type AfterAuthResponse =
   paths['/api/rest/auth/oauth2/habr/callback']['get']['responses']['200']['content']['application/json'];
-type IsAuthResponse =
+export type IsAuthResponse =
   paths['/api/rest/auth/check']['get']['responses']['200']['content']['application/json'];
 type UpdateUserRequest =
   paths['/api/rest/users/{user_id}']['post']['requestBody']['content']['application/json'];
@@ -53,7 +53,7 @@ export class UserApiClient extends BaseApiClient {
     window.location.href = PATHS.root;
   }
 
-  async getUser(user_id: string | null) {
+  async getUser(user_id: string) {
     const { data } = await this.client.get<getUserResponse>(`/api/rest/users/${user_id}`);
     return data;
   }
