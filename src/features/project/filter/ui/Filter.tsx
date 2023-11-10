@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   Button,
   IconButton,
@@ -15,6 +16,7 @@ import {
   Stack,
   Input,
 } from '@chakra-ui/react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { IoOptions } from 'react-icons/io5';
 
@@ -24,6 +26,7 @@ import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 
 export const Filter = () => {
+  const queryClient = useQueryClient();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userSpecs, setUserSpecs] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<{ value: string; label: string }[]>(
@@ -70,6 +73,7 @@ export const Filter = () => {
                 onClick={() => {
                   setUserSpecs([]);
                   setSelectedItems([]);
+                  queryClient.invalidateQueries(['skills']);
                 }}
               >
                 Сбросить

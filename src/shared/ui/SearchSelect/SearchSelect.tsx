@@ -1,5 +1,6 @@
 import { SmallCloseIcon } from '@chakra-ui/icons';
-import { Flex, IconButton, Tag, TagLabel } from '@chakra-ui/react';
+import { Flex, IconButton, Tag, TagLabel, useToast } from '@chakra-ui/react';
+import { useQuery } from '@tanstack/react-query';
 import {
   AsyncSelect,
   GroupBase,
@@ -8,6 +9,8 @@ import {
   chakraComponents,
 } from 'chakra-react-select';
 import { useState } from 'react';
+
+import { useApi } from '~/shared/hooks';
 
 interface SelectOptions extends OptionBase {
   label: string;
@@ -31,36 +34,34 @@ const asyncComponents = {
   },
 };
 
-const items = [
-  { label: 'Figma', value: '1' },
-  { label: 'UX', value: '2' },
-  { label: 'UI', value: '3' },
-  { label: 'Adobe Photoshop', value: '4' },
-  { label: 'Дизайн интерфейсов', value: '5' },
-  { label: 'Adobe Illustrator', value: '6' },
-  { label: 'Web-дизайн', value: '7' },
-  { label: 'Прототипирование', value: '8' },
-  { label: 'Графический дизайн', value: '9' },
-  { label: 'HTML', value: '10' },
-  { label: 'CSS', value: '11' },
-  { label: 'Sketch', value: '12' },
-  { label: 'Tilda', value: '13' },
-  { label: 'Adobe after effect', value: '14' },
-  { label: 'Новое 1', value: '15' },
-  { label: 'Новое 2', value: '16' },
-  { label: 'Новое 3', value: '17' },
-  { label: 'Новое 4', value: '18' },
-  { label: 'Новое 5', value: '19' },
-];
-
 interface SearchSelectProps {
   selectedItems: SelectOptions[];
   setSelectedItems: (selectedItems: SelectOptions[]) => void;
 }
 
 export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectProps) => {
-  const [unSelectedItems, setUnSelectedItems] =
-    useState<{ value: string; label: string }[]>(items);
+  const toast = useToast();
+  const { storageApi } = useApi();
+  const [unSelectedItems, setUnSelectedItems] = useState<
+    { value: string; label: string }[]
+  >([]);
+
+  useQuery({
+    queryKey: ['skills'],
+    queryFn: () => storageApi.getSkills(),
+    onSuccess(data) {
+      setUnSelectedItems(data);
+    },
+    onError: (e: Error) => {
+      toast({
+        title: 'Ошибка получения навыков',
+        description: e.message,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
 
   const unSelectValue = (id: string) => {
     const unSelectedItem = selectedItems.find((item) => item.value === id);
