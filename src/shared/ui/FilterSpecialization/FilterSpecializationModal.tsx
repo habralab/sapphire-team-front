@@ -38,6 +38,7 @@ interface FilterSpecializationModalProps {
   userFilter: string[];
   saveSpec: (spec: string[]) => void;
   singleChecked?: boolean;
+  doubleChecked?: boolean;
 }
 
 export const FilterSpecializationModal = (props: FilterSpecializationModalProps) => {
@@ -52,6 +53,7 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
     singleChecked,
     specsLoading,
     specGroupLoading,
+    doubleChecked,
   } = props;
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
@@ -98,6 +100,12 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
     }
     if (singleChecked) {
       setSelectCheckboxes([id]);
+    } else if (doubleChecked) {
+      setSelectCheckboxes(
+        [...selectCheckboxes, id].length <= 2
+          ? [...selectCheckboxes, id]
+          : [...selectCheckboxes.splice(-1, 1), id],
+      );
     } else {
       setSelectCheckboxes([...selectCheckboxes, id]);
     }

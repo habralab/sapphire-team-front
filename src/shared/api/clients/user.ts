@@ -48,9 +48,9 @@ export class UserApiClient extends BaseApiClient {
     return data;
   }
 
-  async updateUser({ user_id, ...user }: UpdateUserParams & UpdateUserRequest) {
+  async updateUser({ id, ...user }: UpdateUserRequest) {
     const { data } = await this.client.post<UpdateUserResponse>(
-      `/api/rest/users/${user_id}`,
+      `/api/rest/users/${id}`,
       user,
     );
     return data;

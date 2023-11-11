@@ -1,5 +1,9 @@
 import { paths } from './users';
 
+interface Identificator {
+  id: string;
+}
+
 export type AfterAuthRequestParams =
   paths['/api/rest/auth/oauth2/habr/callback']['get']['parameters']['query'];
 export type AfterAuthResponse =
@@ -7,7 +11,8 @@ export type AfterAuthResponse =
 export type IsAuthResponse =
   paths['/api/rest/auth/check']['get']['responses']['200']['content']['application/json'];
 export type UpdateUserRequest =
-  paths['/api/rest/users/{user_id}']['post']['requestBody']['content']['application/json'];
+  paths['/api/rest/users/{user_id}']['post']['requestBody']['content']['application/json'] &
+    Identificator;
 export type UpdateUserParams =
   paths['/api/rest/users/{user_id}']['post']['parameters']['path'];
 export type GetUserAvatarID =
