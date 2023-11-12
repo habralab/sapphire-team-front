@@ -22,6 +22,17 @@ import { NewProjectParams } from '~/shared/api';
 import { useApi, useAuth } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
+interface newPosition {
+  project_id: string;
+  specialization_id: string;
+}
+
+interface updateSkills {
+  project_id: string;
+  postiton_id: string;
+  skills: string[];
+}
+
 export const AddProjectPage = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
@@ -39,11 +50,67 @@ export const AddProjectPage = () => {
 
   const form = { register, errors, dirtyFields };
 
-  const { mutate } = useMutation({
-    mutationFn: (data: NewProjectParams) => projectsApi.addNewProject(data),
+  const { mutate: updateSkillsMutate, isLoading: updateSkillsLoading } = useMutation({
+    mutationFn: (updateSkills: updateSkills) => {
+      const { project_id, postiton_id, skills } = updateSkills;
+      return projectsApi.updateSkills(project_id, postiton_id, skills);
+    },
     onSuccess: () => {
+      console.log('Все успешно!');
       queryClient.invalidateQueries(['getAllProjects']);
       navigate(-1);
+    },
+    onError: (e: Error) => {
+      toast({
+        title: 'Ошибка добавления навыков',
+        description: e.message,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  const { mutate: createPositionMutate, isLoading: createPositionMutateLoading } =
+    useMutation({
+      mutationFn: (newPos: newPosition) => {
+        const { project_id, ...rest } = newPos;
+        return projectsApi.createPosition(project_id, rest);
+      },
+      onSuccess: (data) => {
+        newSpecialist.forEach(({ spec, skills }) => {
+          if (spec === data.specialization_id) {
+            const formatSkills = skills.map(({ value }) => value);
+            const updateSkills: updateSkills = {
+              project_id: data.project_id,
+              postiton_id: data.id,
+              skills: formatSkills,
+            };
+            updateSkillsMutate(updateSkills);
+          }
+        });
+      },
+      onError: (e: Error) => {
+        toast({
+          title: 'Ошибка добавления позиции',
+          description: e.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+      },
+    });
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (data: NewProjectParams) => projectsApi.addNewProject(data),
+    onSuccess: (data) => {
+      newSpecialist.forEach(({ spec }) => {
+        const newPosition: newPosition = {
+          project_id: data.id,
+          specialization_id: spec,
+        };
+        createPositionMutate(newPosition);
+      });
     },
     onError: (e: Error) => {
       toast({
@@ -130,6 +197,7 @@ export const AddProjectPage = () => {
         )}
         {tabIndex === 1 && (
           <Button
+            isLoading={isLoading || createPositionMutateLoading || updateSkillsLoading}
             type="submit"
             form="addNewProjectForm"
             fontSize="sm"

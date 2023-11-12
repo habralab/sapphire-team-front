@@ -1,3 +1,5 @@
+import Qs from 'query-string';
+
 import { paths } from '../types/storage';
 
 import { BaseApiClient } from './base';
@@ -32,8 +34,13 @@ export class StorageApiClient extends BaseApiClient {
     );
     return data;
   }
-  async getSkills() {
-    const { data } = await this.client.get<GetSkillsResponse>(`/api/rest/skills/`);
+  async getSkills(id?: string[]) {
+    const { data } = await this.client.get<GetSkillsResponse>(`/api/rest/skills/`, {
+      params: { id },
+      paramsSerializer: function (params) {
+        return Qs.stringify(params);
+      },
+    });
     const formatData = data.data.map(({ id, name }) => {
       return { value: id, label: name };
     });

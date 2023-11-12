@@ -15,7 +15,7 @@ interface SelectOptions extends OptionBase {
 }
 
 export interface NewSpecialist {
-  spec: string[];
+  spec: string;
   skills: SelectOptions[];
   id: number;
 }
@@ -44,6 +44,7 @@ export const Team = (props: TeamProps) => {
   });
 
   const getMainTag = (specId: string) => {
+    console.log(specId);
     if (specs && specGroup) {
       const mainTag = specs.data.filter(({ id }) => specId === id);
       const titleMainTag = specGroup.data.filter(({ id }) => mainTag[0].group_id === id);
@@ -54,7 +55,7 @@ export const Team = (props: TeamProps) => {
   const handleNewSpecialist = () => {
     setNewSpecialist([
       ...newSpecialist,
-      { spec: [...userSpecs], skills: [...userSkills], id: Date.now() },
+      { spec: userSpecs[0], skills: [...userSkills], id: Date.now() },
     ]);
     setUserSpecs([]);
     setUserSkills([]);
@@ -97,7 +98,7 @@ export const Team = (props: TeamProps) => {
       </Button>
       <Stack gap={6}>
         {newSpecialist.map((specialist) => {
-          const tag = getMainTag(specialist.spec[0]);
+          const tag = getMainTag(specialist.spec);
           return (
             <Card key={specialist.id} p={5} borderRadius="2xl" boxShadow="none">
               <Flex alignItems="baseline" justifyContent="space-between">

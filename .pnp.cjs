@@ -84,6 +84,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["msw", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:1.2.5"],\
             ["openapi-typescript", "npm:6.7.0"],\
             ["prettier", "npm:3.0.3"],\
+            ["query-string", "npm:8.1.0"],\
             ["react", "npm:18.2.0"],\
             ["react-device-detect", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:2.2.3"],\
             ["react-dom", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:18.2.0"],\
@@ -9731,6 +9732,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["decode-uri-component", [\
+        ["npm:0.4.1", {\
+          "packageLocation": "./.yarn/cache/decode-uri-component-npm-0.4.1-61db093ef6-0473924860.zip/node_modules/decode-uri-component/",\
+          "packageDependencies": [\
+            ["decode-uri-component", "npm:0.4.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["decompress-response", [\
         ["npm:6.0.0", {\
           "packageLocation": "./.yarn/cache/decompress-response-npm-6.0.0-359de2878c-d377cf47e0.zip/node_modules/decompress-response/",\
@@ -11196,6 +11206,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["fill-range", "npm:7.0.1"],\
             ["to-regex-range", "npm:5.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["filter-obj", [\
+        ["npm:5.1.0", {\
+          "packageLocation": "./.yarn/cache/filter-obj-npm-5.1.0-a1ae61a7db-ba7c24d9b2.zip/node_modules/filter-obj/",\
+          "packageDependencies": [\
+            ["filter-obj", "npm:5.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -14989,6 +15008,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["query-string", [\
+        ["npm:8.1.0", {\
+          "packageLocation": "./.yarn/cache/query-string-npm-8.1.0-e74248e410-16fe49ab71.zip/node_modules/query-string/",\
+          "packageDependencies": [\
+            ["query-string", "npm:8.1.0"],\
+            ["decode-uri-component", "npm:0.4.1"],\
+            ["filter-obj", "npm:5.1.0"],\
+            ["split-on-first", "npm:3.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["querystringify", [\
         ["npm:2.2.0", {\
           "packageLocation": "./.yarn/cache/querystringify-npm-2.2.0-4e77c9f606-5641ea231b.zip/node_modules/querystringify/",\
@@ -16080,6 +16111,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["msw", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:1.2.5"],\
             ["openapi-typescript", "npm:6.7.0"],\
             ["prettier", "npm:3.0.3"],\
+            ["query-string", "npm:8.1.0"],\
             ["react", "npm:18.2.0"],\
             ["react-device-detect", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:2.2.3"],\
             ["react-dom", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:18.2.0"],\
@@ -16444,6 +16476,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/spdx-license-ids-npm-3.0.13-928dd45e3f-3469d85c65.zip/node_modules/spdx-license-ids/",\
           "packageDependencies": [\
             ["spdx-license-ids", "npm:3.0.13"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["split-on-first", [\
+        ["npm:3.0.0", {\
+          "packageLocation": "./.yarn/cache/split-on-first-npm-3.0.0-3b993e48ae-75dc27ecba.zip/node_modules/split-on-first/",\
+          "packageDependencies": [\
+            ["split-on-first", "npm:3.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
