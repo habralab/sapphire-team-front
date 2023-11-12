@@ -18,15 +18,14 @@ import { Notification, Settings } from '~/features/user';
 
 import { Avatar, DummyAvatar } from '~/entities/user';
 
-import { useApi, useAuth, useLayoutRefs } from '~/shared/hooks';
-import { PATHS } from '~/shared/lib/router';
+import { useApi, useLayoutRefs } from '~/shared/hooks';
+import { BasePageProps, PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
-export const SearchPage = () => {
+export const SearchPage = ({ user }: BasePageProps) => {
   const { userApi, projectsApi } = useApi();
   const targetRef = useRef<HTMLDivElement>(null);
   const layout = useLayoutRefs();
-  const { isAuth, userId } = useAuth();
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey: ['getAllProjects'],
@@ -68,9 +67,9 @@ export const SearchPage = () => {
       <Container maxW="md" mb={4}>
         <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
           <Flex alignItems="center" my={4} h={42}>
-            {userId ? <Avatar userId={userId} /> : <DummyAvatar />}
+            {user.userId ? <Avatar userId={user.userId} /> : <DummyAvatar />}
 
-            {isAuth && (
+            {user.isAuth && (
               <Flex ml="auto" gap={4} alignItems="baseline">
                 <Notification />
                 <Settings />
@@ -122,7 +121,7 @@ export const SearchPage = () => {
           )}
         </Flex>
       </Container>
-      {layout?.footer && !isAuth && (
+      {layout?.footer && !user.isAuth && (
         <Portal containerRef={layout.footer}>
           <Container py={2} maxW="md">
             <Button w="full" as="a" href={userApi.authURL}>

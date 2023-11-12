@@ -3,4 +3,5 @@ export interface MenuRoute {
   name: string;
   icon: React.ReactNode;
   divided?: boolean;
+  isPublic?: boolean;
 }

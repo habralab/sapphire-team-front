@@ -32,36 +32,34 @@ export const Layout = () => {
     <>
       <LayoutContext.Provider value={{ header: headerRef, footer: footerRef }}>
         <ChakraProvider theme={isMobile ? mobileTheme : desktopTheme}>
-          {isMobile ? (
-            <Stack gap={0} minH="full">
-              <Flex flex="1">
-                <AuthProvider>
+          <AuthProvider>
+            {isMobile ? (
+              <Stack gap={0} minH="full">
+                <Flex flex="1">
                   <Routes />
-                </AuthProvider>
+                </Flex>
+                <Box position="sticky" bottom="0" bg="bg">
+                  <Box ref={footerRef}></Box>
+                  {!isDialogPage && <MenuBase />}
+                </Box>
+              </Stack>
+            ) : (
+              <Flex alignItems="start" h="full">
+                {!isNotFoundPage && <MenuDesktop />}
+                <Container
+                  maxW="6xl"
+                  pt="4"
+                  pb={6}
+                  ml={isNotFoundPage ? 'auto' : 0}
+                  minH="full"
+                  display="flex"
+                  flexDirection="column"
+                >
+                  <Routes />
+                </Container>
               </Flex>
-              <Box position="sticky" bottom="0" bg="bg">
-                <Box ref={footerRef}></Box>
-                {!isDialogPage && <MenuBase />}
-              </Box>
-            </Stack>
-          ) : (
-            <Flex alignItems="start" h="full">
-              {!isNotFoundPage && <MenuDesktop />}
-              <Container
-                maxW="6xl"
-                pt="4"
-                pb={6}
-                ml={isNotFoundPage ? 'auto' : 0}
-                minH="full"
-                display="flex"
-                flexDirection="column"
-              >
-                <AuthProvider>
-                  <Routes />
-                </AuthProvider>
-              </Container>
-            </Flex>
-          )}
+            )}
+          </AuthProvider>
         </ChakraProvider>
       </LayoutContext.Provider>
       <ScrollRestoration />

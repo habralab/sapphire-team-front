@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -40,9 +40,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return (
     <AuthContext.Provider value={state}>
       {!loaded ? (
-        <Box m="auto">
+        <Flex justifyContent="center" alignItems="center" h="full">
           <Loader />
-        </Box>
+        </Flex>
       ) : (
         children
       )}
