@@ -209,7 +209,7 @@ export const AddProjectPage = () => {
         {tabIndex === 1 && (
           <Button
             isLoading={isLoading || createPositionMutateLoading || updateSkillsLoading}
-            isDisabled={!isValid || !description}
+            isDisabled={!isValid || !description || !newSpecialist.length}
             type="submit"
             form="addNewProjectForm"
             fontSize="sm"

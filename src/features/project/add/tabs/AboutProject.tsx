@@ -92,7 +92,7 @@ export const AboutProject = (props: AboutProjectProps) => {
           />
         </Flex>
       </FormControl>
-      <FormControl mb={6} isInvalid={errors?.title} isRequired>
+      <FormControl mb={6} isInvalid={!!errors?.title} isRequired>
         <FormLabel mb={4}>Название</FormLabel>
         <Input
           type="text"
@@ -116,7 +116,7 @@ export const AboutProject = (props: AboutProjectProps) => {
           setValue={setDescription}
         />
       </FormControl>
-      <FormControl mb={6} isInvalid={errors?.date} isRequired>
+      <FormControl mb={6} isInvalid={!!errors?.date} isRequired>
         <FormLabel mb={4}>Начало проекта</FormLabel>
         <Input
           variant="filled"
