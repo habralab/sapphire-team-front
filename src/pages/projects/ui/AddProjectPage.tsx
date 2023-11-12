@@ -18,7 +18,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { AboutProject, Inputs, NewSpecialist, Team } from '~/features/project';
 
-import { NewProjectParams } from '~/shared/api';
+import {
+  NewProjectParams,
+  UpdateProjectAvatar,
+  UpdateProjectAvatarID,
+} from '~/shared/api';
 import { useApi, useAuth } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
@@ -44,8 +48,8 @@ export const AddProjectPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, dirtyFields },
-  } = useForm<Inputs>();
+    formState: { errors, dirtyFields, isValid },
+  } = useForm<Inputs>({ mode: 'all' });
   const { userId, isAuth } = useAuth();
 
   const form = { register, errors, dirtyFields };
@@ -123,6 +127,14 @@ export const AddProjectPage = () => {
     },
   });
 
+  const { mutate: uploadProjectAvatar } = useMutation({
+    mutationFn: (data: UpdateProjectAvatarID & UpdateProjectAvatar) =>
+      projectsApi.uploadProjectAvatar(data),
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (userId) {
       const newProject: NewProjectParams = {
@@ -131,7 +143,6 @@ export const AddProjectPage = () => {
         deadline: new Date(data.date).toISOString().slice(0, -1),
         owner_id: userId,
       };
-
       mutate(newProject);
     }
   };
@@ -166,7 +177,7 @@ export const AddProjectPage = () => {
           <Tab>О проекте</Tab>
           <Tab>Команда</Tab>
         </TabList>
-        <form id="addNewProjectForm" onSubmit={handleSubmit(onSubmit)}>
+        <form id="addNewProjectForm" onSubmit={handleSubmit(onSubmit)} noValidate>
           <TabPanels>
             <TabPanel>
               <AboutProject
@@ -198,6 +209,7 @@ export const AddProjectPage = () => {
         {tabIndex === 1 && (
           <Button
             isLoading={isLoading || createPositionMutateLoading || updateSkillsLoading}
+            isDisabled={!isValid || !description}
             type="submit"
             form="addNewProjectForm"
             fontSize="sm"

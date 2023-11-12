@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Stack } from '@chakra-ui/layout';
-import { Button, Card, CloseButton } from '@chakra-ui/react';
+import { Button, Card, CloseButton, FormControl, FormLabel } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { OptionBase } from 'chakra-react-select';
 import { Dispatch, SetStateAction, useState } from 'react';
@@ -44,7 +44,6 @@ export const Team = (props: TeamProps) => {
   });
 
   const getMainTag = (specId: string) => {
-    console.log(specId);
     if (specs && specGroup) {
       const mainTag = specs.data.filter(({ id }) => specId === id);
       const titleMainTag = specGroup.data.filter(({ id }) => mainTag[0].group_id === id);
@@ -65,9 +64,11 @@ export const Team = (props: TeamProps) => {
     <>
       <Box mb={5}>
         <Stack gap={1} mb={4}>
-          <Heading variant="h2" mb={3}>
-            Специализация
-          </Heading>
+          <FormControl isRequired>
+            <FormLabel variant="h2" mb={3}>
+              Специализация
+            </FormLabel>
+          </FormControl>
           <FilterSpecialization
             userSpecs={userSpecs}
             singleChecked={true}
@@ -77,9 +78,11 @@ export const Team = (props: TeamProps) => {
       </Box>
       <Box mb={5}>
         <Stack gap={1}>
-          <Heading variant="h2" mb={3}>
-            Профессиональные навыки
-          </Heading>
+          <FormControl isRequired>
+            <FormLabel variant="h2" mb={3}>
+              Профессиональные навыки
+            </FormLabel>
+          </FormControl>
         </Stack>
         <Box mb={3}>
           <SearchSelect selectedItems={userSkills} setSelectedItems={setUserSkills} />

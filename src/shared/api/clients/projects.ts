@@ -26,6 +26,11 @@ type getProjectPositionsResponse =
 type getPositionSkillsResponse =
   paths['/api/rest/projects/{project_id}/positions/{position_id}/skills/']['get']['responses']['200']['content']['application/json'];
 
+export type UpdateProjectAvatarID =
+  paths['/api/rest/projects/{project_id}/avatar']['post']['parameters']['path'];
+export type UpdateProjectAvatar =
+  paths['/api/rest/projects/{project_id}/avatar']['post']['requestBody']['content']['multipart/form-data'];
+
 export class ProjectsApiClient extends BaseApiClient {
   async addNewProject(newProject: NewProjectParams) {
     const { data } = await this.client.post<AfterPostNewProjectResponse>(
@@ -33,6 +38,19 @@ export class ProjectsApiClient extends BaseApiClient {
       newProject,
     );
     return data;
+  }
+
+  async uploadProjectAvatar({
+    project_id,
+    avatar,
+  }: UpdateProjectAvatarID & UpdateProjectAvatar) {
+    await this.client.post(
+      `/api/rest/projects/${project_id}/avatar`,
+      { avatar },
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      },
+    );
   }
 
   async createPosition(project_id: string, position: CreatePositionRequest) {

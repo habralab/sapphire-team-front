@@ -11,20 +11,14 @@ import {
   Stack,
   Text,
   Skeleton,
-  SkeletonCircle,
-  SkeletonText,
-  useToast,
 } from '@chakra-ui/react';
-import { useQueries, useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 import { Status } from '~/features/project';
 import { Rating } from '~/features/user';
 
 import { Card } from '~/entities/project';
 
-import { useApi, useAuth } from '~/shared/hooks';
+import { useAuth } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 import { STag } from '~/shared/ui/STag';
 
@@ -41,6 +35,7 @@ export const ProjectPage = () => {
     projectPositions,
     loadedProjectData,
     loadedOwnerData,
+    loadedProjectPositions,
     loadedSkills,
     loadedSpecs,
     filterTags,
@@ -97,7 +92,7 @@ export const ProjectPage = () => {
             <Stack gap={0} mb={6}>
               <Heading variant="h2">В проект требуются</Heading>
               <Skeleton
-                isLoaded={loadedSkills && loadedSpecs}
+                isLoaded={loadedProjectPositions && loadedSkills && loadedSpecs}
                 borderRadius="2xl"
                 fadeDuration={2}
               >

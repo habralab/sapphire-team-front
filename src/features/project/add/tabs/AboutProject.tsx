@@ -1,6 +1,14 @@
-import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Text } from '@chakra-ui/layout';
-import { Icon, IconButton, Flex, Box, Switch, Input } from '@chakra-ui/react';
+import {
+  Icon,
+  IconButton,
+  Flex,
+  Switch,
+  Input,
+  FormErrorMessage,
+  FormControl,
+  FormLabel,
+} from '@chakra-ui/react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { BsPlus } from 'react-icons/bs';
 
@@ -35,7 +43,7 @@ interface AboutProjectProps {
 
 export const AboutProject = (props: AboutProjectProps) => {
   const { description, setDescription } = props;
-  const { dirtyFields, register } = props.form;
+  const { dirtyFields, register, errors } = props.form;
 
   return (
     <>
@@ -84,7 +92,7 @@ export const AboutProject = (props: AboutProjectProps) => {
           />
         </Flex>
       </FormControl>
-      <FormControl mb={6} isRequired>
+      <FormControl mb={6} isInvalid={errors?.title} isRequired>
         <FormLabel mb={4}>Название</FormLabel>
         <Input
           type="text"
@@ -92,21 +100,23 @@ export const AboutProject = (props: AboutProjectProps) => {
           borderRadius="full"
           fontSize="sm"
           placeholder="Название проекта"
-          {...register('title')}
+          {...register('title', {
+            required: 'Обязательное поле',
+            minLength: { value: 3, message: 'Минимальная длина 3 символа' },
+          })}
         />
+        <FormErrorMessage>{errors?.title?.message}</FormErrorMessage>
       </FormControl>
       <FormControl mb={6} isRequired>
         <FormLabel mb={4}>Описание</FormLabel>
-        <Box position="relative">
-          <STextarea
-            placeholder="Напишите о проекте подробнее. Хороший рассказ привлечет больше заявок."
-            maxLength={300}
-            value={description}
-            setValue={setDescription}
-          />
-        </Box>
+        <STextarea
+          placeholder="Напишите о проекте подробнее. Хороший рассказ привлечет больше заявок."
+          maxLength={300}
+          value={description}
+          setValue={setDescription}
+        />
       </FormControl>
-      <FormControl mb={6} isRequired>
+      <FormControl mb={6} isInvalid={errors?.date} isRequired>
         <FormLabel mb={4}>Начало проекта</FormLabel>
         <Input
           variant="filled"
@@ -114,8 +124,11 @@ export const AboutProject = (props: AboutProjectProps) => {
           borderRadius="full"
           fontSize="sm"
           type="date"
-          {...register('date')}
+          {...register('date', {
+            required: { value: true, message: 'Обязательное поле' },
+          })}
         />
+        <FormErrorMessage>{errors?.date?.message}</FormErrorMessage>
       </FormControl>
       <FormControl display="flex" alignItems="center" justifyContent="space-between">
         <FormLabel htmlFor="project-on-pause" mb="0">
