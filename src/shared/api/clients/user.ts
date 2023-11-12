@@ -13,6 +13,8 @@ import {
   UpdateUserResponse,
   GetUserSkills,
   GetUserSkillsID,
+  GetUserAvatar,
+  UpdateUserSkillsResponse,
 } from '../types/user.types';
 
 import { BaseApiClient } from './base';
@@ -59,9 +61,9 @@ export class UserApiClient extends BaseApiClient {
   }
 
   async getUserAvatar({ user_id }: GetUserAvatarID) {
-    const { data } = await this.client.get<Blob>(`/api/rest/users/${user_id}/avatar`, {
-      responseType: 'blob',
-    });
+    const { data } = await this.client.get<GetUserAvatar>(
+      `/api/rest/users/${user_id}/avatar`,
+    );
     return data;
   }
 
@@ -72,6 +74,14 @@ export class UserApiClient extends BaseApiClient {
   async getUserSkills({ user_id }: GetUserSkillsID) {
     const { data } = await this.client.get<GetUserSkills>(
       `/api/rest/users/${user_id}/skills`,
+    );
+    return data;
+  }
+
+  async updateUserSkills({ id, skills }: { id: string; skills: string[] }) {
+    const { data } = await this.client.post<UpdateUserSkillsResponse>(
+      `/api/rest/users/${id}/skills`,
+      skills,
     );
     return data;
   }

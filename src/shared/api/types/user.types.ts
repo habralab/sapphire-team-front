@@ -29,3 +29,7 @@ export type GetUserSkills =
   paths['/api/rest/users/{user_id}/skills']['get']['responses']['200']['content']['application/json'];
 export type GetUserSkillsID =
   paths['/api/rest/users/{user_id}/skills']['get']['parameters']['path'];
+export type GetUserAvatar =
+  paths['/api/rest/users/{user_id}/avatar']['get']['responses']['200']['content']['application/json'];
+export type UpdateUserSkillsResponse =
+  paths['/api/rest/users/{user_id}/skills']['post']['responses']['200']['content']['application/json'];

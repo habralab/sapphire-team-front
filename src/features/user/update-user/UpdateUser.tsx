@@ -14,7 +14,7 @@ import {
   Tag,
 } from '@chakra-ui/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { BsPlus } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
@@ -37,17 +37,22 @@ interface UserType {
   main_specialization_id: string | null;
   secondary_specialization_id: string | null;
   email: string | null;
+  skills: string[];
 }
 
 interface AvatarType {
   avatar: string;
 }
 
+interface SkillsType {
+  avatar: string[];
+}
+
 const maxLength = 300;
 
 export function UpdateUser({ user }: UpdateUserProps) {
   const navigate = useNavigate();
-  const { userApi } = useApi();
+  const { userApi, storageApi } = useApi();
   const toast = useToast();
   const [userSpecs, setUserSpecs] = useState<string[]>(
     user.main_specialization_id && user.secondary_specialization_id
@@ -64,7 +69,7 @@ export function UpdateUser({ user }: UpdateUserProps) {
     handleSubmit,
     resetField,
     formState: { errors, isSubmitting },
-  } = useForm<UserType & AvatarType>({
+  } = useForm<UserType & AvatarType & SkillsType>({
     defaultValues: user,
   });
 
@@ -78,8 +83,40 @@ export function UpdateUser({ user }: UpdateUserProps) {
     queryFn: () => userApi.getUserSkills({ user_id: user.id }),
   });
 
-  const { mutate } = useMutation({
+  useEffect(() => {
+    storageApi
+      .getSkills()
+      .then((res) => {
+        res.map((s) => {
+          skills?.includes(s.value)
+            ? setUserSkills([...userSkills, { value: s.value, label: s.label }])
+            : setUserSkills([]);
+        });
+      })
+      .catch(() => {
+        setUserSkills([]);
+      });
+  }, [skills]);
+
+  const { mutate: mutateUser } = useMutation({
     mutationFn: (data: UpdateUserRequest) => userApi.updateUser(data),
+    onSuccess: () => {
+      navigate(PATHS.profile);
+    },
+    onError: (e: Error) => {
+      toast({
+        title: 'Ошибка обновления профиля',
+        description: e.message,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    },
+  });
+
+  const { mutate: mutateSkills } = useMutation({
+    mutationFn: ({ id, skills }: { id: string; skills: string[] }) =>
+      userApi.updateUserSkills({ id, skills }),
     onSuccess: () => {
       navigate(PATHS.profile);
     },
@@ -104,7 +141,16 @@ export function UpdateUser({ user }: UpdateUserProps) {
       secondary_specialization_id: userSpecs[1] ?? null,
     };
 
-    mutate(updatedUser);
+    const newSkills = {
+      id: user.id,
+      skills: userSkills.map((skill) => skill.value),
+    };
+
+    console.log(newSkills);
+
+    mutateSkills(newSkills);
+
+    mutateUser(updatedUser);
   };
 
   return (
@@ -232,9 +278,13 @@ export function UpdateUser({ user }: UpdateUserProps) {
             doubleChecked={true}
           />
         </FormControl>
-        <FormControl>
+        <FormControl isRequired>
           <FormLabel mb={4}>Профессиональные навыки</FormLabel>
-          <SearchSelect selectedItems={userSkills} setSelectedItems={setUserSkills} />;
+          <SearchSelect
+            selectedItems={userSkills}
+            setSelectedItems={setUserSkills}
+            userSkills={skills}
+          />
         </FormControl>
         <Button fontWeight="semibold" w="full" isLoading={isSubmitting} type="submit">
           Сохранить
