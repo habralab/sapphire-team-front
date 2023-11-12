@@ -25,3 +25,7 @@ export type getUserResponse =
   paths['/api/rest/users/{user_id}']['get']['responses']['200']['content']['application/json'];
 export type UpdateUserResponse =
   paths['/api/rest/users/{user_id}']['post']['responses']['200']['content']['application/json'];
+export type GetUserSkills =
+  paths['/api/rest/users/{user_id}/skills']['get']['responses']['200']['content']['application/json'];
+export type GetUserSkillsID =
+  paths['/api/rest/users/{user_id}/skills']['get']['parameters']['path'];

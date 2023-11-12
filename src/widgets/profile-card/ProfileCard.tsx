@@ -1,17 +1,31 @@
-import { Avatar, Text, Flex, Image, Center, SkeletonText } from '@chakra-ui/react';
+import {
+  Avatar,
+  Text,
+  Flex,
+  Image,
+  Center,
+  SkeletonText,
+  Button,
+} from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Info } from '~/entities/user';
 
 import { useApi, useAuth } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 
 import NotAuth from './notAuth.png';
 
 const defaultName = 'Гость';
 
-export function ProfileCard() {
+interface ProfileCardProps {
+  userId?: string;
+}
+
+export function ProfileCard({ userId }: ProfileCardProps) {
   const { userApi } = useApi();
-  const { userId, isAuth } = useAuth();
+  const { isAuth } = useAuth();
   const [name, setName] = useState<{ firstName: string; lastName: string }>({
     firstName: defaultName,
     lastName: '',
@@ -87,6 +101,11 @@ export function ProfileCard() {
         </Text>
       )}
       <Info />
+      <Flex px={4} pb={4} w="full">
+        <Button as={Link} to={PATHS.profileSettings} variant="light" w="full">
+          Редактировать
+        </Button>
+      </Flex>
     </Flex>
   );
 }

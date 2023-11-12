@@ -1,4 +1,4 @@
-import { Box, Heading, Stack, Text } from '@chakra-ui/react';
+import { Box, Heading, Skeleton, Stack, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import { useApi } from '~/shared/hooks';
@@ -6,7 +6,7 @@ import { STag } from '~/shared/ui/STag';
 
 import { useProfile } from './api';
 
-const defaultAbout = `Напишите о себе поподробнее. Хороший рассказ убедит обратиться именно к вам`;
+const defaultAbout = `Требуется заполнить данный раздел`;
 
 interface AboutMeProfileProps {
   userId: string;
@@ -43,7 +43,7 @@ export function AboutMeProfile({ userId }: AboutMeProfileProps) {
     <Stack bg="white" borderRadius="2xl" p={5} gap={6}>
       <Box>
         <Heading variant="h2">Обо мне</Heading>
-        <Text>{user?.about ?? defaultAbout}</Text>
+        <Text>{user?.about ? user.about : defaultAbout}</Text>
       </Box>
       <Box>
         <Heading variant="h2">Специализация</Heading>
@@ -52,7 +52,10 @@ export function AboutMeProfile({ userId }: AboutMeProfileProps) {
         ) : mainSpecialization ? (
           <STag mainTags={[mainSpecialization]} />
         ) : (
-          <Text>Нет специализаций</Text>
+          <Stack spacing={0} gap={2}>
+            <Skeleton h={5} />
+            <Skeleton h={5} />
+          </Stack>
         )}
       </Box>
       <Box>

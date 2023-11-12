@@ -11,6 +11,8 @@ import {
   UpdateUserRequest,
   getUserResponse,
   UpdateUserResponse,
+  GetUserSkills,
+  GetUserSkillsID,
 } from '../types/user.types';
 
 import { BaseApiClient } from './base';
@@ -65,5 +67,12 @@ export class UserApiClient extends BaseApiClient {
 
   async uploadUserAvatar({ user_id, ...data }: UpdateUserAvatarID & UpdateUserAvatar) {
     await this.client.post(`/api/rest/users/${user_id}/avatar`, data);
+  }
+
+  async getUserSkills({ user_id }: GetUserSkillsID) {
+    const { data } = await this.client.get<GetUserSkills>(
+      `/api/rest/users/${user_id}/skills`,
+    );
+    return data;
   }
 }

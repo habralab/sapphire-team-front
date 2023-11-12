@@ -16,19 +16,20 @@ import { useSearchParams } from 'react-router-dom';
 import { ProfileCard } from '~/widgets/profile-card';
 import { ProjectCard } from '~/widgets/project-card';
 
-import { Notification, Settings } from '~/features/user';
+import { Notification, Rating, Settings } from '~/features/user';
 
 import { AvatarsGroup } from '~/entities/project';
 import { AboutMe, Reviews } from '~/entities/user';
 
+import { useAuth } from '~/shared/hooks';
 import { data } from '~/shared/lib/data';
-import { Rating } from '~/shared/ui/rating';
 import { STag } from '~/shared/ui/STag';
 
 const tabs = ['about', 'projects', 'reviews'];
 
-export function ProfilePageBase() {
+export function ProfilePage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { userId } = useAuth();
 
   useLayoutEffect(() => {
     if (!searchParams.get('tab')) {
@@ -83,7 +84,7 @@ export function ProfilePageBase() {
           <Settings />
         </Flex>
       </Flex>
-      <ProfileCard />
+      {userId ? <ProfileCard userId={userId} /> : null}
       <Tabs
         variant="base"
         index={

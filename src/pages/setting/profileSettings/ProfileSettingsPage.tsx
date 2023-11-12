@@ -16,7 +16,7 @@ export function ProfileSettingsPage() {
           Профиль
         </Heading>
       </Flex>
-      {isActivated && (
+      {!isActivated && (
         <Alert status="warning" mb={6}>
           Дальнейшая работа невозможна.
           <br />
