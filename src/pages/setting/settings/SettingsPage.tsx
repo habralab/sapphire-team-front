@@ -2,13 +2,14 @@ import { Flex, Heading, Container, VStack, Divider } from '@chakra-ui/react';
 import { FiChevronRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-import { Logout } from '~/features/user';
-
+import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { GoBack } from '~/shared/ui/GoBack';
 import { SettingItem } from '~/shared/ui/SettingsItem';
 
 export function SettingsPage() {
+  const { userApi } = useApi();
+
   return (
     <>
       <Container maxW="md" mb={4}>
@@ -44,9 +45,13 @@ export function SettingsPage() {
               Сообщить о проблеме
             </SettingItem>
           </Link>
+          <Link to="#" onClick={() => userApi.logout()}>
+            <SettingItem type="heading" variant="h3" icon={FiChevronRight}>
+              Выйти
+            </SettingItem>
+          </Link>
         </VStack>
       </Container>
-      <Logout />
     </>
   );
 }

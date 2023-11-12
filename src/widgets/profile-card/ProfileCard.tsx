@@ -102,9 +102,11 @@ export function ProfileCard({ userId }: ProfileCardProps) {
       )}
       <Info />
       <Flex px={4} pb={4} w="full">
-        <Button as={Link} to={PATHS.profileSettings} variant="light" w="full">
-          Редактировать
-        </Button>
+        {isAuth && (
+          <Button as={Link} to={PATHS.profileSettings} variant="light" w="full">
+            Редактировать
+          </Button>
+        )}
       </Flex>
     </Flex>
   );

@@ -7,3 +7,9 @@ export const useProfile = (id: string) =>
     queryKey: ['profile', id],
     queryFn: () => api.userApi.getUser(id),
   });
+
+export const useSkills = (id: string) =>
+  useQuery({
+    queryKey: ['skills', id],
+    queryFn: () => api.userApi.getUserSkills({ user_id: id }),
+  });

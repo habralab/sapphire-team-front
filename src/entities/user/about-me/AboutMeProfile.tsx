@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useApi } from '~/shared/hooks';
 import { STag } from '~/shared/ui/STag';
 
-import { useProfile } from './api';
+import { useProfile, useSkills } from './api';
 
 const defaultAbout = `Требуется заполнить данный раздел`;
 
@@ -19,7 +19,10 @@ export function AboutMeProfile({ userId }: AboutMeProfileProps) {
     null,
   );
 
+  const [userSkills, setUserSkills] = useState<{ value: string; label: string }[]>([]);
+
   const { data: user } = useProfile(userId);
+  const { data: skills } = useSkills(userId);
 
   useEffect(() => {
     storageApi
@@ -36,6 +39,15 @@ export function AboutMeProfile({ userId }: AboutMeProfileProps) {
       .catch(() => {
         setMainSpecialization(null);
         setSecondarySpecialization(null);
+      });
+
+    storageApi
+      .getSkills()
+      .then((res) => {
+        setUserSkills(res.filter((s) => skills?.includes(s.value)));
+      })
+      .catch(() => {
+        setUserSkills([]);
       });
   }, [user]);
 
@@ -60,20 +72,7 @@ export function AboutMeProfile({ userId }: AboutMeProfileProps) {
       </Box>
       <Box>
         <Heading variant="h2">Навыки</Heading>
-        <STag
-          tags={[
-            'TypeScript',
-            'JavaScript',
-            'React',
-            'Vue',
-            'Angular',
-            'Redux',
-            'Node JS',
-            'SCSS',
-            'Bootstrap',
-            'Tailwind',
-          ]}
-        />
+        <STag tags={userSkills.map((s) => s.label)} />
       </Box>
     </Stack>
   );
