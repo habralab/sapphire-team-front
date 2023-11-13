@@ -11,7 +11,7 @@ export type GetAllProjectsResponse =
 type GetCurrentProjectResponse =
   paths['/api/rest/projects/{project_id}']['get']['responses']['200']['content']['application/json'];
 
-type CreatePositionRequest =
+export type CreatePositionRequest =
   paths['/api/rest/projects/{project_id}/positions/']['post']['requestBody']['content']['application/json'];
 type CreatePositionResponse =
   paths['/api/rest/projects/{project_id}/positions/']['post']['responses']['200']['content']['application/json'];

@@ -1,7 +1,6 @@
 import { Box, Flex, Heading, Stack } from '@chakra-ui/layout';
 import { Button, Card, CloseButton, FormControl, FormLabel } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import { OptionBase } from 'chakra-react-select';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 import { useApi } from '~/shared/hooks';
@@ -9,16 +8,7 @@ import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STag } from '~/shared/ui/STag';
 
-interface SelectOptions extends OptionBase {
-  label: string;
-  value: string;
-}
-
-export interface NewSpecialist {
-  spec: string;
-  skills: SelectOptions[];
-  id: number;
-}
+import { NewSpecialist } from '../AddProject.types';
 
 interface TeamProps {
   newSpecialist: NewSpecialist[];

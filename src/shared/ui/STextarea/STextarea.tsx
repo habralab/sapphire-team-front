@@ -6,6 +6,7 @@ interface STextareaProps {
   value: string;
   setValue: (value: string) => void;
   placeholder: string;
+  isInvalid?: boolean;
 }
 
 export function STextarea({
@@ -13,6 +14,7 @@ export function STextarea({
   value = '',
   setValue,
   placeholder,
+  isInvalid,
 }: STextareaProps) {
   const [cursorPosition, setCursorPosition] = useState<number | null>(null);
   const contentEditableRef = useRef<HTMLDivElement>(null);
@@ -110,6 +112,7 @@ export function STextarea({
         pb={7}
         borderRadius="2xl"
         ref={contentEditableRef}
+        aria-invalid={isInvalid}
         contentEditable
         width="full"
         bg="white"
@@ -120,6 +123,7 @@ export function STextarea({
         pos="relative"
         onInput={handleInput}
         outline="2px solid transparent"
+        outlineColor={isInvalid ? 'red.500' : 'transparent'}
         _focus={{
           outlineColor: 'blue.500',
         }}

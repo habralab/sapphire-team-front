@@ -9,41 +9,23 @@ import {
   FormControl,
   FormLabel,
 } from '@chakra-ui/react';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { BsPlus } from 'react-icons/bs';
 
 import { STextarea } from '~/shared/ui/STextarea';
 
-export interface Inputs {
-  attachFile: string;
-  title: string;
-  date: string;
-  pause: boolean;
-}
-
-interface UseHookForm {
-  dirtyFields: Partial<
-    Readonly<{
-      attachFile?: boolean | undefined;
-      title?: boolean | undefined;
-      description?: boolean | undefined;
-      date?: boolean | undefined;
-      pause?: boolean | undefined;
-    }>
-  >;
-  register: UseFormRegister<Inputs>;
-  errors?: FieldErrors<Inputs>;
-}
+import { AddProjectForm } from '../AddProject.types';
 
 interface AboutProjectProps {
-  form: UseHookForm;
-  description: string;
-  setDescription: (description: string) => void;
+  form: ReturnType<typeof useForm<AddProjectForm>>;
 }
 
 export const AboutProject = (props: AboutProjectProps) => {
-  const { description, setDescription } = props;
-  const { dirtyFields, register, errors } = props.form;
+  const {
+    register,
+    control,
+    formState: { errors, dirtyFields },
+  } = props.form;
 
   return (
     <>
@@ -92,7 +74,7 @@ export const AboutProject = (props: AboutProjectProps) => {
           />
         </Flex>
       </FormControl>
-      <FormControl mb={6} isInvalid={!!errors?.title} isRequired>
+      <FormControl mb={6} isInvalid={!!errors.title} isRequired>
         <FormLabel mb={4}>Название</FormLabel>
         <Input
           type="text"
@@ -105,18 +87,29 @@ export const AboutProject = (props: AboutProjectProps) => {
             minLength: { value: 3, message: 'Минимальная длина 3 символа' },
           })}
         />
-        <FormErrorMessage>{errors?.title?.message}</FormErrorMessage>
+        <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
       </FormControl>
-      <FormControl mb={6} isRequired>
+      <FormControl mb={6} isInvalid={!!errors.description} isRequired>
         <FormLabel mb={4}>Описание</FormLabel>
-        <STextarea
-          placeholder="Напишите о проекте подробнее. Хороший рассказ привлечет больше заявок."
-          maxLength={300}
-          value={description}
-          setValue={setDescription}
+        <Controller
+          name="description"
+          rules={{
+            required: 'Обязательное поле',
+          }}
+          render={({ field: { value, onChange }, fieldState: { invalid } }) => (
+            <STextarea
+              placeholder="Напишите о проекте подробнее. Хороший рассказ привлечет больше заявок."
+              maxLength={300}
+              value={value}
+              setValue={onChange}
+              isInvalid={invalid}
+            />
+          )}
+          control={control}
         />
+        <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
       </FormControl>
-      <FormControl mb={6} isInvalid={!!errors?.date} isRequired>
+      <FormControl mb={6} isInvalid={!!errors.date} isRequired>
         <FormLabel mb={4}>Начало проекта</FormLabel>
         <Input
           variant="filled"
@@ -125,10 +118,10 @@ export const AboutProject = (props: AboutProjectProps) => {
           fontSize="sm"
           type="date"
           {...register('date', {
-            required: { value: true, message: 'Обязательное поле' },
+            required: 'Обязательное поле',
           })}
         />
-        <FormErrorMessage>{errors?.date?.message}</FormErrorMessage>
+        <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
       </FormControl>
       <FormControl display="flex" alignItems="center" justifyContent="space-between">
         <FormLabel htmlFor="project-on-pause" mb="0">

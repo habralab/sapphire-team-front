@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   Flex,
   Button,
@@ -8,54 +9,85 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  useToast,
+  Text,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, FieldErrors, SubmitHandler, useForm } from 'react-hook-form';
 
-import { AboutProject, Inputs, NewSpecialist, Team } from '~/features/project';
+import { AboutProject, AddProjectForm, Team } from '~/features/project';
 
-import { NewProjectParams } from '~/shared/api';
 import { useAuth } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
-import { AddProjectApi } from '../api/AddProjectApi';
+import { useAddAvatar } from '../api/useAddAvatar';
+import { useAddPosition } from '../api/useAddPosition';
+import { useAddProject } from '../api/useAddProject';
+import { useAddSkills } from '../api/useAddSkills';
 
 export const AddProjectPage = () => {
-  const [newSpecialist, setNewSpecialist] = useState<NewSpecialist[]>([]);
-  const [description, setDescription] = useState('');
+  const { mutateAsync: addProject } = useAddProject();
+  const { mutateAsync: addPosition } = useAddPosition();
+  const { mutateAsync: updateSkills } = useAddSkills();
+  const { mutateAsync: uploadAvatar } = useAddAvatar();
   const [tabIndex, setTabIndex] = useState(0);
+  const [isAdding, setIsAdding] = useState(false);
+  const toast = useToast();
+  const form = useForm<AddProjectForm>({ defaultValues: { team: [] } });
+  const { userId } = useAuth();
+
   const {
-    register,
     handleSubmit,
-    watch,
-    formState: { errors, dirtyFields, isValid },
-  } = useForm<Inputs>({ mode: 'all' });
-  const { userId, isAuth } = useAuth();
+    control,
+    formState: { errors },
+  } = form;
 
-  const {
-    addProject,
-    loadingAddProject,
-    loadingPositionCreate,
-    loadingUpdateAvatar,
-    loadingUpdateSkill,
-  } = AddProjectApi({
-    newSpecialist,
-    dirtyFields,
-    watch,
-  });
-
-  const form = { register, errors, dirtyFields };
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<AddProjectForm> = async (data) => {
     if (userId) {
-      const newProject: NewProjectParams = {
-        name: data.title,
-        description,
-        deadline: new Date(data.date).toISOString().slice(0, -1),
-        owner_id: userId,
-      };
-      addProject(newProject);
+      try {
+        setIsAdding(true);
+        const newProject = await addProject({
+          name: data.title,
+          description: data.description,
+          deadline: new Date(data.date).toISOString().slice(0, -1),
+          owner_id: userId,
+        });
+        if (data.attachFile) {
+          await uploadAvatar({ project_id: newProject.id, avatar: data.attachFile[0] });
+        }
+        const newPositions = data.team.map(({ spec }) =>
+          addPosition({
+            project_id: newProject.id,
+            position: { specialization_id: spec },
+          }),
+        );
+        const allProjectPosition = await Promise.all(newPositions);
+        allProjectPosition.map(({ project_id, id }, i) => {
+          const formatSkills = data.team[i].skills.map(({ value }) => value);
+          return updateSkills({
+            project_id,
+            positon_id: id,
+            skills: formatSkills,
+          });
+        });
+      } catch (err) {
+        if (err instanceof Error) {
+          toast({
+            title: 'Ошибка создания проекта',
+            description: err.message,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          });
+        }
+      } finally {
+        setIsAdding(false);
+      }
     }
+  };
+
+  const onError = (errors: FieldErrors<AddProjectForm>) => {
+    console.log(errors);
   };
 
   const handleTabsChange = (index: number) => {
@@ -88,17 +120,27 @@ export const AddProjectPage = () => {
           <Tab>О проекте</Tab>
           <Tab>Команда</Tab>
         </TabList>
-        <form id="addNewProjectForm" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form
+          id="addNewProjectForm"
+          onSubmit={handleSubmit(onSubmit, onError)}
+          noValidate
+        >
           <TabPanels>
             <TabPanel>
-              <AboutProject
-                form={form}
-                description={description}
-                setDescription={setDescription}
-              />
+              <AboutProject form={form} />
             </TabPanel>
             <TabPanel>
-              <Team newSpecialist={newSpecialist} setNewSpecialist={setNewSpecialist} />
+              <Controller
+                name="team"
+                rules={{
+                  required: 'Необходимо добавить хотя бы одного специалиста',
+                }}
+                render={({ field: { value, onChange } }) => (
+                  <Team newSpecialist={value} setNewSpecialist={onChange} />
+                )}
+                control={control}
+              />
+              {errors.team && <Text color="red.500">{errors.team.message}</Text>}
             </TabPanel>
           </TabPanels>
         </form>
@@ -119,13 +161,7 @@ export const AddProjectPage = () => {
         )}
         {tabIndex === 1 && (
           <Button
-            isLoading={
-              loadingAddProject ||
-              loadingPositionCreate ||
-              loadingUpdateAvatar ||
-              loadingUpdateSkill
-            }
-            isDisabled={!isValid || !description || !newSpecialist.length}
+            isLoading={isAdding}
             type="submit"
             form="addNewProjectForm"
             fontSize="sm"
