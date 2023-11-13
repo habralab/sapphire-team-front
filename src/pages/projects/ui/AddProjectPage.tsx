@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   Flex,
   Button,
@@ -9,131 +8,43 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  useToast,
 } from '@chakra-ui/react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 
 import { AboutProject, Inputs, NewSpecialist, Team } from '~/features/project';
 
-import {
-  NewProjectParams,
-  UpdateProjectAvatar,
-  UpdateProjectAvatarID,
-} from '~/shared/api';
-import { useApi, useAuth } from '~/shared/hooks';
+import { NewProjectParams } from '~/shared/api';
+import { useAuth } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
-interface newPosition {
-  project_id: string;
-  specialization_id: string;
-}
-
-interface updateSkills {
-  project_id: string;
-  postiton_id: string;
-  skills: string[];
-}
+import { AddProjectApi } from '../api/AddProjectApi';
 
 export const AddProjectPage = () => {
-  const toast = useToast();
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-  const { projectsApi } = useApi();
   const [newSpecialist, setNewSpecialist] = useState<NewSpecialist[]>([]);
   const [description, setDescription] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, dirtyFields, isValid },
   } = useForm<Inputs>({ mode: 'all' });
   const { userId, isAuth } = useAuth();
 
+  const {
+    addProject,
+    loadingAddProject,
+    loadingPositionCreate,
+    loadingUpdateAvatar,
+    loadingUpdateSkill,
+  } = AddProjectApi({
+    newSpecialist,
+    dirtyFields,
+    watch,
+  });
+
   const form = { register, errors, dirtyFields };
-
-  const { mutate: updateSkillsMutate, isLoading: updateSkillsLoading } = useMutation({
-    mutationFn: (updateSkills: updateSkills) => {
-      const { project_id, postiton_id, skills } = updateSkills;
-      return projectsApi.updateSkills(project_id, postiton_id, skills);
-    },
-    onSuccess: () => {
-      console.log('Все успешно!');
-      queryClient.invalidateQueries(['getAllProjects']);
-      navigate(-1);
-    },
-    onError: (e: Error) => {
-      toast({
-        title: 'Ошибка добавления навыков',
-        description: e.message,
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
-
-  const { mutate: createPositionMutate, isLoading: createPositionMutateLoading } =
-    useMutation({
-      mutationFn: (newPos: newPosition) => {
-        const { project_id, ...rest } = newPos;
-        return projectsApi.createPosition(project_id, rest);
-      },
-      onSuccess: (data) => {
-        newSpecialist.forEach(({ spec, skills }) => {
-          if (spec === data.specialization_id) {
-            const formatSkills = skills.map(({ value }) => value);
-            const updateSkills: updateSkills = {
-              project_id: data.project_id,
-              postiton_id: data.id,
-              skills: formatSkills,
-            };
-            updateSkillsMutate(updateSkills);
-          }
-        });
-      },
-      onError: (e: Error) => {
-        toast({
-          title: 'Ошибка добавления позиции',
-          description: e.message,
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        });
-      },
-    });
-
-  const { mutate, isLoading } = useMutation({
-    mutationFn: (data: NewProjectParams) => projectsApi.addNewProject(data),
-    onSuccess: (data) => {
-      newSpecialist.forEach(({ spec }) => {
-        const newPosition: newPosition = {
-          project_id: data.id,
-          specialization_id: spec,
-        };
-        createPositionMutate(newPosition);
-      });
-    },
-    onError: (e: Error) => {
-      toast({
-        title: 'Ошибка создания проекта',
-        description: e.message,
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
-
-  const { mutate: uploadProjectAvatar } = useMutation({
-    mutationFn: (data: UpdateProjectAvatarID & UpdateProjectAvatar) =>
-      projectsApi.uploadProjectAvatar(data),
-    onSuccess: (data) => {
-      console.log(data);
-    },
-  });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (userId) {
@@ -143,7 +54,7 @@ export const AddProjectPage = () => {
         deadline: new Date(data.date).toISOString().slice(0, -1),
         owner_id: userId,
       };
-      mutate(newProject);
+      addProject(newProject);
     }
   };
 
@@ -208,7 +119,12 @@ export const AddProjectPage = () => {
         )}
         {tabIndex === 1 && (
           <Button
-            isLoading={isLoading || createPositionMutateLoading || updateSkillsLoading}
+            isLoading={
+              loadingAddProject ||
+              loadingPositionCreate ||
+              loadingUpdateAvatar ||
+              loadingUpdateSkill
+            }
             isDisabled={!isValid || !description || !newSpecialist.length}
             type="submit"
             form="addNewProjectForm"
