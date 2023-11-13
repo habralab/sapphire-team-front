@@ -85,7 +85,11 @@ export function ProfilePage() {
       <ProfileCard />
       <Tabs
         variant="base"
-        index={tabs.findIndex((name) => name === searchParams.get('tab'))}
+        index={
+          searchParams.get('tab')
+            ? tabs.findIndex((name) => name === searchParams.get('tab'))
+            : undefined
+        }
         onChange={(index) => {
           setSearchParams({ tab: tabs[index] });
         }}
