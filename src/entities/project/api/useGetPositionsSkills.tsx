@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useQueries } from '@tanstack/react-query';
 
-import { getProjectPositionsData } from '~/shared/api';
+import { GetProjectPositionsData } from '~/shared/api';
 import { api } from '~/shared/contexts';
 
 export const useGetPositionsSkills = (
-  projectPositions?: getProjectPositionsData,
+  projectPositions?: GetProjectPositionsData,
   projectId?: string,
 ) =>
   useQueries({

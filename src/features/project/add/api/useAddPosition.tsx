@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useMutation } from '@tanstack/react-query';
 
 import { CreatePositionRequest } from '~/shared/api';

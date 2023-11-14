@@ -51,7 +51,7 @@ export class UserApiClient extends BaseApiClient {
     window.location.href = PATHS.root;
   }
 
-  async getUser(user_id?: string) {
+  async getUser(user_id: string) {
     const { data } = await this.client.get<getUserResponse>(`/api/rest/users/${user_id}`);
     return data;
   }

@@ -21,11 +21,11 @@ type AddSkillsRequest =
 type AddSkillsResponse =
   paths['/api/rest/projects/{project_id}/positions/{position_id}/skills/']['post']['responses']['200']['content']['application/json'];
 
-type getProjectPositionsResponse =
+type GetProjectPositionsResponse =
   paths['/api/rest/projects/{project_id}/positions/']['get']['responses']['200']['content']['application/json'];
-export type getProjectPositionsData =
+export type GetProjectPositionsData =
   paths['/api/rest/projects/{project_id}/positions/']['get']['responses']['200']['content']['application/json']['data'];
-type getPositionSkillsResponse =
+type GetPositionSkillsResponse =
   paths['/api/rest/projects/{project_id}/positions/{position_id}/skills/']['get']['responses']['200']['content']['application/json'];
 
 export type UpdateProjectAvatarID =
@@ -106,14 +106,14 @@ export class ProjectsApiClient extends BaseApiClient {
   }
 
   async getProjectPositions(project_id?: string) {
-    const { data } = await this.client.get<getProjectPositionsResponse>(
+    const { data } = await this.client.get<GetProjectPositionsResponse>(
       `/api/rest/projects/${project_id}/positions/`,
     );
     return data;
   }
 
   async getPositionSkills(project_id?: string, position_id?: string) {
-    const { data } = await this.client.get<getPositionSkillsResponse>(
+    const { data } = await this.client.get<GetPositionSkillsResponse>(
       `/api/rest/projects/${project_id}/positions/${position_id}/skills/`,
     );
     return data;

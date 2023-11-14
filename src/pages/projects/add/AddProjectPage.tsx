@@ -16,15 +16,19 @@ import { useState } from 'react';
 import { Controller, FieldErrors, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { AboutProject, AddProjectForm, Team } from '~/features/project';
+import {
+  AboutProject,
+  AddProjectForm,
+  Team,
+  useAddAvatar,
+  useAddPosition,
+  useAddProject,
+  useAddSkills,
+} from '~/features/project';
 
 import { useAuth } from '~/shared/hooks';
+import { formatDate } from '~/shared/lib/dateFormatter';
 import { GoBack } from '~/shared/ui/GoBack';
-
-import { useAddAvatar } from '../api/useAddAvatar';
-import { useAddPosition } from '../api/useAddPosition';
-import { useAddProject } from '../api/useAddProject';
-import { useAddSkills } from '../api/useAddSkills';
 
 export const AddProjectPage = () => {
   const navigate = useNavigate();
@@ -48,7 +52,6 @@ export const AddProjectPage = () => {
     if (userId) {
       try {
         setIsAdding(true);
-        const formatDate = (date: string) => new Date(date).toISOString().slice(0, -1);
         const newProject = await addProject({
           name: data.title,
           description: data.description,
@@ -56,9 +59,11 @@ export const AddProjectPage = () => {
           deadline: formatDate(data.deadlineDate),
           owner_id: userId,
         });
+
         if (data.attachFile) {
           await uploadAvatar({ project_id: newProject.id, avatar: data.attachFile[0] });
         }
+
         const newPositions = data.team.map(({ spec }) =>
           addPosition({
             project_id: newProject.id,
@@ -66,6 +71,7 @@ export const AddProjectPage = () => {
           }),
         );
         const allProjectPosition = await Promise.all(newPositions);
+
         const updatedSkills = allProjectPosition.map(({ project_id, id }, i) => {
           const formatSkills = data.team[i].skills.map(({ value }) => value);
           return updateSkills({
@@ -75,6 +81,7 @@ export const AddProjectPage = () => {
           });
         });
         await Promise.all(updatedSkills);
+
         navigate(-1);
       } catch (err) {
         if (err instanceof Error) {
@@ -93,8 +100,7 @@ export const AddProjectPage = () => {
   };
 
   const onError = (errors: FieldErrors<AddProjectForm>) => {
-    console.log(errors);
-    if (errors.title ?? errors.description ?? errors.startDate) {
+    if (errors.title ?? errors.description ?? errors.startDate ?? errors.deadlineDate) {
       setTabIndex(0);
     }
   };

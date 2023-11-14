@@ -10,6 +10,7 @@ import {
   Stack,
   Text,
   Skeleton,
+  Portal,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -17,21 +18,23 @@ import { useParams } from 'react-router-dom';
 import { Status } from '~/features/project';
 import { Rating } from '~/features/user';
 
-import { Card } from '~/entities/project';
+import {
+  Card,
+  useGetOwner,
+  useGetPositions,
+  useGetPositionsSkills,
+  useGetProject,
+  useGetProjectAvatar,
+  useGetSkills,
+  useGetSpecs,
+} from '~/entities/project';
 
-import { useAuth } from '~/shared/hooks';
+import { useAuth, useLayoutRefs } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 import { STag } from '~/shared/ui/STag';
 
-import { useGetOwner } from '../api/useGetOwner';
-import { useGetPositions } from '../api/useGetPositions';
-import { useGetPositionsSkills } from '../api/useGetPositionsSkills';
-import { useGetProject } from '../api/useGetProject';
-import { useGetProjectAvatar } from '../api/useGetProjectAvatar';
-import { useGetSkillsValue } from '../api/useGetSkillsValue';
-import { useGetSpecs } from '../api/useGetSpecs';
-
 export const ProjectPage = () => {
+  const layout = useLayoutRefs();
   const { userId } = useAuth();
   const { id: projectId } = useParams();
   const [projectAvatarImg, setProjectAvatarImg] = useState<string>('');
@@ -39,18 +42,18 @@ export const ProjectPage = () => {
   const [unvaluedSkillsIds, setUnvaluedSkillsIds] = useState<string[][]>([]);
   const [readySkillsIds, setReadySkillsIds] = useState<string[][]>([]);
 
-  const { data: specsData, isSuccess: loadedSpecsData } = useGetSpecs();
-  const { data: projectData, isSuccess: loadedProjectData } = useGetProject(projectId);
+  const { data: specs, isSuccess: loadedSpecs } = useGetSpecs();
+  const { data: project, isSuccess: loadedProject } = useGetProject(projectId);
   const { data: projectAvatar, isSuccess: loadedProjectAvatar } =
     useGetProjectAvatar(projectId);
-  const { data: projectPositionsData, isSuccess: loadedProjectPositions } =
+  const { data: projectPositions, isSuccess: loadedProjectPositions } =
     useGetPositions(projectId);
-  const { data: ownerData, isSuccess: loadedOwnerData } = useGetOwner(
-    projectData?.owner_id,
-  );
+  const { data: owner, isSuccess: loadedOwner } = useGetOwner(project?.owner_id);
 
-  const positionSkillsData = useGetPositionsSkills(projectPositionsData?.data, projectId);
-  const positionSkillsValue = useGetSkillsValue(unvaluedSkillsIds);
+  const userIsOwner = !loadedOwner || userId !== owner.id;
+
+  const positionSkillsData = useGetPositionsSkills(projectPositions?.data, projectId);
+  const positionSkillsValue = useGetSkills(unvaluedSkillsIds);
 
   const loadedPositionSkills = positionSkillsData.every((query) => query.isSuccess);
   const loadedPositionSkillsValue = positionSkillsValue.every((query) => query.isSuccess);
@@ -65,9 +68,9 @@ export const ProjectPage = () => {
     if (
       loadedPositionSkills &&
       positionSkillsData.length &&
-      projectPositionsData?.data.length
+      projectPositions?.data.length
     ) {
-      const idsSpecPositions = projectPositionsData.data.map(
+      const idsSpecPositions = projectPositions.data.map(
         ({ specialization_id }) => specialization_id,
       );
 
@@ -89,7 +92,7 @@ export const ProjectPage = () => {
   }, [loadedPositionSkillsValue]);
 
   const filterMainTag = (positionId?: string) => {
-    const mainTag = specsData?.data
+    const mainTag = specs?.data
       .filter(({ id }) => id === positionId)
       .map(({ name }) => name ?? '');
     return mainTag;
@@ -115,7 +118,7 @@ export const ProjectPage = () => {
       </Flex>
       <Skeleton
         height="550px"
-        isLoaded={loadedProjectData}
+        isLoaded={loadedProject}
         borderRadius="2xl"
         fadeDuration={2}
       >
@@ -134,11 +137,11 @@ export const ProjectPage = () => {
           />
           <CardBody padding={['5', '6']}>
             <Stack gap={0} mb={3} alignItems="start">
-              <Status mb={['3', '4']}>{projectData?.status}</Status>
+              <Status mb={['3', '4']}>{project?.status}</Status>
               <Card
-                title={projectData?.name}
-                date={projectData?.deadline}
-                description={projectData?.description}
+                title={project?.name}
+                date={project?.deadline}
+                description={project?.description}
                 fullDescription={true}
               />
             </Stack>
@@ -148,7 +151,7 @@ export const ProjectPage = () => {
               <Skeleton
                 isLoaded={
                   loadedProjectPositions &&
-                  loadedSpecsData &&
+                  loadedSpecs &&
                   loadedPositionSkillsValue &&
                   !!positionSkillsValue.length
                 }
@@ -156,7 +159,7 @@ export const ProjectPage = () => {
                 fadeDuration={2}
               >
                 <Stack>
-                  {projectPositionsData?.data.map((_, i) => (
+                  {projectPositions?.data.map((_, i) => (
                     <STag
                       key={i}
                       mainTags={filterMainTag(specsIds[i])}
@@ -167,15 +170,12 @@ export const ProjectPage = () => {
               </Skeleton>
             </Stack>
             <Heading variant="h2">Контакты</Heading>
-            <Skeleton isLoaded={loadedOwnerData} borderRadius="2xl" fadeDuration={2}>
+            <Skeleton isLoaded={loadedOwner} borderRadius="2xl" fadeDuration={2}>
               <Flex alignItems="flex-start">
-                <Avatar
-                  src=""
-                  name={`${ownerData?.first_name} ${ownerData?.last_name}`}
-                />
+                <Avatar src="" name={`${owner?.first_name} ${owner?.last_name}`} />
                 <Stack pl={2} gap={0}>
                   <Heading variant="h3">
-                    {ownerData?.first_name} {ownerData?.last_name}
+                    {owner?.first_name} {owner?.last_name}
                   </Heading>
                   <Text variant="caption">Организатор</Text>
                 </Stack>
@@ -186,22 +186,25 @@ export const ProjectPage = () => {
             </Skeleton>
           </CardBody>
         </ChakraCard>
-        <Flex bg="bg" position="sticky" bottom="4.6rem" p={0} py={3} mt="auto">
-          {!loadedOwnerData ||
-            (userId !== ownerData.id && (
-              <Button
-                type="button"
-                onClick={() => {
-                  // handleTabsChange(1);
-                }}
-                fontSize="sm"
-                fontWeight="600"
-                w="full"
-              >
-                Откликнуться
-              </Button>
-            ))}
-        </Flex>
+        {layout?.footer && (
+          <Portal containerRef={layout.footer}>
+            <Container py={2} maxW="md">
+              {!userIsOwner && (
+                <Button
+                  type="button"
+                  onClick={() => {
+                    // handleTabsChange(1);
+                  }}
+                  fontSize="sm"
+                  fontWeight="600"
+                  w="full"
+                >
+                  Откликнуться
+                </Button>
+              )}
+            </Container>
+          </Portal>
+        )}
       </Skeleton>
     </Container>
   );

@@ -52,7 +52,7 @@ export const AboutProject = (props: AboutProjectProps) => {
                 resetField('attachFile');
                 setPrevievImg('');
               }}
-              aria-label="add-project-cover"
+              aria-label="Удалить обложку проекта"
               gap={2}
               flexShrink="0"
               h={0}
@@ -68,7 +68,7 @@ export const AboutProject = (props: AboutProjectProps) => {
             <IconButton
               variant="ghost"
               position="relative"
-              aria-label="add-project-cover"
+              aria-label="Добавить обложку проекта"
               gap={2}
               flexShrink="0"
               h={0}
@@ -106,7 +106,6 @@ export const AboutProject = (props: AboutProjectProps) => {
             <Image src={previewImg} maxH={32} objectFit="cover" borderRadius="2xl" />
           </Flex>
         )}
-        {errors.attachFile && <p>{errors.attachFile.message}</p>}
       </FormControl>
       <FormControl mb={6} isInvalid={!!errors.title} isRequired>
         <FormLabel mb={4}>Название</FormLabel>
