@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Controller, FieldErrors, SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { AboutProject, AddProjectForm, Team } from '~/features/project';
 
@@ -26,6 +27,7 @@ import { useAddProject } from '../api/useAddProject';
 import { useAddSkills } from '../api/useAddSkills';
 
 export const AddProjectPage = () => {
+  const navigate = useNavigate();
   const { mutateAsync: addProject } = useAddProject();
   const { mutateAsync: addPosition } = useAddPosition();
   const { mutateAsync: updateSkills } = useAddSkills();
@@ -46,10 +48,12 @@ export const AddProjectPage = () => {
     if (userId) {
       try {
         setIsAdding(true);
+        const formatDate = (date: string) => new Date(date).toISOString().slice(0, -1);
         const newProject = await addProject({
           name: data.title,
           description: data.description,
-          deadline: new Date(data.date).toISOString().slice(0, -1),
+          startline: formatDate(data.startDate),
+          deadline: formatDate(data.deadlineDate),
           owner_id: userId,
         });
         if (data.attachFile) {
@@ -62,7 +66,7 @@ export const AddProjectPage = () => {
           }),
         );
         const allProjectPosition = await Promise.all(newPositions);
-        allProjectPosition.map(({ project_id, id }, i) => {
+        const updatedSkills = allProjectPosition.map(({ project_id, id }, i) => {
           const formatSkills = data.team[i].skills.map(({ value }) => value);
           return updateSkills({
             project_id,
@@ -70,6 +74,8 @@ export const AddProjectPage = () => {
             skills: formatSkills,
           });
         });
+        await Promise.all(updatedSkills);
+        navigate(-1);
       } catch (err) {
         if (err instanceof Error) {
           toast({
@@ -88,6 +94,9 @@ export const AddProjectPage = () => {
 
   const onError = (errors: FieldErrors<AddProjectForm>) => {
     console.log(errors);
+    if (errors.title ?? errors.description ?? errors.startDate) {
+      setTabIndex(0);
+    }
   };
 
   const handleTabsChange = (index: number) => {

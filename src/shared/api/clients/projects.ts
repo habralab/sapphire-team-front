@@ -23,6 +23,8 @@ type AddSkillsResponse =
 
 type getProjectPositionsResponse =
   paths['/api/rest/projects/{project_id}/positions/']['get']['responses']['200']['content']['application/json'];
+export type getProjectPositionsData =
+  paths['/api/rest/projects/{project_id}/positions/']['get']['responses']['200']['content']['application/json']['data'];
 type getPositionSkillsResponse =
   paths['/api/rest/projects/{project_id}/positions/{position_id}/skills/']['get']['responses']['200']['content']['application/json'];
 
@@ -30,6 +32,9 @@ export type UpdateProjectAvatarID =
   paths['/api/rest/projects/{project_id}/avatar']['post']['parameters']['path'];
 export type UpdateProjectAvatar =
   paths['/api/rest/projects/{project_id}/avatar']['post']['requestBody']['content']['multipart/form-data'];
+
+type GetProjectAvatar =
+  paths['/api/rest/projects/{project_id}/avatar']['get']['responses']['200']['content']['image/*'];
 
 export class ProjectsApiClient extends BaseApiClient {
   async addNewProject(newProject: NewProjectParams) {
@@ -69,7 +74,17 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async getCurrentProject(project_id: string) {
+  async getProjectAvatar(project_id?: string) {
+    const { data } = await this.client.get<Blob>(
+      `/api/rest/projects/${project_id}/avatar`,
+      {
+        responseType: 'blob',
+      },
+    );
+    return data;
+  }
+
+  async getCurrentProject(project_id?: string) {
     const { data } = await this.client.get<GetCurrentProjectResponse>(
       `/api/rest/projects/${project_id}`,
     );
@@ -93,14 +108,14 @@ export class ProjectsApiClient extends BaseApiClient {
     };
   }
 
-  async getProjectPositions(project_id: string) {
+  async getProjectPositions(project_id?: string) {
     const { data } = await this.client.get<getProjectPositionsResponse>(
       `/api/rest/projects/${project_id}/positions/`,
     );
     return data;
   }
 
-  async getPositionSkills(project_id: string, position_id: string) {
+  async getPositionSkills(project_id?: string, position_id?: string) {
     const { data } = await this.client.get<getPositionSkillsResponse>(
       `/api/rest/projects/${project_id}/positions/${position_id}/skills/`,
     );

@@ -15,7 +15,8 @@ export interface AddProjectForm {
   attachFile: string;
   description: string;
   title: string;
-  date: string;
+  startDate: string;
+  deadlineDate: string;
   pause: boolean;
   team: NewSpecialist[];
 }

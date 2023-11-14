@@ -8,9 +8,11 @@ import {
   FormErrorMessage,
   FormControl,
   FormLabel,
+  Image,
 } from '@chakra-ui/react';
+import { ChangeEvent, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { BsPlus } from 'react-icons/bs';
+import { BsPlus, BsX } from 'react-icons/bs';
 
 import { STextarea } from '~/shared/ui/STextarea';
 
@@ -24,8 +26,11 @@ export const AboutProject = (props: AboutProjectProps) => {
   const {
     register,
     control,
-    formState: { errors, dirtyFields },
+    resetField,
+    formState: { errors },
   } = props.form;
+
+  const [previewImg, setPrevievImg] = useState('');
 
   return (
     <>
@@ -39,40 +44,69 @@ export const AboutProject = (props: AboutProjectProps) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Text>Добавить обложку</Text>
-          {dirtyFields.attachFile && (
-            <Text ml="auto" color="purple" fontSize="xs">
-              Добавлено
-            </Text>
+          <Text>{previewImg ? 'Удалить обложку' : 'Добавить обложку'}</Text>
+          {previewImg ? (
+            <IconButton
+              variant="ghost"
+              onClick={() => {
+                resetField('attachFile');
+                setPrevievImg('');
+              }}
+              aria-label="add-project-cover"
+              gap={2}
+              flexShrink="0"
+              h={0}
+              minW="none"
+              padding={['0', '0', '4']}
+              icon={
+                <>
+                  <Icon as={BsX} fontSize="2xl" />
+                </>
+              }
+            />
+          ) : (
+            <IconButton
+              variant="ghost"
+              position="relative"
+              aria-label="add-project-cover"
+              gap={2}
+              flexShrink="0"
+              h={0}
+              minW="none"
+              padding={['0', '0', '4']}
+              icon={
+                <>
+                  <Icon as={BsPlus} fontSize="2xl" />
+                  <Input
+                    type="file"
+                    height="100%"
+                    width="100%"
+                    overflow="hidden"
+                    position="absolute"
+                    top="0"
+                    left="0"
+                    opacity="0"
+                    aria-hidden="true"
+                    accept="image/*"
+                    {...register('attachFile', {
+                      onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                        if (e.target.files) {
+                          setPrevievImg(URL.createObjectURL(e.target.files[0]));
+                        }
+                      },
+                    })}
+                  />
+                </>
+              }
+            />
           )}
-          <IconButton
-            variant="ghost"
-            position="relative"
-            aria-label="add-project-cover"
-            gap={2}
-            flexShrink="0"
-            h={0}
-            minW="none"
-            padding={['0', '0', '4']}
-            icon={
-              <>
-                <Icon as={BsPlus} fontSize="xl" />
-                <Input
-                  type="file"
-                  height="100%"
-                  width="100%"
-                  position="absolute"
-                  top="0"
-                  left="0"
-                  opacity="0"
-                  aria-hidden="true"
-                  accept="image/*"
-                  {...register('attachFile')}
-                />
-              </>
-            }
-          />
         </Flex>
+        {previewImg && (
+          <Flex justifyContent="center" mt={3}>
+            <Image src={previewImg} maxH={32} objectFit="cover" borderRadius="2xl" />
+          </Flex>
+        )}
+        {errors.attachFile && <p>{errors.attachFile.message}</p>}
       </FormControl>
       <FormControl mb={6} isInvalid={!!errors.title} isRequired>
         <FormLabel mb={4}>Название</FormLabel>
@@ -109,7 +143,7 @@ export const AboutProject = (props: AboutProjectProps) => {
         />
         <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
       </FormControl>
-      <FormControl mb={6} isInvalid={!!errors.date} isRequired>
+      <FormControl mb={6} isInvalid={!!errors.startDate} isRequired>
         <FormLabel mb={4}>Начало проекта</FormLabel>
         <Input
           variant="filled"
@@ -117,11 +151,25 @@ export const AboutProject = (props: AboutProjectProps) => {
           borderRadius="full"
           fontSize="sm"
           type="date"
-          {...register('date', {
+          {...register('startDate', {
             required: 'Обязательное поле',
           })}
         />
-        <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
+        <FormErrorMessage>{errors.startDate?.message}</FormErrorMessage>
+      </FormControl>
+      <FormControl mb={6} isInvalid={!!errors.deadlineDate} isRequired>
+        <FormLabel mb={4}>Окончание проекта</FormLabel>
+        <Input
+          variant="filled"
+          bg="white"
+          borderRadius="full"
+          fontSize="sm"
+          type="date"
+          {...register('deadlineDate', {
+            required: 'Обязательное поле',
+          })}
+        />
+        <FormErrorMessage>{errors.deadlineDate?.message}</FormErrorMessage>
       </FormControl>
       <FormControl display="flex" alignItems="center" justifyContent="space-between">
         <FormLabel htmlFor="project-on-pause" mb="0">
