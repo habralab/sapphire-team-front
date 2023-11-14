@@ -13,8 +13,6 @@ export type IsAuthResponse =
 type UpdateUserRequest =
   paths['/api/rest/users/{user_id}']['post']['requestBody']['content']['application/json'];
 type UpdateUserParams = paths['/api/rest/users/{user_id}']['post']['parameters']['path'];
-type GetUserAvatar =
-  paths['/api/rest/users/{user_id}/avatar']['get']['responses']['200']['content']['image/*'];
 type GetUserAvatarID =
   paths['/api/rest/users/{user_id}/avatar']['get']['parameters']['path'];
 type UpdateUserAvatarID =

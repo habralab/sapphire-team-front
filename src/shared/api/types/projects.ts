@@ -517,7 +517,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'image/*': string;
+          'application/json': unknown;
         };
       };
       /** @description Validation Error */

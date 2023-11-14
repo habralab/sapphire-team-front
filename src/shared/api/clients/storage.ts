@@ -42,7 +42,7 @@ export class StorageApiClient extends BaseApiClient {
       },
     });
     const formatData = data.data.map(({ id, name }) => {
-      return { value: id, label: name ?? '' };
+      return { value: id, label: name };
     });
     return formatData;
   }

@@ -59,7 +59,7 @@ export interface components {
        */
       id: string;
       /** Name */
-      name: string | null;
+      name: string;
       /**
        * Created At
        * Format: date-time

@@ -33,9 +33,6 @@ export type UpdateProjectAvatarID =
 export type UpdateProjectAvatar =
   paths['/api/rest/projects/{project_id}/avatar']['post']['requestBody']['content']['multipart/form-data'];
 
-type GetProjectAvatar =
-  paths['/api/rest/projects/{project_id}/avatar']['get']['responses']['200']['content']['image/*'];
-
 export class ProjectsApiClient extends BaseApiClient {
   async addNewProject(newProject: NewProjectParams) {
     const { data } = await this.client.post<AfterPostNewProjectResponse>(
