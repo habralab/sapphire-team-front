@@ -58,7 +58,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.5.0"],\
             ["@vitejs/plugin-basic-ssl", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:1.0.1"],\
             ["@vitejs/plugin-react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.0.4"],\
-            ["axios", "npm:1.5.0"],\
+            ["axios", "npm:1.6.1"],\
             ["chakra-react-select", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.7.6"],\
             ["commitlint", "npm:17.7.1"],\
             ["concurrently", "npm:8.2.1"],\
@@ -6570,7 +6570,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],\
       ["@surma/rollup-plugin-off-main-thread", [\
         ["npm:2.2.3", {\
-          "packageLocation": "./.yarn/unplugged/@surma-rollup-plugin-off-main-thread-npm-2.2.3-1f57d3eded/node_modules/@surma/rollup-plugin-off-main-thread/",\
+          "packageLocation": "./.yarn/cache/@surma-rollup-plugin-off-main-thread-npm-2.2.3-1f57d3eded-2c02134944.zip/node_modules/@surma/rollup-plugin-off-main-thread/",\
           "packageDependencies": [\
             ["@surma/rollup-plugin-off-main-thread", "npm:2.2.3"],\
             ["ejs", "npm:3.1.9"],\
@@ -8477,11 +8477,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["axios", [\
-        ["npm:1.5.0", {\
-          "packageLocation": "./.yarn/cache/axios-npm-1.5.0-35a845e191-e7405a5dbb.zip/node_modules/axios/",\
+        ["npm:1.6.1", {\
+          "packageLocation": "./.yarn/cache/axios-npm-1.6.1-ffaff76449-573f03f59b.zip/node_modules/axios/",\
           "packageDependencies": [\
-            ["axios", "npm:1.5.0"],\
-            ["follow-redirects", "virtual:35a845e191d5a8a7376e256c81e9e855732385142c5dc9e26f0b8393c2fb4673b81fed201d5f2c5ab96fb727142683ac03329eab760f2c4870779d4bda6abe8f#npm:1.15.2"],\
+            ["axios", "npm:1.6.1"],\
+            ["follow-redirects", "virtual:ffaff76449f02e83712a7d24e03c564489516739c78ebeffb0fbcdb3893ad9a0e48504f9acfa70fe6f16debe9c8dabde3679d63bf648278ea98a5ff38cf77a9e#npm:1.15.2"],\
             ["form-data", "npm:4.0.0"],\
             ["proxy-from-env", "npm:1.1.0"]\
           ],\
@@ -11287,10 +11287,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:35a845e191d5a8a7376e256c81e9e855732385142c5dc9e26f0b8393c2fb4673b81fed201d5f2c5ab96fb727142683ac03329eab760f2c4870779d4bda6abe8f#npm:1.15.2", {\
-          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-2e83874824/0/cache/follow-redirects-npm-1.15.2-1ec1dd82be-faa66059b6.zip/node_modules/follow-redirects/",\
+        ["virtual:ffaff76449f02e83712a7d24e03c564489516739c78ebeffb0fbcdb3893ad9a0e48504f9acfa70fe6f16debe9c8dabde3679d63bf648278ea98a5ff38cf77a9e#npm:1.15.2", {\
+          "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-c2d5794c26/0/cache/follow-redirects-npm-1.15.2-1ec1dd82be-faa66059b6.zip/node_modules/follow-redirects/",\
           "packageDependencies": [\
-            ["follow-redirects", "virtual:35a845e191d5a8a7376e256c81e9e855732385142c5dc9e26f0b8393c2fb4673b81fed201d5f2c5ab96fb727142683ac03329eab760f2c4870779d4bda6abe8f#npm:1.15.2"],\
+            ["follow-redirects", "virtual:ffaff76449f02e83712a7d24e03c564489516739c78ebeffb0fbcdb3893ad9a0e48504f9acfa70fe6f16debe9c8dabde3679d63bf648278ea98a5ff38cf77a9e#npm:1.15.2"],\
             ["@types/debug", null],\
             ["debug", null]\
           ],\
@@ -16085,7 +16085,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.5.0"],\
             ["@vitejs/plugin-basic-ssl", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:1.0.1"],\
             ["@vitejs/plugin-react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.0.4"],\
-            ["axios", "npm:1.5.0"],\
+            ["axios", "npm:1.6.1"],\
             ["chakra-react-select", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.7.6"],\
             ["commitlint", "npm:17.7.1"],\
             ["concurrently", "npm:8.2.1"],\
