@@ -1,4 +1,3 @@
-import { useBreakpointValue } from '@chakra-ui/react';
+import { isMobile } from 'react-device-detect';
 
-export const useIsMobile = () =>
-  useBreakpointValue({ base: 'base', md: 'desktop' }, { ssr: false }) === 'base';
+export const useIsMobile = () => isMobile;

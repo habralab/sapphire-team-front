@@ -48,6 +48,7 @@ export const Layout = () => {
                 {!isNotFoundPage && <MenuDesktop />}
                 <Container
                   maxW="6xl"
+                  minW="4xl"
                   pt="4"
                   pb={6}
                   ml={isNotFoundPage ? 'auto' : 0}
