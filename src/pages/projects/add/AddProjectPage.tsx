@@ -60,7 +60,7 @@ export const AddProjectPage = () => {
           owner_id: userId,
         });
 
-        if (data.attachFile) {
+        if (data.attachFile.length) {
           await uploadAvatar({ project_id: newProject.id, avatar: data.attachFile[0] });
         }
 
