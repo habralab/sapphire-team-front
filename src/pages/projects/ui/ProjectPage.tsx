@@ -20,14 +20,13 @@ import { Rating } from '~/features/user';
 
 import {
   Card,
-  useGetOwner,
   useGetPositions,
   useGetPositionsSkills,
   useGetProject,
   useGetProjectAvatar,
-  useGetSkills,
-  useGetSpecs,
 } from '~/entities/project';
+import { useGetSkills, useGetSpecs } from '~/entities/storage';
+import { useGetOwner } from '~/entities/user';
 
 import { useAuth, useLayoutRefs } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
@@ -98,6 +97,12 @@ export const ProjectPage = () => {
     return mainTag;
   };
 
+  const loadedAllPositions =
+    loadedProjectPositions &&
+    loadedSpecs &&
+    loadedPositionSkillsValue &&
+    !!positionSkillsValue.length;
+
   return (
     <Container maxW="md" display="flex" flexDirection="column">
       <Flex
@@ -148,16 +153,7 @@ export const ProjectPage = () => {
 
             <Stack gap={0} mb={6}>
               <Heading variant="h2">В проект требуются</Heading>
-              <Skeleton
-                isLoaded={
-                  loadedProjectPositions &&
-                  loadedSpecs &&
-                  loadedPositionSkillsValue &&
-                  !!positionSkillsValue.length
-                }
-                borderRadius="2xl"
-                fadeDuration={2}
-              >
+              <Skeleton isLoaded={loadedAllPositions} borderRadius="2xl" fadeDuration={2}>
                 <Stack>
                   {projectPositions?.data.map((_, i) => (
                     <STag

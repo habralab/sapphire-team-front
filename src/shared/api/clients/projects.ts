@@ -16,10 +16,12 @@ export type CreatePositionRequest =
 type CreatePositionResponse =
   paths['/api/rest/projects/{project_id}/positions/']['post']['responses']['200']['content']['application/json'];
 
-type AddSkillsRequest =
+export type AddSkillsRequest =
   paths['/api/rest/projects/{project_id}/positions/{position_id}/skills/']['post']['requestBody']['content']['application/json'];
 type AddSkillsResponse =
   paths['/api/rest/projects/{project_id}/positions/{position_id}/skills/']['post']['responses']['200']['content']['application/json'];
+export type UpdateSkillsParams =
+  paths['/api/rest/projects/{project_id}/positions/{position_id}/skills/']['post']['parameters']['path'];
 
 type GetProjectPositionsResponse =
   paths['/api/rest/projects/{project_id}/positions/']['get']['responses']['200']['content']['application/json'];
@@ -63,7 +65,11 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async updateSkills(project_id: string, position_id: string, skills: AddSkillsRequest) {
+  async updateSkills({
+    position_id,
+    project_id,
+    skills,
+  }: UpdateSkillsParams & { skills: AddSkillsRequest }) {
     const { data } = await this.client.post<AddSkillsResponse>(
       `/api/rest/projects/${project_id}/positions/${position_id}/skills/`,
       skills,
