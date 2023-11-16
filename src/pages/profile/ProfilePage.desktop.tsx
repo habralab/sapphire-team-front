@@ -5,12 +5,11 @@ import { useSearchParams } from 'react-router-dom';
 import { ProfileCardDesktop } from '~/widgets/profile-card';
 import { ProjectCard } from '~/widgets/project-card';
 
-import { Rating } from '~/features/user';
-
 import { AvatarsGroup } from '~/entities/project';
 import { Reviews } from '~/entities/user';
 
 import { data } from '~/shared/lib/data';
+import { Rating } from '~/shared/ui/rating';
 import { STag } from '~/shared/ui/STag';
 
 export function ProfilePageDesktop() {

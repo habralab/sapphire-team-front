@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Stack } from '@chakra-ui/layout';
 import { Button, Card, CloseButton, FormControl, FormLabel } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useApi } from '~/shared/hooks';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
@@ -44,7 +45,7 @@ export const Team = (props: TeamProps) => {
   const handleNewSpecialist = () => {
     setNewSpecialist([
       ...newSpecialist,
-      { spec: userSpecs[0], skills: [...userSkills], id: Date.now() },
+      { spec: userSpecs[0], skills: [...userSkills], id: uuidv4() },
     ]);
     setUserSpecs([]);
     setUserSkills([]);

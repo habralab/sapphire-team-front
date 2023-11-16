@@ -8,7 +8,7 @@ interface SelectOptions extends OptionBase {
 export interface NewSpecialist {
   spec: string;
   skills: SelectOptions[];
-  id: number;
+  id: string;
 }
 
 export interface AddProjectForm {

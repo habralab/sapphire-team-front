@@ -1,6 +1,6 @@
 import { useQueries } from '@tanstack/react-query';
 
-import { GetProjectPositionsData } from '~/shared/api';
+import { GetProjectPositionsData } from '~/shared/api/types';
 import { api } from '~/shared/contexts';
 
 export const useGetPositionsSkills = (

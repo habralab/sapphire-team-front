@@ -12,6 +12,8 @@ export type GetSpecsDataResponse =
   paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json']['data'];
 type GetSpecsResponse =
   paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json'];
+export type GetSpecsData =
+  paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json']['data'];
 type GetSkillsResponse =
   paths['/api/rest/skills/']['get']['responses']['200']['content']['application/json'];
 
