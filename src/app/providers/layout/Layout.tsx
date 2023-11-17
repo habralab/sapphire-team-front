@@ -4,6 +4,7 @@ import { ScrollRestoration, useLocation } from 'react-router-dom';
 
 import { MenuBase, MenuDesktop } from '~/widgets/menu';
 
+import { wsNotifications } from '~/shared/api/ws';
 import { desktopTheme, mobileTheme } from '~/shared/config';
 import { LayoutContext } from '~/shared/contexts';
 import { useIsMobile, useWindowSizes } from '~/shared/hooks';
@@ -27,6 +28,16 @@ export const Layout = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }, [isMobile, sizes.height]);
+
+  useEffect(() => {
+    const socket = wsNotifications.notifications;
+
+    socket.connect();
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <>

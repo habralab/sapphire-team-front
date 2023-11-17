@@ -14,10 +14,11 @@ jobs:
         env:
           VITE_CLOSED: ${{ vars.VITE_CLOSED }}
           VITE_APP_BASE_URL: ${{ vars.PROD_URL }}
+          VITE_WS_BASE_URL: ${{ vars.PROD_WS_URL }}
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          envs: VITE_CLOSED, VITE_APP_BASE_URL
+          envs: VITE_CLOSED, VITE_APP_BASE_URL, VITE_WS_BASE_URL
           script: cd /var/www/front-prod && git fetch origin && git reset --hard HEAD && git clean  -d  -f . && git checkout -f ${{github.ref_name}} && yarn --immutable && VITE_CLOSED=$VITE_CLOSED yarn build

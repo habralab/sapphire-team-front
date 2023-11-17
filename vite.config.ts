@@ -78,6 +78,12 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/backend/, ''),
       },
+      '/socket': {
+        target: process.env.VITE_WS_BASE_URL,
+        ws: true,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/socket/, ''),
+      },
     },
   },
   cacheDir: '.yarn/.vite',
