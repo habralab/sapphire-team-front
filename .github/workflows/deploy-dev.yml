@@ -13,11 +13,12 @@ jobs:
       - name: deploy
         env:
           VITE_APP_BASE_URL: ${{ vars.STAGE_URL }}
+          VITE_WS_BASE_URL: ${{ vars.STAGE_WS_URL }}
         uses: appleboy/ssh-action@master
         if: contains(github.event.head_commit.message, 'chore:') == false
         with:
           host: ${{ secrets.IP }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.KEY }}
-          envs: VITE_APP_BASE_URL
+          envs: VITE_APP_BASE_URL, VITE_WS_BASE_URL
           script: cd /var/www/front && git reset --hard HEAD && git clean  -d  -f .  && git pull --force && yarn --immutable && yarn build
