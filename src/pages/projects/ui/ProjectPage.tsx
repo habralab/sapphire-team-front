@@ -7,6 +7,13 @@ import { ProjectBase } from './ProjectBase';
 export const ProjectPage = () => {
   const { id: projectId } = useParams();
 
-  if (!projectId) return <Navigate to={PATHS.notFound} replace />;
-  else <ProjectBase projectId={projectId} />;
+  return (
+    <>
+      {!projectId ? (
+        <Navigate to={PATHS.notFound} replace />
+      ) : (
+        <ProjectBase projectId={projectId} />
+      )}
+    </>
+  );
 };
