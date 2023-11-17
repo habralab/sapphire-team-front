@@ -43,7 +43,7 @@ export const Filter = () => {
         aria-label="Все фильтры"
         flexShrink="0"
         gap={2}
-        padding={['0', '0', '4']}
+        padding={isMobile ? 0 : 4}
         fontWeight="normal"
         icon={
           <>

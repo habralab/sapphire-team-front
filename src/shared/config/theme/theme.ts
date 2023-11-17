@@ -143,15 +143,18 @@ const Heading = defineStyleConfig({
       fontFamily: `'Raleway', sans-serif`,
       fontSize: '2xl',
       fontWeight: 'bold',
+      lineHeight: 'initial',
     },
     h2: {
       fontSize: 'lg',
       fontWeight: 'semibold',
       marginBottom: '3',
+      lineHeight: 'initial',
     },
     h3: {
       fontSize: 'md',
       fontWeight: 'medium',
+      lineHeight: 'initial',
     },
   },
 });
@@ -232,8 +235,5 @@ export const basicTheme = extendTheme({
       800: '#424242',
       900: '#111111',
     },
-  },
-  breakpoints: {
-    md: '56.25rem',
   },
 });
