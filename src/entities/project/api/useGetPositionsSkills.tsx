@@ -4,8 +4,8 @@ import { GetProjectPositionsData } from '~/shared/api/types';
 import { api } from '~/shared/contexts';
 
 export const useGetPositionsSkills = (
+  projectId: string,
   projectPositions?: GetProjectPositionsData,
-  projectId?: string,
 ) =>
   useQueries({
     queries: projectPositions

@@ -58,7 +58,7 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async getProjectAvatar(project_id?: string) {
+  async getProjectAvatar(project_id: string) {
     const { data } = await this.client.get<Blob>(
       `/api/rest/projects/${project_id}/avatar`,
       {
@@ -68,7 +68,7 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async getCurrentProject(project_id?: string) {
+  async getCurrentProject(project_id: string) {
     const { data } = await this.client.get<GetCurrentProjectResponse>(
       `/api/rest/projects/${project_id}`,
     );
@@ -92,14 +92,14 @@ export class ProjectsApiClient extends BaseApiClient {
     };
   }
 
-  async getProjectPositions(project_id?: string) {
+  async getProjectPositions(project_id: string) {
     const { data } = await this.client.get<GetProjectPositionsResponse>(
       `/api/rest/projects/${project_id}/positions/`,
     );
     return data;
   }
 
-  async getPositionSkills(project_id?: string, position_id?: string) {
+  async getPositionSkills(project_id: string, position_id: string) {
     const { data } = await this.client.get<GetPositionSkillsResponse>(
       `/api/rest/projects/${project_id}/positions/${position_id}/skills/`,
     );
