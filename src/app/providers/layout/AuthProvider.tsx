@@ -2,7 +2,7 @@ import { Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { IsAuthResponse } from '~/shared/api';
+import { IsAuthResponse } from '~/shared/api/types';
 import { AuthContext, initAuth } from '~/shared/contexts';
 import { useApi } from '~/shared/hooks';
 import { Loader } from '~/shared/ui/Loader';

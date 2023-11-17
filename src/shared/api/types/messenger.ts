@@ -8,18 +8,96 @@ export interface paths {
     /** Health */
     get: operations['health_health_get'];
   };
+  '/api/rest/chats/': {
+    /** Get Chats */
+    get: operations['get_chats_api_rest_chats__get'];
+  };
+  '/api/rest/chats/{chat_id}': {
+    /** Get Chat */
+    get: operations['get_chat_api_rest_chats__chat_id__get'];
+  };
 }
 
 export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
+    /** ChatListResponse */
+    ChatListResponse: {
+      /** Data */
+      data: components['schemas']['ChatResponse'][];
+      /** Page */
+      page: number;
+      /** Per Page */
+      per_page: number;
+      /** Total Pages */
+      total_pages?: number | null;
+      /** Total Items */
+      total_items?: number | null;
+    };
+    /** ChatResponse */
+    ChatResponse: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string;
+      /** Is Personal */
+      is_personal: boolean;
+      /** Members */
+      members: string[];
+      last_message: components['schemas']['MessageResponse'] | null;
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string;
+    };
+    /** HTTPValidationError */
+    HTTPValidationError: {
+      /** Detail */
+      detail?: components['schemas']['ValidationError'][];
+    };
     /** HealthResponse */
     HealthResponse: {
       /** Version */
       version: string;
       /** Name */
       name: string;
+    };
+    /** MessageResponse */
+    MessageResponse: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string;
+      /**
+       * Chat Id
+       * Format: uuid
+       */
+      chat_id: string;
+      /** Text */
+      text: string;
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string;
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string;
+    };
+    /** ValidationError */
+    ValidationError: {
+      /** Location */
+      loc: (string | number)[];
+      /** Message */
+      msg: string;
+      /** Error Type */
+      type: string;
     };
   };
   responses: never;
@@ -41,6 +119,72 @@ export interface operations {
       200: {
         content: {
           'application/json': components['schemas']['HealthResponse'];
+        };
+      };
+    };
+  };
+  /** Get Chats */
+  get_chats_api_rest_chats__get: {
+    parameters: {
+      query?: {
+        /** @description Page number */
+        page?: number;
+        /** @description Number of items per page */
+        per_page?: number;
+      };
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody?: {
+      content: {
+        'application/json': unknown;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ChatListResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get Chat */
+  get_chat_api_rest_chats__chat_id__get: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      path: {
+        chat_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': unknown;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
         };
       };
     };

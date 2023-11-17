@@ -1,4 +1,3 @@
-export * from './rating';
 export * from './settings';
 export * from './notification';
 export * from './update-user';

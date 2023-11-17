@@ -20,15 +20,17 @@ export interface paths {
     /** Partial Update Project */
     patch: operations['partial_update_project_api_rest_projects__project_id__patch'];
   };
-  '/api/rest/projects/{project_id}/history': {
-    /** History */
-    get: operations['history_api_rest_projects__project_id__history_get'];
-  };
   '/api/rest/projects/{project_id}/avatar': {
+    /** Get Project Avatar */
+    get: operations['get_project_avatar_api_rest_projects__project_id__avatar_get'];
     /** Upload Project Avatar */
     post: operations['upload_project_avatar_api_rest_projects__project_id__avatar_post'];
     /** Delete Project Avatar */
     delete: operations['delete_project_avatar_api_rest_projects__project_id__avatar_delete'];
+  };
+  '/api/rest/projects/{project_id}/history': {
+    /** History */
+    get: operations['history_api_rest_projects__project_id__history_get'];
   };
   '/api/rest/projects/{project_id}/positions/': {
     /** Get Project Positions */
@@ -97,6 +99,11 @@ export interface components {
        * Format: uuid
        */
       owner_id: string;
+      /**
+       * Startline
+       * Format: date-time
+       */
+      startline: string;
       /** Deadline */
       deadline?: string | null;
     };
@@ -123,6 +130,37 @@ export interface components {
       version: string;
       /** Name */
       name: string;
+    };
+    /** ParticipantResponse */
+    ParticipantResponse: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string;
+      /**
+       * Position Id
+       * Format: uuid
+       */
+      position_id: string;
+      /**
+       * User Id
+       * Format: uuid
+       */
+      user_id: string;
+      status: components['schemas']['ParticipantStatusEnum'];
+      /** Joined At */
+      joined_at: string | null;
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string;
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string;
     };
     /**
      * ParticipantStatusEnum
@@ -178,37 +216,6 @@ export interface components {
     ProjectPartialUpdateRequest: {
       /** Status */
       status?: unknown;
-    };
-    /** ProjectParticipantResponse */
-    ProjectParticipantResponse: {
-      /**
-       * Id
-       * Format: uuid
-       */
-      id: string;
-      /**
-       * Position Id
-       * Format: uuid
-       */
-      position_id: string;
-      /**
-       * User Id
-       * Format: uuid
-       */
-      user_id: string;
-      status: components['schemas']['ParticipantStatusEnum'];
-      /** Joined At */
-      joined_at: string | null;
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string;
-      /**
-       * Updated At
-       * Format: date-time
-       */
-      updated_at: string;
     };
     /** ProjectPositionResponse */
     ProjectPositionResponse: {
@@ -269,6 +276,11 @@ export interface components {
        * Format: uuid
        */
       owner_id: string;
+      /**
+       * Startline
+       * Format: date-time
+       */
+      startline: string;
       /** Deadline */
       deadline: string | null;
       /**
@@ -381,11 +393,15 @@ export interface operations {
         per_page?: number;
         query_text?: unknown;
         owner_id?: unknown;
-        deadline?: unknown;
+        startline_ge?: unknown;
+        startline_le?: unknown;
+        deadline_ge?: unknown;
+        deadline_le?: unknown;
         status?: unknown;
         position_is_closed?: unknown;
         position_skill_ids?: unknown;
         position_specialization_ids?: unknown;
+        participant_user_ids?: unknown;
       };
     };
     responses: {
@@ -490,15 +506,9 @@ export interface operations {
       };
     };
   };
-  /** History */
-  history_api_rest_projects__project_id__history_get: {
+  /** Get Project Avatar */
+  get_project_avatar_api_rest_projects__project_id__avatar_get: {
     parameters: {
-      query?: {
-        /** @description Page number */
-        page?: number;
-        /** @description Number of items per page */
-        per_page?: number;
-      };
       path: {
         project_id: string;
       };
@@ -507,7 +517,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['ProjectHistoryListResponse'];
+          'application/json': unknown;
         };
       };
       /** @description Validation Error */
@@ -571,6 +581,34 @@ export interface operations {
       200: {
         content: {
           'application/json': components['schemas']['ProjectResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** History */
+  history_api_rest_projects__project_id__history_get: {
+    parameters: {
+      query?: {
+        /** @description Page number */
+        page?: number;
+        /** @description Number of items per page */
+        per_page?: number;
+      };
+      path: {
+        project_id: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ProjectHistoryListResponse'];
         };
       };
       /** @description Validation Error */
@@ -692,7 +730,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['ProjectParticipantResponse'];
+          'application/json': components['schemas']['ParticipantResponse'];
         };
       };
       /** @description Validation Error */
@@ -716,7 +754,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['ProjectParticipantResponse'];
+          'application/json': components['schemas']['ParticipantResponse'];
         };
       };
       /** @description Validation Error */
@@ -752,7 +790,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['ProjectParticipantResponse'];
+          'application/json': components['schemas']['ParticipantResponse'];
         };
       };
       /** @description Validation Error */

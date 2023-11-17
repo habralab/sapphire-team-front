@@ -38,10 +38,10 @@ export interface components {
       /** Name */
       name: string;
     };
-    /** PaginatedResponse */
-    PaginatedResponse: {
+    /** SkillListResponse */
+    SkillListResponse: {
       /** Data */
-      data: unknown[];
+      data: components['schemas']['SkillResponse'][];
       /** Page */
       page: number;
       /** Per Page */
@@ -50,6 +50,21 @@ export interface components {
       total_pages?: number | null;
       /** Total Items */
       total_items?: number | null;
+    };
+    /** SkillResponse */
+    SkillResponse: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string;
+      /** Name */
+      name: string;
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string;
     };
     /** SpecializationGroupListResponse */
     SpecializationGroupListResponse: {
@@ -72,7 +87,7 @@ export interface components {
        */
       id: string;
       /** Name */
-      name: string;
+      name: string | null;
       /**
        * Created At
        * Format: date-time
@@ -158,7 +173,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['SpecializationGroupListResponse'];
+          'application/json': components['schemas']['SkillListResponse'];
         };
       };
       /** @description Validation Error */

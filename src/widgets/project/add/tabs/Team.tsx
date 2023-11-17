@@ -1,24 +1,15 @@
 import { Box, Flex, Heading, Stack } from '@chakra-ui/layout';
-import { Button, Card, CloseButton } from '@chakra-ui/react';
+import { Button, Card, CloseButton, FormControl, FormLabel } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import { OptionBase } from 'chakra-react-select';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useApi } from '~/shared/hooks';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STag } from '~/shared/ui/STag';
 
-interface SelectOptions extends OptionBase {
-  label: string;
-  value: string;
-}
-
-export interface NewSpecialist {
-  spec: string[];
-  skills: SelectOptions[];
-  id: number;
-}
+import { NewSpecialist } from '../AddProject.types';
 
 interface TeamProps {
   newSpecialist: NewSpecialist[];
@@ -54,7 +45,7 @@ export const Team = (props: TeamProps) => {
   const handleNewSpecialist = () => {
     setNewSpecialist([
       ...newSpecialist,
-      { spec: [...userSpecs], skills: [...userSkills], id: Date.now() },
+      { spec: userSpecs[0], skills: [...userSkills], id: uuidv4() },
     ]);
     setUserSpecs([]);
     setUserSkills([]);
@@ -64,9 +55,11 @@ export const Team = (props: TeamProps) => {
     <>
       <Box mb={5}>
         <Stack gap={1} mb={4}>
-          <Heading variant="h2" mb={3}>
-            Специализация
-          </Heading>
+          <FormControl isRequired>
+            <FormLabel variant="h2" mb={3}>
+              Специализация
+            </FormLabel>
+          </FormControl>
           <FilterSpecialization
             userSpecs={userSpecs}
             singleChecked={true}
@@ -76,9 +69,11 @@ export const Team = (props: TeamProps) => {
       </Box>
       <Box mb={5}>
         <Stack gap={1}>
-          <Heading variant="h2" mb={3}>
-            Профессиональные навыки
-          </Heading>
+          <FormControl isRequired>
+            <FormLabel variant="h2" mb={3}>
+              Профессиональные навыки
+            </FormLabel>
+          </FormControl>
         </Stack>
         <Box mb={3}>
           <SearchSelect selectedItems={userSkills} setSelectedItems={setUserSkills} />
@@ -97,7 +92,7 @@ export const Team = (props: TeamProps) => {
       </Button>
       <Stack gap={6}>
         {newSpecialist.map((specialist) => {
-          const tag = getMainTag(specialist.spec[0]);
+          const tag = getMainTag(specialist.spec);
           return (
             <Card key={specialist.id} p={5} borderRadius="2xl" boxShadow="none">
               <Flex alignItems="baseline" justifyContent="space-between">

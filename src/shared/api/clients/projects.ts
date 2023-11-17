@@ -1,21 +1,69 @@
-import { paths } from '../types/projects';
+import {
+  AddSkillsRequest,
+  AddSkillsResponse,
+  AfterPostNewProjectResponse,
+  CreatePositionRequest,
+  CreatePositionResponse,
+  GetAllProjectsResponse,
+  GetCurrentProjectResponse,
+  GetPositionSkillsResponse,
+  GetProjectPositionsResponse,
+  NewProjectParams,
+  UpdateProjectAvatar,
+  UpdateProjectAvatarID,
+  UpdateSkillsParams,
+} from '../types/project.types';
 
 import { BaseApiClient } from './base';
-
-export type NewProjectParams =
-  paths['/api/rest/projects/']['post']['requestBody']['content']['application/json'];
-type AfterPostNewProjectResponse =
-  paths['/api/rest/projects/']['post']['responses']['200']['content']['application/json'];
-export type GetAllProjectsResponse =
-  paths['/api/rest/projects/']['get']['responses']['200']['content']['application/json'];
-type GetCurrentProjectResponse =
-  paths['/api/rest/projects/{project_id}']['get']['responses']['200']['content']['application/json'];
 
 export class ProjectsApiClient extends BaseApiClient {
   async addNewProject(newProject: NewProjectParams) {
     const { data } = await this.client.post<AfterPostNewProjectResponse>(
       `/api/rest/projects/`,
       newProject,
+    );
+    return data;
+  }
+
+  async uploadProjectAvatar({
+    project_id,
+    avatar,
+  }: UpdateProjectAvatarID & UpdateProjectAvatar) {
+    await this.client.post(
+      `/api/rest/projects/${project_id}/avatar`,
+      { avatar },
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      },
+    );
+  }
+
+  async createPosition(project_id: string, position: CreatePositionRequest) {
+    const { data } = await this.client.post<CreatePositionResponse>(
+      `/api/rest/projects/${project_id}/positions/`,
+      position,
+    );
+    return data;
+  }
+
+  async updateSkills({
+    position_id,
+    project_id,
+    skills,
+  }: UpdateSkillsParams & { skills: AddSkillsRequest }) {
+    const { data } = await this.client.post<AddSkillsResponse>(
+      `/api/rest/projects/${project_id}/positions/${position_id}/skills/`,
+      skills,
+    );
+    return data;
+  }
+
+  async getProjectAvatar(project_id: string) {
+    const { data } = await this.client.get<Blob>(
+      `/api/rest/projects/${project_id}/avatar`,
+      {
+        responseType: 'blob',
+      },
     );
     return data;
   }
@@ -42,6 +90,20 @@ export class ProjectsApiClient extends BaseApiClient {
       deadline: `с ${formatDate}`.slice(0, -3),
       status: statusAdapter[status],
     };
+  }
+
+  async getProjectPositions(project_id: string) {
+    const { data } = await this.client.get<GetProjectPositionsResponse>(
+      `/api/rest/projects/${project_id}/positions/`,
+    );
+    return data;
+  }
+
+  async getPositionSkills(project_id: string, position_id: string) {
+    const { data } = await this.client.get<GetPositionSkillsResponse>(
+      `/api/rest/projects/${project_id}/positions/${position_id}/skills/`,
+    );
+    return data;
   }
 
   async getAllProjects(page: number, owner_id?: string | null) {

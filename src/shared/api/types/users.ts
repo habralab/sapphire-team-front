@@ -123,9 +123,9 @@ export interface components {
     /** UserUpdateRequest */
     UserUpdateRequest: {
       /** First Name */
-      first_name: string | null;
+      first_name: string;
       /** Last Name */
-      last_name: string | null;
+      last_name: string;
       /** About */
       about: string | null;
       /** Main Specialization Id */
