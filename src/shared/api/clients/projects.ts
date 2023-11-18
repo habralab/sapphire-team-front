@@ -1,3 +1,5 @@
+import Qs from 'query-string';
+
 import {
   AddSkillsRequest,
   AddSkillsResponse,
@@ -106,10 +108,34 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async getAllProjects(page: number, owner_id?: string | null) {
+  async getAllProjects(
+    page: number,
+    owner_id?: string | null,
+    position_specialization_ids?: string[],
+    skills?: { value: string; label: string }[],
+    date?: string,
+    text?: string,
+  ) {
+    const formatSkills = skills?.map(({ value }) => value);
+    const formatDate = date ? date : null;
+    const formatText = text ? text : null;
     const { data } = await this.client.get<GetAllProjectsResponse>(
       `/api/rest/projects/`,
-      { params: { page, owner_id } },
+      {
+        params: {
+          page,
+          owner_id,
+          position_specialization_ids,
+          position_skill_ids: formatSkills,
+          startline_le: formatDate,
+          query_text: formatText,
+        },
+        paramsSerializer: function (params) {
+          return Qs.stringify(params, {
+            skipNull: true,
+          });
+        },
+      },
     );
     const { data: onlyData, ...others } = data;
     const newData = onlyData.map((project) => {

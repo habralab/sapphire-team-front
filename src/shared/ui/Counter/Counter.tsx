@@ -14,6 +14,7 @@ export function Counter(props: CounterType) {
 
   return (
     <Box
+      display={count ? 'block' : 'none'}
       bg={bg ?? 'purple.600'}
       color={color ?? 'white'}
       overflow="hidden"

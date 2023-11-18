@@ -1,14 +1,5 @@
-import {
-  Flex,
-  SimpleGrid,
-  Container,
-  Button,
-  Portal,
-  Box,
-  Skeleton,
-} from '@chakra-ui/react';
-import { QueryFunctionContext, QueryKey, useInfiniteQuery } from '@tanstack/react-query';
-import React, { useEffect, useRef } from 'react';
+import { Flex, SimpleGrid, Container, Button, Portal, Skeleton } from '@chakra-ui/react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
@@ -20,20 +11,42 @@ import { Avatar, DummyAvatar } from '~/entities/user';
 
 import { useApi, useLayoutRefs } from '~/shared/hooks';
 import { BasePageProps, PATHS } from '~/shared/lib/router';
+import {
+  loadDataFromStorage,
+  loadSkillsFromStorage,
+  loadSpecsFromStorage,
+} from '~/shared/lib/storageActions';
 import { STag } from '~/shared/ui/STag';
 
+import { useGetAllProjects } from '../api/useGetAllProjects';
+
 export const SearchPage = ({ user }: BasePageProps) => {
-  const { userApi, projectsApi } = useApi();
+  const { userApi } = useApi();
   const targetRef = useRef<HTMLDivElement>(null);
   const layout = useLayoutRefs();
 
-  const { data, isLoading, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['getAllProjects'],
-    queryFn: ({ pageParam = 1 }: QueryFunctionContext<QueryKey, number>) =>
-      projectsApi.getAllProjects(pageParam),
-    getNextPageParam: (lastPage) => lastPage.page + 1,
-    staleTime: 5000,
-  });
+  const [userSpecs, setUserSpecs] = useState<string[]>([]);
+  const [selectedItems, setSelectedItems] = useState<{ value: string; label: string }[]>(
+    [],
+  );
+  const [date, setDate] = useState('');
+  const [searchText, setSearchText] = useState('');
+
+  useEffect(() => {
+    const localSpecs = loadSpecsFromStorage();
+    const localSkills = loadSkillsFromStorage();
+    const localData = loadDataFromStorage();
+    if (localSpecs.length) setUserSpecs(localSpecs);
+    if (localSkills.length) setSelectedItems(localSkills);
+    if (localData.length) setDate(localData);
+  }, []);
+
+  const { data, isLoading, fetchNextPage, isFetchingNextPage } = useGetAllProjects(
+    userSpecs,
+    selectedItems,
+    date,
+    searchText,
+  );
 
   const dummyDate = {
     mainTags: ['Фронтенд разработчик'],
@@ -62,6 +75,10 @@ export const SearchPage = ({ user }: BasePageProps) => {
     };
   }, [data]);
 
+  const handleSumbit = (value: string) => {
+    setSearchText(value);
+  };
+
   return (
     <>
       <Container maxW="md" mb={4}>
@@ -77,8 +94,16 @@ export const SearchPage = ({ user }: BasePageProps) => {
             )}
           </Flex>
           <Flex gap="1" mb={4}>
-            <SearchProject />
-            <Filter />
+            <SearchProject onChange={handleSumbit} />
+            <Filter
+              userSpecs={userSpecs}
+              setUserSpecs={setUserSpecs}
+              selectedItems={selectedItems}
+              setSelectedItems={setSelectedItems}
+              filterDate={date}
+              setFilterDate={setDate}
+              totalItems={data?.pages[0].total_items}
+            />
           </Flex>
           {isLoading || !data ? (
             <>
@@ -116,7 +141,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
                   <Skeleton height="200px" borderRadius="2xl" mb={3} />
                 </>
               )}
-              <Box ref={targetRef}></Box>
+              {/* <Box ref={targetRef}></Box> */}
             </SimpleGrid>
           )}
         </Flex>

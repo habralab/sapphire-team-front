@@ -17,21 +17,36 @@ import {
   Input,
 } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
 import { IoOptions } from 'react-icons/io5';
 
 import { useIsMobile } from '~/shared/hooks';
+import { deleteKeyFromStorage, saveInStorage } from '~/shared/lib/storageActions';
+import { stringToServerDate } from '~/shared/lib/stringToServerDate';
 import { Counter } from '~/shared/ui/Counter';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
-import { SearchSelect } from '~/shared/ui/SearchSelect';
+import { SearchSelect, SelectOptions } from '~/shared/ui/SearchSelect';
 
-export const Filter = () => {
+interface FilterProps {
+  userSpecs: string[];
+  setUserSpecs: (userSpecs: string[]) => void;
+  selectedItems: SelectOptions[];
+  setSelectedItems: (selectedItems: SelectOptions[]) => void;
+  filterDate: string;
+  setFilterDate: (date: string) => void;
+  totalItems?: number | null;
+}
+
+export const Filter = ({
+  userSpecs,
+  setUserSpecs,
+  selectedItems,
+  setSelectedItems,
+  filterDate,
+  setFilterDate,
+  totalItems = 0,
+}: FilterProps) => {
   const queryClient = useQueryClient();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [userSpecs, setUserSpecs] = useState<string[]>([]);
-  const [selectedItems, setSelectedItems] = useState<{ value: string; label: string }[]>(
-    [],
-  );
 
   const isMobile = useIsMobile();
 
@@ -49,7 +64,11 @@ export const Filter = () => {
           <>
             <Text hidden={isMobile}>Все фильтры</Text>
             <Icon as={IoOptions} fontSize="2xl" />
-            <Counter count={5} float borderBg="bg" />
+            <Counter
+              count={userSpecs.length + selectedItems.length + filterDate.length ? 1 : 0}
+              float
+              borderBg="bg"
+            />
           </>
         }
       ></IconButton>
@@ -73,6 +92,10 @@ export const Filter = () => {
                 onClick={() => {
                   setUserSpecs([]);
                   setSelectedItems([]);
+                  setFilterDate('');
+                  deleteKeyFromStorage('skills');
+                  deleteKeyFromStorage('specs');
+                  deleteKeyFromStorage('date');
                   queryClient.invalidateQueries(['skills']);
                 }}
               >
@@ -93,6 +116,7 @@ export const Filter = () => {
                     Профессиональные навыки
                   </Heading>
                   <SearchSelect
+                    isSearchFilter={true}
                     selectedItems={selectedItems}
                     setSelectedItems={setSelectedItems}
                   />
@@ -108,13 +132,19 @@ export const Filter = () => {
                   color="gray.500"
                   placeholder="Выберите дату"
                   type="date"
+                  value={filterDate.split('T', 1)[0]}
+                  onChange={(e) => {
+                    const formatDate = stringToServerDate(e.target.value);
+                    setFilterDate(formatDate);
+                    saveInStorage('date', formatDate);
+                  }}
                 />
               </Box>
             </Stack>
           </Container>
           <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0" mt="auto">
-            <Button fontSize="sm" fontWeight="600" w="full">
-              Показать 43 проекта
+            <Button fontSize="sm" fontWeight="600" w="full" onClick={onClose}>
+              Показать {!totalItems ? '0' : totalItems} проектов
             </Button>
           </Container>
         </ModalContent>
