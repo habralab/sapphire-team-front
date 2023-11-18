@@ -11,9 +11,11 @@ import {
 
 import { Info } from '~/entities/user';
 
+import { useIsMobile } from '~/shared/hooks';
 import { STag } from '~/shared/ui/STag';
 
 export function ProfileCardDesktop() {
+  const isMobile = useIsMobile();
   const dummyFillProfile = 60;
   const dymmyMainSkills = ['UX/UI дизайнер', 'Product дизайнер'];
   const dymmySkills = [
@@ -36,7 +38,7 @@ export function ProfileCardDesktop() {
         w="100%"
         borderRadius="2xl"
         mb={10}
-        p={[2, 2, 6, 10]}
+        p={isMobile ? 2 : 10}
         gap={6}
       >
         <Stack gap="2.5">

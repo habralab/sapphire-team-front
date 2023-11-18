@@ -23,13 +23,13 @@ export function Messages({ isDesktop }: MessagesProps) {
     <VStack
       pt={4}
       ref={messagesRef}
-      px={[0, 0, 6]}
+      px={isDesktop ? 6 : 0}
       overflowY={isDesktop ? 'auto' : 'initial'}
     >
       <Box>
         <STag tags={['Не прочитано']} />
       </Box>
-      <VStack gap={6} mb={[4]}>
+      <VStack gap={6} mb={4}>
         <VStack alignItems="end">
           <Message variant="outgoing">Здравствуйте</Message>
           <Message variant="outgoing">

@@ -21,7 +21,7 @@ import {
 } from '~/entities/project';
 import { useGetSkills, useGetSpecs } from '~/entities/storage';
 
-import { useAuth, useLayoutRefs } from '~/shared/hooks';
+import { useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
 interface ProjectBase {
@@ -31,6 +31,7 @@ interface ProjectBase {
 export const ProjectBase = ({ projectId }: ProjectBase) => {
   const layout = useLayoutRefs();
   const { userId } = useAuth();
+  const isMobile = useIsMobile();
   const [projectAvatarImg, setProjectAvatarImg] = useState<string>('');
   const [specsIds, setSpecsIds] = useState<string[]>([]);
   const [unvaluedSkillsIds, setUnvaluedSkillsIds] = useState<string[][]>([]);
@@ -127,7 +128,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
             height={32}
             objectFit="cover"
           />
-          <CardBody padding={['5', '6']}>
+          <CardBody padding={isMobile ? 5 : 6}>
             {project && (
               <>
                 <ProjectInfo

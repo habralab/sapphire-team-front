@@ -47,7 +47,7 @@ export const ProjectInfo = ({
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
-        <Status mb={['3', '4']}>{project.status}</Status>
+        <Status mb={3}>{project.status}</Status>
         <Card
           title={project.name}
           date={project.deadline}

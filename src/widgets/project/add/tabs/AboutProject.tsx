@@ -14,6 +14,7 @@ import { ChangeEvent, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { BsPlus, BsX } from 'react-icons/bs';
 
+import { useIsMobile } from '~/shared/hooks';
 import { STextarea } from '~/shared/ui/STextarea';
 
 import { AddProjectForm } from '../AddProject.types';
@@ -23,6 +24,7 @@ interface AboutProjectProps {
 }
 
 export const AboutProject = (props: AboutProjectProps) => {
+  const isMobile = useIsMobile();
   const {
     register,
     control,
@@ -57,7 +59,7 @@ export const AboutProject = (props: AboutProjectProps) => {
               flexShrink="0"
               h={0}
               minW="none"
-              padding={['0', '0', '4']}
+              padding={isMobile ? 0 : 4}
               icon={
                 <>
                   <Icon as={BsX} fontSize="2xl" />
@@ -73,7 +75,7 @@ export const AboutProject = (props: AboutProjectProps) => {
               flexShrink="0"
               h={0}
               minW="none"
-              padding={['0', '0', '4']}
+              padding={isMobile ? 0 : 4}
               icon={
                 <>
                   <Icon as={BsPlus} fontSize="2xl" />

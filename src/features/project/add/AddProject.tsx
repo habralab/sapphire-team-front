@@ -17,11 +17,11 @@ export const AddProject = () => {
       onClick={() => {
         navigate(PATHS.addProject);
       }}
+      h={'initial'}
       gap={2}
-      minW={['8', '8', '10']}
-      h={['8', '8', '10']}
       flexShrink="0"
-      padding={['0', '0', '4']}
+      px={isMobile ? 1 : 4}
+      py={isMobile ? 1 : 2}
       icon={
         <HStack fontWeight="semibold">
           <Text hidden={isMobile}>Создать проект</Text>

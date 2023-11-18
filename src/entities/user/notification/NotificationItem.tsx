@@ -1,5 +1,6 @@
 import { Stack, Flex, Heading, Text, Circle } from '@chakra-ui/react';
 
+import { useIsMobile } from '~/shared/hooks';
 import { SLink } from '~/shared/ui/SLink';
 
 interface NotificationItemProps {
@@ -9,6 +10,7 @@ interface NotificationItemProps {
 
 export function NotificationItem(props: NotificationItemProps) {
   const { status, project } = props;
+  const isMobile = useIsMobile();
 
   return (
     <Flex
@@ -16,7 +18,7 @@ export function NotificationItem(props: NotificationItemProps) {
       borderBottom="1px"
       borderColor="gray.200"
       py={3}
-      px={[5, 6]}
+      px={isMobile ? 5 : 6}
       _last={{ border: 'none' }}
     >
       <Flex alignItems="center" justifyContent="space-between" gap={2}>

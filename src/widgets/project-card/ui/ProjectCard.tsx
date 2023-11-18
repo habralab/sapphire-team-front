@@ -3,6 +3,7 @@ import React from 'react';
 
 import { Card } from '~/entities/project';
 
+import { useIsMobile } from '~/shared/hooks';
 import { Status } from '~/shared/ui/status';
 
 type ProjectCardProps = {
@@ -14,6 +15,7 @@ type ProjectCardProps = {
 } & CardProps;
 
 export const ProjectCard = (props: ProjectCardProps) => {
+  const isMobile = useIsMobile();
   const { status, title, date, description, children, ...others } = props;
 
   return (
@@ -25,8 +27,8 @@ export const ProjectCard = (props: ProjectCardProps) => {
       alignContent="center"
       {...others}
     >
-      <CardBody padding={['5', '6']}>
-        <Status mb={['3', '4']}>{status}</Status>
+      <CardBody padding={isMobile ? 5 : 6}>
+        <Status mb={isMobile ? 3 : 4}>{status}</Status>
         <Card date={date} description={description} title={title} />
         {children}
       </CardBody>

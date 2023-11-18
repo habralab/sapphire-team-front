@@ -2,6 +2,7 @@ import { Icon, Flex, IconButton } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import { IoSend } from 'react-icons/io5';
 
+import { useIsMobile } from '~/shared/hooks';
 import { STextarea } from '~/shared/ui/STextarea';
 
 interface CreateMessageProps {
@@ -10,10 +11,11 @@ interface CreateMessageProps {
 
 export function CreateMessage({ onSubmit }: CreateMessageProps) {
   const [value, setValue] = useState('');
+  const isMobile = useIsMobile();
   const messageRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Flex px={[0, 0, 6]} py={4} alignItems="center" gap={4} w="full">
+    <Flex px={isMobile ? 0 : 6} py={4} alignItems="center" gap={4} w="full">
       <STextarea
         maxLength={50}
         value={value}

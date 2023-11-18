@@ -20,7 +20,7 @@ const normalRouter = createBrowserRouter([
 
 const Routing = () => {
   return (
-    <RouterProvider router={import.meta.env.VITE_CLOSED ? closedRouter : normalRouter} />
+    <RouterProvider router={!import.meta.env.VITE_CLOSED ? closedRouter : normalRouter} />
   );
 };
 
