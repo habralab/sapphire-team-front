@@ -117,8 +117,6 @@ export class ProjectsApiClient extends BaseApiClient {
     text?: string,
   ) {
     const formatSkills = skills?.map(({ value }) => value);
-    const formatDate = date ? date : null;
-    const formatText = text ? text : null;
     const { data } = await this.client.get<GetAllProjectsResponse>(
       `/api/rest/projects/`,
       {
@@ -127,12 +125,13 @@ export class ProjectsApiClient extends BaseApiClient {
           owner_id,
           position_specialization_ids,
           position_skill_ids: formatSkills,
-          startline_le: formatDate,
-          query_text: formatText,
+          startline_le: date,
+          query_text: text,
         },
         paramsSerializer: function (params) {
           return Qs.stringify(params, {
             skipNull: true,
+            skipEmptyString: true,
           });
         },
       },
