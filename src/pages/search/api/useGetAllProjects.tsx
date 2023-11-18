@@ -13,7 +13,7 @@ export const useGetAllProjects = (
     queryFn: ({ pageParam = 1 }: QueryFunctionContext<QueryKey, number>) =>
       api.projectsApi.getAllProjects(
         pageParam,
-        null,
+        '',
         specsIds,
         skillsIds,
         date,

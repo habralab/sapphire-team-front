@@ -110,7 +110,7 @@ export class ProjectsApiClient extends BaseApiClient {
 
   async getAllProjects(
     page: number,
-    owner_id?: string | null,
+    owner_id?: string,
     position_specialization_ids?: string[],
     skills?: { value: string; label: string }[],
     date?: string,
