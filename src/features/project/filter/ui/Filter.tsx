@@ -50,6 +50,8 @@ export const Filter = ({
 
   const isMobile = useIsMobile();
 
+  const dateCount = filterDate.length ? 1 : 0;
+
   return (
     <>
       <IconButton
@@ -65,7 +67,7 @@ export const Filter = ({
             <Text hidden={isMobile}>Все фильтры</Text>
             <Icon as={IoOptions} fontSize="2xl" />
             <Counter
-              count={userSpecs.length + selectedItems.length + filterDate.length ? 1 : 0}
+              count={userSpecs.length + selectedItems.length + dateCount}
               float
               borderBg="bg"
             />
