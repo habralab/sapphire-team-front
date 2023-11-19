@@ -3,13 +3,12 @@ import {
   Text,
   SkeletonCircle,
   SkeletonText,
-  Image,
-  Center,
+  Avatar as ChakraAvatar,
 } from '@chakra-ui/react';
 
-import { useProfile } from '../api';
+import { useApi } from '~/shared/hooks';
 
-import NotAuth from './notAuth.svg';
+import { useProfile } from '../api';
 
 const defaultName = 'Хабраюзер';
 
@@ -19,6 +18,9 @@ interface AvatarProps {
 
 export const Avatar = ({ userId }: AvatarProps) => {
   const { data, isLoading } = useProfile(userId);
+  const { userApi } = useApi();
+
+  const avatar = userApi.getAvatar(userId);
 
   return (
     <Flex alignItems="center" gap={2} w="full">
@@ -29,10 +31,7 @@ export const Avatar = ({ userId }: AvatarProps) => {
         </>
       ) : (
         <>
-          <Center w={10} h={10} bg="white" borderRadius="full">
-            <Image src={NotAuth} w={9} h={9} />
-          </Center>
-          {/* <ChakraAvatar name={name} src={NotAuth} /> */}
+          <ChakraAvatar name={`${data?.first_name} ${data?.last_name}`} src={avatar} />
           <Text fontWeight="semibold">{`Привет, ${
             data?.first_name ?? defaultName
           }!`}</Text>

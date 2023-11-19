@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useApi } from '~/shared/hooks';
 import { STag } from '~/shared/ui/STag';
 
-import { useProfile, useSkills, useSkillsGroup } from '../api';
+import { useIsAvatarExist, useProfile, useSkills, useSkillsGroup } from '../api';
 
 interface AboutMeProfileProps {
   userId: string;
@@ -21,6 +21,7 @@ export function AboutMeProfile({ userId }: AboutMeProfileProps) {
   const { data: user } = useProfile(userId);
   const { data: userSkills } = useSkills(userId);
   const { data: skills } = useSkillsGroup(userSkills ?? []);
+  const { data: isAvatarExist, isLoading } = useIsAvatarExist(userId);
 
   useEffect(() => {
     storageApi
@@ -40,9 +41,9 @@ export function AboutMeProfile({ userId }: AboutMeProfileProps) {
       });
   }, [user]);
 
-  return user?.about ||
+  return isLoading ? null : user?.about ||
     user?.main_specialization_id ||
-    user?.secondary_specialization_id ||
+    mainSpecialization ||
     userSkills ? (
     <Stack bg="white" borderRadius="2xl" p={5} gap={6}>
       {user?.about && (
