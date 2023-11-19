@@ -2,7 +2,7 @@ import { Flex, Heading, Container, Text, Tabs, TabList, Tab } from '@chakra-ui/r
 import { useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { ProfileCard } from '~/widgets/profile-card';
+import { ProfileCardNotAuth } from '~/widgets/profile-card';
 
 import { Login, Notification, Settings } from '~/features/user';
 
@@ -28,7 +28,7 @@ export function NotAuthProfilePage() {
           <Settings />
         </Flex>
       </Flex>
-      <ProfileCard />
+      <ProfileCardNotAuth />
       <Tabs
         variant="base"
         index={tabs.findIndex((name) => name === searchParams.get('tab'))}

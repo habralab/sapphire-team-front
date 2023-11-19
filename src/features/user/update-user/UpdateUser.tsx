@@ -1,4 +1,3 @@
-import { SmallCloseIcon } from '@chakra-ui/icons';
 import {
   Button,
   Flex,
@@ -7,53 +6,53 @@ import {
   FormLabel,
   useToast,
   FormErrorMessage,
-  TagLabel,
-  IconButton,
   Icon,
-  Text,
-  Tag,
+  Center,
+  Avatar,
 } from '@chakra-ui/react';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { BsPlus } from 'react-icons/bs';
+import { MdPhotoCamera } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
-import { GetUserResponse, UpdateUserRequest } from '~/shared/api';
+import { useSkillsGroup } from '~/entities/user';
+
+import { GetUserResponse } from '~/shared/api';
 import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STextarea } from '~/shared/ui/STextarea';
 
+import {
+  useDeleteAvatar,
+  useUpdateAvatar,
+  useUpdateProfile,
+  useUpdateSkills,
+} from './api';
+import { userResponseToUserType, UserTypeForm } from './model';
+
 interface UpdateUserProps {
   user: GetUserResponse;
-}
-
-interface UserType {
-  first_name: string | null;
-  last_name: string | null;
-  about: string | null;
-  main_specialization_id: string | null;
-  secondary_specialization_id: string | null;
-  email: string | null;
+  isAvatarExist: boolean;
   skills: string[];
-}
-
-interface AvatarType {
-  avatar: string;
-}
-
-interface SkillsType {
-  avatar: string[];
 }
 
 const maxLength = 300;
 
-export function UpdateUser({ user }: UpdateUserProps) {
+export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
   const navigate = useNavigate();
-  const { userApi, storageApi } = useApi();
   const toast = useToast();
+
+  const { userApi } = useApi();
+
+  const { data: userSkillsGroup } = useSkillsGroup(skills);
+
+  const { mutate: mutateUser } = useUpdateProfile();
+  const { mutate: mutateSkills } = useUpdateSkills();
+  const { mutate: mutateAvatar } = useUpdateAvatar();
+  const { mutate: mutateDeleteAvatar } = useDeleteAvatar();
+
   const [userSpecs, setUserSpecs] = useState<string[]>(
     user.main_specialization_id && user.secondary_specialization_id
       ? [user.main_specialization_id, user.secondary_specialization_id]
@@ -61,7 +60,22 @@ export function UpdateUser({ user }: UpdateUserProps) {
       ? [user.main_specialization_id]
       : [],
   );
+
   const [userSkills, setUserSkills] = useState<{ value: string; label: string }[]>([]);
+
+  const [previewImg, setPrevievImg] = useState('');
+
+  useEffect(() => {
+    if (isAvatarExist) {
+      setPrevievImg(userApi.getAvatar(user.id));
+    }
+  }, [isAvatarExist]);
+
+  useEffect(() => {
+    if (userSkillsGroup) {
+      setUserSkills([...userSkillsGroup]);
+    }
+  }, [userSkillsGroup]);
 
   const {
     control,
@@ -69,143 +83,108 @@ export function UpdateUser({ user }: UpdateUserProps) {
     handleSubmit,
     resetField,
     formState: { errors, isSubmitting },
-  } = useForm<UserType & AvatarType & SkillsType>({
-    defaultValues: user,
+  } = useForm<UserTypeForm>({
+    defaultValues: userResponseToUserType({ user, skills }),
   });
 
-  const { data: avatar } = useQuery({
-    queryKey: ['avatar', user.id],
-    queryFn: () => userApi.getUserAvatar({ user_id: user.id }),
-  });
+  const onSubmit = (data: UserTypeForm) => {
+    try {
+      const updatedUser = {
+        id: user.id,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        about: data.about,
+        main_specialization_id: userSpecs[0] ?? null,
+        secondary_specialization_id: userSpecs[1] ?? null,
+      };
 
-  const { data: skills } = useQuery({
-    queryKey: ['getUserSkills', user.id],
-    queryFn: () => userApi.getUserSkills({ user_id: user.id }),
-  });
+      const newSkills = {
+        id: user.id,
+        skills: userSkills.map((skill) => skill.value),
+      };
 
-  useEffect(() => {
-    storageApi
-      .getSkills()
-      .then((res) => {
-        res.map((s) => {
-          skills?.includes(s.value)
-            ? setUserSkills([...userSkills, { value: s.value, label: s.label }])
-            : setUserSkills([]);
+      mutateSkills(newSkills);
+
+      mutateUser(updatedUser);
+
+      if (previewImg) {
+        const newAvatar = {
+          id: user.id,
+          avatar: data.avatar[0],
+        };
+        console.log(newAvatar);
+        mutateAvatar(newAvatar);
+      }
+
+      if (isAvatarExist && !previewImg) {
+        mutateDeleteAvatar(user.id);
+      }
+
+      navigate(PATHS.profileMe);
+    } catch (err) {
+      if (err instanceof Error) {
+        toast({
+          title: 'Ошибка создания проекта',
+          description: err.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
         });
-      })
-      .catch(() => {
-        setUserSkills([]);
-      });
-  }, [skills]);
-
-  const { mutate: mutateUser } = useMutation({
-    mutationFn: (data: UpdateUserRequest) => userApi.updateUser(data),
-    onSuccess: () => {
-      navigate(PATHS.profile);
-    },
-    onError: (e: Error) => {
-      toast({
-        title: 'Ошибка обновления профиля',
-        description: e.message,
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
-
-  const { mutate: mutateSkills } = useMutation({
-    mutationFn: ({ id, skills }: { id: string; skills: string[] }) =>
-      userApi.updateUserSkills({ id, skills }),
-    onSuccess: () => {
-      navigate(PATHS.profile);
-    },
-    onError: (e: Error) => {
-      toast({
-        title: 'Ошибка обновления профиля',
-        description: e.message,
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-  });
-
-  const onSubmit = (data: UserType) => {
-    const updatedUser = {
-      id: user.id,
-      first_name: data.first_name,
-      last_name: data.last_name,
-      about: data.about,
-      main_specialization_id: userSpecs[0],
-      secondary_specialization_id: userSpecs[1] ?? null,
-    };
-
-    const newSkills = {
-      id: user.id,
-      skills: userSkills.map((skill) => skill.value),
-    };
-
-    console.log(newSkills);
-
-    mutateSkills(newSkills);
-
-    mutateUser(updatedUser);
+      }
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex direction="column" gap={6}>
-        <Flex direction="column" gap={4}>
-          <FormLabel mb={0}>Фото</FormLabel>
-          <Flex
-            fontWeight="normal"
-            fontSize="sm"
-            py={2}
-            px={5}
-            bg="white"
-            borderRadius="full"
-            alignItems="center"
-            justifyContent="space-between"
-            position="relative"
-          >
-            <Input
-              w="fit-content"
-              type="file"
-              accept="image/*"
-              position="absolute"
-              opacity={0}
-              {...register('avatar')}
-            />
-            <Text>Добавить фотографию</Text>
-            <Icon as={BsPlus} fontSize="2xl" />
-          </Flex>
-          {!!avatar && (
-            <Tag
-              w="fit-content"
-              size="sm"
-              bg="gray.300"
-              py={1}
-              px={2}
-              borderRadius="lg"
-              fontWeight="medium"
-            >
-              <TagLabel>Фото</TagLabel>
-              <IconButton
-                onClick={() => {
-                  resetField('avatar');
-                }}
-                aria-label="Close"
-                variant="ghost"
-                flexShrink="0"
-                minW="none"
-                height="none"
-                fontWeight="normal"
-                icon={<SmallCloseIcon boxSize={4} />}
+        <FormControl>
+          <Flex direction="column" gap={4}>
+            <Flex justifyContent="space-between">
+              <FormLabel mb={0}>Фото</FormLabel>
+              {previewImg && (
+                <Button
+                  variant="filter"
+                  color="gray.600"
+                  onClick={() => {
+                    setPrevievImg('');
+                    resetField('avatar');
+                  }}
+                >
+                  Удалить
+                </Button>
+              )}
+            </Flex>
+            <Center borderRadius="full" w={20} h={20} bg="white" position="relative">
+              <Avatar name=" " src={previewImg} h={20} w={20} />
+              <Icon
+                as={MdPhotoCamera}
+                position="absolute"
+                bg="blackAlpha.500"
+                color="white"
+                w={4}
+                h={4}
+                border="4px"
+                borderRadius="full"
+                borderColor="transparent"
+                boxSizing="content-box"
               />
-            </Tag>
-          )}
-        </Flex>
+              <Input
+                h="full"
+                type="file"
+                accept="image/*"
+                position="absolute"
+                opacity={0}
+                {...register('avatar', {
+                  onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                    if (e.target.files?.length) {
+                      setPrevievImg(URL.createObjectURL(e.target.files[0]));
+                    }
+                  },
+                })}
+              />
+            </Center>
+          </Flex>
+        </FormControl>
         <Flex direction="column" gap={4}>
           <FormLabel mb={0}>Email</FormLabel>
           <Input
@@ -261,7 +240,7 @@ export function UpdateUser({ user }: UpdateUserProps) {
                 return (
                   <STextarea
                     maxLength={maxLength}
-                    value={value ?? ''}
+                    value={value}
                     setValue={onChange}
                     placeholder="Напишите о себе поподробнее. Хороший рассказ убедит обратиться именно к вам"
                   />
@@ -270,7 +249,7 @@ export function UpdateUser({ user }: UpdateUserProps) {
             />
           </Flex>
         </FormControl>
-        <FormControl isRequired>
+        <FormControl>
           <FormLabel mb={4}>Специализация</FormLabel>
           <FilterSpecialization
             userSpecs={userSpecs}
@@ -278,13 +257,9 @@ export function UpdateUser({ user }: UpdateUserProps) {
             doubleChecked={true}
           />
         </FormControl>
-        <FormControl isRequired>
+        <FormControl>
           <FormLabel mb={4}>Профессиональные навыки</FormLabel>
-          <SearchSelect
-            selectedItems={userSkills}
-            setSelectedItems={setUserSkills}
-            userSkills={skills}
-          />
+          <SearchSelect selectedItems={userSkills} setSelectedItems={setUserSkills} />
         </FormControl>
         <Button fontWeight="semibold" w="full" isLoading={isSubmitting} type="submit">
           Сохранить

@@ -6,9 +6,8 @@ import {
   Image,
   Center,
 } from '@chakra-ui/react';
-import { useQuery } from '@tanstack/react-query';
 
-import { useApi } from '~/shared/hooks';
+import { useProfile } from '../api';
 
 import NotAuth from './notAuth.svg';
 
@@ -19,12 +18,7 @@ interface AvatarProps {
 }
 
 export const Avatar = ({ userId }: AvatarProps) => {
-  const { userApi } = useApi();
-
-  const { data, isLoading, isFetched } = useQuery({
-    queryKey: ['ownerID', userId],
-    queryFn: () => userApi.getUser(userId),
-  });
+  const { data, isLoading } = useProfile(userId);
 
   return (
     <Flex alignItems="center" gap={2} w="full">

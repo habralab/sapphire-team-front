@@ -1,4 +1,11 @@
-import { Flex, Heading, Container, VStack, Divider } from '@chakra-ui/react';
+import {
+  Flex,
+  Heading,
+  Container,
+  VStack,
+  Divider,
+  Link as ChakraLink,
+} from '@chakra-ui/react';
 import { FiChevronRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
@@ -40,11 +47,13 @@ export function SettingsPage() {
             </SettingItem>
           </Link>
           <Divider variant="light" />
-          <Link to="#">
+          {/* TODO: вставить актуальную почту */}
+          <ChakraLink href="mailto:">
             <SettingItem type="heading" variant="h3" icon={FiChevronRight}>
               Сообщить о проблеме
             </SettingItem>
-          </Link>
+          </ChakraLink>
+          <Divider variant="light" />
           <Link to="#" onClick={() => userApi.logout()}>
             <SettingItem type="heading" variant="h3" icon={FiChevronRight}>
               Выйти

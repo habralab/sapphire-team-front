@@ -7,7 +7,6 @@ import { ProfileSettingsUser } from './ProfileSettingsUser';
 
 export function ProfileSettingsPage() {
   const { isActivated, userId } = useAuth();
-
   return (
     <Container maxW="md" px={5} w="full">
       <Flex alignItems="center" my={6} gap={2}>

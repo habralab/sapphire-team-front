@@ -357,6 +357,7 @@ export interface operations {
       200: {
         content: {
           'application/json': unknown;
+          'image/*': string;
         };
       };
       /** @description Validation Error */
