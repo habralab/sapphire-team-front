@@ -15,11 +15,10 @@ import { Controller, useForm } from 'react-hook-form';
 import { MdPhotoCamera } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
-import { useSkillsGroup } from '~/entities/user';
-
 import { GetUserResponse } from '~/shared/api/types';
 import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
+import { SelectOptions } from '~/shared/types';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STextarea } from '~/shared/ui/STextarea';
@@ -35,7 +34,7 @@ import { userResponseToUserType, UserTypeForm } from './model';
 interface UpdateUserProps {
   user: GetUserResponse;
   isAvatarExist: boolean;
-  skills: string[];
+  skills?: SelectOptions[];
 }
 
 const maxLength = 300;
@@ -46,22 +45,10 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
 
   const { userApi } = useApi();
 
-  const { data: userSkillsGroup } = useSkillsGroup(skills);
-
   const { mutate: mutateUser } = useUpdateProfile();
   const { mutate: mutateSkills } = useUpdateSkills();
   const { mutate: mutateAvatar } = useUpdateAvatar();
   const { mutate: mutateDeleteAvatar } = useDeleteAvatar();
-
-  const [userSpecs, setUserSpecs] = useState<string[]>(
-    user.main_specialization_id && user.secondary_specialization_id
-      ? [user.main_specialization_id, user.secondary_specialization_id]
-      : user.main_specialization_id
-      ? [user.main_specialization_id]
-      : [],
-  );
-
-  const [userSkills, setUserSkills] = useState<{ value: string; label: string }[]>([]);
 
   const [previewImg, setPrevievImg] = useState('');
 
@@ -71,36 +58,35 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
     }
   }, [isAvatarExist]);
 
-  useEffect(() => {
-    if (userSkillsGroup) {
-      setUserSkills([...userSkillsGroup]);
-    }
-  }, [userSkillsGroup]);
-
   const {
     control,
     register,
     handleSubmit,
     resetField,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<UserTypeForm>({
     defaultValues: userResponseToUserType({ user, skills }),
   });
 
   const onSubmit = (data: UserTypeForm) => {
+    if (!isDirty) {
+      navigate(PATHS.profileMe);
+      return;
+    }
+
     try {
       const updatedUser = {
         id: user.id,
         first_name: data.first_name,
         last_name: data.last_name,
         about: data.about,
-        main_specialization_id: userSpecs[0] ?? null,
-        secondary_specialization_id: userSpecs[1] ?? null,
+        main_specialization_id: data.specs[0] ?? null,
+        secondary_specialization_id: data.specs[1] ?? null,
       };
 
       const newSkills = {
         id: user.id,
-        skills: userSkills.map((skill) => skill.value),
+        skills: data.skills.map((skill) => skill.value),
       };
 
       mutateSkills(newSkills);
@@ -112,7 +98,6 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
           id: user.id,
           avatar: data.avatar[0],
         };
-        console.log(newAvatar);
         mutateAvatar(newAvatar);
       }
 
@@ -251,15 +236,29 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
         </FormControl>
         <FormControl>
           <FormLabel mb={4}>Специализация</FormLabel>
-          <FilterSpecialization
-            userSpecs={userSpecs}
-            setUserSpecs={setUserSpecs}
-            doubleChecked={true}
+          <Controller
+            control={control}
+            name="specs"
+            render={({ field: { onChange, value } }) => {
+              return (
+                <FilterSpecialization
+                  userSpecs={value}
+                  setUserSpecs={onChange}
+                  doubleChecked={true}
+                />
+              );
+            }}
           />
         </FormControl>
         <FormControl>
           <FormLabel mb={4}>Профессиональные навыки</FormLabel>
-          <SearchSelect selectedItems={userSkills} setSelectedItems={setUserSkills} />
+          <Controller
+            control={control}
+            name="skills"
+            render={({ field: { onChange, value } }) => {
+              return <SearchSelect selectedItems={value} setSelectedItems={onChange} />;
+            }}
+          />
         </FormControl>
         <Button fontWeight="semibold" w="full" isLoading={isSubmitting} type="submit">
           Сохранить

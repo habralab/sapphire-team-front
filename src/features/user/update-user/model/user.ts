@@ -1,5 +1,6 @@
-import { GetUserResponse, GetUserSkills } from '~/shared/api/types';
+import { GetUserResponse } from '~/shared/api/types';
 import { nullToUndefined } from '~/shared/lib/form';
+import { SelectOptions } from '~/shared/types';
 
 export interface UserTypeForm {
   first_name: string;
@@ -8,13 +9,14 @@ export interface UserTypeForm {
   main_specialization_id: string;
   secondary_specialization_id: string;
   email: string;
-  skills: string[];
+  skills: SelectOptions[];
   avatar: FileList;
+  specs: string[];
 }
 
 interface UserResponseToUserTypeProps {
   user: GetUserResponse;
-  skills?: GetUserSkills;
+  skills?: SelectOptions[];
 }
 
 export const userResponseToUserType = ({
@@ -22,5 +24,8 @@ export const userResponseToUserType = ({
   skills,
 }: UserResponseToUserTypeProps) => ({
   ...nullToUndefined(user),
-  skills: skills,
+  specs: [user.main_specialization_id, user.secondary_specialization_id].filter(
+    Boolean,
+  ) as string[],
+  skills: skills ?? [],
 });

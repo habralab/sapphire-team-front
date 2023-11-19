@@ -28,6 +28,7 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/prefer-nullish-coalescing': 'off',
     '@typescript-eslint/no-unused-vars': [
       'warn',
       {

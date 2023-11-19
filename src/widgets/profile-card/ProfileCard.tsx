@@ -2,7 +2,7 @@ import { Skeleton } from '@chakra-ui/react';
 
 import { useProfile } from '~/entities/user';
 
-import { ProfileCardUser } from './ProfileCatdUser';
+import { ProfileCardUser } from './ProfileCardUser';
 
 interface ProfileCardProps {
   userId: string;
