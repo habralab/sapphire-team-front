@@ -109,7 +109,14 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
           </Heading>
         </Flex>
       </Flex>
-      <Skeleton isLoaded={loadedProject} borderRadius="2xl" fadeDuration={2}>
+      {!loadedProject ? (
+        <Skeleton
+          isLoaded={loadedProject}
+          borderRadius="2xl"
+          fadeDuration={2}
+          height="550px"
+        />
+      ) : (
         <ChakraCard
           bg="white"
           borderRadius="2xl"
@@ -124,41 +131,37 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
             objectFit="cover"
           />
           <CardBody padding={isMobile ? 5 : 6}>
-            {project && (
-              <>
-                <ProjectInfo
-                  allSpecs={specs?.data}
-                  specs={specsIds}
-                  skills={readySkillsIds}
-                  project={project}
-                  positions={projectPositions?.data}
-                  ioadedPositions={loadedAllPositions}
-                />
-                <Contacts ownerId={project.owner_id} />
-              </>
-            )}
+            <ProjectInfo
+              allSpecs={specs?.data}
+              specs={specsIds}
+              skills={readySkillsIds}
+              project={project}
+              positions={projectPositions?.data}
+              ioadedPositions={loadedAllPositions}
+            />
+            <Contacts ownerId={project.owner_id} />
           </CardBody>
         </ChakraCard>
-        {layout?.footer && (
-          <Portal containerRef={layout.footer}>
-            <Container py={2} maxW="md">
-              {userIsOwner && (
-                <Button
-                  type="button"
-                  onClick={() => {
-                    // handleTabsChange(1);
-                  }}
-                  fontSize="sm"
-                  fontWeight="600"
-                  w="full"
-                >
-                  Откликнуться
-                </Button>
-              )}
-            </Container>
-          </Portal>
-        )}
-      </Skeleton>
+      )}
+      {layout?.footer && (
+        <Portal containerRef={layout.footer}>
+          <Container py={2} maxW="md">
+            {userIsOwner && (
+              <Button
+                type="button"
+                onClick={() => {
+                  // handleTabsChange(1);
+                }}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Откликнуться
+              </Button>
+            )}
+          </Container>
+        </Portal>
+      )}
     </Container>
   );
 };
