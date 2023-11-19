@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useApi } from '~/shared/hooks';
+import { SelectOptions } from '~/shared/types';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STag } from '~/shared/ui/STag';
@@ -20,7 +21,7 @@ export const Team = (props: TeamProps) => {
   const { storageApi } = useApi();
   const { newSpecialist, setNewSpecialist } = props;
   const [userSpecs, setUserSpecs] = useState<string[]>([]);
-  const [userSkills, setUserSkills] = useState<{ value: string; label: string }[]>([]);
+  const [userSkills, setUserSkills] = useState<SelectOptions[]>([]);
 
   const { data: specs } = useQuery({
     queryKey: ['specs'],

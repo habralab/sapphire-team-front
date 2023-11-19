@@ -4,18 +4,14 @@ import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { SearchProject, Filter } from '~/features/project';
+import { SearchProject } from '~/features/project';
 import { Notification, Settings } from '~/features/user';
 
+import { Filter, useFilterStore } from '~/entities/project';
 import { Avatar, DummyAvatar } from '~/entities/user';
 
 import { useApi, useLayoutRefs } from '~/shared/hooks';
 import { BasePageProps, PATHS } from '~/shared/lib/router';
-import {
-  loadDataFromStorage,
-  loadSkillsFromStorage,
-  loadSpecsFromStorage,
-} from '~/shared/lib/storageActions';
 import { STag } from '~/shared/ui/STag';
 
 import { useGetAllProjects } from '../api/useGetAllProjects';
@@ -25,28 +21,16 @@ export const SearchPage = ({ user }: BasePageProps) => {
   const targetRef = useRef<HTMLDivElement>(null);
   const layout = useLayoutRefs();
 
-  const [userSpecs, setUserSpecs] = useState<string[]>([]);
-  const [selectedItems, setSelectedItems] = useState<{ value: string; label: string }[]>(
-    [],
-  );
-  const [date, setDate] = useState('');
   const [searchText, setSearchText] = useState('');
 
-  useEffect(() => {
-    const localSpecs = loadSpecsFromStorage();
-    const localSkills = loadSkillsFromStorage();
-    const localData = loadDataFromStorage();
-    if (localSpecs.length) setUserSpecs(localSpecs);
-    if (localSkills.length) setSelectedItems(localSkills);
-    if (localData.length) setDate(localData);
-  }, []);
+  const { filter } = useFilterStore();
 
-  const { data, isLoading, fetchNextPage, isFetchingNextPage } = useGetAllProjects(
-    userSpecs,
-    selectedItems,
-    date,
+  const { data, isLoading, fetchNextPage, isFetchingNextPage } = useGetAllProjects({
+    date: filter.date,
+    skills: filter.skills,
+    specs: filter.specs,
     searchText,
-  );
+  });
 
   const dummyDate = {
     mainTags: ['Фронтенд разработчик'],
@@ -95,15 +79,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
           </Flex>
           <Flex gap="1" mb={4}>
             <SearchProject onChange={handleSumbit} />
-            <Filter
-              userSpecs={userSpecs}
-              setUserSpecs={setUserSpecs}
-              selectedItems={selectedItems}
-              setSelectedItems={setSelectedItems}
-              filterDate={date}
-              setFilterDate={setDate}
-              totalItems={data?.pages[0].total_items}
-            />
+            <Filter totalItems={data?.pages[0].total_items} />
           </Flex>
           {isLoading || !data ? (
             <>

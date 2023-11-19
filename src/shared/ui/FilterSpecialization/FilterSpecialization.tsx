@@ -13,7 +13,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { useApi } from '~/shared/hooks';
-import { deleteKeyFromStorage, saveInStorage } from '~/shared/lib/storageActions';
 
 import { FilterSpecializationModal } from './FilterSpecializationModal';
 
@@ -56,7 +55,6 @@ export const FilterSpecialization = ({
   const deleteSpecFilter = (id: string) => {
     const newUserSpecs = userSpecs.filter((specId) => specId !== id);
     setUserSpecs(newUserSpecs);
-    saveInStorage('specs', newUserSpecs);
   };
 
   return (
@@ -117,7 +115,6 @@ export const FilterSpecialization = ({
         userFilter={userSpecs}
         resetSpec={() => {
           setUserSpecs([]);
-          deleteKeyFromStorage('skills');
         }}
         saveSpec={setUserSpecs}
         singleChecked={singleChecked}

@@ -24,7 +24,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
 import { GetSpecGroupsDataResponse, GetSpecsDataResponse } from '~/shared/api';
-import { saveInStorage } from '~/shared/lib/storageActions';
 import { Counter } from '~/shared/ui/Counter';
 import { SearchInput } from '~/shared/ui/SearchInput';
 
@@ -56,7 +55,6 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
   } = props;
   const [search, setSearch] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
-  const queryClient = useQueryClient();
 
   const [filteredGroupsState, setFilteredGroupsState] =
     useState<GetSpecGroupsDataResponse>([]);
@@ -203,7 +201,6 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
           <Button
             onClick={() => {
               saveSpec(selectCheckboxes);
-              saveInStorage('specs', selectCheckboxes);
               changeVisible(false);
             }}
             fontSize="sm"

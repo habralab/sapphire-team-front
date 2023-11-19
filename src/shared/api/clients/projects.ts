@@ -6,6 +6,7 @@ import {
   AfterPostNewProjectResponse,
   CreatePositionRequest,
   CreatePositionResponse,
+  GetAllProjectsRequest,
   GetAllProjectsResponse,
   GetCurrentProjectResponse,
   GetPositionSkillsResponse,
@@ -108,26 +109,11 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async getAllProjects(
-    page: number,
-    owner_id?: string,
-    position_specialization_ids?: string[],
-    skills?: { value: string; label: string }[],
-    date?: string,
-    text?: string,
-  ) {
-    const formatSkills = skills?.map(({ value }) => value);
+  async getAllProjects(request: GetAllProjectsRequest) {
     const { data } = await this.client.get<GetAllProjectsResponse>(
       `/api/rest/projects/`,
       {
-        params: {
-          page,
-          owner_id,
-          position_specialization_ids,
-          position_skill_ids: formatSkills,
-          startline_le: date,
-          query_text: text,
-        },
+        params: request,
         paramsSerializer: function (params) {
           return Qs.stringify(params, {
             skipNull: true,

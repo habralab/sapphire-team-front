@@ -1,9 +1,4 @@
-import { OptionBase } from 'chakra-react-select';
-
-interface SelectOptions extends OptionBase {
-  label: string;
-  value: string;
-}
+import { SelectOptions } from '~/shared/types';
 
 export interface NewSpecialist {
   spec: string;

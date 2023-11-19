@@ -5,18 +5,12 @@ import {
   AsyncSelect,
   GroupBase,
   LoadingIndicatorProps,
-  OptionBase,
   chakraComponents,
 } from 'chakra-react-select';
 import { useEffect, useState } from 'react';
 
 import { useApi } from '~/shared/hooks';
-import { saveInStorage } from '~/shared/lib/storageActions';
-
-export interface SelectOptions extends OptionBase {
-  label: string;
-  value: string;
-}
+import { SelectOptions } from '~/shared/types';
 
 const asyncComponents = {
   LoadingIndicator: (
@@ -41,16 +35,10 @@ interface SearchSelectProps {
   isSearchFilter?: boolean;
 }
 
-export const SearchSelect = ({
-  selectedItems,
-  setSelectedItems,
-  isSearchFilter,
-}: SearchSelectProps) => {
+export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectProps) => {
   const toast = useToast();
   const { storageApi } = useApi();
-  const [unSelectedItems, setUnSelectedItems] = useState<
-    { value: string; label: string }[]
-  >([]);
+  const [unSelectedItems, setUnSelectedItems] = useState<SelectOptions[]>([]);
 
   const { data } = useQuery({
     queryKey: ['skills'],
@@ -82,7 +70,6 @@ export const SearchSelect = ({
     if (unSelectedItem) {
       const newItems = selectedItems.filter((item) => item.value !== id);
       setSelectedItems(newItems);
-      if (isSearchFilter) saveInStorage('skills', newItems);
       setUnSelectedItems((unSelectedItems) => [...unSelectedItems, unSelectedItem]);
     }
   };
@@ -109,7 +96,6 @@ export const SearchSelect = ({
         onChange={(item) => {
           if (item) {
             setSelectedItems([...selectedItems, item]);
-            if (isSearchFilter) saveInStorage('skills', [...selectedItems, item]);
             setUnSelectedItems((unSelectedItems) =>
               unSelectedItems.filter(
                 (unSelectedItem) => unSelectedItem.value !== item.value,
