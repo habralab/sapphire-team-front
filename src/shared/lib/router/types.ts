@@ -1,5 +1,4 @@
 export interface BasePageProps {
-  isPublic?: boolean;
   user: {
     isAuth: boolean;
     userId?: string;

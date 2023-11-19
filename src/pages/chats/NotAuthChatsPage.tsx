@@ -10,7 +10,7 @@ export function NotAuthChatsPage() {
   return (
     <Box w="full">
       <Box bg="bg">
-        <Container maxW="md" py={4} pb={8}>
+        <Container maxW="md" py={4}>
           <Flex justifyContent="space-between" alignItems="center" h={42} mb={2}>
             <Heading variant="h1" as="h1">
               Чаты
@@ -19,9 +19,9 @@ export function NotAuthChatsPage() {
           <SearchInput placeholder="Найти в чатах" onChange={console.log} />
           <Flex
             bg="white"
-            my={6}
             borderRadius="2xl"
             p={5}
+            mt={4}
             direction="column"
             alignItems="center"
             gap={5}

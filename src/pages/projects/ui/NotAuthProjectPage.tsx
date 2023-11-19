@@ -18,7 +18,7 @@ export const NotAuthProjectsPage = () => {
       </Flex>
       <Flex
         bg="white"
-        my={6}
+        mt={4}
         borderRadius="2xl"
         p={5}
         direction="column"

@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-import { ChatsPage, ChatsPageDesktop, NotAuthChatsPage } from '~/pages/chats';
+import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
 import { MainPage } from '~/pages/main';
 import { NotFoundPage } from '~/pages/not-found';
@@ -10,10 +10,9 @@ import {
   NotificationsPage,
   NotificationsPageDesktop,
 } from '~/pages/notifications';
-import { NotAuthProfilePage, ProfilePage, ProfilePageDesktop } from '~/pages/profile';
+import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
 import {
   AddProjectPage,
-  NotAuthProjectsPage,
   ProjectPage,
   ProjectsPage,
   ProjectsPageDesktop,
@@ -33,57 +32,45 @@ export const normalRoutes = [
     view: {
       base: MainPage,
     },
-    isPublic: true,
   },
   {
     path: PATHS.notFound,
     view: {
       base: NotFoundPage,
     },
-    isPublic: true,
   },
   {
     path: PATHS.profile,
     view: { base: ProfilePage, desktop: ProfilePageDesktop },
-    isPublic: true,
   },
   {
     path: PATHS.profileMe,
     view: {
       base: ProfilePage,
       desktop: ProfilePageDesktop,
-      notAuthBase: NotAuthProfilePage,
-      notAuthDesktop: NotFoundPage,
     },
-    isPublic: true,
   },
   {
     path: PATHS.searchProject,
     view: { base: ProjectPage },
-    isPublic: true,
   },
   {
     path: PATHS.search,
     view: { base: SearchPage, desktop: SearchPageDesktop },
-    isPublic: true,
   },
   {
     path: PATHS.projects,
     view: {
       base: ProjectsPage,
       desktop: ProjectsPageDesktop,
-      notAuthBase: NotAuthProjectsPage,
     },
-    isPublic: true,
   },
   {
     path: PATHS.chats,
     view: {
       base: ChatsPage,
       desktop: ChatsPageDesktop,
-      notAuthBase: NotAuthChatsPage,
     },
-    isPublic: true,
   },
   {
     path: PATHS.project,
@@ -113,6 +100,5 @@ export const normalRoutes = [
         replace: true,
       }),
     },
-    isPublic: true,
   },
 ];
