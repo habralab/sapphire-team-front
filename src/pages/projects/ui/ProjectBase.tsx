@@ -109,12 +109,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
           </Heading>
         </Flex>
       </Flex>
-      <Skeleton
-        height="550px"
-        isLoaded={loadedProject}
-        borderRadius="2xl"
-        fadeDuration={2}
-      >
+      <Skeleton isLoaded={loadedProject} borderRadius="2xl" fadeDuration={2}>
         <ChakraCard
           bg="white"
           borderRadius="2xl"
