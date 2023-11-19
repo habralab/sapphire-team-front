@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useSkillsGroup } from '~/entities/user';
 
-import { GetUserResponse } from '~/shared/api';
+import { GetUserResponse } from '~/shared/api/types';
 import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';

@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { Identificator, UpdateUserAvatar } from '~/shared/api';
+import { Identificator, UpdateUserAvatar } from '~/shared/api/types';
 import { api } from '~/shared/contexts';
 
 export const useUpdateAvatar = () =>

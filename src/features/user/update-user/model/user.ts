@@ -1,4 +1,4 @@
-import { GetUserResponse, GetUserSkills } from '~/shared/api';
+import { GetUserResponse, GetUserSkills } from '~/shared/api/types';
 import { nullToUndefined } from '~/shared/lib/form';
 
 export interface UserTypeForm {

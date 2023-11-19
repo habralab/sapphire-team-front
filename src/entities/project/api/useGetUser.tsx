@@ -5,5 +5,5 @@ import { api } from '~/shared/contexts';
 export const useGetUser = (userID: string) =>
   useQuery({
     queryKey: ['userID', userID],
-    queryFn: () => api.userApi.getUser(userID),
+    queryFn: () => api.userApi.get(userID),
   });

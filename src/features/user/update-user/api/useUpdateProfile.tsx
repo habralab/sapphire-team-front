@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { UpdateUserRequest } from '~/shared/api';
+import { UpdateUserRequest } from '~/shared/api/types';
 import { api } from '~/shared/contexts';
 
 export const useUpdateProfile = () =>

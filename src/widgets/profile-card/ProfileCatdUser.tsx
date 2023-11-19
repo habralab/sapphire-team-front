@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Info, useIsAvatarExist } from '~/entities/user';
 
-import { GetUserResponse } from '~/shared/api';
+import { GetUserResponse } from '~/shared/api/types';
 import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
