@@ -18,6 +18,7 @@ import { FilterSpecializationModal } from './FilterSpecializationModal';
 
 interface FilterSpecializationProps {
   singleChecked?: boolean;
+  doubleChecked?: boolean;
   userSpecs: string[];
   setUserSpecs: (userSpecs: string[]) => void;
 }
@@ -26,6 +27,7 @@ export const FilterSpecialization = ({
   singleChecked,
   userSpecs,
   setUserSpecs,
+  doubleChecked,
 }: FilterSpecializationProps) => {
   const [specFilter, setSpecFilter] = useState(false);
   const { storageApi } = useApi();
@@ -118,6 +120,7 @@ export const FilterSpecialization = ({
         }}
         saveSpec={setUserSpecs}
         singleChecked={singleChecked}
+        doubleChecked={doubleChecked}
       />
     </>
   );

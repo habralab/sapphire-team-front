@@ -1,5 +1,5 @@
 import { Box, Text } from '@chakra-ui/react';
-import React, { useRef, useState, useCallback, useLayoutEffect } from 'react';
+import React, { useRef, useState, useCallback, useLayoutEffect, useEffect } from 'react';
 
 interface STextareaProps {
   maxLength: number;
@@ -105,6 +105,12 @@ export function STextarea({
     }
   }, []);
 
+  useEffect(() => {
+    if (contentEditableRef.current) {
+      contentEditableRef.current.textContent = value;
+    }
+  }, [value]);
+
   return (
     <Box pos="relative" w="full">
       <Box
@@ -136,6 +142,7 @@ export function STextarea({
         }}
       />
       <Text
+        fontSize="md"
         pos="absolute"
         right={2}
         bottom={2}

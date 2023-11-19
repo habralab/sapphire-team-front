@@ -70,13 +70,13 @@ const flatButton = defineStyle(({ colorScheme }) => ({
 }));
 
 const lightButton = defineStyle(({ colorScheme }) => ({
-  bg: colorScheme === 'gray' ? 'gray.300' : 'gray.900',
+  bg: colorScheme === 'gray' ? 'gray.300' : 'gray.100',
   p: 0,
   _hover: {
-    bg: colorScheme === 'gray' && 'gray.400',
+    bg: colorScheme === 'gray' ? 'gray.400' : 'gray.300',
   },
   _active: {
-    bg: colorScheme === 'gray' && 'gray.400',
+    bg: colorScheme === 'gray' ? 'gray.400' : 'gray.300',
     color: colorScheme === 'gray' ? 'white' : 'gray.800',
   },
   size: 'md',

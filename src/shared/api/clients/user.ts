@@ -3,13 +3,15 @@ import { PATHS } from '~/shared/lib/router';
 import {
   AfterAuthRequestParams,
   AfterAuthResponse,
-  GetUserAvatarID,
+  GetAvatar,
   IsAuthResponse,
   UpdateUserAvatar,
-  UpdateUserAvatarID,
-  UpdateUserParams,
   UpdateUserRequest,
-  getUserResponse,
+  GetUserResponse,
+  UpdateUserResponse,
+  GetUserSkills,
+  UpdateUserSkillsResponse,
+  DeleteUserAavatar,
 } from '../types/user.types';
 
 import { BaseApiClient } from './base';
@@ -42,23 +44,60 @@ export class UserApiClient extends BaseApiClient {
     window.location.href = PATHS.root;
   }
 
-  async getUser(user_id: string) {
-    const { data } = await this.client.get<getUserResponse>(`/api/rest/users/${user_id}`);
+  async get(user_id: string) {
+    const { data } = await this.client.get<GetUserResponse>(`/api/rest/users/${user_id}`);
     return data;
   }
 
-  async updateUser({ user_id, ...data }: UpdateUserParams & UpdateUserRequest) {
-    await this.client.post(`/api/rest/users/${user_id}`, data);
-  }
-
-  async getUserAvatar({ user_id }: GetUserAvatarID) {
-    const { data } = await this.client.get<Blob>(`/api/rest/users/${user_id}/avatar`, {
-      responseType: 'blob',
-    });
+  async update({ id, ...user }: UpdateUserRequest) {
+    const { data } = await this.client.post<UpdateUserResponse>(
+      `/api/rest/users/${id}`,
+      user,
+    );
     return data;
   }
 
-  async uploadUserAvatar({ user_id, ...data }: UpdateUserAvatarID & UpdateUserAvatar) {
-    await this.client.post(`/api/rest/users/${user_id}/avatar`, data);
+  getAvatar(user_id: string): GetAvatar {
+    return `${this.baseURL}/api/rest/users/${user_id}/avatar`;
+  }
+
+  async isAvatarExist(user_id: string) {
+    const { data } = await this.client.get<string | null>(
+      `/api/rest/users/${user_id}/avatar`,
+    );
+
+    return data !== null;
+  }
+
+  async uploadAvatar({ id, avatar }: UpdateUserAvatar) {
+    await this.client.post(
+      `/api/rest/users/${id}/avatar`,
+      { avatar },
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      },
+    );
+  }
+
+  async deleteAvatar(id: string) {
+    const { data } = await this.client.delete<DeleteUserAavatar>(
+      `/api/rest/users/${id}/avatar`,
+    );
+    return data;
+  }
+
+  async getUserSkills(user_id: string) {
+    const { data } = await this.client.get<GetUserSkills>(
+      `/api/rest/users/${user_id}/skills`,
+    );
+    return data;
+  }
+
+  async updateUserSkills({ id, skills }: { id: string; skills: string[] }) {
+    const { data } = await this.client.post<UpdateUserSkillsResponse>(
+      `/api/rest/users/${id}/skills`,
+      skills,
+    );
+    return data;
   }
 }
