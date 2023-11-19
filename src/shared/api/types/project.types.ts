@@ -6,6 +6,8 @@ export type AfterPostNewProjectResponse =
   paths['/api/rest/projects/']['post']['responses']['200']['content']['application/json'];
 export type GetAllProjectsResponse =
   paths['/api/rest/projects/']['get']['responses']['200']['content']['application/json'];
+export type GetAllProjectsRequest =
+  paths['/api/rest/projects/']['get']['parameters']['query'];
 export type GetCurrentProjectResponse =
   paths['/api/rest/projects/{project_id}']['get']['responses']['200']['content']['application/json'];
 export type CreatePositionRequest =

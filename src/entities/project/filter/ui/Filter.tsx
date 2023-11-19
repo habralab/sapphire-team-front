@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   Button,
   IconButton,
@@ -16,23 +15,24 @@ import {
   Stack,
   Input,
 } from '@chakra-ui/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
 import { IoOptions } from 'react-icons/io5';
 
 import { useIsMobile } from '~/shared/hooks';
+import { stringToServerDate } from '~/shared/lib/stringToServerDate';
 import { Counter } from '~/shared/ui/Counter';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 
-export const Filter = () => {
-  const queryClient = useQueryClient();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [userSpecs, setUserSpecs] = useState<string[]>([]);
-  const [selectedItems, setSelectedItems] = useState<{ value: string; label: string }[]>(
-    [],
-  );
+import { useFilterStore } from '../model';
 
+interface FilterProps {
+  totalItems?: number | null;
+}
+
+export const Filter = ({ totalItems = 0 }: FilterProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { filter, removeFilter, updateFilter } = useFilterStore();
   const isMobile = useIsMobile();
 
   return (
@@ -49,7 +49,11 @@ export const Filter = () => {
           <>
             <Text hidden={isMobile}>Все фильтры</Text>
             <Icon as={IoOptions} fontSize="2xl" />
-            <Counter count={5} float borderBg="bg" />
+            <Counter
+              count={filter.skills.length + filter.specs.length + (filter.date ? 1 : 0)}
+              float
+              borderBg="bg"
+            />
           </>
         }
       ></IconButton>
@@ -71,9 +75,7 @@ export const Filter = () => {
                 fontWeight="500"
                 colorScheme="purple"
                 onClick={() => {
-                  setUserSpecs([]);
-                  setSelectedItems([]);
-                  queryClient.invalidateQueries(['skills']);
+                  removeFilter();
                 }}
               >
                 Сбросить
@@ -85,7 +87,12 @@ export const Filter = () => {
                 <Heading variant="h2" mb={3}>
                   Специализация
                 </Heading>
-                <FilterSpecialization userSpecs={userSpecs} setUserSpecs={setUserSpecs} />
+                <FilterSpecialization
+                  userSpecs={filter.specs}
+                  setUserSpecs={(values) => {
+                    updateFilter({ specs: values });
+                  }}
+                />
               </Box>
               <Box>
                 <Stack gap={1} mb={4}>
@@ -93,8 +100,11 @@ export const Filter = () => {
                     Профессиональные навыки
                   </Heading>
                   <SearchSelect
-                    selectedItems={selectedItems}
-                    setSelectedItems={setSelectedItems}
+                    isSearchFilter={true}
+                    selectedItems={filter.skills}
+                    setSelectedItems={(values) => {
+                      updateFilter({ skills: values });
+                    }}
                   />
                 </Stack>
               </Box>
@@ -108,13 +118,18 @@ export const Filter = () => {
                   color="gray.500"
                   placeholder="Выберите дату"
                   type="date"
+                  value={filter.date.split('T', 1)[0]}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    updateFilter({ date: value ? stringToServerDate(value) : value });
+                  }}
                 />
               </Box>
             </Stack>
           </Container>
           <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0" mt="auto">
-            <Button fontSize="sm" fontWeight="600" w="full">
-              Показать 43 проекта
+            <Button fontSize="sm" fontWeight="600" w="full" onClick={onClose}>
+              Показать {totalItems ?? 0} проектов
             </Button>
           </Container>
         </ModalContent>

@@ -1,13 +1,22 @@
 import { Flex, SimpleGrid, Heading } from '@chakra-ui/react';
+import { useState } from 'react';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { Filter, SearchProject } from '~/features/project';
+import { SearchProject } from '~/features/project';
+
+import { Filter } from '~/entities/project';
 
 import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
 
 export const SearchPageDesktop = () => {
+  const [searchText, setSearchText] = useState('');
+
+  const handleSumbit = (value: string) => {
+    setSearchText(value);
+  };
+
   return (
     <>
       <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
@@ -17,7 +26,7 @@ export const SearchPageDesktop = () => {
           </Heading>
         </Flex>
         <Flex gap="4" mb={4}>
-          <SearchProject />
+          <SearchProject onChange={handleSumbit} />
           <Filter />
         </Flex>
         <SimpleGrid columns={2} gap={6}>

@@ -1,9 +1,12 @@
+import Qs from 'query-string';
+
 import {
   AddSkillsRequest,
   AddSkillsResponse,
   AfterPostNewProjectResponse,
   CreatePositionRequest,
   CreatePositionResponse,
+  GetAllProjectsRequest,
   GetAllProjectsResponse,
   GetCurrentProjectResponse,
   GetPositionSkillsResponse,
@@ -106,10 +109,18 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async getAllProjects(page: number, owner_id?: string | null) {
+  async getAllProjects(request: GetAllProjectsRequest) {
     const { data } = await this.client.get<GetAllProjectsResponse>(
       `/api/rest/projects/`,
-      { params: { page, owner_id } },
+      {
+        params: request,
+        paramsSerializer: function (params) {
+          return Qs.stringify(params, {
+            skipNull: true,
+            skipEmptyString: true,
+          });
+        },
+      },
     );
     const { data: onlyData, ...others } = data;
     const newData = onlyData.map((project) => {

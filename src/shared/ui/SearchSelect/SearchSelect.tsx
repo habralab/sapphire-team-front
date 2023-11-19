@@ -5,17 +5,12 @@ import {
   AsyncSelect,
   GroupBase,
   LoadingIndicatorProps,
-  OptionBase,
   chakraComponents,
 } from 'chakra-react-select';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useApi } from '~/shared/hooks';
-
-interface SelectOptions extends OptionBase {
-  label: string;
-  value: string;
-}
+import { SelectOptions } from '~/shared/types';
 
 const asyncComponents = {
   LoadingIndicator: (
@@ -37,21 +32,17 @@ const asyncComponents = {
 interface SearchSelectProps {
   selectedItems: SelectOptions[];
   setSelectedItems: (selectedItems: SelectOptions[]) => void;
+  isSearchFilter?: boolean;
 }
 
 export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectProps) => {
   const toast = useToast();
   const { storageApi } = useApi();
-  const [unSelectedItems, setUnSelectedItems] = useState<
-    { value: string; label: string }[]
-  >([]);
+  const [unSelectedItems, setUnSelectedItems] = useState<SelectOptions[]>([]);
 
-  useQuery({
+  const { data } = useQuery({
     queryKey: ['skills'],
     queryFn: () => storageApi.getSkills(),
-    onSuccess(data) {
-      setUnSelectedItems(data);
-    },
     onError: (e: Error) => {
       toast({
         title: 'Ошибка получения навыков',
@@ -61,7 +52,18 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
         isClosable: true,
       });
     },
+    staleTime: Infinity,
   });
+
+  useEffect(() => {
+    if (data) {
+      const formatSelectedItems = selectedItems.map(({ value }) => value);
+      const formatUnSelectedItem = data.filter(
+        ({ value }) => !formatSelectedItems.includes(value),
+      );
+      setUnSelectedItems(formatUnSelectedItem);
+    }
+  }, [data]);
 
   const unSelectValue = (id: string) => {
     const unSelectedItem = selectedItems.find((item) => item.value === id);

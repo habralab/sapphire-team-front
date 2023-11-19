@@ -27,6 +27,7 @@ module.exports = {
     'plugin:@tanstack/eslint-plugin-query/recommended',
   ],
   rules: {
+    '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-unused-vars': [
       'warn',
       {

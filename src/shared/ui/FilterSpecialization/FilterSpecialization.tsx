@@ -34,7 +34,7 @@ export const FilterSpecialization = ({
   const { data: specGroup, isLoading: specGroupLoading } = useQuery({
     queryKey: ['specGroups'],
     queryFn: () => storageApi.getSpecGroups(),
-    staleTime: 5000,
+    staleTime: Infinity,
   });
 
   const { data: specs, isLoading: specsLoading } = useQuery({
@@ -49,7 +49,7 @@ export const FilterSpecialization = ({
         isClosable: true,
       });
     },
-    staleTime: 50000,
+    staleTime: Infinity,
   });
 
   const deleteSpecFilter = (id: string) => {
