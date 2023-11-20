@@ -10,6 +10,7 @@ import {
   NotificationsPage,
   NotificationsPageDesktop,
 } from '~/pages/notifications';
+import { OnboardingPage } from '~/pages/onboarding';
 import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
 import {
   AddProjectPage,
@@ -57,6 +58,10 @@ export const normalRoutes = [
   {
     path: PATHS.search,
     view: { base: SearchPage, desktop: SearchPageDesktop },
+  },
+  {
+    path: PATHS.onboarding,
+    view: { base: OnboardingPage },
   },
   {
     path: PATHS.projects,

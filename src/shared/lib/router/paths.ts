@@ -15,4 +15,5 @@ export const PATHS = {
   profileSettings: '/settings/profile',
   notificationsSettings: '/settings/notifications',
   notFound: '/404',
+  onboarding: '/onboarding',
 };
