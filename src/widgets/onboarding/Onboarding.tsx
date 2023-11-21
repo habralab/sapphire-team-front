@@ -51,7 +51,7 @@ export function Onboarding({ userId }: OnboardingProps) {
   const [isLastNameFilled, setIsLastNameFilled] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
-  const { mutate: mutateUser } = useUpdateProfile();
+  const { mutate: mutateUser, data: result } = useUpdateProfile();
   const { mutate: mutateSkills } = useUpdateSkills();
   const { mutate: mutateAvatar } = useUpdateAvatar();
 
@@ -96,7 +96,16 @@ export function Onboarding({ userId }: OnboardingProps) {
         mutateAvatar(newAvatar);
       }
 
-      navigate(PATHS.search);
+      if (result?.is_activated) {
+        navigate(PATHS.search);
+      } else {
+        toast({
+          title: 'Ошибка создания профиля',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+      }
     } catch (err) {
       if (err instanceof Error) {
         toast({
