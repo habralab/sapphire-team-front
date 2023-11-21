@@ -20,6 +20,7 @@ export const Layout = () => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   const isNotFoundPage = location.pathname === PATHS.notFound;
+  const isOnboardingPage = location.pathname === PATHS.onboarding;
   const isDialogPage = new RegExp(`${PATHS.chats}/\\d+`).test(location.pathname);
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export const Layout = () => {
                 </Flex>
                 <Box position="sticky" bottom="0" bg="bg">
                   <Box ref={footerRef}></Box>
-                  {!isDialogPage && <MenuBase />}
+                  {!isDialogPage && !isOnboardingPage && <MenuBase />}
                 </Box>
               </Stack>
             ) : (

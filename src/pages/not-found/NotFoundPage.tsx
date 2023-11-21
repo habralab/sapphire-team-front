@@ -3,11 +3,11 @@ import { BsArrowRightShort } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
 import { useIsMobile } from '~/shared/hooks';
-import { PATHS } from '~/shared/lib/router';
+import { BasePageProps, PATHS } from '~/shared/lib/router';
 
 import NotFound from './notFound.svg';
 
-export const NotFoundPage = () => {
+export const NotFoundPage = ({ user }: BasePageProps) => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
 
@@ -49,7 +49,11 @@ export const NotFoundPage = () => {
       <Button
         aria-label="main-page"
         onClick={() => {
-          navigate(PATHS.root);
+          if (!user.isActivated && user.isAuth) {
+            navigate(PATHS.onboarding);
+          } else {
+            navigate(PATHS.root);
+          }
         }}
         maxW="100%"
         padding={isMobile ? 5 : 7}
@@ -57,7 +61,9 @@ export const NotFoundPage = () => {
         fontWeight="600"
         rightIcon={<Icon as={BsArrowRightShort} fontSize="2xl" />}
       >
-        Вернуться на главную страницу
+        {!user.isActivated && user.isAuth
+          ? 'Пройти онбординг'
+          : 'Вернуться на главную страницу'}
       </Button>
     </Flex>
   );

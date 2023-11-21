@@ -5,12 +5,16 @@ import { useLocation } from 'react-router-dom';
 import { IsAuthResponse } from '~/shared/api/types';
 import { AuthContext, initAuth } from '~/shared/contexts';
 import { useApi } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 import { Loader } from '~/shared/ui/Loader';
+import { StartLogo } from '~/shared/ui/StartLogo';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { userApi } = useApi();
   const location = useLocation();
   const [loaded, setLoaded] = useState(false);
+
+  const isOnboardingPage = location.pathname === PATHS.onboarding;
 
   const setAuth = (data: IsAuthResponse) => {
     setState({
@@ -41,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider value={state}>
       {!loaded ? (
         <Flex justifyContent="center" alignItems="center" h="full">
-          <Loader />
+          {isOnboardingPage ? <StartLogo /> : <Loader />}
         </Flex>
       ) : (
         children

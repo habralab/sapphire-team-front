@@ -45,6 +45,31 @@ const Tabs = defineMultiStyleConfig({
         p: 0,
       },
     }),
+    onboard: {
+      tablist: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '2',
+      },
+      tab: {
+        borderBottom: '4px solid',
+        borderColor: 'blackAlpha.200',
+        borderRadius: 'full',
+        w: '44px',
+        py: '0',
+        _selected: {
+          borderColor: 'gray.400',
+        },
+        _disabled: {
+          borderColor: 'blackAlpha.200',
+          opacity: 1,
+        },
+      },
+      tabpanel: {
+        p: '0',
+      },
+    },
   },
 });
 
