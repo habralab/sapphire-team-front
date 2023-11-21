@@ -12,6 +12,7 @@ import {
   useToast,
   Text,
 } from '@chakra-ui/react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Controller, FieldErrors, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -31,6 +32,7 @@ import { AboutProject, Team } from './tabs';
 
 export const AddProjectFormView = ({ userId }: { userId: string }) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { mutateAsync: addProject } = useAddProject();
   const { mutateAsync: addPosition } = useAddPosition();
   const { mutateAsync: updateSkills } = useAddSkills();
@@ -79,6 +81,7 @@ export const AddProjectFormView = ({ userId }: { userId: string }) => {
       });
       await Promise.all(updatedSkills);
 
+      queryClient.invalidateQueries(['getAllProjects']);
       navigate(-1);
     } catch (err) {
       if (err instanceof Error) {

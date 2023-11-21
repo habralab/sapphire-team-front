@@ -1,3 +1,4 @@
+import { DeleteIcon } from '@chakra-ui/icons';
 import { Text } from '@chakra-ui/layout';
 import {
   Icon,
@@ -12,7 +13,6 @@ import {
 } from '@chakra-ui/react';
 import { ChangeEvent, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { BsPlus, BsX } from 'react-icons/bs';
 
 import { useIsMobile } from '~/shared/hooks';
 import { STextarea } from '~/shared/ui/STextarea';
@@ -39,75 +39,66 @@ export const AboutProject = (props: AboutProjectProps) => {
       <FormControl mb={6}>
         <FormLabel mb={4}>Обложка</FormLabel>
         <Flex
-          bg="white"
-          py={3}
-          px={5}
-          borderRadius="full"
+          bg="gray.200"
+          color="gray.700"
+          h={32}
+          borderRadius="2xl"
           alignItems="center"
-          justifyContent="space-between"
+          justifyContent="center"
+          position="relative"
+          overflow="hidden"
         >
-          <Text>{previewImg ? 'Удалить обложку' : 'Добавить обложку'}</Text>
-          {previewImg ? (
-            <IconButton
-              variant="ghost"
-              onClick={() => {
-                resetField('attachFile');
-                setPrevievImg('');
-              }}
-              aria-label="Удалить обложку проекта"
-              gap={2}
-              flexShrink="0"
-              h={0}
-              minW="none"
-              padding={isMobile ? 0 : 4}
-              icon={
-                <>
-                  <Icon as={BsX} fontSize="2xl" />
-                </>
-              }
-            />
-          ) : (
-            <IconButton
-              variant="ghost"
-              position="relative"
-              aria-label="Добавить обложку проекта"
-              gap={2}
-              flexShrink="0"
-              h={0}
-              minW="none"
-              padding={isMobile ? 0 : 4}
-              icon={
-                <>
-                  <Icon as={BsPlus} fontSize="2xl" />
-                  <Input
-                    type="file"
-                    height="100%"
-                    width="100%"
-                    overflow="hidden"
-                    position="absolute"
-                    top="0"
-                    left="0"
-                    opacity="0"
-                    aria-hidden="true"
-                    accept="image/*"
-                    {...register('attachFile', {
-                      onChange: (e: ChangeEvent<HTMLInputElement>) => {
-                        if (e.target.files) {
-                          setPrevievImg(URL.createObjectURL(e.target.files[0]));
-                        }
-                      },
-                    })}
-                  />
-                </>
-              }
-            />
+          <Text position="absolute" textAlign="center">
+            Добавьте изображение
+            <br /> размером 300х300
+          </Text>
+          <Input
+            type="file"
+            height="100%"
+            width="100%"
+            overflow="hidden"
+            position="absolute"
+            top="0"
+            left="0"
+            opacity="0"
+            aria-hidden="true"
+            accept="image/*"
+            {...register('attachFile', {
+              onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                if (e.target.files) {
+                  setPrevievImg(URL.createObjectURL(e.target.files[0]));
+                }
+              },
+            })}
+          />
+          {previewImg && (
+            <>
+              <Image src={previewImg} objectFit="cover" bg="gray.200" zIndex={10} />
+              <IconButton
+                onClick={() => {
+                  resetField('attachFile');
+                  setPrevievImg('');
+                }}
+                right={2}
+                top={2}
+                backgroundColor="blackAlpha.600"
+                position="absolute"
+                aria-label="Удалить обложку проекта"
+                gap={2}
+                flexShrink="0"
+                px={1}
+                py={1}
+                h={'initial'}
+                zIndex={10}
+                icon={
+                  <>
+                    <DeleteIcon />
+                  </>
+                }
+              />
+            </>
           )}
         </Flex>
-        {previewImg && (
-          <Flex justifyContent="center" mt={3}>
-            <Image src={previewImg} maxH={32} objectFit="cover" borderRadius="2xl" />
-          </Flex>
-        )}
       </FormControl>
       <FormControl mb={6} isInvalid={!!errors.title} isRequired>
         <FormLabel mb={4}>Название</FormLabel>
