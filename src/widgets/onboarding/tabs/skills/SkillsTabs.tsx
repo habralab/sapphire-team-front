@@ -4,13 +4,14 @@ import { Controller, useForm } from 'react-hook-form';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 
+import { CreateUserType } from '../../Onboarding.types';
+
 interface SkillsTabs {
-  handleTabsChange: (index: number) => void;
-  tabIndex: number;
+  form: ReturnType<typeof useForm<CreateUserType>>;
 }
 
-export function SkillsTabs() {
-  const { control } = useForm({});
+export function SkillsTabs(props: SkillsTabs) {
+  const { control } = props.form;
 
   return (
     <Stack mt={10} gap={10}>
@@ -26,10 +27,10 @@ export function SkillsTabs() {
           <Controller
             control={control}
             name="specs"
-            render={({ field: { onChange } }) => {
+            render={({ field: { onChange, value } }) => {
               return (
                 <FilterSpecialization
-                  userSpecs={[]}
+                  userSpecs={value}
                   setUserSpecs={onChange}
                   doubleChecked={true}
                 />
@@ -42,8 +43,8 @@ export function SkillsTabs() {
           <Controller
             control={control}
             name="skills"
-            render={({ field: { onChange } }) => {
-              return <SearchSelect selectedItems={[]} setSelectedItems={onChange} />;
+            render={({ field: { onChange, value } }) => {
+              return <SearchSelect selectedItems={value} setSelectedItems={onChange} />;
             }}
           />
         </FormControl>

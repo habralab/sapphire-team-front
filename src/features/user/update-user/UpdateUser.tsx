@@ -109,7 +109,7 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
     } catch (err) {
       if (err instanceof Error) {
         toast({
-          title: 'Ошибка создания проекта',
+          title: 'Ошибка обновления профиля',
           description: err.message,
           status: 'error',
           duration: 9000,
