@@ -1,7 +1,6 @@
 import { DeleteIcon } from '@chakra-ui/icons';
 import { Text } from '@chakra-ui/layout';
 import {
-  Icon,
   IconButton,
   Flex,
   Switch,
@@ -24,7 +23,6 @@ interface AboutProjectProps {
 }
 
 export const AboutProject = (props: AboutProjectProps) => {
-  const isMobile = useIsMobile();
   const {
     register,
     control,
