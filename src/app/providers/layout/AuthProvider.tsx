@@ -21,8 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       ...state,
       userId: data?.user_id,
       isAuth: !!data,
-      // isActivated: data?.is_activated,
-      isActivated: false,
+      isActivated: data?.is_activated,
     });
   };
 

@@ -15,10 +15,12 @@ import {
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FiChevronLeft } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 import { useUpdateAvatar, useUpdateProfile, useUpdateSkills } from '~/features/user';
 
 import { useLayoutRefs } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 
 import { CreateUserType } from './Onboarding.types';
 import { WelcomeTabs, AvatarTabs, NameTabs, SkillsTabs } from './tabs';
@@ -27,29 +29,34 @@ interface OnboardingProps {
   userId: string;
 }
 
+const defaultUser = {
+  first_name: '',
+  last_name: '',
+  avatar: null,
+  about: null,
+  main_specialization_id: null,
+  secondary_specialization_id: null,
+  specs: [],
+  skills: [],
+};
+
 export function Onboarding({ userId }: OnboardingProps) {
-  const [tabIndex, setTabIndex] = useState(0);
   const layout = useLayoutRefs();
-  const [previewImg, setPrevievImg] = useState('');
   const toast = useToast();
+  const navigate = useNavigate();
+
+  const [tabIndex, setTabIndex] = useState(0);
+  const [previewImg, setPrevievImg] = useState('');
   const [isNameFilled, setIsNameFilled] = useState(false);
   const [isLastNameFilled, setIsLastNameFilled] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
   const { mutate: mutateUser } = useUpdateProfile();
   const { mutate: mutateSkills } = useUpdateSkills();
   const { mutate: mutateAvatar } = useUpdateAvatar();
 
   const form = useForm<CreateUserType>({
-    defaultValues: {
-      first_name: '',
-      last_name: '',
-      avatar: null,
-      about: null,
-      main_specialization_id: null,
-      secondary_specialization_id: null,
-      specs: [],
-      skills: [],
-    },
+    defaultValues: defaultUser,
   });
 
   const { handleSubmit } = form;
@@ -60,6 +67,8 @@ export function Onboarding({ userId }: OnboardingProps) {
 
   const onSubmit: SubmitHandler<CreateUserType> = (data) => {
     try {
+      setIsAdding(true);
+
       const newUser = {
         id: userId,
         first_name: data.first_name,
@@ -69,7 +78,6 @@ export function Onboarding({ userId }: OnboardingProps) {
         secondary_specialization_id: data.specs[1] ?? null,
       };
 
-      console.log(newUser);
       mutateUser(newUser);
 
       const newSkills = {
@@ -77,7 +85,6 @@ export function Onboarding({ userId }: OnboardingProps) {
         skills: data.skills.map((skill) => skill.value),
       };
 
-      console.log(newSkills);
       mutateSkills(newSkills);
 
       if (previewImg && data.avatar?.length) {
@@ -85,9 +92,11 @@ export function Onboarding({ userId }: OnboardingProps) {
           id: userId,
           avatar: data.avatar[0],
         };
-        console.log(newAvatar);
+
         mutateAvatar(newAvatar);
       }
+
+      navigate(PATHS.search);
     } catch (err) {
       if (err instanceof Error) {
         toast({
@@ -98,10 +107,10 @@ export function Onboarding({ userId }: OnboardingProps) {
           isClosable: true,
         });
       }
+    } finally {
+      setIsAdding(false);
     }
   };
-
-  console.log(tabIndex);
 
   return (
     <Container maxW="md" px={5}>
@@ -157,7 +166,7 @@ export function Onboarding({ userId }: OnboardingProps) {
         <Portal containerRef={layout.footer}>
           <Container py={5} maxW="md">
             {tabIndex === 3 && (
-              <Button form="createUser" type="submit" w="full">
+              <Button form="createUser" type="submit" w="full" isLoading={isAdding}>
                 Продолжить
               </Button>
             )}
