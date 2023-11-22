@@ -8,6 +8,32 @@ export interface paths {
     /** Health */
     get: operations['health_health_get'];
   };
+  '/api/rest/participants/': {
+    /** Create Participant */
+    post: operations['create_participant_api_rest_participants__post'];
+  };
+  '/api/rest/participants/{participant_id}': {
+    /** Get Participant */
+    get: operations['get_participant_api_rest_participants__participant_id__get'];
+    /** Update Participant */
+    post: operations['update_participant_api_rest_participants__participant_id__post'];
+  };
+  '/api/rest/positions/': {
+    /** Get Positions */
+    get: operations['get_positions_api_rest_positions__get'];
+    /** Create Position */
+    post: operations['create_position_api_rest_positions__post'];
+  };
+  '/api/rest/positions/{position_id}': {
+    /** Remove Position */
+    delete: operations['remove_position_api_rest_positions__position_id__delete'];
+  };
+  '/api/rest/positions/{position_id}/skills/': {
+    /** Get Position Skills */
+    get: operations['get_position_skills_api_rest_positions__position_id__skills__get'];
+    /** Update Position Skills */
+    post: operations['update_position_skills_api_rest_positions__position_id__skills__post'];
+  };
   '/api/rest/projects/': {
     /** Get Projects */
     get: operations['get_projects_api_rest_projects__get'];
@@ -32,35 +58,9 @@ export interface paths {
     /** History */
     get: operations['history_api_rest_projects__project_id__history_get'];
   };
-  '/api/rest/projects/{project_id}/positions/': {
-    /** Get Project Positions */
-    get: operations['get_project_positions_api_rest_projects__project_id__positions__get'];
-    /** Create Project Position */
-    post: operations['create_project_position_api_rest_projects__project_id__positions__post'];
-  };
-  '/api/rest/projects/{project_id}/positions/{position_id}': {
-    /** Remove Project Position */
-    delete: operations['remove_project_position_api_rest_projects__project_id__positions__position_id__delete'];
-  };
-  '/api/rest/projects/{project_id}/positions/{position_id}/participants/': {
-    /** Create Participant */
-    post: operations['create_participant_api_rest_projects__project_id__positions__position_id__participants__post'];
-  };
-  '/api/rest/projects/{project_id}/positions/{position_id}/participants/{participant_id}': {
-    /** Get Participant */
-    get: operations['get_participant_api_rest_projects__project_id__positions__position_id__participants__participant_id__get'];
-    /** Update Participant */
-    post: operations['update_participant_api_rest_projects__project_id__positions__position_id__participants__participant_id__post'];
-  };
-  '/api/rest/projects/{project_id}/positions/{position_id}/skills/': {
-    /** Get Project Position Skills */
-    get: operations['get_project_position_skills_api_rest_projects__project_id__positions__position_id__skills__get'];
-    /** Update Project Position Skills */
-    post: operations['update_project_position_skills_api_rest_projects__project_id__positions__position_id__skills__post'];
-  };
-  '/api/rest/projects/{project_id}/reviews/': {
+  '/api/rest/reviews/': {
     /** Create Review */
-    post: operations['create_review_api_rest_projects__project_id__reviews__post'];
+    post: operations['create_review_api_rest_reviews__post'];
   };
   '/api/rest/users/{user_id}/statistic': {
     /** Get User Statistic */
@@ -72,6 +72,13 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
+    /** Body_get_positions_api_rest_positions__get */
+    Body_get_positions_api_rest_positions__get: {
+      /** Specialization Ids */
+      specialization_ids?: unknown;
+      /** Skill Ids */
+      skill_ids?: unknown;
+    };
     /** Body_upload_project_avatar_api_rest_projects__project_id__avatar_post */
     Body_upload_project_avatar_api_rest_projects__project_id__avatar_post: {
       /**
@@ -80,8 +87,21 @@ export interface components {
        */
       avatar: string;
     };
-    /** CreateProjectPositionRequest */
-    CreateProjectPositionRequest: {
+    /** CreateParticipantRequest */
+    CreateParticipantRequest: {
+      /**
+       * Position Id
+       * Format: uuid
+       */
+      position_id: string;
+    };
+    /** CreatePositionRequest */
+    CreatePositionRequest: {
+      /**
+       * Project Id
+       * Format: uuid
+       */
+      project_id: string;
       /**
        * Specialization Id
        * Format: uuid
@@ -109,6 +129,11 @@ export interface components {
     };
     /** CreateReviewRequest */
     CreateReviewRequest: {
+      /**
+       * Project Id
+       * Format: uuid
+       */
+      project_id: string;
       /**
        * User Id
        * Format: uuid
@@ -167,6 +192,51 @@ export interface components {
      * @enum {string}
      */
     ParticipantStatusEnum: 'request' | 'declined' | 'joined' | 'left';
+    /** PositionListResponse */
+    PositionListResponse: {
+      /** Data */
+      data: components['schemas']['PositionResponse'][];
+      /** Page */
+      page: number;
+      /** Per Page */
+      per_page: number;
+      /** Total Pages */
+      total_pages?: number | null;
+      /** Total Items */
+      total_items?: number | null;
+    };
+    /** PositionResponse */
+    PositionResponse: {
+      /**
+       * Id
+       * Format: uuid
+       */
+      id: string;
+      /**
+       * Project Id
+       * Format: uuid
+       */
+      project_id: string;
+      /**
+       * Specialization Id
+       * Format: uuid
+       */
+      specialization_id: string;
+      /** Skills */
+      skills: string[];
+      /** Closed At */
+      closed_at: string | null;
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string;
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string;
+    };
     /** ProjectHistoryListResponse */
     ProjectHistoryListResponse: {
       /** Data */
@@ -216,49 +286,6 @@ export interface components {
     ProjectPartialUpdateRequest: {
       /** Status */
       status?: unknown;
-    };
-    /** ProjectPositionResponse */
-    ProjectPositionResponse: {
-      /**
-       * Id
-       * Format: uuid
-       */
-      id: string;
-      /**
-       * Project Id
-       * Format: uuid
-       */
-      project_id: string;
-      /** Closed At */
-      closed_at: string | null;
-      /**
-       * Created At
-       * Format: date-time
-       */
-      created_at: string;
-      /**
-       * Updated At
-       * Format: date-time
-       */
-      updated_at: string;
-      /**
-       * Specialization Id
-       * Format: uuid
-       */
-      specialization_id: string;
-    };
-    /** ProjectPositionsResponse */
-    ProjectPositionsResponse: {
-      /** Data */
-      data: components['schemas']['ProjectPositionResponse'][];
-      /** Page */
-      page: number;
-      /** Per Page */
-      per_page: number;
-      /** Total Pages */
-      total_pages?: number | null;
-      /** Total Items */
-      total_items?: number | null;
     };
     /** ProjectResponse */
     ProjectResponse: {
@@ -383,6 +410,247 @@ export interface operations {
       };
     };
   };
+  /** Create Participant */
+  create_participant_api_rest_participants__post: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateParticipantRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ParticipantResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get Participant */
+  get_participant_api_rest_participants__participant_id__get: {
+    parameters: {
+      path: {
+        participant_id: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ParticipantResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Update Participant */
+  update_participant_api_rest_participants__participant_id__post: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      path: {
+        participant_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UpdateParticipantRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ParticipantResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get Positions */
+  get_positions_api_rest_positions__get: {
+    parameters: {
+      query?: {
+        project_id?: unknown;
+        is_closed?: unknown;
+        project_query_text?: unknown;
+        project_startline_ge?: unknown;
+        project_startline_le?: unknown;
+        project_deadline_ge?: unknown;
+        project_deadline_le?: unknown;
+        project_status?: unknown;
+        /** @description Page number */
+        page?: number;
+        /** @description Number of items per page */
+        per_page?: number;
+      };
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['Body_get_positions_api_rest_positions__get'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['PositionListResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Create Position */
+  create_position_api_rest_positions__post: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreatePositionRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['PositionResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Remove Position */
+  remove_position_api_rest_positions__position_id__delete: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      path: {
+        position_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['PositionResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get Position Skills */
+  get_position_skills_api_rest_positions__position_id__skills__get: {
+    parameters: {
+      path: {
+        position_id: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': string[];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Update Position Skills */
+  update_position_skills_api_rest_positions__position_id__skills__post: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      path: {
+        position_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': string[];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': string[];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
   /** Get Projects */
   get_projects_api_rest_projects__get: {
     parameters: {
@@ -393,12 +661,12 @@ export interface operations {
         per_page?: number;
         query_text?: unknown;
         owner_id?: unknown;
+        user_id?: unknown;
         startline_ge?: unknown;
         startline_le?: unknown;
         deadline_ge?: unknown;
         deadline_le?: unknown;
         status?: unknown;
-        position_is_closed?: unknown;
         position_skill_ids?: unknown;
         position_specialization_ids?: unknown;
         participant_user_ids?: unknown;
@@ -518,6 +786,7 @@ export interface operations {
       200: {
         content: {
           'application/json': unknown;
+          'image/*': string;
         };
       };
       /** @description Validation Error */
@@ -619,253 +888,8 @@ export interface operations {
       };
     };
   };
-  /** Get Project Positions */
-  get_project_positions_api_rest_projects__project_id__positions__get: {
-    parameters: {
-      query?: {
-        /** @description Page number */
-        page?: number;
-        /** @description Number of items per page */
-        per_page?: number;
-      };
-      path: {
-        project_id: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ProjectPositionsResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /** Create Project Position */
-  create_project_position_api_rest_projects__project_id__positions__post: {
-    parameters: {
-      header?: {
-        Authorization?: string | null;
-      };
-      path: {
-        project_id: string;
-      };
-      cookie?: {
-        access_token?: string | null;
-        refresh_token?: string | null;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['CreateProjectPositionRequest'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ProjectPositionResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /** Remove Project Position */
-  remove_project_position_api_rest_projects__project_id__positions__position_id__delete: {
-    parameters: {
-      header?: {
-        Authorization?: string | null;
-      };
-      path: {
-        project_id: string;
-        position_id: string;
-      };
-      cookie?: {
-        access_token?: string | null;
-        refresh_token?: string | null;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ProjectPositionResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /** Create Participant */
-  create_participant_api_rest_projects__project_id__positions__position_id__participants__post: {
-    parameters: {
-      header?: {
-        Authorization?: string | null;
-      };
-      path: {
-        position_id: string;
-        project_id: string;
-      };
-      cookie?: {
-        access_token?: string | null;
-        refresh_token?: string | null;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ParticipantResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /** Get Participant */
-  get_participant_api_rest_projects__project_id__positions__position_id__participants__participant_id__get: {
-    parameters: {
-      path: {
-        participant_id: string;
-        position_id: string;
-        project_id: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ParticipantResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /** Update Participant */
-  update_participant_api_rest_projects__project_id__positions__position_id__participants__participant_id__post: {
-    parameters: {
-      header?: {
-        Authorization?: string | null;
-      };
-      path: {
-        project_id: string;
-        participant_id: string;
-        position_id: string;
-      };
-      cookie?: {
-        access_token?: string | null;
-        refresh_token?: string | null;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['UpdateParticipantRequest'];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['ParticipantResponse'];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /** Get Project Position Skills */
-  get_project_position_skills_api_rest_projects__project_id__positions__position_id__skills__get: {
-    parameters: {
-      path: {
-        position_id: string;
-        project_id: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': string[];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
-  /** Update Project Position Skills */
-  update_project_position_skills_api_rest_projects__project_id__positions__position_id__skills__post: {
-    parameters: {
-      path: {
-        position_id: string;
-        project_id: string;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': string[];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': string[];
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          'application/json': components['schemas']['HTTPValidationError'];
-        };
-      };
-    };
-  };
   /** Create Review */
-  create_review_api_rest_projects__project_id__reviews__post: {
-    parameters: {
-      header?: {
-        Authorization?: string | null;
-      };
-      path: {
-        project_id: string;
-      };
-      cookie?: {
-        access_token?: string | null;
-        refresh_token?: string | null;
-      };
-    };
+  create_review_api_rest_reviews__post: {
     requestBody: {
       content: {
         'application/json': components['schemas']['CreateReviewRequest'];

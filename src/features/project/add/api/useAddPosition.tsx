@@ -5,11 +5,5 @@ import { api } from '~/shared/contexts';
 
 export const useAddPosition = () =>
   useMutation({
-    mutationFn: ({
-      project_id,
-      position,
-    }: {
-      project_id: string;
-      position: CreatePositionRequest;
-    }) => api.projectsApi.createPosition(project_id, position),
+    mutationFn: (data: CreatePositionRequest) => api.projectsApi.createPosition(data),
   });

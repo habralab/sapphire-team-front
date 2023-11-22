@@ -41,21 +41,20 @@ export class ProjectsApiClient extends BaseApiClient {
     );
   }
 
-  async createPosition(project_id: string, position: CreatePositionRequest) {
+  async createPosition(requestData: CreatePositionRequest) {
     const { data } = await this.client.post<CreatePositionResponse>(
-      `/api/rest/projects/${project_id}/positions/`,
-      position,
+      `/api/rest/positions/`,
+      requestData,
     );
     return data;
   }
 
   async updateSkills({
     position_id,
-    project_id,
     skills,
   }: UpdateSkillsParams & { skills: AddSkillsRequest }) {
     const { data } = await this.client.post<AddSkillsResponse>(
-      `/api/rest/projects/${project_id}/positions/${position_id}/skills/`,
+      `/api/rest/positions/${position_id}/skills/`,
       skills,
     );
     return data;
@@ -97,7 +96,8 @@ export class ProjectsApiClient extends BaseApiClient {
 
   async getProjectPositions(project_id: string) {
     const { data } = await this.client.get<GetProjectPositionsResponse>(
-      `/api/rest/projects/${project_id}/positions/`,
+      `/api/rest/positions/`,
+      { params: { project_id } },
     );
     return data;
   }

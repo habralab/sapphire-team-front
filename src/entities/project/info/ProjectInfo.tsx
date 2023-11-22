@@ -1,6 +1,5 @@
 import { Heading, Stack } from '@chakra-ui/layout';
 import { Skeleton } from '@chakra-ui/react';
-import React from 'react';
 
 import { GetSpecsData } from '~/shared/api';
 import { GetProjectPositionsData } from '~/shared/api/types';
