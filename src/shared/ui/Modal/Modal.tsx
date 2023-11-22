@@ -12,16 +12,17 @@ interface ModalCustomProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: () => void;
+  children: string;
 }
 
-export const Modal = ({ isOpen, onClose, onSubmit }: ModalCustomProps) => {
+export const Modal = ({ isOpen, onClose, onSubmit, children }: ModalCustomProps) => {
   return (
     <ChakraModal onClose={onClose} isOpen={isOpen} isCentered>
       <ModalOverlay />
       <ModalContent py={3} mx={5} borderRadius="2xl">
         <ModalBody>
           <Heading variant="h2" textAlign="center" mb={0}>
-            Вы уверены, что хотите удалить обложку?
+            {children}
           </Heading>
         </ModalBody>
         <ModalFooter flexDirection="column" gap={2}>

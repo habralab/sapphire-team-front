@@ -97,7 +97,9 @@ export const AboutProject = (props: AboutProjectProps) => {
               />
             </>
           )}
-          <Modal isOpen={isOpen} onClose={onClose} onSubmit={deleteAvatar} />
+          <Modal isOpen={isOpen} onClose={onClose} onSubmit={deleteAvatar}>
+            Вы уверены, что хотите удалить обложку?
+          </Modal>
         </Flex>
       </FormControl>
       <FormControl mb={6} isInvalid={!!errors.title} isRequired>
