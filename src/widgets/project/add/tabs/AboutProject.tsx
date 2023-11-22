@@ -9,10 +9,12 @@ import {
   FormControl,
   FormLabel,
   Image,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { ChangeEvent, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { Modal } from '~/shared/ui/Modal';
 import { STextarea } from '~/shared/ui/STextarea';
 
 import { AddProjectForm } from '../AddProject.types';
@@ -28,8 +30,15 @@ export const AboutProject = (props: AboutProjectProps) => {
     resetField,
     formState: { errors },
   } = props.form;
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [previewImg, setPrevievImg] = useState('');
+
+  const deleteAvatar = () => {
+    resetField('attachFile');
+    setPrevievImg('');
+    onClose();
+  };
 
   return (
     <>
@@ -72,10 +81,7 @@ export const AboutProject = (props: AboutProjectProps) => {
             <>
               <Image src={previewImg} objectFit="cover" bg="gray.200" zIndex={10} />
               <IconButton
-                onClick={() => {
-                  resetField('attachFile');
-                  setPrevievImg('');
-                }}
+                onClick={onOpen}
                 right={2}
                 top={2}
                 backgroundColor="blackAlpha.600"
@@ -91,6 +97,9 @@ export const AboutProject = (props: AboutProjectProps) => {
               />
             </>
           )}
+          <Modal isOpen={isOpen} onClose={onClose} onSubmit={deleteAvatar}>
+            Вы уверены, что хотите удалить обложку?
+          </Modal>
         </Flex>
       </FormControl>
       <FormControl mb={6} isInvalid={!!errors.title} isRequired>

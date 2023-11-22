@@ -15,7 +15,6 @@ import {
   Contacts,
   ProjectInfo,
   useGetPositions,
-  useGetPositionsSkills,
   useGetProject,
   useGetProjectAvatar,
 } from '~/entities/project';
@@ -46,10 +45,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
 
   const userIsOwner = loadedProject && userId !== project.owner_id;
 
-  const positionSkillsData = useGetPositionsSkills(projectId, projectPositions?.data);
   const positionSkillsValue = useGetSkills(unvaluedSkillsIds);
-
-  const loadedPositionSkills = positionSkillsData.every((query) => query.isSuccess);
   const loadedPositionSkillsValue = positionSkillsValue.every((query) => query.isSuccess);
 
   useEffect(() => {
@@ -59,22 +55,16 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
   }, [loadedProjectAvatar]);
 
   useEffect(() => {
-    if (
-      loadedPositionSkills &&
-      positionSkillsData.length &&
-      projectPositions?.data.length
-    ) {
+    if (projectPositions?.data.length) {
       const idsSpecPositions = projectPositions.data.map(
         ({ specialization_id }) => specialization_id,
       );
 
-      const idsSkillsPositions = positionSkillsData.map(({ data }) =>
-        data?.length ? data : [],
-      );
+      const idsSkillsPositions = projectPositions.data.map(({ skills }) => skills);
       setSpecsIds(idsSpecPositions);
       setUnvaluedSkillsIds(idsSkillsPositions);
     }
-  }, [loadedPositionSkills]);
+  }, [projectPositions]);
 
   useEffect(() => {
     if (loadedPositionSkillsValue && positionSkillsValue.length) {

@@ -103,6 +103,8 @@ export interface components {
       last_name: string | null;
       /** Is Activated */
       is_activated: boolean;
+      /** Has Avatar */
+      has_avatar: boolean;
       /** About */
       about: string | null;
       /** Main Specialization Id */

@@ -16,6 +16,12 @@ export interface paths {
     /** Get Chat */
     get: operations['get_chat_api_rest_chats__chat_id__get'];
   };
+  '/api/rest/chats/{chat_id}/messages/': {
+    /** Get Messages */
+    get: operations['get_messages_api_rest_chats__chat_id__messages__get'];
+    /** Create Message */
+    post: operations['create_message_api_rest_chats__chat_id__messages__post'];
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -53,6 +59,11 @@ export interface components {
        */
       created_at: string;
     };
+    /** CreateMessageRequest */
+    CreateMessageRequest: {
+      /** Text */
+      text: string;
+    };
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
@@ -64,6 +75,19 @@ export interface components {
       version: string;
       /** Name */
       name: string;
+    };
+    /** MessageListResponse */
+    MessageListResponse: {
+      /** Data */
+      data: components['schemas']['MessageResponse'][];
+      /** Page */
+      page: number;
+      /** Per Page */
+      per_page: number;
+      /** Total Pages */
+      total_pages?: number | null;
+      /** Total Items */
+      total_items?: number | null;
     };
     /** MessageResponse */
     MessageResponse: {
@@ -77,6 +101,11 @@ export interface components {
        * Format: uuid
        */
       chat_id: string;
+      /**
+       * User Id
+       * Format: uuid
+       */
+      user_id: string;
       /** Text */
       text: string;
       /**
@@ -179,6 +208,75 @@ export interface operations {
       200: {
         content: {
           'application/json': unknown;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get Messages */
+  get_messages_api_rest_chats__chat_id__messages__get: {
+    parameters: {
+      query?: {
+        /** @description Page number */
+        page?: number;
+        /** @description Number of items per page */
+        per_page?: number;
+      };
+      header?: {
+        Authorization?: string | null;
+      };
+      path: {
+        chat_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['MessageListResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Create Message */
+  create_message_api_rest_chats__chat_id__messages__post: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      path: {
+        chat_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateMessageRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['MessageResponse'];
         };
       };
       /** @description Validation Error */

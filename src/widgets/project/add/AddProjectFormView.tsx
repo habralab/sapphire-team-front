@@ -66,15 +66,14 @@ export const AddProjectFormView = ({ userId }: { userId: string }) => {
       const newPositions = data.team.map(({ spec }) =>
         addPosition({
           project_id: newProject.id,
-          position: { specialization_id: spec },
+          specialization_id: spec,
         }),
       );
       const allProjectPosition = await Promise.all(newPositions);
 
-      const updatedSkills = allProjectPosition.map(({ project_id, id }, i) => {
+      const updatedSkills = allProjectPosition.map(({ id }, i) => {
         const formatSkills = data.team[i].skills.map(({ value }) => value);
         return updateSkills({
-          project_id,
           position_id: id,
           skills: formatSkills,
         });
