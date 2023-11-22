@@ -13,7 +13,6 @@ import {
 import { ChangeEvent, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useIsMobile } from '~/shared/hooks';
 import { STextarea } from '~/shared/ui/STextarea';
 
 import { AddProjectForm } from '../AddProject.types';
@@ -88,11 +87,7 @@ export const AboutProject = (props: AboutProjectProps) => {
                 py={1}
                 h={'initial'}
                 zIndex={10}
-                icon={
-                  <>
-                    <DeleteIcon />
-                  </>
-                }
+                icon={<DeleteIcon />}
               />
             </>
           )}
