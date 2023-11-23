@@ -19,6 +19,8 @@ export function STextarea({
   const [cursorPosition, setCursorPosition] = useState<number | null>(null);
   const contentEditableRef = useRef<HTMLDivElement>(null);
   const [minH, setMinH] = useState(0);
+  const [updated, setUpdated] = useState(0);
+  const [offset, setOffset] = useState(0);
 
   useLayoutEffect(() => {
     if (contentEditableRef.current && cursorPosition !== null) {
@@ -35,28 +37,26 @@ export function STextarea({
   }, [cursorPosition]);
 
   const handleInput = useCallback(() => {
-    if (contentEditableRef.current) {
-      const selection = window.getSelection();
-      const range = selection?.getRangeAt(0);
-      const offset = range?.startOffset;
+    const selection = window.getSelection();
+    if (contentEditableRef.current && selection) {
+      const range = selection.getRangeAt(0);
+      const offset = range.startOffset;
+
+      if (!offset) setOffset(0);
+      else setOffset(offset > maxLength ? maxLength : offset);
 
       const content = contentEditableRef.current.textContent ?? '';
-      if (content.length > maxLength) {
-        if (selection) {
-          const newValue = content.slice(0, maxLength);
 
-          contentEditableRef.current.textContent = newValue;
-          setCursorPosition(
-            offset && offset > maxLength ? maxLength : offset ? offset : newValue.length,
-          );
-
-          setValue(newValue);
-        }
-      } else {
-        setValue(content);
-      }
+      const newValue = content.slice(0, maxLength);
+      contentEditableRef.current.textContent = newValue;
+      setValue(newValue);
+      setUpdated((oldUpdated) => ++oldUpdated);
     }
   }, []);
+
+  useLayoutEffect(() => {
+    setCursorPosition(offset);
+  }, [offset, updated]);
 
   const handlePaste = (e: React.ClipboardEvent<HTMLDivElement>) => {
     e.preventDefault();
