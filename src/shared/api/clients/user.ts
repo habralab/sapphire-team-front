@@ -20,7 +20,7 @@ export class UserApiClient extends BaseApiClient {
   get authURL() {
     return `${this.baseURL}/api/rest/auth/oauth2/habr/authorize?redirect_url=${window.location.origin}`;
   }
-  async afterAuth({ code, state }: AfterAuthRequestParams) {
+  async afterAuth({ code, state }: AfterAuthRequestParams, signal: AbortSignal) {
     const { data } = await this.client.get<AfterAuthResponse>(
       `/api/rest/auth/oauth2/habr/callback`,
       {
@@ -29,6 +29,7 @@ export class UserApiClient extends BaseApiClient {
           state,
         },
         withCredentials: true,
+        signal,
       },
     );
     return data;

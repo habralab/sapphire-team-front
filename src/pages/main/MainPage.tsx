@@ -1,6 +1,6 @@
 import { useToast } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
@@ -8,24 +8,29 @@ import { PATHS } from '~/shared/lib/router';
 export const MainPage = () => {
   const toast = useToast();
   const [searchParams] = useSearchParams();
-  const [loaded, setLoaded] = useState(false);
+  const navigate = useNavigate();
   const { userApi } = useApi();
 
   useEffect(() => {
     const code = searchParams.get('code');
     const state = searchParams.get('state');
     if (!code || !state) {
-      setLoaded(true);
+      navigate(PATHS.search);
       return;
     }
 
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
     userApi
-      .afterAuth({ code, state })
+      .afterAuth({ code, state }, signal)
       .then(() => {
-        setLoaded(true);
+        navigate(PATHS.search);
       })
       .catch((e: Error) => {
-        setLoaded(true);
+        if (signal.aborted) return;
+        navigate(PATHS.search);
+
         toast({
           title: 'Ошибка авторизации',
           description: e.message,
@@ -34,7 +39,11 @@ export const MainPage = () => {
           isClosable: true,
         });
       });
+
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
-  return loaded ? <Navigate to={PATHS.search} replace /> : null;
+  return null;
 };
