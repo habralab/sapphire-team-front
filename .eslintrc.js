@@ -28,6 +28,9 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/prefer-nullish-coalescing': 'off',
     '@typescript-eslint/no-unused-vars': [
       'warn',
@@ -39,6 +42,7 @@ module.exports = {
     ],
     'react-hooks/exhaustive-deps': 'off',
     'react/react-in-jsx-scope': 'off',
+
     'jsx-a11y/accessible-emoji': 'off',
     'react/prop-types': 'off',
     'import/no-unresolved': 'error',

@@ -20,7 +20,7 @@ import {
 } from '~/entities/project';
 import { useGetSkills, useGetSpecs } from '~/entities/storage';
 
-import { useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
+import { useApi, useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
 interface ProjectBase {
@@ -29,17 +29,15 @@ interface ProjectBase {
 
 export const ProjectBase = ({ projectId }: ProjectBase) => {
   const layout = useLayoutRefs();
+  const { projectsApi } = useApi();
   const { userId } = useAuth();
   const isMobile = useIsMobile();
-  const [projectAvatarImg, setProjectAvatarImg] = useState<string>('');
   const [specsIds, setSpecsIds] = useState<string[]>([]);
   const [unvaluedSkillsIds, setUnvaluedSkillsIds] = useState<string[][]>([]);
   const [readySkillsIds, setReadySkillsIds] = useState<string[][]>([]);
 
   const { data: specs, isSuccess: loadedSpecs } = useGetSpecs();
   const { data: project, isSuccess: loadedProject } = useGetProject(projectId);
-  const { data: projectAvatar, isSuccess: loadedProjectAvatar } =
-    useGetProjectAvatar(projectId);
   const { data: projectPositions, isSuccess: loadedProjectPositions } =
     useGetPositions(projectId);
 
@@ -47,12 +45,6 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
 
   const positionSkillsValue = useGetSkills(unvaluedSkillsIds);
   const loadedPositionSkillsValue = positionSkillsValue.every((query) => query.isSuccess);
-
-  useEffect(() => {
-    if (loadedProjectAvatar) {
-      setProjectAvatarImg(URL.createObjectURL(projectAvatar));
-    }
-  }, [loadedProjectAvatar]);
 
   useEffect(() => {
     if (projectPositions?.data.length) {
@@ -115,7 +107,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
           alignContent="center"
         >
           <Image
-            src={projectAvatarImg}
+            src={projectsApi.getProjectAvatar(projectId)}
             fallbackSrc="https://img.freepik.com/premium-photo/programmer-working-computer-office_229060-14.jpg"
             height={32}
             objectFit="cover"

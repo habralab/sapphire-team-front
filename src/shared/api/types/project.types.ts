@@ -20,10 +20,16 @@ export type AddSkillsResponse =
   paths['/api/rest/positions/{position_id}/skills/']['post']['responses']['200']['content']['application/json'];
 export type UpdateSkillsParams =
   paths['/api/rest/positions/{position_id}/skills/']['post']['parameters']['path'];
+export type GetAllPositionRequest =
+  paths['/api/rest/positions/']['get']['parameters']['query'];
 export type GetProjectPositionsResponse =
   paths['/api/rest/positions/']['get']['responses']['200']['content']['application/json'];
+export type ProjectPositionsResponse =
+  paths['/api/rest/positions/']['get']['responses']['200']['content']['application/json']['data']['0'];
 export type GetProjectPositionsData =
   paths['/api/rest/positions/']['get']['responses']['200']['content']['application/json']['data'];
+export type ProjectData =
+  paths['/api/rest/positions/']['get']['responses']['200']['content']['application/json']['data']['0']['project'];
 export type GetPositionSkillsResponse =
   paths['/api/rest/positions/{position_id}/skills/']['get']['responses']['200']['content']['application/json'];
 export type UpdateProjectAvatarID =

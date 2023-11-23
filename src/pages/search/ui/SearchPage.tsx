@@ -1,4 +1,5 @@
 import { Flex, SimpleGrid, Container, Button, Portal, Skeleton } from '@chakra-ui/react';
+import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 
@@ -8,16 +9,17 @@ import { SearchProject } from '~/features/project';
 import { Notification, Settings } from '~/features/user';
 
 import { Filter, useFilterStore } from '~/entities/project';
+import { useGetSpecs } from '~/entities/storage';
 import { Avatar, DummyAvatar } from '~/entities/user';
 
 import { useApi, useLayoutRefs } from '~/shared/hooks';
 import { BasePageProps, PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
-import { useGetAllProjects } from '../api/useGetAllProjects';
+import { useGetAllPositions } from '../api/useGetAllPositions';
 
 export const SearchPage = ({ user }: BasePageProps) => {
-  const { userApi } = useApi();
+  const { userApi, storageApi } = useApi();
   const targetRef = useRef<HTMLDivElement>(null);
   const layout = useLayoutRefs();
 
@@ -25,17 +27,20 @@ export const SearchPage = ({ user }: BasePageProps) => {
 
   const { filter } = useFilterStore();
 
-  const { data, isLoading, fetchNextPage, isFetchingNextPage } = useGetAllProjects({
+  const { data, isLoading, fetchNextPage, isFetchingNextPage } = useGetAllPositions({
     date: filter.date,
     skills: filter.skills,
     specs: filter.specs,
     searchText,
   });
 
-  const dummyDate = {
-    mainTags: ['Фронтенд разработчик'],
-    tags: ['TypeScript', 'Vue', 'Webpack'],
-  };
+  const { data: allSpecs } = useGetSpecs();
+
+  const { data: allSkills } = useQuery({
+    queryKey: ['skills'],
+    queryFn: () => storageApi.getSkills(),
+    staleTime: Infinity,
+  });
 
   useEffect(() => {
     const options = {
@@ -91,19 +96,26 @@ export const SearchPage = ({ user }: BasePageProps) => {
             <SimpleGrid gap={4}>
               {data.pages.map((group, i) => (
                 <React.Fragment key={i}>
-                  {group.data.map((project) => {
+                  {group.data.map((position) => {
                     return (
                       <Link
-                        key={project.id}
-                        to={generatePath(PATHS.searchProject, { id: project.id })}
+                        key={position.id}
+                        to={generatePath(PATHS.position, { id: position.id })}
                       >
                         <ProjectCard
-                          status={project.status}
-                          title={project.name}
-                          date={project.deadline}
-                          description={project.description}
+                          status={position.project.status}
+                          title={position.project.name}
+                          date={position.project.startline}
+                          description={position.project.description}
                         >
-                          <STag mainTags={dummyDate.mainTags} tags={dummyDate.tags} />
+                          <STag
+                            mainTags={allSpecs?.data
+                              .filter(({ id }) => id === position.specialization_id)
+                              .map(({ name }) => (name ? name : ''))}
+                            tags={allSkills
+                              ?.filter(({ value }) => position.skills.includes(value))
+                              .map(({ label }) => label)}
+                          />
                         </ProjectCard>
                       </Link>
                     );

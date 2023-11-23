@@ -25,6 +25,8 @@ export interface paths {
     post: operations['create_position_api_rest_positions__post'];
   };
   '/api/rest/positions/{position_id}': {
+    /** Get Position */
+    get: operations['get_position_api_rest_positions__position_id__get'];
     /** Remove Position */
     delete: operations['remove_position_api_rest_positions__position_id__delete'];
   };
@@ -212,11 +214,7 @@ export interface components {
        * Format: uuid
        */
       id: string;
-      /**
-       * Project Id
-       * Format: uuid
-       */
-      project_id: string;
+      project: components['schemas']['ProjectResponse'];
       /**
        * Specialization Id
        * Format: uuid
@@ -556,6 +554,28 @@ export interface operations {
       200: {
         content: {
           'application/json': components['schemas']['PositionResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get Position */
+  get_position_api_rest_positions__position_id__get: {
+    parameters: {
+      path: {
+        position_id: string;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': unknown;
         };
       };
       /** @description Validation Error */

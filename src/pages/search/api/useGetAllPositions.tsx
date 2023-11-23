@@ -10,16 +10,16 @@ interface Search {
   searchText?: string;
 }
 
-export const useGetAllProjects = ({ specs, skills, date, searchText }: Search) =>
+export const useGetAllPositions = ({ specs, skills, date, searchText }: Search) =>
   useInfiniteQuery({
-    queryKey: ['getAllProjects', { specs, skills, date, searchText }],
+    queryKey: ['getAllPositions', { specs, skills, date, searchText }],
     queryFn: ({ pageParam = 1 }: QueryFunctionContext<QueryKey, number>) =>
-      api.projectsApi.getAllProjects({
+      api.projectsApi.getAllPositions({
         page: pageParam,
-        position_skill_ids: specs,
-        position_specialization_ids: skills?.map((skill) => skill.value),
-        startline_le: date,
-        query_text: searchText,
+        specialization_ids: specs,
+        skills_ids: skills?.map((skill) => skill.value),
+        project_startline_le: date,
+        project_query_text: searchText,
       }),
     getNextPageParam: (lastPage) => lastPage.page + 1,
     staleTime: 5000,
