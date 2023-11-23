@@ -41,7 +41,7 @@ export function ProfilePage() {
           Профиль
         </Heading>
         <Flex gap={4} alignItems="baseline">
-          <Notification />
+          {/* <Notification /> */}
           <Settings />
         </Flex>
       </Flex>
@@ -60,12 +60,12 @@ export function ProfilePage() {
         <TabList>
           <Tab>Обо мне</Tab>
           <Tab>Проекты</Tab>
-          <Tab>Отзывы</Tab>
+          {/* <Tab>Отзывы</Tab> */}
         </TabList>
         <TabPanels>
           <TabPanel>{userId ? <AboutMeTab userId={userId} /> : <NotAuthTab />}</TabPanel>
-          <TabPanel>{userId ? <ProjectsTab /> : <NotAuthTab />}</TabPanel>
-          <TabPanel>{userId ? <ReviewsTab /> : <NotAuthTab />}</TabPanel>
+          <TabPanel>{userId ? <ProjectsTab userId={userId} /> : <NotAuthTab />}</TabPanel>
+          {/* <TabPanel>{userId ? <ReviewsTab /> : <NotAuthTab />}</TabPanel> */}
         </TabPanels>
       </Tabs>
       {userId ? null : <Login />}

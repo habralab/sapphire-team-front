@@ -2,7 +2,7 @@ import { Text, Flex, Center, SkeletonText, Button, Avatar } from '@chakra-ui/rea
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Info, useIsAvatarExist } from '~/entities/user';
+import { Info, useIsAvatarExist, useUserStatistic } from '~/entities/user';
 
 import { GetUserResponse } from '~/shared/api/types';
 import { useApi } from '~/shared/hooks';
@@ -19,6 +19,8 @@ export function ProfileCardUser({ user }: ProfileCardProps) {
 
   const avatar = userApi.getAvatar(user.id);
   const { data: isAvatarExist, isLoading } = useIsAvatarExist(user.id);
+
+  const { data: statistic } = useUserStatistic(user.id);
 
   return (
     <Flex
@@ -53,7 +55,7 @@ export function ProfileCardUser({ user }: ProfileCardProps) {
           {name}
         </Text>
       )}
-      <Info />
+      <Info statistic={statistic} />
       <Flex px={4} pb={4} w="full">
         <Button as={Link} to={PATHS.profileSettings} variant="light" w="full">
           Редактировать

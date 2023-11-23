@@ -12,7 +12,7 @@ import {
   Button,
   useToast,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FiChevronLeft } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
@@ -65,6 +65,13 @@ export function Onboarding({ userId }: OnboardingProps) {
     setTabIndex(index);
   };
 
+  useEffect(() => {
+    if (result?.is_activated) {
+      navigate(PATHS.search);
+    }
+    console.log(result?.is_activated);
+  }, [result]);
+
   const onSubmit: SubmitHandler<CreateUserType> = (data) => {
     try {
       setIsAdding(true);
@@ -96,16 +103,7 @@ export function Onboarding({ userId }: OnboardingProps) {
         mutateAvatar(newAvatar);
       }
 
-      if (result?.is_activated) {
-        navigate(PATHS.search);
-      } else {
-        toast({
-          title: 'Ошибка создания профиля',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        });
-      }
+      console.log(newUser);
     } catch (err) {
       if (err instanceof Error) {
         toast({
@@ -145,7 +143,7 @@ export function Onboarding({ userId }: OnboardingProps) {
           <Tab isDisabled></Tab>
         </TabList>
 
-        <form id="createUser" onSubmit={handleSubmit(onSubmit)}>
+        <form id="createUser" onSubmit={handleSubmit(onSubmit)} noValidate>
           <TabPanels>
             <TabPanel>
               <WelcomeTabs />

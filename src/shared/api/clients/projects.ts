@@ -14,6 +14,7 @@ import {
   GetCurrentProjectResponse,
   GetPositionSkillsResponse,
   GetProjectPositionsResponse,
+  GetStatistic,
   NewProjectParams,
   ProjectPositionsResponse,
   UpdateProjectAvatar,
@@ -186,5 +187,12 @@ export class ProjectsApiClient extends BaseApiClient {
       };
     });
     return { ...others, data: newData };
+  }
+
+  async getStatistic(id: string) {
+    const { data } = await this.client.get<GetStatistic>(
+      `/api/rest/users/${id}/statistic`,
+    );
+    return data;
   }
 }
