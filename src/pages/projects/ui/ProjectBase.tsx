@@ -61,7 +61,6 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
       );
 
       const idsSkillsPositions = projectPositions.data.map(({ skills }) => skills);
-      console.log(idsSkillsPositions);
       if (idsSkillsPositions[0].length > 0) setUnvaluedSkillsIds(idsSkillsPositions);
       setSpecsIds(idsSpecPositions);
     }
