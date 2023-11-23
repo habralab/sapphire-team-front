@@ -121,7 +121,7 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Flex direction="column" gap={6}>
+      <Flex direction="column" gap={6} mb={4}>
         <FormControl>
           <Flex direction="column" gap={4}>
             <Flex justifyContent="space-between">

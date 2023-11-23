@@ -114,6 +114,8 @@ export function STextarea({
   return (
     <Box pos="relative" w="full">
       <Box
+        fontSize="md"
+        lineHeight="initial"
         p={5}
         pb={7}
         borderRadius="2xl"
@@ -142,7 +144,6 @@ export function STextarea({
         }}
       />
       <Text
-        fontSize="md"
         pos="absolute"
         right={2}
         bottom={2}
