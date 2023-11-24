@@ -12,11 +12,11 @@ import {
 import { useEffect, useState } from 'react';
 
 import {
+  Avatar,
   Contacts,
   ProjectInfo,
   useGetPositions,
   useGetProject,
-  useGetProjectAvatar,
 } from '~/entities/project';
 import { useGetSkills, useGetSpecs } from '~/entities/storage';
 
@@ -29,7 +29,6 @@ interface ProjectBase {
 
 export const ProjectBase = ({ projectId }: ProjectBase) => {
   const layout = useLayoutRefs();
-  const { projectsApi } = useApi();
   const { userId } = useAuth();
   const isMobile = useIsMobile();
   const [specsIds, setSpecsIds] = useState<string[]>([]);
@@ -106,12 +105,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
           boxShadow="none"
           alignContent="center"
         >
-          <Image
-            src={projectsApi.getProjectAvatar(projectId)}
-            fallbackSrc="https://img.freepik.com/premium-photo/programmer-working-computer-office_229060-14.jpg"
-            height={32}
-            objectFit="cover"
-          />
+          <Avatar projectId={projectId} />
           <CardBody padding={isMobile ? 5 : 6}>
             <ProjectInfo
               allSpecs={specs?.data}

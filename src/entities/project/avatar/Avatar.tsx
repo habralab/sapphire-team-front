@@ -2,6 +2,8 @@ import { Image } from '@chakra-ui/react';
 
 import { useApi } from '~/shared/hooks';
 
+import placeholderAvatar from './placeholder-project-avatar.jpg';
+
 interface AvatarProps {
   projectId: string;
 }
@@ -11,7 +13,7 @@ export const Avatar = ({ projectId }: AvatarProps) => {
   return (
     <Image
       src={projectsApi.getProjectAvatar(projectId)}
-      fallbackSrc="https://img.freepik.com/premium-photo/programmer-working-computer-office_229060-14.jpg"
+      fallbackSrc={placeholderAvatar}
       height={32}
       objectFit="cover"
     />

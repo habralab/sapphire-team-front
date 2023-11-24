@@ -1,4 +1,12 @@
-import { Flex, SimpleGrid, Container, Button, Portal, Skeleton } from '@chakra-ui/react';
+import {
+  Flex,
+  SimpleGrid,
+  Container,
+  Button,
+  Portal,
+  Skeleton,
+  Box,
+} from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
@@ -53,7 +61,11 @@ export const SearchPage = ({ user }: BasePageProps) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        fetchNextPage();
+        if (data?.pages[0].total_pages) {
+          if (data.pages.length < data.pages[0].total_pages) {
+            fetchNextPage();
+          }
+        }
       }
     }, options);
 
@@ -122,14 +134,15 @@ export const SearchPage = ({ user }: BasePageProps) => {
                   })}
                 </React.Fragment>
               ))}
-              {isFetchingNextPage && (
+              {isFetchingNextPage ? (
                 <>
                   <Skeleton height="200px" borderRadius="2xl" mb={3} />
                   <Skeleton height="200px" borderRadius="2xl" mb={3} />
                   <Skeleton height="200px" borderRadius="2xl" mb={3} />
                 </>
+              ) : (
+                <Box ref={targetRef} />
               )}
-              {/* <Box ref={targetRef}></Box> */}
             </SimpleGrid>
           )}
         </Flex>
