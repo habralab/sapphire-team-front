@@ -35,12 +35,15 @@ export const SearchPage = ({ user }: BasePageProps) => {
 
   const { filter } = useFilterStore();
 
-  const { data, isLoading, fetchNextPage, isFetchingNextPage } = useGetAllPositions({
-    date: filter.date,
-    skills: filter.skills,
-    specs: filter.specs,
-    searchText,
-  });
+  const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
+    useGetAllPositions({
+      date: filter.date,
+      skills: filter.skills,
+      specs: filter.specs,
+      searchText,
+    });
+
+  console.log(hasNextPage);
 
   const { data: allSpecs } = useGetSpecs();
 
@@ -60,11 +63,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
-        if (data?.pages[0].total_pages) {
-          if (data.pages.length < data.pages[0].total_pages) {
-            fetchNextPage();
-          }
-        }
+        fetchNextPage();
       }
     }, options);
 

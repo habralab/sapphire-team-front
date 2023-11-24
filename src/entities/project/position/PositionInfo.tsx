@@ -39,6 +39,8 @@ export const PositionInfo = ({ spec, skills, project }: ProjectInfoProps) => {
     queryFn: () => storageApi.getSpecs(),
   });
 
+  const isLoaded = loadedSkills && loadedSpecs;
+
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
@@ -53,11 +55,7 @@ export const PositionInfo = ({ spec, skills, project }: ProjectInfoProps) => {
 
       <Stack gap={0} mb={6}>
         <Heading variant="h2">В проект требуется</Heading>
-        <Skeleton
-          isLoaded={loadedSkills && loadedSpecs}
-          borderRadius="2xl"
-          fadeDuration={2}
-        >
+        <Skeleton isLoaded={isLoaded} borderRadius="2xl" fadeDuration={2}>
           <STag
             mainTags={allSpecs?.data
               .filter(({ id }) => id === spec)

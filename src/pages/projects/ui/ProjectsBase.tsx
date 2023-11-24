@@ -54,11 +54,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
-        if (data?.pages[0].total_pages) {
-          if (data.pages.length < data.pages[0].total_pages) {
-            fetchNextPage();
-          }
-        }
+        fetchNextPage();
       }
     }, options);
 

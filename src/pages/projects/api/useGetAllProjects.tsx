@@ -7,6 +7,10 @@ export const useGetAllProjects = (userId: string) =>
     queryKey: ['getAllProjects', userId],
     queryFn: ({ pageParam = 1 }: QueryFunctionContext<QueryKey, number>) =>
       api.projectsApi.getAllProjects({ page: pageParam, owner_id: userId }),
-    getNextPageParam: (lastPage) => lastPage.page + 1,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.total_pages) {
+        return lastPage.page < lastPage.total_pages ? lastPage.page + 1 : undefined;
+      }
+    },
     staleTime: 5000,
   });
