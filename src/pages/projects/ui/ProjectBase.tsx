@@ -5,7 +5,6 @@ import {
   Button,
   Card as ChakraCard,
   CardBody,
-  Image,
   Skeleton,
   Portal,
 } from '@chakra-ui/react';
@@ -20,7 +19,7 @@ import {
 } from '~/entities/project';
 import { useGetSkills, useGetSpecs } from '~/entities/storage';
 
-import { useApi, useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
+import { useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
 interface ProjectBase {

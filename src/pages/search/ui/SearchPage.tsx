@@ -60,7 +60,6 @@ export const SearchPage = ({ user }: BasePageProps) => {
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         if (data?.pages[0].total_pages) {
           if (data.pages.length < data.pages[0].total_pages) {
             fetchNextPage();
