@@ -41,7 +41,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
     { firstName: 'Бернд', lastName: 'Шнайдер', img: 'https://bit.ly/dan-abramov' },
   ];
 
-  const { data, isLoading, fetchNextPage, isFetchingNextPage } =
+  const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetAllProjects(userId);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
-        fetchNextPage();
+        if (hasNextPage) fetchNextPage();
       }
     }, options);
 

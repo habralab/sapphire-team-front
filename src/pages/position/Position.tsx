@@ -21,8 +21,8 @@ interface ProjectBase {
 
 export const Position = ({ positionId }: ProjectBase) => {
   const layout = useLayoutRefs();
-  const { userId } = useAuth();
-  const { projectsApi } = useApi();
+  const { userId, isAuth } = useAuth();
+  const { projectsApi, userApi } = useApi();
   const isMobile = useIsMobile();
 
   const { data: position, isSuccess: loadedPosition } = useQuery({
@@ -31,7 +31,7 @@ export const Position = ({ positionId }: ProjectBase) => {
     staleTime: Infinity,
   });
 
-  const userIsOwner = loadedPosition && userId !== position.project.owner_id;
+  const userIsOwner = isAuth && loadedPosition && userId !== position.project.owner_id;
 
   return (
     <Container maxW="md" display="flex" flexDirection="column">
@@ -91,6 +91,18 @@ export const Position = ({ positionId }: ProjectBase) => {
                 w="full"
               >
                 Откликнуться
+              </Button>
+            )}
+            {!isAuth && (
+              <Button
+                type="button"
+                as="a"
+                href={userApi.authURL}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Зарегистрироваться
               </Button>
             )}
           </Container>

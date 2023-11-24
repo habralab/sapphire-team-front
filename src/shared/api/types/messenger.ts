@@ -37,9 +37,9 @@ export interface components {
       /** Per Page */
       per_page: number;
       /** Total Pages */
-      total_pages?: number | null;
+      total_pages: number;
       /** Total Items */
-      total_items?: number | null;
+      total_items: number;
     };
     /** ChatResponse */
     ChatResponse: {
@@ -85,9 +85,9 @@ export interface components {
       /** Per Page */
       per_page: number;
       /** Total Pages */
-      total_pages?: number | null;
+      total_pages: number;
       /** Total Items */
-      total_items?: number | null;
+      total_items: number;
     };
     /** MessageResponse */
     MessageResponse: {

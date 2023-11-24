@@ -43,8 +43,6 @@ export const SearchPage = ({ user }: BasePageProps) => {
       searchText,
     });
 
-  console.log(hasNextPage);
-
   const { data: allSpecs } = useGetSpecs();
 
   const { data: allSkills } = useQuery({
@@ -63,7 +61,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
-        fetchNextPage();
+        if (hasNextPage) fetchNextPage();
       }
     }, options);
 

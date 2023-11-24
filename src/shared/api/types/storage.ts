@@ -47,9 +47,9 @@ export interface components {
       /** Per Page */
       per_page: number;
       /** Total Pages */
-      total_pages?: number | null;
+      total_pages: number;
       /** Total Items */
-      total_items?: number | null;
+      total_items: number;
     };
     /** SkillResponse */
     SkillResponse: {
@@ -75,9 +75,9 @@ export interface components {
       /** Per Page */
       per_page: number;
       /** Total Pages */
-      total_pages?: number | null;
+      total_pages: number;
       /** Total Items */
-      total_items?: number | null;
+      total_items: number;
     };
     /** SpecializationGroupResponse */
     SpecializationGroupResponse: {
@@ -103,9 +103,9 @@ export interface components {
       /** Per Page */
       per_page: number;
       /** Total Pages */
-      total_pages?: number | null;
+      total_pages: number;
       /** Total Items */
-      total_items?: number | null;
+      total_items: number;
     };
     /** SpecializationResponse */
     SpecializationResponse: {

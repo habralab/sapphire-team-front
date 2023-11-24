@@ -8,9 +8,15 @@ export interface paths {
     /** Health */
     get: operations['health_health_get'];
   };
-  '/api/rest/notifications': {
+  '/api/rest/notifications/': {
     /** Get Notifications */
-    get: operations['get_notifications_api_rest_notifications_get'];
+    get: operations['get_notifications_api_rest_notifications__get'];
+  };
+  '/api/rest/notifications/{notification_id}': {
+    /** Get Notification */
+    get: operations['get_notification_api_rest_notifications__notification_id__get'];
+    /** Update Notification */
+    post: operations['update_notification_api_rest_notifications__notification_id__post'];
   };
 }
 
@@ -30,8 +36,21 @@ export interface components {
       /** Name */
       name: string;
     };
-    /** Notification */
-    Notification: {
+    /** NotificationListResponse */
+    NotificationListResponse: {
+      /** Data */
+      data: components['schemas']['NotificationResponse'][];
+      /** Page */
+      page: number;
+      /** Per Page */
+      per_page: number;
+      /** Total Pages */
+      total_pages: number;
+      /** Total Items */
+      total_items: number;
+    };
+    /** NotificationResponse */
+    NotificationResponse: {
       /**
        * Id
        * Format: uuid
@@ -59,18 +78,13 @@ export interface components {
        */
       updated_at: string;
     };
-    /** NotificationListModel */
-    NotificationListModel: {
-      /** Data */
-      data: components['schemas']['Notification'][];
-      /** Page */
-      page: number;
-      /** Per Page */
-      per_page: number;
-      /** Total Pages */
-      total_pages?: number | null;
-      /** Total Items */
-      total_items?: number | null;
+    /** UpdateNotificationRequest */
+    UpdateNotificationRequest: {
+      /**
+       * Is Read
+       * @constant
+       */
+      is_read: true;
     };
     /** ValidationError */
     ValidationError: {
@@ -106,7 +120,7 @@ export interface operations {
     };
   };
   /** Get Notifications */
-  get_notifications_api_rest_notifications_get: {
+  get_notifications_api_rest_notifications__get: {
     parameters: {
       query?: {
         is_read?: unknown;
@@ -127,7 +141,70 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          'application/json': components['schemas']['NotificationListModel'];
+          'application/json': components['schemas']['NotificationListResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get Notification */
+  get_notification_api_rest_notifications__notification_id__get: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      path: {
+        notification_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['NotificationResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Update Notification */
+  update_notification_api_rest_notifications__notification_id__post: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      path: {
+        notification_id: string;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UpdateNotificationRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['NotificationResponse'];
         };
       };
       /** @description Validation Error */
