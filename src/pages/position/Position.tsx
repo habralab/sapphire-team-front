@@ -17,8 +17,6 @@ import { useGetAllSkills, useGetSpecs } from '~/entities/storage';
 import { useApi, useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
 
-import { useCreateParticipant } from './api';
-
 interface ProjectBase {
   positionId: string;
 }
