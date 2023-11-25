@@ -3,17 +3,12 @@ import { Flex } from '@chakra-ui/react';
 import { useAuth } from '~/shared/hooks';
 
 import { Buttons } from './Buttons';
-import { DummyChats } from './DummyChats';
-import { DummyNotifications } from './DummyNotifications';
-import { DummyProject } from './DummyProject';
-
-type DummyType = 'project' | 'notifications' | 'chats';
 
 interface DummyProps {
-  variant: DummyType;
+  children: JSX.Element[];
 }
 
-export function Dummy({ variant }: DummyProps) {
+export function Dummy({ children }: DummyProps) {
   const { isAuth } = useAuth();
 
   return (
@@ -25,9 +20,7 @@ export function Dummy({ variant }: DummyProps) {
       alignItems="center"
       gap={5}
     >
-      {variant === 'project' && <DummyProject />}
-      {variant === 'notifications' && <DummyNotifications />}
-      {variant === 'chats' && <DummyChats />}
+      {children}
       {isAuth && <Buttons />}
     </Flex>
   );

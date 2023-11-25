@@ -1,10 +1,11 @@
 import { Image, Text } from '@chakra-ui/react';
 
 import chats from './chats.svg';
+import { Dummy } from './Dummy';
 
 export function DummyChats() {
   return (
-    <>
+    <Dummy>
       <Image src={chats} />
       <Text fontSize="md" fontWeight="medium" mt={1}>
         Нет сообщений
@@ -12,6 +13,6 @@ export function DummyChats() {
       <Text color="gray.700" textAlign="center">
         Здесь будут отображаться диалоги с Вашими тиммейтами
       </Text>
-    </>
+    </Dummy>
   );
 }

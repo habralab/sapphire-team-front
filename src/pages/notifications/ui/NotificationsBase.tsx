@@ -2,7 +2,7 @@ import { Flex, Heading, Container, Box } from '@chakra-ui/react';
 
 import { NotificationList } from '~/widgets/notification-list';
 
-import { Dummy } from '~/entities/dummy';
+import { DummyNotifications } from '~/entities/dummy';
 
 import { notifications } from '~/shared/lib/notifications';
 import { GoBack } from '~/shared/ui/GoBack';
@@ -17,7 +17,7 @@ export function NotificationsBase() {
         </Heading>
       </Flex>
       <Box py={2}>
-        <Dummy variant="notifications" />
+        <DummyNotifications />
       </Box>
       {/* <NotificationList notifications={notifications} /> */}
     </Container>

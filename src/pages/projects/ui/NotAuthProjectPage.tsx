@@ -3,7 +3,7 @@ import { Flex, Heading, Container } from '@chakra-ui/react';
 import { AddProject } from '~/features/project';
 import { Login } from '~/features/user';
 
-import { Dummy } from '~/entities/dummy';
+import { DummyProject } from '~/entities/dummy';
 
 export const NotAuthProjectsPage = () => {
   return (
@@ -16,7 +16,7 @@ export const NotAuthProjectsPage = () => {
           <AddProject />
         </Flex>
       </Flex>
-      <Dummy variant="project" />
+      <DummyProject />
       <Login />
     </Container>
   );

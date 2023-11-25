@@ -6,7 +6,7 @@ import { ProjectCard } from '~/widgets/project-card';
 
 import { AddProject } from '~/features/project';
 
-import { Dummy } from '~/entities/dummy';
+import { DummyProject } from '~/entities/dummy';
 import { AvatarsGroup } from '~/entities/project';
 
 import { PATHS } from '~/shared/lib/router';
@@ -73,7 +73,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
       ) : (
         <SimpleGrid gap={4}>
           {!data?.pages.length ? (
-            <Dummy variant="project" />
+            <DummyProject />
           ) : (
             <>
               {data.pages.map((group, i) => (

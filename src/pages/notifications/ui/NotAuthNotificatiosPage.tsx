@@ -2,7 +2,7 @@ import { Flex, Heading, Container, Box } from '@chakra-ui/react';
 
 import { Login } from '~/features/user';
 
-import { Dummy } from '~/entities/dummy';
+import { DummyNotifications } from '~/entities/dummy';
 
 import { GoBack } from '~/shared/ui/GoBack';
 
@@ -16,7 +16,7 @@ export function NotAuthNotificationsPage() {
         </Heading>
       </Flex>
       <Box py={2}>
-        <Dummy variant="notifications" />
+        <DummyNotifications />
       </Box>
       <Login />
     </Container>
