@@ -2,11 +2,11 @@ import { Text } from '@chakra-ui/react';
 
 import { NotificationImage } from '~/shared/ui/NotificationImage';
 
-import { Dummy } from './Dummy';
+import { DummyWrapper } from '../base';
 
 export function DummyNotifications() {
   return (
-    <Dummy>
+    <DummyWrapper>
       <NotificationImage />
       <Text fontSize="md" fontWeight="medium" mt={1}>
         Нет уведомлений
@@ -14,6 +14,6 @@ export function DummyNotifications() {
       <Text color="gray.700" textAlign="center">
         Здесь будут отображаться диалоги c Вашими тиммейтами
       </Text>
-    </Dummy>
+    </DummyWrapper>
   );
 }

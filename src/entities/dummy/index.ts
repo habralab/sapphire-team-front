@@ -1,3 +1,3 @@
-export * from './DummyChats';
-export * from './DummyNotifications';
-export * from './DummyProject';
+export * from './chats';
+export * from './notifications';
+export * from './project';

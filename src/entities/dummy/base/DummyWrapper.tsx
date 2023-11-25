@@ -8,9 +8,8 @@ interface DummyProps {
   children: JSX.Element[];
 }
 
-export function Dummy({ children }: DummyProps) {
+export function DummyWrapper({ children }: DummyProps) {
   const { isAuth } = useAuth();
-
   return (
     <Flex
       bg="white"
