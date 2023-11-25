@@ -3,7 +3,7 @@ import { Flex, Heading, Container, Image, Text } from '@chakra-ui/react';
 import { AddProject } from '~/features/project';
 import { Login } from '~/features/user';
 
-import NotAuth from './NotAuth.svg';
+import { DummyPage } from '~/shared/ui/DummyPage';
 
 export const NotAuthProjectsPage = () => {
   return (
@@ -16,23 +16,9 @@ export const NotAuthProjectsPage = () => {
           <AddProject />
         </Flex>
       </Flex>
-      <Flex
-        bg="white"
-        mt={4}
-        borderRadius="2xl"
-        p={5}
-        direction="column"
-        alignItems="center"
-        gap={5}
-      >
-        <Image src={NotAuth} />
-        <Text fontSize="md" fontWeight="medium" mt={1}>
-          Нет проектов
-        </Text>
-        <Text color="gray.700" textAlign="center">
-          Здесь будут отображаться все ваши проекты в качестве участника и организатора
-        </Text>
-      </Flex>
+      <DummyPage heading="Нет проектов" variant="project">
+        Здесь будут отображаться все ваши проекты в качестве участника и организатора
+      </DummyPage>
       <Login />
     </Container>
   );

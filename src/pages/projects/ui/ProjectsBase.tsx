@@ -1,16 +1,6 @@
-import {
-  Flex,
-  SimpleGrid,
-  Heading,
-  Container,
-  Box,
-  Skeleton,
-  Image,
-  Text,
-  Button,
-} from '@chakra-ui/react';
+import { Flex, SimpleGrid, Heading, Container, Box, Skeleton } from '@chakra-ui/react';
 import React, { useEffect, useRef } from 'react';
-import { Link, generatePath, useNavigate } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
 
@@ -19,11 +9,10 @@ import { AddProject } from '~/features/project';
 import { AvatarsGroup } from '~/entities/project';
 
 import { PATHS } from '~/shared/lib/router';
+import { DummyPage } from '~/shared/ui/DummyPage';
 import { STag } from '~/shared/ui/STag';
 
 import { useGetAllProjects } from '../api/useGetAllProjects';
-
-import NotAuth from './NotAuth.svg';
 
 interface ProjectPageProps {
   userId: string;
@@ -31,7 +20,6 @@ interface ProjectPageProps {
 
 export const ProjectsBase = ({ userId }: ProjectPageProps) => {
   const targetRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
   const dummyAvatars = [
     { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
     { firstName: 'Игорь', lastName: 'Крутой', img: 'https://bit.ly/sage-adebayo' },
@@ -85,35 +73,10 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
       ) : (
         <SimpleGrid gap={4}>
           {!data?.pages.length ? (
-            <Flex
-              bg="white"
-              my={6}
-              borderRadius="2xl"
-              p={5}
-              direction="column"
-              alignItems="center"
-              gap={5}
-            >
-              <Image src={NotAuth} />
-              <Text fontSize="md" fontWeight="medium" mt={1}>
-                Нет проектов
-              </Text>
-              <Text color="gray.700" textAlign="center">
-                Здесь будут отображаться все ваши проекты в качестве участника и
-                организатора
-              </Text>
-              <Button
-                type="button"
-                onClick={() => {
-                  navigate(PATHS.addProject);
-                }}
-                fontSize="sm"
-                fontWeight="600"
-                w="full"
-              >
-                Создать свой проект
-              </Button>
-            </Flex>
+            <DummyPage variant="project" buttonCount={2} heading="Нет проектов">
+              Здесь будут отображаться все ваши проекты в качестве участника и
+              организатора
+            </DummyPage>
           ) : (
             <>
               {data.pages.map((group, i) => (
