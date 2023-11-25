@@ -73,7 +73,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
       ) : (
         <SimpleGrid gap={4}>
           {!data?.pages.length ? (
-            <Dummy variant="project" buttonCount={2} heading="Нет проектов">
+            <Dummy variant="project" heading="Нет проектов">
               Здесь будут отображаться все ваши проекты в качестве участника и
               организатора
             </Dummy>

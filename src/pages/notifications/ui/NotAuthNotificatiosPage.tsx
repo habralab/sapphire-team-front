@@ -16,7 +16,7 @@ export function NotAuthNotificationsPage() {
         </Heading>
       </Flex>
       <Box py={2}>
-        <Dummy heading="Нет уведомлений" variant="notification">
+        <Dummy heading="Нет уведомлений" variant="notifications">
           Здесь будут отображаться диалоги c Вашими тиммейтами
         </Dummy>
       </Box>
