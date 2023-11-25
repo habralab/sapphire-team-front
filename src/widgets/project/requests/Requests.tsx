@@ -1,5 +1,5 @@
 import { Container, Flex, Heading } from '@chakra-ui/layout';
-import { Button, Card, Icon, IconButton, Stack, useDisclosure } from '@chakra-ui/react';
+import { Card, Icon, IconButton, Stack } from '@chakra-ui/react';
 import React from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
@@ -7,7 +7,6 @@ import { RequestButtons } from '~/features/project';
 
 import { RequestInfo } from '~/entities/project';
 
-import { Modal } from '~/shared/ui/Modal';
 import { STag } from '~/shared/ui/STag';
 
 interface dummyParticipant {
