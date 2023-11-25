@@ -1,4 +1,4 @@
-import { Flex, Heading, Container, Image, Text } from '@chakra-ui/react';
+import { Flex, Heading, Container } from '@chakra-ui/react';
 
 import { AddProject } from '~/features/project';
 import { Login } from '~/features/user';
@@ -16,9 +16,7 @@ export const NotAuthProjectsPage = () => {
           <AddProject />
         </Flex>
       </Flex>
-      <Dummy heading="Нет проектов" variant="project">
-        Здесь будут отображаться все ваши проекты в качестве участника и организатора
-      </Dummy>
+      <Dummy variant="project" />
       <Login />
     </Container>
   );

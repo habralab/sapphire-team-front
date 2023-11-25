@@ -73,10 +73,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
       ) : (
         <SimpleGrid gap={4}>
           {!data?.pages.length ? (
-            <Dummy variant="project" heading="Нет проектов">
-              Здесь будут отображаться все ваши проекты в качестве участника и
-              организатора
-            </Dummy>
+            <Dummy variant="project" />
           ) : (
             <>
               {data.pages.map((group, i) => (

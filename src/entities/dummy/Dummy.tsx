@@ -1,25 +1,20 @@
-import { Flex, Image, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import { useAuth } from '~/shared/hooks';
 
 import { Buttons } from './Buttons';
-import chats from './chats.svg';
-import notificatios from './notifications.svg';
-import projects from './projects.svg';
+import { DummyChats } from './DummyChats';
+import { DummyNotifications } from './DummyNotifications';
+import { DummyProject } from './DummyProject';
 
-type DummyVariant = 'project' | 'notifications' | 'chats';
+type DummyType = 'project' | 'notifications' | 'chats';
 
 interface DummyProps {
-  heading: string;
-  children: string;
-  variant: DummyVariant;
+  variant: DummyType;
 }
 
-export function Dummy({ children, heading, variant }: DummyProps) {
+export function Dummy({ variant }: DummyProps) {
   const { isAuth } = useAuth();
-
-  const image =
-    variant === 'project' ? projects : variant === 'chats' ? chats : notificatios;
 
   return (
     <Flex
@@ -30,13 +25,9 @@ export function Dummy({ children, heading, variant }: DummyProps) {
       alignItems="center"
       gap={5}
     >
-      <Image src={image} />
-      <Text fontSize="md" fontWeight="medium" mt={1}>
-        {heading}
-      </Text>
-      <Text color="gray.700" textAlign="center">
-        {children}
-      </Text>
+      {variant === 'project' && <DummyProject />}
+      {variant === 'notifications' && <DummyNotifications />}
+      {variant === 'chats' && <DummyChats />}
       {isAuth && <Buttons />}
     </Flex>
   );
