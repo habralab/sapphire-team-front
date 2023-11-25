@@ -54,6 +54,7 @@ export class UserApiClient extends BaseApiClient {
     const { data } = await this.client.post<UpdateUserResponse>(
       `/api/rest/users/${id}`,
       user,
+      { withCredentials: true },
     );
     return data;
   }

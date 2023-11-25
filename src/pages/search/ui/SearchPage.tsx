@@ -85,8 +85,8 @@ export const SearchPage = ({ user }: BasePageProps) => {
 
             {user.isAuth && (
               <Flex ml="auto" gap={4} alignItems="baseline">
-                <Notification />
-                <Settings />
+                {/* <Notification />
+                <Settings /> */}
               </Flex>
             )}
           </Flex>

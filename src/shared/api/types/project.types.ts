@@ -36,3 +36,5 @@ export type UpdateProjectAvatarID =
   paths['/api/rest/projects/{project_id}/avatar']['post']['parameters']['path'];
 export type UpdateProjectAvatar =
   paths['/api/rest/projects/{project_id}/avatar']['post']['requestBody']['content']['multipart/form-data'];
+export type GetStatistic =
+  paths['/api/rest/users/{user_id}/statistic']['get']['responses']['200']['content']['application/json'];

@@ -1,5 +1,6 @@
 export const PATHS = {
   root: '/',
+  any: '*',
   search: '/search',
   searchProject: '/search/:id',
   projects: '/projects',

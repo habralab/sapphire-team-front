@@ -45,7 +45,7 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
 
   const { userApi } = useApi();
 
-  const { mutate: mutateUser } = useUpdateProfile();
+  const { mutate: mutateUser, data: profile } = useUpdateProfile();
   const { mutate: mutateSkills } = useUpdateSkills();
   const { mutate: mutateAvatar } = useUpdateAvatar();
   const { mutate: mutateDeleteAvatar } = useDeleteAvatar();

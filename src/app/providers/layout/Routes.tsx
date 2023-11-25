@@ -23,7 +23,7 @@ export function Routes() {
           if (
             user.isAuth &&
             !user.isActivated &&
-            ![PATHS.onboarding, PATHS.notFound].includes(props.path)
+            ![PATHS.onboarding, PATHS.notFound, PATHS.root].includes(props.path)
           ) {
             return (
               <Route

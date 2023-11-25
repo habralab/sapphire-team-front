@@ -30,6 +30,15 @@ import { PATHS } from '~/shared/lib/router';
 
 export const normalRoutes = [
   {
+    path: '*',
+    view: {
+      base: Navigate.bind(null, {
+        to: PATHS.notFound,
+        replace: true,
+      }),
+    },
+  },
+  {
     path: PATHS.root,
     view: {
       base: MainPage,
@@ -71,11 +80,17 @@ export const normalRoutes = [
       desktop: ProjectsPageDesktop,
     },
   },
+  // {
+  //   path: PATHS.chats,
+  //   view: {
+  //     base: ChatsPage,
+  //     desktop: ChatsPageDesktop,
+  //   },
+  // },
   {
     path: PATHS.chats,
     view: {
-      base: ChatsPage,
-      desktop: ChatsPageDesktop,
+      base: NotFoundPage,
     },
   },
   {
@@ -90,7 +105,13 @@ export const normalRoutes = [
     path: PATHS.addProject,
     view: { base: AddProjectPage },
   },
-  { path: PATHS.dialog, view: { base: DialogPage, desktop: ChatsPageDesktop } },
+  // { path: PATHS.dialog, view: { base: DialogPage, desktop: ChatsPageDesktop } },
+  {
+    path: PATHS.dialog,
+    view: {
+      base: NotFoundPage,
+    },
+  },
   {
     path: PATHS.notifications,
     view: { base: NotificationsPage, desktop: NotificationsPageDesktop },
@@ -102,13 +123,4 @@ export const normalRoutes = [
   { path: PATHS.settings, view: { base: SettingsPage } },
   { path: PATHS.profileSettings, view: { base: ProfileSettingsPage } },
   { path: PATHS.notificationsSettings, view: { base: NotificationsSettingsPage } },
-  {
-    path: '*',
-    view: {
-      base: Navigate.bind(null, {
-        to: PATHS.notFound,
-        replace: true,
-      }),
-    },
-  },
 ];

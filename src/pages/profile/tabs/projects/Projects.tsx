@@ -1,10 +1,10 @@
-import { Flex, Stack } from '@chakra-ui/react';
+import { Flex, Stack, Text } from '@chakra-ui/react';
 
 import { ProjectCard } from '~/widgets/project-card';
 
 import { AvatarsGroup } from '~/entities/project';
+import { useGetUserProject } from '~/entities/user';
 
-import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
 
 const dummyAvatars = [
@@ -16,25 +16,37 @@ const dummyAvatars = [
   { firstName: 'Бернд', lastName: 'Шнайдер', img: 'https://bit.ly/dan-abramov' },
 ];
 
-export const ProjectsTab = () => {
+interface ProjectsTabProps {
+  userId: string;
+}
+
+export const ProjectsTab = ({ userId }: ProjectsTabProps) => {
+  const { data: projects } = useGetUserProject(userId);
+
   return (
     <Stack gap={4}>
-      {data.map((project) => {
-        return (
-          <ProjectCard
-            key={project.id}
-            status={project.status}
-            title={project.title}
-            date={project.date}
-            description={project.description}
-          >
-            <Flex justifyContent="space-between" alignItems="center">
-              <STag mainTags={['Организатор']} />
-              <AvatarsGroup avatars={dummyAvatars} />
-            </Flex>
-          </ProjectCard>
-        );
-      })}
+      {projects?.data.length ? (
+        projects.data.map((project) => {
+          return (
+            <ProjectCard
+              key={project.id}
+              status={project.status}
+              title={project.name}
+              date={project.startline}
+              description={project.description}
+            >
+              <Flex justifyContent="space-between" alignItems="center">
+                <STag mainTags={['Организатор']} />
+                <AvatarsGroup avatars={dummyAvatars} />
+              </Flex>
+            </ProjectCard>
+          );
+        })
+      ) : (
+        <Text textAlign="center" color="gray.700">
+          Нет проектов
+        </Text>
+      )}
     </Stack>
   );
 };

@@ -113,9 +113,93 @@
         font-display: swap;
       }
     </style>
+    <style>
+      @keyframes zoom-in-zoom-out {
+        0% {
+          transform: scale(1, 1);
+        }
+        50% {
+          transform: scale(1.2, 1.2);
+        }
+        100% {
+          transform: scale(1, 1);
+        }
+      }
+    </style>
   </head>
   <body background="#F5F5F5">
+    <div
+      id="preloader"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        background-color: rgba(237, 237, 237, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <svg
+        style="animation: zoom-in-zoom-out 1.5s ease-out infinite"
+        xmlns="http://www.w3.org/2000/svg"
+        width="100"
+        height="100"
+        viewBox="0 0 100 100"
+        fill="none"
+      >
+        <path
+          d="M22.3965 91.7416L32.2334 74.7361L19.6487 52.9364H0L22.3965 91.7416Z"
+          fill="#6D2DF0"
+        />
+        <path
+          d="M3.72648 40.4866L22.3965 8.13217L32.2334 25.1377L28.2062 32.1157L96.2735 59.3872L77.6035 91.7416L67.7666 74.7361L71.9256 67.5296L3.72648 40.4866Z"
+          fill="#6D2DF0"
+        />
+        <path
+          d="M27.6035 5.12012L37.4404 22.1256H62.5596L72.3965 5.12012H27.6035Z"
+          fill="#6D2DF0"
+        />
+        <path
+          d="M72.3965 94.7536L62.5596 77.7481H37.4404L27.6035 94.7536H72.3965Z"
+          fill="#6D2DF0"
+        />
+        <path
+          d="M77.6035 8.13217L67.7666 25.1377L80.3513 46.9374H100L77.6035 8.13217Z"
+          fill="#6D2DF0"
+        />
+      </svg>
+    </div>
     <div id="root"></div>
+    <script async>
+      var observerFunc = function () {
+        observer.observe(root, config);
+      };
+      var preloader = document.querySelector('#preloader');
+      var root = document.querySelector('#root');
+      var observer = new MutationObserver(function (mutations) {
+        // Traverse every mutation
+        mutations.forEach(function (mutation) {
+          if (mutation.target === root) {
+            if (preloader) preloader.remove();
+            observer.disconnect();
+            window.removeEventListener('load', observerFunc);
+          }
+        });
+      });
+
+      var config = {
+        attributes: true,
+        childList: true,
+        characterData: true,
+        subtree: true,
+      };
+
+      window.addEventListener('load', observerFunc);
+    </script>
     <script type="module" src="/src/app/index.tsx"></script>
   </body>
 </html>

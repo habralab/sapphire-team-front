@@ -4,6 +4,6 @@ import { api } from '~/shared/contexts';
 
 export const useUserSkills = (id: string) =>
   useQuery({
-    queryKey: ['skills', id],
+    queryKey: ['profile', 'skills', id],
     queryFn: () => api.userApi.getUserSkills(id),
   });

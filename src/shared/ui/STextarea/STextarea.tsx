@@ -20,7 +20,7 @@ export function STextarea({
   const contentEditableRef = useRef<HTMLDivElement>(null);
   const [minH, setMinH] = useState(0);
   const [updated, setUpdated] = useState(0);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState<number | null>(null);
 
   useLayoutEffect(() => {
     if (contentEditableRef.current && cursorPosition !== null) {
