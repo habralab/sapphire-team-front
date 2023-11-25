@@ -158,7 +158,7 @@ export const AddProjectFormView = ({ userId }: { userId: string }) => {
           </TabPanels>
         </form>
       </Tabs>
-      <Flex bg="bg" position="sticky" bottom="4.6rem" p={0} py={3} mt="auto">
+      <Flex bg="bg" bottom="4.6rem" p={0} py={4}>
         {tabIndex === 0 && (
           <Button
             type="button"
