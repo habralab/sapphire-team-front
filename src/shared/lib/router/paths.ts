@@ -3,6 +3,7 @@ export const PATHS = {
   search: '/search',
   searchProject: '/search/:id',
   projects: '/projects',
+  position: '/position/:id',
   project: '/projects/:id',
   addProject: '/add-project',
   chats: '/chats',

@@ -11,6 +11,7 @@ import {
   NotificationsPageDesktop,
 } from '~/pages/notifications';
 import { OnboardingPage } from '~/pages/onboarding';
+import { PositionPage } from '~/pages/position';
 import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
 import {
   AddProjectPage,
@@ -80,6 +81,10 @@ export const normalRoutes = [
   {
     path: PATHS.project,
     view: { base: ProjectPage },
+  },
+  {
+    path: PATHS.position,
+    view: { base: PositionPage },
   },
   {
     path: PATHS.addProject,

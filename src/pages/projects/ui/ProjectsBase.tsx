@@ -9,8 +9,7 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react';
-import { QueryFunctionContext, QueryKey, useInfiniteQuery } from '@tanstack/react-query';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, generatePath, useNavigate } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
@@ -19,9 +18,10 @@ import { AddProject } from '~/features/project';
 
 import { AvatarsGroup } from '~/entities/project';
 
-import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
+
+import { useGetAllProjects } from '../api/useGetAllProjects';
 
 import NotAuth from './NotAuth.svg';
 
@@ -31,8 +31,6 @@ interface ProjectPageProps {
 
 export const ProjectsBase = ({ userId }: ProjectPageProps) => {
   const targetRef = useRef<HTMLDivElement>(null);
-  const { projectsApi } = useApi();
-  const [isEmptyData, setEmptyData] = useState<boolean>(false);
   const navigate = useNavigate();
   const dummyAvatars = [
     { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
@@ -43,16 +41,8 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
     { firstName: 'Бернд', lastName: 'Шнайдер', img: 'https://bit.ly/dan-abramov' },
   ];
 
-  const { data, isLoading, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['getAllProjects', userId],
-    queryFn: ({ pageParam = 1 }: QueryFunctionContext<QueryKey, number>) =>
-      projectsApi.getAllProjects({ page: pageParam, owner_id: userId }),
-    // getNextPageParam: (lastPage) => lastPage.page + 1,
-    onSuccess: (response) => {
-      setEmptyData(!response.pages[0].data.length);
-    },
-    staleTime: 5000,
-  });
+  const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
+    useGetAllProjects(userId);
 
   useEffect(() => {
     const options = {
@@ -64,8 +54,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
       if (entry.isIntersecting) {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        fetchNextPage();
+        if (hasNextPage) fetchNextPage();
       }
     }, options);
 
@@ -95,7 +84,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
         </>
       ) : (
         <SimpleGrid gap={4}>
-          {isEmptyData ? (
+          {!data?.pages.length ? (
             <Flex
               bg="white"
               my={6}
@@ -127,7 +116,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
             </Flex>
           ) : (
             <>
-              {data?.pages.map((group, i) => (
+              {data.pages.map((group, i) => (
                 <React.Fragment key={i}>
                   {group.data.map((project) => {
                     return (
@@ -153,15 +142,15 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
               ))}
             </>
           )}
-
-          {isFetchingNextPage && (
+          {isFetchingNextPage ? (
             <>
               <Skeleton height="200px" borderRadius="2xl" mb={3} />
               <Skeleton height="200px" borderRadius="2xl" mb={3} />
               <Skeleton height="200px" borderRadius="2xl" mb={3} />
             </>
+          ) : (
+            <Box ref={targetRef} />
           )}
-          <Box ref={targetRef}></Box>
         </SimpleGrid>
       )}
     </Container>

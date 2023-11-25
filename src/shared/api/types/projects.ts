@@ -9,6 +9,8 @@ export interface paths {
     get: operations['health_health_get'];
   };
   '/api/rest/participants/': {
+    /** Get Participants */
+    get: operations['get_participants_api_rest_participants__get'];
     /** Create Participant */
     post: operations['create_participant_api_rest_participants__post'];
   };
@@ -25,6 +27,8 @@ export interface paths {
     post: operations['create_position_api_rest_positions__post'];
   };
   '/api/rest/positions/{position_id}': {
+    /** Get Position */
+    get: operations['get_position_api_rest_positions__position_id__get'];
     /** Remove Position */
     delete: operations['remove_position_api_rest_positions__position_id__delete'];
   };
@@ -72,13 +76,6 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
-    /** Body_get_positions_api_rest_positions__get */
-    Body_get_positions_api_rest_positions__get: {
-      /** Specialization Ids */
-      specialization_ids?: unknown;
-      /** Skill Ids */
-      skill_ids?: unknown;
-    };
     /** Body_upload_project_avatar_api_rest_projects__project_id__avatar_post */
     Body_upload_project_avatar_api_rest_projects__project_id__avatar_post: {
       /**
@@ -156,6 +153,19 @@ export interface components {
       /** Name */
       name: string;
     };
+    /** ParticipantListResponse */
+    ParticipantListResponse: {
+      /** Data */
+      data: components['schemas']['ParticipantResponse'][];
+      /** Page */
+      page: number;
+      /** Per Page */
+      per_page: number;
+      /** Total Pages */
+      total_pages: number;
+      /** Total Items */
+      total_items: number;
+    };
     /** ParticipantResponse */
     ParticipantResponse: {
       /**
@@ -201,9 +211,9 @@ export interface components {
       /** Per Page */
       per_page: number;
       /** Total Pages */
-      total_pages?: number | null;
+      total_pages: number;
       /** Total Items */
-      total_items?: number | null;
+      total_items: number;
     };
     /** PositionResponse */
     PositionResponse: {
@@ -212,11 +222,7 @@ export interface components {
        * Format: uuid
        */
       id: string;
-      /**
-       * Project Id
-       * Format: uuid
-       */
-      project_id: string;
+      project: components['schemas']['ProjectResponse'];
       /**
        * Specialization Id
        * Format: uuid
@@ -246,9 +252,9 @@ export interface components {
       /** Per Page */
       per_page: number;
       /** Total Pages */
-      total_pages?: number | null;
+      total_pages: number;
       /** Total Items */
-      total_items?: number | null;
+      total_items: number;
     };
     /** ProjectHistoryResponse */
     ProjectHistoryResponse: {
@@ -278,9 +284,9 @@ export interface components {
       /** Per Page */
       per_page: number;
       /** Total Pages */
-      total_pages?: number | null;
+      total_pages: number;
       /** Total Items */
-      total_items?: number | null;
+      total_items: number;
     };
     /** ProjectPartialUpdateRequest */
     ProjectPartialUpdateRequest: {
@@ -410,6 +416,41 @@ export interface operations {
       };
     };
   };
+  /** Get Participants */
+  get_participants_api_rest_participants__get: {
+    parameters: {
+      query?: {
+        /** @description Page number */
+        page?: number;
+        /** @description Number of items per page */
+        per_page?: number;
+        user_id?: unknown;
+        position_id?: unknown;
+        project_id?: unknown;
+        status?: unknown;
+        created_at_le?: unknown;
+        created_at_ge?: unknown;
+        joined_at_le?: unknown;
+        joined_at_ge?: unknown;
+        updated_at_le?: unknown;
+        updated_at_ge?: unknown;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['ParticipantListResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
   /** Create Participant */
   create_participant_api_rest_participants__post: {
     parameters: {
@@ -503,6 +544,9 @@ export interface operations {
       query?: {
         project_id?: unknown;
         is_closed?: unknown;
+        specialization_ids?: unknown;
+        skill_ids?: unknown;
+        joined_user_id?: unknown;
         project_query_text?: unknown;
         project_startline_ge?: unknown;
         project_startline_le?: unknown;
@@ -513,11 +557,6 @@ export interface operations {
         page?: number;
         /** @description Number of items per page */
         per_page?: number;
-      };
-    };
-    requestBody?: {
-      content: {
-        'application/json': components['schemas']['Body_get_positions_api_rest_positions__get'];
       };
     };
     responses: {
@@ -549,6 +588,28 @@ export interface operations {
     requestBody: {
       content: {
         'application/json': components['schemas']['CreatePositionRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['PositionResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get Position */
+  get_position_api_rest_positions__position_id__get: {
+    parameters: {
+      path: {
+        position_id: string;
       };
     };
     responses: {
