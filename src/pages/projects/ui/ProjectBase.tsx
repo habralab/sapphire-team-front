@@ -24,6 +24,7 @@ import {
   Avatar,
   Contacts,
   ProjectInfo,
+  useGetParticipants,
   useGetPositions,
   useGetProject,
 } from '~/entities/project';
@@ -44,13 +45,27 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
   const [specsIds, setSpecsIds] = useState<string[]>([]);
   const [unvaluedSkillsIds, setUnvaluedSkillsIds] = useState<string[][]>([]);
   const [readySkillsIds, setReadySkillsIds] = useState<string[][]>([]);
+  const [userStatus, setUserStatus] = useState('');
+
+  const { data: allParticipant } = useGetParticipants({
+    project_id: projectId,
+  });
+
+  useEffect(() => {
+    if (allParticipant) {
+      const userIsParticipant = allParticipant.data.filter(
+        ({ user_id }) => user_id === userId,
+      );
+      if (userIsParticipant.length) {
+        setUserStatus(userIsParticipant[0].status);
+      }
+    }
+  }, [allParticipant]);
 
   const { data: specs, isSuccess: loadedSpecs } = useGetSpecs();
   const { data: project, isSuccess: loadedProject } = useGetProject(projectId);
   const { data: projectPositions, isSuccess: loadedProjectPositions } =
     useGetPositions(projectId);
-
-  const userIsOwner = loadedProject && userId !== project.owner_id;
 
   const positionSkillsValue = useGetSkills(unvaluedSkillsIds);
   const loadedPositionSkillsValue = positionSkillsValue.every((query) => query.isSuccess);
@@ -159,17 +174,16 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
       {layout?.footer && (
         <Portal containerRef={layout.footer}>
           <Container py={2} maxW="md">
-            {userIsOwner && (
+            {userStatus === 'request' && (
               <Button
-                type="button"
-                onClick={() => {
-                  // handleTabsChange(1);
-                }}
+                bg="gray.300"
+                color="gray.800"
+                _hover={{ bg: 'gray.300' }}
                 fontSize="sm"
                 fontWeight="600"
                 w="full"
               >
-                Откликнуться
+                Отклик отправлен
               </Button>
             )}
           </Container>

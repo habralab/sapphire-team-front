@@ -6,8 +6,12 @@ import {
   AddSkillsRequest,
   AddSkillsResponse,
   AfterPostNewProjectResponse,
+  CreateParticipantRequest,
+  CreateParticipantResponse,
   CreatePositionRequest,
   CreatePositionResponse,
+  GetAllParticipantsRequest,
+  GetAllParticipantsResponse,
   GetAllPositionRequest,
   GetAllProjectsRequest,
   GetAllProjectsResponse,
@@ -50,6 +54,22 @@ export class ProjectsApiClient extends BaseApiClient {
     const { data } = await this.client.post<CreatePositionResponse>(
       `/api/rest/positions/`,
       requestData,
+    );
+    return data;
+  }
+
+  async createParticipant(requestData: CreateParticipantRequest) {
+    const { data } = await this.client.post<CreateParticipantResponse>(
+      `/api/rest/participants/`,
+      requestData,
+    );
+    return data;
+  }
+
+  async getParticipants(request: GetAllParticipantsRequest) {
+    const { data } = await this.client.get<GetAllParticipantsResponse>(
+      `/api/rest/participants/`,
+      { params: request },
     );
     return data;
   }

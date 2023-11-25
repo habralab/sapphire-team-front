@@ -9,12 +9,15 @@ import {
   Portal,
 } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 
 import { Avatar, Contacts, PositionInfo } from '~/entities/project';
 import { useGetAllSkills, useGetSpecs } from '~/entities/storage';
 
 import { useApi, useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
+
+import { useCreateParticipant } from './api';
 
 interface ProjectBase {
   positionId: string;
@@ -25,6 +28,9 @@ export const Position = ({ positionId }: ProjectBase) => {
   const { userId, isAuth } = useAuth();
   const { projectsApi, userApi } = useApi();
   const isMobile = useIsMobile();
+  const [userStatus, setUserStatus] = useState('');
+
+  const { mutateAsync: createParticipant, isLoading } = useCreateParticipant();
 
   const { data: position, isSuccess: loadedPosition } = useQuery({
     queryKey: ['getPosition', positionId],
@@ -94,17 +100,28 @@ export const Position = ({ positionId }: ProjectBase) => {
       {layout?.footer && (
         <Portal containerRef={layout.footer}>
           <Container py={2} maxW="md">
-            {userIsOwner && (
+            {userNotOwner && (
               <Button
                 type="button"
-                onClick={() => {
-                  // handleTabsChange(1);
-                }}
+                isLoading={isLoading}
+                onClick={createRequest}
                 fontSize="sm"
                 fontWeight="600"
                 w="full"
               >
                 Откликнуться
+              </Button>
+            )}
+            {userStatus === 'request' && (
+              <Button
+                bg="gray.300"
+                color="gray.800"
+                _hover={{ bg: 'gray.300' }}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Отклик отправлен
               </Button>
             )}
             {!isAuth && (

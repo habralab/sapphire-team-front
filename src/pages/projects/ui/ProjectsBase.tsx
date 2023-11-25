@@ -32,6 +32,8 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetAllProjects(userId);
 
+  console.log(data?.pages.flatMap(({ data }) => data.flatMap(({ id }) => id)));
+
   useEffect(() => {
     const options = {
       root: null,
