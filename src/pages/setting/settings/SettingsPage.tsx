@@ -41,12 +41,12 @@ export function SettingsPage() {
             </SettingItem>
           </Link>
           <Divider variant="light" />
-          <Link to={PATHS.notificationsSettings}>
+          {/* <Link to={PATHS.notificationsSettings}>
             <SettingItem type="heading" variant="h3" icon={FiChevronRight}>
               Уведомления
             </SettingItem>
-          </Link>
-          <Divider variant="light" />
+          </Link> */}
+          {/* <Divider variant="light" /> */}
           {/* TODO: вставить актуальную почту */}
           <ChakraLink href="mailto:">
             <SettingItem type="heading" variant="h3" icon={FiChevronRight}>

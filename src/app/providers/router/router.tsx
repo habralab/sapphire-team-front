@@ -2,6 +2,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { BlankPage } from '~/pages/blank';
 
+import { api } from '~/shared/contexts';
+
 import { Layout } from '../layout/Layout';
 
 const closedRouter = createBrowserRouter([
@@ -15,6 +17,13 @@ const normalRouter = createBrowserRouter([
   {
     path: '*',
     element: <Layout />,
+    loader: async () => {
+      try {
+        return api.userApi.isAuth();
+      } catch (e) {
+        return null;
+      }
+    },
   },
 ]);
 

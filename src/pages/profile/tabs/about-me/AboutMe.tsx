@@ -31,7 +31,7 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
       specs.data.find((spec) => spec.id === user?.secondary_specialization_id)?.name ??
         null,
     );
-  }, [specs]);
+  }, [specs, user?.main_specialization_id, user?.secondary_specialization_id]);
 
   if (
     user?.about ||

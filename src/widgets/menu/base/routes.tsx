@@ -1,6 +1,6 @@
 import { Icon, Search2Icon } from '@chakra-ui/icons';
 import { BsFillBriefcaseFill } from 'react-icons/bs';
-import { IoChatbubbles, IoPerson } from 'react-icons/io5';
+import { IoChatbubbles, IoNotifications, IoPerson } from 'react-icons/io5';
 
 import { PATHS } from '~/shared/lib/router';
 
@@ -19,10 +19,16 @@ export const routes: MenuRoute[] = [
     icon: <Icon as={BsFillBriefcaseFill} fontSize="2xl" />,
     isPublic: true,
   },
+  // {
+  //   path: PATHS.chats,
+  //   name: 'Чаты',
+  //   icon: <Icon as={IoChatbubbles} fontSize="2xl" />,
+  //   isPublic: true,
+  // },
   {
-    path: PATHS.chats,
-    name: 'Чаты',
-    icon: <Icon as={IoChatbubbles} fontSize="2xl" />,
+    path: PATHS.notifications,
+    name: 'Уведомления',
+    icon: <Icon as={IoNotifications} fontSize="2xl" />,
     isPublic: true,
   },
   {

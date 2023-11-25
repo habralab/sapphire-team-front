@@ -67,9 +67,8 @@ export function Onboarding({ userId }: OnboardingProps) {
 
   useEffect(() => {
     if (result?.is_activated) {
-      navigate(PATHS.search);
+      location.href = PATHS.search;
     }
-    console.log(result?.is_activated);
   }, [result]);
 
   const onSubmit: SubmitHandler<CreateUserType> = (data) => {
@@ -102,8 +101,6 @@ export function Onboarding({ userId }: OnboardingProps) {
 
         mutateAvatar(newAvatar);
       }
-
-      console.log(newUser);
     } catch (err) {
       if (err instanceof Error) {
         toast({
