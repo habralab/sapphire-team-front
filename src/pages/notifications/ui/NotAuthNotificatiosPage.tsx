@@ -2,7 +2,8 @@ import { Flex, Heading, Container, Box } from '@chakra-ui/react';
 
 import { Login } from '~/features/user';
 
-import { DummyPage } from '~/shared/ui/DummyPage';
+import { Dummy } from '~/entities/dummy';
+
 import { GoBack } from '~/shared/ui/GoBack';
 
 export function NotAuthNotificationsPage() {
@@ -15,9 +16,9 @@ export function NotAuthNotificationsPage() {
         </Heading>
       </Flex>
       <Box py={2}>
-        <DummyPage heading="Нет уведомлений" variant="notification">
+        <Dummy heading="Нет уведомлений" variant="notification">
           Здесь будут отображаться диалоги c Вашими тиммейтами
-        </DummyPage>
+        </Dummy>
       </Box>
       <Login />
     </Container>

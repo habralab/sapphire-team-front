@@ -17,7 +17,7 @@ interface DummyPageProps {
   buttonCount?: DummyPageVariantButtonCount;
 }
 
-export function DummyPage({ children, heading, variant, buttonCount }: DummyPageProps) {
+export function Dummy({ children, heading, variant, buttonCount }: DummyPageProps) {
   const navigate = useNavigate();
 
   const image = () => {

@@ -6,10 +6,10 @@ import { ProjectCard } from '~/widgets/project-card';
 
 import { AddProject } from '~/features/project';
 
+import { Dummy } from '~/entities/dummy';
 import { AvatarsGroup } from '~/entities/project';
 
 import { PATHS } from '~/shared/lib/router';
-import { DummyPage } from '~/shared/ui/DummyPage';
 import { STag } from '~/shared/ui/STag';
 
 import { useGetAllProjects } from '../api/useGetAllProjects';
@@ -73,10 +73,10 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
       ) : (
         <SimpleGrid gap={4}>
           {!data?.pages.length ? (
-            <DummyPage variant="project" buttonCount={2} heading="Нет проектов">
+            <Dummy variant="project" buttonCount={2} heading="Нет проектов">
               Здесь будут отображаться все ваши проекты в качестве участника и
               организатора
-            </DummyPage>
+            </Dummy>
           ) : (
             <>
               {data.pages.map((group, i) => (
