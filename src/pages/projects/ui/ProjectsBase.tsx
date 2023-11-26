@@ -32,8 +32,6 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetAllProjects(userId);
 
-  console.log(data?.pages.flatMap(({ data }) => data.flatMap(({ id }) => id)));
-
   useEffect(() => {
     const options = {
       root: null,
@@ -94,7 +92,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
                         >
                           <Flex justifyContent="space-between" alignItems="center">
                             <STag mainTags={['Организатор']} />
-                            <AvatarsGroup avatars={dummyAvatars} />
+                            {/* <AvatarsGroup avatars={dummyAvatars} /> */}
                           </Flex>
                         </ProjectCard>
                       </Link>

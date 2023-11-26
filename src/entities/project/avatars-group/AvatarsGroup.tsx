@@ -13,8 +13,8 @@ interface AvatarProps {
 export const AvatarsGroup = ({ avatars }: AvatarProps) => {
   return (
     <AvatarGroup spacing={'-2'} size={'sm'} max={3}>
-      {avatars.map(({ firstName, lastName, img }, i) => (
-        <Avatar key={i} name={`${firstName} ${lastName}`} w={7} h={7} src={img} />
+      {avatars.map(({ firstName, lastName, img }) => (
+        <Avatar key={img} name={`${firstName} ${lastName}`} w={7} h={7} src={img} />
       ))}
     </AvatarGroup>
   );

@@ -14,6 +14,8 @@ export type GetAllParticipantsRequest =
   paths['/api/rest/participants/']['get']['parameters']['query'];
 export type GetAllParticipantsResponse =
   paths['/api/rest/participants/']['get']['responses']['200']['content']['application/json'];
+export type GetAllParticipantsDataResponse =
+  paths['/api/rest/participants/']['get']['responses']['200']['content']['application/json']['data'];
 export type CreateParticipantRequest =
   paths['/api/rest/participants/']['post']['requestBody']['content']['application/json'];
 export type CreateParticipantResponse =

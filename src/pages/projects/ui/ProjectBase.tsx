@@ -27,6 +27,7 @@ import {
   useGetParticipants,
   useGetPositions,
   useGetProject,
+  useGetUserStatus,
 } from '~/entities/project';
 import { useGetSkills, useGetSpecs } from '~/entities/storage';
 
@@ -45,22 +46,15 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
   const [specsIds, setSpecsIds] = useState<string[]>([]);
   const [unvaluedSkillsIds, setUnvaluedSkillsIds] = useState<string[][]>([]);
   const [readySkillsIds, setReadySkillsIds] = useState<string[][]>([]);
-  const [userStatus, setUserStatus] = useState('');
 
   const { data: allParticipant } = useGetParticipants({
     project_id: projectId,
   });
 
-  useEffect(() => {
-    if (allParticipant) {
-      const userIsParticipant = allParticipant.data.filter(
-        ({ user_id }) => user_id === userId,
-      );
-      if (userIsParticipant.length) {
-        setUserStatus(userIsParticipant[0].status);
-      }
-    }
-  }, [allParticipant]);
+  const { userStatus } = useGetUserStatus({
+    allParticipant: allParticipant?.data,
+    userId,
+  });
 
   const { data: specs, isSuccess: loadedSpecs } = useGetSpecs();
   const { data: project, isSuccess: loadedProject } = useGetProject(projectId);
@@ -176,8 +170,9 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
           <Container py={2} maxW="md">
             {userStatus === 'request' && (
               <Button
-                bg="gray.300"
-                color="gray.800"
+                isDisabled
+                bg="gray.400"
+                color="gray.900"
                 _hover={{ bg: 'gray.300' }}
                 fontSize="sm"
                 fontWeight="600"

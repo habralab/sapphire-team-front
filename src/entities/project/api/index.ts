@@ -4,3 +4,4 @@ export * from './useGetProject';
 export * from './useGetProjectAvatar';
 export * from './useGetUser';
 export * from './useGetParticipants';
+export * from './useGetUserStatus';

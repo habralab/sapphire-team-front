@@ -7,6 +7,7 @@ import {
   CardBody,
   Skeleton,
   Portal,
+  useToast,
 } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
@@ -26,8 +27,7 @@ export const Position = ({ positionId }: ProjectBase) => {
   const { userId, isAuth } = useAuth();
   const { projectsApi, userApi } = useApi();
   const isMobile = useIsMobile();
-  const [userStatus, setUserStatus] = useState('');
-
+  const toast = useToast();
   const { mutateAsync: createParticipant, isLoading } = useCreateParticipant();
 
   const { data: position, isSuccess: loadedPosition } = useQuery({
@@ -98,7 +98,7 @@ export const Position = ({ positionId }: ProjectBase) => {
       {layout?.footer && (
         <Portal containerRef={layout.footer}>
           <Container py={2} maxW="md">
-            {userNotOwner && (
+            {userIsAvailableToRequest && (
               <Button
                 type="button"
                 isLoading={isLoading}
