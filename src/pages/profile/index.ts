@@ -1,3 +1,3 @@
-export * from './ProfilePage';
+export * from './ProfileMePage';
 export * from './ProfilePage.desktop';
 export * from './ProfileUserPage';

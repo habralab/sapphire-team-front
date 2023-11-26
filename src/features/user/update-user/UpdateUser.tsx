@@ -44,19 +44,19 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const { data: getAvatar } = useGetAvatar(user.id);
+  const { data: avatar } = useGetAvatar(user.id);
   const { mutate: mutateUser } = useUpdateProfile();
-  const { mutate: mutateSkills } = useUpdateSkills();
-  const { mutate: mutateAvatar } = useUpdateAvatar();
-  const { mutate: mutateDeleteAvatar } = useDeleteAvatar();
+  const { mutate: updateSkills } = useUpdateSkills();
+  const { mutate: updateAvatar } = useUpdateAvatar();
+  const { mutate: deleteAvatar } = useDeleteAvatar();
 
   const [previewImg, setPrevievImg] = useState('');
 
   useEffect(() => {
     if (isAvatarExist) {
-      setPrevievImg(getAvatar ?? '');
+      setPrevievImg(avatar ?? '');
     }
-  }, [isAvatarExist, getAvatar]);
+  }, [isAvatarExist, avatar]);
 
   const {
     control,
@@ -68,7 +68,6 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
     defaultValues: userResponseToUserType({ user, skills }),
   });
 
-  console.log(dirtyFields);
   const onSubmit = (data: UserTypeForm) => {
     if (!isDirty) {
       navigate(PATHS.profileMe);
@@ -100,7 +99,7 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
           skills: data.skills.map((skill) => skill.value),
         };
 
-        mutateSkills(newSkills);
+        updateSkills(newSkills);
       }
 
       if (dirtyFields.avatar) {
@@ -109,12 +108,12 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
             id: user.id,
             avatar: data.avatar[0],
           };
-          mutateAvatar(newAvatar);
+          updateAvatar(newAvatar);
         }
       }
 
       if (isAvatarExist && !previewImg) {
-        mutateDeleteAvatar(user.id);
+        deleteAvatar(user.id);
       }
 
       navigate(PATHS.profileMe);
