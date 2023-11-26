@@ -18,11 +18,9 @@ export const RequestButtons = () => {
 
   const submitParticipant = () => {
     console.log('Принят');
-    submitOnClose();
   };
   const rejectParticipant = () => {
     console.log('Отклонен');
-    rejectOnClose();
   };
   return (
     <Flex gap={3}>
@@ -54,7 +52,10 @@ export const RequestButtons = () => {
         isOpen={submitIsOpen}
         onClose={submitOnClose}
         submitText="Принять в команду"
-        onSubmit={submitParticipant}
+        onSubmit={() => {
+          submitParticipant();
+          submitOnClose();
+        }}
       >
         Принять в команду?
       </Modal>
@@ -62,7 +63,10 @@ export const RequestButtons = () => {
         isOpen={rejectIsOpen}
         onClose={rejectOnClose}
         submitText="Отклонить заявку"
-        onSubmit={rejectParticipant}
+        onSubmit={() => {
+          rejectParticipant();
+          rejectOnClose();
+        }}
       >
         Отклонить заявку?
       </Modal>

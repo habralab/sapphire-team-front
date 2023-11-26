@@ -22,8 +22,8 @@ export const Modal = ({
   onClose,
   onSubmit,
   children,
-  submitText,
-  cancelText,
+  submitText = 'Удалить',
+  cancelText = 'Отмена',
 }: ModalCustomProps) => {
   return (
     <ChakraModal onClose={onClose} isOpen={isOpen} isCentered>
@@ -42,7 +42,7 @@ export const Modal = ({
             fontWeight="600"
             w="full"
           >
-            {submitText ?? 'Удалить'}
+            {submitText}
           </Button>
           <Button
             variant="ghost"
@@ -53,7 +53,7 @@ export const Modal = ({
             fontWeight="600"
             w="full"
           >
-            {cancelText ?? 'Отмена'}
+            {cancelText}
           </Button>
         </ModalFooter>
       </ModalContent>
