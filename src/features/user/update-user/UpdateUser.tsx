@@ -45,7 +45,7 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
   const toast = useToast();
 
   const { data: avatar } = useGetAvatar(user.id);
-  const { mutate: mutateUser } = useUpdateProfile();
+  const { mutate: updateUser } = useUpdateProfile();
   const { mutate: updateSkills } = useUpdateSkills();
   const { mutate: updateAvatar } = useUpdateAvatar();
   const { mutate: deleteAvatar } = useDeleteAvatar();
@@ -90,7 +90,7 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
           secondary_specialization_id: data.specs[1] ?? null,
         };
 
-        mutateUser(updatedUser);
+        updateUser(updatedUser);
       }
 
       if (dirtyFields.skills) {
