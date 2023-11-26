@@ -4,7 +4,7 @@ import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { useGetUserProject } from '~/entities/user';
+import { useGetAllProjects } from '~/entities/project';
 
 import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
@@ -15,7 +15,7 @@ interface ProjectsTabProps {
 
 export const ProjectsTab = ({ userId }: ProjectsTabProps) => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
-    useGetUserProject(userId);
+    useGetAllProjects(userId);
   const targetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export const ProjectsTab = ({ userId }: ProjectsTabProps) => {
         </>
       ) : (
         <Stack gap={4}>
-          {!data?.pages.length ? (
+          {!data?.pages.length || !data.pages[0].total_items ? (
             <Text textAlign="center" color="gray.700">
               Нет проектов
             </Text>

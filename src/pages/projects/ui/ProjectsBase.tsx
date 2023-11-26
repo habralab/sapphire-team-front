@@ -7,12 +7,10 @@ import { ProjectCard } from '~/widgets/project-card';
 import { AddProject } from '~/features/project';
 
 import { DummyProject } from '~/entities/dummy';
-import { AvatarsGroup } from '~/entities/project';
+import { AvatarsGroup, useGetAllProjects } from '~/entities/project';
 
 import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
-
-import { useGetAllProjects } from '../api/useGetAllProjects';
 
 interface ProjectPageProps {
   userId: string;
@@ -72,7 +70,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
         </>
       ) : (
         <SimpleGrid gap={4}>
-          {!data?.pages.length ? (
+          {!data?.pages.length || !data.pages[0].total_items ? (
             <DummyProject />
           ) : (
             <>
