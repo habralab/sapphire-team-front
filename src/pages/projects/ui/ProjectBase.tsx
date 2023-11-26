@@ -85,6 +85,8 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
     }
   }, [loadedPositionSkillsValue, positionSkillsValue.length]);
 
+  const userNotOwner = loadedProject && userId !== project.owner_id;
+
   const loadedAllPositions =
     loadedProjectPositions &&
     loadedSpecs &&
@@ -161,7 +163,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                 <Requests onClose={onClose} participants={dummyPartic} />
               </ModalContent>
             </Modal>
-            {userIsOwner && <Contacts ownerId={project.owner_id} />}
+            {userNotOwner && <Contacts ownerId={project.owner_id} />}
           </CardBody>
         </ChakraCard>
       )}
