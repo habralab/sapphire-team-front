@@ -12,10 +12,19 @@ interface ModalCustomProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: () => void;
+  submitText: string;
+  cancelText: string;
   children: string;
 }
 
-export const Modal = ({ isOpen, onClose, onSubmit, children }: ModalCustomProps) => {
+export const Modal = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  children,
+  submitText,
+  cancelText,
+}: ModalCustomProps) => {
   return (
     <ChakraModal onClose={onClose} isOpen={isOpen} isCentered>
       <ModalOverlay />
@@ -33,7 +42,7 @@ export const Modal = ({ isOpen, onClose, onSubmit, children }: ModalCustomProps)
             fontWeight="600"
             w="full"
           >
-            Удалить
+            {submitText}
           </Button>
           <Button
             variant="ghost"
@@ -44,7 +53,7 @@ export const Modal = ({ isOpen, onClose, onSubmit, children }: ModalCustomProps)
             fontWeight="600"
             w="full"
           >
-            Отмена
+            {cancelText}
           </Button>
         </ModalFooter>
       </ModalContent>

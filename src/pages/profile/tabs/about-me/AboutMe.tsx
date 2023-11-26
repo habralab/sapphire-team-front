@@ -22,14 +22,13 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
   const { data: specs } = useGetSpecs();
 
   useEffect(() => {
-    if (!specs?.data.length) return;
+    if (!specs?.length) return;
 
     setMainSpecialization(
-      specs.data.find((spec) => spec.id === user?.main_specialization_id)?.name ?? null,
+      specs.find((spec) => spec.id === user?.main_specialization_id)?.name ?? null,
     );
     setSecondarySpecialization(
-      specs.data.find((spec) => spec.id === user?.secondary_specialization_id)?.name ??
-        null,
+      specs.find((spec) => spec.id === user?.secondary_specialization_id)?.name ?? null,
     );
   }, [specs, user?.main_specialization_id, user?.secondary_specialization_id]);
 

@@ -6,3 +6,4 @@ export * from './info';
 export * from './filter';
 export * from './position';
 export * from './avatar';
+export * from './request';

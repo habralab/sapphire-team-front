@@ -5,5 +5,8 @@ import { api } from '~/shared/contexts';
 export const useGetSpecs = () =>
   useQuery({
     queryKey: ['specs'],
-    queryFn: () => api.storageApi.getSpecs(),
+    queryFn: async () => {
+      const { data } = await api.storageApi.getSpecs();
+      return data;
+    },
   });

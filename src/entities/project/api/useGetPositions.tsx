@@ -5,5 +5,8 @@ import { api } from '~/shared/contexts';
 export const useGetPositions = (projectId: string) =>
   useQuery({
     queryKey: ['getProjectPositions', projectId],
-    queryFn: () => api.projectsApi.getProjectPositions(projectId),
+    queryFn: async () => {
+      const { data } = await api.projectsApi.getProjectPositions(projectId);
+      return data;
+    },
   });

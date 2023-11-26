@@ -116,8 +116,8 @@ export const SearchPage = ({ user }: BasePageProps) => {
                           description={position.project.description}
                         >
                           <STag
-                            mainTags={allSpecs?.data
-                              .filter(({ id }) => id === position.specialization_id)
+                            mainTags={allSpecs
+                              ?.filter(({ id }) => id === position.specialization_id)
                               .map(({ name }) => (name ? name : ''))}
                             tags={allSkills
                               ?.filter(({ value }) => position.skills.includes(value))
