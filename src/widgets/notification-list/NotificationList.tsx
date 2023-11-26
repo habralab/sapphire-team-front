@@ -1,6 +1,6 @@
-import { Stack, Link, Box } from '@chakra-ui/react';
+import { Stack, Box } from '@chakra-ui/react';
 import React, { useEffect, useRef } from 'react';
-import { Link as ReactLink, generatePath } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 
 import { DummyNotifications } from '~/entities/dummy';
 
@@ -12,6 +12,7 @@ import { NotificationItem } from './NotificationItem';
 export function NotificationList() {
   const targetRef = useRef<HTMLDivElement>(null);
   const { data, fetchNextPage, hasNextPage, isLoading } = useGetNotifications();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const options = {
@@ -46,10 +47,11 @@ export function NotificationList() {
         <React.Fragment key={page.page}>
           {page.data.map((notification) => {
             return (
-              <Link
-                to={generatePath(PATHS.notification, { id: notification.id })}
+              <Box
+                onClick={() => {
+                  navigate(generatePath(PATHS.notification, { id: notification.id }));
+                }}
                 key={notification.id}
-                as={ReactLink}
                 borderBottom="1px"
                 borderColor="gray.200"
                 _last={{ border: 'none', paddingBottom: 2 }}
@@ -57,7 +59,7 @@ export function NotificationList() {
                 _hover={{ textDecoration: 'none', bg: 'gray.200' }}
               >
                 <NotificationItem notification={notification} />
-              </Link>
+              </Box>
             );
           })}
         </React.Fragment>
