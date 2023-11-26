@@ -17,9 +17,9 @@ export const RequestInfo = ({ name, spec }: RequestInfoProps) => {
         <Heading variant="h3">{name}</Heading>
         <Text variant="caption">{spec}</Text>
       </Stack>
-      <Flex ml="auto">
+      {/* <Flex ml="auto">
         <Rating />
-      </Flex>
+      </Flex> */}
     </Flex>
   );
 };
