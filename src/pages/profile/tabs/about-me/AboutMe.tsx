@@ -2,9 +2,9 @@ import { Box, Heading, Skeleton, Stack, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import { useGetSkillsByIds, useGetSpecs } from '~/entities/storage';
-import { useUserSkills } from '~/entities/user';
+import { useGetProfile, useUserSkills } from '~/entities/user';
 
-import { useProfile, useAuth } from '~/shared/hooks';
+import { useAuth } from '~/shared/hooks';
 import { Loader } from '~/shared/ui/Loader';
 import { STag } from '~/shared/ui/STag';
 
@@ -19,7 +19,7 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
     null,
   );
 
-  const { data: user, isLoading: userLoaded } = useProfile(userId);
+  const { data: user, isLoading: userLoaded } = useGetProfile(userId);
   const { data: userSkills } = useUserSkills(userId);
   const { data: skills, isLoading: skillsLoaded } = useGetSkillsByIds(userSkills);
   const { data: specs } = useGetSpecs();

@@ -4,14 +4,14 @@ import { FiChevronLeft } from 'react-icons/fi';
 
 import { RequestButtons } from '~/features/project';
 
-import { RequestInfo } from '~/entities/project';
-
 import { GetSpecsData } from '~/shared/api';
 import {
   GetAllParticipantsDataResponse,
   GetProjectPositionsDataResponse,
 } from '~/shared/api/types';
 import { STag } from '~/shared/ui/STag';
+
+import { RequestParticipant } from './RequestParticipant';
 
 interface RequestsProps {
   allSpecs?: GetSpecsData;
@@ -75,7 +75,7 @@ export const Requests = ({
           .filter(({ status }) => status === 'request')
           .map((participant) => (
             <Card key={participant.id} p={5} borderRadius="2xl" gap={5} boxShadow="none">
-              <RequestInfo userId={participant.user_id} allSpecs={allSpecs} />
+              <RequestParticipant userId={participant.user_id} allSpecs={allSpecs} />
               <STag
                 mainTags={filterMainTag(...participantSpecs(participant.position_id))}
                 tags={filterTags(participant.position_id)}

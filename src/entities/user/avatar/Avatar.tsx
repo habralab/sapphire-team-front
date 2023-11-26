@@ -6,7 +6,7 @@ import {
   Avatar as ChakraAvatar,
 } from '@chakra-ui/react';
 
-import { useApi, useProfile } from '~/shared/hooks';
+import { useGetAvatar, useGetProfile } from '../api';
 
 const defaultName = 'Хабраюзер';
 
@@ -15,10 +15,9 @@ interface AvatarProps {
 }
 
 export const Avatar = ({ userId }: AvatarProps) => {
-  const { data, isLoading } = useProfile(userId);
-  const { userApi } = useApi();
+  const { data, isLoading } = useGetProfile(userId);
 
-  const avatar = userApi.getAvatar(userId);
+  const { data: avatar } = useGetAvatar(userId);
 
   return (
     <Flex alignItems="center" gap={2} w="full">
