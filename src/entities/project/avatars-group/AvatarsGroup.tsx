@@ -14,7 +14,7 @@ export const AvatarsGroup = ({ avatars }: AvatarProps) => {
   return (
     <AvatarGroup spacing={'-2'} size={'sm'} max={3}>
       {avatars.map(({ firstName, lastName, img }) => (
-        <Avatar key={firstName} name={`${firstName} ${lastName}`} w={7} h={7} src={img} />
+        <Avatar key={img} name={`${firstName} ${lastName}`} w={7} h={7} src={img} />
       ))}
     </AvatarGroup>
   );

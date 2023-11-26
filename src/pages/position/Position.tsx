@@ -7,10 +7,19 @@ import {
   CardBody,
   Skeleton,
   Portal,
+  useToast,
 } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 
-import { Avatar, Contacts, PositionInfo } from '~/entities/project';
+import { useCreateParticipant } from '~/features/project';
+
+import {
+  Avatar,
+  Contacts,
+  PositionInfo,
+  useGetParticipants,
+  useGetUserStatus,
+} from '~/entities/project';
 import { useGetAllSkills, useGetSpecs } from '~/entities/storage';
 
 import { useApi, useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
@@ -25,6 +34,9 @@ export const Position = ({ positionId }: ProjectBase) => {
   const { userId, isAuth } = useAuth();
   const { projectsApi, userApi } = useApi();
   const isMobile = useIsMobile();
+  const toast = useToast();
+
+  const { mutateAsync: createParticipant, isLoading } = useCreateParticipant();
 
   const { data: position, isSuccess: loadedPosition } = useQuery({
     queryKey: ['getPosition', positionId],
@@ -37,6 +49,40 @@ export const Position = ({ positionId }: ProjectBase) => {
 
   const isLoaded = loadedSkills && loadedSpecs;
 
+  const { data: allParticipant } = useGetParticipants({
+    position_id: positionId,
+  });
+
+  const { userStatus, setStatus } = useGetUserStatus({
+    allParticipant: allParticipant?.data,
+    userId,
+  });
+
+  const createRequest = async () => {
+    if (position) {
+      try {
+        const { status } = await createParticipant({ position_id: position.id });
+        setStatus(status);
+      } catch (error) {
+        if (error instanceof Error) {
+          toast({
+            title: 'Ошибка подачи отклика',
+            description: error.message,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          });
+        }
+      }
+    }
+  };
+
+  const userNotParticipant = userStatus === 'NotInTheProject';
+
+  const userNotOwner = loadedPosition && userId !== position.project.owner_id;
+
+  const userIsAvailableToRequest = userNotOwner && isAuth && userNotParticipant;
+
   const mainTags =
     allSpecs
       ?.filter(({ id }) => id === position?.specialization_id)
@@ -46,8 +92,6 @@ export const Position = ({ positionId }: ProjectBase) => {
     allSkills
       ?.filter(({ value }) => position?.skills.includes(value))
       .map(({ label }) => label) ?? [];
-
-  const userIsOwner = isAuth && loadedPosition && userId !== position.project.owner_id;
 
   return (
     <Container maxW="md" display="flex" flexDirection="column">
@@ -94,17 +138,28 @@ export const Position = ({ positionId }: ProjectBase) => {
       {layout?.footer && (
         <Portal containerRef={layout.footer}>
           <Container py={2} maxW="md">
-            {userIsOwner && (
+            {userIsAvailableToRequest && (
               <Button
                 type="button"
-                onClick={() => {
-                  // handleTabsChange(1);
-                }}
+                isLoading={isLoading}
+                onClick={createRequest}
                 fontSize="sm"
                 fontWeight="600"
                 w="full"
               >
                 Откликнуться
+              </Button>
+            )}
+            {userStatus === 'request' && (
+              <Button
+                bg="gray.300"
+                color="gray.800"
+                _hover={{ bg: 'gray.300' }}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Отклик отправлен
               </Button>
             )}
             {!isAuth && (
