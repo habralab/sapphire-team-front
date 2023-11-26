@@ -56,12 +56,12 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
   const loadedPositionSkillsValue = positionSkillsValue.every((query) => query.isSuccess);
 
   useEffect(() => {
-    if (projectPositions?.data.length) {
-      const idsSpecPositions = projectPositions.data.map(
+    if (projectPositions?.length) {
+      const idsSpecPositions = projectPositions.map(
         ({ specialization_id }) => specialization_id,
       );
 
-      const idsSkillsPositions = projectPositions.data.map(({ skills }) => skills);
+      const idsSkillsPositions = projectPositions.map(({ skills }) => skills);
       if (idsSkillsPositions[0].length > 0) setUnvaluedSkillsIds(idsSkillsPositions);
       setSpecsIds(idsSpecPositions);
     }
@@ -123,11 +123,11 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
           <Avatar projectId={projectId} />
           <CardBody padding={isMobile ? 5 : 6}>
             <ProjectInfo
-              allSpecs={specs?.data}
+              allSpecs={specs}
               specs={specsIds}
               skills={readySkillsIds}
               project={project}
-              positions={projectPositions?.data}
+              positions={projectPositions}
               ioadedPositions={loadedAllPositions}
             />
             <IconButton

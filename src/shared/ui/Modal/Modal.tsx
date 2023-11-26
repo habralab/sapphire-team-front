@@ -12,8 +12,8 @@ interface ModalCustomProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: () => void;
-  submitText?: string;
-  cancelText?: string;
+  submitText: string;
+  cancelText: string;
   children: string;
 }
 
@@ -22,8 +22,8 @@ export const Modal = ({
   onClose,
   onSubmit,
   children,
-  submitText = 'Удалить',
-  cancelText = 'Отмена',
+  submitText,
+  cancelText,
 }: ModalCustomProps) => {
   return (
     <ChakraModal onClose={onClose} isOpen={isOpen} isCentered>

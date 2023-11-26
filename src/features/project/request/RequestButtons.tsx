@@ -1,6 +1,5 @@
 import { Flex } from '@chakra-ui/layout';
 import { Button, useDisclosure } from '@chakra-ui/react';
-import React from 'react';
 
 import { Modal } from '~/shared/ui/Modal';
 
@@ -18,10 +17,14 @@ export const RequestButtons = () => {
 
   const submitParticipant = () => {
     console.log('Принят');
+    submitOnClose();
   };
+
   const rejectParticipant = () => {
     console.log('Отклонен');
+    rejectOnClose();
   };
+
   return (
     <Flex gap={3}>
       <Button
@@ -52,10 +55,8 @@ export const RequestButtons = () => {
         isOpen={submitIsOpen}
         onClose={submitOnClose}
         submitText="Принять в команду"
-        onSubmit={() => {
-          submitParticipant();
-          submitOnClose();
-        }}
+        cancelText="Отмена"
+        onSubmit={submitParticipant}
       >
         Принять в команду?
       </Modal>
@@ -63,10 +64,8 @@ export const RequestButtons = () => {
         isOpen={rejectIsOpen}
         onClose={rejectOnClose}
         submitText="Отклонить заявку"
-        onSubmit={() => {
-          rejectParticipant();
-          rejectOnClose();
-        }}
+        cancelText="Отмена"
+        onSubmit={rejectParticipant}
       >
         Отклонить заявку?
       </Modal>

@@ -1,6 +1,5 @@
 import { Container, Flex, Heading } from '@chakra-ui/layout';
 import { Card, Icon, IconButton, Stack } from '@chakra-ui/react';
-import React from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
 import { RequestButtons } from '~/features/project';
@@ -9,7 +8,7 @@ import { RequestInfo } from '~/entities/project';
 
 import { STag } from '~/shared/ui/STag';
 
-interface dummyParticipant {
+interface Participant {
   name: string;
   spec: string;
   skills: string[];
@@ -17,7 +16,7 @@ interface dummyParticipant {
 
 interface RequestsProps {
   onClose: () => void;
-  participants: dummyParticipant[];
+  participants: Participant[];
 }
 
 export const Requests = ({ onClose, participants }: RequestsProps) => {
