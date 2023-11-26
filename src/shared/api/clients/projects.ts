@@ -1,6 +1,6 @@
 import Qs from 'query-string';
 
-import { formatDate, StatusAdapter } from '~/shared/lib/adapters';
+import { formatDate, getSatatus } from '~/shared/lib/adapters';
 
 import {
   AddSkillsRequest,
@@ -110,7 +110,7 @@ export class ProjectsApiClient extends BaseApiClient {
     return {
       ...rest,
       deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
-      status: StatusAdapter(status),
+      status: getSatatus(status),
     };
   }
 
@@ -133,7 +133,7 @@ export class ProjectsApiClient extends BaseApiClient {
       project: {
         ...restProject,
         startline: `с ${formatDate(startline)}`,
-        status: StatusAdapter(status),
+        status: getSatatus(status),
       },
     };
   }
@@ -172,7 +172,7 @@ export class ProjectsApiClient extends BaseApiClient {
         project: {
           ...restProject,
           startline: `с ${formatDate(startline)}`,
-          status: StatusAdapter(status),
+          status: getSatatus(status),
         },
       };
     });
@@ -198,7 +198,7 @@ export class ProjectsApiClient extends BaseApiClient {
       return {
         ...rest,
         deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
-        status: StatusAdapter(status),
+        status: getSatatus(status),
       };
     });
     return { ...others, data: newData };

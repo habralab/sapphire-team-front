@@ -1,6 +1,5 @@
 import { Flex } from '@chakra-ui/layout';
 import { Button, useDisclosure } from '@chakra-ui/react';
-import { useQueryClient } from '@tanstack/react-query';
 
 import { Modal } from '~/shared/ui/Modal';
 
@@ -12,7 +11,6 @@ interface RequestButtonsProps {
 
 export const RequestButtons = ({ participantId }: RequestButtonsProps) => {
   const { mutateAsync: updateParticipant } = useUpdateParticipant();
-  const queryClient = useQueryClient();
   const {
     isOpen: submitIsOpen,
     onOpen: submitOnOpen,
@@ -26,13 +24,11 @@ export const RequestButtons = ({ participantId }: RequestButtonsProps) => {
 
   const submitParticipant = async () => {
     await updateParticipant({ participant_id: participantId, status: 'joined' });
-    await queryClient.invalidateQueries(['getParticipants']);
     submitOnClose();
   };
 
   const rejectParticipant = async () => {
     await updateParticipant({ participant_id: participantId, status: 'declined' });
-    await queryClient.invalidateQueries(['getParticipants']);
     rejectOnClose();
   };
 

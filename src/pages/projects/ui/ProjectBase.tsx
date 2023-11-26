@@ -216,7 +216,6 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                 isDisabled
                 bg="gray.400"
                 color="gray.900"
-                _hover={{ bg: 'gray.300' }}
                 fontSize="sm"
                 fontWeight="600"
                 w="full"
@@ -229,7 +228,6 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                 isDisabled
                 bg="gray.400"
                 color="gray.900"
-                _hover={{ bg: 'gray.300' }}
                 fontSize="sm"
                 fontWeight="600"
                 w="full"

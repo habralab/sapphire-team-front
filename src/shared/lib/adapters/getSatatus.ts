@@ -1,4 +1,4 @@
-export const StatusAdapter = (name: string) => {
+export const getSatatus = (name: string) => {
   switch (name) {
     case 'preparation':
       return 'Скоро начнётся';
