@@ -7,10 +7,11 @@ import {
   Tag,
   TagLabel,
   IconButton,
-  useToast,
 } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+
+import { useGetSpecs } from '~/entities/storage';
 
 import { useApi } from '~/shared/hooks';
 
@@ -31,7 +32,6 @@ export const FilterSpecialization = ({
 }: FilterSpecializationProps) => {
   const [specFilter, setSpecFilter] = useState(false);
   const { storageApi } = useApi();
-  const toast = useToast();
 
   const { data: specGroup, isLoading: specGroupLoading } = useQuery({
     queryKey: ['specGroups'],
@@ -39,20 +39,7 @@ export const FilterSpecialization = ({
     staleTime: Infinity,
   });
 
-  const { data: specs, isLoading: specsLoading } = useQuery({
-    queryKey: ['specs'],
-    queryFn: () => storageApi.getSpecs(),
-    onError: (e: Error) => {
-      toast({
-        title: 'Ошибка получения специализаций',
-        description: e.message,
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
-    },
-    staleTime: Infinity,
-  });
+  const { data: specs, isLoading: specsLoading } = useGetSpecs();
 
   const deleteSpecFilter = (id: string) => {
     const newUserSpecs = userSpecs.filter((specId) => specId !== id);
@@ -77,7 +64,7 @@ export const FilterSpecialization = ({
         </InputRightElement>
       </InputGroup>
       <Flex flexWrap="wrap" gap={2}>
-        {specs?.data.map(
+        {specs?.map(
           ({ id, name }) =>
             userSpecs.includes(id) && (
               <Tag
@@ -113,7 +100,7 @@ export const FilterSpecialization = ({
         isVisible={specFilter}
         changeVisible={setSpecFilter}
         stateGroup={specGroup?.data}
-        state={specs?.data}
+        state={specs}
         userFilter={userSpecs}
         resetSpec={() => {
           setUserSpecs([]);

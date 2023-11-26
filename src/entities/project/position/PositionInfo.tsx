@@ -1,8 +1,5 @@
 import { Heading, Stack } from '@chakra-ui/layout';
-import { Skeleton } from '@chakra-ui/react';
-import { useQuery } from '@tanstack/react-query';
 
-import { useApi } from '~/shared/hooks';
 import { STag } from '~/shared/ui/STag';
 import { Status } from '~/shared/ui/status';
 
@@ -21,34 +18,12 @@ interface Project {
 }
 
 interface ProjectInfoProps {
-  spec: string;
-  skills: string[];
+  mainTags: string[];
+  tags: string[];
   project: Project;
 }
 
-export const PositionInfo = ({ spec, skills, project }: ProjectInfoProps) => {
-  const { storageApi } = useApi();
-  const { data: allSkills, isSuccess: loadedSkills } = useQuery({
-    queryKey: ['skills'],
-    queryFn: () => storageApi.getSkills(),
-    staleTime: Infinity,
-  });
-
-  const { data: allSpecs, isSuccess: loadedSpecs } = useQuery({
-    queryKey: ['specs'],
-    queryFn: () => storageApi.getSpecs(),
-  });
-
-  const isLoaded = loadedSkills && loadedSpecs;
-
-  const mainTag = allSpecs?.data
-    .filter(({ id }) => id === spec)
-    .map(({ name }) => (name ? name : ''));
-
-  const tags = allSkills
-    ?.filter(({ value }) => skills.includes(value))
-    .map(({ label }) => label);
-
+export const PositionInfo = ({ mainTags, tags, project }: ProjectInfoProps) => {
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
@@ -63,9 +38,7 @@ export const PositionInfo = ({ spec, skills, project }: ProjectInfoProps) => {
 
       <Stack gap={0} mb={6}>
         <Heading variant="h2">В проект требуется</Heading>
-        <Skeleton isLoaded={isLoaded} borderRadius="2xl" fadeDuration={2}>
-          <STag mainTags={mainTag} tags={tags} />
-        </Skeleton>
+        <STag mainTags={mainTags} tags={tags} />
       </Stack>
     </>
   );

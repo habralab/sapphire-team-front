@@ -11,6 +11,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 
 import { Avatar, Contacts, PositionInfo } from '~/entities/project';
+import { useGetAllSkills, useGetSpecs } from '~/entities/storage';
 
 import { useApi, useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
@@ -30,6 +31,21 @@ export const Position = ({ positionId }: ProjectBase) => {
     queryFn: () => projectsApi.getPosition(positionId),
     staleTime: Infinity,
   });
+
+  const { data: allSpecs, isSuccess: loadedSpecs } = useGetSpecs();
+  const { data: allSkills, isSuccess: loadedSkills } = useGetAllSkills();
+
+  const isLoaded = loadedSkills && loadedSpecs;
+
+  const mainTags =
+    allSpecs
+      ?.filter(({ id }) => id === position?.specialization_id)
+      .map(({ name }) => (name ? name : '')) ?? [];
+
+  const tags =
+    allSkills
+      ?.filter(({ value }) => position?.skills.includes(value))
+      .map(({ label }) => label) ?? [];
 
   const userIsOwner = isAuth && loadedPosition && userId !== position.project.owner_id;
 
@@ -68,11 +84,9 @@ export const Position = ({ positionId }: ProjectBase) => {
         >
           <Avatar projectId={position.project.id} />
           <CardBody padding={isMobile ? 5 : 6}>
-            <PositionInfo
-              spec={position.specialization_id}
-              skills={position.skills}
-              project={position.project}
-            />
+            {isLoaded && (
+              <PositionInfo tags={tags} mainTags={mainTags} project={position.project} />
+            )}
             <Contacts ownerId={position.project.owner_id} />
           </CardBody>
         </ChakraCard>
