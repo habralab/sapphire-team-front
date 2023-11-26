@@ -1,8 +1,8 @@
 import { Box, Flex, Heading } from '@chakra-ui/react';
 
-import { NotificationCard } from '~/widgets/notification-card';
+import { FilterNotifications } from '~/features/notifications';
 
-import { FilterNotifications } from '~/features/user';
+import { Notification } from '~/entities/notification';
 
 export function NotificationPageDesktop() {
   return (
@@ -11,7 +11,7 @@ export function NotificationPageDesktop() {
         Уведомления
       </Heading>
       <Flex alignItems="start" gap={4}>
-        <NotificationCard />
+        <Notification />
         <FilterNotifications />
       </Flex>
     </Box>

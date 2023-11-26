@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useIsMobile } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
-export function NotificationCard() {
+export function Notification() {
   const isMobile = useIsMobile();
 
   return (

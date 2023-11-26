@@ -8,7 +8,7 @@ type SLinkProps = {
 } & LinkProps;
 
 export function SLink({ external, to, ...props }: SLinkProps) {
-  let link = <Link as={ReactLink} {...props} color="purple.600" />;
+  let link = <Link as={ReactLink} to={to} {...props} color="purple.600" />;
 
   if (external) {
     link = <Link href={to} {...props} color="purple.600" />;

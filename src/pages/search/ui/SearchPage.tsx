@@ -14,7 +14,6 @@ import { Link, generatePath } from 'react-router-dom';
 import { ProjectCard } from '~/widgets/project-card';
 
 import { SearchProject } from '~/features/project';
-import { Notification, Settings } from '~/features/user';
 
 import { Filter, useFilterStore } from '~/entities/project';
 import { useGetSpecs } from '~/entities/storage';

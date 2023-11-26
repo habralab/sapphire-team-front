@@ -1,6 +1,6 @@
 import Qs from 'query-string';
 
-import { DateAdapter, StatusAdapter } from '~/shared/lib/adapters';
+import { formatDate, StatusAdapter } from '~/shared/lib/adapters';
 
 import {
   AddSkillsRequest,
@@ -79,16 +79,9 @@ export class ProjectsApiClient extends BaseApiClient {
       finished: 'Проект завершён',
     };
     const { deadline, status, ...rest } = data;
-    let formatDate;
-    if (deadline)
-      formatDate = new Date(deadline).toLocaleDateString('ru', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
     return {
       ...rest,
-      deadline: `с ${formatDate}`.slice(0, -3),
+      deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
       status: statusAdapter[status],
     };
   }
@@ -107,13 +100,11 @@ export class ProjectsApiClient extends BaseApiClient {
     );
     const { project, ...rest } = data;
     const { startline, status, ...restProject } = project;
-    let formatDate;
-    if (startline) formatDate = DateAdapter(startline);
     return {
       ...rest,
       project: {
         ...restProject,
-        startline: `с ${formatDate}`,
+        startline: `с ${formatDate(startline)}`,
         status: StatusAdapter(status),
       },
     };
@@ -148,13 +139,11 @@ export class ProjectsApiClient extends BaseApiClient {
     const newData = onlyData.map((position) => {
       const { project, ...rest } = position;
       const { startline, status, ...restProject } = project;
-      let formatDate;
-      if (startline) formatDate = DateAdapter(startline);
       return {
         ...rest,
         project: {
           ...restProject,
-          startline: `с ${formatDate}`,
+          startline: `с ${formatDate(startline)}`,
           status: StatusAdapter(status),
         },
       };
@@ -178,11 +167,9 @@ export class ProjectsApiClient extends BaseApiClient {
     const { data: onlyData, ...others } = data;
     const newData = onlyData.map((project) => {
       const { deadline, status, ...rest } = project;
-      let formatDate;
-      if (deadline) formatDate = DateAdapter(deadline);
       return {
         ...rest,
-        deadline: `с ${formatDate}`,
+        deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
         status: StatusAdapter(status),
       };
     });

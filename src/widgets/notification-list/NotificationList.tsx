@@ -1,35 +1,66 @@
-import { Stack, Link } from '@chakra-ui/react';
+import { Stack, Link, Box } from '@chakra-ui/react';
+import React, { useEffect, useRef } from 'react';
 import { Link as ReactLink, generatePath } from 'react-router-dom';
 
-import { NotificationItem } from '~/entities/user';
+import { DummyNotifications } from '~/entities/dummy';
 
-import { NotificationsDto } from '~/shared/lib/notifications';
 import { PATHS } from '~/shared/lib/router';
 
-interface NotificationListProps {
-  notifications: NotificationsDto[];
-}
+import { useGetNotifications } from './api';
+import { NotificationItem } from './NotificationItem';
 
-export function NotificationList({ notifications }: NotificationListProps) {
+export function NotificationList() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { data, fetchNextPage, hasNextPage, isLoading } = useGetNotifications();
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0,
+    };
+
+    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+      const [entry] = entries;
+      if (entry.isIntersecting) {
+        if (hasNextPage) fetchNextPage();
+      }
+    }, options);
+
+    if (targetRef.current) observer.observe(targetRef.current);
+
+    return () => {
+      if (targetRef.current) observer.unobserve(targetRef.current);
+    };
+  }, [data]);
+
   return (
     <Stack spacing={0} bg="white" borderRadius="2xl" overflow="hidden" flexGrow={1}>
-      {notifications.map((notification, i) => (
-        <Link
-          to={generatePath(PATHS.notification, { id: notification.id })}
-          key={notification.id}
-          as={ReactLink}
-          borderBottom="1px"
-          borderColor="gray.200"
-          _last={{ border: 'none', paddingBottom: 2 }}
-          _first={{ paddingTop: 2 }}
-          _hover={{ textDecoration: 'none', bg: 'gray.200' }}
-        >
-          <NotificationItem
-            key={i}
-            status={notification.status}
-            project={notification.project}
-          />
-        </Link>
+      {!data?.pages[0]?.total_items && !isLoading && (
+        <Box py={2}>
+          <DummyNotifications />
+        </Box>
+      )}
+
+      {data?.pages.map((page) => (
+        <React.Fragment key={page.page}>
+          {page.data.map((notification) => {
+            return (
+              <Link
+                to={generatePath(PATHS.notification, { id: notification.id })}
+                key={notification.id}
+                as={ReactLink}
+                borderBottom="1px"
+                borderColor="gray.200"
+                _last={{ border: 'none', paddingBottom: 2 }}
+                _first={{ paddingTop: 2 }}
+                _hover={{ textDecoration: 'none', bg: 'gray.200' }}
+              >
+                <NotificationItem notification={notification} />
+              </Link>
+            );
+          })}
+        </React.Fragment>
       ))}
     </Stack>
   );

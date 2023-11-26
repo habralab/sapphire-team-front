@@ -13,7 +13,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { ProfileCard, ProfileCardNotAuth } from '~/widgets/profile-card';
 
-import { Login, Notification, Settings } from '~/features/user';
+import { Login, Settings } from '~/features/user';
 
 import { useAuth } from '~/shared/hooks';
 

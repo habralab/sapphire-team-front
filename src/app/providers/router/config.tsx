@@ -4,12 +4,8 @@ import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
 import { MainPage } from '~/pages/main';
 import { NotFoundPage } from '~/pages/not-found';
-import {
-  NotificationPage,
-  NotificationPageDesktop,
-  NotificationsPage,
-  NotificationsPageDesktop,
-} from '~/pages/notifications';
+import { NotificationPage, NotificationPageDesktop } from '~/pages/notification';
+import { NotificationsPage, NotificationsPageDesktop } from '~/pages/notifications';
 import { OnboardingPage } from '~/pages/onboarding';
 import { PositionPage } from '~/pages/position';
 import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';

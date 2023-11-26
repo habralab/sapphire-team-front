@@ -1,6 +1,8 @@
 import { ChakraProvider, createLocalStorageManager, ColorMode } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { setDefaultOptions } from 'date-fns';
+import ru from 'date-fns/locale/ru';
 
 import { basicTheme } from '~/shared/config';
 
@@ -13,6 +15,8 @@ const colorModeManager = {
   ...createLocalStorageManager('chakra-ui-color-mode'),
   get: () => 'light' as ColorMode,
 };
+
+setDefaultOptions({ locale: ru });
 
 function App() {
   return (

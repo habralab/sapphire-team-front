@@ -1,6 +1,6 @@
 import { Container, Flex, Heading } from '@chakra-ui/react';
 
-import { SettingsList } from '~/features/user';
+import { SettingsList } from '~/features/notifications';
 
 import { GoBack } from '~/shared/ui/GoBack';
 

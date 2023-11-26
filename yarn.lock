@@ -11795,6 +11795,7 @@ __metadata:
     chakra-react-select: ^4.7.6
     commitlint: ^17.7.1
     concurrently: ^8.2.1
+    date-fns: ^2.30.0
     dotenv: ^16.3.1
     eslint: ^8.48.0
     eslint-config-prettier: ^9.0.0
