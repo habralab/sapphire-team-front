@@ -9,6 +9,7 @@ import {
 } from 'chakra-react-select';
 import { useEffect, useState } from 'react';
 
+import { GetSkillsParameters } from '~/shared/api';
 import { useApi } from '~/shared/hooks';
 import { SelectOptions } from '~/shared/types';
 
@@ -39,10 +40,15 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
   const toast = useToast();
   const { storageApi } = useApi();
   const [unSelectedItems, setUnSelectedItems] = useState<SelectOptions[]>([]);
+  const [searchValue, setSearchValue] = useState('');
 
-  const { data } = useQuery({
-    queryKey: ['skills'],
-    queryFn: () => storageApi.getSkills(),
+  const params: GetSkillsParameters = {
+    query_text: searchValue,
+  };
+
+  const { data, refetch } = useQuery({
+    queryKey: ['skills', params],
+    queryFn: () => storageApi.getSkills(params),
     onError: (e: Error) => {
       toast({
         title: 'Ошибка получения навыков',
@@ -52,8 +58,12 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
         isClosable: true,
       });
     },
-    staleTime: Infinity,
+    enabled: false,
   });
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   useEffect(() => {
     if (data) {
@@ -83,15 +93,14 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
         noOptionsMessage={() => 'Ничего не найдено'}
         loadingMessage={() => 'Загрузка...'}
         components={asyncComponents}
-        value={null}
         defaultOptions={unSelectedItems}
-        options={unSelectedItems}
         loadOptions={(inputValue, callback) => {
-          setTimeout(() => {
-            callback(
-              unSelectedItems.filter((e) => e.label.match(new RegExp(inputValue, 'i'))),
-            );
-          }, 500);
+          setSearchValue(inputValue);
+          requestAnimationFrame(() => {
+            refetch().then((response) => {
+              callback(response.data ?? []);
+            });
+          });
         }}
         onChange={(item) => {
           if (item) {

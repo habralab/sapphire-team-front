@@ -5,6 +5,6 @@ import { api } from '~/shared/contexts';
 export const useGetAllSkills = () =>
   useQuery({
     queryKey: ['skills'],
-    queryFn: () => api.storageApi.getSkills(),
+    queryFn: () => api.storageApi.getSkills({}),
     staleTime: Infinity,
   });

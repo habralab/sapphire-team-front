@@ -5,6 +5,6 @@ import { api } from '~/shared/contexts';
 export const useGetSkillsByIds = (skills?: string[]) =>
   useQuery({
     queryKey: ['skills', skills],
-    queryFn: () => api.storageApi.getSkills(skills),
+    queryFn: () => api.storageApi.getSkills({ id: skills }),
     enabled: !!skills?.length,
   });

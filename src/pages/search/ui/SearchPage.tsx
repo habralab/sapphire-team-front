@@ -46,7 +46,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
 
   const { data: allSkills } = useQuery({
     queryKey: ['skills'],
-    queryFn: () => storageApi.getSkills(),
+    queryFn: () => storageApi.getSkills({}),
     staleTime: Infinity,
   });
 

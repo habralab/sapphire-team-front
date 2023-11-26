@@ -14,8 +14,14 @@ type GetSpecsResponse =
   paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json'];
 export type GetSpecsData =
   paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json']['data'];
+export type GetSkillsParametersBase =
+  paths['/api/rest/skills/']['get']['parameters']['query'];
 type GetSkillsResponse =
   paths['/api/rest/skills/']['get']['responses']['200']['content']['application/json'];
+
+export type GetSkillsParameters = GetSkillsParametersBase & {
+  id?: string[];
+};
 
 export class StorageApiClient extends BaseApiClient {
   async getSpecGroups() {
@@ -36,9 +42,9 @@ export class StorageApiClient extends BaseApiClient {
     );
     return data;
   }
-  async getSkills(id?: string[]) {
+  async getSkills(params: GetSkillsParameters) {
     const { data } = await this.client.get<GetSkillsResponse>(`/api/rest/skills/`, {
-      params: { id },
+      params,
       paramsSerializer: function (params) {
         return Qs.stringify(params);
       },

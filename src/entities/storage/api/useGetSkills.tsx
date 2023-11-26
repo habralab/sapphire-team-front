@@ -8,7 +8,7 @@ export const useGetSkills = (projectPositions?: string[][]) =>
       ? projectPositions.map((skills) => {
           return {
             queryKey: ['positionSkills', skills],
-            queryFn: () => api.storageApi.getSkills(skills),
+            queryFn: () => api.storageApi.getSkills({ id: skills }),
           };
         })
       : [],
