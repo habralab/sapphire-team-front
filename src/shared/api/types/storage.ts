@@ -196,6 +196,11 @@ export interface operations {
         group_id?: unknown;
       };
     };
+    requestBody?: {
+      content: {
+        'application/json': unknown;
+      };
+    };
     responses: {
       /** @description Successful Response */
       200: {
@@ -220,6 +225,11 @@ export interface operations {
         /** @description Number of items per page */
         per_page?: number;
         query_text?: unknown;
+      };
+    };
+    requestBody?: {
+      content: {
+        'application/json': unknown;
       };
     };
     responses: {

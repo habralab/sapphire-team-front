@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useGetSkillsByIds, useGetSpecs } from '~/entities/storage';
 import { useProfile, useUserSkills } from '~/entities/user';
 
+import { useAuth } from '~/shared/hooks';
 import { STag } from '~/shared/ui/STag';
 
 interface AboutMeTabProps {
@@ -11,6 +12,7 @@ interface AboutMeTabProps {
 }
 
 export function AboutMeTab({ userId }: AboutMeTabProps) {
+  const { userId: id } = useAuth();
   const [mainSpecialization, setMainSpecialization] = useState<string | null>(null);
   const [secondarySpecialization, setSecondarySpecialization] = useState<string | null>(
     null,
@@ -73,7 +75,9 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
 
   return (
     <Text color="gray.700" textAlign="center">
-      Заполните информацию о себе
+      {userId === id
+        ? 'Заполните информацию о себе'
+        : 'Пользователь не заполнил информацию о себе'}
     </Text>
   );
 }

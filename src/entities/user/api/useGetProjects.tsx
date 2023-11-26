@@ -1,12 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
+import { QueryFunctionContext, QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 
 import { api } from '~/shared/contexts';
 
 export const useGetUserProject = (id: string) =>
-  useQuery({
+  useInfiniteQuery({
     queryKey: ['getUserProjects', id],
-    queryFn: () =>
+    queryFn: ({ pageParam = 1 }: QueryFunctionContext<QueryKey, number>) =>
       api.projectsApi.getAllProjects({
-        owner_id: id,
+        page: pageParam,
+        user_id: id,
       }),
+    getNextPageParam: (lastPage) =>
+      lastPage.page < lastPage.total_pages ? lastPage.page + 1 : undefined,
+    staleTime: 5000,
   });
