@@ -27,9 +27,9 @@ export const Contacts = ({ ownerId }: { ownerId: string }) => {
               </Heading>
               <Text variant="caption">Организатор</Text>
             </Stack>
-            <Flex ml="auto">
+            {/* <Flex ml="auto">
               <Rating />
-            </Flex>
+            </Flex> */}
           </Flex>
         </Skeleton>
       </Link>

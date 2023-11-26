@@ -94,8 +94,8 @@ export class ProjectsApiClient extends BaseApiClient {
       `/api/rest/projects/${project_id}`,
     );
     const statusAdapter = {
-      preparation: 'Подготовка',
-      in_work: 'В работе',
+      preparation: 'Скоро начнется',
+      in_work: 'Проект идёт',
       finished: 'Проект завершён',
     };
     const { deadline, status, ...rest } = data;
