@@ -4,3 +4,4 @@ export * from './useHorizontalScroll';
 export * from './useApi';
 export * from './useAuth';
 export * from './useWindowSizes';
+export * from './useGetProfile';

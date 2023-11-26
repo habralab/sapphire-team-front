@@ -20,6 +20,8 @@ import { FiChevronRight } from 'react-icons/fi';
 
 import { Requests } from '~/widgets/project';
 
+import { useUpdateParticipant } from '~/features/project';
+
 import {
   Avatar,
   Contacts,
@@ -46,6 +48,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
   const [specsIds, setSpecsIds] = useState<string[]>([]);
   const [unvaluedSkillsIds, setUnvaluedSkillsIds] = useState<string[][]>([]);
   const [readySkillsIds, setReadySkillsIds] = useState<string[][]>([]);
+  const { mutateAsync: updateParticipant } = useUpdateParticipant();
 
   const { data: allParticipant } = useGetParticipants({
     project_id: projectId,
@@ -93,10 +96,12 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
     loadedPositionSkillsValue &&
     !!positionSkillsValue.length;
 
-  const dummyPartic = [
-    { name: 'Тестовый тест', spec: 'Фронтенд', skills: ['CSS', 'React'] },
-    { name: 'Тестовый тест2', spec: 'Бекенд', skills: ['Python', 'PostgreSQL'] },
-  ];
+  const leaveProject = () => {
+    const participantId = allParticipant?.data.find(({ user_id }) => userId === user_id);
+    if (participantId) {
+      updateParticipant({ participant_id: participantId.id, status: 'left' });
+    }
+  };
 
   return (
     <Container maxW="md" display="flex" flexDirection="column">
@@ -141,28 +146,46 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
               positions={projectPositions}
               ioadedPositions={loadedAllPositions}
             />
-            <IconButton
-              size="md"
-              variant="unstyled"
-              onClick={onOpen}
-              aria-label="Заявки"
-              flexShrink="0"
-              gap={2}
-              w="100%"
-              fontWeight="500"
-              icon={
-                <Flex justifyContent="space-between" alignItems="center">
-                  <Text>Заявки</Text>
-                  <Icon as={FiChevronRight} fontSize="2xl" />
-                </Flex>
-              }
-            />
+            {!userNotOwner && (
+              <IconButton
+                size="md"
+                variant="unstyled"
+                onClick={onOpen}
+                aria-label="Заявки"
+                flexShrink="0"
+                gap={2}
+                w="100%"
+                fontWeight="500"
+                icon={
+                  <Flex justifyContent="space-between" alignItems="center">
+                    <Text>Заявки</Text>
+                    <Text ml={1} color="gray.600" fontSize="sm">
+                      {
+                        allParticipant?.data.filter(({ status }) => status === 'request')
+                          .length
+                      }
+                    </Text>
+                    <Icon ml="auto" as={FiChevronRight} fontSize="2xl" />
+                  </Flex>
+                }
+              />
+            )}
             <Modal onClose={onClose} size="full" isOpen={isOpen}>
               <ModalOverlay />
               <ModalContent bg="bg" display="flex" alignItems="center">
-                <Requests onClose={onClose} participants={dummyPartic} />
+                {allParticipant && projectPositions && (
+                  <Requests
+                    allSpecs={specs}
+                    onClose={onClose}
+                    participants={allParticipant.data}
+                    positions={projectPositions}
+                    specs={specsIds}
+                    skills={positionSkillsValue.flatMap(({ data }) => (data ? data : []))}
+                  />
+                )}
               </ModalContent>
             </Modal>
+
             {userNotOwner && <Contacts ownerId={project.owner_id} />}
           </CardBody>
         </ChakraCard>
@@ -181,6 +204,37 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                 w="full"
               >
                 Отклик отправлен
+              </Button>
+            )}
+            {userStatus === 'joined' && (
+              <Button onClick={leaveProject} fontSize="sm" fontWeight="600" w="full">
+                Покинуть проект
+              </Button>
+            )}
+            {userStatus === 'declined' && (
+              <Button
+                isDisabled
+                bg="gray.400"
+                color="gray.900"
+                _hover={{ bg: 'gray.300' }}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Ваш отклик отклонен
+              </Button>
+            )}
+            {userStatus === 'left' && (
+              <Button
+                isDisabled
+                bg="gray.400"
+                color="gray.900"
+                _hover={{ bg: 'gray.300' }}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Вы покинули проект
               </Button>
             )}
           </Container>

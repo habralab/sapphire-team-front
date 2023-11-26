@@ -2,9 +2,9 @@ import { Box, Heading, Skeleton, Stack, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import { useGetSkillsByIds, useGetSpecs } from '~/entities/storage';
-import { useProfile, useUserSkills } from '~/entities/user';
+import { useUserSkills } from '~/entities/user';
 
-import { useAuth } from '~/shared/hooks';
+import { useProfile, useAuth } from '~/shared/hooks';
 import { Loader } from '~/shared/ui/Loader';
 import { STag } from '~/shared/ui/STag';
 

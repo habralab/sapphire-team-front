@@ -16,6 +16,10 @@ export type GetAllParticipantsResponse =
   paths['/api/rest/participants/']['get']['responses']['200']['content']['application/json'];
 export type GetAllParticipantsDataResponse =
   paths['/api/rest/participants/']['get']['responses']['200']['content']['application/json']['data'];
+export type UpdateParticipantParams =
+  paths['/api/rest/participants/{participant_id}']['post']['parameters']['path'];
+export type UpdateParticipantRequest =
+  paths['/api/rest/participants/{participant_id}']['post']['requestBody']['content']['application/json'];
 export type CreateParticipantRequest =
   paths['/api/rest/participants/']['post']['requestBody']['content']['application/json'];
 export type CreateParticipantResponse =
@@ -34,6 +38,8 @@ export type GetAllPositionRequest =
   paths['/api/rest/positions/']['get']['parameters']['query'];
 export type GetProjectPositionsResponse =
   paths['/api/rest/positions/']['get']['responses']['200']['content']['application/json'];
+export type GetProjectPositionsDataResponse =
+  paths['/api/rest/positions/']['get']['responses']['200']['content']['application/json']['data'];
 export type ProjectPositionsResponse =
   paths['/api/rest/positions/']['get']['responses']['200']['content']['application/json']['data']['0'];
 export type GetProjectPositionsData =

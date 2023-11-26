@@ -1,7 +1,9 @@
 import { UpdateUser } from '~/features/user';
 
 import { useGetSkillsByIds } from '~/entities/storage';
-import { useIsAvatarExist, useProfile, useUserSkills } from '~/entities/user';
+import { useIsAvatarExist, useUserSkills } from '~/entities/user';
+
+import { useProfile } from '~/shared/hooks';
 
 interface ProfileSettingsUserProps {
   userId: string;

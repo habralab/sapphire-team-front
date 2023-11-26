@@ -5,6 +5,6 @@ import { api } from '~/shared/contexts';
 
 export const useGetParticipants = (data: GetAllParticipantsRequest) =>
   useQuery({
-    queryKey: ['getCurrentProject', data],
+    queryKey: ['getParticipants', data],
     queryFn: () => api.projectsApi.getParticipants(data),
   });

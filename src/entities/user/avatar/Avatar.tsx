@@ -6,9 +6,7 @@ import {
   Avatar as ChakraAvatar,
 } from '@chakra-ui/react';
 
-import { useApi } from '~/shared/hooks';
-
-import { useProfile } from '../api';
+import { useApi, useProfile } from '~/shared/hooks';
 
 const defaultName = 'Хабраюзер';
 

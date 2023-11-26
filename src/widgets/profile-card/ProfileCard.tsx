@@ -1,6 +1,6 @@
 import { Skeleton } from '@chakra-ui/react';
 
-import { useProfile } from '~/entities/user';
+import { useProfile } from '~/shared/hooks';
 
 import { ProfileCardUser } from './ProfileCardUser';
 

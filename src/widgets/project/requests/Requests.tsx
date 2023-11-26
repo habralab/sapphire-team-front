@@ -6,23 +6,56 @@ import { RequestButtons } from '~/features/project';
 
 import { RequestInfo } from '~/entities/project';
 
+import { GetSpecsData } from '~/shared/api';
+import {
+  GetAllParticipantsDataResponse,
+  GetProjectPositionsDataResponse,
+} from '~/shared/api/types';
 import { STag } from '~/shared/ui/STag';
 
-interface Participant {
-  name: string;
-  spec: string;
-  skills: string[];
-}
-
 interface RequestsProps {
+  allSpecs?: GetSpecsData;
   onClose: () => void;
-  participants: Participant[];
+  participants: GetAllParticipantsDataResponse;
+  positions: GetProjectPositionsDataResponse;
+  specs: string[];
+  skills: {
+    value: string;
+    label: string;
+  }[];
 }
 
-export const Requests = ({ onClose, participants }: RequestsProps) => {
+export const Requests = ({
+  onClose,
+  participants,
+  positions,
+  skills,
+  allSpecs,
+}: RequestsProps) => {
+  const participantSpecs = (position_id: string) =>
+    positions
+      .filter(({ id }) => position_id === id)
+      .flatMap(({ specialization_id }) => specialization_id);
+  const participantSkills = (position_id: string) =>
+    positions.filter(({ id }) => position_id === id).flatMap(({ skills }) => skills);
+
+  const filterMainTag = (positionId?: string) => {
+    const mainTag = allSpecs
+      ?.filter(({ id }) => id === positionId)
+      .map(({ name }) => name ?? '');
+    return mainTag;
+  };
+
+  const filterTags = (positionId: string) => {
+    const currentSkills = participantSkills(positionId);
+    const tags = skills
+      .filter(({ value }) => currentSkills.includes(value))
+      .map(({ label }) => label);
+    return tags;
+  };
   return (
-    <Container maxW="md">
-      <Flex alignItems="center" justifyContent="space-between" my={4}>
+    <Container maxW="md" pb={3}>
+      <Flex alignItems="center" justifyContent="space-between" my={3}>
         <Flex alignItems="center">
           <IconButton
             aria-label="back"
@@ -38,13 +71,18 @@ export const Requests = ({ onClose, participants }: RequestsProps) => {
         </Flex>
       </Flex>
       <Stack gap={4}>
-        {participants.map((part, i) => (
-          <Card key={i} p={5} borderRadius="2xl" gap={5} boxShadow="none">
-            <RequestInfo name={part.name} spec={part.spec} />
-            <STag mainTags={[part.spec]} tags={part.skills} />
-            <RequestButtons />
-          </Card>
-        ))}
+        {participants
+          .filter(({ status }) => status === 'request')
+          .map((participant) => (
+            <Card key={participant.id} p={5} borderRadius="2xl" gap={5} boxShadow="none">
+              <RequestInfo userId={participant.user_id} allSpecs={allSpecs} />
+              <STag
+                mainTags={filterMainTag(...participantSpecs(participant.position_id))}
+                tags={filterTags(participant.position_id)}
+              />
+              <RequestButtons participantId={participant.id} />
+            </Card>
+          ))}
       </Stack>
     </Container>
   );

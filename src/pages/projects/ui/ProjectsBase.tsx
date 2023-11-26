@@ -18,14 +18,6 @@ interface ProjectPageProps {
 
 export const ProjectsBase = ({ userId }: ProjectPageProps) => {
   const targetRef = useRef<HTMLDivElement>(null);
-  const dummyAvatars = [
-    { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
-    { firstName: 'Игорь', lastName: 'Крутой', img: 'https://bit.ly/sage-adebayo' },
-    { firstName: 'Джек', lastName: 'Воробей', img: 'https://bit.ly/kent-c-dodds' },
-    { firstName: 'Кларк', lastName: 'Кент', img: 'https://bit.ly/prosper-baba' },
-    { firstName: 'Джеймс', lastName: 'Бонд', img: 'https://bit.ly/code-beast' },
-    { firstName: 'Бернд', lastName: 'Шнайдер', img: 'https://bit.ly/dan-abramov' },
-  ];
 
   const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
     useGetAllProjects(userId);
