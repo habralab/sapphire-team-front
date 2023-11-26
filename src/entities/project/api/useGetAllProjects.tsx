@@ -8,7 +8,7 @@ export const useGetAllProjects = (userId: string) =>
     queryFn: ({ pageParam = 1 }: QueryFunctionContext<QueryKey, number>) =>
       api.projectsApi.getAllProjects({
         page: pageParam,
-        participant_user_ids: userId,
+        user_id: userId,
       }),
     getNextPageParam: (lastPage) =>
       lastPage.page < lastPage.total_pages ? lastPage.page + 1 : undefined,

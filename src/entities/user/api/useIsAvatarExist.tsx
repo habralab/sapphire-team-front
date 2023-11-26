@@ -4,6 +4,6 @@ import { api } from '~/shared/contexts';
 
 export const useIsAvatarExist = (id: string) =>
   useQuery({
-    queryKey: ['avatar', id],
+    queryKey: ['avatar', 'IsAvatar', id],
     queryFn: () => api.userApi.isAvatarExist(id),
   });

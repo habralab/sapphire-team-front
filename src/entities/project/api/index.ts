@@ -5,3 +5,4 @@ export * from './useGetProjectAvatar';
 export * from './useGetUser';
 export * from './useGetParticipants';
 export * from './useGetUserStatus';
+export * from './useGetAllProjects';

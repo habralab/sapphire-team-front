@@ -24,7 +24,7 @@ import { ReviewsTab } from './tabs/reviews';
 
 const tabs = ['about', 'projects', 'reviews'];
 
-export function ProfilePage() {
+export function ProfileMePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { userId } = useAuth();
 

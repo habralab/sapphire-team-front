@@ -1,52 +1,96 @@
-import { Flex, Stack, Text } from '@chakra-ui/react';
+import { Box, Flex, Skeleton, Stack, Text } from '@chakra-ui/react';
+import React, { useEffect, useRef } from 'react';
+import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { AvatarsGroup } from '~/entities/project';
-import { useGetUserProject } from '~/entities/user';
+import { useGetAllProjects } from '~/entities/project';
 
+import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
-
-const dummyAvatars = [
-  { firstName: 'Alex', lastName: 'Gordon', img: 'https://bit.ly/ryan-florence' },
-  { firstName: 'Игорь', lastName: 'Крутой', img: 'https://bit.ly/sage-adebayo' },
-  { firstName: 'Джек', lastName: 'Воробей', img: 'https://bit.ly/kent-c-dodds' },
-  { firstName: 'Кларк', lastName: 'Кент', img: 'https://bit.ly/prosper-baba' },
-  { firstName: 'Джеймс', lastName: 'Бонд', img: 'https://bit.ly/code-beast' },
-  { firstName: 'Бернд', lastName: 'Шнайдер', img: 'https://bit.ly/dan-abramov' },
-];
 
 interface ProjectsTabProps {
   userId: string;
 }
 
 export const ProjectsTab = ({ userId }: ProjectsTabProps) => {
-  const { data: projects } = useGetUserProject(userId);
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
+    useGetAllProjects(userId);
+  const targetRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 1.0,
+    };
+
+    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
+      const [entry] = entries;
+      if (entry.isIntersecting) {
+        if (hasNextPage) fetchNextPage();
+      }
+    }, options);
+
+    if (targetRef.current) observer.observe(targetRef.current);
+
+    return () => {
+      if (targetRef.current) observer.unobserve(targetRef.current);
+    };
+  }, [data]);
 
   return (
-    <Stack gap={4}>
-      {projects?.data.length ? (
-        projects.data.map((project) => {
-          return (
-            <ProjectCard
-              key={project.id}
-              status={project.status}
-              title={project.name}
-              date={project.startline}
-              description={project.description}
-            >
-              <Flex justifyContent="space-between" alignItems="center">
-                <STag mainTags={['Организатор']} />
-                <AvatarsGroup avatars={dummyAvatars} />
-              </Flex>
-            </ProjectCard>
-          );
-        })
+    <>
+      {isLoading ? (
+        <>
+          <Skeleton height="200px" borderRadius="2xl" mb={3} />
+          <Skeleton height="200px" borderRadius="2xl" mb={3} />
+          <Skeleton height="200px" borderRadius="2xl" mb={3} />
+        </>
       ) : (
-        <Text textAlign="center" color="gray.700">
-          Нет проектов
-        </Text>
+        <Stack gap={4}>
+          {!data?.pages.length || !data.pages[0].total_items ? (
+            <Text textAlign="center" color="gray.700">
+              Нет проектов
+            </Text>
+          ) : (
+            <>
+              {data.pages.map((group, i) => (
+                <React.Fragment key={i}>
+                  {group.data.map((project) => {
+                    return (
+                      <Link
+                        key={project.id}
+                        to={generatePath(PATHS.project, { id: project.id })}
+                      >
+                        <ProjectCard
+                          status={project.status}
+                          title={project.name}
+                          date={project.deadline}
+                          description={project.description}
+                        >
+                          <Flex justifyContent="space-between" alignItems="center">
+                            <STag mainTags={['Организатор']} />
+                          </Flex>
+                        </ProjectCard>
+                      </Link>
+                    );
+                  })}
+                </React.Fragment>
+              ))}
+            </>
+          )}
+          {isFetchingNextPage ? (
+            <>
+              <Skeleton height="200px" borderRadius="2xl" mb={3} />
+              <Skeleton height="200px" borderRadius="2xl" mb={3} />
+              <Skeleton height="200px" borderRadius="2xl" mb={3} />
+            </>
+          ) : (
+            <Box ref={targetRef} />
+          )}
+        </Stack>
       )}
-    </Stack>
+    </>
   );
 };

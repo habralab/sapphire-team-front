@@ -12,7 +12,7 @@ export function DummyNotifications() {
         Нет уведомлений
       </Text>
       <Text color="gray.700" textAlign="center">
-        Здесь будут отображаться диалоги c Вашими тиммейтами
+        Здесь будут отображаться все уведомления о Ваших проектах
       </Text>
     </DummyWrapper>
   );
