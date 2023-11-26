@@ -1,6 +1,6 @@
 import { Skeleton } from '@chakra-ui/react';
 
-import { useProfile } from '~/entities/user';
+import { useGetProfile } from '~/entities/user';
 
 import { ProfileCardUser } from './ProfileCardUser';
 
@@ -9,7 +9,7 @@ interface ProfileCardProps {
 }
 
 export function ProfileCard({ userId }: ProfileCardProps) {
-  const { data: user } = useProfile(userId);
+  const { data: user } = useGetProfile(userId);
 
   return user ? (
     <ProfileCardUser user={user} />

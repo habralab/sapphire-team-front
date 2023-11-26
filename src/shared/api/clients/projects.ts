@@ -1,6 +1,6 @@
 import Qs from 'query-string';
 
-import { formatDate, StatusAdapter } from '~/shared/lib/adapters';
+import { formatDate, getSatatus } from '~/shared/lib/adapters';
 
 import {
   AddSkillsRequest,
@@ -21,6 +21,8 @@ import {
   GetStatistic,
   NewProjectParams,
   ProjectPositionsResponse,
+  UpdateParticipantParams,
+  UpdateParticipantRequest,
   UpdateProjectAvatar,
   UpdateProjectAvatarID,
   UpdateSkillsParams,
@@ -66,6 +68,17 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
+  async updateParticipant({
+    status,
+    participant_id,
+  }: UpdateParticipantRequest & UpdateParticipantParams) {
+    const { data } = await this.client.post<CreateParticipantResponse>(
+      `/api/rest/participants/${participant_id}`,
+      { status },
+    );
+    return data;
+  }
+
   async getParticipants(request: GetAllParticipantsRequest) {
     const { data } = await this.client.get<GetAllParticipantsResponse>(
       `/api/rest/participants/`,
@@ -93,16 +106,11 @@ export class ProjectsApiClient extends BaseApiClient {
     const { data } = await this.client.get<GetCurrentProjectResponse>(
       `/api/rest/projects/${project_id}`,
     );
-    const statusAdapter = {
-      preparation: 'Скоро начнется',
-      in_work: 'Проект идёт',
-      finished: 'Проект завершён',
-    };
     const { deadline, status, ...rest } = data;
     return {
       ...rest,
       deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
-      status: statusAdapter[status],
+      status: getSatatus(status),
     };
   }
 
@@ -125,7 +133,7 @@ export class ProjectsApiClient extends BaseApiClient {
       project: {
         ...restProject,
         startline: `с ${formatDate(startline)}`,
-        status: StatusAdapter(status),
+        status: getSatatus(status),
       },
     };
   }
@@ -164,7 +172,7 @@ export class ProjectsApiClient extends BaseApiClient {
         project: {
           ...restProject,
           startline: `с ${formatDate(startline)}`,
-          status: StatusAdapter(status),
+          status: getSatatus(status),
         },
       };
     });
@@ -190,7 +198,7 @@ export class ProjectsApiClient extends BaseApiClient {
       return {
         ...rest,
         deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
-        status: StatusAdapter(status),
+        status: getSatatus(status),
       };
     });
     return { ...others, data: newData };

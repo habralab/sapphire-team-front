@@ -1,2 +1,2 @@
-export * from './StatusAdapter';
+export * from './getSatatus';
 export * from './formatDate';

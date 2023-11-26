@@ -3,7 +3,14 @@ import { Button, useDisclosure } from '@chakra-ui/react';
 
 import { Modal } from '~/shared/ui/Modal';
 
-export const RequestButtons = () => {
+import { useUpdateParticipant } from './api';
+
+interface RequestButtonsProps {
+  participantId: string;
+}
+
+export const RequestButtons = ({ participantId }: RequestButtonsProps) => {
+  const { mutateAsync: updateParticipant } = useUpdateParticipant();
   const {
     isOpen: submitIsOpen,
     onOpen: submitOnOpen,
@@ -15,13 +22,13 @@ export const RequestButtons = () => {
     onClose: rejectOnClose,
   } = useDisclosure();
 
-  const submitParticipant = () => {
-    console.log('Принят');
+  const submitParticipant = async () => {
+    await updateParticipant({ participant_id: participantId, status: 'joined' });
     submitOnClose();
   };
 
-  const rejectParticipant = () => {
-    console.log('Отклонен');
+  const rejectParticipant = async () => {
+    await updateParticipant({ participant_id: participantId, status: 'declined' });
     rejectOnClose();
   };
 

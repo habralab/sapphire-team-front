@@ -1,14 +1,14 @@
 import { UpdateUser } from '~/features/user';
 
 import { useGetSkillsByIds } from '~/entities/storage';
-import { useIsAvatarExist, useProfile, useUserSkills } from '~/entities/user';
+import { useGetProfile, useIsAvatarExist, useUserSkills } from '~/entities/user';
 
 interface ProfileSettingsUserProps {
   userId: string;
 }
 
 export function ProfileSettingsUser({ userId }: ProfileSettingsUserProps) {
-  const { data: user } = useProfile(userId);
+  const { data: user } = useGetProfile(userId);
   const { data: isAvatarExist, isLoading } = useIsAvatarExist(userId);
   const { data: userSkillsIds } = useUserSkills(userId);
   const { data: skills } = useGetSkillsByIds(userSkillsIds);
