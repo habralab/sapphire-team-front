@@ -9,7 +9,7 @@ export const PATHS = {
   addProject: '/add-project',
   chats: '/chats',
   dialog: '/chats/:id',
-  profile: '/profile',
+  profile: '/profile/:id',
   profileMe: '/profile/me',
   notifications: '/notifications',
   notification: '/notifications/:id',

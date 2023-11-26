@@ -2,10 +2,10 @@ import { Text, Flex, Center, SkeletonText, Button, Avatar } from '@chakra-ui/rea
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Info, useIsAvatarExist, useUserStatistic } from '~/entities/user';
+import { Info, useGetAvatar, useIsAvatarExist, useUserStatistic } from '~/entities/user';
 
 import { GetUserResponse } from '~/shared/api/types';
-import { useApi } from '~/shared/hooks';
+import { useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
 interface ProfileCardProps {
@@ -13,11 +13,12 @@ interface ProfileCardProps {
 }
 
 export function ProfileCardUser({ user }: ProfileCardProps) {
+  const { userId } = useAuth();
   const [name, setName] = useState(`${user.first_name} ${user.last_name}`);
 
-  const { userApi } = useApi();
+  const { data: avatar } = useGetAvatar(user.id);
 
-  const avatar = userApi.getAvatar(user.id);
+  // const avatar = userApi.getAvatar(user.id);
   const { data: isAvatarExist, isLoading } = useIsAvatarExist(user.id);
 
   const { data: statistic } = useUserStatistic(user.id);
@@ -56,11 +57,13 @@ export function ProfileCardUser({ user }: ProfileCardProps) {
         </Text>
       )}
       <Info statistic={statistic} />
-      <Flex px={4} pb={4} w="full">
-        <Button as={Link} to={PATHS.profileSettings} variant="light" w="full">
-          Редактировать
-        </Button>
-      </Flex>
+      {userId === user.id && (
+        <Flex px={4} pb={4} w="full">
+          <Button as={Link} to={PATHS.profileSettings} variant="light" w="full">
+            Редактировать
+          </Button>
+        </Flex>
+      )}
     </Flex>
   );
 }

@@ -15,8 +15,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { MdPhotoCamera } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
+import { useGetAvatar } from '~/entities/user';
+
 import { GetUserResponse } from '~/shared/api/types';
-import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { SelectOptions } from '~/shared/types';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
@@ -43,9 +44,8 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const { userApi } = useApi();
-
-  const { mutate: mutateUser, data: profile } = useUpdateProfile();
+  const { data: getAvatar } = useGetAvatar(user.id);
+  const { mutate: mutateUser } = useUpdateProfile();
   const { mutate: mutateSkills } = useUpdateSkills();
   const { mutate: mutateAvatar } = useUpdateAvatar();
   const { mutate: mutateDeleteAvatar } = useDeleteAvatar();
@@ -54,20 +54,21 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
 
   useEffect(() => {
     if (isAvatarExist) {
-      setPrevievImg(userApi.getAvatar(user.id));
+      setPrevievImg(getAvatar ?? '');
     }
-  }, [isAvatarExist]);
+  }, [isAvatarExist, getAvatar]);
 
   const {
     control,
     register,
     handleSubmit,
     resetField,
-    formState: { errors, isSubmitting, isDirty },
+    formState: { errors, isSubmitting, isDirty, dirtyFields },
   } = useForm<UserTypeForm>({
     defaultValues: userResponseToUserType({ user, skills }),
   });
 
+  console.log(dirtyFields);
   const onSubmit = (data: UserTypeForm) => {
     if (!isDirty) {
       navigate(PATHS.profileMe);
@@ -75,30 +76,41 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
     }
 
     try {
-      const updatedUser = {
-        id: user.id,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        about: data.about,
-        main_specialization_id: data.specs[0] ?? null,
-        secondary_specialization_id: data.specs[1] ?? null,
-      };
-
-      const newSkills = {
-        id: user.id,
-        skills: data.skills.map((skill) => skill.value),
-      };
-
-      mutateSkills(newSkills);
-
-      mutateUser(updatedUser);
-
-      if (previewImg) {
-        const newAvatar = {
+      if (
+        dirtyFields.about ||
+        dirtyFields.first_name ||
+        dirtyFields.last_name ||
+        dirtyFields.specs
+      ) {
+        const updatedUser = {
           id: user.id,
-          avatar: data.avatar[0],
+          first_name: data.first_name,
+          last_name: data.last_name,
+          about: data.about,
+          main_specialization_id: data.specs[0] ?? null,
+          secondary_specialization_id: data.specs[1] ?? null,
         };
-        mutateAvatar(newAvatar);
+
+        mutateUser(updatedUser);
+      }
+
+      if (dirtyFields.skills) {
+        const newSkills = {
+          id: user.id,
+          skills: data.skills.map((skill) => skill.value),
+        };
+
+        mutateSkills(newSkills);
+      }
+
+      if (dirtyFields.avatar) {
+        if (previewImg) {
+          const newAvatar = {
+            id: user.id,
+            avatar: data.avatar[0],
+          };
+          mutateAvatar(newAvatar);
+        }
       }
 
       if (isAvatarExist && !previewImg) {

@@ -61,7 +61,7 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
             )}
           </Box>
         )}
-        {skills && (
+        {skills?.length && (
           <Box>
             <Heading variant="h2">Навыки</Heading>
             <STag tags={skills.map((s) => s.label)} />

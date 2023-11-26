@@ -10,7 +10,6 @@ export const useUpdateProfile = () => {
     mutationFn: (data: UpdateUserRequest) => api.userApi.update(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['profile']);
-      // queryClient.setQueryData(['profile', { id: data.id }], data);
     },
   });
 };

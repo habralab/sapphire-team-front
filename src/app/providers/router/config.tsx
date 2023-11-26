@@ -8,7 +8,7 @@ import { NotificationPage, NotificationPageDesktop } from '~/pages/notification'
 import { NotificationsPage, NotificationsPageDesktop } from '~/pages/notifications';
 import { OnboardingPage } from '~/pages/onboarding';
 import { PositionPage } from '~/pages/position';
-import { ProfilePage, ProfilePageDesktop } from '~/pages/profile';
+import { ProfilePage, ProfilePageDesktop, ProfileUserPage } from '~/pages/profile';
 import {
   AddProjectPage,
   ProjectPage,
@@ -48,7 +48,7 @@ export const normalRoutes = [
   },
   {
     path: PATHS.profile,
-    view: { base: ProfilePage, desktop: ProfilePageDesktop },
+    view: { base: ProfileUserPage },
   },
   {
     path: PATHS.profileMe,
