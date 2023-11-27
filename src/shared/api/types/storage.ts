@@ -26,6 +26,13 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
+    /** Body_get_specialization_groups_api_rest_spec_groups__get */
+    Body_get_specialization_groups_api_rest_spec_groups__get: {
+      /** Id */
+      id?: unknown;
+      /** Exclude Id */
+      exclude_id?: unknown;
+    };
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
@@ -167,6 +174,7 @@ export interface operations {
         per_page?: number;
         query_text?: unknown;
         id?: unknown;
+        exclude_id?: unknown;
       };
     };
     responses: {
@@ -194,11 +202,8 @@ export interface operations {
         per_page?: number;
         query_text?: unknown;
         group_id?: unknown;
-      };
-    };
-    requestBody?: {
-      content: {
-        'application/json': unknown;
+        id?: unknown;
+        exclude_id?: unknown;
       };
     };
     responses: {
@@ -229,7 +234,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': unknown;
+        'application/json': components['schemas']['Body_get_specialization_groups_api_rest_spec_groups__get'];
       };
     };
     responses: {

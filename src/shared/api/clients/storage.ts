@@ -21,6 +21,7 @@ type GetSkillsResponse =
 
 export type GetSkillsParameters = GetSkillsParametersBase & {
   id?: string[];
+  exclude_id?: string[];
 };
 
 export class StorageApiClient extends BaseApiClient {

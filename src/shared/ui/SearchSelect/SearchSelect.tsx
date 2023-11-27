@@ -44,6 +44,8 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
 
   const params: GetSkillsParameters = {
     query_text: searchValue,
+    exclude_id: selectedItems.map((item) => item.value),
+    per_page: 10,
   };
 
   const { data, refetch } = useQuery({
@@ -63,7 +65,7 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
 
   useEffect(() => {
     refetch();
-  }, []);
+  }, [selectedItems]);
 
   useEffect(() => {
     if (data) {
@@ -94,6 +96,7 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
         loadingMessage={() => 'Загрузка...'}
         components={asyncComponents}
         defaultOptions={unSelectedItems}
+        value={null}
         loadOptions={(inputValue, callback) => {
           setSearchValue(inputValue);
           requestAnimationFrame(() => {

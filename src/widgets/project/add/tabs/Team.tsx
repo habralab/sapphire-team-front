@@ -4,6 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { useGetSpecs } from '~/entities/storage';
+
 import { useApi } from '~/shared/hooks';
 import { SelectOptions } from '~/shared/types';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
@@ -23,11 +25,7 @@ export const Team = (props: TeamProps) => {
   const [userSpecs, setUserSpecs] = useState<string[]>([]);
   const [userSkills, setUserSkills] = useState<SelectOptions[]>([]);
 
-  const { data: specs } = useQuery({
-    queryKey: ['specs'],
-    queryFn: () => storageApi.getSpecs(),
-    staleTime: 5000,
-  });
+  const { data: specs } = useGetSpecs();
 
   const { data: specGroup } = useQuery({
     queryKey: ['specGroups'],
@@ -37,7 +35,7 @@ export const Team = (props: TeamProps) => {
 
   const getMainTag = (specId: string) => {
     if (specs && specGroup) {
-      const mainTag = specs.data.filter(({ id }) => specId === id);
+      const mainTag = specs.filter(({ id }) => specId === id);
       const titleMainTag = specGroup.data.filter(({ id }) => mainTag[0].group_id === id);
       return { mainTag: mainTag[0].name ?? '', titleMainTag: titleMainTag[0].name };
     }
