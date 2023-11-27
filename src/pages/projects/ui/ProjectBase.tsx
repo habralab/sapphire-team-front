@@ -223,7 +223,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
           </CardBody>
         </ChakraCard>
       )}
-      {layout?.footer && project?.status !== 'Проект завершён' && (
+      {project && layout?.footer && project.status !== 'Проект завершён' && (
         <Portal containerRef={layout.footer}>
           <Container py={2} maxW="md">
             {!userNotOwner && (
