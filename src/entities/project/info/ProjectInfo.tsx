@@ -2,7 +2,10 @@ import { Heading, Stack } from '@chakra-ui/layout';
 import { Skeleton } from '@chakra-ui/react';
 
 import { GetSpecsData } from '~/shared/api';
-import { GetProjectPositionsData } from '~/shared/api/types';
+import {
+  GetAllParticipantsDataResponse,
+  GetProjectPositionsData,
+} from '~/shared/api/types';
 import { STag } from '~/shared/ui/STag';
 import { Status } from '~/shared/ui/Status';
 
@@ -27,6 +30,9 @@ interface ProjectInfoProps {
   project: Project;
   positions?: GetProjectPositionsData;
   ioadedPositions: boolean;
+  userIsOwner: boolean;
+  userId?: string;
+  participants: GetAllParticipantsDataResponse;
 }
 
 export const ProjectInfo = ({
@@ -36,13 +42,25 @@ export const ProjectInfo = ({
   project,
   positions,
   ioadedPositions,
+  userId,
+  userIsOwner,
+  participants,
 }: ProjectInfoProps) => {
+  const participantIds = participants
+    .filter(({ user_id }) => user_id === userId)
+    .map(({ position_id }) => position_id);
+
   const filterMainTag = (positionId?: string) => {
     const mainTag = allSpecs
       ?.filter(({ id }) => id === positionId)
       .map(({ name }) => name ?? '');
     return mainTag;
   };
+
+  const filteredPositions = userIsOwner
+    ? positions
+    : positions?.filter(({ id }) => participantIds.includes(id));
+
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
@@ -56,11 +74,17 @@ export const ProjectInfo = ({
       </Stack>
 
       <Stack gap={0} mb={6}>
-        <Heading variant="h2">В проект требуются</Heading>
+        <Heading variant="h2">
+          {userIsOwner ? 'В проект требуются' : 'Мои отклики'}
+        </Heading>
         <Skeleton isLoaded={ioadedPositions} borderRadius="2xl" fadeDuration={2}>
           <Stack>
-            {positions?.map((_, i) => (
-              <STag key={i} mainTags={filterMainTag(specs[i])} tags={skills[i]} />
+            {filteredPositions?.map((position, i) => (
+              <STag
+                key={position.id}
+                mainTags={filterMainTag(specs[i])}
+                tags={skills[i]}
+              />
             ))}
           </Stack>
         </Skeleton>

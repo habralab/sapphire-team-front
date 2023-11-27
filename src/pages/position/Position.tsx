@@ -20,7 +20,7 @@ import {
   useGetParticipants,
   useGetUserStatus,
 } from '~/entities/project';
-import { useGetAllSkills, useGetSpecs } from '~/entities/storage';
+import { useGetSkillsByIds, useGetSpecs } from '~/entities/storage';
 
 import { useApi, useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
 import { GoBack } from '~/shared/ui/GoBack';
@@ -45,7 +45,9 @@ export const Position = ({ positionId }: ProjectBase) => {
   });
 
   const { data: allSpecs, isSuccess: loadedSpecs } = useGetSpecs();
-  const { data: allSkills, isSuccess: loadedSkills } = useGetAllSkills();
+  const { data: allSkills, isSuccess: loadedSkills } = useGetSkillsByIds(
+    position?.skills,
+  );
 
   const isLoaded = loadedSkills && loadedSpecs;
 
@@ -160,6 +162,30 @@ export const Position = ({ positionId }: ProjectBase) => {
                 w="full"
               >
                 Отклик отправлен
+              </Button>
+            )}
+            {userStatus === 'left' && (
+              <Button
+                isDisabled
+                bg="gray.400"
+                color="gray.900"
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Вы покинули проект
+              </Button>
+            )}
+            {userStatus === 'declined' && (
+              <Button
+                isDisabled
+                bg="gray.400"
+                color="gray.900"
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Ваш отклик отклонен
               </Button>
             )}
             {!isAuth && (
