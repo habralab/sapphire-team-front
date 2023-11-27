@@ -40,7 +40,7 @@ export const Filter = ({ userData, isLoading, totalItems = 0 }: FilterProps) => 
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (userData.main_specialization_id) {
+    if (userData.main_specialization_id && !filter.specs.length) {
       userData.secondary_specialization_id
         ? updateFilter({
             specs: [
