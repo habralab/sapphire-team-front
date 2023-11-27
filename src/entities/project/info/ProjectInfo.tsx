@@ -7,7 +7,7 @@ import {
   GetProjectPositionsData,
 } from '~/shared/api/types';
 import { STag } from '~/shared/ui/STag';
-import { Status } from '~/shared/ui/status';
+import { Status } from '~/shared/ui/Status';
 
 import { Card } from '../card';
 
@@ -49,12 +49,18 @@ export const ProjectInfo = ({
   const participantIds = participants
     .filter(({ user_id }) => user_id === userId)
     .map(({ position_id }) => position_id);
+
   const filterMainTag = (positionId?: string) => {
     const mainTag = allSpecs
       ?.filter(({ id }) => id === positionId)
       .map(({ name }) => name ?? '');
     return mainTag;
   };
+
+  const filteredPositions = userIsOwner
+    ? positions
+    : positions?.filter(({ id }) => participantIds.includes(id));
+
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
@@ -73,21 +79,13 @@ export const ProjectInfo = ({
         </Heading>
         <Skeleton isLoaded={ioadedPositions} borderRadius="2xl" fadeDuration={2}>
           <Stack>
-            {userIsOwner ? (
-              <>
-                {positions?.map((_, i) => (
-                  <STag key={i} mainTags={filterMainTag(specs[i])} tags={skills[i]} />
-                ))}
-              </>
-            ) : (
-              <>
-                {positions
-                  ?.filter(({ id }) => participantIds.includes(id))
-                  .map((_, i) => (
-                    <STag key={i} mainTags={filterMainTag(specs[i])} tags={skills[i]} />
-                  ))}
-              </>
-            )}
+            {filteredPositions?.map((position, i) => (
+              <STag
+                key={position.id}
+                mainTags={filterMainTag(specs[i])}
+                tags={skills[i]}
+              />
+            ))}
           </Stack>
         </Skeleton>
       </Stack>
