@@ -2,10 +2,14 @@ import { IconButton, Icon } from '@chakra-ui/react';
 import { FiChevronLeft } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
-export function GoBack() {
+interface GoBackProps {
+  prevCount?: number;
+}
+
+export function GoBack({ prevCount = -1 }: GoBackProps) {
   const navigate = useNavigate();
   const goBack = () => {
-    navigate(-1);
+    navigate(prevCount);
   };
 
   return (
