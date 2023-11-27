@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 
+import { FilterUser } from '~/widgets/project';
 import { ProjectCard } from '~/widgets/project-card';
 
 import { SearchProject } from '~/features/project';
@@ -92,7 +93,13 @@ export const SearchPage = ({ user }: BasePageProps) => {
           </Flex>
           <Flex gap="1" mb={4}>
             <SearchProject onChange={handleSumbit} />
-            <Filter totalItems={data?.pages[0].total_items} isLoading={isLoading} />
+            {user.userId && (
+              <FilterUser
+                totalItems={data?.pages[0].total_items}
+                isLoading={isLoading}
+                userId={user.userId}
+              />
+            )}
           </Flex>
           {isLoading || !data ? (
             <>

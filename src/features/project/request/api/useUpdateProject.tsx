@@ -8,8 +8,10 @@ export const useUpdateProject = () => {
   return useMutation({
     mutationFn: (data: UpdateProjectRequest & UpdateProjectParams) =>
       api.projectsApi.updateProject(data),
-    onSuccess: (response) => {
-      queryClient.invalidateQueries(['getCurrentProject', response.id]);
+    onSuccess: () => {
+      queryClient.invalidateQueries(['getCurrentProject']);
+      queryClient.invalidateQueries(['getAllPositions']);
+      queryClient.invalidateQueries(['getAllProjects']);
     },
   });
 };

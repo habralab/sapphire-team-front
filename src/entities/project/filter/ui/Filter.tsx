@@ -15,8 +15,10 @@ import {
   Stack,
   Input,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { IoOptions } from 'react-icons/io5';
 
+import { GetUserResponse } from '~/shared/api/types';
 import { useIsMobile } from '~/shared/hooks';
 import { stringToServerDate } from '~/shared/lib/stringToServerDate';
 import { Counter } from '~/shared/ui/Counter';
@@ -28,13 +30,27 @@ import { useFilterStore } from '../model';
 interface FilterProps {
   totalItems?: number | null;
   isLoading?: boolean;
+  userData: GetUserResponse;
 }
 
-export const Filter = ({ isLoading, totalItems = 0 }: FilterProps) => {
+export const Filter = ({ userData, isLoading, totalItems = 0 }: FilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { filter, removeFilter, updateFilter } = useFilterStore();
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (userData.main_specialization_id) {
+      userData.secondary_specialization_id
+        ? updateFilter({
+            specs: [
+              userData.main_specialization_id,
+              userData.secondary_specialization_id,
+            ],
+          })
+        : updateFilter({ specs: [userData.main_specialization_id] });
+    }
+  }, []);
 
   return (
     <>

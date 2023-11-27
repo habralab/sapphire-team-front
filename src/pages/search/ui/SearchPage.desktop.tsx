@@ -27,7 +27,7 @@ export const SearchPageDesktop = () => {
         </Flex>
         <Flex gap="4" mb={4}>
           <SearchProject onChange={handleSumbit} />
-          <Filter />
+          {/* <Filter  /> */}
         </Flex>
         <SimpleGrid columns={2} gap={6}>
           {data.map((project) => {
