@@ -26,11 +26,13 @@ export function NotificationItem({ notification }: NotificationItemProps) {
       _last={{ border: 'none' }}
       gap={1}
     >
-      <Flex alignItems="center" justifyContent="space-between" gap={2}>
+      <Flex alignItems="baseline" justifyContent="space-between" gap={2}>
         <Circle
-          size="6px"
+          size="1.5"
           bg="purple.600"
           visibility={notification.is_read ? 'hidden' : 'visible'}
+          position="relative"
+          top="-0.15rem"
         />
         <Stack spacing={0} gap={1}>
           <Heading variant="h3">
