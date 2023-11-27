@@ -4,8 +4,8 @@ import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
 import { MainPage } from '~/pages/main';
 import { NotFoundPage } from '~/pages/not-found';
-import { NotificationPage, NotificationPageDesktop } from '~/pages/notification';
-import { NotificationsPage, NotificationsPageDesktop } from '~/pages/notifications';
+import { NotificationPage } from '~/pages/notification';
+import { NotificationsPage } from '~/pages/notifications';
 import { OnboardingPage } from '~/pages/onboarding';
 import { PositionPage } from '~/pages/position';
 import { ProfileMePage, ProfilePageDesktop, ProfileUserPage } from '~/pages/profile';
@@ -110,11 +110,11 @@ export const normalRoutes = [
   },
   {
     path: PATHS.notifications,
-    view: { base: NotificationsPage, desktop: NotificationsPageDesktop },
+    view: { base: NotificationsPage },
   },
   {
     path: PATHS.notification,
-    view: { base: NotificationPage, desktop: NotificationPageDesktop },
+    view: { base: NotificationPage },
   },
   { path: PATHS.settings, view: { base: SettingsPage } },
   { path: PATHS.profileSettings, view: { base: ProfileSettingsPage } },

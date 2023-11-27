@@ -1,13 +1,13 @@
 import { Stack, Flex, Heading, Text, Circle } from '@chakra-ui/react';
 import { generatePath } from 'react-router-dom';
 
+import { NOTIFICATIONS } from '~/entities/notification';
+
 import { NotificationResponse } from '~/shared/api/types';
 import { useIsMobile } from '~/shared/hooks';
 import { formatDate, formatTime } from '~/shared/lib/adapters';
 import { PATHS } from '~/shared/lib/router';
 import { SLink } from '~/shared/ui/SLink';
-
-import { NOTIFICATIONS } from './Notifications.constants';
 
 interface NotificationItemProps {
   notification: NotificationResponse;

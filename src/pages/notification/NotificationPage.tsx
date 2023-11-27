@@ -1,19 +1,15 @@
-import { Container, Flex, Heading } from '@chakra-ui/react';
+import { Navigate, useParams } from 'react-router-dom';
 
-import { Notification } from '~/entities/notification';
+import { PATHS } from '~/shared/lib/router';
 
-import { GoBack } from '~/shared/ui/GoBack';
+import { NotificationBasePage } from './NotificationBasePage';
 
 export function NotificationPage() {
-  return (
-    <Container maxW="md" mt={2} mb={4}>
-      <Flex alignItems="center" gap={2} my={4}>
-        <GoBack />
-        <Heading as="h1" variant="h1">
-          Уведомления
-        </Heading>
-      </Flex>
-      <Notification />
-    </Container>
+  const { id: notificationId } = useParams();
+
+  return !notificationId ? (
+    <Navigate to={PATHS.notFound} replace />
+  ) : (
+    <NotificationBasePage notificationId={notificationId} />
   );
 }
