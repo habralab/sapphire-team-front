@@ -62,6 +62,7 @@ export function ProfileMePage() {
           <Tab>Проекты</Tab>
           {/* <Tab>Отзывы</Tab> */}
         </TabList>
+
         <TabPanels>
           <TabPanel>{userId ? <AboutMeTab userId={userId} /> : <NotAuthTab />}</TabPanel>
           <TabPanel>{userId ? <ProjectsTab userId={userId} /> : <NotAuthTab />}</TabPanel>
