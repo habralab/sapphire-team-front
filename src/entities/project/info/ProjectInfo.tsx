@@ -7,7 +7,7 @@ import {
   GetProjectPositionsData,
 } from '~/shared/api/types';
 import { STag } from '~/shared/ui/STag';
-import { Status } from '~/shared/ui/Status';
+import { Status } from '~/shared/ui/status';
 
 import { Card } from '../card';
 

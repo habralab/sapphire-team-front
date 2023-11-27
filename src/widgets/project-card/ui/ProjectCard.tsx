@@ -4,7 +4,7 @@ import React from 'react';
 import { Card } from '~/entities/project';
 
 import { useIsMobile } from '~/shared/hooks';
-import { Status } from '~/shared/ui/Status';
+import { Status } from '~/shared/ui/status';
 
 type ProjectCardProps = {
   status: string;
