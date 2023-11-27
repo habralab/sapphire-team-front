@@ -10,9 +10,8 @@ export const AddProject = () => {
   const isMobile = useIsMobile();
   const { isAuth } = useAuth();
 
-  return (
+  return isAuth ? (
     <IconButton
-      isDisabled={!isAuth}
       aria-label="add-project"
       onClick={() => {
         navigate(PATHS.addProject);
@@ -29,5 +28,5 @@ export const AddProject = () => {
         </HStack>
       }
     />
-  );
+  ) : null;
 };

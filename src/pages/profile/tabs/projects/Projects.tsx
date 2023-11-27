@@ -70,7 +70,13 @@ export const ProjectsTab = ({ userId }: ProjectsTabProps) => {
                           description={project.description}
                         >
                           <Flex justifyContent="space-between" alignItems="center">
-                            <STag mainTags={['Организатор']} />
+                            <STag
+                              mainTags={
+                                userId === project.owner_id
+                                  ? ['Организатор']
+                                  : ['Участник']
+                              }
+                            />
                           </Flex>
                         </ProjectCard>
                       </Link>

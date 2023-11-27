@@ -171,12 +171,14 @@ const Heading = defineStyleConfig({
       lineHeight: 'inherit',
     },
     h2: {
+      fontFamily: `'Inter', sans-serif`,
       fontSize: 'lg',
       fontWeight: 'semibold',
       marginBottom: '3',
       lineHeight: 'inherit',
     },
     h3: {
+      fontFamily: `'Inter', sans-serif`,
       fontSize: 'md',
       fontWeight: 'medium',
       lineHeight: 'inherit',

@@ -41,8 +41,8 @@ export function ProfileMePage() {
           Профиль
         </Heading>
         <Flex gap={4} alignItems="baseline">
+          {userId && <Settings />}
           {/* <Notification /> */}
-          <Settings />
         </Flex>
       </Flex>
       {userId ? <ProfileCard userId={userId} /> : <ProfileCardNotAuth />}
@@ -62,6 +62,7 @@ export function ProfileMePage() {
           <Tab>Проекты</Tab>
           {/* <Tab>Отзывы</Tab> */}
         </TabList>
+
         <TabPanels>
           <TabPanel>{userId ? <AboutMeTab userId={userId} /> : <NotAuthTab />}</TabPanel>
           <TabPanel>{userId ? <ProjectsTab userId={userId} /> : <NotAuthTab />}</TabPanel>

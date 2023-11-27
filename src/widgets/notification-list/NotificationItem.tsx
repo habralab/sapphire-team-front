@@ -5,7 +5,7 @@ import { NOTIFICATIONS } from '~/entities/notification';
 
 import { NotificationResponse } from '~/shared/api/types';
 import { useIsMobile } from '~/shared/hooks';
-import { formatDate, formatTime } from '~/shared/lib/adapters';
+import { formatDateNotification, formatTime } from '~/shared/lib/adapters';
 import { PATHS } from '~/shared/lib/router';
 import { SLink } from '~/shared/ui/SLink';
 
@@ -28,24 +28,26 @@ export function NotificationItem({ notification }: NotificationItemProps) {
     >
       <Flex alignItems="baseline" justifyContent="space-between" gap={2}>
         <Circle
-          size="1.5"
+          size="2"
           bg="purple.600"
           visibility={notification.is_read ? 'hidden' : 'visible'}
           position="relative"
-          top="-0.15rem"
+          top="0.25rem"
         />
         <Stack spacing={0} gap={1}>
-          <Heading variant="h3">
+          <Heading variant="h3" fontSize="sm">
             {NOTIFICATIONS[notification.type as keyof typeof NOTIFICATIONS]}
           </Heading>
+          {}
           <SLink to={generatePath(PATHS.position, { id: notification.data.position_id })}>
             {notification.data.project_name}
           </SLink>
         </Stack>
       </Flex>
+
       <Stack gap={0} alignItems="end" flexShrink={0}>
-        <Text variant="caption">{formatDate(notification.created_at)}</Text>
-        <Text variant="caption">{formatTime(notification.created_at)}</Text>
+        <Text variant="caption">{formatDateNotification(notification.created_at)}</Text>
+        {/* <Text variant="caption">{formatTime(notification.created_at)}</Text> */}
       </Stack>
     </Flex>
   );

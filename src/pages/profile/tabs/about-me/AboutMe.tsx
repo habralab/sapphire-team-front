@@ -5,7 +5,6 @@ import { useGetSkillsByIds, useGetSpecs } from '~/entities/storage';
 import { useGetProfile, useUserSkills } from '~/entities/user';
 
 import { useAuth } from '~/shared/hooks';
-import { Loader } from '~/shared/ui/Loader';
 import { STag } from '~/shared/ui/STag';
 
 interface AboutMeTabProps {
@@ -78,7 +77,7 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
         )}
       </>
     );
-  } else if (!userLoaded && !skillsLoaded) {
+  } else if (!userLoaded) {
     return (
       <Text color="gray.700" textAlign="center">
         {userId === id
@@ -90,7 +89,7 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
 
   return (
     <Stack alignItems="center" mt={6}>
-      <Loader />
+      <Skeleton height="200px" borderRadius="2xl" />
     </Stack>
   );
 }
