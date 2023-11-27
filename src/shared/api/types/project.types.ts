@@ -20,6 +20,12 @@ export type UpdateParticipantParams =
   paths['/api/rest/participants/{participant_id}']['post']['parameters']['path'];
 export type UpdateParticipantRequest =
   paths['/api/rest/participants/{participant_id}']['post']['requestBody']['content']['application/json'];
+export type UpdateProjectParams =
+  paths['/api/rest/projects/{project_id}']['patch']['parameters']['path'];
+export type UpdateProjectRequest =
+  paths['/api/rest/projects/{project_id}']['patch']['requestBody']['content']['application/json'];
+export type UpdateProjectResponse =
+  paths['/api/rest/projects/{project_id}']['patch']['responses']['200']['content']['application/json'];
 export type CreateParticipantRequest =
   paths['/api/rest/participants/']['post']['requestBody']['content']['application/json'];
 export type CreateParticipantResponse =

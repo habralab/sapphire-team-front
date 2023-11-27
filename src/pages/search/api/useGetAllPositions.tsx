@@ -20,6 +20,7 @@ export const useGetAllPositions = ({ specs, skills, date, searchText }: Search) 
         skills_ids: skills?.map((skill) => skill.value),
         project_startline_le: date,
         project_query_text: searchText,
+        // project_status: ['preparation', 'in_work'],
       }),
     getNextPageParam: (lastPage) =>
       lastPage.page < lastPage.total_pages ? lastPage.page + 1 : undefined,

@@ -5,6 +5,9 @@ import {
   SkeletonText,
   Avatar as ChakraAvatar,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
+
+import { useFilterStore } from '~/entities/project';
 
 import { useGetAvatar, useGetProfile } from '../api';
 
@@ -16,6 +19,20 @@ interface AvatarProps {
 
 export const Avatar = ({ userId }: AvatarProps) => {
   const { data, isLoading } = useGetProfile(userId);
+
+  const { updateFilter } = useFilterStore();
+
+  useEffect(() => {
+    if (data) {
+      if (data.main_specialization_id) {
+        data.secondary_specialization_id
+          ? updateFilter({
+              specs: [data.main_specialization_id, data.secondary_specialization_id],
+            })
+          : updateFilter({ specs: [data.main_specialization_id] });
+      }
+    }
+  }, [data]);
 
   const { data: avatar } = useGetAvatar(userId);
 

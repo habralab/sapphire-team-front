@@ -27,9 +27,10 @@ import { useFilterStore } from '../model';
 
 interface FilterProps {
   totalItems?: number | null;
+  isLoading?: boolean;
 }
 
-export const Filter = ({ totalItems = 0 }: FilterProps) => {
+export const Filter = ({ isLoading, totalItems = 0 }: FilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { filter, removeFilter, updateFilter } = useFilterStore();
@@ -128,8 +129,14 @@ export const Filter = ({ totalItems = 0 }: FilterProps) => {
             </Stack>
           </Container>
           <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0" mt="auto">
-            <Button fontSize="sm" fontWeight="600" w="full" onClick={onClose}>
-              Найдено позиций: {totalItems ?? 0}
+            <Button
+              isLoading={isLoading}
+              fontSize="sm"
+              fontWeight="600"
+              w="full"
+              onClick={onClose}
+            >
+              {totalItems ? `Найдено позиций: ${totalItems}` : 'Позиций не найдено'}
             </Button>
           </Container>
         </ModalContent>

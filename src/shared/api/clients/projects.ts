@@ -25,6 +25,9 @@ import {
   UpdateParticipantRequest,
   UpdateProjectAvatar,
   UpdateProjectAvatarID,
+  UpdateProjectParams,
+  UpdateProjectRequest,
+  UpdateProjectResponse,
   UpdateSkillsParams,
 } from '../types/project.types';
 
@@ -74,6 +77,17 @@ export class ProjectsApiClient extends BaseApiClient {
   }: UpdateParticipantRequest & UpdateParticipantParams) {
     const { data } = await this.client.post<CreateParticipantResponse>(
       `/api/rest/participants/${participant_id}`,
+      { status },
+    );
+    return data;
+  }
+
+  async updateProject({
+    status,
+    project_id,
+  }: UpdateProjectRequest & UpdateProjectParams) {
+    const { data } = await this.client.patch<UpdateProjectResponse>(
+      `/api/rest/projects/${project_id}`,
       { status },
     );
     return data;

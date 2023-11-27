@@ -39,6 +39,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
       date: filter.date,
       skills: filter.skills,
       specs: filter.specs,
+
       searchText,
     });
 
@@ -46,7 +47,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
 
   const { data: allSkills } = useQuery({
     queryKey: ['skills'],
-    queryFn: () => storageApi.getSkills({}),
+    queryFn: () => storageApi.getSkills({ per_page: 2000 }),
     staleTime: Infinity,
   });
 
@@ -91,7 +92,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
           </Flex>
           <Flex gap="1" mb={4}>
             <SearchProject onChange={handleSumbit} />
-            <Filter totalItems={data?.pages[0].total_items} />
+            <Filter totalItems={data?.pages[0].total_items} isLoading={isLoading} />
           </Flex>
           {isLoading || !data ? (
             <>
