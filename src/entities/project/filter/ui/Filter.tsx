@@ -136,7 +136,9 @@ export const Filter = ({ isLoading, totalItems = 0 }: FilterProps) => {
               w="full"
               onClick={onClose}
             >
-              {totalItems ? `Найдено позиций: ${totalItems}` : 'Позиций не найдено'}
+              {totalItems
+                ? `Найдено позиций для проектов: ${totalItems}`
+                : 'Позиций для проектов не найдено'}
             </Button>
           </Container>
         </ModalContent>
