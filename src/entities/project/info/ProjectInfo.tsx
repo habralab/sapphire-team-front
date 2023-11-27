@@ -72,23 +72,24 @@ export const ProjectInfo = ({
           fullDescription={true}
         />
       </Stack>
-
-      <Stack gap={0} mb={6}>
-        <Heading variant="h2">
-          {userIsOwner ? 'В проект требуются' : 'Мои отклики'}
-        </Heading>
-        <Skeleton isLoaded={ioadedPositions} borderRadius="2xl" fadeDuration={2}>
-          <Stack>
-            {filteredPositions?.map((position, i) => (
-              <STag
-                key={position.id}
-                mainTags={filterMainTag(specs[i])}
-                tags={skills[i]}
-              />
-            ))}
-          </Stack>
-        </Skeleton>
-      </Stack>
+      {project.status !== 'Проект завершён' && (
+        <Stack gap={0} mb={6}>
+          <Heading variant="h2">
+            {userIsOwner ? 'В проект требуются' : 'Мои отклики'}
+          </Heading>
+          <Skeleton isLoaded={ioadedPositions} borderRadius="2xl" fadeDuration={2}>
+            <Stack>
+              {filteredPositions?.map((position, i) => (
+                <STag
+                  key={position.id}
+                  mainTags={filterMainTag(specs[i])}
+                  tags={skills[i]}
+                />
+              ))}
+            </Stack>
+          </Skeleton>
+        </Stack>
+      )}
     </>
   );
 };
