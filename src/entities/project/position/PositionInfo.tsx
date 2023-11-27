@@ -1,7 +1,7 @@
 import { Heading, Stack } from '@chakra-ui/layout';
 
 import { STag } from '~/shared/ui/STag';
-import { Status } from '~/shared/ui/status';
+import { Status } from '~/shared/ui/Status';
 
 import { Card } from '../card';
 

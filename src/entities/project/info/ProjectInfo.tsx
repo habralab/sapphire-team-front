@@ -4,7 +4,7 @@ import { Skeleton } from '@chakra-ui/react';
 import { GetSpecsData } from '~/shared/api';
 import { GetProjectPositionsData } from '~/shared/api/types';
 import { STag } from '~/shared/ui/STag';
-import { Status } from '~/shared/ui/status';
+import { Status } from '~/shared/ui/Status';
 
 import { Card } from '../card';
 
