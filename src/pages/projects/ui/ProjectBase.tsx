@@ -106,6 +106,8 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
 
   const userNotOwner = loadedProject && userId !== project.owner_id;
 
+  const projectNotClosed = project && project.status !== 'Проект завершён';
+
   const loadedAllPositions =
     loadedProjectPositions &&
     loadedSpecs &&
@@ -165,7 +167,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                 participants={allParticipant.data}
               />
             )}
-            {!userNotOwner && (
+            {!userNotOwner && projectNotClosed && (
               <IconButton
                 size="md"
                 variant="unstyled"
@@ -223,7 +225,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
           </CardBody>
         </ChakraCard>
       )}
-      {project && layout?.footer && project.status !== 'Проект завершён' && (
+      {layout?.footer && projectNotClosed && (
         <Portal containerRef={layout.footer}>
           <Container py={2} maxW="md">
             {!userNotOwner && (
