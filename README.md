@@ -50,3 +50,5 @@ git config --global core.autocrlf false
 git rm --cached -r .
 
 git reset --hard HEAD
+
+git config core.ignorecase false
