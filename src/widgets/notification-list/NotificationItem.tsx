@@ -24,6 +24,7 @@ export function NotificationItem({ notification }: NotificationItemProps) {
       py={3}
       px={isMobile ? 5 : 6}
       _last={{ border: 'none' }}
+      gap={1}
     >
       <Flex alignItems="center" justifyContent="space-between" gap={2}>
         <Circle
