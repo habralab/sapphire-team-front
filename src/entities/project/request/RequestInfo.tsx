@@ -1,9 +1,12 @@
 import { Flex, Heading, Stack, Text } from '@chakra-ui/layout';
 import { Avatar } from '@chakra-ui/react';
+import { generatePath } from 'react-router-dom';
 
 import { GetSpecsData } from '~/shared/api';
 import { GetUserResponse } from '~/shared/api/types';
 import { useApi } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
+import { SLink } from '~/shared/ui/SLink';
 
 interface RequestInfoProps {
   userInfo: GetUserResponse;
@@ -20,7 +23,7 @@ export const RequestInfo = ({ userInfo, allSpecs }: RequestInfoProps) => {
     return specName;
   };
   return (
-    <Flex alignItems="flex-start">
+    <Flex alignItems="center">
       <Avatar
         name={`${userInfo.first_name} ${userInfo.last_name}`}
         src={userApi.getAvatar(userInfo.id)}
@@ -34,6 +37,9 @@ export const RequestInfo = ({ userInfo, allSpecs }: RequestInfoProps) => {
             ? getSpecName(userInfo.main_specialization_id)
             : 'У пользователя не выбрана специализация'}
         </Text>
+        <SLink to={generatePath(PATHS.profile, { id: userInfo.id })}>
+          Перейти в профиль
+        </SLink>
       </Stack>
       <Flex ml="auto">{/* <Rating /> */}</Flex>
     </Flex>

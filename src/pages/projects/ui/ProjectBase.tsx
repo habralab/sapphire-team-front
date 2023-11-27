@@ -7,18 +7,20 @@ import {
   CardBody,
   Skeleton,
   Portal,
-  Modal,
+  Modal as ChakraModal,
   ModalOverlay,
   ModalContent,
   useDisclosure,
   Text,
   IconButton,
   Icon,
+  Stack,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
+import { Link, generatePath } from 'react-router-dom';
 
-import { Requests } from '~/widgets/project';
+import { RequestParticipant, Requests } from '~/widgets/project';
 
 import { useUpdateParticipant } from '~/features/project';
 
@@ -34,7 +36,9 @@ import {
 import { useGetSkills, useGetSpecs } from '~/entities/storage';
 
 import { useAuth, useIsMobile, useLayoutRefs } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 import { GoBack } from '~/shared/ui/GoBack';
+import { Modal } from '~/shared/ui/Modal';
 
 interface ProjectBase {
   projectId: string;
@@ -45,6 +49,11 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
   const { userId } = useAuth();
   const isMobile = useIsMobile();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: leftIsOpen,
+    onOpen: leftOnOpen,
+    onClose: leftOnClose,
+  } = useDisclosure();
   const [specsIds, setSpecsIds] = useState<string[]>([]);
   const [unvaluedSkillsIds, setUnvaluedSkillsIds] = useState<string[][]>([]);
   const [readySkillsIds, setReadySkillsIds] = useState<string[][]>([]);
@@ -96,10 +105,11 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
     loadedPositionSkillsValue &&
     !!positionSkillsValue.length;
 
-  const leaveProject = () => {
+  const leaveProject = async () => {
     const participantId = allParticipant?.data.find(({ user_id }) => userId === user_id);
     if (participantId) {
-      updateParticipant({ participant_id: participantId.id, status: 'left' });
+      await updateParticipant({ participant_id: participantId.id, status: 'left' });
+      leftOnClose();
     }
   };
 
@@ -138,14 +148,19 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
         >
           <Avatar projectId={projectId} />
           <CardBody padding={isMobile ? 5 : 6}>
-            <ProjectInfo
-              allSpecs={specs}
-              specs={specsIds}
-              skills={readySkillsIds}
-              project={project}
-              positions={projectPositions}
-              ioadedPositions={loadedAllPositions}
-            />
+            {allParticipant && (
+              <ProjectInfo
+                allSpecs={specs}
+                specs={specsIds}
+                skills={readySkillsIds}
+                project={project}
+                positions={projectPositions}
+                ioadedPositions={loadedAllPositions}
+                userIsOwner={!userNotOwner}
+                userId={userId}
+                participants={allParticipant.data}
+              />
+            )}
             {!userNotOwner && (
               <IconButton
                 size="md"
@@ -170,7 +185,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                 }
               />
             )}
-            <Modal onClose={onClose} size="full" isOpen={isOpen}>
+            <ChakraModal onClose={onClose} size="full" isOpen={isOpen}>
               <ModalOverlay />
               <ModalContent bg="bg" display="flex" alignItems="center">
                 {allParticipant && projectPositions && (
@@ -184,9 +199,23 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                   />
                 )}
               </ModalContent>
-            </Modal>
+            </ChakraModal>
 
-            {userNotOwner && <Contacts ownerId={project.owner_id} />}
+            <Stack mt={3}>
+              <Contacts ownerId={project.owner_id} />
+              <Stack>
+                {allParticipant?.data
+                  .filter(({ status }) => status === 'joined')
+                  .map((participant) => (
+                    <Link
+                      key={participant.user_id}
+                      to={generatePath(PATHS.profile, { id: participant.user_id })}
+                    >
+                      <RequestParticipant userId={participant.user_id} allSpecs={specs} />
+                    </Link>
+                  ))}
+              </Stack>
+            </Stack>
           </CardBody>
         </ChakraCard>
       )}
@@ -207,10 +236,19 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
               </Button>
             )}
             {userStatus === 'joined' && (
-              <Button onClick={leaveProject} fontSize="sm" fontWeight="600" w="full">
+              <Button onClick={leftOnOpen} fontSize="sm" fontWeight="600" w="full">
                 Покинуть проект
               </Button>
             )}
+            <Modal
+              isOpen={leftIsOpen}
+              onClose={leftOnClose}
+              submitText="Покинуть проект"
+              cancelText="Отмена"
+              onSubmit={leaveProject}
+            >
+              Вы уверены, что хотите покинуть проект?
+            </Modal>
             {userStatus === 'declined' && (
               <Button
                 isDisabled

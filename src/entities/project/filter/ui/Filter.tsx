@@ -95,7 +95,7 @@ export const Filter = ({ totalItems = 0 }: FilterProps) => {
                 />
               </Box>
               <Box>
-                <Stack gap={1} mb={4}>
+                <Stack gap={1} mb={3}>
                   <Heading variant="h2" mb={3}>
                     Профессиональные навыки
                   </Heading>
@@ -129,7 +129,7 @@ export const Filter = ({ totalItems = 0 }: FilterProps) => {
           </Container>
           <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0" mt="auto">
             <Button fontSize="sm" fontWeight="600" w="full" onClick={onClose}>
-              Показать {totalItems ?? 0} проектов
+              Найдено позиций: {totalItems ?? 0}
             </Button>
           </Container>
         </ModalContent>

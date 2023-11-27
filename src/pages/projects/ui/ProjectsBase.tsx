@@ -81,7 +81,13 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
                           description={project.description}
                         >
                           <Flex justifyContent="space-between" alignItems="center">
-                            <STag mainTags={['Организатор']} />
+                            <STag
+                              mainTags={
+                                project.owner_id === userId
+                                  ? ['Организатор']
+                                  : ['Участник']
+                              }
+                            />
                             {/* <AvatarsGroup avatars={dummyAvatars} /> */}
                           </Flex>
                         </ProjectCard>
