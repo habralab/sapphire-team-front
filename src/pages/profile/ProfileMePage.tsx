@@ -41,8 +41,8 @@ export function ProfileMePage() {
           Профиль
         </Heading>
         <Flex gap={4} alignItems="baseline">
+          {userId && <Settings />}
           {/* <Notification /> */}
-          <Settings />
         </Flex>
       </Flex>
       {userId ? <ProfileCard userId={userId} /> : <ProfileCardNotAuth />}

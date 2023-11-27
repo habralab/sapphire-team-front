@@ -4,6 +4,8 @@ import { FiChevronLeft } from 'react-icons/fi';
 
 import { RequestButtons } from '~/features/project';
 
+import { DummyPosition } from '~/entities/dummy';
+
 import { GetSpecsData } from '~/shared/api';
 import {
   GetAllParticipantsDataResponse,
@@ -70,20 +72,30 @@ export const Requests = ({
           </Heading>
         </Flex>
       </Flex>
-      <Stack gap={4}>
-        {participants
-          .filter(({ status }) => status === 'request')
-          .map((participant) => (
-            <Card key={participant.id} p={5} borderRadius="2xl" gap={5} boxShadow="none">
-              <RequestParticipant userId={participant.user_id} allSpecs={allSpecs} />
-              <STag
-                mainTags={filterMainTag(...participantSpecs(participant.position_id))}
-                tags={filterTags(participant.position_id)}
-              />
-              <RequestButtons participantId={participant.id} />
-            </Card>
-          ))}
-      </Stack>
+      {participants.filter(({ status }) => status === 'request').length ? (
+        <Stack gap={4}>
+          {participants
+            .filter(({ status }) => status === 'request')
+            .map((participant) => (
+              <Card
+                key={participant.id}
+                p={5}
+                borderRadius="2xl"
+                gap={5}
+                boxShadow="none"
+              >
+                <RequestParticipant userId={participant.user_id} allSpecs={allSpecs} />
+                <STag
+                  mainTags={filterMainTag(...participantSpecs(participant.position_id))}
+                  tags={filterTags(participant.position_id)}
+                />
+                <RequestButtons participantId={participant.id} />
+              </Card>
+            ))}
+        </Stack>
+      ) : (
+        <DummyPosition />
+      )}
     </Container>
   );
 };

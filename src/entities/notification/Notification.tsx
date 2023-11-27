@@ -8,7 +8,7 @@ import { PATHS } from '~/shared/lib/router';
 import { NotificationImage } from '~/shared/ui/NotificationImage';
 
 import { useGetNotification } from './api';
-import { NOTIFICATIONS } from './Notification.constants';
+import { NOTIFICATION, NOTIFICATIONS } from './Notification.constants';
 
 interface NotificationProps {
   notificationId: string;
@@ -35,14 +35,13 @@ export function Notification({ notificationId, read }: NotificationProps) {
       gap={5}
       grow={1}
     >
-      <VStack spacing={0} gap={3}>
+      <VStack spacing={0} gap={3} textAlign="center">
         <NotificationImage />
         <Heading variant="h2" mb={0}>
           {notification && NOTIFICATIONS[notification.type as keyof typeof NOTIFICATIONS]}
         </Heading>
         <Text variant="caption">
-          {notification && `от ${formatDate(notification.created_at)}`}{' '}
-          {notification && formatTime(notification.created_at)}
+          {notification && NOTIFICATION[notification.type as keyof typeof NOTIFICATION]}
         </Text>
       </VStack>
       <Button w="full" maxW={isMobile ? 72 : 80}>

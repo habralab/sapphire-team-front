@@ -1,4 +1,4 @@
-import { Link as ChakraLink, Icon, Flex, styled } from '@chakra-ui/react';
+import { Link as ChakraLink, Icon, Flex, styled, Text } from '@chakra-ui/react';
 import { FiArrowUpRight } from 'react-icons/fi';
 import { Link as ReactLink, LinkProps } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const StyledLink = styled(ChakraLink, {
     color: 'purple.600',
     display: 'flex',
     alignItems: 'center',
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
     overflowWrap: 'anywhere',
   },
 });
@@ -34,7 +34,7 @@ export function SLink({ external, to, children, ...props }: SLinkProps) {
   return (
     <Flex alignItems="center" gap={1}>
       <StyledLink {...mainProps} {...props}>
-        {children}
+        <Text noOfLines={1}> {children}</Text>
         {icon}
       </StyledLink>
     </Flex>
