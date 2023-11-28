@@ -1,6 +1,8 @@
 import { Flex } from '@chakra-ui/layout';
 import { Button, useDisclosure } from '@chakra-ui/react';
 
+import { PARTICIPANT_STATUSES } from '~/entities/project';
+
 import { Modal } from '~/shared/ui/Modal';
 
 import { useUpdateParticipant } from './api';
@@ -23,12 +25,18 @@ export const RequestButtons = ({ participantId }: RequestButtonsProps) => {
   } = useDisclosure();
 
   const submitParticipant = async () => {
-    await updateParticipant({ participant_id: participantId, status: 'joined' });
+    await updateParticipant({
+      participant_id: participantId,
+      status: PARTICIPANT_STATUSES.joined,
+    });
     submitOnClose();
   };
 
   const rejectParticipant = async () => {
-    await updateParticipant({ participant_id: participantId, status: 'declined' });
+    await updateParticipant({
+      participant_id: participantId,
+      status: PARTICIPANT_STATUSES.declined,
+    });
     rejectOnClose();
   };
 

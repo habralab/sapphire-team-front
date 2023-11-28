@@ -5,6 +5,7 @@ import { FiChevronLeft } from 'react-icons/fi';
 import { RequestButtons } from '~/features/project';
 
 import { DummyPosition } from '~/entities/dummy';
+import { PARTICIPANT_STATUSES } from '~/entities/project';
 
 import { GetSpecsData } from '~/shared/api';
 import {
@@ -72,10 +73,11 @@ export const Requests = ({
           </Heading>
         </Flex>
       </Flex>
-      {participants.filter(({ status }) => status === 'request').length ? (
+      {participants.filter(({ status }) => status === PARTICIPANT_STATUSES.request)
+        .length ? (
         <Stack gap={4}>
           {participants
-            .filter(({ status }) => status === 'request')
+            .filter(({ status }) => status === PARTICIPANT_STATUSES.request)
             .map((participant) => (
               <Card
                 key={participant.id}

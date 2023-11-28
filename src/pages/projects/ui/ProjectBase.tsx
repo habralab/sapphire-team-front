@@ -27,6 +27,7 @@ import { useUpdateParticipant, useUpdateProject } from '~/features/project';
 import {
   Avatar,
   Contacts,
+  PARTICIPANT_STATUSES,
   PROJECT_STATUSES,
   ProjectInfo,
   useGetParticipants,
@@ -119,7 +120,10 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
   const leaveProject = async () => {
     const participantId = allParticipant?.data.find(({ user_id }) => userId === user_id);
     if (participantId) {
-      await updateParticipant({ participant_id: participantId.id, status: 'left' });
+      await updateParticipant({
+        participant_id: participantId.id,
+        status: PARTICIPANT_STATUSES.left,
+      });
       leftOnClose();
     }
   };
@@ -179,8 +183,9 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                     <Text>Заявки</Text>
                     <Text ml={1} color="gray.600" fontSize="sm">
                       {
-                        allParticipant?.data.filter(({ status }) => status === 'request')
-                          .length
+                        allParticipant?.data.filter(
+                          ({ status }) => status === PARTICIPANT_STATUSES.request,
+                        ).length
                       }
                     </Text>
                     <Icon ml="auto" as={FiChevronRight} fontSize="2xl" />
@@ -208,7 +213,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
               <Contacts ownerId={project.owner_id} />
               <Stack>
                 {allParticipant?.data
-                  .filter(({ status }) => status === 'joined')
+                  .filter(({ status }) => status === PARTICIPANT_STATUSES.joined)
                   .map((participant) => (
                     <Link
                       key={participant.user_id}
@@ -248,7 +253,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
             >
               Вы уверены, что хотите завершить проект?
             </Modal>
-            {userStatus === 'request' && (
+            {userStatus === PARTICIPANT_STATUSES.request && (
               <Button
                 isDisabled
                 bg="gray.400"
@@ -261,7 +266,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                 Отклик отправлен
               </Button>
             )}
-            {userStatus === 'joined' && (
+            {userStatus === PARTICIPANT_STATUSES.joined && (
               <Button onClick={leftOnOpen} fontSize="sm" fontWeight="600" w="full">
                 Покинуть проект
               </Button>
@@ -275,7 +280,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
             >
               Вы уверены, что хотите покинуть проект?
             </Modal>
-            {userStatus === 'declined' && (
+            {userStatus === PARTICIPANT_STATUSES.declined && (
               <Button
                 isDisabled
                 bg="gray.400"
@@ -287,7 +292,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                 Ваш отклик отклонен
               </Button>
             )}
-            {userStatus === 'left' && (
+            {userStatus === PARTICIPANT_STATUSES.left && (
               <Button
                 isDisabled
                 bg="gray.400"

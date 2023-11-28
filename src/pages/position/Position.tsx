@@ -16,6 +16,7 @@ import { useCreateParticipant } from '~/features/project';
 import {
   Avatar,
   Contacts,
+  PARTICIPANT_STATUSES,
   PositionInfo,
   useGetParticipants,
   useGetUserStatus,
@@ -152,7 +153,7 @@ export const Position = ({ positionId }: ProjectBase) => {
                 Откликнуться
               </Button>
             )}
-            {userStatus === 'request' && (
+            {userStatus === PARTICIPANT_STATUSES.request && (
               <Button
                 bg="gray.300"
                 color="gray.800"
@@ -164,7 +165,7 @@ export const Position = ({ positionId }: ProjectBase) => {
                 Отклик отправлен
               </Button>
             )}
-            {userStatus === 'left' && (
+            {userStatus === PARTICIPANT_STATUSES.left && (
               <Button
                 isDisabled
                 bg="gray.400"
@@ -176,7 +177,7 @@ export const Position = ({ positionId }: ProjectBase) => {
                 Вы покинули проект
               </Button>
             )}
-            {userStatus === 'declined' && (
+            {userStatus === PARTICIPANT_STATUSES.declined && (
               <Button
                 isDisabled
                 bg="gray.400"
