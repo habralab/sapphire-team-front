@@ -1,4 +1,4 @@
-import { Stack, Box } from '@chakra-ui/react';
+import { Stack, Box, Skeleton } from '@chakra-ui/react';
 import React, { useEffect, useRef } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,8 @@ import { NotificationItem } from './NotificationItem';
 
 export function NotificationList() {
   const targetRef = useRef<HTMLDivElement>(null);
-  const { data, fetchNextPage, hasNextPage, isLoading } = useGetNotifications();
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
+    useGetNotifications();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,6 +65,13 @@ export function NotificationList() {
           })}
         </React.Fragment>
       ))}
+      {isFetchingNextPage ? (
+        <>
+          <Skeleton height="66px" />
+        </>
+      ) : (
+        <Box ref={targetRef} />
+      )}
     </Stack>
   );
 }

@@ -26,7 +26,7 @@ export function Counter(props: CounterType) {
       fontWeight="normal"
       lineHeight="1"
       border={noBorder ? '' : '2px'}
-      fontSize="sm"
+      fontSize="xs"
       borderColor={borderBg ?? bg ?? 'purple.600'}
       borderRadius="full"
       boxSizing="content-box"

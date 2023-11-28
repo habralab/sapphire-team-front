@@ -42,7 +42,7 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
   ) {
     return (
       <>
-        {userLoaded || skillsLoaded ? (
+        {userLoaded && skillsLoaded ? (
           <Skeleton height="200px" borderRadius="2xl" />
         ) : (
           <Stack bg="white" borderRadius="2xl" p={5} gap={6}>
@@ -77,7 +77,7 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
         )}
       </>
     );
-  } else if (!userLoaded) {
+  } else {
     return (
       <Text color="gray.700" textAlign="center">
         {userId === id
@@ -86,10 +86,4 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
       </Text>
     );
   }
-
-  return (
-    <Stack alignItems="center" mt={6}>
-      <Skeleton height="200px" borderRadius="2xl" />
-    </Stack>
-  );
 }

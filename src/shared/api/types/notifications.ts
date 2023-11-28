@@ -12,6 +12,10 @@ export interface paths {
     /** Get Notifications */
     get: operations['get_notifications_api_rest_notifications__get'];
   };
+  '/api/rest/notifications/count': {
+    /** Get Notifications Count */
+    get: operations['get_notifications_count_api_rest_notifications_count_get'];
+  };
   '/api/rest/notifications/{notification_id}': {
     /** Get Notification */
     get: operations['get_notification_api_rest_notifications__notification_id__get'];
@@ -142,6 +146,35 @@ export interface operations {
       200: {
         content: {
           'application/json': components['schemas']['NotificationListResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Get Notifications Count */
+  get_notifications_count_api_rest_notifications_count_get: {
+    parameters: {
+      query?: {
+        is_read?: unknown;
+      };
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': number;
         };
       };
       /** @description Validation Error */

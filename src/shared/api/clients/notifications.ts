@@ -8,8 +8,14 @@ export type GetListParameters =
 export type GetListResponse =
   paths['/api/rest/notifications/']['get']['responses']['200']['content']['application/json'];
 
-export type GetResponse =
+export type GetNotificationResponse =
   paths['/api/rest/notifications/{notification_id}']['get']['responses']['200']['content']['application/json'];
+
+export type GetCountParameters =
+  paths['/api/rest/notifications/count']['get']['parameters']['query'];
+
+export type GetCountResponse =
+  paths['/api/rest/notifications/count']['get']['responses']['200']['content']['application/json'];
 
 export class NotificationsApiClient extends BaseApiClient {
   async getList(params: GetListParameters) {
@@ -20,7 +26,7 @@ export class NotificationsApiClient extends BaseApiClient {
   }
 
   async get(notification_id: string) {
-    const { data } = await this.client.get<GetResponse>(
+    const { data } = await this.client.get<GetNotificationResponse>(
       `/api/rest/notifications/${notification_id}`,
     );
     return data;
@@ -30,5 +36,15 @@ export class NotificationsApiClient extends BaseApiClient {
     return this.client.post(`/api/rest/notifications/${notification_id}`, {
       is_read: true,
     });
+  }
+
+  async getUnreadCount(params: GetCountParameters) {
+    const { data } = await this.client.get<GetCountResponse>(
+      `/api/rest/notifications/count`,
+      {
+        params,
+      },
+    );
+    return data;
   }
 }

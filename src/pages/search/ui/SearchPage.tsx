@@ -16,6 +16,7 @@ import { ProjectCard } from '~/widgets/project-card';
 
 import { SearchProject } from '~/features/project';
 
+import { DummyNotFound } from '~/entities/dummy';
 import { useFilterStore } from '~/entities/project';
 import { useGetSpecs } from '~/entities/storage';
 import { Avatar, DummyAvatar } from '~/entities/user';
@@ -118,45 +119,51 @@ export const SearchPage = () => {
               <Skeleton height="200px" borderRadius="2xl" mb={3} />
             </>
           ) : (
-            <SimpleGrid gap={4}>
-              {positions.pages.map((group, i) => (
-                <React.Fragment key={i}>
-                  {group.data.map((position) => {
-                    return (
-                      <Link
-                        key={position.id}
-                        to={generatePath(PATHS.position, { id: position.id })}
-                      >
-                        <ProjectCard
-                          status={position.project.status}
-                          title={position.project.name}
-                          date={position.project.startline}
-                          description={position.project.description}
-                        >
-                          <STag
-                            mainTags={allSpecs
-                              ?.filter(({ id }) => id === position.specialization_id)
-                              .map(({ name }) => (name ? name : ''))}
-                            tags={allSkills
-                              ?.filter(({ value }) => position.skills.includes(value))
-                              .map(({ label }) => label)}
-                          />
-                        </ProjectCard>
-                      </Link>
-                    );
-                  })}
-                </React.Fragment>
-              ))}
-              {isFetchingNextPage ? (
-                <>
-                  <Skeleton height="200px" borderRadius="2xl" mb={3} />
-                  <Skeleton height="200px" borderRadius="2xl" mb={3} />
-                  <Skeleton height="200px" borderRadius="2xl" mb={3} />
-                </>
+            <>
+              {!positions.pages[0].total_items ? (
+                <DummyNotFound />
               ) : (
-                <Box ref={targetRef} />
+                <SimpleGrid gap={4}>
+                  {positions.pages.map((group, i) => (
+                    <React.Fragment key={i}>
+                      {group.data.map((position) => {
+                        return (
+                          <Link
+                            key={position.id}
+                            to={generatePath(PATHS.position, { id: position.id })}
+                          >
+                            <ProjectCard
+                              status={position.project.status}
+                              title={position.project.name}
+                              date={position.project.startline}
+                              description={position.project.description}
+                            >
+                              <STag
+                                mainTags={allSpecs
+                                  ?.filter(({ id }) => id === position.specialization_id)
+                                  .map(({ name }) => (name ? name : ''))}
+                                tags={allSkills
+                                  ?.filter(({ value }) => position.skills.includes(value))
+                                  .map(({ label }) => label)}
+                              />
+                            </ProjectCard>
+                          </Link>
+                        );
+                      })}
+                    </React.Fragment>
+                  ))}
+                  {isFetchingNextPage ? (
+                    <>
+                      <Skeleton height="200px" borderRadius="2xl" mb={3} />
+                      <Skeleton height="200px" borderRadius="2xl" mb={3} />
+                      <Skeleton height="200px" borderRadius="2xl" mb={3} />
+                    </>
+                  ) : (
+                    <Box ref={targetRef} />
+                  )}
+                </SimpleGrid>
               )}
-            </SimpleGrid>
+            </>
           )}
         </Flex>
       </Container>

@@ -33,7 +33,7 @@ export function ProfileUserPageBase() {
 
   return (
     <Container maxW="md" mb={4}>
-      <Flex alignItems="center" mt={4} mb={16} h={42} gap={4}>
+      <Flex alignItems="center" mt={4} mb={16} h={42} gap={2}>
         <GoBack prevCount={-2} />
         <Heading variant="h1" as="h1">
           Профиль

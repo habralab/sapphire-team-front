@@ -1,6 +1,8 @@
 import { Flex } from '@chakra-ui/react';
+import { useLocation } from 'react-router-dom';
 
 import { useAuth } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 
 import { Buttons } from './Buttons';
 
@@ -9,6 +11,7 @@ interface DummyProps {
 }
 
 export function DummyWrapper({ children }: DummyProps) {
+  const location = useLocation();
   const { isAuth } = useAuth();
   return (
     <Flex
@@ -20,7 +23,7 @@ export function DummyWrapper({ children }: DummyProps) {
       gap={5}
     >
       {children}
-      {isAuth && <Buttons />}
+      {isAuth && location.pathname !== PATHS.search && <Buttons />}
     </Flex>
   );
 }
