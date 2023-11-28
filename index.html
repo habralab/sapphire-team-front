@@ -175,30 +175,14 @@
     </div>
     <div id="root"></div>
     <script>
-      var observerFunc = function () {
-        observer.observe(root, config);
-      };
-      var preloader = document.querySelector('#preloader');
-      var root = document.querySelector('#root');
-      var observer = new MutationObserver(function (mutations) {
-        // Traverse every mutation
-        mutations.forEach(function (mutation) {
-          if (mutation.target === root) {
-            if (preloader) preloader.remove();
-            observer.disconnect();
-            window.removeEventListener('load', observerFunc);
-          }
-        });
-      });
-
-      var config = {
-        attributes: true,
-        childList: true,
-        characterData: true,
-        subtree: true,
-      };
-
-      window.addEventListener('load', observerFunc);
+      document.addEventListener(
+        'DOMContentLoaded',
+        () => {
+          var preloader = document.querySelector('#preloader');
+          preloader.style.display = 'none';
+        },
+        false,
+      );
     </script>
     <script type="module" src="/src/app/index.tsx"></script>
   </body>
