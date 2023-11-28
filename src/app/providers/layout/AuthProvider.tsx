@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 
-import { IsAuthResponse } from '~/shared/api/types';
+import { IsAuthResponse } from '~/shared/api/model';
 import { AuthContext } from '~/shared/contexts';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {

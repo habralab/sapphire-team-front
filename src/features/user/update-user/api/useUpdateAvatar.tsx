@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { Identificator, UpdateUserAvatar } from '~/shared/api/types';
+import { Identificator, UpdateUserAvatar } from '~/shared/api/model';
 import { api } from '~/shared/contexts';
 
 export const useUpdateAvatar = () => {

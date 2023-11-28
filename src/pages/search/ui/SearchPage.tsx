@@ -16,7 +16,7 @@ import { ProjectCard } from '~/widgets/project-card';
 
 import { SearchProject } from '~/features/project';
 
-import { Filter, useFilterStore } from '~/entities/project';
+import { useFilterStore } from '~/entities/project';
 import { useGetSpecs } from '~/entities/storage';
 import { Avatar, DummyAvatar } from '~/entities/user';
 
@@ -35,14 +35,19 @@ export const SearchPage = ({ user }: BasePageProps) => {
 
   const { filter } = useFilterStore();
 
-  const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    useGetAllPositions({
-      date: filter.date,
-      skills: filter.skills,
-      specs: filter.specs,
+  const {
+    data: positions,
+    isLoading,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useGetAllPositions({
+    date: filter.date,
+    skills: filter.skills,
+    specs: filter.specs,
 
-      searchText,
-    });
+    searchText,
+  });
 
   const { data: allSpecs } = useGetSpecs();
 
@@ -71,7 +76,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
     return () => {
       if (targetRef.current) observer.unobserve(targetRef.current);
     };
-  }, [data]);
+  }, [positions]);
 
   const handleSumbit = (value: string) => {
     setSearchText(value);
@@ -95,13 +100,13 @@ export const SearchPage = ({ user }: BasePageProps) => {
             <SearchProject onChange={handleSumbit} />
             {user.userId && (
               <FilterUser
-                totalItems={data?.pages[0].total_items}
+                totalItems={positions?.pages[0].total_items}
                 isLoading={isLoading}
                 userId={user.userId}
               />
             )}
           </Flex>
-          {isLoading || !data ? (
+          {isLoading || !positions ? (
             <>
               <Skeleton height="200px" borderRadius="2xl" mb={3} />
               <Skeleton height="200px" borderRadius="2xl" mb={3} />
@@ -109,7 +114,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
             </>
           ) : (
             <SimpleGrid gap={4}>
-              {data.pages.map((group, i) => (
+              {positions.pages.map((group, i) => (
                 <React.Fragment key={i}>
                   {group.data.map((position) => {
                     return (

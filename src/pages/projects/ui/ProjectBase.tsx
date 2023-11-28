@@ -66,6 +66,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
   const { mutateAsync: updateProject, isLoading: updateProjectLoading } =
     useUpdateProject();
 
+  // TODO: infinityScroll
   const { data: allParticipant } = useGetParticipants({
     project_id: projectId,
   });

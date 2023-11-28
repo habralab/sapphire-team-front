@@ -4,8 +4,8 @@ import { Skeleton } from '@chakra-ui/react';
 import { GetSpecsData } from '~/shared/api';
 import {
   GetAllParticipantsDataResponse,
-  GetProjectPositionsData,
-} from '~/shared/api/types';
+  GetProjectPositionsDataResponse,
+} from '~/shared/api/model';
 import { STag } from '~/shared/ui/STag';
 import { Status } from '~/shared/ui/Status';
 
@@ -28,7 +28,7 @@ interface ProjectInfoProps {
   specs: string[];
   skills: string[][];
   project: Project;
-  positions?: GetProjectPositionsData;
+  positions?: GetProjectPositionsDataResponse;
   ioadedPositions: boolean;
   userIsOwner: boolean;
   userId?: string;

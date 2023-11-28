@@ -19,22 +19,20 @@ import {
   GetPositionSkillsResponse,
   GetProjectPositionsResponse,
   GetStatistic,
-  NewProjectParams,
+  NewProjectRequest,
   ProjectPositionsResponse,
-  UpdateParticipantParams,
   UpdateParticipantRequest,
-  UpdateProjectAvatar,
-  UpdateProjectAvatarID,
+  UpdateProjectAvatarRequest,
   UpdateProjectParams,
   UpdateProjectRequest,
   UpdateProjectResponse,
   UpdateSkillsParams,
-} from '../types/project.types';
+} from '../model/project.types';
 
 import { BaseApiClient } from './base';
 
 export class ProjectsApiClient extends BaseApiClient {
-  async addNewProject(newProject: NewProjectParams) {
+  async addNewProject(newProject: NewProjectRequest) {
     const { data } = await this.client.post<AfterPostNewProjectResponse>(
       `/api/rest/projects/`,
       newProject,
@@ -42,10 +40,7 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async uploadProjectAvatar({
-    project_id,
-    avatar,
-  }: UpdateProjectAvatarID & UpdateProjectAvatar) {
+  async uploadProjectAvatar({ project_id, avatar }: UpdateProjectAvatarRequest) {
     await this.client.post(
       `/api/rest/projects/${project_id}/avatar`,
       { avatar },
@@ -71,10 +66,7 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async updateParticipant({
-    status,
-    participant_id,
-  }: UpdateParticipantRequest & UpdateParticipantParams) {
+  async updateParticipant({ status, participant_id }: UpdateParticipantRequest) {
     const { data } = await this.client.post<CreateParticipantResponse>(
       `/api/rest/participants/${participant_id}`,
       { status },

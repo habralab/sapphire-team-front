@@ -10,8 +10,8 @@ interface FilterUserProps {
 }
 
 export const FilterUser = ({ userId, isLoading, totalItems }: FilterUserProps) => {
-  const { data: userData, isSuccess: loadedUserData } = useGetProfile(userId);
-  return loadedUserData ? (
-    <Filter totalItems={totalItems} isLoading={isLoading} userData={userData} />
+  const { data: user, isSuccess } = useGetProfile(userId);
+  return isSuccess ? (
+    <Filter totalItems={totalItems} isLoading={isLoading} user={user} />
   ) : null;
 };

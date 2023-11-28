@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { UpdateProjectParams, UpdateProjectRequest } from '~/shared/api/types';
+import { UpdateProjectParams, UpdateProjectRequest } from '~/shared/api/model';
 import { api } from '~/shared/contexts';
 
 export const useUpdateProject = () => {
