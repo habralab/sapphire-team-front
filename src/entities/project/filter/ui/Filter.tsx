@@ -15,7 +15,6 @@ import {
   Stack,
   Input,
 } from '@chakra-ui/react';
-import { useEffect } from 'react';
 import { IoOptions } from 'react-icons/io5';
 
 import { GetUserResponse } from '~/shared/api/model';
@@ -36,18 +35,8 @@ interface FilterProps {
 export const Filter = ({ user, isLoading, totalItems = 0 }: FilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { filter, removeFilter, updateFilter } = useFilterStore();
+  const { filter, removeFilter, updateFilter } = useFilterStore(user);
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    if (user.main_specialization_id && !filter.specs.length) {
-      user.secondary_specialization_id
-        ? updateFilter({
-            specs: [user.main_specialization_id, user.secondary_specialization_id],
-          })
-        : updateFilter({ specs: [user.main_specialization_id] });
-    }
-  }, []);
 
   return (
     <>
