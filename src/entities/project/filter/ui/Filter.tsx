@@ -15,6 +15,7 @@ import {
   Stack,
   Input,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { IoOptions } from 'react-icons/io5';
 
 import { GetUserResponse } from '~/shared/api/model';
@@ -35,8 +36,14 @@ interface FilterProps {
 export const Filter = ({ user, isLoading, totalItems = 0 }: FilterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { filter, removeFilter, updateFilter } = useFilterStore(user);
+  const { filter, removeFilter, updateFilter, initialStore } = useFilterStore();
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (filter.initialized) return;
+
+    initialStore(user);
+  }, [filter.initialized]);
 
   return (
     <>
