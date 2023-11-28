@@ -10,7 +10,7 @@ import { GetSpecsData } from '~/shared/api';
 import {
   GetAllParticipantsDataResponse,
   GetProjectPositionsDataResponse,
-} from '~/shared/api/types';
+} from '~/shared/api/model';
 import { STag } from '~/shared/ui/STag';
 
 import { RequestParticipant } from './RequestParticipant';

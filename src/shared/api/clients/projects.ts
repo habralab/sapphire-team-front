@@ -1,6 +1,6 @@
 import Qs from 'query-string';
 
-import { formatDate, getSatatus } from '~/shared/lib/adapters';
+import { formatDate } from '~/shared/lib/adapters';
 
 import {
   AddSkillsRequest,
@@ -19,19 +19,20 @@ import {
   GetPositionSkillsResponse,
   GetProjectPositionsResponse,
   GetStatistic,
-  NewProjectParams,
+  NewProjectRequest,
   ProjectPositionsResponse,
-  UpdateParticipantParams,
   UpdateParticipantRequest,
-  UpdateProjectAvatar,
-  UpdateProjectAvatarID,
+  UpdateProjectAvatarRequest,
+  UpdateProjectParams,
+  UpdateProjectRequest,
+  UpdateProjectResponse,
   UpdateSkillsParams,
-} from '../types/project.types';
+} from '../model/project.types';
 
 import { BaseApiClient } from './base';
 
 export class ProjectsApiClient extends BaseApiClient {
-  async addNewProject(newProject: NewProjectParams) {
+  async addNewProject(newProject: NewProjectRequest) {
     const { data } = await this.client.post<AfterPostNewProjectResponse>(
       `/api/rest/projects/`,
       newProject,
@@ -39,10 +40,7 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async uploadProjectAvatar({
-    project_id,
-    avatar,
-  }: UpdateProjectAvatarID & UpdateProjectAvatar) {
+  async uploadProjectAvatar({ project_id, avatar }: UpdateProjectAvatarRequest) {
     await this.client.post(
       `/api/rest/projects/${project_id}/avatar`,
       { avatar },
@@ -68,12 +66,20 @@ export class ProjectsApiClient extends BaseApiClient {
     return data;
   }
 
-  async updateParticipant({
-    status,
-    participant_id,
-  }: UpdateParticipantRequest & UpdateParticipantParams) {
+  async updateParticipant({ status, participant_id }: UpdateParticipantRequest) {
     const { data } = await this.client.post<CreateParticipantResponse>(
       `/api/rest/participants/${participant_id}`,
+      { status },
+    );
+    return data;
+  }
+
+  async updateProject({
+    status,
+    project_id,
+  }: UpdateProjectRequest & UpdateProjectParams) {
+    const { data } = await this.client.patch<UpdateProjectResponse>(
+      `/api/rest/projects/${project_id}`,
       { status },
     );
     return data;
@@ -106,11 +112,10 @@ export class ProjectsApiClient extends BaseApiClient {
     const { data } = await this.client.get<GetCurrentProjectResponse>(
       `/api/rest/projects/${project_id}`,
     );
-    const { deadline, status, ...rest } = data;
+    const { deadline, ...rest } = data;
     return {
       ...rest,
       deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
-      status: getSatatus(status),
     };
   }
 
@@ -127,13 +132,12 @@ export class ProjectsApiClient extends BaseApiClient {
       `/api/rest/positions/${position_id}`,
     );
     const { project, ...rest } = data;
-    const { startline, status, ...restProject } = project;
+    const { startline, ...restProject } = project;
     return {
       ...rest,
       project: {
         ...restProject,
         startline: `с ${formatDate(startline)}`,
-        status: getSatatus(status),
       },
     };
   }
@@ -166,13 +170,12 @@ export class ProjectsApiClient extends BaseApiClient {
     const { data: onlyData, ...others } = data;
     const newData = onlyData.map((position) => {
       const { project, ...rest } = position;
-      const { startline, status, ...restProject } = project;
+      const { startline, ...restProject } = project;
       return {
         ...rest,
         project: {
           ...restProject,
           startline: `с ${formatDate(startline)}`,
-          status: getSatatus(status),
         },
       };
     });
@@ -194,11 +197,10 @@ export class ProjectsApiClient extends BaseApiClient {
     );
     const { data: onlyData, ...others } = data;
     const newData = onlyData.map((project) => {
-      const { deadline, status, ...rest } = project;
+      const { deadline, ...rest } = project;
       return {
         ...rest,
         deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
-        status: getSatatus(status),
       };
     });
     return { ...others, data: newData };

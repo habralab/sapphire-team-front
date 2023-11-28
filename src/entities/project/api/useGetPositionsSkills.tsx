@@ -1,11 +1,11 @@
 import { useQueries } from '@tanstack/react-query';
 
-import { GetProjectPositionsData } from '~/shared/api/types';
+import { GetProjectPositionsDataResponse } from '~/shared/api/model';
 import { api } from '~/shared/contexts';
 
 export const useGetPositionsSkills = (
   projectId: string,
-  projectPositions?: GetProjectPositionsData,
+  projectPositions?: GetProjectPositionsDataResponse,
 ) =>
   useQueries({
     queries: projectPositions

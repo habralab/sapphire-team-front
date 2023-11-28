@@ -4,10 +4,11 @@ import { STag } from '~/shared/ui/STag';
 import { Status } from '~/shared/ui/Status';
 
 import { Card } from '../card';
+import { PROJECT_STATUSES, PROJECT_STATUSES_MESSAGES } from '../Project.constants';
 
 interface Project {
   deadline: string | null;
-  status: string;
+  status: keyof typeof PROJECT_STATUSES;
   id: string;
   name: string;
   description: string | null;
@@ -27,7 +28,7 @@ export const PositionInfo = ({ mainTags, tags, project }: ProjectInfoProps) => {
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
-        <Status mb={3}>{project.status}</Status>
+        <Status mb={3}>{PROJECT_STATUSES_MESSAGES[project.status]}</Status>
         <Card
           title={project.name}
           date={project.startline}

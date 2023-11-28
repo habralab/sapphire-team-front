@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useGetAvatar } from '~/entities/user';
 
-import { GetUserResponse } from '~/shared/api/types';
+import { GetUserResponse } from '~/shared/api/model';
 import { PATHS } from '~/shared/lib/router';
 import { SelectOptions } from '~/shared/types';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';

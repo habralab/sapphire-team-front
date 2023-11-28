@@ -73,7 +73,7 @@ export function ProfilePageDesktop() {
                   key={project.id}
                   flex="0 0 45%"
                   _hover={{ boxShadow: 'xs', cursor: 'pointer' }}
-                  status={project.status}
+                  status={'finished'}
                   title={project.title}
                   date={project.date}
                   description={project.description}

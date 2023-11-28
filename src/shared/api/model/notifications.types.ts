@@ -1,3 +1,3 @@
-import { components } from './notifications';
+import { components } from '../types/notifications';
 
 export type NotificationResponse = components['schemas']['NotificationResponse'];

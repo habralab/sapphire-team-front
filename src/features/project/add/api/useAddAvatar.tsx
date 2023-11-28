@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { UpdateProjectAvatar, UpdateProjectAvatarID } from '~/shared/api/types';
+import { UpdateProjectAvatarRequest } from '~/shared/api/model';
 import { api } from '~/shared/contexts';
 
 export const useAddAvatar = () =>
   useMutation({
-    mutationFn: (data: UpdateProjectAvatarID & UpdateProjectAvatar) =>
+    mutationFn: (data: UpdateProjectAvatarRequest) =>
       api.projectsApi.uploadProjectAvatar(data),
   });

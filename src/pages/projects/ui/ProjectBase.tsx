@@ -22,11 +22,12 @@ import { Link, generatePath } from 'react-router-dom';
 
 import { RequestParticipant, Requests } from '~/widgets/project';
 
-import { useUpdateParticipant } from '~/features/project';
+import { useUpdateParticipant, useUpdateProject } from '~/features/project';
 
 import {
   Avatar,
   Contacts,
+  PROJECT_STATUSES,
   ProjectInfo,
   useGetParticipants,
   useGetPositions,
@@ -54,11 +55,19 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
     onOpen: leftOnOpen,
     onClose: leftOnClose,
   } = useDisclosure();
+  const {
+    isOpen: closeProjectIsOpen,
+    onOpen: closeProjectOnOpen,
+    onClose: closeProjectOnClose,
+  } = useDisclosure();
   const [specsIds, setSpecsIds] = useState<string[]>([]);
   const [unvaluedSkillsIds, setUnvaluedSkillsIds] = useState<string[][]>([]);
   const [readySkillsIds, setReadySkillsIds] = useState<string[][]>([]);
   const { mutateAsync: updateParticipant } = useUpdateParticipant();
+  const { mutateAsync: updateProject, isLoading: updateProjectLoading } =
+    useUpdateProject();
 
+  // TODO: infinityScroll
   const { data: allParticipant } = useGetParticipants({
     project_id: projectId,
   });
@@ -99,6 +108,8 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
 
   const userNotOwner = loadedProject && userId !== project.owner_id;
 
+  const projectNotClosed = project && project.status !== PROJECT_STATUSES.finished;
+
   const loadedAllPositions =
     loadedProjectPositions &&
     loadedSpecs &&
@@ -113,17 +124,14 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
     }
   };
 
+  const cancelProject = async () => {
+    await updateProject({ project_id: projectId, status: PROJECT_STATUSES.finished });
+    closeProjectOnClose();
+  };
+
   return (
-    <Container maxW="md" display="flex" flexDirection="column">
-      <Flex
-        position="sticky"
-        bg="bg"
-        zIndex={3}
-        top={0}
-        alignItems="center"
-        justifyContent="space-between"
-        py={4}
-      >
+    <Container maxW="md" display="flex" flexDirection="column" mb={4}>
+      <Flex bg="bg" top={0} alignItems="center" justifyContent="space-between" py={4}>
         <Flex alignItems="center">
           <GoBack />
           <Heading variant="h2" mb={0}>
@@ -132,12 +140,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
         </Flex>
       </Flex>
       {!loadedProject ? (
-        <Skeleton
-          isLoaded={loadedProject}
-          borderRadius="2xl"
-          fadeDuration={2}
-          height="550px"
-        />
+        <Skeleton borderRadius="2xl" fadeDuration={2} height="550px" />
       ) : (
         <ChakraCard
           bg="white"
@@ -161,7 +164,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
                 participants={allParticipant.data}
               />
             )}
-            {!userNotOwner && (
+            {!userNotOwner && projectNotClosed && (
               <IconButton
                 size="md"
                 variant="unstyled"
@@ -219,9 +222,32 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
           </CardBody>
         </ChakraCard>
       )}
-      {layout?.footer && (
+      {layout?.footer && projectNotClosed && (
         <Portal containerRef={layout.footer}>
           <Container py={2} maxW="md">
+            {!userNotOwner && (
+              <Button
+                onClick={closeProjectOnOpen}
+                bg="gray.300"
+                color="gray.900"
+                _hover={{ bg: 'gray.300' }}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+              >
+                Завершить проект
+              </Button>
+            )}
+            <Modal
+              isOpen={closeProjectIsOpen}
+              onClose={closeProjectOnClose}
+              submitText="Завершить проект"
+              cancelText="Отмена"
+              onSubmit={cancelProject}
+              isLoading={updateProjectLoading}
+            >
+              Вы уверены, что хотите завершить проект?
+            </Modal>
             {userStatus === 'request' && (
               <Button
                 isDisabled

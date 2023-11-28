@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { CreatePositionRequest } from '~/shared/api/types';
+import { CreatePositionRequest } from '~/shared/api/model';
 import { api } from '~/shared/contexts';
 
 export const useAddPosition = () =>

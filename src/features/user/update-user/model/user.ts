@@ -1,4 +1,4 @@
-import { GetUserResponse } from '~/shared/api/types';
+import { GetUserResponse } from '~/shared/api/model';
 import { nullToUndefined } from '~/shared/lib/form';
 import { SelectOptions } from '~/shared/types';
 

@@ -11,21 +11,23 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 
+import { FilterUser } from '~/widgets/project';
 import { ProjectCard } from '~/widgets/project-card';
 
 import { SearchProject } from '~/features/project';
 
-import { Filter, useFilterStore } from '~/entities/project';
+import { useFilterStore } from '~/entities/project';
 import { useGetSpecs } from '~/entities/storage';
 import { Avatar, DummyAvatar } from '~/entities/user';
 
-import { useApi, useLayoutRefs } from '~/shared/hooks';
-import { BasePageProps, PATHS } from '~/shared/lib/router';
+import { useApi, useAuth, useLayoutRefs } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
 import { useGetAllPositions } from '../api/useGetAllPositions';
 
-export const SearchPage = ({ user }: BasePageProps) => {
+export const SearchPage = () => {
+  const user = useAuth();
   const { userApi, storageApi } = useApi();
   const targetRef = useRef<HTMLDivElement>(null);
   const layout = useLayoutRefs();
@@ -34,19 +36,25 @@ export const SearchPage = ({ user }: BasePageProps) => {
 
   const { filter } = useFilterStore();
 
-  const { data, isLoading, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    useGetAllPositions({
-      date: filter.date,
-      skills: filter.skills,
-      specs: filter.specs,
-      searchText,
-    });
+  const {
+    data: positions,
+    isLoading,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useGetAllPositions({
+    date: filter.date,
+    skills: filter.skills,
+    specs: filter.specs,
+
+    searchText,
+  });
 
   const { data: allSpecs } = useGetSpecs();
 
   const { data: allSkills } = useQuery({
     queryKey: ['skills'],
-    queryFn: () => storageApi.getSkills({}),
+    queryFn: () => storageApi.getSkills({ per_page: 2000 }),
     staleTime: Infinity,
   });
 
@@ -69,7 +77,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
     return () => {
       if (targetRef.current) observer.unobserve(targetRef.current);
     };
-  }, [data]);
+  }, [positions]);
 
   const handleSumbit = (value: string) => {
     setSearchText(value);
@@ -91,9 +99,15 @@ export const SearchPage = ({ user }: BasePageProps) => {
           </Flex>
           <Flex gap="1" mb={4}>
             <SearchProject onChange={handleSumbit} />
-            <Filter totalItems={data?.pages[0].total_items} />
+            {user.userId && (
+              <FilterUser
+                totalItems={positions?.pages[0].total_items}
+                isLoading={isLoading}
+                userId={user.userId}
+              />
+            )}
           </Flex>
-          {isLoading || !data ? (
+          {isLoading || !positions ? (
             <>
               <Skeleton height="200px" borderRadius="2xl" mb={3} />
               <Skeleton height="200px" borderRadius="2xl" mb={3} />
@@ -101,7 +115,7 @@ export const SearchPage = ({ user }: BasePageProps) => {
             </>
           ) : (
             <SimpleGrid gap={4}>
-              {data.pages.map((group, i) => (
+              {positions.pages.map((group, i) => (
                 <React.Fragment key={i}>
                   {group.data.map((position) => {
                     return (

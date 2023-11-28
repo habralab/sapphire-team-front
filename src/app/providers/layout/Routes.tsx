@@ -1,44 +1,17 @@
-import { Navigate, Routes as ReactRoutes, Route } from 'react-router-dom';
-
-import { useIsMobile, useAuth } from '~/shared/hooks';
-import { BasePage, PATHS } from '~/shared/lib/router';
+import { Routes as ReactRoutes, Route } from 'react-router-dom';
 
 import { normalRoutes } from '../router/config';
+import { OnboardingMiddleware } from '../router/middlewares';
 
 export function Routes() {
-  const isMobile = useIsMobile();
-  const user = useAuth();
-
   return (
     <ReactRoutes>
-      {normalRoutes
-        .map((props) => {
-          let Element = props.view.base as BasePage;
-          const desktop = props.view.desktop;
-
-          if (!isMobile && desktop) {
-            Element = desktop;
-          }
-
-          if (
-            user.isAuth &&
-            !user.isActivated &&
-            ![PATHS.onboarding, PATHS.notFound, PATHS.root].includes(props.path)
-          ) {
-            return (
-              <Route
-                key={props.path}
-                path={props.path}
-                element={<Navigate to={PATHS.notFound} replace />}
-              />
-            );
-          }
-
-          return (
-            <Route key={props.path} path={props.path} element={<Element user={user} />} />
-          );
-        })
-        .filter(Boolean)}
+      {normalRoutes.map(({ Component, path }) =>
+        OnboardingMiddleware(
+          path,
+          <Route key={path} path={path} element={<Component />} />,
+        ),
+      )}
     </ReactRoutes>
   );
 }

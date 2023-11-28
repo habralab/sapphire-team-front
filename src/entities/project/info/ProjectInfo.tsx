@@ -4,16 +4,17 @@ import { Skeleton } from '@chakra-ui/react';
 import { GetSpecsData } from '~/shared/api';
 import {
   GetAllParticipantsDataResponse,
-  GetProjectPositionsData,
-} from '~/shared/api/types';
+  GetProjectPositionsDataResponse,
+} from '~/shared/api/model';
 import { STag } from '~/shared/ui/STag';
 import { Status } from '~/shared/ui/Status';
 
 import { Card } from '../card';
+import { PROJECT_STATUSES, PROJECT_STATUSES_MESSAGES } from '../Project.constants';
 
 interface Project {
   deadline: string;
-  status: string;
+  status: keyof typeof PROJECT_STATUSES;
   id: string;
   name: string;
   description: string | null;
@@ -28,7 +29,7 @@ interface ProjectInfoProps {
   specs: string[];
   skills: string[][];
   project: Project;
-  positions?: GetProjectPositionsData;
+  positions?: GetProjectPositionsDataResponse;
   ioadedPositions: boolean;
   userIsOwner: boolean;
   userId?: string;
@@ -64,7 +65,7 @@ export const ProjectInfo = ({
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
-        <Status mb={3}>{project.status}</Status>
+        <Status mb={3}>{PROJECT_STATUSES_MESSAGES[project.status]}</Status>
         <Card
           title={project.name}
           date={project.deadline}
@@ -72,23 +73,24 @@ export const ProjectInfo = ({
           fullDescription={true}
         />
       </Stack>
-
-      <Stack gap={0} mb={6}>
-        <Heading variant="h2">
-          {userIsOwner ? 'В проект требуются' : 'Мои отклики'}
-        </Heading>
-        <Skeleton isLoaded={ioadedPositions} borderRadius="2xl" fadeDuration={2}>
-          <Stack>
-            {filteredPositions?.map((position, i) => (
-              <STag
-                key={position.id}
-                mainTags={filterMainTag(specs[i])}
-                tags={skills[i]}
-              />
-            ))}
-          </Stack>
-        </Skeleton>
-      </Stack>
+      {project.status !== PROJECT_STATUSES.finished && (
+        <Stack gap={0} mb={6}>
+          <Heading variant="h2">
+            {userIsOwner ? 'В проект требуются' : 'Мои отклики'}
+          </Heading>
+          <Skeleton isLoaded={ioadedPositions} borderRadius="2xl" fadeDuration={2}>
+            <Stack>
+              {filteredPositions?.map((position, i) => (
+                <STag
+                  key={position.id}
+                  mainTags={filterMainTag(specs[i])}
+                  tags={skills[i]}
+                />
+              ))}
+            </Stack>
+          </Skeleton>
+        </Stack>
+      )}
     </>
   );
 };

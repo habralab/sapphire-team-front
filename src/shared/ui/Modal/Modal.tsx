@@ -15,6 +15,7 @@ interface ModalCustomProps {
   submitText: string;
   cancelText: string;
   children: string;
+  isLoading?: boolean;
 }
 
 export const Modal = ({
@@ -24,6 +25,7 @@ export const Modal = ({
   children,
   submitText,
   cancelText,
+  isLoading,
 }: ModalCustomProps) => {
   return (
     <ChakraModal onClose={onClose} isOpen={isOpen} isCentered>
@@ -37,6 +39,7 @@ export const Modal = ({
         <ModalFooter flexDirection="column" gap={2}>
           <Button
             type="button"
+            isLoading={isLoading}
             onClick={onSubmit}
             fontSize="sm"
             fontWeight="600"
@@ -46,6 +49,7 @@ export const Modal = ({
           </Button>
           <Button
             variant="ghost"
+            isLoading={isLoading}
             type="button"
             bg="gray.300"
             onClick={onClose}

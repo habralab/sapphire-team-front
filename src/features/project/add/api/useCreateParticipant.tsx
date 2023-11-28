@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { CreateParticipantRequest } from '~/shared/api/types';
+import { CreateParticipantRequest } from '~/shared/api/model';
 import { api } from '~/shared/contexts';
 
 export const useCreateParticipant = () =>

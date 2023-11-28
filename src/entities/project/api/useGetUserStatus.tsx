@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { GetAllParticipantsDataResponse } from '~/shared/api/types';
+import { GetAllParticipantsDataResponse } from '~/shared/api/model';
 
 interface UseGetUserStatusProps {
   allParticipant?: GetAllParticipantsDataResponse;

@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { UpdateParticipantParams, UpdateParticipantRequest } from '~/shared/api/types';
+import { UpdateParticipantRequest } from '~/shared/api/model';
 import { api } from '~/shared/contexts';
 
 export const useUpdateParticipant = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: UpdateParticipantRequest & UpdateParticipantParams) =>
+    mutationFn: (data: UpdateParticipantRequest) =>
       api.projectsApi.updateParticipant(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['getParticipants']);

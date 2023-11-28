@@ -7,7 +7,7 @@ export const NOTIFICATIONS = {
   owner_excluded: 'Вас исключили из проекта',
 };
 
-export const NOTIFICATION = {
+export const NOTIFICATIONS_MESSAGE = {
   participant_declined: 'Участник вашего проекта решил его покинуть',
   participant_requested:
     'Пользователь хочет присоединиться к вашей команде. Но еще много пользователей, которые могут подойти в команду',
