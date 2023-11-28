@@ -2,15 +2,15 @@ import { Button, Flex, Heading, Icon } from '@chakra-ui/react';
 import { BsArrowRightShort } from 'react-icons/bs';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
-import { useIsMobile } from '~/shared/hooks';
-import { BasePageProps, PATHS } from '~/shared/lib/router';
+import { useAuth, useIsMobile } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 
 import NotFound from './notFound.svg';
 
-export const NotFoundPage = ({ user }: BasePageProps) => {
+export const NotFoundPage = () => {
+  const user = useAuth();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
-  const data = useLoaderData();
 
   return (
     <Flex

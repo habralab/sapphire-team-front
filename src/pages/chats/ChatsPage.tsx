@@ -1,8 +1,9 @@
-import { BasePageProps } from '~/shared/lib/router';
+import { useAuth } from '~/shared/hooks';
 
 import { ChatsPageBase } from './ChatsPageBase';
 import { NotAuthChatsPage } from './NotAuthChatsPage';
 
-export const ChatsPage = ({ user }: BasePageProps) => {
+export const ChatsPage = () => {
+  const user = useAuth();
   return !user.userId ? <NotAuthChatsPage /> : <ChatsPageBase />;
 };

@@ -3,12 +3,11 @@ import { useEffect } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 
 import { useIsMobile } from '~/shared/hooks';
-import { formatDate, formatTime } from '~/shared/lib/adapters';
 import { PATHS } from '~/shared/lib/router';
 import { NotificationImage } from '~/shared/ui/NotificationImage';
 
 import { useGetNotification } from './api';
-import { NOTIFICATION, NOTIFICATIONS } from './Notification.constants';
+import { NOTIFICATIONS_MESSAGE, NOTIFICATIONS } from './Notification.constants';
 
 interface NotificationProps {
   notificationId: string;
@@ -41,7 +40,10 @@ export function Notification({ notificationId, read }: NotificationProps) {
           {notification && NOTIFICATIONS[notification.type as keyof typeof NOTIFICATIONS]}
         </Heading>
         <Text variant="caption">
-          {notification && NOTIFICATION[notification.type as keyof typeof NOTIFICATION]}
+          {notification &&
+            NOTIFICATIONS_MESSAGE[
+              notification.type as keyof typeof NOTIFICATIONS_MESSAGE
+            ]}
         </Text>
       </VStack>
       <Button w="full" maxW={isMobile ? 72 : 80}>

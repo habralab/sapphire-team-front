@@ -27,6 +27,7 @@ import { useUpdateParticipant, useUpdateProject } from '~/features/project';
 import {
   Avatar,
   Contacts,
+  PROJECT_STATUSES,
   ProjectInfo,
   useGetParticipants,
   useGetPositions,
@@ -107,7 +108,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
 
   const userNotOwner = loadedProject && userId !== project.owner_id;
 
-  const projectNotClosed = project && project.status !== 'Проект завершён';
+  const projectNotClosed = project && project.status !== PROJECT_STATUSES.finished;
 
   const loadedAllPositions =
     loadedProjectPositions &&
@@ -124,7 +125,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
   };
 
   const cancelProject = async () => {
-    await updateProject({ project_id: projectId, status: 'finished' });
+    await updateProject({ project_id: projectId, status: PROJECT_STATUSES.finished });
     closeProjectOnClose();
   };
 

@@ -10,10 +10,11 @@ import { STag } from '~/shared/ui/STag';
 import { Status } from '~/shared/ui/Status';
 
 import { Card } from '../card';
+import { PROJECT_STATUSES, PROJECT_STATUSES_MESSAGES } from '../Project.constants';
 
 interface Project {
   deadline: string;
-  status: string;
+  status: keyof typeof PROJECT_STATUSES;
   id: string;
   name: string;
   description: string | null;
@@ -64,7 +65,7 @@ export const ProjectInfo = ({
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
-        <Status mb={3}>{project.status}</Status>
+        <Status mb={3}>{PROJECT_STATUSES_MESSAGES[project.status]}</Status>
         <Card
           title={project.name}
           date={project.deadline}
@@ -72,7 +73,7 @@ export const ProjectInfo = ({
           fullDescription={true}
         />
       </Stack>
-      {project.status !== 'Проект завершён' && (
+      {project.status !== PROJECT_STATUSES.finished && (
         <Stack gap={0} mb={6}>
           <Heading variant="h2">
             {userIsOwner ? 'В проект требуются' : 'Мои отклики'}

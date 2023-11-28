@@ -20,13 +20,14 @@ import { useFilterStore } from '~/entities/project';
 import { useGetSpecs } from '~/entities/storage';
 import { Avatar, DummyAvatar } from '~/entities/user';
 
-import { useApi, useLayoutRefs } from '~/shared/hooks';
-import { BasePageProps, PATHS } from '~/shared/lib/router';
+import { useApi, useAuth, useLayoutRefs } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
 import { useGetAllPositions } from '../api/useGetAllPositions';
 
-export const SearchPage = ({ user }: BasePageProps) => {
+export const SearchPage = () => {
+  const user = useAuth();
   const { userApi, storageApi } = useApi();
   const targetRef = useRef<HTMLDivElement>(null);
   const layout = useLayoutRefs();

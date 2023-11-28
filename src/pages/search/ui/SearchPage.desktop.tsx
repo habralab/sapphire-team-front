@@ -34,7 +34,7 @@ export const SearchPageDesktop = () => {
             return (
               <ProjectCard
                 key={project.id}
-                status={project.status}
+                status={'finished'}
                 title={project.title}
                 date={project.date}
                 description={project.description}

@@ -1,6 +1,6 @@
 import Qs from 'query-string';
 
-import { formatDate, getSatatus } from '~/shared/lib/adapters';
+import { formatDate } from '~/shared/lib/adapters';
 
 import {
   AddSkillsRequest,
@@ -112,11 +112,10 @@ export class ProjectsApiClient extends BaseApiClient {
     const { data } = await this.client.get<GetCurrentProjectResponse>(
       `/api/rest/projects/${project_id}`,
     );
-    const { deadline, status, ...rest } = data;
+    const { deadline, ...rest } = data;
     return {
       ...rest,
       deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
-      status: getSatatus(status),
     };
   }
 
@@ -133,13 +132,12 @@ export class ProjectsApiClient extends BaseApiClient {
       `/api/rest/positions/${position_id}`,
     );
     const { project, ...rest } = data;
-    const { startline, status, ...restProject } = project;
+    const { startline, ...restProject } = project;
     return {
       ...rest,
       project: {
         ...restProject,
         startline: `с ${formatDate(startline)}`,
-        status: getSatatus(status),
       },
     };
   }
@@ -172,13 +170,12 @@ export class ProjectsApiClient extends BaseApiClient {
     const { data: onlyData, ...others } = data;
     const newData = onlyData.map((position) => {
       const { project, ...rest } = position;
-      const { startline, status, ...restProject } = project;
+      const { startline, ...restProject } = project;
       return {
         ...rest,
         project: {
           ...restProject,
           startline: `с ${formatDate(startline)}`,
-          status: getSatatus(status),
         },
       };
     });
@@ -200,11 +197,10 @@ export class ProjectsApiClient extends BaseApiClient {
     );
     const { data: onlyData, ...others } = data;
     const newData = onlyData.map((project) => {
-      const { deadline, status, ...rest } = project;
+      const { deadline, ...rest } = project;
       return {
         ...rest,
         deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
-        status: getSatatus(status),
       };
     });
     return { ...others, data: newData };

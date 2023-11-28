@@ -2,9 +2,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { AddProjectFormView } from '~/widgets/project';
 
-import { BasePageProps, PATHS } from '~/shared/lib/router';
+import { useAuth } from '~/shared/hooks';
+import { PATHS } from '~/shared/lib/router';
 
-export const AddProjectPage = ({ user }: BasePageProps) => {
+export const AddProjectPage = () => {
+  const user = useAuth();
   const navigate = useNavigate();
   return (
     <>
