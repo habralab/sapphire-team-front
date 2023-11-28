@@ -6,5 +6,5 @@ export const useGetUnreadNotification = () =>
   useQuery({
     queryKey: ['unreadNotificatiions'],
     queryFn: () => api.notificationsApi.getUnreadCount({ is_read: false }),
-    staleTime: 15000,
+    staleTime: 10000,
   });

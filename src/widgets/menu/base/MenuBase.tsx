@@ -23,7 +23,7 @@ export const MenuBase = () => {
                 <Flex direction="column" position="relative" alignItems="center" gap={1}>
                   <Flex position="relative">
                     {icon}
-                    {name === 'Уведомления' && data && (
+                    {name === 'Уведомления' && data && data > 0 && (
                       <Counter count={data} float borderBg="white" />
                     )}
                   </Flex>

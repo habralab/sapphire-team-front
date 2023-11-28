@@ -107,7 +107,7 @@ export const Position = ({ positionId }: ProjectBase) => {
         justifyContent="space-between"
         py={4}
       >
-        <Flex alignItems="center">
+        <Flex alignItems="center" gap={2}>
           <GoBack />
           <Heading variant="h2" mb={0}>
             Проект
