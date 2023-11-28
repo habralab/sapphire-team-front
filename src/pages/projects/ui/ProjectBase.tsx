@@ -136,7 +136,7 @@ export const ProjectBase = ({ projectId }: ProjectBase) => {
   return (
     <Container maxW="md" display="flex" flexDirection="column" mb={4}>
       <Flex bg="bg" top={0} alignItems="center" justifyContent="space-between" py={4}>
-        <Flex alignItems="center">
+        <Flex alignItems="center" gap={2}>
           <GoBack />
           <Heading variant="h2" mb={0}>
             Проект

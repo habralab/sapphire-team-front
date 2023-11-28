@@ -59,7 +59,7 @@ export const Requests = ({
   return (
     <Container maxW="md" pb={3}>
       <Flex alignItems="center" justifyContent="space-between" my={3}>
-        <Flex alignItems="center">
+        <Flex alignItems="center" gap={2}>
           <IconButton
             aria-label="back"
             icon={<Icon as={FiChevronLeft} fontSize="2xl" />}

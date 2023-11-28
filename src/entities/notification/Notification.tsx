@@ -2,7 +2,7 @@ import { Flex, Heading, VStack, Button, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 
-import { useIsMobile } from '~/shared/hooks';
+import { useAuth, useIsMobile } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { NotificationImage } from '~/shared/ui/NotificationImage';
 
@@ -17,6 +17,7 @@ interface NotificationProps {
 export function Notification({ notificationId, read }: NotificationProps) {
   const isMobile = useIsMobile();
   const { data: notification } = useGetNotification(notificationId);
+  const { userId } = useAuth();
 
   useEffect(() => {
     if (!notification || notification.is_read) return;
@@ -49,9 +50,11 @@ export function Notification({ notificationId, read }: NotificationProps) {
       <Button w="full" maxW={isMobile ? 72 : 80}>
         <Link
           to={
-            notification
+            !notification
+              ? '#'
+              : userId === notification.data.owner_id
               ? generatePath(PATHS.position, { id: notification.data.position_id })
-              : '#'
+              : generatePath(PATHS.project, { id: notification.data.project_id })
           }
         >
           Перейти к проекту
