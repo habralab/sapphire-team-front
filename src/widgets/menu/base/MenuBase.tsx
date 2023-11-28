@@ -23,9 +23,9 @@ export const MenuBase = () => {
                 <Flex direction="column" position="relative" alignItems="center" gap={1}>
                   <Flex position="relative">
                     {icon}
-                    {name === 'Уведомления' && data && data > 0 && (
-                      <Counter count={data} float borderBg="white" />
-                    )}
+                    {name === 'Уведомления' && data ? (
+                      <>{data > 0 && <Counter count={data} float borderBg="white" />}</>
+                    ) : null}
                   </Flex>
                   <Text fontSize="xs">{name}</Text>
                 </Flex>
