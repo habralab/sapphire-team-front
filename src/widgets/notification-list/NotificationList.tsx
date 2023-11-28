@@ -44,8 +44,8 @@ export function NotificationList() {
         </Box>
       )}
 
-      {data?.pages.map((page, i) => (
-        <React.Fragment key={i}>
+      {data?.pages.map((page) => (
+        <React.Fragment key={page.page}>
           {page.data.map((notification) => {
             return (
               <Box
