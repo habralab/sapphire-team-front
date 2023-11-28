@@ -8,7 +8,7 @@ export type GetListParameters =
 export type GetListResponse =
   paths['/api/rest/notifications/']['get']['responses']['200']['content']['application/json'];
 
-export type GetResponse =
+export type GetNotificationResponse =
   paths['/api/rest/notifications/{notification_id}']['get']['responses']['200']['content']['application/json'];
 
 export type GetCountParameters =
@@ -26,7 +26,7 @@ export class NotificationsApiClient extends BaseApiClient {
   }
 
   async get(notification_id: string) {
-    const { data } = await this.client.get<GetResponse>(
+    const { data } = await this.client.get<GetNotificationResponse>(
       `/api/rest/notifications/${notification_id}`,
     );
     return data;

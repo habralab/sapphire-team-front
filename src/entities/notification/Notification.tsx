@@ -3,12 +3,23 @@ import { Flex, Heading, VStack, Button, Text, Stack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 
+import { GetNotificationResponse } from '~/shared/api';
 import { useAuth, useIsMobile } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { NotificationImage } from '~/shared/ui/NotificationImage';
 
 import { useGetNotification } from './api';
 import { NOTIFICATIONS_MESSAGE, NOTIFICATIONS } from './Notification.constants';
+
+function getNavigateUrl(notification?: GetNotificationResponse, userId?: string) {
+  if (!notification) return '#';
+
+  if (userId === notification.data.owner_id) {
+    return generatePath(PATHS.project, { id: notification.data.project_id });
+  } else {
+    return generatePath(PATHS.position, { id: notification.data.position_id });
+  }
+}
 
 interface NotificationProps {
   notificationId: string;
@@ -25,15 +36,7 @@ export function Notification({ notificationId, read }: NotificationProps) {
     read();
   }, [notification]);
 
-  const navigate = () => {
-    if (notification) {
-      if (userId === notification.data.owner_id)
-        return generatePath(PATHS.project, { id: notification.data.project_id });
-      else return generatePath(PATHS.position, { id: notification.data.position_id });
-    } else {
-      return '#';
-    }
-  };
+  const navigateUrl = getNavigateUrl(notification, userId);
 
   return (
     <Flex
@@ -75,7 +78,7 @@ export function Notification({ notificationId, read }: NotificationProps) {
         )}
       </VStack>
       <Button w="full" maxW={isMobile ? 72 : 80}>
-        <Link to={navigate()}>Перейти к проекту</Link>
+        <Link to={navigateUrl}>Перейти к проекту</Link>
       </Button>
     </Flex>
   );
