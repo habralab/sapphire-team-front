@@ -51,10 +51,6 @@ export const SearchPage = () => {
     searchText,
   });
 
-  useEffect(() => {
-    console.log(filter);
-  }, [filter]);
-
   const { data: allSpecs } = useGetSpecs();
 
   const { data: allSkills } = useQuery({
