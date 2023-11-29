@@ -5,7 +5,7 @@ import { NOTIFICATIONS } from '~/entities/notification';
 
 import { NotificationResponse } from '~/shared/api/model';
 import { useIsMobile } from '~/shared/hooks';
-import { formatDateNotification, formatTime } from '~/shared/lib/adapters';
+import { formatDateNotification } from '~/shared/lib/adapters';
 import { PATHS } from '~/shared/lib/router';
 import { SLink } from '~/shared/ui/SLink';
 
@@ -38,8 +38,12 @@ export function NotificationItem({ notification }: NotificationItemProps) {
           <Heading variant="h3" fontSize="sm">
             {NOTIFICATIONS[notification.type as keyof typeof NOTIFICATIONS]}
           </Heading>
-          {}
-          <SLink to={generatePath(PATHS.position, { id: notification.data.position_id })}>
+          <SLink
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            to={generatePath(PATHS.position, { id: notification.data.position_id })}
+          >
             {notification.data.project_name}
           </SLink>
         </Stack>

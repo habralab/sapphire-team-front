@@ -9,6 +9,7 @@ export const useReadNotification = (notificationId: string) => {
     mutationFn: () => api.notificationsApi.read(notificationId),
     onSuccess: () => {
       queryClient.invalidateQueries(['notifications']);
+      queryClient.invalidateQueries(['unreadNotificatiions']);
     },
   });
 };
