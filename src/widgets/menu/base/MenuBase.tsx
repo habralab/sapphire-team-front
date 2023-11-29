@@ -10,7 +10,7 @@ import { routes } from './routes';
 
 export const MenuBase = () => {
   const { isAuth } = useAuth();
-  const { data } = useGetUnreadNotification();
+  const { data } = useGetUnreadNotification(isAuth);
 
   return (
     <Flex shadow="base" borderTop="1px" borderColor="gray.200" bg="white">
