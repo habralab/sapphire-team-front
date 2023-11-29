@@ -50,7 +50,10 @@ export const Position = ({ positionId }: ProjectBase) => {
     position?.skills,
   );
 
-  const isLoaded = loadedSkills && loadedSpecs;
+  const isLoaded = loadedSkills || loadedSpecs;
+
+  console.log(loadedSkills);
+  console.log(loadedSpecs);
 
   const { data: allParticipant } = useGetParticipants({
     position_id: positionId,
@@ -115,12 +118,7 @@ export const Position = ({ positionId }: ProjectBase) => {
         </Flex>
       </Flex>
       {!loadedPosition ? (
-        <Skeleton
-          isLoaded={loadedPosition}
-          borderRadius="2xl"
-          fadeDuration={2}
-          height="550px"
-        />
+        <Skeleton borderRadius="2xl" fadeDuration={2} height="550px" />
       ) : (
         <ChakraCard
           bg="white"
