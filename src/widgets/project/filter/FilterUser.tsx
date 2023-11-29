@@ -1,17 +1,16 @@
-import React from 'react';
-
-import { Filter } from '~/entities/project';
-import { useGetProfile } from '~/entities/user';
+import { FilterAuth } from './FilterAuth';
+import { FilterGuest } from './FilterGuest';
 
 interface FilterUserProps {
   userId?: string;
-  totalItems?: number | null;
+  totalItems?: number;
   isLoading?: boolean;
 }
 
 export const FilterUser = ({ userId, isLoading, totalItems }: FilterUserProps) => {
-  const { fetchStatus, data: user } = useGetProfile(userId);
-  return fetchStatus === 'idle' ? (
-    <Filter totalItems={totalItems} isLoading={isLoading} user={user} />
-  ) : null;
+  return !userId ? (
+    <FilterGuest isLoading={isLoading} totalItems={totalItems} />
+  ) : (
+    <FilterAuth userId={userId} isLoading={isLoading} totalItems={totalItems} />
+  );
 };
