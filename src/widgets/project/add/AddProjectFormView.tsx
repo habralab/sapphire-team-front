@@ -124,9 +124,9 @@ export const AddProjectFormView = ({ userId }: { userId: string }) => {
             Создать проект
           </Heading>
         </Flex>
-        <Button variant="flat" fontSize="xs" fontWeight="500" colorScheme="purple">
+        {/* <Button variant="flat" fontSize="xs" fontWeight="500" colorScheme="purple">
           Сохранить и выйти
-        </Button>
+        </Button> */}
       </Flex>
       <Tabs variant="base" index={tabIndex} onChange={handleTabsChange}>
         <TabList>

@@ -1,4 +1,5 @@
 import { Heading, Stack } from '@chakra-ui/layout';
+import { Text } from '@chakra-ui/react';
 
 import { STag } from '~/shared/ui/STag';
 import { Status } from '~/shared/ui/Status';
@@ -25,6 +26,7 @@ interface ProjectInfoProps {
 }
 
 export const PositionInfo = ({ mainTags, tags, project }: ProjectInfoProps) => {
+  const isCorrectTags = mainTags.length && tags.length;
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
@@ -37,10 +39,16 @@ export const PositionInfo = ({ mainTags, tags, project }: ProjectInfoProps) => {
         />
       </Stack>
 
-      <Stack gap={0} mb={6}>
-        <Heading variant="h2">В проект требуется</Heading>
-        <STag mainTags={mainTags} tags={tags} />
-      </Stack>
+      {isCorrectTags ? (
+        <Stack gap={0} mb={6}>
+          <Heading variant="h2">В проект требуется</Heading>
+          <STag mainTags={mainTags} tags={tags} />
+        </Stack>
+      ) : (
+        <Heading variant="h2" mb={6}>
+          Невозможно отобразить навыки
+        </Heading>
+      )}
     </>
   );
 };

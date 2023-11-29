@@ -45,12 +45,8 @@ export const Position = ({ positionId }: ProjectBase) => {
     staleTime: Infinity,
   });
 
-  const { data: allSpecs, isSuccess: loadedSpecs } = useGetSpecs();
-  const { data: allSkills, isSuccess: loadedSkills } = useGetSkillsByIds(
-    position?.skills,
-  );
-
-  const isLoaded = loadedSkills && loadedSpecs;
+  const { data: allSpecs } = useGetSpecs();
+  const { data: allSkills } = useGetSkillsByIds(position?.skills);
 
   const { data: allParticipant } = useGetParticipants({
     position_id: positionId,
@@ -115,12 +111,7 @@ export const Position = ({ positionId }: ProjectBase) => {
         </Flex>
       </Flex>
       {!loadedPosition ? (
-        <Skeleton
-          isLoaded={loadedPosition}
-          borderRadius="2xl"
-          fadeDuration={2}
-          height="550px"
-        />
+        <Skeleton borderRadius="2xl" fadeDuration={2} height="550px" />
       ) : (
         <ChakraCard
           bg="white"
@@ -131,9 +122,7 @@ export const Position = ({ positionId }: ProjectBase) => {
         >
           <Avatar projectId={position.project.id} />
           <CardBody padding={isMobile ? 5 : 6}>
-            {isLoaded && (
-              <PositionInfo tags={tags} mainTags={mainTags} project={position.project} />
-            )}
+            <PositionInfo tags={tags} mainTags={mainTags} project={position.project} />
             <Contacts ownerId={position.project.owner_id} />
           </CardBody>
         </ChakraCard>

@@ -100,13 +100,11 @@ export const SearchPage = () => {
           </Flex>
           <Flex gap="1" mb={4}>
             <SearchProject onChange={handleSumbit} />
-            {user.userId && (
-              <FilterUser
-                totalItems={positions?.pages[0].total_items}
-                isLoading={isLoading}
-                userId={user.userId}
-              />
-            )}
+            <FilterUser
+              totalItems={positions?.pages[0].total_items}
+              isLoading={isLoading}
+              userId={user.userId}
+            />
           </Flex>
           {isLoading || !positions ? (
             <>

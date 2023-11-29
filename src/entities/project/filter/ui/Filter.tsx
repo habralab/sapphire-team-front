@@ -30,7 +30,7 @@ import { useFilterStore } from '../model';
 interface FilterProps {
   totalItems?: number | null;
   isLoading?: boolean;
-  user: GetUserResponse;
+  user?: GetUserResponse;
 }
 
 export const Filter = ({ user, isLoading, totalItems = 0 }: FilterProps) => {
@@ -41,6 +41,7 @@ export const Filter = ({ user, isLoading, totalItems = 0 }: FilterProps) => {
 
   useEffect(() => {
     if (filter.initialized) return;
+    if (!user) return;
 
     initialStore(user);
   }, [filter.initialized]);
