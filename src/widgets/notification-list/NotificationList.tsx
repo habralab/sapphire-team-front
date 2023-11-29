@@ -67,7 +67,7 @@ export function NotificationList() {
       ))}
       {isFetchingNextPage ? (
         <>
-          <Skeleton height="66px" />
+          <Skeleton height="200px" />
         </>
       ) : (
         <Box ref={targetRef} />

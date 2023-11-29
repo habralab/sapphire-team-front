@@ -27,7 +27,7 @@ export const MenuBase = () => {
                       <Counter count={data} float borderBg="white" />
                     )}
                   </Flex>
-                  <Text fontSize="xs">{name}</Text>
+                  <Text fontSize="11px">{name}</Text>
                 </Flex>
               </Link>
             );

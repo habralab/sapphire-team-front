@@ -197,10 +197,10 @@ export class ProjectsApiClient extends BaseApiClient {
     );
     const { data: onlyData, ...others } = data;
     const newData = onlyData.map((project) => {
-      const { deadline, ...rest } = project;
+      const { startline, ...rest } = project;
       return {
         ...rest,
-        deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
+        startline: startline ? `с ${formatDate(startline)}` : 'отсутствует',
       };
     });
     return { ...others, data: newData };

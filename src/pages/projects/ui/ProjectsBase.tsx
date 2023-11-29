@@ -77,7 +77,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
                         <ProjectCard
                           status={project.status}
                           title={project.name}
-                          date={project.deadline}
+                          date={project.startline}
                           description={project.description}
                         >
                           <Flex justifyContent="space-between" alignItems="center">
