@@ -42,6 +42,8 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
   const [unSelectedItems, setUnSelectedItems] = useState<SelectOptions[]>([]);
   const [searchValue, setSearchValue] = useState('');
 
+  console.log(selectedItems);
+
   const params: GetSkillsParameters = {
     query_text: searchValue,
     exclude_id: selectedItems.map((item) => item.value),

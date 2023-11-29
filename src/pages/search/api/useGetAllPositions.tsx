@@ -17,8 +17,8 @@ export const useGetAllPositions = ({ specs, skills, date, searchText }: Search) 
       api.projectsApi.getAllPositions({
         page: pageParam,
         specialization_ids: specs,
-        skills_ids: skills?.map((skill) => skill.value),
-        project_startline_le: date,
+        skill_ids: skills?.map((skill) => skill.value),
+        project_startline_ge: date,
         project_query_text: searchText,
         project_status: ['preparation', 'in_work'],
       }),
