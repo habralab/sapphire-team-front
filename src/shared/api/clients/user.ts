@@ -88,7 +88,7 @@ export class UserApiClient extends BaseApiClient {
     return data;
   }
 
-  async getUserSkills(user_id?: string) {
+  async getUserSkills(user_id: string) {
     const { data } = await this.client.get<GetUserSkills>(
       `/api/rest/users/${user_id}/skills`,
     );
