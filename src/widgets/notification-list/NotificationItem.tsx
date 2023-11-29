@@ -42,7 +42,7 @@ export function NotificationItem({ notification }: NotificationItemProps) {
             onClick={(e) => {
               e.stopPropagation();
             }}
-            to={generatePath(PATHS.position, { id: notification.data.position_id })}
+            to={generatePath(PATHS.project, { id: notification.data.project_id })}
           >
             {notification.data.project_name}
           </SLink>
