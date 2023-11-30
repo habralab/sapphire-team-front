@@ -66,7 +66,7 @@ export const ProjectsTab = ({ userId }: ProjectsTabProps) => {
                         <ProjectCard
                           status={project.status}
                           title={project.name}
-                          date={project.deadline}
+                          date={project.startline}
                           description={project.description}
                         >
                           <Flex justifyContent="space-between" alignItems="center">
