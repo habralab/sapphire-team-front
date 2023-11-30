@@ -55,8 +55,8 @@ export function ProfileCardUser({ user }: ProfileCardProps) {
           pt={16}
           px={2}
           mb={4}
+          overflowWrap="anywhere"
           noOfLines={1}
-          w="full"
         >
           {name}
         </Text>
