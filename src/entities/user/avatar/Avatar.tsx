@@ -29,7 +29,7 @@ export const Avatar = ({ userId }: AvatarProps) => {
       ) : (
         <>
           <ChakraAvatar name={`${data?.first_name} ${data?.last_name}`} src={avatar} />
-          <Text fontWeight="semibold">{`Привет, ${
+          <Text fontWeight="semibold" noOfLines={1}>{`Привет, ${
             data?.first_name ?? defaultName
           }!`}</Text>
         </>

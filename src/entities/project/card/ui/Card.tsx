@@ -12,14 +12,18 @@ export const Card = (props: CardProps) => {
 
   return (
     <>
-      <Heading variant="h2">{title}</Heading>
+      <Heading variant="h2" overflowWrap="anywhere" noOfLines={3}>
+        {title}
+      </Heading>
       <Text variant="caption" mb={3}>
         {date}
       </Text>
       {fullDescription ? (
-        <Text mb={3}>{description}</Text>
+        <Text mb={3} overflowWrap="anywhere">
+          {description}
+        </Text>
       ) : (
-        <Text noOfLines={3} mb={3}>
+        <Text noOfLines={3} mb={3} overflowWrap="anywhere">
           {description}
         </Text>
       )}

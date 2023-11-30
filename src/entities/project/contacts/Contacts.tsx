@@ -21,8 +21,8 @@ export const Contacts = ({ ownerId }: { ownerId: string }) => {
       <Skeleton isLoaded={loadedOwner} borderRadius="2xl" fadeDuration={2}>
         <Flex alignItems="center">
           <Avatar src={avatar} name={`${owner?.first_name} ${owner?.last_name}`} />
-          <Stack pl={2} gap={0}>
-            <Heading variant="h3">
+          <Stack pl={2} gap={0} whiteSpace="nowrap" overflow="hidden">
+            <Heading minWidth={0} variant="h3" overflow="hidden" textOverflow="ellipsis">
               {owner?.first_name} {owner?.last_name}
             </Heading>
             <Text variant="caption">Организатор</Text>

@@ -48,7 +48,16 @@ export function ProfileCardUser({ user }: ProfileCardProps) {
       {isLoading ? (
         <SkeletonText noOfLines={1} skeletonHeight="5" w="60%" pt={16} mb={3} />
       ) : (
-        <Text align="center" fontWeight="bold" fontSize="2xl" pt={16} mb={4}>
+        <Text
+          align="center"
+          fontWeight="bold"
+          fontSize="2xl"
+          pt={16}
+          px={2}
+          mb={4}
+          noOfLines={1}
+          w="full"
+        >
           {name}
         </Text>
       )}
