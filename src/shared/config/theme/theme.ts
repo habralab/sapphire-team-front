@@ -168,20 +168,20 @@ const Heading = defineStyleConfig({
       fontFamily: `'Raleway', sans-serif`,
       fontSize: '2xl',
       fontWeight: 'bold',
-      lineHeight: 'inherit',
+      lineHeight: 'shorter',
     },
     h2: {
       fontFamily: `'Inter', sans-serif`,
       fontSize: 'lg',
       fontWeight: 'semibold',
       marginBottom: '3',
-      lineHeight: 'inherit',
+      lineHeight: 'shorter',
     },
     h3: {
       fontFamily: `'Inter', sans-serif`,
       fontSize: 'md',
       fontWeight: 'medium',
-      lineHeight: 'inherit',
+      lineHeight: 'shorter',
     },
   },
 });
@@ -219,7 +219,7 @@ export const basicTheme = extendTheme({
       },
       body: {
         fontSize: 'sm',
-        lineHeight: '1.2rem',
+        lineHeight: 'shorter',
         color: 'gray.900',
         bg: 'bg',
         overflowY: 'scroll',

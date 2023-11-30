@@ -1,14 +1,7 @@
 import { Text, Flex, Center, SkeletonText, Button, Avatar } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import {
-  Info,
-  useGetAvatar,
-  useGetProfile,
-  useIsAvatarExist,
-  useUserStatistic,
-} from '~/entities/user';
+import { Info, useGetAvatar, useIsAvatarExist, useUserStatistic } from '~/entities/user';
 
 import { GetUserResponse } from '~/shared/api/model';
 import { useAuth } from '~/shared/hooks';
@@ -20,18 +13,11 @@ interface ProfileCardProps {
 
 export function ProfileCardUser({ user }: ProfileCardProps) {
   const { userId } = useAuth();
-  const { data: profile } = useGetProfile(user.id);
   const { data: avatar } = useGetAvatar(user.id);
   const { data: isAvatarExist, isLoading } = useIsAvatarExist(user.id);
   const { data: statistic } = useUserStatistic(user.id);
 
-  const [name, setName] = useState(`${user.first_name} ${user.last_name}`);
-
-  useEffect(() => {
-    if (profile) {
-      setName(`${profile.first_name} ${profile.last_name}`);
-    }
-  }, [profile]);
+  const name = `${user.first_name} ${user.last_name}`;
 
   return (
     <Flex
