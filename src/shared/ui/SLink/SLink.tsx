@@ -34,7 +34,10 @@ export function SLink({ external, to, children, ...props }: SLinkProps) {
   return (
     <Flex alignItems="center" gap={1}>
       <StyledLink {...mainProps} {...props}>
-        <Text noOfLines={1}> {children}</Text>
+        <Text noOfLines={1} overflowWrap="anywhere">
+          {' '}
+          {children}
+        </Text>
         {icon}
       </StyledLink>
     </Flex>

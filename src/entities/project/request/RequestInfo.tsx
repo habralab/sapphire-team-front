@@ -29,7 +29,7 @@ export const RequestInfo = ({ userInfo, allSpecs }: RequestInfoProps) => {
         src={userApi.getAvatar(userInfo.id)}
       />
       <Stack pl={2} gap={0}>
-        <Heading variant="h3">
+        <Heading variant="h3" noOfLines={1}>
           {userInfo.first_name} {userInfo.last_name}
         </Heading>
         <Text variant="caption">
