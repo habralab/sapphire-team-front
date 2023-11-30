@@ -49,7 +49,12 @@ export function AboutMeTab({ userId }: AboutMeTabProps) {
             {user?.about && (
               <Box>
                 <Heading variant="h2">Обо мне</Heading>
-                <Text>{user.about}</Text>
+                {user.about.split('\n').map((text, index) => (
+                  <Text key={index}>
+                    {text}
+                    <br />
+                  </Text>
+                ))}
               </Box>
             )}
             {mainSpecialization && (
