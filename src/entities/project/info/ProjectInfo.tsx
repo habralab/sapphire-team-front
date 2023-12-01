@@ -1,10 +1,10 @@
 import { Heading, Stack } from '@chakra-ui/layout';
 import { Skeleton } from '@chakra-ui/react';
 
-import { GetSpecsData } from '~/shared/api';
 import {
   GetAllParticipantsDataResponse,
   GetProjectPositionsDataResponse,
+  GetSpecsData,
 } from '~/shared/api/model';
 import { STag } from '~/shared/ui/STag';
 import { Status } from '~/shared/ui/Status';
