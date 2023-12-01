@@ -125,6 +125,7 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
     <Modal
       onClose={() => {
         changeVisible(false);
+        setSearchText('');
       }}
       size="full"
       isOpen={isVisible}
