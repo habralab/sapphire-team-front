@@ -23,6 +23,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
+import { DummyNotFound } from '~/entities/dummy';
+
 import { GetSpecGroupsDataResponse, GetSpecsDataResponse } from '~/shared/api';
 import { Counter } from '~/shared/ui/Counter';
 import { SearchInput } from '~/shared/ui/SearchInput';
@@ -37,6 +39,8 @@ interface FilterSpecializationModalProps {
   resetSpec: () => void;
   userFilter: string[];
   saveSpec: (spec: string[]) => void;
+  searchText: string;
+  setSearchText: (text: string) => void;
   singleChecked?: boolean;
   doubleChecked?: boolean;
 }
@@ -54,8 +58,10 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
     specsLoading,
     specGroupLoading,
     doubleChecked,
+    searchText,
+    setSearchText,
   } = props;
-  const [search, setSearch] = useState('');
+
   const searchRef = useRef<HTMLInputElement>(null);
 
   const [filteredGroupsState, setFilteredGroupsState] =
@@ -75,22 +81,26 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
 
   useEffect(() => {
     if (state && stateGroup) {
+      const visibleSpecsGroupsIds = state.map(({ group_id }) => group_id);
+      const visibleSpecsGroups = stateGroup.filter(({ id }) =>
+        visibleSpecsGroupsIds.includes(id),
+      );
       const activeCheckbox = state.filter(({ id }) => selectCheckboxes.includes(id));
       const inactiveCheckbox = state.filter(({ id }) => !selectCheckboxes.includes(id));
 
       const activeSectionTitles = activeCheckbox.map(({ group_id }) => group_id);
 
-      const activeSections = stateGroup.filter(({ id }) =>
+      const activeSections = visibleSpecsGroups.filter(({ id }) =>
         activeSectionTitles.includes(id),
       );
-      const inactiveSections = stateGroup.filter(
+      const inactiveSections = visibleSpecsGroups.filter(
         ({ id }) => !activeSectionTitles.includes(id),
       );
 
       setFilteredGroupsState([...activeSections, ...inactiveSections]);
       setFilteredState([...activeCheckbox, ...inactiveCheckbox]);
     }
-  }, [isVisible]);
+  }, [isVisible, state]);
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = e.target.value;
@@ -153,13 +163,13 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
               ref={searchRef}
               placeholder="Найти специальность"
               onChange={(value) => {
-                setSearch(value);
+                setSearchText(value);
               }}
-              value={search}
+              value={searchText}
             />
           </Box>
           {specGroupLoading || specsLoading ? (
-            <Skeleton height="550px" borderRadius="2xl" />
+            <Skeleton height="150px" borderRadius="2xl" />
           ) : (
             <Accordion allowMultiple bg="white" borderRadius="2xl">
               <CheckboxGroup
@@ -167,56 +177,63 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
                 colorScheme="purple"
                 value={selectCheckboxes}
               >
-                {filteredGroupsState.map((spec) => (
-                  <AccordionItem key={spec.id}>
-                    <AccordionButton justifyContent="space-between">
-                      <Flex gap={2} fontSize="sm" textAlign="left">
-                        <Heading fontSize="md" fontWeight="medium">
-                          {spec.name}
-                        </Heading>
-                        {activeNestedCheckboxes(spec.id) > 0 && (
-                          <Counter count={activeNestedCheckboxes(spec.id)} />
-                        )}
-                      </Flex>
-                      <AccordionIcon />
-                    </AccordionButton>
-                    <AccordionPanel pb={3}>
-                      {filteredState.map((selector) => (
-                        <React.Fragment key={selector.id}>
-                          {selector.group_id === spec.id && (
-                            <Checkbox
-                              onChange={handleCheckbox}
-                              p={4}
-                              w="full"
-                              py={2}
-                              value={selector.id}
-                            >
-                              <Text fontWeight="medium" fontSize="sm">
-                                {selector.name}
-                              </Text>
-                            </Checkbox>
+                {filteredGroupsState.length ? (
+                  filteredGroupsState.map((spec) => (
+                    <AccordionItem key={spec.id}>
+                      <AccordionButton justifyContent="space-between">
+                        <Flex gap={2} fontSize="sm" textAlign="left" alignItems="center">
+                          <Heading fontSize="md" fontWeight="medium">
+                            {spec.name}
+                          </Heading>
+                          {activeNestedCheckboxes(spec.id) > 0 && (
+                            <Counter count={activeNestedCheckboxes(spec.id)} />
                           )}
-                        </React.Fragment>
-                      ))}
-                    </AccordionPanel>
-                  </AccordionItem>
-                ))}
+                        </Flex>
+                        <AccordionIcon />
+                      </AccordionButton>
+                      <AccordionPanel pb={3}>
+                        {filteredState.map((selector) => (
+                          <React.Fragment key={selector.id}>
+                            {selector.group_id === spec.id && (
+                              <Checkbox
+                                onChange={handleCheckbox}
+                                p={4}
+                                w="full"
+                                py={2}
+                                value={selector.id}
+                              >
+                                <Text fontWeight="medium" fontSize="sm">
+                                  {selector.name}
+                                </Text>
+                              </Checkbox>
+                            )}
+                          </React.Fragment>
+                        ))}
+                      </AccordionPanel>
+                    </AccordionItem>
+                  ))
+                ) : (
+                  <DummyNotFound text="Упс, специализация не найдена" />
+                )}
               </CheckboxGroup>
             </Accordion>
           )}
         </Container>
         <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0">
-          <Button
-            onClick={() => {
-              saveSpec(selectCheckboxes);
-              changeVisible(false);
-            }}
-            fontSize="sm"
-            fontWeight="600"
-            w="full"
-          >
-            Применить
-          </Button>
+          {filteredGroupsState.length > 0 && (
+            <Button
+              onClick={() => {
+                saveSpec(selectCheckboxes);
+                changeVisible(false);
+                setSearchText('');
+              }}
+              fontSize="sm"
+              fontWeight="600"
+              w="full"
+            >
+              Применить
+            </Button>
+          )}
         </Container>
       </ModalContent>
     </Modal>

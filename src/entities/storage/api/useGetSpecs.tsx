@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { GetSpecsParams } from '~/shared/api';
 import { api } from '~/shared/contexts';
 
-export const useGetSpecs = () =>
+export const useGetSpecs = (params?: GetSpecsParams) =>
   useQuery({
-    queryKey: ['specs'],
+    queryKey: ['specs', params],
     queryFn: async () => {
-      const { data } = await api.storageApi.getSpecs();
+      const { data } = await api.storageApi.getSpecs(params);
       return data;
     },
   });

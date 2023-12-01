@@ -14,6 +14,8 @@ type GetSpecsResponse =
   paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json'];
 export type GetSpecsData =
   paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json']['data'];
+export type GetSpecsParams =
+  paths['/api/rest/specializations/']['get']['parameters']['query'];
 export type GetSkillsParametersBase =
   paths['/api/rest/skills/']['get']['parameters']['query'];
 type GetSkillsResponse =
@@ -34,11 +36,11 @@ export class StorageApiClient extends BaseApiClient {
     );
     return data;
   }
-  async getSpecs() {
+  async getSpecs(request: GetSpecsParams) {
     const { data } = await this.client.get<GetSpecsResponse>(
       `/api/rest/specializations/`,
       {
-        params: { per_page: 130 },
+        params: { per_page: 130, ...request },
       },
     );
     return data;
