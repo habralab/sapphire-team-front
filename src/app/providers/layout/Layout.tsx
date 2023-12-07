@@ -1,10 +1,9 @@
-import { Box, ChakraProvider, Container, Flex, Stack } from '@chakra-ui/react';
+import { Box, Container, Flex, Stack } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import { ScrollRestoration, useLocation } from 'react-router-dom';
 
 import { MenuBase, MenuDesktop } from '~/widgets/menu';
 
-import { desktopTheme, mobileTheme } from '~/shared/config';
 import { LayoutContext } from '~/shared/contexts';
 import { useIsMobile, useWindowSizes } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
@@ -32,37 +31,35 @@ export const Layout = () => {
   return (
     <>
       <LayoutContext.Provider value={{ header: headerRef, footer: footerRef }}>
-        <ChakraProvider theme={isMobile ? mobileTheme : desktopTheme}>
-          <AuthProvider>
-            {isMobile ? (
-              <Stack gap={0} minH="full">
-                <Flex flex="1">
-                  <Routes />
-                </Flex>
-                <Box position="sticky" bottom="0" bg="bg">
-                  <Box ref={footerRef}></Box>
-                  {!isDialogPage && !isOnboardingPage && <MenuBase />}
-                </Box>
-              </Stack>
-            ) : (
-              <Flex alignItems="start" h="full">
-                {!isNotFoundPage && <MenuDesktop />}
-                <Container
-                  maxW="6xl"
-                  minW="4xl"
-                  pt="4"
-                  pb={6}
-                  ml={isNotFoundPage ? 'auto' : 0}
-                  minH="full"
-                  display="flex"
-                  flexDirection="column"
-                >
-                  <Routes />
-                </Container>
+        <AuthProvider>
+          {isMobile ? (
+            <Stack gap={0} minH="full">
+              <Flex flex="1">
+                <Routes />
               </Flex>
-            )}
-          </AuthProvider>
-        </ChakraProvider>
+              <Box position="sticky" bottom="0" bg="bg">
+                <Box ref={footerRef}></Box>
+                {!isDialogPage && !isOnboardingPage && <MenuBase />}
+              </Box>
+            </Stack>
+          ) : (
+            <Flex alignItems="start" h="full">
+              {!isNotFoundPage && <MenuDesktop />}
+              <Container
+                maxW="6xl"
+                minW="4xl"
+                pt="4"
+                pb={6}
+                ml={isNotFoundPage ? 'auto' : 0}
+                minH="full"
+                display="flex"
+                flexDirection="column"
+              >
+                <Routes />
+              </Container>
+            </Flex>
+          )}
+        </AuthProvider>
       </LayoutContext.Provider>
       <ScrollRestoration />
     </>

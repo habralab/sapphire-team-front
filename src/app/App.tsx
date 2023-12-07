@@ -6,10 +6,11 @@ import { setDefaultOptions } from 'date-fns';
 // eslint-disable-next-line import/no-duplicates
 import ru from 'date-fns/locale/ru';
 
-import { basicTheme } from '~/shared/config';
+import { useIsMobile } from '~/shared/hooks';
 
 import { ApiProvider } from './providers/api';
 import { Routing } from './providers/router';
+import { desktopTheme, mobileTheme } from './providers/theme';
 
 const queryClient = new QueryClient();
 
@@ -21,8 +22,13 @@ const colorModeManager = {
 setDefaultOptions({ locale: ru });
 
 function App() {
+  const isMobile = useIsMobile();
+
   return (
-    <ChakraProvider theme={basicTheme} colorModeManager={colorModeManager}>
+    <ChakraProvider
+      theme={isMobile ? mobileTheme : desktopTheme}
+      colorModeManager={colorModeManager}
+    >
       <ApiProvider>
         <QueryClientProvider client={queryClient}>
           <Routing />
