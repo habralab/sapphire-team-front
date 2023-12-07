@@ -7,7 +7,6 @@ import { SearchProject } from '~/features/project';
 
 import { Filter } from '~/entities/project';
 
-import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
 
 export const SearchPageDesktop = () => {
@@ -30,7 +29,7 @@ export const SearchPageDesktop = () => {
           {/* <Filter  /> */}
         </Flex>
         <SimpleGrid columns={2} gap={6}>
-          {data.map((project) => {
+          {/* {data.map((project) => {
             return (
               <ProjectCard
                 key={project.id}
@@ -42,7 +41,7 @@ export const SearchPageDesktop = () => {
                 <STag mainTags={project.mainTags} tags={project.tags} />
               </ProjectCard>
             );
-          })}
+          })} */}
         </SimpleGrid>
       </Flex>
     </>

@@ -6,7 +6,6 @@ import { AddProject } from '~/features/project';
 
 import { AvatarsGroup } from '~/entities/project';
 
-import { data } from '~/shared/lib/data';
 import { STag } from '~/shared/ui/STag';
 
 export const ProjectsPageDesktop = () => {
@@ -35,7 +34,7 @@ export const ProjectsPageDesktop = () => {
           }}
           gap={6}
         >
-          {data.map((project) => {
+          {/* {data.map((project) => {
             return (
               <ProjectCard
                 key={project.id}
@@ -50,7 +49,7 @@ export const ProjectsPageDesktop = () => {
                 </Flex>
               </ProjectCard>
             );
-          })}
+          })} */}
         </SimpleGrid>
       </Flex>
     </>

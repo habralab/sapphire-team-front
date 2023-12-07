@@ -24,7 +24,7 @@ import {
   useAddSkills,
 } from '~/features/project';
 
-import { stringToServerDate } from '~/shared/lib/stringToServerDate';
+import { stringToServerDate } from '~/shared/lib/adapters';
 import { GoBack } from '~/shared/ui/GoBack';
 
 import { AddProjectForm } from './AddProject.types';

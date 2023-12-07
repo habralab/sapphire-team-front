@@ -20,7 +20,7 @@ import { IoOptions } from 'react-icons/io5';
 
 import { GetUserResponse } from '~/shared/api/model';
 import { useIsMobile } from '~/shared/hooks';
-import { stringToServerDate } from '~/shared/lib/stringToServerDate';
+import { stringToServerDate } from '~/shared/lib/adapters';
 import { Counter } from '~/shared/ui/Counter';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';

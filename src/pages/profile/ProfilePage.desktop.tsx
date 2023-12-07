@@ -8,7 +8,6 @@ import { ProjectCard } from '~/widgets/project-card';
 import { AvatarsGroup } from '~/entities/project';
 import { Reviews } from '~/entities/user';
 
-import { data } from '~/shared/lib/data';
 import { Rating } from '~/shared/ui/rating';
 import { STag } from '~/shared/ui/STag';
 
@@ -65,7 +64,7 @@ export function ProfilePageDesktop() {
       <ProfileCardDesktop />
       <Flex direction="column">
         <Heading variant="h2">Проекты</Heading>
-        {data.length > 0 ? (
+        {/* {data.length > 0 ? (
           <Flex gap={4} flexWrap="wrap" pb={1} mb={10}>
             {data.map((project) => {
               return (
@@ -90,7 +89,7 @@ export function ProfilePageDesktop() {
           <Text color="gray.400" textAlign="center" pt={20} pb={40}>
             У вас пока нет проектов
           </Text>
-        )}
+        )} */}
         <Heading variant="h2">Отзывы</Heading>
         {dummyReviews.length > 0 ? (
           <Flex flexWrap="wrap" gap={4} pb={1}>
