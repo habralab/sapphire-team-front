@@ -27,7 +27,7 @@ import {
   UpdateProjectRequest,
   UpdateProjectResponse,
   UpdateSkillsParams,
-} from '../model/project.types';
+} from '../model/project';
 
 import { BaseApiClient } from './base';
 

@@ -1,21 +1,12 @@
-import { paths } from '../types/notifications';
+import {
+  GetCountParameters,
+  GetCountResponse,
+  GetListParameters,
+  GetListResponse,
+  GetNotificationResponse,
+} from '../model';
 
 import { BaseApiClient } from './base';
-
-export type GetListParameters =
-  paths['/api/rest/notifications/']['get']['parameters']['query'];
-
-export type GetListResponse =
-  paths['/api/rest/notifications/']['get']['responses']['200']['content']['application/json'];
-
-export type GetNotificationResponse =
-  paths['/api/rest/notifications/{notification_id}']['get']['responses']['200']['content']['application/json'];
-
-export type GetCountParameters =
-  paths['/api/rest/notifications/count']['get']['parameters']['query'];
-
-export type GetCountResponse =
-  paths['/api/rest/notifications/count']['get']['responses']['200']['content']['application/json'];
 
 export class NotificationsApiClient extends BaseApiClient {
   async getList(params: GetListParameters) {

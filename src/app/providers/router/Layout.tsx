@@ -1,6 +1,11 @@
 import { Box, Container, Flex, Stack } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
-import { ScrollRestoration, useLocation } from 'react-router-dom';
+import {
+  ScrollRestoration,
+  useLocation,
+  Routes as ReactRoutes,
+  Route,
+} from 'react-router-dom';
 
 import { MenuBase, MenuDesktop } from '~/widgets/menu';
 
@@ -8,8 +13,21 @@ import { LayoutContext } from '~/shared/contexts';
 import { useIsMobile, useWindowSizes } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
-import { AuthProvider } from './AuthProvider';
-import { Routes } from './Routes';
+import { AuthProvider } from '../auth';
+
+import { OnboardingMiddleware } from './middlewares/onboarding';
+import { routerPaths } from './router.paths';
+
+const routes = (
+  <ReactRoutes>
+    {routerPaths.map(({ Component, path }) =>
+      OnboardingMiddleware(
+        path,
+        <Route key={path} path={path} element={<Component />} />,
+      ),
+    )}
+  </ReactRoutes>
+);
 
 export const Layout = () => {
   const isMobile = useIsMobile();
@@ -34,9 +52,7 @@ export const Layout = () => {
         <AuthProvider>
           {isMobile ? (
             <Stack gap={0} minH="full">
-              <Flex flex="1">
-                <Routes />
-              </Flex>
+              <Flex flex="1">{routes}</Flex>
               <Box position="sticky" bottom="0" bg="bg">
                 <Box ref={footerRef}></Box>
                 {!isDialogPage && !isOnboardingPage && <MenuBase />}
@@ -55,7 +71,7 @@ export const Layout = () => {
                 display="flex"
                 flexDirection="column"
               >
-                <Routes />
+                {routes}
               </Container>
             </Flex>
           )}

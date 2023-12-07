@@ -12,7 +12,7 @@ import {
   GetUserSkills,
   UpdateUserSkillsResponse,
   DeleteUserAavatar,
-} from '../model/user.types';
+} from '../model/user';
 
 import { BaseApiClient } from './base';
 

@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { api } from '~/shared/api';
 import { AddSkillsRequest, UpdateSkillsParams } from '~/shared/api/model';
-import { api } from '~/shared/contexts';
 
 export const useAddSkills = () =>
   useMutation({

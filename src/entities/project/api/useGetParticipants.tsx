@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { api } from '~/shared/api';
 import { GetAllParticipantsRequest } from '~/shared/api/model';
-import { api } from '~/shared/contexts';
 
 export const useGetParticipants = (data: GetAllParticipantsRequest) =>
   useQuery({

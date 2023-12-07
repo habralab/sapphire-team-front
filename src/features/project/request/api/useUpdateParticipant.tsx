@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { api } from '~/shared/api';
 import { UpdateParticipantRequest } from '~/shared/api/model';
-import { api } from '~/shared/contexts';
 
 export const useUpdateParticipant = () => {
   const queryClient = useQueryClient();

@@ -24,7 +24,7 @@ import {
 
 import { PATHS } from '~/shared/lib/router';
 
-export const normalRoutes = [
+export const routerPaths = [
   {
     path: '*',
     Component: Navigate.bind(null, {

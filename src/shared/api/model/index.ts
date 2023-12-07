@@ -1,3 +1,4 @@
-export * from './user.types';
-export * from './project.types';
-export * from './notifications.types';
+export * from './user';
+export * from './project';
+export * from './notifications';
+export * from './storage';

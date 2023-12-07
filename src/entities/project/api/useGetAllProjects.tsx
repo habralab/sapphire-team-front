@@ -1,6 +1,6 @@
 import { QueryFunctionContext, QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 
-import { api } from '~/shared/contexts';
+import { api } from '~/shared/api';
 
 export const useGetAllProjects = (userId: string) =>
   useInfiniteQuery({

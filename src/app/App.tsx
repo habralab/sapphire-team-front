@@ -9,7 +9,7 @@ import ru from 'date-fns/locale/ru';
 import { useIsMobile } from '~/shared/hooks';
 
 import { ApiProvider } from './providers/api';
-import { Routing } from './providers/router';
+import { RouterProvider } from './providers/router';
 import { desktopTheme, mobileTheme } from './providers/theme';
 
 const queryClient = new QueryClient();
@@ -31,7 +31,7 @@ function App() {
     >
       <ApiProvider>
         <QueryClientProvider client={queryClient}>
-          <Routing />
+          <RouterProvider />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ApiProvider>

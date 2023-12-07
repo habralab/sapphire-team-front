@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { api } from '~/shared/api';
 import { NewProjectRequest } from '~/shared/api/model';
-import { api } from '~/shared/contexts';
 
 export const useAddProject = () =>
   useMutation({
