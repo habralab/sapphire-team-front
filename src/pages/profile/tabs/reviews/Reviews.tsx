@@ -2,7 +2,7 @@ import { Stack, Text } from '@chakra-ui/react';
 
 import { Reviews } from '~/entities/user';
 
-import { Rating } from '~/shared/ui/rating';
+import { Rating } from '~/shared/ui/Rating';
 
 const dummyReviews = [
   {

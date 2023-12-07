@@ -8,7 +8,7 @@ import { ProjectCard } from '~/widgets/project-card';
 import { AvatarsGroup } from '~/entities/project';
 import { Reviews } from '~/entities/user';
 
-import { Rating } from '~/shared/ui/rating';
+import { Rating } from '~/shared/ui/Rating';
 import { STag } from '~/shared/ui/STag';
 
 export function ProfilePageDesktop() {

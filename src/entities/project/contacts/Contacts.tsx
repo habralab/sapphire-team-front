@@ -4,7 +4,7 @@ import { generatePath } from 'react-router-dom';
 
 import { useApi, useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
-import { Rating } from '~/shared/ui/rating';
+import { Rating } from '~/shared/ui/Rating';
 import { SLink } from '~/shared/ui/SLink';
 
 import { useGetUser } from '../api';
