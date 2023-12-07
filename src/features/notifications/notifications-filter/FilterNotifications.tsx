@@ -2,12 +2,62 @@ import { Heading, Flex, VStack, Text, Button } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { NotificationsDto, notifications } from '~/shared/lib/notifications';
 import { PATHS } from '~/shared/lib/router';
 import { SAvatar } from '~/shared/ui/SAvatar';
 
+export const notifications = [
+  {
+    status: 'Вы приняты в команду',
+    id: 1,
+    project: 'Сервис онлайн-образования',
+    category: 'response',
+  },
+  {
+    status: 'Ваша заявка отклонена',
+    id: 2,
+    project: 'Сервис онлайн-образования',
+    category: 'response',
+  },
+  {
+    status: 'Участник покинул проект',
+    id: 3,
+    project: 'Сервис онлайн-образования',
+    category: 'project',
+  },
+  {
+    status: 'Новая заявка на проект',
+    id: 4,
+    project: 'Сервис онлайн-образования',
+    category: 'project',
+  },
+  {
+    status: 'Проект закрыт',
+    id: 5,
+    project: 'Сервис онлайн-образования',
+    category: 'project',
+  },
+  {
+    status: 'Ваша публикация одобрена',
+    id: 6,
+    project: 'Сервис онлайн-образования',
+    category: 'response',
+  },
+  {
+    status: 'Оставьте отзыв об участниках',
+    id: 7,
+    project: 'Сервис онлайн-образования',
+    category: 'review',
+  },
+  {
+    status: 'Требуется внести правки',
+    id: 8,
+    project: 'Сервис онлайн-образования',
+    category: 'project',
+  },
+];
+
 interface FilterNotificationsProps {
-  setFilter?: (filter: NotificationsDto[]) => void;
+  setFilter?: (filter: typeof notifications) => void;
 }
 
 export function FilterNotifications(props: FilterNotificationsProps) {
