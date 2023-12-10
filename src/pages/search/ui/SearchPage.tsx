@@ -115,7 +115,7 @@ export const SearchPage = () => {
           ) : (
             <>
               {!positions.pages[0].total_items ? (
-                <DummyNotFound />
+                <DummyNotFound text="Упс, проект не найден" />
               ) : (
                 <SimpleGrid gap={4}>
                   {positions.pages.map((group, i) => (

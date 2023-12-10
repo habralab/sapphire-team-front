@@ -2,8 +2,7 @@ import { Flex, Heading, Stack, Text } from '@chakra-ui/layout';
 import { Avatar } from '@chakra-ui/react';
 import { generatePath } from 'react-router-dom';
 
-import { GetSpecsData } from '~/shared/api';
-import { GetUserResponse } from '~/shared/api/model';
+import { GetSpecsData, GetUserResponse } from '~/shared/api/model';
 import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { SLink } from '~/shared/ui/SLink';

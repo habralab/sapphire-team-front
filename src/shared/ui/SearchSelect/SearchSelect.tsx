@@ -9,7 +9,7 @@ import {
 } from 'chakra-react-select';
 import { useEffect, useState } from 'react';
 
-import { GetSkillsParameters } from '~/shared/api';
+import { GetSkillsParameters } from '~/shared/api/model';
 import { useApi } from '~/shared/hooks';
 import { SelectOptions } from '~/shared/types';
 

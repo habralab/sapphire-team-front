@@ -7,10 +7,10 @@ import { RequestButtons } from '~/features/project';
 import { DummyPosition } from '~/entities/dummy';
 import { PARTICIPANT_STATUSES } from '~/entities/project';
 
-import { GetSpecsData } from '~/shared/api';
 import {
   GetAllParticipantsDataResponse,
   GetProjectPositionsDataResponse,
+  GetSpecsData,
 } from '~/shared/api/model';
 import { STag } from '~/shared/ui/STag';
 

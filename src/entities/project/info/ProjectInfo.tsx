@@ -1,10 +1,10 @@
 import { Heading, Stack } from '@chakra-ui/layout';
 import { Skeleton } from '@chakra-ui/react';
 
-import { GetSpecsData } from '~/shared/api';
 import {
   GetAllParticipantsDataResponse,
   GetProjectPositionsDataResponse,
+  GetSpecsData,
 } from '~/shared/api/model';
 import { STag } from '~/shared/ui/STag';
 import { Status } from '~/shared/ui/Status';
@@ -13,7 +13,7 @@ import { Card } from '../card';
 import { PROJECT_STATUSES, PROJECT_STATUSES_MESSAGES } from '../Project.constants';
 
 interface Project {
-  deadline: string;
+  deadline: string | null;
   status: keyof typeof PROJECT_STATUSES;
   id: string;
   name: string;
@@ -68,7 +68,7 @@ export const ProjectInfo = ({
         <Status mb={3}>{PROJECT_STATUSES_MESSAGES[project.status]}</Status>
         <Card
           title={project.name}
-          date={project.deadline}
+          date={project.startline}
           description={project.description}
           fullDescription={true}
         />
@@ -85,6 +85,7 @@ export const ProjectInfo = ({
                   key={position.id}
                   mainTags={filterMainTag(specs[i])}
                   tags={skills[i]}
+                  accordion={true}
                 />
               ))}
             </Stack>
