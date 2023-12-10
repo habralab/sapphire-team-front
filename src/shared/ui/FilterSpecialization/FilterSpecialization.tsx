@@ -32,14 +32,17 @@ export const FilterSpecialization = ({
 }: FilterSpecializationProps) => {
   const [specFilter, setSpecFilter] = useState(false);
   const { storageApi } = useApi();
+  const [searchText, setSearchText] = useState('');
 
-  const { data: specGroup, isLoading: specGroupLoading } = useQuery({
+  const { data: specGroup, isFetching: specGroupLoading } = useQuery({
     queryKey: ['specGroups'],
     queryFn: () => storageApi.getSpecGroups(),
     staleTime: Infinity,
   });
 
-  const { data: specs, isLoading: specsLoading } = useGetSpecs();
+  const { data: specs, isFetching: specsLoading } = useGetSpecs({
+    query_text: searchText,
+  });
 
   const deleteSpecFilter = (id: string) => {
     const newUserSpecs = userSpecs.filter((specId) => specId !== id);
@@ -105,6 +108,8 @@ export const FilterSpecialization = ({
         resetSpec={() => {
           setUserSpecs([]);
         }}
+        searchText={searchText}
+        setSearchText={setSearchText}
         saveSpec={setUserSpecs}
         singleChecked={singleChecked}
         doubleChecked={doubleChecked}

@@ -112,10 +112,10 @@ export class ProjectsApiClient extends BaseApiClient {
     const { data } = await this.client.get<GetCurrentProjectResponse>(
       `/api/rest/projects/${project_id}`,
     );
-    const { deadline, ...rest } = data;
+    const { startline, ...rest } = data;
     return {
       ...rest,
-      deadline: deadline ? `с ${formatDate(deadline)}` : 'отсутствует',
+      startline: startline ? `с ${formatDate(startline)}` : 'отсутствует',
     };
   }
 

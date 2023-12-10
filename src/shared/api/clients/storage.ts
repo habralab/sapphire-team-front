@@ -4,8 +4,9 @@ import {
   GetSkillsParameters,
   GetSkillsResponse,
   GetSpecGroupsResponse,
+  GetSpecsParams,
   GetSpecsResponse,
-} from '../model/storage';
+} from '../model';
 
 import { BaseApiClient } from './base';
 
@@ -19,11 +20,11 @@ export class StorageApiClient extends BaseApiClient {
     );
     return data;
   }
-  async getSpecs() {
+  async getSpecs(request: GetSpecsParams) {
     const { data } = await this.client.get<GetSpecsResponse>(
       `/api/rest/specializations/`,
       {
-        params: { per_page: 130 },
+        params: { per_page: 130, ...request },
       },
     );
     return data;

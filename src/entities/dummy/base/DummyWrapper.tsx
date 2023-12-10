@@ -13,6 +13,7 @@ interface DummyProps {
 export function DummyWrapper({ children }: DummyProps) {
   const location = useLocation();
   const { isAuth } = useAuth();
+  const restrictedPages = [PATHS.search, PATHS.profileSettings, PATHS.onboarding];
   return (
     <Flex
       bg="white"
@@ -23,7 +24,7 @@ export function DummyWrapper({ children }: DummyProps) {
       gap={5}
     >
       {children}
-      {isAuth && location.pathname !== PATHS.search && <Buttons />}
+      {isAuth && !restrictedPages.includes(location.pathname) && <Buttons />}
     </Flex>
   );
 }

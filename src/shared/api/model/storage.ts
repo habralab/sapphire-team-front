@@ -10,6 +10,8 @@ export type GetSpecsResponse =
   paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json'];
 export type GetSpecsData =
   paths['/api/rest/specializations/']['get']['responses']['200']['content']['application/json']['data'];
+export type GetSpecsParams =
+  paths['/api/rest/specializations/']['get']['parameters']['query'];
 export type GetSkillsParametersBase =
   paths['/api/rest/skills/']['get']['parameters']['query'];
 export type GetSkillsResponse =
