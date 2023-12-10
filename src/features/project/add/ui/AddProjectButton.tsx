@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useIsMobile, useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
-export const AddProject = () => {
+export const AddProjectButton = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   const { isAuth } = useAuth();
