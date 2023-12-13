@@ -28,13 +28,13 @@ export function ChatCard(props: ChatCardProps) {
           {name}
         </Heading>
         <Text color="gray.600" noOfLines={1}>
-          {lastMessage.message}
+          {lastMessage?.message}
         </Text>
       </Stack>
 
       <VStack justifyContent="space-between" alignItems="flex-end" ml="auto">
-        <Text variant="caption">{lastMessage.date}</Text>
-        <Status status={lastMessage.status} count={count} />
+        <Text variant="caption">{lastMessage?.date}</Text>
+        {lastMessage?.status && <Status status={lastMessage.status} count={count} />}
       </VStack>
     </Flex>
   );

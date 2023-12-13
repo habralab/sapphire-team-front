@@ -68,7 +68,7 @@ export const SearchPage = () => {
 
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
-      if (entry.isIntersecting) {
+      if (entry?.isIntersecting) {
         if (hasNextPage) fetchNextPage();
       }
     }, options);
@@ -101,7 +101,7 @@ export const SearchPage = () => {
           <Flex gap="1" mb={4}>
             <SearchProject onChange={handleSumbit} />
             <FilterUser
-              totalItems={positions?.pages[0].total_items}
+              totalItems={positions?.pages[0]?.total_items}
               isLoading={isLoading}
               userId={user.userId}
             />
@@ -114,7 +114,7 @@ export const SearchPage = () => {
             </>
           ) : (
             <>
-              {!positions.pages[0].total_items ? (
+              {!positions.pages[0]?.total_items ? (
                 <DummyNotFound text="Упс, проект не найден" />
               ) : (
                 <SimpleGrid gap={4}>

@@ -72,7 +72,9 @@ export const AboutProject = (props: AboutProjectProps) => {
             {...register('attachFile', {
               onChange: (e: ChangeEvent<HTMLInputElement>) => {
                 if (e.target.files) {
-                  setPrevievImg(URL.createObjectURL(e.target.files[0]));
+                  setPrevievImg(
+                    e.target.files[0] ? URL.createObjectURL(e.target.files[0]) : '',
+                  );
                 }
               },
             })}

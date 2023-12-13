@@ -8,7 +8,7 @@ import {
   Heading,
   Container,
 } from '@chakra-ui/react';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
 import { ProfileCard, ProfileCardNotAuth } from '~/widgets/profile-card';
@@ -19,16 +19,25 @@ import { AboutMeTab } from './tabs/about-me';
 import { NotAuthTab } from './tabs/not-auth';
 import { ProjectsTab } from './tabs/projects';
 
-const tabs = ['about', 'projects', 'reviews'];
+enum EnumTabs {
+  about,
+  projects,
+  reviews,
+}
+
+type TabKeys = keyof typeof EnumTabs;
 
 export function ProfileUserPageBase() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { id } = useParams();
+  const [currentTab, setCurrentTab] = useState<number | undefined>(undefined);
 
   useLayoutEffect(() => {
-    if (!searchParams.get('tab')) {
-      setSearchParams({ tab: tabs[0] });
+    const searchTab = searchParams.get('tab');
+    if (!searchTab) {
+      setSearchParams({ tab: 'about' });
     }
+    setCurrentTab(searchTab ? EnumTabs[searchTab as TabKeys] : undefined);
   }, [searchParams]);
 
   return (
@@ -40,20 +49,22 @@ export function ProfileUserPageBase() {
         </Heading>
       </Flex>
       {id ? <ProfileCard userId={id} /> : <ProfileCardNotAuth />}
-      <Tabs
-        variant="base"
-        index={
-          searchParams.get('tab')
-            ? tabs.findIndex((name) => name === searchParams.get('tab'))
-            : undefined
-        }
-        onChange={(index) => {
-          setSearchParams({ tab: tabs[index] });
-        }}
-      >
+      <Tabs variant="base" index={currentTab}>
         <TabList>
-          <Tab>Обо мне</Tab>
-          <Tab>Проекты</Tab>
+          <Tab
+            onClick={() => {
+              setSearchParams({ tab: 'about' });
+            }}
+          >
+            Обо мне
+          </Tab>
+          <Tab
+            onClick={() => {
+              setSearchParams({ tab: 'projects' });
+            }}
+          >
+            Проекты
+          </Tab>
         </TabList>
         <TabPanels>
           <TabPanel>{id ? <AboutMeTab userId={id} /> : <NotAuthTab />}</TabPanel>

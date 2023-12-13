@@ -27,7 +27,7 @@ export const ProjectsTab = ({ userId }: ProjectsTabProps) => {
 
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
-      if (entry.isIntersecting) {
+      if (entry?.isIntersecting) {
         if (hasNextPage) fetchNextPage();
       }
     }, options);
@@ -49,7 +49,7 @@ export const ProjectsTab = ({ userId }: ProjectsTabProps) => {
         </>
       ) : (
         <Stack gap={4}>
-          {!data?.pages.length || !data.pages[0].total_items ? (
+          {!data?.pages.length || !data.pages[0]?.total_items ? (
             <Text textAlign="center" color="gray.700">
               Нет проектов
             </Text>

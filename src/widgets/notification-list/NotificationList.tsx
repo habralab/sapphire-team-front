@@ -24,7 +24,7 @@ export function NotificationList() {
 
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
-      if (entry.isIntersecting) {
+      if (entry?.isIntersecting) {
         if (hasNextPage) fetchNextPage();
       }
     }, options);

@@ -57,7 +57,9 @@ export function AvatarTabs(props: AvatarTabsProps) {
             {...register('avatar', {
               onChange: (e: ChangeEvent<HTMLInputElement>) => {
                 if (e.target.files?.length) {
-                  setPrevievImg(URL.createObjectURL(e.target.files[0]));
+                  setPrevievImg(
+                    e.target.files[0] ? URL.createObjectURL(e.target.files[0]) : '',
+                  );
                 }
               },
             })}

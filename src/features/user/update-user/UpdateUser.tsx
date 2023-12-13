@@ -103,7 +103,7 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
       }
 
       if (dirtyFields.avatar) {
-        if (previewImg) {
+        if (previewImg && data.avatar[0]) {
           const newAvatar = {
             id: user.id,
             avatar: data.avatar[0],
@@ -173,7 +173,9 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
                 {...register('avatar', {
                   onChange: (e: ChangeEvent<HTMLInputElement>) => {
                     if (e.target.files?.length) {
-                      setPrevievImg(URL.createObjectURL(e.target.files[0]));
+                      setPrevievImg(
+                        e.target.files[0] ? URL.createObjectURL(e.target.files[0]) : '',
+                      );
                     }
                   },
                 })}

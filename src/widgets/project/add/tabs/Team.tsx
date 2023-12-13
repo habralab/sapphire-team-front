@@ -36,16 +36,20 @@ export const Team = (props: TeamProps) => {
   const getMainTag = (specId: string) => {
     if (specs && specGroup) {
       const mainTag = specs.filter(({ id }) => specId === id);
-      const titleMainTag = specGroup.data.filter(({ id }) => mainTag[0].group_id === id);
-      return { mainTag: mainTag[0].name ?? '', titleMainTag: titleMainTag[0].name };
+      if (!mainTag[0]) return;
+      const group_id = mainTag[0].group_id;
+      const mainTagFromStorage = specGroup.data.filter(({ id }) => group_id === id)[0];
+      return { mainTag: mainTag[0].name ?? '', titleMainTag: mainTagFromStorage?.name };
     }
   };
 
   const handleNewSpecialist = () => {
-    setNewSpecialist([
-      ...newSpecialist,
-      { spec: userSpecs[0], skills: [...userSkills], id: uuidv4() },
-    ]);
+    if (userSpecs[0]) {
+      setNewSpecialist([
+        ...newSpecialist,
+        { spec: userSpecs[0], skills: [...userSkills], id: uuidv4() },
+      ]);
+    }
     setUserSpecs([]);
     setUserSkills([]);
   };

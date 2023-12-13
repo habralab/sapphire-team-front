@@ -93,7 +93,7 @@ export function Onboarding({ userId }: OnboardingProps) {
 
       mutateSkills(newSkills);
 
-      if (previewImg && data.avatar?.length) {
+      if (previewImg && data.avatar?.[0]) {
         const newAvatar = {
           id: userId,
           avatar: data.avatar[0],

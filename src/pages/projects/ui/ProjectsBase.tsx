@@ -31,7 +31,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
 
     const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const [entry] = entries;
-      if (entry.isIntersecting) {
+      if (entry?.isIntersecting) {
         if (hasNextPage) fetchNextPage();
       }
     }, options);
@@ -62,7 +62,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
         </>
       ) : (
         <SimpleGrid gap={4}>
-          {!data?.pages.length || !data.pages[0].total_items ? (
+          {!data?.pages.length || !data.pages[0]?.total_items ? (
             <DummyProject />
           ) : (
             <>

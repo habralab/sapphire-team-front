@@ -59,7 +59,7 @@ export const AddProjectFormView = ({ userId }: { userId: string }) => {
         owner_id: userId,
       });
 
-      if (data.attachFile.length) {
+      if (data.attachFile[0]) {
         await uploadAvatar({ project_id: newProject.id, avatar: data.attachFile[0] });
       }
 
@@ -72,10 +72,10 @@ export const AddProjectFormView = ({ userId }: { userId: string }) => {
       const allProjectPosition = await Promise.all(newPositions);
 
       const updatedSkills = allProjectPosition.map(({ id }, i) => {
-        const formatSkills = data.team[i].skills.map(({ value }) => value);
+        const formatSkills = data.team[i]?.skills.map(({ value }) => value);
         return updateSkills({
           position_id: id,
-          skills: formatSkills,
+          skills: formatSkills ?? [],
         });
       });
       await Promise.all(updatedSkills);
