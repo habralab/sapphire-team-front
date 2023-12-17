@@ -1,7 +1,7 @@
 import { Heading, Stack } from '@chakra-ui/layout';
 import { Skeleton } from '@chakra-ui/react';
 
-import {
+import type {
   GetAllParticipantsDataResponse,
   GetProjectPositionsDataResponse,
   GetSpecsData,

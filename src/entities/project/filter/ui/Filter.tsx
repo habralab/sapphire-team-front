@@ -18,7 +18,7 @@ import {
 import { useEffect } from 'react';
 import { IoOptions } from 'react-icons/io5';
 
-import { GetUserResponse } from '~/shared/api/model';
+import type { GetUserResponse } from '~/shared/api/model';
 import { useIsMobile } from '~/shared/hooks';
 import { stringToServerDate } from '~/shared/lib/adapters';
 import { Counter } from '~/shared/ui/Counter';

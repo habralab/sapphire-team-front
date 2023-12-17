@@ -25,7 +25,7 @@ import { FiChevronLeft } from 'react-icons/fi';
 
 import { DummyNotFound } from '~/entities/dummy';
 
-import { GetSpecGroupsDataResponse, GetSpecsDataResponse } from '~/shared/api/model';
+import type { GetSpecGroupsDataResponse, GetSpecsDataResponse } from '~/shared/api/model';
 import { Counter } from '~/shared/ui/Counter';
 import { SearchInput } from '~/shared/ui/SearchInput';
 

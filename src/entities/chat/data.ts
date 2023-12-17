@@ -1,4 +1,4 @@
-import { ChatCardProps } from './model';
+import type { ChatCardProps } from './model';
 
 export const data: ChatCardProps[] = [
   {

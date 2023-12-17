@@ -11,13 +11,15 @@ import {
   Image,
   useDisclosure,
 } from '@chakra-ui/react';
-import { ChangeEvent, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import type { ChangeEvent } from 'react';
+import { useState } from 'react';
+import type { useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { Modal } from '~/shared/ui/Modal';
 import { STextarea } from '~/shared/ui/STextarea';
 
-import { AddProjectForm } from '../AddProject.types';
+import type { AddProjectForm } from '../AddProject.types';
 
 interface AboutProjectProps {
   form: ReturnType<typeof useForm<AddProjectForm>>;

@@ -1,6 +1,7 @@
 import { Link as ChakraLink, Icon, Flex, styled, Text } from '@chakra-ui/react';
 import { FiArrowUpRight } from 'react-icons/fi';
-import { Link as ReactLink, LinkProps } from 'react-router-dom';
+import type { LinkProps } from 'react-router-dom';
+import { Link as ReactLink } from 'react-router-dom';
 
 type SLinkProps = {
   external?: boolean;

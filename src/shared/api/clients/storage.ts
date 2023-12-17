@@ -1,6 +1,6 @@
 import Qs from 'query-string';
 
-import {
+import type {
   GetSkillsParameters,
   GetSkillsResponse,
   GetSpecGroupsResponse,

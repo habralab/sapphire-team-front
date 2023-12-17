@@ -1,17 +1,13 @@
 import { SmallCloseIcon } from '@chakra-ui/icons';
 import { Flex, IconButton, Tag, TagLabel, useToast } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import {
-  AsyncSelect,
-  GroupBase,
-  LoadingIndicatorProps,
-  chakraComponents,
-} from 'chakra-react-select';
+import type { GroupBase, LoadingIndicatorProps } from 'chakra-react-select';
+import { AsyncSelect, chakraComponents } from 'chakra-react-select';
 import { useEffect, useState } from 'react';
 
-import { GetSkillsParameters } from '~/shared/api/model';
+import type { GetSkillsParameters } from '~/shared/api/model';
 import { useApi } from '~/shared/hooks';
-import { SelectOptions } from '~/shared/types';
+import type { SelectOptions } from '~/shared/types';
 
 const asyncComponents = {
   LoadingIndicator: (

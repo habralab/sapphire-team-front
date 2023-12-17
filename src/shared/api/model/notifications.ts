@@ -1,4 +1,4 @@
-import { components, paths } from '../types/notifications';
+import type { components, paths } from '../types/notifications';
 
 export type GetListParameters =
   paths['/api/rest/notifications/']['get']['parameters']['query'];

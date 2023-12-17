@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { api } from '~/shared/api';
-import { GetSpecsParams } from '~/shared/api/model';
+import type { GetSpecsParams } from '~/shared/api/model';
 
 export const useGetSpecs = (params?: GetSpecsParams) =>
   useQuery({

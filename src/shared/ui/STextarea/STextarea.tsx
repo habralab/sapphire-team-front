@@ -1,5 +1,5 @@
 import { Flex, Text, Textarea } from '@chakra-ui/react';
-import { ChangeEvent } from 'react';
+import type { ChangeEvent } from 'react';
 
 interface STextareaProps {
   maxLength: number;

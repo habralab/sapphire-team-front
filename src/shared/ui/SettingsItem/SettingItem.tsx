@@ -1,4 +1,5 @@
-import { Flex, Heading, IconButton, Icon, As, Switch, Text } from '@chakra-ui/react';
+import type { As } from '@chakra-ui/react';
+import { Flex, Heading, IconButton, Icon, Switch, Text } from '@chakra-ui/react';
 
 interface SettingItemProp {
   type?: 'heading' | 'text';

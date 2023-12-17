@@ -2,7 +2,7 @@ import { useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
 import { isBaseMiddleware } from './isBaseMiddleware';
-import { Middleware } from './middleware.types';
+import type { Middleware } from './middleware.types';
 
 export const OnboardingMiddleware: Middleware = (path, component) => {
   const user = useAuth();

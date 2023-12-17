@@ -6,10 +6,10 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { ChangeEvent } from 'react';
-import { useForm } from 'react-hook-form';
+import type { ChangeEvent } from 'react';
+import type { useForm } from 'react-hook-form';
 
-import { CreateUserType } from '../../Onboarding.types';
+import type { CreateUserType } from '../../Onboarding.types';
 
 interface NameTabsProps {
   form: ReturnType<typeof useForm<CreateUserType>>;

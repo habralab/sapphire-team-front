@@ -1,6 +1,6 @@
-import { GetUserResponse } from '~/shared/api/model';
+import type { GetUserResponse } from '~/shared/api/model';
 import { nullToUndefined } from '~/shared/lib/form';
-import { SelectOptions } from '~/shared/types';
+import type { SelectOptions } from '~/shared/types';
 
 export interface UserTypeForm {
   first_name: string;

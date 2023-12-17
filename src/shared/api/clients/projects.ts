@@ -2,7 +2,7 @@ import Qs from 'query-string';
 
 import { formatDate } from '~/shared/lib/adapters';
 
-import {
+import type {
   AddSkillsRequest,
   AddSkillsResponse,
   AfterPostNewProjectResponse,

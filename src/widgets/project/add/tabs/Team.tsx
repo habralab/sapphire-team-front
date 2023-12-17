@@ -1,18 +1,19 @@
 import { Box, Flex, Heading, Stack } from '@chakra-ui/layout';
 import { Button, Card, CloseButton, FormControl, FormLabel } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import { Dispatch, SetStateAction, useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useGetSpecs } from '~/entities/storage';
 
 import { useApi } from '~/shared/hooks';
-import { SelectOptions } from '~/shared/types';
+import type { SelectOptions } from '~/shared/types';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STag } from '~/shared/ui/STag';
 
-import { NewSpecialist } from '../AddProject.types';
+import type { NewSpecialist } from '../AddProject.types';
 
 interface TeamProps {
   newSpecialist: NewSpecialist[];

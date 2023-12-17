@@ -1,4 +1,4 @@
-import { paths } from '../types/projects';
+import type { paths } from '../types/projects';
 
 export type GetAllParticipantsRequest =
   paths['/api/rest/participants/']['get']['parameters']['query'];

@@ -3,7 +3,7 @@ import { generatePath } from 'react-router-dom';
 
 import { NOTIFICATIONS } from '~/entities/notification';
 
-import { NotificationResponse } from '~/shared/api/model';
+import type { NotificationResponse } from '~/shared/api/model';
 import { useIsMobile } from '~/shared/hooks';
 import { formatDateNotification } from '~/shared/lib/adapters';
 import { PATHS } from '~/shared/lib/router';

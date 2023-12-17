@@ -7,7 +7,7 @@ import { RequestButtons } from '~/features/project';
 import { DummyPosition } from '~/entities/dummy';
 import { PARTICIPANT_STATUSES } from '~/entities/project';
 
-import {
+import type {
   GetAllParticipantsDataResponse,
   GetProjectPositionsDataResponse,
   GetSpecsData,

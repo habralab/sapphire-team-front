@@ -1,6 +1,7 @@
 import { act } from '@testing-library/react';
-import { StateCreator } from 'zustand';
+import type { StateCreator } from 'zustand';
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 type ZustandModel = typeof import('zustand');
 
 const storeResetFns = vi.hoisted(() => new Set<() => void>());

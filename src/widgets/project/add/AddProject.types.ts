@@ -1,4 +1,4 @@
-import { SelectOptions } from '~/shared/types';
+import type { SelectOptions } from '~/shared/types';
 
 export interface NewSpecialist {
   spec: string;

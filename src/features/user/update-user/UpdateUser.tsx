@@ -10,16 +10,17 @@ import {
   Center,
   Avatar,
 } from '@chakra-ui/react';
-import { ChangeEvent, useEffect, useState } from 'react';
+import type { ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { MdPhotoCamera } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
 import { useGetAvatar } from '~/entities/user';
 
-import { GetUserResponse } from '~/shared/api/model';
+import type { GetUserResponse } from '~/shared/api/model';
 import { PATHS } from '~/shared/lib/router';
-import { SelectOptions } from '~/shared/types';
+import type { SelectOptions } from '~/shared/types';
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STextarea } from '~/shared/ui/STextarea';
@@ -30,7 +31,8 @@ import {
   useUpdateProfile,
   useUpdateSkills,
 } from './api';
-import { userResponseToUserType, UserTypeForm } from './model';
+import type { UserTypeForm } from './model';
+import { userResponseToUserType } from './model';
 
 interface UpdateUserProps {
   user: GetUserResponse;

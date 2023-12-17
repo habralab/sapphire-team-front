@@ -14,7 +14,8 @@ import {
 } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { Controller, FieldErrors, SubmitHandler, useForm } from 'react-hook-form';
+import type { FieldErrors, SubmitHandler } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -27,7 +28,7 @@ import {
 import { stringToServerDate } from '~/shared/lib/adapters';
 import { GoBack } from '~/shared/ui/GoBack';
 
-import { AddProjectForm } from './AddProject.types';
+import type { AddProjectForm } from './AddProject.types';
 import { AboutProject, Team } from './tabs';
 
 export const AddProjectFormView = ({ userId }: { userId: string }) => {

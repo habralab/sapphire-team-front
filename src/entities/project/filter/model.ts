@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { GetUserResponse } from '~/shared/api/model';
-import { SelectOptions } from '~/shared/types';
+import type { GetUserResponse } from '~/shared/api/model';
+import type { SelectOptions } from '~/shared/types';
 
 export interface FilterType {
   specs: string[];

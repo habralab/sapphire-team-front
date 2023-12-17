@@ -1,10 +1,11 @@
 import { FormControl, FormLabel, Heading, Stack, Text } from '@chakra-ui/react';
-import { Controller, useForm } from 'react-hook-form';
+import type { useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 
-import { CreateUserType } from '../../Onboarding.types';
+import type { CreateUserType } from '../../Onboarding.types';
 
 interface SkillsTabs {
   form: ReturnType<typeof useForm<CreateUserType>>;

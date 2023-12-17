@@ -3,7 +3,7 @@ import { Flex, Heading, VStack, Button, Text, Stack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 
-import { GetNotificationResponse } from '~/shared/api';
+import type { GetNotificationResponse } from '~/shared/api';
 import { useAuth, useIsMobile } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { NotificationImage } from '~/shared/ui/NotificationImage';

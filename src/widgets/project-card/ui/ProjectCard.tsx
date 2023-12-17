@@ -1,7 +1,9 @@
-import { CardBody, CardProps, Card as ChakraCard } from '@chakra-ui/react';
+import type { CardProps } from '@chakra-ui/react';
+import { CardBody, Card as ChakraCard } from '@chakra-ui/react';
 import React from 'react';
 
-import { Card, PROJECT_STATUSES, PROJECT_STATUSES_MESSAGES } from '~/entities/project';
+import type { PROJECT_STATUSES } from '~/entities/project';
+import { Card, PROJECT_STATUSES_MESSAGES } from '~/entities/project';
 
 import { useIsMobile } from '~/shared/hooks';
 import { Status } from '~/shared/ui/Status';

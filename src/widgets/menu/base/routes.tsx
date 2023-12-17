@@ -4,7 +4,7 @@ import { IoChatbubbles, IoNotifications, IoPerson } from 'react-icons/io5';
 
 import { PATHS } from '~/shared/lib/router';
 
-import { MenuRoute } from './MenuBase.types';
+import type { MenuRoute } from './MenuBase.types';
 
 export const routes: MenuRoute[] = [
   {

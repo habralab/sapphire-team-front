@@ -1,4 +1,5 @@
-import { Box, HStack, Heading, Stack, StackProps, Text } from '@chakra-ui/react';
+import type { StackProps } from '@chakra-ui/react';
+import { Box, HStack, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { SLink } from '~/shared/ui/SLink';
 

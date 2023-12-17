@@ -13,7 +13,8 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FiChevronLeft } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,7 +23,7 @@ import { useUpdateAvatar, useUpdateProfile, useUpdateSkills } from '~/features/u
 import { useLayoutRefs } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 
-import { CreateUserType } from './Onboarding.types';
+import type { CreateUserType } from './Onboarding.types';
 import { WelcomeTabs, AvatarTabs, NameTabs, SkillsTabs } from './tabs';
 
 interface OnboardingProps {

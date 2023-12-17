@@ -1,4 +1,5 @@
-import { Box, ColorProps } from '@chakra-ui/react';
+import type { ColorProps } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 interface CounterType {
   count?: number;

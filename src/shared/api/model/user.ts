@@ -1,4 +1,4 @@
-import { paths } from '../types/users';
+import type { paths } from '../types/users';
 
 export interface Identificator {
   id: string;

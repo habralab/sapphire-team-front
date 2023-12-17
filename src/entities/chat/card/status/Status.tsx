@@ -4,7 +4,7 @@ import { BsCheck2All } from 'react-icons/bs';
 
 import { Counter } from '~/shared/ui/Counter';
 
-import { MessageType } from '../../model';
+import type { MessageType } from '../../model';
 
 interface StatusProps {
   status: MessageType['status'];

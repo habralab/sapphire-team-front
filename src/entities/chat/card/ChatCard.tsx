@@ -4,7 +4,7 @@ import { IoPerson } from 'react-icons/io5';
 
 import { SAvatar } from '~/shared/ui/SAvatar';
 
-import { ChatCardProps } from '../model';
+import type { ChatCardProps } from '../model';
 
 import { Status } from './status';
 

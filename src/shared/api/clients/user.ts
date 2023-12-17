@@ -1,6 +1,6 @@
 import { PATHS } from '~/shared/lib/router';
 
-import {
+import type {
   AfterAuthRequestParams,
   AfterAuthResponse,
   GetAvatar,

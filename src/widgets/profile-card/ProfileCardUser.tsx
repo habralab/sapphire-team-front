@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Info, useGetAvatar, useIsAvatarExist, useUserStatistic } from '~/entities/user';
 
-import { GetUserResponse } from '~/shared/api/model';
+import type { GetUserResponse } from '~/shared/api/model';
 import { useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 

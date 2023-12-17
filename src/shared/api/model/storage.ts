@@ -1,4 +1,4 @@
-import { paths } from '../types/storage';
+import type { paths } from '../types/storage';
 
 export type GetSpecGroupsDataResponse =
   paths['/api/rest/spec-groups/']['get']['responses']['200']['content']['application/json']['data'];

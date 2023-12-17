@@ -1,7 +1,7 @@
 import { RequestInfo } from '~/entities/project';
 import { useGetProfile } from '~/entities/user';
 
-import { GetSpecsData } from '~/shared/api/model';
+import type { GetSpecsData } from '~/shared/api/model';
 
 interface RequestParticipant {
   userId: string;
