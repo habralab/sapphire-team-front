@@ -2,8 +2,6 @@ import { Container, Flex, Heading } from '@chakra-ui/layout';
 import { Card, Icon, IconButton, Stack } from '@chakra-ui/react';
 import { FiChevronLeft } from 'react-icons/fi';
 
-import { RequestButtons } from '~/features/project';
-
 import { DummyPosition } from '~/entities/dummy';
 import { PARTICIPANT_STATUSES } from '~/entities/project';
 
@@ -14,6 +12,7 @@ import type {
 } from '~/shared/api/model';
 import { STag } from '~/shared/ui/STag';
 
+import { RequestButtons } from './RequestButtons';
 import { RequestParticipant } from './RequestParticipant';
 
 interface RequestsProps {

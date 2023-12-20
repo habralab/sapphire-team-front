@@ -3,10 +3,9 @@ import { CardBody, Card as ChakraCard } from '@chakra-ui/react';
 import React from 'react';
 
 import type { PROJECT_STATUSES } from '~/entities/project';
-import { Card, PROJECT_STATUSES_MESSAGES } from '~/entities/project';
+import { Card } from '~/entities/project';
 
 import { useIsMobile } from '~/shared/hooks';
-import { Status } from '~/shared/ui/Status';
 
 type ProjectCardProps = {
   status: keyof typeof PROJECT_STATUSES;

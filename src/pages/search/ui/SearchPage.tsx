@@ -11,10 +11,9 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 
-import { FilterUser } from '~/widgets/project';
 import { ProjectCard } from '~/widgets/project-card';
 
-import { SearchProject } from '~/features/project';
+import { FilterUser, SearchProject } from '~/features/project';
 
 import { DummyNotFound } from '~/entities/dummy';
 import { useFilterStore } from '~/entities/project';

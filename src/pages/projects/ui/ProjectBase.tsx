@@ -20,9 +20,12 @@ import { useEffect, useState } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 import { Link, generatePath } from 'react-router-dom';
 
-import { RequestParticipant, Requests } from '~/widgets/project';
-
-import { useUpdateParticipant, useUpdateProject } from '~/features/project';
+import {
+  RequestParticipant,
+  Requests,
+  useUpdateParticipant,
+  useUpdateProject,
+} from '~/features/project';
 
 import {
   Avatar,
