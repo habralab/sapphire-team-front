@@ -1,5 +1,8 @@
-import type { QueryFunctionContext, QueryKey } from '@tanstack/react-query';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import {
+  useInfiniteQuery,
+  type QueryFunctionContext,
+  type QueryKey,
+} from '@tanstack/react-query';
 
 import { api } from '~/shared/api';
 import type { SelectOptions } from '~/shared/types';

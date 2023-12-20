@@ -13,8 +13,12 @@ import {
 } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import type { FieldErrors, SubmitHandler } from 'react-hook-form';
-import { Controller, useForm } from 'react-hook-form';
+import {
+  Controller,
+  useForm,
+  type FieldErrors,
+  type SubmitHandler,
+} from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { stringToServerDate } from '~/shared/lib/adapters';

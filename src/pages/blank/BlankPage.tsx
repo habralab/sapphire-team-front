@@ -1,4 +1,3 @@
-import type { ColorMode } from '@chakra-ui/react';
 import {
   Container,
   Flex,
@@ -10,6 +9,7 @@ import {
   Text,
   ChakraProvider,
   createLocalStorageManager,
+  type ColorMode,
 } from '@chakra-ui/react';
 
 import { Logo } from '~/shared/ui/Logo';

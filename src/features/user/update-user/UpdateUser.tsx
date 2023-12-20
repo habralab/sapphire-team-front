@@ -10,8 +10,7 @@ import {
   Center,
   Avatar,
 } from '@chakra-ui/react';
-import type { ChangeEvent } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ChangeEvent } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { MdPhotoCamera } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
@@ -31,8 +30,7 @@ import {
   useUpdateProfile,
   useUpdateSkills,
 } from './api';
-import type { UserTypeForm } from './model';
-import { userResponseToUserType } from './model';
+import { userResponseToUserType, type UserTypeForm } from './model';
 
 interface UpdateUserProps {
   user: GetUserResponse;

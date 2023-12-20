@@ -13,8 +13,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import type { SubmitHandler } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 import { FiChevronLeft } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,6 +1,5 @@
 import { FormControl, FormLabel, Heading, Stack, Text } from '@chakra-ui/react';
-import type { useForm } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
+import { Controller, type useForm } from 'react-hook-form';
 
 import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';

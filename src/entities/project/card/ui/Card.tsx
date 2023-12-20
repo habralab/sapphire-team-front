@@ -3,8 +3,10 @@ import { Heading, Text } from '@chakra-ui/react';
 import { useIsMobile } from '~/shared/hooks';
 import { Status } from '~/shared/ui/Status';
 
-import type { PROJECT_STATUSES } from '../../Project.constants';
-import { PROJECT_STATUSES_MESSAGES } from '../../Project.constants';
+import {
+  PROJECT_STATUSES_MESSAGES,
+  type PROJECT_STATUSES,
+} from '../../Project.constants';
 
 export interface CardProps {
   status: keyof typeof PROJECT_STATUSES;
