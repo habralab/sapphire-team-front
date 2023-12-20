@@ -4,7 +4,7 @@ import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { AddProject } from '~/features/project';
+import { AddProjectButton } from '~/features/project';
 
 import { DummyProject } from '~/entities/dummy';
 import { AvatarsGroup, useGetAllProjects } from '~/entities/project';
@@ -50,7 +50,7 @@ export const ProjectsBase = ({ userId }: ProjectPageProps) => {
           Проекты
         </Heading>
         <Flex gap={4} alignItems="baseline">
-          <AddProject />
+          <AddProjectButton />
         </Flex>
       </Flex>
 

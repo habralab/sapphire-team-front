@@ -1,5 +1,4 @@
-import type { FlexProps } from '@chakra-ui/react';
-import { Box, Divider, Flex } from '@chakra-ui/react';
+import { Box, Divider, Flex, type FlexProps } from '@chakra-ui/react';
 
 import type { GetStatistic } from '~/shared/api/model';
 import { useAuth } from '~/shared/hooks';

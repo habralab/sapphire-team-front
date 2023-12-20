@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import {
   Flex,
   Button,
@@ -14,24 +13,23 @@ import {
 } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import type { FieldErrors, SubmitHandler } from 'react-hook-form';
-import { Controller, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-
 import {
-  useAddAvatar,
-  useAddPosition,
-  useAddProject,
-  useAddSkills,
-} from '~/features/project';
+  Controller,
+  useForm,
+  type FieldErrors,
+  type SubmitHandler,
+} from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { stringToServerDate } from '~/shared/lib/adapters';
 import { GoBack } from '~/shared/ui/GoBack';
 
+import { useAddAvatar, useAddPosition, useAddProject, useAddSkills } from '../api';
+
 import type { AddProjectForm } from './AddProject.types';
 import { AboutProject, Team } from './tabs';
 
-export const AddProjectFormView = ({ userId }: { userId: string }) => {
+export const AddProject = ({ userId }: { userId: string }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutateAsync: addProject } = useAddProject();

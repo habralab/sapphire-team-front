@@ -1,5 +1,4 @@
-import type { BadgeProps } from '@chakra-ui/react';
-import { Badge, Text } from '@chakra-ui/react';
+import { Badge, Text, type BadgeProps } from '@chakra-ui/react';
 
 type StatusProps = {
   children?: string;

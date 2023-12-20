@@ -11,10 +11,8 @@ import {
   Image,
   useDisclosure,
 } from '@chakra-ui/react';
-import type { ChangeEvent } from 'react';
-import { useState } from 'react';
-import type { useForm } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
+import { useState, type ChangeEvent } from 'react';
+import { Controller, type useForm } from 'react-hook-form';
 
 import { Modal } from '~/shared/ui/Modal';
 import { STextarea } from '~/shared/ui/STextarea';

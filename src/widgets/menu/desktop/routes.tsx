@@ -3,8 +3,7 @@ import { IoNotifications, IoSettings } from 'react-icons/io5';
 
 import { PATHS } from '~/shared/lib/router';
 
-import type { MenuRoute } from '../base';
-import { routes as baseRoutes } from '../base';
+import { routes as baseRoutes, type MenuRoute } from '../base';
 
 export const routes: MenuRoute[] = [
   ...baseRoutes,

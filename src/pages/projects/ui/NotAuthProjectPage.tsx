@@ -1,6 +1,6 @@
 import { Flex, Heading, Container } from '@chakra-ui/react';
 
-import { AddProject } from '~/features/project';
+import { AddProjectButton } from '~/features/project';
 import { Login } from '~/features/user';
 
 import { DummyProject } from '~/entities/dummy';
@@ -13,7 +13,7 @@ export const NotAuthProjectsPage = () => {
           Проекты
         </Heading>
         <Flex gap={4} alignItems="baseline">
-          <AddProject />
+          <AddProjectButton />
         </Flex>
       </Flex>
       <DummyProject />

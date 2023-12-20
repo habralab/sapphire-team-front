@@ -1,5 +1,9 @@
-import type { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
-import axios, { isAxiosError } from 'axios';
+import axios, {
+  isAxiosError,
+  type AxiosError,
+  type AxiosInstance,
+  type AxiosResponse,
+} from 'axios';
 
 export class BaseApiClient {
   client: AxiosInstance;

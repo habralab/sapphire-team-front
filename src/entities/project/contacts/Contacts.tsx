@@ -12,7 +12,7 @@ import { useGetUser } from '../api';
 export const Contacts = ({ ownerId }: { ownerId: string }) => {
   const { userApi } = useApi();
   const { isAuth } = useAuth();
-  const avatar = userApi.getAvatar(ownerId);
+  const avatarUrl = userApi.getAvatar(ownerId);
   const { data: owner, isSuccess: loadedOwner } = useGetUser(ownerId);
 
   return (
@@ -20,7 +20,7 @@ export const Contacts = ({ ownerId }: { ownerId: string }) => {
       <Heading variant="h2">Участники</Heading>
       <Skeleton isLoaded={loadedOwner} borderRadius="2xl" fadeDuration={2}>
         <Flex alignItems="center">
-          <Avatar src={avatar} name={`${owner?.first_name} ${owner?.last_name}`} />
+          <Avatar src={avatarUrl} name={`${owner?.first_name} ${owner?.last_name}`} />
           <Stack pl={2} gap={0} whiteSpace="nowrap" overflow="hidden">
             <Heading minWidth={0} variant="h3" overflow="hidden" textOverflow="ellipsis">
               {owner?.first_name} {owner?.last_name}

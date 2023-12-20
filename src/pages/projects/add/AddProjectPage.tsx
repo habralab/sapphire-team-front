@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { AddProjectFormView } from '~/widgets/project';
+import { AddProject } from '~/features/project';
 
 import { useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
@@ -11,7 +11,7 @@ export const AddProjectPage = () => {
   return (
     <>
       {user.userId ? (
-        <AddProjectFormView userId={user.userId} />
+        <AddProject userId={user.userId} />
       ) : (
         () => {
           navigate(PATHS.notFound);

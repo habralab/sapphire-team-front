@@ -1,8 +1,7 @@
 import { Box, Flex, Heading, Stack } from '@chakra-ui/layout';
 import { Button, Card, CloseButton, FormControl, FormLabel } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import type { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
+import { useState, type Dispatch, type SetStateAction } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useGetSpecs } from '~/entities/storage';

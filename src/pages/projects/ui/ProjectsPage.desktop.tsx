@@ -2,7 +2,7 @@ import { Flex, SimpleGrid, Heading } from '@chakra-ui/react';
 
 import { ProjectCard } from '~/widgets/project-card';
 
-import { AddProject } from '~/features/project';
+import { AddProjectButton } from '~/features/project';
 
 import { AvatarsGroup } from '~/entities/project';
 
@@ -25,7 +25,7 @@ export const ProjectsPageDesktop = () => {
             Проекты
           </Heading>
           <Flex gap={4} alignItems="baseline">
-            <AddProject />
+            <AddProjectButton />
           </Flex>
         </Flex>
         <SimpleGrid

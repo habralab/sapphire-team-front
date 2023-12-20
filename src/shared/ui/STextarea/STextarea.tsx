@@ -25,6 +25,7 @@ export function STextarea({
     <Flex flexDirection="column" alignItems="end">
       <Textarea
         background="white"
+        borderRadius="2xl"
         placeholder={placeholder}
         isInvalid={isInvalid}
         value={value}
