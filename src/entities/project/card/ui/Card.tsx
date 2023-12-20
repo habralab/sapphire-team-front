@@ -1,6 +1,12 @@
 import { Heading, Text } from '@chakra-ui/react';
 
+import { useIsMobile } from '~/shared/hooks';
+import { Status } from '~/shared/ui/Status';
+
+import { PROJECT_STATUSES, PROJECT_STATUSES_MESSAGES } from '../../Project.constants';
+
 export interface CardProps {
+  status: keyof typeof PROJECT_STATUSES;
   title?: string;
   date?: string | null;
   description?: string | null;
@@ -8,10 +14,12 @@ export interface CardProps {
 }
 
 export const Card = (props: CardProps) => {
-  const { title, date, description, fullDescription } = props;
+  const { title, date, description, status, fullDescription } = props;
+  const isMobile = useIsMobile();
 
   return (
     <>
+      <Status mb={isMobile ? 3 : 4}>{PROJECT_STATUSES_MESSAGES[status]}</Status>
       <Heading variant="h2" overflowWrap="anywhere" noOfLines={3}>
         {title}
       </Heading>

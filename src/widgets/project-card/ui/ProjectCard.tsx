@@ -36,8 +36,7 @@ export const ProjectCard = ({
       {...others}
     >
       <CardBody padding={isMobile ? 5 : 6}>
-        <Status mb={isMobile ? 3 : 4}>{PROJECT_STATUSES_MESSAGES[status]}</Status>
-        <Card date={date} description={description} title={title} />
+        <Card date={date} description={description} title={title} status={status} />
         {children}
       </CardBody>
     </ChakraCard>
