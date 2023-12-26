@@ -28,7 +28,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
             borderColor: 'blue.500',
           }}
           borderRadius="full"
-          _placeholder={{ color: 'gray.400' }}
+          _placeholder={{ color: 'gray.400', fontWeight: 400 }}
           background={'white'}
           placeholder={placeholder}
           value={value}

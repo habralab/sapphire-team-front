@@ -1,3 +1,3 @@
-export { ProfileCard } from './ProfileCard';
-export { ProfileCardDesktop } from './ProfileCard.desktop';
+export * from './ProfileCard';
+export * from './ProfileCard.desktop';
 export * from './ProfileCardNotAuth';

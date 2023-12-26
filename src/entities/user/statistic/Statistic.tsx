@@ -4,11 +4,11 @@ import type { GetStatistic } from '~/shared/api/model';
 import { useAuth } from '~/shared/hooks';
 import { SGroup } from '~/shared/ui/SGroup';
 
-interface InfoProps {
+interface StatisticProps {
   statistic?: GetStatistic;
 }
 
-export const Info = (props: FlexProps & InfoProps) => {
+export const Statistic = (props: FlexProps & StatisticProps) => {
   const { isAuth } = useAuth();
   const { statistic } = props;
 

@@ -33,7 +33,7 @@ export function STag(props: TagType) {
         </Tag>
       ))}
       {tags?.map((tag) => (
-        <Tag key={tag} bg={'gray.300'} py={1} px={2} borderRadius="lg">
+        <Tag key={tag} bg={'gray.100'} py={1} px={2} borderRadius="lg">
           {tag}
         </Tag>
       ))}
@@ -53,7 +53,7 @@ export function STag(props: TagType) {
         )}
         <AccordionPanel display="flex" gap={1} flexWrap="wrap">
           {tags?.map((tag) => (
-            <Tag key={tag} bg={'gray.300'} py={1} px={2} borderRadius="lg">
+            <Tag key={tag} bg={'gray.100'} py={1} px={2} borderRadius="lg">
               {tag}
             </Tag>
           ))}

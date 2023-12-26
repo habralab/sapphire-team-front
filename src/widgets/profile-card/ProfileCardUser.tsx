@@ -1,7 +1,12 @@
 import { Text, Flex, Center, SkeletonText, Button, Avatar } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-import { Info, useGetAvatar, useIsAvatarExist, useUserStatistic } from '~/entities/user';
+import {
+  Statistic,
+  useGetAvatar,
+  useIsAvatarExist,
+  useUserStatistic,
+} from '~/entities/user';
 
 import type { GetUserResponse } from '~/shared/api/model';
 import { useAuth } from '~/shared/hooks';
@@ -61,7 +66,7 @@ export function ProfileCardUser({ user }: ProfileCardProps) {
           {name}
         </Text>
       )}
-      <Info statistic={statistic} />
+      <Statistic statistic={statistic} />
       {userId === user.id && (
         <Flex px={4} pb={4} w="full">
           <Button as={Link} to={PATHS.profileSettings} variant="light" w="full">
