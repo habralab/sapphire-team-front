@@ -1,16 +1,13 @@
 import { Text, Flex, Center, SkeletonText, Button, Avatar } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-import {
-  Statistic,
-  useGetAvatar,
-  useIsAvatarExist,
-  useUserStatistic,
-} from '~/entities/user';
-
 import type { GetUserResponse } from '~/shared/api/model';
 import { useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
+
+import { useGetAvatar, useIsAvatarExist, useUserStatistic } from '../api';
+
+import { Statistic } from './statistic';
 
 interface ProfileCardProps {
   user: GetUserResponse;

@@ -36,10 +36,10 @@ export function ChatsList(props: SearchProps) {
               as={ReactLink}
               key={chat.id}
               borderBottom="1px"
-              borderColor="gray.300"
+              borderColor="gray.200"
               _hover={{
                 textDecoration: 'none',
-                bg: 'gray.300',
+                bg: 'gray.200',
               }}
               _last={{
                 border: 'none',

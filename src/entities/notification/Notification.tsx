@@ -6,7 +6,7 @@ import { generatePath, Link } from 'react-router-dom';
 import type { GetNotificationResponse } from '~/shared/api';
 import { useAuth, useIsMobile } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
-import { NotificationImage } from '~/shared/ui/NotificationImage';
+import { DummyImage } from '~/shared/ui/DummyImage';
 
 import { useGetNotification } from './api';
 import { NOTIFICATIONS_MESSAGE, NOTIFICATIONS } from './Notification.constants';
@@ -50,7 +50,7 @@ export function Notification({ notificationId, read }: NotificationProps) {
       grow={1}
     >
       <VStack spacing={0} gap={3} textAlign="center">
-        <NotificationImage />
+        <DummyImage />
         {notification && (
           <React.Fragment>
             <Heading variant="h2" mb={0}>

@@ -9,10 +9,10 @@ import {
   CircularProgressLabel,
 } from '@chakra-ui/react';
 
-import { Statistic } from '~/entities/user';
-
 import { useIsMobile } from '~/shared/hooks';
 import { STag } from '~/shared/ui/STag';
+
+import { Statistic } from './statistic';
 
 export function ProfileCardDesktop() {
   const isMobile = useIsMobile();

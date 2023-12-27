@@ -12,10 +12,11 @@ interface SearchInputProps {
   placeholder?: string;
   value?: string;
   onChange: (value: string) => void;
+  variant?: string;
 }
 
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ placeholder, onChange, value }: SearchInputProps, ref) => {
+  ({ placeholder, onChange, value, variant }: SearchInputProps, ref) => {
     return (
       <InputGroup>
         <InputLeftElement pointerEvents="none">

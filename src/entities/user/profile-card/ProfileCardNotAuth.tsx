@@ -1,8 +1,7 @@
 import { Text, Flex, Image, Center } from '@chakra-ui/react';
 
-import { Statistic } from '~/entities/user';
-
 import NotAuth from './notAuth.png';
+import { Statistic } from './statistic';
 
 const defaultName = 'Гость';
 

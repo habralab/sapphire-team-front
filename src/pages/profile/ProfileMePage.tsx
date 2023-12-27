@@ -11,9 +11,9 @@ import {
 import { useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { ProfileCard, ProfileCardNotAuth } from '~/widgets/profile-card';
-
 import { Login, Settings } from '~/features/user';
+
+import { ProfileCard, ProfileCardNotAuth } from '~/entities/user';
 
 import { useAuth } from '~/shared/hooks';
 

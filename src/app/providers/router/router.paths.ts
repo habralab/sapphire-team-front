@@ -84,7 +84,10 @@ export const routerPaths = [
     path: PATHS.addProject,
     Component: AddProjectPage,
   },
-  // { path: PATHS.dialog, Component: DialogPage }
+  // {
+  //   path: PATHS.dialog,
+  //   Component: DialogPage,
+  // },
   {
     path: PATHS.dialog,
     Component: NotFoundPage,

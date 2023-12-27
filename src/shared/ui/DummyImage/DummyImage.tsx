@@ -1,7 +1,7 @@
 import { Image } from '@chakra-ui/react';
 
-import image from './notifications.svg';
+import image from './image.svg';
 
-export function NotificationImage() {
+export function DummyImage() {
   return <Image src={image} />;
 }
