@@ -27,7 +27,7 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
             messageRef.current.innerHTML = '';
           }
         }}
-        icon={<Icon as={IoSend} w={4} h={4} />}
+        icon={<Icon as={IoSend} fontSize="md" />}
       />
     </Flex>
   );
