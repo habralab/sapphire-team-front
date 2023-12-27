@@ -1,13 +1,13 @@
 import { Text } from '@chakra-ui/react';
 
-import { NotificationImage } from '~/shared/ui/NotificationImage';
+import { DummyImage } from '~/shared/ui/DummyImage';
 
 import { DummyWrapper } from '../base';
 
 export function DummyNotifications() {
   return (
     <DummyWrapper>
-      <NotificationImage />
+      <DummyImage />
       <Text fontSize="md" fontWeight="medium" mt={1}>
         Нет уведомлений
       </Text>

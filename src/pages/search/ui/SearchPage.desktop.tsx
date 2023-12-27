@@ -25,7 +25,7 @@ export const SearchPageDesktop = () => {
           </Heading>
         </Flex>
         <Flex gap="4" mb={4}>
-          <SearchProject onChange={handleSumbit} />
+          <SearchProject onChange={handleSumbit} placeholder="Поиск в проектах" />
           {/* <Filter  /> */}
         </Flex>
         <SimpleGrid columns={2} gap={6}>

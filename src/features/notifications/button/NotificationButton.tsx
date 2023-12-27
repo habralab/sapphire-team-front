@@ -6,7 +6,7 @@ import { useAuth } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { Counter } from '~/shared/ui/Counter';
 
-export function Notification() {
+export function NotificationButton() {
   const { isAuth } = useAuth();
   const navigate = useNavigate();
 

@@ -11,7 +11,7 @@ import {
 import { useLayoutEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
-import { ProfileCard, ProfileCardNotAuth } from '~/widgets/profile-card';
+import { ProfileCard, ProfileCardNotAuth } from '~/entities/user';
 
 import { GoBack } from '~/shared/ui/GoBack';
 

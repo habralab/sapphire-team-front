@@ -16,12 +16,7 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
 
   return (
     <Flex px={isMobile ? 0 : 6} py={4} alignItems="center" gap={4} w="full">
-      <STextarea
-        maxLength={50}
-        value={value}
-        setValue={setValue}
-        placeholder="Введите сообщение..."
-      />
+      <STextarea value={value} setValue={setValue} placeholder="Сообщение" />
       <IconButton
         aria-label="create-message"
         variant="flat"
@@ -32,7 +27,7 @@ export function CreateMessage({ onSubmit }: CreateMessageProps) {
             messageRef.current.innerHTML = '';
           }
         }}
-        icon={<Icon as={IoSend} />}
+        icon={<Icon as={IoSend} fontSize="md" />}
       />
     </Flex>
   );

@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { useApi } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { GoBack } from '~/shared/ui/GoBack';
-import { SettingItem } from '~/shared/ui/SettingsItem';
+import { Switcher } from '~/shared/ui/Switcher';
 
 export function SettingsPage() {
   const { userApi } = useApi();
@@ -36,28 +36,28 @@ export function SettingsPage() {
           mt={8}
         >
           <Link to={PATHS.profileSettings}>
-            <SettingItem type="heading" variant="h3" icon={FiChevronRight}>
+            <Switcher type="heading" variant="h3" icon={FiChevronRight}>
               Профиль
-            </SettingItem>
+            </Switcher>
           </Link>
           <Divider variant="light" />
           {/* <Link to={PATHS.notificationsSettings}>
-            <SettingItem type="heading" variant="h3" icon={FiChevronRight}>
+            <Switcher type="heading" variant="h3" icon={FiChevronRight}>
               Уведомления
-            </SettingItem>
+            </Switcher>
           </Link> */}
           {/* <Divider variant="light" /> */}
           {/* TODO: вставить актуальную почту */}
           <ChakraLink href="mailto:">
-            <SettingItem type="heading" variant="h3" icon={FiChevronRight}>
+            <Switcher type="heading" variant="h3" icon={FiChevronRight}>
               Сообщить о проблеме
-            </SettingItem>
+            </Switcher>
           </ChakraLink>
           <Divider variant="light" />
           <Link to="#" onClick={() => userApi.logout()}>
-            <SettingItem type="heading" variant="h3" icon={FiChevronRight}>
+            <Switcher type="heading" variant="h3" icon={FiChevronRight}>
               Выйти
-            </SettingItem>
+            </Switcher>
           </Link>
         </VStack>
       </Container>

@@ -1,6 +1,6 @@
 import { Flex, Heading, VStack, Divider } from '@chakra-ui/react';
 
-import { SettingItem } from '~/shared/ui/SettingsItem';
+import { Switcher } from '~/shared/ui/Switcher';
 
 export function SettingsList() {
   return (
@@ -16,17 +16,17 @@ export function SettingsList() {
         borderRadius="2xl"
         spacing={0}
       >
-        <SettingItem>Одобрение отклика</SettingItem>
+        <Switcher>Одобрение отклика</Switcher>
         <Divider variant="light" />
-        <SettingItem>Отклонение отклика</SettingItem>
+        <Switcher>Отклонение отклика</Switcher>
         <Divider variant="light" />
-        <SettingItem>Проект закрыт</SettingItem>
+        <Switcher>Проект закрыт</Switcher>
         <Divider variant="light" />
-        <SettingItem>Возможность оставить отзыв</SettingItem>
+        <Switcher>Возможность оставить отзыв</Switcher>
         <Divider variant="light" />
-        <SettingItem>Одобрение публикации</SettingItem>
+        <Switcher>Одобрение публикации</Switcher>
         <Divider variant="light" />
-        <SettingItem>Правки в публикации</SettingItem>
+        <Switcher>Правки в публикации</Switcher>
       </VStack>
       <Heading variant="h3" mt={6} mb={4}>
         Push-уведомления
@@ -39,9 +39,9 @@ export function SettingsList() {
         borderRadius="2xl"
         spacing={0}
       >
-        <SettingItem>Личные сообщения</SettingItem>
+        <Switcher>Личные сообщения</Switcher>
         <Divider variant="light" />
-        <SettingItem>Вам оставили отзыв</SettingItem>
+        <Switcher>Вам оставили отзыв</Switcher>
       </VStack>
     </Flex>
   );

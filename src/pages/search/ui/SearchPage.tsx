@@ -98,7 +98,7 @@ export const SearchPage = () => {
             )}
           </Flex>
           <Flex gap="1" mb={4}>
-            <SearchProject onChange={handleSumbit} />
+            <SearchProject onChange={handleSumbit} placeholder="Найти проект" />
             <FilterUser
               totalItems={positions?.pages[0].total_items}
               isLoading={isLoading}

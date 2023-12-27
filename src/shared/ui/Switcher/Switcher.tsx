@@ -1,13 +1,13 @@
 import { Flex, Heading, IconButton, Icon, Switch, Text, type As } from '@chakra-ui/react';
 
-interface SettingItemProp {
+interface SwitcherProp {
   type?: 'heading' | 'text';
   children: string;
   icon?: As;
   variant?: string;
 }
 
-export function SettingItem(props: SettingItemProp) {
+export function Switcher(props: SwitcherProp) {
   const { type, children, icon, variant } = props;
   return (
     <Flex alignItems="center" justifyContent="space-between" py={3}>

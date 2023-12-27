@@ -12,10 +12,11 @@ interface SearchInputProps {
   placeholder?: string;
   value?: string;
   onChange: (value: string) => void;
+  variant?: string;
 }
 
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ placeholder, onChange, value }: SearchInputProps, ref) => {
+  ({ placeholder, onChange, value, variant }: SearchInputProps, ref) => {
     return (
       <InputGroup>
         <InputLeftElement pointerEvents="none">
@@ -28,7 +29,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
             borderColor: 'blue.500',
           }}
           borderRadius="full"
-          _placeholder={{ color: 'gray.400' }}
+          _placeholder={{ color: 'gray.400', fontWeight: 400 }}
           background={'white'}
           placeholder={placeholder}
           value={value}
