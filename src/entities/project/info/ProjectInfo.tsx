@@ -7,10 +7,9 @@ import type {
   GetSpecsData,
 } from '~/shared/api/model';
 import { STag } from '~/shared/ui/STag';
-import { Status } from '~/shared/ui/Status';
 
 import { Card } from '../card';
-import { PROJECT_STATUSES, PROJECT_STATUSES_MESSAGES } from '../Project.constants';
+import { PROJECT_STATUSES } from '../Project.constants';
 
 interface Project {
   deadline: string | null;

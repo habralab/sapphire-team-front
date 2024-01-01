@@ -7,4 +7,5 @@ export * from './filter';
 export * from './position';
 export * from './avatar';
 export * from './request';
+export * from './status';
 export * from './Project.constants';

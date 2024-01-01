@@ -1,12 +1,12 @@
 import { Heading, Text } from '@chakra-ui/react';
 
 import { useIsMobile } from '~/shared/hooks';
-import { Status } from '~/shared/ui/Status';
 
 import {
   PROJECT_STATUSES_MESSAGES,
   type PROJECT_STATUSES,
 } from '../../Project.constants';
+import { Status } from '../../status';
 
 export interface CardProps {
   status: keyof typeof PROJECT_STATUSES;
