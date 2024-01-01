@@ -45,6 +45,33 @@ const Tabs = defineMultiStyleConfig({
         p: 0,
       },
     }),
+    animatedBase: definePartsStyle({
+      tablist: {
+        bg: 'white',
+        w: '100%',
+        borderRadius: 'full',
+        p: '1',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        mb: 4,
+      },
+      tab: {
+        h: '7',
+        color: 'gray.600',
+        fontSize: 'sm',
+        borderRadius: 'full',
+        flex: '1',
+        zIndex: '1',
+        _selected: { color: 'white' },
+      },
+      tabpanel: {
+        p: 0,
+      },
+      indicator: {
+        transitionDuration: '200ms !important',
+      },
+    }),
     onboard: {
       tablist: {
         display: 'flex',

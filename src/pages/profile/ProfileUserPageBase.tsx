@@ -7,6 +7,7 @@ import {
   Tab,
   Heading,
   Container,
+  TabIndicator,
 } from '@chakra-ui/react';
 import { useLayoutEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
@@ -41,7 +42,7 @@ export function ProfileUserPageBase() {
       </Flex>
       {id ? <ProfileCard userId={id} /> : <ProfileCardNotAuth />}
       <Tabs
-        variant="base"
+        variant="animatedBase"
         index={
           searchParams.get('tab')
             ? tabs.findIndex((name) => name === searchParams.get('tab'))
@@ -51,9 +52,10 @@ export function ProfileUserPageBase() {
           setSearchParams({ tab: tabs[index] });
         }}
       >
-        <TabList>
+        <TabList position="relative">
           <Tab>Обо мне</Tab>
           <Tab>Проекты</Tab>
+          <TabIndicator h="86%" bg="gray.900" borderRadius="full" />
         </TabList>
         <TabPanels>
           <TabPanel>{id ? <AboutMeTab userId={id} /> : <NotAuthTab />}</TabPanel>

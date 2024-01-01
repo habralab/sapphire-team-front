@@ -10,6 +10,7 @@ import {
   TabPanel,
   useToast,
   Text,
+  TabIndicator,
 } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -127,11 +128,13 @@ export const AddProject = ({ userId }: { userId: string }) => {
           Сохранить и выйти
         </Button> */}
       </Flex>
-      <Tabs variant="base" index={tabIndex} onChange={handleTabsChange}>
-        <TabList>
+      <Tabs variant="animatedBase" index={tabIndex} onChange={handleTabsChange}>
+        <TabList position="relative">
           <Tab>О проекте</Tab>
           <Tab>Команда</Tab>
+          <TabIndicator h="86%" bg="gray.900" borderRadius="full" />
         </TabList>
+
         <form
           id="addNewProjectForm"
           onSubmit={handleSubmit(onSubmit, onError)}
