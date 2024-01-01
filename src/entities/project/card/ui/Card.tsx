@@ -8,26 +8,31 @@ import {
 } from '../../Project.constants';
 import { Status } from '../../status';
 
-export interface CardProps {
+export interface CardInfo {
   status: keyof typeof PROJECT_STATUSES;
-  title?: string;
-  date?: string | null;
+  name?: string;
+  startline?: string | null;
   description?: string | null;
+}
+
+interface CardProps {
+  info: CardInfo;
   fullDescription?: boolean;
 }
 
 export const Card = (props: CardProps) => {
-  const { title, date, description, status, fullDescription } = props;
+  const { fullDescription } = props;
+  const { name, startline, description, status } = props.info;
   const isMobile = useIsMobile();
 
   return (
     <>
       <Status mb={isMobile ? 3 : 4}>{PROJECT_STATUSES_MESSAGES[status]}</Status>
       <Heading variant="h2" overflowWrap="anywhere" noOfLines={3}>
-        {title}
+        {name}
       </Heading>
       <Text variant="caption" mb={3}>
-        {date}
+        {startline}
       </Text>
       {fullDescription ? (
         <Text mb={3} overflowWrap="anywhere">

@@ -125,12 +125,7 @@ export const SearchPage = () => {
                             key={position.id}
                             to={generatePath(PATHS.position, { id: position.id })}
                           >
-                            <ProjectCard
-                              status={position.project.status}
-                              title={position.project.name}
-                              date={position.project.startline}
-                              description={position.project.description}
-                            >
+                            <ProjectCard info={position.project}>
                               <STag
                                 mainTags={allSpecs
                                   ?.filter(({ id }) => id === position.specialization_id)

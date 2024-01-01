@@ -64,13 +64,7 @@ export const ProjectInfo = ({
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
-        <Card
-          title={project.name}
-          date={project.startline}
-          description={project.description}
-          fullDescription={true}
-          status={project.status}
-        />
+        <Card info={project} fullDescription={true} />
       </Stack>
       {project.status !== PROJECT_STATUSES.finished && (
         <Stack gap={0} mb={6}>

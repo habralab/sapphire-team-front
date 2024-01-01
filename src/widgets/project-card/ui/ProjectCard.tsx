@@ -5,22 +5,19 @@ import { Card, type PROJECT_STATUSES } from '~/entities/project';
 
 import { useIsMobile } from '~/shared/hooks';
 
-type ProjectCardProps = {
+interface ProjectCardInfo {
   status: keyof typeof PROJECT_STATUSES;
-  title: string;
-  date: string;
+  name: string;
+  startline: string;
   description: string | null;
+}
+
+type ProjectCardProps = {
+  info: ProjectCardInfo;
   children: React.ReactNode;
 } & CardProps;
 
-export const ProjectCard = ({
-  status,
-  title,
-  date,
-  description,
-  children,
-  ...others
-}: ProjectCardProps) => {
+export const ProjectCard = ({ info, children, ...others }: ProjectCardProps) => {
   const isMobile = useIsMobile();
 
   return (
@@ -33,7 +30,7 @@ export const ProjectCard = ({
       {...others}
     >
       <CardBody padding={isMobile ? 5 : 6}>
-        <Card date={date} description={description} title={title} status={status} />
+        <Card info={info} />
         {children}
       </CardBody>
     </ChakraCard>
