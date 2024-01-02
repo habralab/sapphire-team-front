@@ -7,10 +7,9 @@ import type {
   GetSpecsData,
 } from '~/shared/api/model';
 import { STag } from '~/shared/ui/STag';
-import { Status } from '~/shared/ui/Status';
 
 import { Card } from '../card';
-import { PROJECT_STATUSES, PROJECT_STATUSES_MESSAGES } from '../Project.constants';
+import { PROJECT_STATUSES } from '../Project.constants';
 
 interface Project {
   deadline: string | null;
@@ -65,13 +64,7 @@ export const ProjectInfo = ({
   return (
     <>
       <Stack gap={0} mb={3} alignItems="start">
-        <Card
-          title={project.name}
-          date={project.startline}
-          description={project.description}
-          fullDescription={true}
-          status={project.status}
-        />
+        <Card info={project} fullDescription={true} />
       </Stack>
       {project.status !== PROJECT_STATUSES.finished && (
         <Stack gap={0} mb={6}>

@@ -63,12 +63,7 @@ export const ProjectsTab = ({ userId }: ProjectsTabProps) => {
                         key={project.id}
                         to={generatePath(PATHS.project, { id: project.id })}
                       >
-                        <ProjectCard
-                          status={project.status}
-                          title={project.name}
-                          date={project.startline}
-                          description={project.description}
-                        >
+                        <ProjectCard info={project}>
                           <Flex justifyContent="space-between" alignItems="center">
                             <STag
                               mainTags={

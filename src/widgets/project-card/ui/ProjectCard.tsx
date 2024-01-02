@@ -1,26 +1,23 @@
-import { CardBody, Card as ChakraCard, type CardProps } from '@chakra-ui/react';
+import { CardBody, Card as ChakraCard } from '@chakra-ui/react';
 import React from 'react';
 
 import { Card, type PROJECT_STATUSES } from '~/entities/project';
 
 import { useIsMobile } from '~/shared/hooks';
 
-type ProjectCardProps = {
+interface ProjectCardInfo {
   status: keyof typeof PROJECT_STATUSES;
-  title: string;
-  date: string;
+  name: string;
+  startline: string;
   description: string | null;
-  children: React.ReactNode;
-} & CardProps;
+}
 
-export const ProjectCard = ({
-  status,
-  title,
-  date,
-  description,
-  children,
-  ...others
-}: ProjectCardProps) => {
+interface ProjectCardProps {
+  info: ProjectCardInfo;
+  children: React.ReactNode;
+}
+
+export const ProjectCard = ({ info, children }: ProjectCardProps) => {
   const isMobile = useIsMobile();
 
   return (
@@ -30,10 +27,9 @@ export const ProjectCard = ({
       _active={{ boxShadow: '2xl' }}
       boxShadow="none"
       alignContent="center"
-      {...others}
     >
       <CardBody padding={isMobile ? 5 : 6}>
-        <Card date={date} description={description} title={title} status={status} />
+        <Card info={info} />
         {children}
       </CardBody>
     </ChakraCard>
