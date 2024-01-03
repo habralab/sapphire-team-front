@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { stringToServerDate } from '~/shared/lib/adapters';
 import { GoBack } from '~/shared/ui/GoBack';
+import { AnimatedTabs } from '~/shared/ui/SAnimatedTabs';
 
 import { useAddAvatar, useAddPosition, useAddProject, useAddSkills } from '../api';
 
@@ -106,6 +107,11 @@ export const AddProject = ({ userId }: { userId: string }) => {
     setTabIndex(index);
   };
 
+  const tabs = [
+    { id: 0, label: 'О проекте' },
+    { id: 1, label: 'Команда' },
+  ];
+
   return (
     <Container maxW="md" display="flex" flexDirection="column">
       <Flex
@@ -127,11 +133,11 @@ export const AddProject = ({ userId }: { userId: string }) => {
           Сохранить и выйти
         </Button> */}
       </Flex>
-      <Tabs variant="base" index={tabIndex} onChange={handleTabsChange}>
+      <Tabs variant="animatedBase" index={tabIndex} onChange={handleTabsChange}>
         <TabList>
-          <Tab>О проекте</Tab>
-          <Tab>Команда</Tab>
+          <AnimatedTabs tabs={tabs} currentIndex={tabIndex} />
         </TabList>
+
         <form
           id="addNewProjectForm"
           onSubmit={handleSubmit(onSubmit, onError)}
