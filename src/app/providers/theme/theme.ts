@@ -68,9 +68,6 @@ const Tabs = defineMultiStyleConfig({
       tabpanel: {
         p: 0,
       },
-      indicator: {
-        transitionDuration: '200ms !important',
-      },
     }),
     onboard: {
       tablist: {

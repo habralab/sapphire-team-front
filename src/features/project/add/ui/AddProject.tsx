@@ -10,7 +10,6 @@ import {
   TabPanel,
   useToast,
   Text,
-  TabIndicator,
 } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -29,6 +28,7 @@ import { useAddAvatar, useAddPosition, useAddProject, useAddSkills } from '../ap
 
 import type { AddProjectForm } from './AddProject.types';
 import { AboutProject, Team } from './tabs';
+import { AnimatedTabs } from '~/shared/ui/SAnimatedTabs';
 
 export const AddProject = ({ userId }: { userId: string }) => {
   const navigate = useNavigate();
@@ -107,6 +107,11 @@ export const AddProject = ({ userId }: { userId: string }) => {
     setTabIndex(index);
   };
 
+  const tabs = [
+    { id: 0, label: 'О проекте' },
+    { id: 1, label: 'Команда' },
+  ];
+
   return (
     <Container maxW="md" display="flex" flexDirection="column">
       <Flex
@@ -129,10 +134,8 @@ export const AddProject = ({ userId }: { userId: string }) => {
         </Button> */}
       </Flex>
       <Tabs variant="animatedBase" index={tabIndex} onChange={handleTabsChange}>
-        <TabList position="relative">
-          <Tab>О проекте</Tab>
-          <Tab>Команда</Tab>
-          <TabIndicator h="86%" bg="gray.900" borderRadius="full" />
+        <TabList>
+          <AnimatedTabs tabs={tabs} currentIndex={tabIndex} />
         </TabList>
 
         <form
