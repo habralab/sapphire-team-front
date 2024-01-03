@@ -23,12 +23,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { stringToServerDate } from '~/shared/lib/adapters';
 import { GoBack } from '~/shared/ui/GoBack';
+import { AnimatedTabs } from '~/shared/ui/SAnimatedTabs';
 
 import { useAddAvatar, useAddPosition, useAddProject, useAddSkills } from '../api';
 
 import type { AddProjectForm } from './AddProject.types';
 import { AboutProject, Team } from './tabs';
-import { AnimatedTabs } from '~/shared/ui/SAnimatedTabs';
 
 export const AddProject = ({ userId }: { userId: string }) => {
   const navigate = useNavigate();
