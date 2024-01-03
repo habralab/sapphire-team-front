@@ -11,6 +11,14 @@ interface AnimatedTabsProps {
 }
 
 const ChakraAnimateTabs = chakra(motion.span, {
+  baseStyle: {
+    borderRadius: 'full',
+    pos: 'absolute',
+    inset: '0',
+    zIndex: 'docked',
+    backgroundColor: 'dark.500',
+    mixBlendMode: 'difference',
+  },
   shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
 });
 
@@ -20,12 +28,6 @@ export const AnimatedTabs = ({ tabs, currentIndex }: AnimatedTabsProps) => {
       {currentIndex === id && (
         <ChakraAnimateTabs
           layoutId="bubble"
-          borderRadius="full"
-          pos="absolute"
-          inset="0"
-          zIndex="10"
-          backgroundColor="dark.500"
-          mixBlendMode="difference"
           transition={{ type: 'spring', bounce: '0.2', duration: '0.6' }}
         />
       )}
