@@ -1,5 +1,5 @@
-import { Tab } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { Tab, chakra, shouldForwardProp } from '@chakra-ui/react';
+import { motion, isValidMotionProp } from 'framer-motion';
 
 interface Tab {
   id: number | string;
@@ -10,21 +10,23 @@ interface AnimatedTabsProps {
   currentIndex: number | string;
 }
 
+const ChakraAnimateTabs = chakra(motion.span, {
+  shouldForwardProp: (prop) => isValidMotionProp(prop) || shouldForwardProp(prop),
+});
+
 export const AnimatedTabs = ({ tabs, currentIndex }: AnimatedTabsProps) => {
   return tabs.map(({ id, label }) => (
     <Tab key={id} position="relative">
       {currentIndex === id && (
-        <motion.span
+        <ChakraAnimateTabs
           layoutId="bubble"
-          style={{
-            borderRadius: 9999,
-            position: 'absolute',
-            inset: '0px',
-            zIndex: 10,
-            backgroundColor: 'black',
-            mixBlendMode: 'difference',
-          }}
-          transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+          borderRadius="full"
+          pos="absolute"
+          inset="0"
+          zIndex="10"
+          backgroundColor="dark.500"
+          mixBlendMode="difference"
+          transition={{ type: 'spring', bounce: '0.2', duration: '0.6' }}
         />
       )}
       {label}
