@@ -2,6 +2,7 @@ import { Navigate } from 'react-router-dom';
 
 import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
 import { DialogPage } from '~/pages/dialog';
+import { Filter } from '~/pages/filter';
 import { MainPage } from '~/pages/main';
 import { NotFoundPage } from '~/pages/not-found';
 import { NotificationPage } from '~/pages/notification';
@@ -112,4 +113,5 @@ export const routerPaths = [
   { path: PATHS.settings, Component: SettingsPage },
   { path: PATHS.profileSettings, Component: ProfileSettingsPage },
   { path: PATHS.notificationsSettings, Component: NotificationsSettingsPage },
+  { path: '/filter', Component: Filter },
 ];
