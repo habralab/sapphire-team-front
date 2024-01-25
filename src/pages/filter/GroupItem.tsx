@@ -7,14 +7,17 @@ import {
   Heading,
 } from '@chakra-ui/react';
 
+import { useFilterStore } from '~/entities/project';
+
 import { SpecsGroups } from './SpecsGroups';
 
 interface GroupItemProps {
   name: string | null;
   id: string;
+  tempSpec: string[];
 }
 
-export const GroupItem = ({ name, id }: GroupItemProps) => {
+export const GroupItem = ({ name, id, tempSpec }: GroupItemProps) => {
   return (
     <AccordionItem>
       {({ isExpanded }) => (
@@ -27,7 +30,9 @@ export const GroupItem = ({ name, id }: GroupItemProps) => {
             </Flex>
             <AccordionIcon />
           </AccordionButton>
-          <AccordionPanel pb={3}>{isExpanded && <SpecsGroups id={id} />}</AccordionPanel>
+          <AccordionPanel pb={3}>
+            {isExpanded && <SpecsGroups id={id} tempSpec={tempSpec} />}
+          </AccordionPanel>
         </>
       )}
     </AccordionItem>
