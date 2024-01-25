@@ -6,9 +6,10 @@ import { SpecItem } from './SpecItem';
 
 interface SpecsGroupsProps {
   id: string;
+  tempSpec: string[];
 }
 
-export const SpecsGroups = ({ id }: SpecsGroupsProps) => {
+export const SpecsGroups = ({ id, tempSpec }: SpecsGroupsProps) => {
   const { data: specs, isLoading } = useGetSpecs({ group_id: id });
 
   return isLoading ? (
@@ -17,7 +18,9 @@ export const SpecsGroups = ({ id }: SpecsGroupsProps) => {
       <Skeleton height="17.5px" borderRadius="md" w="full" />
     </HStack>
   ) : (
-    specs?.map((spec) => <SpecItem id={spec.id} name={spec.name} key={spec.id} />)
+    specs?.map((spec) => (
+      <SpecItem id={spec.id} name={spec.name} key={spec.id} tempSpec={tempSpec} />
+    ))
   );
 };
 
