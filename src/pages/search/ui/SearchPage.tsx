@@ -18,7 +18,7 @@ import { FilterUser, SearchProject } from '~/features/project';
 import { DummyNotFound } from '~/entities/dummy';
 import { useFilterStore } from '~/entities/project';
 import { useGetSpecs } from '~/entities/storage';
-import { Avatar, DummyAvatar } from '~/entities/user';
+import { Avatar, NotAuthAvatar } from '~/entities/user';
 
 import { useApi, useAuth, useLayoutRefs } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
@@ -88,7 +88,7 @@ export const SearchPage = () => {
       <Container maxW="md" mb={4}>
         <Flex alignContent="center" flexDirection="column" justifyContent="space-between">
           <Flex alignItems="center" my={4} h={42}>
-            {user.userId ? <Avatar userId={user.userId} /> : <DummyAvatar />}
+            {user.userId ? <Avatar userId={user.userId} /> : <NotAuthAvatar />}
 
             {user.isAuth && (
               <Flex ml="auto" gap={4} alignItems="baseline">

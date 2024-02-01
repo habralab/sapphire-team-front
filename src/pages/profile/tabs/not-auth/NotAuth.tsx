@@ -1,9 +1,15 @@
 import { Text } from '@chakra-ui/react';
 
-export const NotAuthTab = () => {
+interface NotAuthTabType {
+  isDeleted?: boolean;
+}
+
+export const NotAuthTab = ({ isDeleted }: NotAuthTabType) => {
   return (
-    <Text textAlign="center" color="gray.700" pt={5}>
-      Для создания личного профиля необходимо зарегистрироваться
+    <Text textAlign="center" color="gray.700">
+      {isDeleted
+        ? 'Страница удалена'
+        : 'Для создания личного профиля необходимо зарегистрироваться'}
     </Text>
   );
 };
