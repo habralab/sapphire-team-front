@@ -1,8 +1,7 @@
-import { Text, Flex, Image, Center } from '@chakra-ui/react';
+import { Text, Flex, Center } from '@chakra-ui/react';
 
 import { DummyAvatar } from '~/shared/ui/DummyAvatar';
 
-import NotAuth from './notAuth.png';
 import { Statistic } from './statistic';
 
 const defaultName = 'Гость';
