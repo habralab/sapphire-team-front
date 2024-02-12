@@ -10,6 +10,7 @@ export const PATHS = {
   chats: '/chats',
   dialog: '/chats/:id',
   profile: '/profile/:id',
+  deletedProfile: '/profile/deleted',
   profileMe: '/profile/me',
   notifications: '/notifications',
   notification: '/notifications/:id',

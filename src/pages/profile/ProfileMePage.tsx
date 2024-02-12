@@ -7,7 +7,9 @@ import { ProfileCard, ProfileCardNotAuth } from '~/entities/user';
 import { useAuth } from '~/shared/hooks';
 
 import { ProfileTabs } from './ProfileTabs';
+import { AboutMeTab } from './tabs/about-me';
 import { NotAuthTab } from './tabs/not-auth';
+import { ProjectsTab } from './tabs/projects';
 
 export function ProfileMePage() {
   const { userId } = useAuth();
@@ -24,7 +26,12 @@ export function ProfileMePage() {
         </Flex>
       </Flex>
       {userId ? <ProfileCard userId={userId} /> : <ProfileCardNotAuth />}
-      {userId ? <ProfileTabs userId={userId} /> : <NotAuthTab />}
+      <ProfileTabs>
+        <TabPanels>
+          <TabPanel>{userId ? <AboutMeTab userId={userId} /> : <NotAuthTab />}</TabPanel>
+          <TabPanel>{userId ? <ProjectsTab userId={userId} /> : <NotAuthTab />}</TabPanel>
+        </TabPanels>
+      </ProfileTabs>
       {userId ? null : <Login />}
     </Container>
   );

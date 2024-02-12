@@ -8,7 +8,12 @@ import { NotificationPage } from '~/pages/notification';
 import { NotificationsPage } from '~/pages/notifications';
 import { OnboardingPage } from '~/pages/onboarding';
 import { PositionPage } from '~/pages/position';
-import { ProfileMePage, ProfilePageDesktop, ProfileUserPage } from '~/pages/profile';
+import {
+  DeletedProfile,
+  ProfileMePage,
+  ProfilePageDesktop,
+  ProfileUserPage,
+} from '~/pages/profile';
 import {
   AddProjectPage,
   ProjectPage,
@@ -47,6 +52,10 @@ export const routerPaths = [
   {
     path: PATHS.profileMe,
     Component: ProfileMePage,
+  },
+  {
+    path: PATHS.deletedProfile,
+    Component: DeletedProfile,
   },
   {
     path: PATHS.searchProject,

@@ -1,11 +1,8 @@
-import { Skeleton, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
+import { Skeleton, TabList, Tabs } from '@chakra-ui/react';
 import React, { useLayoutEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { AnimatedTabs } from '~/shared/ui/SAnimatedTabs';
-
-import { AboutMeTab } from './tabs/about-me';
-import { ProjectsTab } from './tabs/projects';
 
 const tabs = [
   { id: 'about', label: 'Обо мне' },
@@ -14,11 +11,10 @@ const tabs = [
 ];
 
 interface ProfileTabsProps {
-  userId: string;
-  children?: React.ReactNode;
+  children?: JSX.Element;
 }
 
-export const ProfileTabs = ({ userId, children }: ProfileTabsProps) => {
+export const ProfileTabs = ({ children }: ProfileTabsProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = searchParams.get('tab');
 
@@ -42,15 +38,6 @@ export const ProfileTabs = ({ userId, children }: ProfileTabsProps) => {
           <Skeleton height="25px" />
         )}
       </TabList>
-      <TabPanels>
-        <TabPanel>
-          <AboutMeTab userId={userId} />
-        </TabPanel>
-        <TabPanel>
-          <ProjectsTab userId={userId} />
-        </TabPanel>
-        {/* <TabPanel><ReviewsTab /></TabPanel> */}
-      </TabPanels>
       {children}
     </Tabs>
   );

@@ -1,11 +1,17 @@
-import { Text, Flex, Image, Center } from '@chakra-ui/react';
+import { Text, Flex, Center } from '@chakra-ui/react';
 
-import NotAuth from './notAuth.png';
+import { DummyAvatar } from '~/shared/ui/DummyAvatar';
+
 import { Statistic } from './statistic';
 
 const defaultName = 'Гость';
+const deletedName = 'Удалённый профиль';
 
-export function ProfileCardNotAuth() {
+interface ProfileCardNotAuthType {
+  isDeleted?: boolean;
+}
+
+export function ProfileCardNotAuth({ isDeleted }: ProfileCardNotAuthType) {
   return (
     <Flex
       direction="column"
@@ -26,10 +32,10 @@ export function ProfileCardNotAuth() {
         boxSizing="content-box"
         bg="white"
       >
-        <Image src={NotAuth} objectFit="contain" objectPosition="center" h={16} w={16} />
+        <DummyAvatar objectFit="contain" objectPosition="center" h={16} w={16} />
       </Center>
       <Text align="center" fontWeight="bold" fontSize="2xl" pt={16} mb={4}>
-        {defaultName}
+        {isDeleted ? deletedName : defaultName}
       </Text>
       <Statistic />
     </Flex>

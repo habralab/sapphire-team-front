@@ -1,18 +1,13 @@
 import { Flex, Heading, Container, TabPanels, TabPanel } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
 
-import { ProfileCard, ProfileCardNotAuth } from '~/entities/user';
+import { ProfileCardNotAuth } from '~/entities/user';
 
 import { GoBack } from '~/shared/ui/GoBack';
 
 import { ProfileTabs } from './ProfileTabs';
-import { AboutMeTab } from './tabs/about-me';
 import { NotAuthTab } from './tabs/not-auth';
-import { ProjectsTab } from './tabs/projects';
 
-export function ProfileUserPageBase() {
-  const { id } = useParams();
-
+export function DeletedProfile() {
   return (
     <Container maxW="md" mb={4}>
       <Flex alignItems="center" mt={4} mb={16} h={42} gap={2}>
@@ -21,11 +16,15 @@ export function ProfileUserPageBase() {
           Профиль
         </Heading>
       </Flex>
-      {id ? <ProfileCard userId={id} /> : <ProfileCardNotAuth />}
+      <ProfileCardNotAuth isDeleted />
       <ProfileTabs>
         <TabPanels>
-          <TabPanel>{id ? <AboutMeTab userId={id} /> : <NotAuthTab />}</TabPanel>
-          <TabPanel>{id ? <ProjectsTab userId={id} /> : <NotAuthTab />}</TabPanel>
+          <TabPanel>
+            <NotAuthTab isDeleted />
+          </TabPanel>
+          <TabPanel>
+            <NotAuthTab isDeleted />
+          </TabPanel>
         </TabPanels>
       </ProfileTabs>
     </Container>
