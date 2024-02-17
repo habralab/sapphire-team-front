@@ -2,6 +2,8 @@ import { Box, Container, Flex, Stack } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import { ScrollRestoration, useLocation } from 'react-router-dom';
 
+import { BlankPage } from '~/pages/blank';
+
 import { MenuBase, MenuDesktop } from '~/widgets/menu';
 
 import { LayoutContext } from '~/shared/contexts';
@@ -45,7 +47,8 @@ export const Layout = () => {
             </Stack>
           ) : (
             <Flex alignItems="start" h="full">
-              {!isNotFoundPage && <MenuDesktop />}
+              <BlankPage />
+              {/* {!isNotFoundPage && <MenuDesktop />}
               <Container
                 maxW="6xl"
                 minW="4xl"
@@ -57,7 +60,7 @@ export const Layout = () => {
                 flexDirection="column"
               >
                 <Routes />
-              </Container>
+              </Container> */}
             </Flex>
           )}
         </AuthProvider>

@@ -64,11 +64,12 @@ export function BlankPage() {
               textAlign="center"
               mb="8"
             >
-              Наш сайт <br />в разработке
+              Десктоп
+              <br />в разработке
             </Heading>
             <Box textAlign="center" mb={[10, null, 12]} fontSize={['sm', 'xl']}>
               <Text>
-                Создаём продукт для Хабра, где специалисты смогут объединяться в команды и
+                Создаём продукт, где специалисты смогут объединяться <br /> в команды и
                 делать проекты.
               </Text>
               <Text
@@ -80,11 +81,11 @@ export function BlankPage() {
                     position: 'absolute',
                     width: '45px',
                     top: '10px',
-                    left: '-60px',
+                    left: '-100px',
                   },
                 }}
               >
-                Ещё немного, и вы сможете его увидеть!
+                Используйте мобильную версию.
               </Text>
             </Box>
             <Box>
