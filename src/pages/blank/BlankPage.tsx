@@ -92,7 +92,7 @@ export function BlankPage() {
               <Button
                 as="a"
                 target="_blank"
-                href="https://t.me/+EqCvrAXmK_IyOTky"
+                href="https://t.me/+6JjDGzNZqgozMWE6"
                 rightIcon={<Icon as={TelegramIcon} />}
                 fontSize={['sm', 'lg']}
                 py={['4', '7']}
