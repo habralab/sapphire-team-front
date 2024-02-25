@@ -1,7 +1,4 @@
-import { Skeleton, HStack } from '@chakra-ui/react';
 import type { Dispatch, SetStateAction } from 'react';
-
-import { useGetSpecs } from '~/entities/storage';
 
 import { SpecItem } from './SpecItem';
 

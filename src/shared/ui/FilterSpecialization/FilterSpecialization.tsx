@@ -12,8 +12,6 @@ import { useState } from 'react';
 
 import { useGetSpecs, useGetSpecsGroups } from '~/entities/storage';
 
-import { useApi } from '~/shared/hooks';
-
 import { FilterSpecializationModal } from './FilterSpecializationModal';
 
 interface FilterSpecializationProps {
@@ -30,17 +28,9 @@ export const FilterSpecialization = ({
   doubleChecked,
 }: FilterSpecializationProps) => {
   const [specFilter, setSpecFilter] = useState(false);
-  const { storageApi } = useApi();
   const [searchText, setSearchText] = useState('');
 
   const { data: specGroup } = useGetSpecsGroups();
-  // const { data: specs } = useGetSpecs();
-
-  // const { data: specGroup, isFetching: specGroupLoading } = useQuery({
-  //   queryKey: ['specGroups'],
-  //   queryFn: () => storageApi.getSpecGroups(),
-  //   staleTime: Infinity,
-  // });
 
   const { data: specs } = useGetSpecs({
     query_text: searchText,

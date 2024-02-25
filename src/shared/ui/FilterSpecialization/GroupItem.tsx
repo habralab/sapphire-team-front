@@ -34,7 +34,6 @@ export const GroupItem = ({
   singleChecked,
   doubleChecked,
 }: GroupItemProps) => {
-  // const [specsCount, setSpecsCount] = useState(0);
   const [_, setCheckboxChange] = useState(false);
   const getCurrentSpecs = (id: string) => {
     return allSpecs.filter(({ group_id }) => group_id === id);

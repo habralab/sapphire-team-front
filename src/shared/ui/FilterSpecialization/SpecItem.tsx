@@ -1,6 +1,5 @@
 import { Checkbox, Text, useToast } from '@chakra-ui/react';
 import type { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
 
 interface SpecItemProps {
   id: string;
