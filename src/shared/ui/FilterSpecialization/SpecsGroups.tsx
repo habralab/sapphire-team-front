@@ -17,7 +17,6 @@ interface SpecsGroupsProps {
 }
 
 export const SpecsGroups = ({
-  id,
   tempSpec,
   currentSpecs,
   updateCounter,
