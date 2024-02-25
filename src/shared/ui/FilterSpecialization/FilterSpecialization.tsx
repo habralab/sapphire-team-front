@@ -8,10 +8,9 @@ import {
   TagLabel,
   IconButton,
 } from '@chakra-ui/react';
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { useGetSpecs } from '~/entities/storage';
+import { useGetSpecs, useGetSpecsGroups } from '~/entities/storage';
 
 import { useApi } from '~/shared/hooks';
 
@@ -34,13 +33,16 @@ export const FilterSpecialization = ({
   const { storageApi } = useApi();
   const [searchText, setSearchText] = useState('');
 
-  const { data: specGroup, isFetching: specGroupLoading } = useQuery({
-    queryKey: ['specGroups'],
-    queryFn: () => storageApi.getSpecGroups(),
-    staleTime: Infinity,
-  });
+  const { data: specGroup } = useGetSpecsGroups();
+  // const { data: specs } = useGetSpecs();
 
-  const { data: specs, isFetching: specsLoading } = useGetSpecs({
+  // const { data: specGroup, isFetching: specGroupLoading } = useQuery({
+  //   queryKey: ['specGroups'],
+  //   queryFn: () => storageApi.getSpecGroups(),
+  //   staleTime: Infinity,
+  // });
+
+  const { data: specs } = useGetSpecs({
     query_text: searchText,
   });
 
@@ -98,11 +100,9 @@ export const FilterSpecialization = ({
       </Flex>
 
       <FilterSpecializationModal
-        specsLoading={specsLoading}
-        specGroupLoading={specGroupLoading}
         isVisible={specFilter}
         changeVisible={setSpecFilter}
-        stateGroup={specGroup?.data}
+        stateGroup={specGroup}
         state={specs}
         userFilter={userSpecs}
         resetSpec={() => {
