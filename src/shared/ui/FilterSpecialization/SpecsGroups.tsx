@@ -27,7 +27,6 @@ export const SpecsGroups = ({
   singleChecked,
   doubleChecked,
 }: SpecsGroupsProps) => {
-  // console.log(`specGroups ${id}`);
   return currentSpecs?.map((spec) => (
     <SpecItem
       id={spec.id}
