@@ -14,7 +14,7 @@ import { useGetSpecs, useGetSpecsGroups } from '~/entities/storage';
 
 import { FilterSpecializationModal } from './FilterSpecializationModal';
 
-interface FilterSpecializationProps {
+export interface FilterSpecializationProps {
   singleChecked?: boolean;
   doubleChecked?: boolean;
   userSpecs: string[];
@@ -31,7 +31,6 @@ export const FilterSpecialization = ({
   const [searchText, setSearchText] = useState('');
 
   const { data: specGroup } = useGetSpecsGroups();
-
   const { data: specs } = useGetSpecs({
     query_text: searchText,
   });

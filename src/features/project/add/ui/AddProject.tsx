@@ -22,6 +22,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 import { stringToServerDate } from '~/shared/lib/adapters';
+import type { FilterSpecOptions } from '~/shared/types';
 import { GoBack } from '~/shared/ui/GoBack';
 import { AnimatedTabs } from '~/shared/ui/SAnimatedTabs';
 
@@ -30,7 +31,10 @@ import { useAddAvatar, useAddPosition, useAddProject, useAddSkills } from '../ap
 import type { AddProjectForm } from './AddProject.types';
 import { AboutProject, Team } from './tabs';
 
-export const AddProject = ({ userId }: { userId: string }) => {
+export const AddProject = ({
+  userId,
+  FilterSpec,
+}: { userId: string } & FilterSpecOptions) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutateAsync: addProject } = useAddProject();
@@ -154,7 +158,11 @@ export const AddProject = ({ userId }: { userId: string }) => {
                   required: 'Необходимо добавить хотя бы одного специалиста',
                 }}
                 render={({ field: { value, onChange } }) => (
-                  <Team newSpecialist={value} setNewSpecialist={onChange} />
+                  <Team
+                    newSpecialist={value}
+                    setNewSpecialist={onChange}
+                    FilterSpec={FilterSpec}
+                  />
                 )}
                 control={control}
               />

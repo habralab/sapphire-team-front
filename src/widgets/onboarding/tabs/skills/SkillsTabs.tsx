@@ -1,7 +1,8 @@
 import { FormControl, FormLabel, Heading, Stack, Text } from '@chakra-ui/react';
 import { Controller, type useForm } from 'react-hook-form';
 
-import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
+import { FilterSpecialization } from '~/features/filter';
+
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 
 import type { CreateUserType } from '../../Onboarding.types';

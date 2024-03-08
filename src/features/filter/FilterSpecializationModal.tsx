@@ -11,10 +11,10 @@ import {
   ModalContent,
   ModalOverlay,
 } from '@chakra-ui/react';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
-import type { GetSpecGroupsDataResponse, GetSpecsDataResponse } from '~/shared/api/model';
+import type { GetSpecGroupsDataResponse, GetSpecsDataResponse } from '~/shared/api';
 import { SearchInput } from '~/shared/ui/SearchInput';
 
 import { GroupItem } from './GroupItem';

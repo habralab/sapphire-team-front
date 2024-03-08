@@ -13,6 +13,7 @@ import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
 
+import { FilterSpecialization } from '~/features/filter';
 import { FilterUser, SearchProject } from '~/features/project';
 
 import { DummyNotFound } from '~/entities/dummy';
@@ -103,6 +104,7 @@ export const SearchPage = () => {
               totalItems={positions?.pages[0].total_items}
               isLoading={isLoading}
               userId={user.userId}
+              FilterSpec={FilterSpecialization}
             />
           </Flex>
           {isLoading || !positions ? (
