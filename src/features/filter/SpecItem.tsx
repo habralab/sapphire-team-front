@@ -37,22 +37,21 @@ export const SpecItem = ({
       updateCounter((prev) => !prev);
       return;
     }
-    if (singleChecked) {
-      tempSpec.length < 1
-        ? (tempSpec = [id])
-        : errorSelectCheckbox('Одновременно можно выбрать только одну специализацию');
-    } else if (doubleChecked) {
-      tempSpec.length < 2
-        ? tempSpec.push(id)
-        : errorSelectCheckbox('Одновременно можно выбрать только две специализации');
-    } else {
-      tempSpec.push(id);
+    if (singleChecked && tempSpec.length >= 1) {
+      errorSelectCheckbox('Одновременно можно выбрать только одну специализацию');
+      return;
     }
+    if (doubleChecked && tempSpec.length >= 2) {
+      errorSelectCheckbox('Одновременно можно выбрать только две специализации');
+      return;
+    }
+    tempSpec.push(id);
     updateCounter((prev) => !prev);
   };
   return (
     <Checkbox
       p={4}
+      colorScheme="purple"
       w="full"
       py={2}
       value={id}
