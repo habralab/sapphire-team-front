@@ -21,8 +21,8 @@ import { IoOptions } from 'react-icons/io5';
 import type { GetUserResponse } from '~/shared/api/model';
 import { useIsMobile } from '~/shared/hooks';
 import { stringToServerDate } from '~/shared/lib/adapters';
+import type { FilterSpecOptions } from '~/shared/types';
 import { Counter } from '~/shared/ui/Counter';
-import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 
 import { useFilterStore } from '../model';
@@ -33,7 +33,12 @@ interface FilterProps {
   user?: GetUserResponse;
 }
 
-export const Filter = ({ user, isLoading, totalItems = 0 }: FilterProps) => {
+export const Filter = ({
+  user,
+  FilterSpec,
+  isLoading,
+  totalItems = 0,
+}: FilterProps & FilterSpecOptions) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { filter, removeFilter, updateFilter, initialStore } = useFilterStore();
@@ -98,7 +103,7 @@ export const Filter = ({ user, isLoading, totalItems = 0 }: FilterProps) => {
                 <Heading variant="h2" mb={3}>
                   Специализация
                 </Heading>
-                <FilterSpecialization
+                <FilterSpec
                   userSpecs={filter.specs}
                   setUserSpecs={(values) => {
                     updateFilter({ specs: values });

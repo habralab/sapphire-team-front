@@ -1,3 +1,5 @@
+import type { FilterSpecOptions } from '~/shared/types';
+
 import { FilterAuth } from './FilterAuth';
 import { FilterGuest } from './FilterGuest';
 
@@ -7,10 +9,20 @@ interface FilterUserProps {
   isLoading?: boolean;
 }
 
-export const FilterUser = ({ userId, isLoading, totalItems }: FilterUserProps) => {
+export const FilterUser = ({
+  userId,
+  isLoading,
+  totalItems,
+  FilterSpec,
+}: FilterUserProps & FilterSpecOptions) => {
   return !userId ? (
-    <FilterGuest isLoading={isLoading} totalItems={totalItems} />
+    <FilterGuest isLoading={isLoading} totalItems={totalItems} FilterSpec={FilterSpec} />
   ) : (
-    <FilterAuth userId={userId} isLoading={isLoading} totalItems={totalItems} />
+    <FilterAuth
+      userId={userId}
+      isLoading={isLoading}
+      totalItems={totalItems}
+      FilterSpec={FilterSpec}
+    />
   );
 };

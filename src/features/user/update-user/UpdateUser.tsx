@@ -19,8 +19,7 @@ import { useGetAvatar } from '~/entities/user';
 
 import type { GetUserResponse } from '~/shared/api/model';
 import { PATHS } from '~/shared/lib/router';
-import type { SelectOptions } from '~/shared/types';
-import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
+import type { FilterSpecOptions, SelectOptions } from '~/shared/types';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STextarea } from '~/shared/ui/STextarea';
 
@@ -40,7 +39,12 @@ interface UpdateUserProps {
 
 const maxLength = 300;
 
-export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
+export function UpdateUser({
+  user,
+  isAvatarExist,
+  skills,
+  FilterSpec,
+}: UpdateUserProps & FilterSpecOptions) {
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -252,7 +256,7 @@ export function UpdateUser({ user, isAvatarExist, skills }: UpdateUserProps) {
             name="specs"
             render={({ field: { onChange, value } }) => {
               return (
-                <FilterSpecialization
+                <FilterSpec
                   userSpecs={value}
                   setUserSpecs={onChange}
                   doubleChecked={true}

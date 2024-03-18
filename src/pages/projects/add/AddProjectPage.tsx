@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
+import { FilterSpecialization } from '~/features/filter';
 import { AddProject } from '~/features/project';
 
 import { useAuth } from '~/shared/hooks';
@@ -11,7 +12,7 @@ export const AddProjectPage = () => {
   return (
     <>
       {user.userId ? (
-        <AddProject userId={user.userId} />
+        <AddProject userId={user.userId} FilterSpec={FilterSpecialization} />
       ) : (
         () => {
           navigate(PATHS.notFound);

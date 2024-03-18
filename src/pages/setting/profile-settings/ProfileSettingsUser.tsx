@@ -1,3 +1,4 @@
+import { FilterSpecialization } from '~/features/filter';
 import { UpdateUser } from '~/features/user';
 
 import { useGetSkillsByIds } from '~/entities/storage';
@@ -15,5 +16,12 @@ export function ProfileSettingsUser({ userId }: ProfileSettingsUserProps) {
 
   if (isLoading || !user || (userSkillsIds?.length && !skills?.length)) return null;
 
-  return <UpdateUser user={user} isAvatarExist={!!isAvatarExist} skills={skills} />;
+  return (
+    <UpdateUser
+      user={user}
+      isAvatarExist={!!isAvatarExist}
+      skills={skills}
+      FilterSpec={FilterSpecialization}
+    />
+  );
 }

@@ -7,8 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useGetSpecs } from '~/entities/storage';
 
 import { useApi } from '~/shared/hooks';
-import type { SelectOptions } from '~/shared/types';
-import { FilterSpecialization } from '~/shared/ui/FilterSpecialization';
+import type { FilterSpecOptions, SelectOptions } from '~/shared/types';
 import { SearchSelect } from '~/shared/ui/SearchSelect';
 import { STag } from '~/shared/ui/STag';
 
@@ -19,7 +18,7 @@ interface TeamProps {
   setNewSpecialist: Dispatch<SetStateAction<NewSpecialist[]>>;
 }
 
-export const Team = (props: TeamProps) => {
+export const Team = (props: TeamProps & FilterSpecOptions) => {
   const { storageApi } = useApi();
   const { newSpecialist, setNewSpecialist } = props;
   const [userSpecs, setUserSpecs] = useState<string[]>([]);
@@ -59,7 +58,7 @@ export const Team = (props: TeamProps) => {
               Специализация
             </FormLabel>
           </FormControl>
-          <FilterSpecialization
+          <props.FilterSpec
             userSpecs={userSpecs}
             singleChecked={true}
             setUserSpecs={setUserSpecs}
