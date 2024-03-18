@@ -1,5 +1,6 @@
 import { Container, Flex, Link, Text } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import { useGetUnreadNotification } from '~/features/notifications';
 
@@ -10,7 +11,12 @@ import { routes } from './routes';
 
 export const MenuBase = () => {
   const { isAuth } = useAuth();
-  const { data } = useGetUnreadNotification(isAuth);
+  const { data, refetch } = useGetUnreadNotification(isAuth);
+  const location = useLocation();
+
+  useEffect(() => {
+    refetch();
+  }, [location, isAuth]);
 
   return (
     <Flex shadow="base" borderTop="1px" borderColor="gray.200" bg="white">

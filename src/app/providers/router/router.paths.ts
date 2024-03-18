@@ -1,7 +1,5 @@
 import { Navigate } from 'react-router-dom';
 
-import { ChatsPage, ChatsPageDesktop } from '~/pages/chats';
-import { DialogPage } from '~/pages/dialog';
 import { MainPage } from '~/pages/main';
 import { NotFoundPage } from '~/pages/not-found';
 import { NotificationPage } from '~/pages/notification';
@@ -32,84 +30,128 @@ import { PATHS } from '~/shared/lib/router';
 export const routerPaths = [
   {
     path: '*',
-    Component: Navigate.bind(null, {
-      to: PATHS.notFound,
-      replace: true,
-    }),
+    view: {
+      base: Navigate.bind(null, {
+        to: PATHS.notFound,
+        replace: true,
+      }),
+    },
   },
   {
     path: PATHS.root,
-    Component: MainPage,
+    view: {
+      base: MainPage,
+      // для примера
+      desktop: MainPage,
+    },
   },
   {
     path: PATHS.notFound,
-    Component: NotFoundPage,
+    view: {
+      base: NotFoundPage,
+    },
   },
   {
     path: PATHS.profile,
-    Component: ProfileUserPage,
+    view: {
+      base: ProfileUserPage,
+    },
   },
   {
     path: PATHS.profileMe,
-    Component: ProfileMePage,
+    view: {
+      base: ProfileMePage,
+      // desktop: ProfilePageDesktop,
+    },
   },
   {
     path: PATHS.deletedProfile,
-    Component: DeletedProfile,
+    view: {
+      base: DeletedProfile,
+    },
   },
   {
     path: PATHS.searchProject,
-    Component: ProjectPage,
+    view: {
+      base: ProjectPage,
+    },
   },
   {
     path: PATHS.search,
-    Component: SearchPage,
+    view: {
+      base: SearchPage,
+    },
   },
   {
     path: PATHS.onboarding,
-    Component: OnboardingPage,
+    view: {
+      base: OnboardingPage,
+    },
   },
   {
     path: PATHS.projects,
-    Component: ProjectsPage,
+    view: {
+      base: ProjectsPage,
+    },
   },
-  // {
-  //   path: PATHS.chats,
-  //   Component: ChatsPage,
-  // },
   {
     path: PATHS.chats,
-    Component: NotFoundPage,
+    view: {
+      base: NotFoundPage,
+    },
   },
   {
     path: PATHS.project,
-    Component: ProjectPage,
+    view: {
+      base: ProjectPage,
+    },
   },
   {
     path: PATHS.position,
-    Component: PositionPage,
+    view: {
+      base: PositionPage,
+    },
   },
   {
     path: PATHS.addProject,
-    Component: AddProjectPage,
+    view: {
+      base: AddProjectPage,
+    },
   },
-  // {
-  //   path: PATHS.dialog,
-  //   Component: DialogPage,
-  // },
   {
     path: PATHS.dialog,
-    Component: NotFoundPage,
+    view: {
+      base: NotFoundPage,
+    },
   },
   {
     path: PATHS.notifications,
-    Component: NotificationsPage,
+    view: {
+      base: NotificationsPage,
+    },
   },
   {
     path: PATHS.notification,
-    Component: NotificationPage,
+    view: {
+      base: NotificationPage,
+    },
   },
-  { path: PATHS.settings, Component: SettingsPage },
-  { path: PATHS.profileSettings, Component: ProfileSettingsPage },
-  { path: PATHS.notificationsSettings, Component: NotificationsSettingsPage },
+  {
+    path: PATHS.settings,
+    view: {
+      base: SettingsPage,
+    },
+  },
+  {
+    path: PATHS.profileSettings,
+    view: {
+      base: ProfileSettingsPage,
+    },
+  },
+  {
+    path: PATHS.notificationsSettings,
+    view: {
+      base: NotificationsSettingsPage,
+    },
+  },
 ];

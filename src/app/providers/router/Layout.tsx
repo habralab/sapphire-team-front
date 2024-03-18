@@ -48,6 +48,7 @@ export const Layout = () => {
           ) : (
             <Flex alignItems="start" h="full">
               <BlankPage />
+              {/* ВОТ ТУТ ДЛЯ ДЕСКТОПА РАСКОММЕНТИРУЙ, А BlankPage ЗАКОММЕНТЬ */}
               {/* {!isNotFoundPage && <MenuDesktop />}
               <Container
                 maxW="6xl"

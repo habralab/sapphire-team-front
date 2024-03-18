@@ -6,6 +6,6 @@ export const useGetUnreadNotification = (isAuth: boolean) =>
   useQuery({
     queryKey: ['unreadNotificatiions'],
     queryFn: () => api.notificationsApi.getUnreadCount({ is_read: false }),
-    staleTime: 10000,
+    staleTime: 5000,
     enabled: isAuth,
   });

@@ -89,7 +89,7 @@ export function UpdateUser({
           id: user.id,
           first_name: data.first_name,
           last_name: data.last_name,
-          about: data.about,
+          about: data.about || '',
           main_specialization_id: data.specs[0] ?? null,
           secondary_specialization_id: data.specs[1] ?? null,
         };
