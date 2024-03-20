@@ -15,7 +15,9 @@ export const MenuBase = () => {
   const location = useLocation();
 
   useEffect(() => {
-    refetch();
+    if (isAuth) {
+      refetch();
+    }
   }, [location, isAuth]);
 
   return (
