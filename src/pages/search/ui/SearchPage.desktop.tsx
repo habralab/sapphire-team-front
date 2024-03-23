@@ -113,17 +113,17 @@ export const SearchPageDesktop = () => {
                     })}
                   </React.Fragment>
                 ))}
-                {isFetchingNextPage ? (
-                  <SimpleGrid columns={2} gap={6}>
-                    <Skeleton height="200px" borderRadius="2xl" mb={3} />
-                    <Skeleton height="200px" borderRadius="2xl" mb={3} />
-                    <Skeleton height="200px" borderRadius="2xl" mb={3} />
-                    <Skeleton height="200px" borderRadius="2xl" mb={3} />
-                  </SimpleGrid>
-                ) : (
-                  <Box ref={targetRef} />
-                )}
               </SimpleGrid>
+            )}
+            {isFetchingNextPage ? (
+              <SimpleGrid columns={2} gap={6}>
+                <Skeleton height="200px" borderRadius="2xl" mb={3} />
+                <Skeleton height="200px" borderRadius="2xl" mb={3} />
+                <Skeleton height="200px" borderRadius="2xl" mb={3} />
+                <Skeleton height="200px" borderRadius="2xl" mb={3} />
+              </SimpleGrid>
+            ) : (
+              <Box ref={targetRef} />
             )}
           </>
         )}
