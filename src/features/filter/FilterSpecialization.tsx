@@ -7,6 +7,7 @@ import {
   Tag,
   TagLabel,
   IconButton,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
@@ -27,7 +28,7 @@ export const FilterSpecialization = ({
   setUserSpecs,
   doubleChecked,
 }: FilterSpecializationProps) => {
-  const [specFilter, setSpecFilter] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [searchText, setSearchText] = useState('');
 
   const { data: specGroup } = useGetSpecsGroups();
@@ -50,7 +51,7 @@ export const FilterSpecialization = ({
           readOnly
           placeholder="Например, Фронтенд разработчик"
           onClick={() => {
-            setSpecFilter(true);
+            onOpen();
           }}
         />
         <InputRightElement pointerEvents="none">
@@ -89,11 +90,11 @@ export const FilterSpecialization = ({
       </Flex>
 
       <FilterSpecializationModal
-        isVisible={specFilter}
-        changeVisible={setSpecFilter}
+        isOpen={isOpen}
+        onClose={onClose}
         stateGroup={specGroup}
         state={specs}
-        userFilter={userSpecs}
+        userFilter={[...userSpecs]}
         resetSpec={() => {
           setUserSpecs([]);
         }}

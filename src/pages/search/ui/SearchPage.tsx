@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import {
   Flex,
   SimpleGrid,
@@ -8,7 +9,7 @@ import {
   Box,
 } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 
 import { ProjectCard } from '~/widgets/project-card';
@@ -21,7 +22,7 @@ import { useFilterStore } from '~/entities/project';
 import { useGetSpecs } from '~/entities/storage';
 import { Avatar, NotAuthAvatar } from '~/entities/user';
 
-import { useApi, useAuth, useLayoutRefs } from '~/shared/hooks';
+import { useApi, useAuth, useInfinityScroll, useLayoutRefs } from '~/shared/hooks';
 import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
@@ -47,7 +48,6 @@ export const SearchPage = () => {
     date: filter.date,
     skills: filter.skills,
     specs: filter.specs,
-
     searchText,
   });
 
@@ -59,26 +59,12 @@ export const SearchPage = () => {
     staleTime: Infinity,
   });
 
-  useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 1.0,
-    };
-
-    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-      const [entry] = entries;
-      if (entry.isIntersecting) {
-        if (hasNextPage) fetchNextPage();
-      }
-    }, options);
-
-    if (targetRef.current) observer.observe(targetRef.current);
-
-    return () => {
-      if (targetRef.current) observer.unobserve(targetRef.current);
-    };
-  }, [positions]);
+  useInfinityScroll({
+    hasNextPage,
+    targetRef,
+    isFetchingNextPage,
+    fetchNextPage,
+  });
 
   const handleSumbit = (value: string) => {
     setSearchText(value);

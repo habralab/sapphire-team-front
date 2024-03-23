@@ -3,6 +3,9 @@ import {
   Box,
   Button,
   Container,
+  Drawer,
+  DrawerContent,
+  DrawerOverlay,
   Flex,
   Heading,
   Icon,
@@ -15,13 +18,14 @@ import { useEffect, useRef, useState } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
 import type { GetSpecGroupsDataResponse, GetSpecsDataResponse } from '~/shared/api';
+import { useIsMobile } from '~/shared/hooks';
 import { SearchInput } from '~/shared/ui/SearchInput';
 
 import { GroupItem } from './GroupItem';
 
 interface FilterSpecializationModalProps {
-  isVisible: boolean;
-  changeVisible: (status: boolean) => void;
+  isOpen: boolean;
+  onClose: () => void;
   state?: GetSpecsDataResponse;
   stateGroup?: GetSpecGroupsDataResponse;
   resetSpec: () => void;
@@ -35,8 +39,8 @@ interface FilterSpecializationModalProps {
 
 export const FilterSpecializationModal = (props: FilterSpecializationModalProps) => {
   const {
-    isVisible,
-    changeVisible,
+    isOpen,
+    onClose,
     state,
     stateGroup,
     resetSpec,
@@ -53,6 +57,7 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
   const [filteredGroupsState, setFilteredGroupsState] =
     useState<GetSpecGroupsDataResponse>([]);
   const [filteredState, setFilteredState] = useState<GetSpecsDataResponse>([]);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (state && stateGroup) {
@@ -75,88 +80,105 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
       setFilteredGroupsState([...activeSections, ...inactiveSections]);
       setFilteredState([...activeCheckbox, ...inactiveCheckbox]);
     }
-  }, [isVisible, state]);
+  }, [isOpen, state]);
 
-  return (
+  const getMainFilterSpecsBody = () => (
+    <>
+      <Container maxW="md">
+        <Box bg="bg" position="sticky" top="0" zIndex={1} pt={3} pb={4}>
+          <Flex justifyContent="space-between" mb={3}>
+            <Flex alignItems="center">
+              <IconButton
+                onClick={() => {
+                  onClose();
+                }}
+                variant="ghost"
+                aria-label="Close"
+                minW="fit-content"
+                mr={2}
+                icon={<Icon as={FiChevronLeft} fontSize="2xl" />}
+              />
+              <Heading variant="h2" mb={0}>
+                Специализация
+              </Heading>
+            </Flex>
+            <Button
+              onClick={resetSpec}
+              variant="flat"
+              fontSize="sm"
+              fontWeight="500"
+              colorScheme="purple"
+            >
+              Сбросить
+            </Button>
+          </Flex>
+          <SearchInput
+            ref={searchRef}
+            placeholder="Найти специальность"
+            onChange={(value) => {
+              setSearchText(value);
+            }}
+            value={searchText}
+          />
+        </Box>
+
+        <Accordion allowToggle bg="white" borderRadius="2xl">
+          {filteredGroupsState.map((group) => (
+            <GroupItem
+              key={group.id}
+              id={group.id}
+              name={group.name}
+              allSpecs={filteredState}
+              tempSpec={userFilter}
+              singleChecked={singleChecked}
+              doubleChecked={doubleChecked}
+            />
+          ))}
+        </Accordion>
+      </Container>
+      <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0">
+        {filteredGroupsState.length > 0 && (
+          <Button
+            onClick={() => {
+              saveSpec(userFilter);
+              onClose();
+              setSearchText('');
+            }}
+            fontSize="sm"
+            fontWeight="600"
+            w="full"
+          >
+            Применить
+          </Button>
+        )}
+      </Container>
+    </>
+  );
+
+  return isMobile ? (
     <Modal
       onClose={() => {
-        changeVisible(false);
+        onClose();
         setSearchText('');
       }}
       size="full"
-      isOpen={isVisible}
+      isOpen={isOpen}
     >
       <ModalOverlay />
-      <ModalContent bg="bg">
-        <Container maxW="md">
-          <Box bg="bg" position="sticky" top="0" zIndex={1} pt={3} pb={4}>
-            <Flex justifyContent="space-between" mb={3}>
-              <Flex alignItems="center">
-                <IconButton
-                  onClick={() => {
-                    changeVisible(false);
-                  }}
-                  variant="ghost"
-                  aria-label="Close"
-                  minW="fit-content"
-                  mr={2}
-                  icon={<Icon as={FiChevronLeft} fontSize="2xl" />}
-                />
-                <Heading variant="h2" mb={0}>
-                  Специализация
-                </Heading>
-              </Flex>
-              <Button
-                onClick={resetSpec}
-                variant="flat"
-                fontSize="sm"
-                fontWeight="500"
-                colorScheme="purple"
-              >
-                Сбросить
-              </Button>
-            </Flex>
-            <SearchInput
-              ref={searchRef}
-              placeholder="Найти специальность"
-              onChange={(value) => {
-                setSearchText(value);
-              }}
-              value={searchText}
-            />
-          </Box>
-
-          <Accordion allowToggle bg="white" borderRadius="2xl">
-            {filteredGroupsState.map((group) => (
-              <GroupItem
-                key={group.id}
-                id={group.id}
-                name={group.name}
-                allSpecs={filteredState}
-                tempSpec={userFilter}
-                singleChecked={singleChecked}
-                doubleChecked={doubleChecked}
-              />
-            ))}
-          </Accordion>
-        </Container>
-        <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0">
-          {filteredGroupsState.length > 0 && (
-            <Button
-              onClick={() => {
-                saveSpec(userFilter);
-                changeVisible(false);
-                setSearchText('');
-              }}
-              fontSize="sm"
-              fontWeight="600"
-              w="full"
-            >
-              Применить
-            </Button>
-          )}
-        </Container>
-      </ModalContent>
+      <ModalContent bg="bg">{getMainFilterSpecsBody()}</ModalContent>
     </Modal>
+  ) : (
+    <Drawer
+      onClose={() => {
+        onClose();
+        setSearchText('');
+      }}
+      placement="right"
+      isOpen={isOpen}
+      size="sm"
+    >
+      <DrawerOverlay bg="transparent" />
+      <DrawerContent bg="bg">{getMainFilterSpecsBody()}</DrawerContent>
+    </Drawer>
   );
 };
