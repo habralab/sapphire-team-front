@@ -178,7 +178,9 @@ export const FilterSpecializationModal = (props: FilterSpecializationModalProps)
       size="sm"
     >
       <DrawerOverlay bg="transparent" />
-      <DrawerContent bg="bg">{getMainFilterSpecsBody()}</DrawerContent>
+      <DrawerContent bg="bg" overflow="auto">
+        {getMainFilterSpecsBody()}
+      </DrawerContent>
     </Drawer>
   );
 };

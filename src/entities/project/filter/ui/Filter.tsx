@@ -80,7 +80,7 @@ export const Filter = ({
       {!isMobile ? (
         <Drawer onClose={onClose} placement="right" isOpen={isOpen} size="sm">
           <DrawerOverlay />
-          <DrawerContent bg="bg" display="flex" alignItems="center">
+          <DrawerContent bg="bg" display="flex" alignItems="center" overflow="auto">
             <Container maxW="md" px={6} py={8}>
               <Flex alignItems="center" justifyContent="space-between" mb={8}>
                 <Heading variant="h2" mb={0} fontWeight="medium">

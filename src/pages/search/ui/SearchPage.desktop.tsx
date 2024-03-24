@@ -116,7 +116,7 @@ export const SearchPageDesktop = () => {
               </SimpleGrid>
             )}
             {isFetchingNextPage ? (
-              <SimpleGrid columns={2} gap={6}>
+              <SimpleGrid columns={2} gap={6} mt={4}>
                 <Skeleton height="200px" borderRadius="2xl" mb={3} />
                 <Skeleton height="200px" borderRadius="2xl" mb={3} />
                 <Skeleton height="200px" borderRadius="2xl" mb={3} />
