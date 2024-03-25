@@ -14,6 +14,9 @@ import {
   Container,
   Stack,
   Input,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { IoOptions } from 'react-icons/io5';
@@ -74,90 +77,159 @@ export const Filter = ({
         }
       />
 
-      <Modal onClose={onClose} size="full" isOpen={isOpen}>
-        <ModalOverlay />
-        <ModalContent bg="bg" display="flex" alignItems="center">
-          <Container maxW="md">
-            <Flex alignItems="center" justifyContent="space-between" my={4}>
-              <Flex alignItems="baseline">
-                <CloseButton onClick={onClose} mr={2} />
-                <Heading variant="h2" mb={0}>
+      {!isMobile ? (
+        <Drawer onClose={onClose} placement="right" isOpen={isOpen} size="sm">
+          <DrawerOverlay />
+          <DrawerContent bg="bg" display="flex" alignItems="center" overflow="auto">
+            <Container maxW="md" px={6} py={8}>
+              <Flex alignItems="center" justifyContent="space-between" mb={8}>
+                <Heading variant="h2" mb={0} fontWeight="medium">
                   Фильтры
                 </Heading>
+                <CloseButton onClick={onClose} mr={2} />
               </Flex>
+
+              <Stack spacing={6}>
+                <Box>
+                  <Heading variant="h3" fontSize="lg" mb={3}>
+                    Специализация
+                  </Heading>
+                  <FilterSpec
+                    userSpecs={filter.specs}
+                    setUserSpecs={(values) => {
+                      updateFilter({ specs: values });
+                    }}
+                  />
+                </Box>
+                <Box>
+                  <Stack gap={1} mb={3}>
+                    <Heading variant="h3" fontSize="lg" mb={3}>
+                      Профессиональные навыки
+                    </Heading>
+                    <SearchSelect
+                      isSearchFilter={true}
+                      selectedItems={filter.skills}
+                      setSelectedItems={(values) => {
+                        updateFilter({ skills: values });
+                      }}
+                    />
+                  </Stack>
+                </Box>
+              </Stack>
+            </Container>
+            <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0" mt="auto">
+              <Button
+                isLoading={isLoading}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+                onClick={onClose}
+              >
+                {totalItems
+                  ? `Найдено позиций для проектов: ${totalItems}`
+                  : 'Позиций для проектов не найдено'}
+              </Button>
               <Button
                 variant="flat"
+                w="full"
                 fontSize="sm"
                 fontWeight="500"
-                colorScheme="purple"
+                // colorScheme="purple"
                 onClick={() => {
                   removeFilter();
                 }}
               >
-                Сбросить
+                Сбросить фильтры
               </Button>
-            </Flex>
-
-            <Stack spacing={6}>
-              <Box>
-                <Heading variant="h2" mb={3}>
-                  Специализация
-                </Heading>
-                <FilterSpec
-                  userSpecs={filter.specs}
-                  setUserSpecs={(values) => {
-                    updateFilter({ specs: values });
-                  }}
-                />
-              </Box>
-              <Box>
-                <Stack gap={1} mb={3}>
-                  <Heading variant="h2" mb={3}>
-                    Профессиональные навыки
+            </Container>
+          </DrawerContent>
+        </Drawer>
+      ) : (
+        <Modal onClose={onClose} size="full" isOpen={isOpen}>
+          <ModalOverlay />
+          <ModalContent bg="bg" display="flex" alignItems="center">
+            <Container maxW="md">
+              <Flex alignItems="center" justifyContent="space-between" my={4}>
+                <Flex alignItems="baseline">
+                  <CloseButton onClick={onClose} mr={2} />
+                  <Heading variant="h2" mb={0}>
+                    Фильтры
                   </Heading>
-                  <SearchSelect
-                    isSearchFilter={true}
-                    selectedItems={filter.skills}
-                    setSelectedItems={(values) => {
-                      updateFilter({ skills: values });
+                </Flex>
+                <Button
+                  variant="flat"
+                  fontSize="sm"
+                  fontWeight="500"
+                  colorScheme="purple"
+                  onClick={() => {
+                    removeFilter();
+                  }}
+                >
+                  Сбросить
+                </Button>
+              </Flex>
+
+              <Stack spacing={6}>
+                <Box>
+                  <Heading variant="h2" mb={3}>
+                    Специализация
+                  </Heading>
+                  <FilterSpec
+                    userSpecs={filter.specs}
+                    setUserSpecs={(values) => {
+                      updateFilter({ specs: values });
                     }}
                   />
-                </Stack>
-              </Box>
-              <Box>
-                <Heading variant="h2">Дата начала проекта</Heading>
-                <Input
-                  variant="filled"
-                  bg="white"
-                  borderRadius="full"
-                  fontSize="sm"
-                  color="gray.500"
-                  placeholder="Выберите дату"
-                  type="date"
-                  value={filter.date.split('T', 1)[0]}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    updateFilter({ date: value ? stringToServerDate(value) : value });
-                  }}
-                />
-              </Box>
-            </Stack>
-          </Container>
-          <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0" mt="auto">
-            <Button
-              isLoading={isLoading}
-              fontSize="sm"
-              fontWeight="600"
-              w="full"
-              onClick={onClose}
-            >
-              {totalItems
-                ? `Найдено позиций для проектов: ${totalItems}`
-                : 'Позиций для проектов не найдено'}
-            </Button>
-          </Container>
-        </ModalContent>
-      </Modal>
+                </Box>
+                <Box>
+                  <Stack gap={1} mb={3}>
+                    <Heading variant="h2" mb={3}>
+                      Профессиональные навыки
+                    </Heading>
+                    <SearchSelect
+                      isSearchFilter={true}
+                      selectedItems={filter.skills}
+                      setSelectedItems={(values) => {
+                        updateFilter({ skills: values });
+                      }}
+                    />
+                  </Stack>
+                </Box>
+                <Box>
+                  <Heading variant="h2">Дата начала проекта</Heading>
+                  <Input
+                    variant="filled"
+                    bg="white"
+                    borderRadius="full"
+                    fontSize="sm"
+                    color="gray.500"
+                    placeholder="Выберите дату"
+                    type="date"
+                    value={filter.date.split('T', 1)[0]}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      updateFilter({ date: value ? stringToServerDate(value) : value });
+                    }}
+                  />
+                </Box>
+              </Stack>
+            </Container>
+            <Container maxW="md" py={6} bg="bg" position="sticky" bottom="0" mt="auto">
+              <Button
+                isLoading={isLoading}
+                fontSize="sm"
+                fontWeight="600"
+                w="full"
+                onClick={onClose}
+              >
+                {totalItems
+                  ? `Найдено позиций для проектов: ${totalItems}`
+                  : 'Позиций для проектов не найдено'}
+              </Button>
+            </Container>
+          </ModalContent>
+        </Modal>
+      )}
     </>
   );
 };

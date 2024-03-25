@@ -15,6 +15,7 @@ export const FilterUser = ({
   totalItems,
   FilterSpec,
 }: FilterUserProps & FilterSpecOptions) => {
+  console.log(userId);
   return !userId ? (
     <FilterGuest isLoading={isLoading} totalItems={totalItems} FilterSpec={FilterSpec} />
   ) : (

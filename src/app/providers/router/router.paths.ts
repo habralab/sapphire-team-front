@@ -80,6 +80,7 @@ export const routerPaths = [
     path: PATHS.search,
     view: {
       base: SearchPage,
+      desktop: SearchPageDesktop,
     },
   },
   {
