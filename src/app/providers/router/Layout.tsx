@@ -47,9 +47,9 @@ export const Layout = () => {
             </Stack>
           ) : (
             <Flex alignItems="start" h="full">
-              <BlankPage />
+              {/* <BlankPage /> */}
               {/* ВОТ ТУТ ДЛЯ ДЕСКТОПА РАСКОММЕНТИРУЙ, А BlankPage ЗАКОММЕНТЬ */}
-              {/* {!isNotFoundPage && <MenuDesktop />}
+              {!isNotFoundPage && <MenuDesktop />}
               <Container
                 maxW="6xl"
                 minW="4xl"
@@ -61,7 +61,7 @@ export const Layout = () => {
                 flexDirection="column"
               >
                 <Routes />
-              </Container> */}
+              </Container>
             </Flex>
           )}
         </AuthProvider>

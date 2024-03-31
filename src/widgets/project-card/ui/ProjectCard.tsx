@@ -27,6 +27,7 @@ export const ProjectCard = ({ info, children }: ProjectCardProps) => {
       _active={{ boxShadow: '2xl' }}
       boxShadow="none"
       alignContent="center"
+      height="100%"
     >
       <CardBody padding={isMobile ? 5 : 6}>
         <Card info={info} />
