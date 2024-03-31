@@ -15,10 +15,11 @@ interface NameTabsProps {
   form: ReturnType<typeof useForm<CreateUserType>>;
   setIsNameFilled: (isNameFilled: boolean) => void;
   setIsLastNameFilled: (isLastNameFilled: boolean) => void;
+  setIsTelegramFilled: (isTelegramFilled: boolean) => void;
 }
 
 export function NameTabs(props: NameTabsProps) {
-  const { setIsNameFilled, setIsLastNameFilled } = props;
+  const { setIsNameFilled, setIsLastNameFilled, setIsTelegramFilled } = props;
   const {
     register,
     formState: { errors },
@@ -68,6 +69,25 @@ export function NameTabs(props: NameTabsProps) {
             })}
           />
           <FormErrorMessage>{errors.last_name?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={!!errors.last_name} isRequired>
+          <Input
+            placeholder="Ваш telegram*"
+            py={4}
+            px={5}
+            bg="white"
+            borderRadius="full"
+            {...register('telegram', {
+              required: 'Обязательное поле',
+              minLength: { value: 2, message: 'Введите минимум 2 символа' },
+              onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                if (e.target.value && e.target.value.length > 3) {
+                  setIsTelegramFilled(true);
+                }
+              },
+            })}
+          />
+          <FormErrorMessage>{errors.telegram?.message}</FormErrorMessage>
         </FormControl>
       </Stack>
     </Stack>

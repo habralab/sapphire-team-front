@@ -16,6 +16,14 @@ export interface paths {
     /** Logout */
     delete: operations['logout_api_rest_auth_logout_delete'];
   };
+  '/api/rest/auth/signup': {
+    /** Sign Up */
+    post: operations['sign_up_api_rest_auth_signup_post'];
+  };
+  '/api/rest/auth/signin': {
+    /** Sign In */
+    post: operations['sign_in_api_rest_auth_signin_post'];
+  };
   '/api/rest/auth/oauth2/habr/authorize': {
     /** Authorize */
     get: operations['authorize_api_rest_auth_oauth2_habr_authorize_get'];
@@ -23,6 +31,14 @@ export interface paths {
   '/api/rest/auth/oauth2/habr/callback': {
     /** Callback */
     get: operations['callback_api_rest_auth_oauth2_habr_callback_get'];
+  };
+  '/api/rest/auth/change-password': {
+    /** Change Password */
+    post: operations['change_password_api_rest_auth_change_password_post'];
+  };
+  '/api/rest/auth/reset-password': {
+    /** Reset Password Request */
+    post: operations['reset_password_request_api_rest_auth_reset_password_post'];
   };
   '/api/rest/users/{user_id}': {
     /** Get User */
@@ -50,6 +66,16 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
+    /** AuthorizeRequest */
+    AuthorizeRequest: {
+      /**
+       * Email
+       * Format: email
+       */
+      email: string;
+      /** Password */
+      password: string;
+    };
     /** AuthorizeResponse */
     AuthorizeResponse: {
       user: components['schemas']['UserResponse'];
@@ -65,6 +91,18 @@ export interface components {
        * Format: binary
        */
       avatar: string;
+    };
+    /** ChangePasswordRequest */
+    ChangePasswordRequest: {
+      /** Code */
+      code: string;
+      /**
+       * Email
+       * Format: email
+       */
+      email: string;
+      /** New Password */
+      new_password: string;
     };
     /** HTTPValidationError */
     HTTPValidationError: {
@@ -88,6 +126,14 @@ export interface components {
       /** Is Activated */
       is_activated: boolean;
     };
+    /** ResetPasswordRequest */
+    ResetPasswordRequest: {
+      /**
+       * Email
+       * Format: email
+       */
+      email: string;
+    };
     /** UserResponse */
     UserResponse: {
       /**
@@ -97,6 +143,8 @@ export interface components {
       id: string;
       /** Email */
       email: string | null;
+      /** Telegram */
+      telegram: string | null;
       /** First Name */
       first_name: string | null;
       /** Last Name */
@@ -130,6 +178,8 @@ export interface components {
       last_name: string;
       /** About */
       about: string | null;
+      /** Telegram */
+      telegram: string | null;
       /** Main Specialization Id */
       main_specialization_id: string | null;
       /** Secondary Specialization Id */
@@ -220,6 +270,68 @@ export interface operations {
       };
     };
   };
+  /** Sign Up */
+  sign_up_api_rest_auth_signup_post: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AuthorizeRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['AuthorizeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Sign In */
+  sign_in_api_rest_auth_signin_post: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['AuthorizeRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': unknown;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
   /** Authorize */
   authorize_api_rest_auth_oauth2_habr_authorize_get: {
     parameters: {
@@ -267,6 +379,68 @@ export interface operations {
       200: {
         content: {
           'application/json': components['schemas']['AuthorizeResponse'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Change Password */
+  change_password_api_rest_auth_change_password_post: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ChangePasswordRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': unknown;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  /** Reset Password Request */
+  reset_password_request_api_rest_auth_reset_password_post: {
+    parameters: {
+      header?: {
+        Authorization?: string | null;
+      };
+      cookie?: {
+        access_token?: string | null;
+        refresh_token?: string | null;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ResetPasswordRequest'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          'application/json': unknown;
         };
       };
       /** @description Validation Error */

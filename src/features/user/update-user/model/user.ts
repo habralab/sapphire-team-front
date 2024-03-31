@@ -9,6 +9,7 @@ export interface UserTypeForm {
   main_specialization_id: string;
   secondary_specialization_id: string;
   email: string;
+  telegram: string;
   skills: SelectOptions[];
   avatar: FileList;
   specs: string[];

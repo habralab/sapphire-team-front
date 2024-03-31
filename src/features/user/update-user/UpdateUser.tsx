@@ -83,6 +83,7 @@ export function UpdateUser({
         dirtyFields.about ||
         dirtyFields.first_name ||
         dirtyFields.last_name ||
+        dirtyFields.telegram ||
         dirtyFields.specs
       ) {
         const updatedUser = {
@@ -90,6 +91,7 @@ export function UpdateUser({
           first_name: data.first_name,
           last_name: data.last_name,
           about: data.about || '',
+          telegram: data.telegram,
           main_specialization_id: data.specs[0] ?? null,
           secondary_specialization_id: data.specs[1] ?? null,
         };
@@ -228,6 +230,23 @@ export function UpdateUser({
               })}
             />
             <FormErrorMessage>{errors.last_name?.message}</FormErrorMessage>
+          </Flex>
+        </FormControl>
+        <FormControl isRequired isInvalid={!!errors.last_name}>
+          <Flex direction="column" gap={4}>
+            <FormLabel mb={0}>Telegram</FormLabel>
+            <Input
+              placeholder="Ваш telegram"
+              py={4}
+              px={5}
+              bg="white"
+              borderRadius="full"
+              {...register('telegram', {
+                required: 'Обязательное поле',
+                minLength: { value: 2, message: 'Введите минимум 2 символа' },
+              })}
+            />
+            <FormErrorMessage>{errors.telegram?.message}</FormErrorMessage>
           </Flex>
         </FormControl>
         <FormControl>
