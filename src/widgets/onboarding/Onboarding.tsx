@@ -34,6 +34,7 @@ const defaultUser = {
   last_name: '',
   avatar: null,
   about: null,
+  telegram: '',
   main_specialization_id: null,
   secondary_specialization_id: null,
   specs: [],
@@ -49,6 +50,7 @@ export function Onboarding({ userId }: OnboardingProps) {
   const [previewImg, setPrevievImg] = useState('');
   const [isNameFilled, setIsNameFilled] = useState(false);
   const [isLastNameFilled, setIsLastNameFilled] = useState(false);
+  const [isTelegramFilled, setIsTelegramFilled] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
   const { mutate: mutateUser, data: result } = useUpdateProfile();
@@ -80,6 +82,7 @@ export function Onboarding({ userId }: OnboardingProps) {
         first_name: data.first_name,
         last_name: data.last_name,
         about: data.about,
+        telegram: data.telegram,
         main_specialization_id: data.specs[0] ?? null,
         secondary_specialization_id: data.specs[1] ?? null,
       };
@@ -151,6 +154,7 @@ export function Onboarding({ userId }: OnboardingProps) {
                 form={form}
                 setIsNameFilled={setIsNameFilled}
                 setIsLastNameFilled={setIsLastNameFilled}
+                setIsTelegramFilled={setIsTelegramFilled}
               />
             </TabPanel>
             <TabPanel>
@@ -177,7 +181,10 @@ export function Onboarding({ userId }: OnboardingProps) {
             {tabIndex < 3 && (
               <Button
                 w="full"
-                isDisabled={tabIndex === 1 && (!isNameFilled || !isLastNameFilled)}
+                isDisabled={
+                  tabIndex === 1 &&
+                  (!isNameFilled || !isLastNameFilled || !isTelegramFilled)
+                }
                 onClick={() => {
                   handleTabsChange(tabIndex + 1);
                 }}

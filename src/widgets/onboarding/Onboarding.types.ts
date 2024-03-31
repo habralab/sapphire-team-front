@@ -5,6 +5,7 @@ export interface CreateUserType {
   last_name: string;
   avatar: FileList | null;
   about: string | null;
+  telegram: string;
   main_specialization_id: string | null;
   secondary_specialization_id: string | null;
   specs: string[];
