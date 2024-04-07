@@ -9,7 +9,7 @@ import { PositionPage } from '~/pages/position';
 import {
   DeletedProfile,
   ProfileMePage,
-  ProfilePageDesktop,
+  ProfileMePageDesktop,
   ProfileUserPage,
 } from '~/pages/profile';
 import {
@@ -61,7 +61,7 @@ export const routerPaths = [
     path: PATHS.profileMe,
     view: {
       base: ProfileMePage,
-      // desktop: ProfilePageDesktop,
+      desktop: ProfileMePageDesktop,
     },
   },
   {

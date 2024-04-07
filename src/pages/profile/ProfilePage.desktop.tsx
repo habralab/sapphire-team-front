@@ -60,7 +60,7 @@ export function ProfilePageDesktop() {
           Профиль
         </Heading>
       </Flex>
-      <ProfileCardDesktop />
+      {/* <ProfileCardDesktop userId='' /> */}
       <Flex direction="column">
         <Heading variant="h2">Проекты</Heading>
         {/* {data.length > 0 ? (
