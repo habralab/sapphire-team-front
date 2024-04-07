@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
 import { SmallCloseIcon } from '@chakra-ui/icons';
 import { Flex, IconButton, Tag, TagLabel, useToast } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
