@@ -4205,6 +4205,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/debounce-promise@npm:^3.1.9":
+  version: 3.1.9
+  resolution: "@types/debounce-promise@npm:3.1.9"
+  checksum: ea6c38c8d4b6006aea25fb9891281b0ea908aab7ae32755e85dfda1ae78331dab1884da7143aa4ca5166741884bc9f7665391072ddce800b5d2c1f44d4a11b9d
+  languageName: node
+  linkType: hard
+
 "@types/debug@npm:^4.1.7":
   version: 4.1.8
   resolution: "@types/debug@npm:4.1.8"
@@ -6262,6 +6269,13 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.21.0
   checksum: f7be01523282e9bb06c0cd2693d34f245247a29098527d4420628966a2d9aad154bd0e90a6b1cf66d37adcb769cd108cf8a7bd49d76db0fb119af5cdd13644f4
+  languageName: node
+  linkType: hard
+
+"debounce-promise@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "debounce-promise@npm:3.1.2"
+  checksum: 29bac4524c423cc852319d7455363909ea3d933a3b9e3eb1149d963cffc34c475fe37219d0bafc61af566500b5d663cba579bbad7ee4023bef06f8394ed900ad
   languageName: node
   linkType: hard
 
@@ -11781,6 +11795,7 @@ __metadata:
     "@testing-library/jest-dom": ^6.1.2
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.4.3
+    "@types/debounce-promise": ^3.1.9
     "@types/jest": ^29.5.4
     "@types/lodash": ^4.14.200
     "@types/node": ^20.5.7
@@ -11796,6 +11811,7 @@ __metadata:
     commitlint: ^17.7.1
     concurrently: ^8.2.1
     date-fns: ^2.30.0
+    debounce-promise: ^3.1.2
     dotenv: ^16.3.1
     eslint: ^8.48.0
     eslint-config-prettier: ^9.0.0
@@ -11827,6 +11843,7 @@ __metadata:
     react-router-dom: ^6.15.0
     release-it: ^16.1.5
     typescript: ^5.1.6
+    use-debounce: ^10.0.0
     uuid: ^9.0.1
     vite: ^4.4.9
     vite-bundle-visualizer: ^0.10.0
@@ -13196,6 +13213,15 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 7913df383a5a6fcb399212eedefaac2e0c6f843555202d4e3010bac3848afe38ecaa3d0d6500ad1d936fbeffd637e6c517e68edb024af5e6beca7f27f3ce7b21
+  languageName: node
+  linkType: hard
+
+"use-debounce@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "use-debounce@npm:10.0.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: b296fedba916ca721eeb7117f29a13c252966d03411abccc5e5894ed4de0f32b9cb6f6b150555b8b4cb9b0acf53b84022ad4cd43b89253389e9cd13779eebca7
   languageName: node
   linkType: hard
 

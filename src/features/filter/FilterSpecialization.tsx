@@ -10,8 +10,11 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 import { useGetSpecs, useGetSpecsGroups } from '~/entities/storage';
+
+import { TIME } from '~/shared/lib/const';
 
 import { FilterSpecializationModal } from './FilterSpecializationModal';
 
@@ -30,10 +33,11 @@ export const FilterSpecialization = ({
 }: FilterSpecializationProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [searchText, setSearchText] = useState('');
+  const [debounceText] = useDebounce(searchText, TIME.DEBOUNCE);
 
   const { data: specGroup } = useGetSpecsGroups();
   const { data: specs } = useGetSpecs({
-    query_text: searchText,
+    query: debounceText,
   });
 
   const deleteSpecFilter = (id: string) => {

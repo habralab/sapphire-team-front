@@ -547,7 +547,7 @@ export interface operations {
         specialization_ids?: unknown;
         skill_ids?: unknown;
         joined_user_id?: unknown;
-        project_query_text?: unknown;
+        query?: unknown;
         project_startline_ge?: unknown;
         project_startline_le?: unknown;
         project_deadline_ge?: unknown;
@@ -720,7 +720,7 @@ export interface operations {
         page?: number;
         /** @description Number of items per page */
         per_page?: number;
-        query_text?: unknown;
+        query?: unknown;
         owner_id?: unknown;
         user_id?: unknown;
         startline_ge?: unknown;

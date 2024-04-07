@@ -1,16 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
 import { SmallCloseIcon } from '@chakra-ui/icons';
 import { Flex, IconButton, Tag, TagLabel, useToast } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import {
-  AsyncSelect,
-  chakraComponents,
+  type OptionsOrGroups,
   type GroupBase,
   type LoadingIndicatorProps,
 } from 'chakra-react-select';
-import { useEffect, useState } from 'react';
+import { AsyncSelect, chakraComponents } from 'chakra-react-select';
+import debounce from 'debounce-promise';
+import { useCallback, useEffect, useState } from 'react';
 
 import type { GetSkillsParameters } from '~/shared/api/model';
 import { useApi } from '~/shared/hooks';
+import { TIME } from '~/shared/lib/const';
 import type { SelectOptions } from '~/shared/types';
 
 const asyncComponents = {
@@ -40,10 +43,9 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
   const toast = useToast();
   const { storageApi } = useApi();
   const [unSelectedItems, setUnSelectedItems] = useState<SelectOptions[]>([]);
-  const [searchValue, setSearchValue] = useState('');
 
-  const params: GetSkillsParameters = {
-    query_text: searchValue,
+  let params: GetSkillsParameters = {
+    // query: searchValue,
     exclude_id: selectedItems.map((item) => item.value),
     per_page: 10,
   };
@@ -86,6 +88,21 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
     }
   };
 
+  const getOptions = debounce(
+    async (
+      value: string,
+      callback: (
+        options: OptionsOrGroups<SelectOptions, GroupBase<SelectOptions>>,
+      ) => void,
+    ) => {
+      params = { ...params, query: value };
+      await refetch().then((response) => {
+        callback(response.data ?? []);
+      });
+    },
+    TIME.DEBOUNCE,
+  );
+
   return (
     <>
       <AsyncSelect<SelectOptions, false, GroupBase<SelectOptions>>
@@ -97,14 +114,9 @@ export const SearchSelect = ({ selectedItems, setSelectedItems }: SearchSelectPr
         components={asyncComponents}
         defaultOptions={unSelectedItems}
         value={null}
-        loadOptions={(inputValue, callback) => {
-          setSearchValue(inputValue);
-          requestAnimationFrame(() => {
-            refetch().then((response) => {
-              callback(response.data ?? []);
-            });
-          });
-        }}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        loadOptions={getOptions}
         onChange={(item) => {
           if (item) {
             setSelectedItems([...selectedItems, item]);
