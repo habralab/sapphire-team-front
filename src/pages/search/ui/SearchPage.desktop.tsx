@@ -3,6 +3,7 @@ import { Flex, SimpleGrid, Skeleton, Box } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import React, { useRef, useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
+import { useDebounce } from 'use-debounce';
 
 import { ProjectCard } from '~/widgets/project-card';
 
@@ -14,6 +15,7 @@ import { useFilterStore } from '~/entities/project';
 import { useGetSpecs } from '~/entities/storage';
 
 import { useApi, useAuth, useInfinityScroll } from '~/shared/hooks';
+import { TIME } from '~/shared/lib/const';
 import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
@@ -25,6 +27,7 @@ export const SearchPageDesktop = () => {
   const targetRef = useRef<HTMLDivElement>(null);
 
   const [searchText, setSearchText] = useState('');
+  const [debounceText] = useDebounce(searchText, TIME.DEBOUNCE);
 
   const { filter } = useFilterStore();
 
@@ -38,7 +41,7 @@ export const SearchPageDesktop = () => {
     date: filter.date,
     skills: filter.skills,
     specs: filter.specs,
-    searchText,
+    searchText: debounceText,
   });
 
   const { data: allSpecs } = useGetSpecs();

@@ -23,7 +23,7 @@ export const useGetAllPositions = ({ specs, skills, date, searchText }: Search) 
         specialization_ids: specs,
         skill_ids: skills?.map((skill) => skill.value),
         project_startline_ge: date,
-        project_query_text: searchText,
+        query: searchText,
         project_status: ['preparation', 'in_work'],
       }),
     getNextPageParam: (lastPage) =>

@@ -49,6 +49,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.1.2"],\
             ["@testing-library/react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:14.0.0"],\
             ["@testing-library/user-event", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:14.4.3"],\
+            ["@types/debounce-promise", "npm:3.1.9"],\
             ["@types/jest", "npm:29.5.4"],\
             ["@types/lodash", "npm:4.14.200"],\
             ["@types/node", "npm:20.5.7"],\
@@ -64,6 +65,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commitlint", "npm:17.7.1"],\
             ["concurrently", "npm:8.2.1"],\
             ["date-fns", "npm:2.30.0"],\
+            ["debounce-promise", "npm:3.1.2"],\
             ["dotenv", "npm:16.3.1"],\
             ["eslint", "npm:8.48.0"],\
             ["eslint-config-prettier", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:9.0.0"],\
@@ -95,6 +97,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-router-dom", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.15.0"],\
             ["release-it", "npm:16.1.5"],\
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
+            ["use-debounce", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:10.0.0"],\
             ["uuid", "npm:9.0.1"],\
             ["vite", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.4.9"],\
             ["vite-bundle-visualizer", "npm:0.10.0"],\
@@ -7139,6 +7142,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/debounce-promise", [\
+        ["npm:3.1.9", {\
+          "packageLocation": "./.yarn/cache/@types-debounce-promise-npm-3.1.9-9aea081a63-ea6c38c8d4.zip/node_modules/@types/debounce-promise/",\
+          "packageDependencies": [\
+            ["@types/debounce-promise", "npm:3.1.9"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/debug", [\
         ["npm:4.1.8", {\
           "packageLocation": "./.yarn/cache/@types-debug-npm-4.1.8-a04e2ca136-a9a9bb40a1.zip/node_modules/@types/debug/",\
@@ -9667,6 +9679,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["date-fns", "npm:2.30.0"],\
             ["@babel/runtime", "npm:7.22.11"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["debounce-promise", [\
+        ["npm:3.1.2", {\
+          "packageLocation": "./.yarn/cache/debounce-promise-npm-3.1.2-3c185da0c7-29bac4524c.zip/node_modules/debounce-promise/",\
+          "packageDependencies": [\
+            ["debounce-promise", "npm:3.1.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -16088,6 +16109,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.1.2"],\
             ["@testing-library/react", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:14.0.0"],\
             ["@testing-library/user-event", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:14.4.3"],\
+            ["@types/debounce-promise", "npm:3.1.9"],\
             ["@types/jest", "npm:29.5.4"],\
             ["@types/lodash", "npm:4.14.200"],\
             ["@types/node", "npm:20.5.7"],\
@@ -16103,6 +16125,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["commitlint", "npm:17.7.1"],\
             ["concurrently", "npm:8.2.1"],\
             ["date-fns", "npm:2.30.0"],\
+            ["debounce-promise", "npm:3.1.2"],\
             ["dotenv", "npm:16.3.1"],\
             ["eslint", "npm:8.48.0"],\
             ["eslint-config-prettier", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:9.0.0"],\
@@ -16134,6 +16157,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-router-dom", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:6.15.0"],\
             ["release-it", "npm:16.1.5"],\
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
+            ["use-debounce", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:10.0.0"],\
             ["uuid", "npm:9.0.1"],\
             ["vite", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:4.4.9"],\
             ["vite-bundle-visualizer", "npm:0.10.0"],\
@@ -17701,6 +17725,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.21"],\
             ["react", "npm:18.2.0"],\
             ["tslib", "npm:2.6.2"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["use-debounce", [\
+        ["npm:10.0.0", {\
+          "packageLocation": "./.yarn/cache/use-debounce-npm-10.0.0-04f7df41a1-b296fedba9.zip/node_modules/use-debounce/",\
+          "packageDependencies": [\
+            ["use-debounce", "npm:10.0.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:10.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/use-debounce-virtual-6ee902d8e7/0/cache/use-debounce-npm-10.0.0-04f7df41a1-b296fedba9.zip/node_modules/use-debounce/",\
+          "packageDependencies": [\
+            ["use-debounce", "virtual:1c437dc0bcbbbbb8e13ce8545c57ffe2159f1e83486bc58aea069eb9730fc148eb58a88a9843f21c194c41eb6c191104836828c12c5751cdded24f62d33f0a43#npm:10.0.0"],\
+            ["@types/react", "npm:18.2.21"],\
+            ["react", "npm:18.2.0"]\
           ],\
           "packagePeers": [\
             "@types/react",\

@@ -11,6 +11,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import React, { useRef, useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
+import { useDebounce } from 'use-debounce';
 
 import { ProjectCard } from '~/widgets/project-card';
 
@@ -23,6 +24,7 @@ import { useGetSpecs } from '~/entities/storage';
 import { Avatar, NotAuthAvatar } from '~/entities/user';
 
 import { useApi, useAuth, useInfinityScroll, useLayoutRefs } from '~/shared/hooks';
+import { TIME } from '~/shared/lib/const';
 import { PATHS } from '~/shared/lib/router';
 import { STag } from '~/shared/ui/STag';
 
@@ -35,6 +37,7 @@ export const SearchPage = () => {
   const layout = useLayoutRefs();
 
   const [searchText, setSearchText] = useState('');
+  const [debounceText] = useDebounce(searchText, TIME.DEBOUNCE);
 
   const { filter } = useFilterStore();
 
@@ -48,7 +51,7 @@ export const SearchPage = () => {
     date: filter.date,
     skills: filter.skills,
     specs: filter.specs,
-    searchText,
+    searchText: debounceText,
   });
 
   const { data: allSpecs } = useGetSpecs();

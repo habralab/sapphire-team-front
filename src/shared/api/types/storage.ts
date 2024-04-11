@@ -172,7 +172,7 @@ export interface operations {
         page?: number;
         /** @description Number of items per page */
         per_page?: number;
-        query_text?: unknown;
+        query?: unknown;
         id?: unknown;
         exclude_id?: unknown;
       };
@@ -200,7 +200,7 @@ export interface operations {
         page?: number;
         /** @description Number of items per page */
         per_page?: number;
-        query_text?: unknown;
+        query?: unknown;
         group_id?: unknown;
         id?: unknown;
         exclude_id?: unknown;
@@ -229,7 +229,7 @@ export interface operations {
         page?: number;
         /** @description Number of items per page */
         per_page?: number;
-        query_text?: unknown;
+        query?: unknown;
       };
     };
     requestBody?: {
