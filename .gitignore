@@ -1,5 +1,3 @@
-node_modules
-dist
 *.local
 .yarn/*
 !.yarn/cache
@@ -8,8 +6,10 @@ dist
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-stats.html
 .cache
 .eslintcache
 .DS_Store
 dev-dist
+dist
+stats.html
+node_modules

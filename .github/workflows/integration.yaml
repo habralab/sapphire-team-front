@@ -1,0 +1,49 @@
+name: Integration
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: [self-hosted, builder]
+    steps:
+      - name: Set environment variables
+        run: >
+          for e in $(env | grep "COLLABRY__BUILDER__");
+          do echo "${e#'COLLABRY__BUILDER__'}" >> $GITHUB_ENV;
+          done
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build docker image
+        run: docker build -t "${REGISTRY_URL}/collabry/frontend:${{ github.sha }}" --target full .
+      - name: Login docker registry
+        run: docker login "${REGISTRY_DOMAIN}" -u "${REGISTRY_USER}" -p "${REGISTRY_PASSWORD}"
+      - name: Push docker image
+        run: docker push "${REGISTRY_DOMAIN}/collabry/frontend:${{ github.sha }}"
+  lint:
+    needs: [build]
+    runs-on: [self-hosted, integration]
+    steps:
+      - name: Set environment variables
+        run: >
+          for e in $(env | grep "COLLABRY__INTEGRATION__");
+          do echo "${e#'COLLABRY__INTEGRATION__'}" >> $GITHUB_ENV;
+          done
+      - name: Login docker registry
+        run: docker login "${REGISTRY_DOMAIN}" -u "${REGISTRY_USER}" -p "${REGISTRY_PASSWORD}"
+      - name: Pull docker image
+        run: docker pull "${REGISTRY_DOMAIN}/collabry/frontend:${{ github.sha }}"
+      - name: Lint
+        run: docker run --rm "${REGISTRY_DOMAIN}/collabry/frontend:${{ github.sha }}" lint
+  test:
+    needs: [build]
+    runs-on: [self-hosted, integration]
+    steps:
+      - name: Set environment variables
+        run: >
+          for e in $(env | grep "COLLABRY__INTEGRATION__");
+          do echo "${e#'COLLABRY__INTEGRATION__'}" >> $GITHUB_ENV;
+          done
+      - name: Login docker registry
+        run: docker login "${REGISTRY_DOMAIN}" -u "${REGISTRY_USER}" -p "${REGISTRY_PASSWORD}"
+      - name: Pull docker image
+        run: docker pull "${REGISTRY_DOMAIN}/collabry/frontend:${{ github.sha }}"
+      - name: Isort
+        run: docker run --rm "${REGISTRY_DOMAIN}/collabry/frontend:${{ github.sha }}" test

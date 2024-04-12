@@ -1,3 +1,3 @@
 export const TIME = {
-  DEBOUNCE: 1000,
+  DEBOUNCE: 500,
 };

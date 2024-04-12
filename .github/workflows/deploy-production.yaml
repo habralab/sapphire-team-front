@@ -1,0 +1,32 @@
+name: Deploy Production
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: [self-hosted, builder]
+    steps:
+      - name: Set environment variables
+        run: >
+          for e in $(env | grep "COLLABRY__BUILDER__");
+          do echo "${e#'COLLABRY__BUILDER__'}" >> $GITHUB_ENV;
+          done
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build docker image
+        run: >
+          docker build
+          -t "${REGISTRY_DOMAIN}/collabry/frontend:${{ github.sha }}"
+          -t "${REGISTRY_DOMAIN}/collabry/frontend:production"
+          --build-arg "API_BASE_URL=https://api.${production__DOMAIN}"
+          --target slim .
+      - name: Login docker registry
+        run: docker login "${REGISTRY_DOMAIN}" -u "${REGISTRY_USER}" -p "${REGISTRY_PASSWORD}"
+      - name: Push docker image
+        run: docker push "${REGISTRY_DOMAIN}/collabry/frontend:production" --all-tags
+  deploy:
+    uses: collabry-space/deploy/.github/workflows/deploy.yaml@main
+    with:
+      env: production

@@ -9,14 +9,7 @@ import { api } from '~/shared/api';
 
 import { Layout } from './Layout';
 
-const closedRouter = createBrowserRouter([
-  {
-    path: '*',
-    element: <BlankPage />,
-  },
-]);
-
-const normalRouter = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: '*',
     element: <Layout />,
@@ -31,9 +24,5 @@ const normalRouter = createBrowserRouter([
 ]);
 
 export const RouterProvider = () => {
-  return (
-    <ReactRouterProvider
-      router={import.meta.env.VITE_CLOSED ? closedRouter : normalRouter}
-    />
-  );
+  return <ReactRouterProvider router={router} />;
 };
