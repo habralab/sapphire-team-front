@@ -24,7 +24,6 @@ export default defineConfig({
       injectRegister: null,
       workbox: {
         globPatterns: ['**/*.{js,css,html,woff,woff2,svg}'],
-        navigateFallbackDenylist: [/^\/backend/],
       },
       includeAssets: [
         '/favicon.ico',
@@ -72,13 +71,6 @@ export default defineConfig({
   },
   server: {
     https: true,
-    proxy: {
-      '/backend': {
-        target: process.env.VITE_API_BASE_URL,
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/backend/, ''),
-      },
-    },
   },
   cacheDir: '.yarn/.vite',
   resolve: {

@@ -13,7 +13,7 @@ export class BaseApiClient {
     this.baseURL = `${import.meta.env.VITE_API_BASE_URL}${domainURL}`;
 
     this.client = axios.create({
-      baseURL: import.meta.env.DEV ? `/backend${domainURL}` : this.baseURL,
+      baseURL: this.baseURL,
     });
 
     this.client.interceptors.response.use(
