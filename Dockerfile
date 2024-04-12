@@ -8,16 +8,16 @@ COPY ./.yarn /app/.yarn
 COPY ./.yarnrc.yml /app/.yarnrc.yml
 RUN yarn --immutable
 
+COPY ./public /app/public
 COPY ./src /app/src
+COPY ./index.html /app/index.html
+COPY ./vite.config.ts /app/vite.config.ts
 
 FROM core as build
 
 ARG API_BASE_URL
 ENV VITE_API_BASE_URL=${API_BASE_URL}
 
-COPY ./public /app/public
-COPY ./index.html /app/index.html
-COPY ./vite.config.ts /app/vite.config.ts
 RUN yarn build
 
 FROM core as full
